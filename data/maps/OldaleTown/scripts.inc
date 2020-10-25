@@ -356,7 +356,7 @@ OldaleTown_Text_SavingMyProgress: @ 81E918E
 OldaleTown_Text_IWorkAtPokemonMart: @ 81E91C0
 	.string "¡Hola!\n"
 	.string "Trabajo en la Tienda POKéMON.\p"
-	.string "¡Querrías venir conmigo?$"
+	.string "¿Querrías venir conmigo?$"
 
 OldaleTown_Text_ThisIsAPokemonMart: @ 81E91FD
 	.string "Ésta es la Tienda POKéMON.\n"
@@ -367,7 +367,7 @@ OldaleTown_Text_ThisIsAPokemonMart: @ 81E91FD
 	.string "parte de nuestra promoción.$"
 
 OldaleTown_Text_PotionExplanation: @ 81E92AF
-	.string "Puedes usar una Poción en cualquier\n"
+	.string "Puedes usar una POCIÓN en cualquier\n"
 	.string "momento, así que a veces puede ser más\l"
 	.string "útil que buscar un CENTRO POKéMON.$"
 
@@ -388,8 +388,8 @@ OldaleTown_Text_DiscoveredFootprints: @ 81E939A
 OldaleTown_Text_FinishedSketchingFootprints: @ 81E93F8
 	.string "Ya he acabado con el bosquejo de las\n"
 	.string "huellas del POKéMON raro.\p"
-	.string "Y ahora me doy cuenta de que...\n"
-	.string "eran mis propias huellas, snif...$"
+	.string "Y ahora me doy cuenta de que“...”\n"
+	.string "eran mis propias huellas, snif“...”$"
 
 OldaleTown_Text_MayLetsGoBack: @ 81E9462
 	.string "AURA: {PLAYER}{KUN}!\n"
@@ -398,7 +398,7 @@ OldaleTown_Text_MayLetsGoBack: @ 81E9462
 
 OldaleTown_Text_BrendanLetsGoBack: @ 81E948A
 	.string "BRENDAN: I'm heading back to my dad's\n"
-	.string "Lab now.\l"
+	.string "LAB now.\l"
 	.string "{PLAYER}, you should hustle back, too.$"
 
 OldaleTown_Text_CitySign: @ 81E94DA
