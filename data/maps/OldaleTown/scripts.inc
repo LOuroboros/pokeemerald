@@ -388,8 +388,8 @@ OldaleTown_Text_DiscoveredFootprints: @ 81E939A
 OldaleTown_Text_FinishedSketchingFootprints: @ 81E93F8
 	.string "Ya he acabado con el bosquejo de las\n"
 	.string "huellas del POKéMON raro.\p"
-	.string "Y ahora me doy cuenta de que“...”\n"
-	.string "eran mis propias huellas, snif“...”$"
+	.string "Y ahora me doy cuenta de que…\n"
+	.string "eran mis propias huellas, snif…$"
 
 OldaleTown_Text_MayLetsGoBack: @ 81E9462
 	.string "AURA: {PLAYER}{KUN}!\n"
