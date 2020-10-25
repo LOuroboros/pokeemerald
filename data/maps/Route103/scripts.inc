@@ -308,7 +308,7 @@ Route103_Text_MayLetsBattle: @ 81EC7DE
 
 Route103_Text_MayDefeated: @ 81EC881
 	.string "¡Guau, genial!\n"
-	.string "¡{PLAYER}{KUN}, se te das bien!$"
+	.string "¡{PLAYER}{KUN}, se te da bien!$"
 
 Route103_Text_MayTimeToHeadBack: @ 81EC8AE
 	.string "AURA: Creo que ya entiendo por qué\n"
@@ -317,11 +317,11 @@ Route103_Text_MayTimeToHeadBack: @ 81EC8AE
 	.string "de recibir ya te quiere un montón\p"
 	.string "Se ve que puedes hacer amistad\n"
 	.string "con los POKéMON muy fácilmente.\p"
-	.string "Bien, volvamos al Laboratorio.$"
+	.string "Bien, volvamos al LABORATORIO.$"
 
 Route103_Text_BrendanRoute103Pokemon: @ 81EC989
 	.string "BRENDAN: Okay, so it's this one and\n"
-	.string "that one that live on Route 103…$"
+	.string "that one that live on ROUTE 103…$"
 
 Route103_Text_BrendanLetsBattle: @ 81EC9CE
 	.string "Hey, it's {PLAYER}!\p"
@@ -346,7 +346,7 @@ Route103_Text_BrendanTimeToHeadBack: @ 81ECA79
 
 Route103_Text_ShouldHaveBroughtPotion: @ 81ECB73
 	.string "Mi POKéMON está agotado…\n"
-	.string "Deberiía haber traído una Poción…$"
+	.string "Debería haber traído una POCIÓN…$"
 
 Route103_Text_ShortcutToOldale: @ 81ECBB5
 	.string "If you cross the sea from here,\n"
