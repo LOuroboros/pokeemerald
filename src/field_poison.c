@@ -63,7 +63,7 @@ static bool32 MonFaintedFromPoison(u8 partyIdx)
     return FALSE;
 }
 
-static void Task_TryFieldPoisonWhiteOut(u8 taskId)
+static void Task_TryFieldPoisonSurvive(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     switch (data[0])
@@ -88,30 +88,16 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             }
             break;
         case 2:
-            if (AllMonsFainted())
-            {
-                if (InBattlePyramid() | InBattlePike() || InTrainerHillChallenge())
-                {
-                    gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
-                }
-                else
-                {
-                    gSpecialVar_Result = FLDPSN_WHITEOUT;
-                }
-            }
-            else
-            {
-                gSpecialVar_Result = FLDPSN_NO_WHITEOUT;
-            }
+            gSpecialVar_Result = 0;
             EnableBothScriptContexts();
             DestroyTask(taskId);
             break;
     }
 }
 
-void TryFieldPoisonWhiteOut(void)
+void TryFieldPoisonSurvive(void)
 {
-    CreateTask(Task_TryFieldPoisonWhiteOut, 80);
+    CreateTask(Task_TryFieldPoisonSurvive, 80);
     ScriptContext1_Stop();
 }
 
@@ -144,11 +130,11 @@ s32 DoPoisonFieldEffect(void)
     }
     if (numFainted != 0)
     {
-        return FLDPSN_FNT;
+        return 2;
     }
     if (numPoisoned != 0)
     {
-        return FLDPSN_PSN;
+        return FLDPSN_SURVIVED;
     }
     return FLDPSN_NONE;
 }
