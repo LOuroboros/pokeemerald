@@ -2867,7 +2867,7 @@ bool32 Overworld_RecvKeysFromLinkIsRunning(void)
 
     if (temp == TRUE)
         return TRUE;
-    else if (gPaletteFade.active && gPaletteFade.softwareFadeFinishing)
+    else if (gPaletteFade.active && gPaletteFade.softwareFadeFinishingCounter > 0)
         return TRUE;
     else
         return FALSE;
