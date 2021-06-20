@@ -331,6 +331,7 @@ SECTIONS {
         src/debug.o(.text);
         src/wonder_trade.o(.text);
         src/infobox.o(.text);
+        src/rhh_copyright.o(.text);
     } =0
 
     script_data :
@@ -692,6 +693,7 @@ SECTIONS {
         src/infobox.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
+        src/rhh_copyright.o(.rodata);
     } =0
 
     song_data :
