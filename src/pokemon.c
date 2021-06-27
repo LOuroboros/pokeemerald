@@ -3236,6 +3236,19 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         if (gIsFishingEncounter)
             shinyRolls += 1 + 2 * gChainFishingStreak; // 1 + 2 rolls per streak count. max 41
 
+        if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 10 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 19)
+            shinyRolls += 1;
+        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 20 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 29)
+            shinyRolls += 2;
+        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 30 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 39)
+            shinyRolls += 3;
+        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 40 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 49)
+            shinyRolls += 4;
+        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 50 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 59)
+            shinyRolls += 5;
+        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 60)
+            shinyRolls += 6;
+
         if (shinyRolls)
         {
             do {
@@ -3273,14 +3286,16 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
 
-    if (fixedIV < USE_RANDOM_IVS)
+    if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 60 && (Random() % 99) < 10)
     {
-        SetBoxMonData(boxMon, MON_DATA_HP_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &fixedIV);
-        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &fixedIV);
+        u32 iv;
+        iv = 31;
+        SetBoxMonData(boxMon, MON_DATA_HP_IV, &iv);
+        SetBoxMonData(boxMon, MON_DATA_ATK_IV, &iv);
+        SetBoxMonData(boxMon, MON_DATA_DEF_IV, &iv);
+        SetBoxMonData(boxMon, MON_DATA_SPEED_IV, &iv);
+        SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
+        SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
     }
     else
     {

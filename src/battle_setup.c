@@ -614,15 +614,31 @@ void StartRegiBattle(void)
 
 static void CB2_EndWildBattle(void)
 {
+    u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES);
+
     CpuFill16(0, (void*)(BG_PLTT), BG_PLTT_SIZE);
     ResetOamRange(0, 128);
-
     if (IsPlayerDefeated(gBattleOutcome) == TRUE && !InBattlePyramid() && !InBattlePike())
     {
         SetMainCallback2(CB2_WhiteOut);
     }
     else
     {
+        if (gBattleOutcome == B_OUTCOME_CAUGHT)
+        {
+            if (VarGet(VAR_CURRENTLY_CHAINED_SPECIES) != species)
+            {
+                VarSet(VAR_CURRENTLY_CHAINED_SPECIES, species);
+                GetSpeciesName(gStringVar4, species);
+                VarSet(VAR_WILD_POKEMON_CHAIN_COUNT, 0);
+            }
+            VarSet(VAR_WILD_POKEMON_CHAIN_COUNT, VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) + 1);
+        }
+        else
+        {
+            VarSet(VAR_WILD_POKEMON_CHAIN_COUNT, 0);
+            VarSet(VAR_CURRENTLY_CHAINED_SPECIES, 0);
+        }
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
     }
