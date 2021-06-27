@@ -71,6 +71,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_OPEN_PC,
     DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE,
     DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME,
+    DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS,
 };
 enum { // Flags
     DEBUG_FLAG_MENU_ITEM_FLAGS,
@@ -106,7 +107,7 @@ enum { //Sound
 
 // *******************************
 // Constants
-#define DEBUG_MAIN_MENU_WIDTH 13
+#define DEBUG_MAIN_MENU_WIDTH 14
 #define DEBUG_MAIN_MENU_HEIGHT 8
 
 #define DEBUG_NUMBER_DISPLAY_WIDTH 10
@@ -190,6 +191,7 @@ static void DebugAction_Util_ForceEggHatch(u8);
 static void DebugAction_Util_OpenPC(u8 taskId);
 static void DebugAction_Util_DoWonderTrade(u8 taskId);
 static void DebugAction_Util_ChangeCostume(u8 taskId);
+static void DebugAction_Util_CatchChainStatus(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
@@ -247,6 +249,7 @@ extern u8 EventScript_CheckEVs[];
 extern u8 EventScript_CheckIVs[];
 extern u8 EventScript_ForceEggHatch[];
 extern u8 EventScript_DoWonderTrade[];
+extern u8 Script_CatchingStreak[];
 
 #define ABILITY_NAME_LENGTH 12
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
@@ -285,6 +288,7 @@ static const u8 gDebugText_Util_ForceEggHatch[] =           _("Force Egg Hatch")
 static const u8 gDebugText_Util_OpenPC[] =                  _("Open PC");
 static const u8 gDebugText_Util_DoWonderTrade[] =           _("Do a Wonder Trade");
 static const u8 gDebugText_Util_ChangeCostume[] =           _("Change Costume");
+static const u8 gDebugText_Util_CatchChainStatus[] =        _("Catch Chain Status");
 // Flags Menu
 static const u8 gDebugText_Flags_Flags[] =                _("Edit Flags");
 static const u8 gDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
@@ -388,39 +392,40 @@ static const struct ListMenuItem sDebugMenu_Items_Main[] =
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]       = {gDebugText_Util_HealParty,        DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
-    [DEBUG_UTIL_MENU_ITEM_FLY]              = {gDebugText_Util_Fly,              DEBUG_UTIL_MENU_ITEM_FLY},
-    [DEBUG_UTIL_MENU_ITEM_WARP]             = {gDebugText_Util_WarpToMap,        DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]        = {gDebugText_Util_SaveBlockSpace,   DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]   = {gDebugText_Util_CheckWallClock,   DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]     = {gDebugText_Util_SetWallClock,     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]     = {gDebugText_Util_CheckWeekDay,     DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]     = {gDebugText_Util_WatchCredits,     DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = {gDebugText_Util_Trainer_Name,     DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = {gDebugText_Util_Trainer_Gender,   DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = {gDebugText_Util_Trainer_Id,       DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
-    [DEBUG_UTIL_MENU_ITEM_CHECKEVS]         = {gDebugText_Util_CheckEVs,         DEBUG_UTIL_MENU_ITEM_CHECKEVS},
-    [DEBUG_UTIL_MENU_ITEM_CHECKIVS]         = {gDebugText_Util_CheckIVs,         DEBUG_UTIL_MENU_ITEM_CHECKIVS},
-    [DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH]    = {gDebugText_Util_ForceEggHatch,    DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH},
-    [DEBUG_UTIL_MENU_ITEM_OPEN_PC]          = {gDebugText_Util_OpenPC,           DEBUG_UTIL_MENU_ITEM_OPEN_PC},
-    [DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE]  = {gDebugText_Util_DoWonderTrade,    DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE},
-    [DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME]   = {gDebugText_Util_ChangeCostume,    DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME},
+    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]         = {gDebugText_Util_HealParty,          DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
+    [DEBUG_UTIL_MENU_ITEM_FLY]                = {gDebugText_Util_Fly,                DEBUG_UTIL_MENU_ITEM_FLY},
+    [DEBUG_UTIL_MENU_ITEM_WARP]               = {gDebugText_Util_WarpToMap,          DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]          = {gDebugText_Util_SaveBlockSpace,     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]     = {gDebugText_Util_CheckWallClock,     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]       = {gDebugText_Util_SetWallClock,       DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]       = {gDebugText_Util_CheckWeekDay,       DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]       = {gDebugText_Util_WatchCredits,       DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]       = {gDebugText_Util_Trainer_Name,       DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]     = {gDebugText_Util_Trainer_Gender,     DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]         = {gDebugText_Util_Trainer_Id,         DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
+    [DEBUG_UTIL_MENU_ITEM_CHECKEVS]           = {gDebugText_Util_CheckEVs,           DEBUG_UTIL_MENU_ITEM_CHECKEVS},
+    [DEBUG_UTIL_MENU_ITEM_CHECKIVS]           = {gDebugText_Util_CheckIVs,           DEBUG_UTIL_MENU_ITEM_CHECKIVS},
+    [DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH]      = {gDebugText_Util_ForceEggHatch,      DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH},
+    [DEBUG_UTIL_MENU_ITEM_OPEN_PC]            = {gDebugText_Util_OpenPC,             DEBUG_UTIL_MENU_ITEM_OPEN_PC},
+    [DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE]    = {gDebugText_Util_DoWonderTrade,      DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE},
+    [DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME]     = {gDebugText_Util_ChangeCostume,      DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME},
+    [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS] = {gDebugText_Util_CatchChainStatus,   DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
-    [DEBUG_FLAG_MENU_ITEM_FLAGS]            = {gDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]     = {gDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]     = {gDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
-    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]      = {gDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
-    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]     = {gDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
-    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]      = {gDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]     = {gDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
-    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]  = {gDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]  = {gDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]= {gDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]    = {gDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]   = {gDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]    = {gDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLAGS]             = {gDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = {gDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = {gDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = {gDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = {gDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = {gDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = {gDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
+    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]   = {gDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]   = {gDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF] = {gDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]     = {gDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = {gDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = {gDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
 };
 static const struct ListMenuItem sDebugMenu_Items_Vars[] =
 {
@@ -455,39 +460,40 @@ static void (*const sDebugMenu_Actions_Main[])(u8) =
 };
 static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 {
-    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]       = DebugAction_Util_HealParty,
-    [DEBUG_UTIL_MENU_ITEM_FLY]              = DebugAction_Util_Fly,
-    [DEBUG_UTIL_MENU_ITEM_WARP]             = DebugAction_Util_Warp_Warp,
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]        = DebugAction_Util_CheckSaveBlock,
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]   = DebugAction_Util_CheckWallClock,
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]     = DebugAction_Util_SetWallClock,
-    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]     = DebugAction_Util_CheckWeekDay,
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]     = DebugAction_Util_WatchCredits,
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]     = DebugAction_Util_Trainer_Name,
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]   = DebugAction_Util_Trainer_Gender,
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]       = DebugAction_Util_Trainer_Id,
-    [DEBUG_UTIL_MENU_ITEM_CHECKEVS]         = DebugAction_Util_CheckEVs,
-    [DEBUG_UTIL_MENU_ITEM_CHECKIVS]         = DebugAction_Util_CheckIVs,
-    [DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH]    = DebugAction_Util_ForceEggHatch,
-    [DEBUG_UTIL_MENU_ITEM_OPEN_PC]          = DebugAction_Util_OpenPC,
-    [DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE]  = DebugAction_Util_DoWonderTrade,
-    [DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME]   = DebugAction_Util_ChangeCostume,
+    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]          = DebugAction_Util_HealParty,
+    [DEBUG_UTIL_MENU_ITEM_FLY]                 = DebugAction_Util_Fly,
+    [DEBUG_UTIL_MENU_ITEM_WARP]                = DebugAction_Util_Warp_Warp,
+    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]           = DebugAction_Util_CheckSaveBlock,
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]      = DebugAction_Util_CheckWallClock,
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]        = DebugAction_Util_SetWallClock,
+    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]        = DebugAction_Util_CheckWeekDay,
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]        = DebugAction_Util_WatchCredits,
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]        = DebugAction_Util_Trainer_Name,
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]      = DebugAction_Util_Trainer_Gender,
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]          = DebugAction_Util_Trainer_Id,
+    [DEBUG_UTIL_MENU_ITEM_CHECKEVS]            = DebugAction_Util_CheckEVs,
+    [DEBUG_UTIL_MENU_ITEM_CHECKIVS]            = DebugAction_Util_CheckIVs,
+    [DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH]       = DebugAction_Util_ForceEggHatch,
+    [DEBUG_UTIL_MENU_ITEM_OPEN_PC]             = DebugAction_Util_OpenPC,
+    [DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE]     = DebugAction_Util_DoWonderTrade,
+    [DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME]      = DebugAction_Util_ChangeCostume,
+    [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]  = DebugAction_Util_CatchChainStatus,
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
-    [DEBUG_FLAG_MENU_ITEM_FLAGS]            = DebugAction_Flags_Flags,
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]     = DebugAction_Flags_SetPokedexFlags,
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]     = DebugAction_Flags_SwitchDex,
-    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]      = DebugAction_Flags_SwitchNatDex,
-    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]     = DebugAction_Flags_SwitchPokeNav,
-    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]      = DebugAction_Flags_ToggleFlyFlags,
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]     = DebugAction_Flags_ToggleBadgeFlags,
-    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]  = DebugAction_Flags_CollisionOnOff,
-    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]  = DebugAction_Flags_EncounterOnOff,
-    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]= DebugAction_Flags_TrainerSeeOnOff,
-    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]    = DebugAction_Flags_BagUseOnOff,
-    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]   = DebugAction_Flags_CatchingOnOff,
-    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]    = DebugAction_Flags_ShiniesOnOff,
+    [DEBUG_FLAG_MENU_ITEM_FLAGS]             = DebugAction_Flags_Flags,
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = DebugAction_Flags_SetPokedexFlags,
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = DebugAction_Flags_SwitchDex,
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = DebugAction_Flags_SwitchNatDex,
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = DebugAction_Flags_SwitchPokeNav,
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = DebugAction_Flags_ToggleFlyFlags,
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = DebugAction_Flags_ToggleBadgeFlags,
+    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]   = DebugAction_Flags_CollisionOnOff,
+    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]   = DebugAction_Flags_EncounterOnOff,
+    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF] = DebugAction_Flags_TrainerSeeOnOff,
+    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]     = DebugAction_Flags_BagUseOnOff,
+    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = DebugAction_Flags_CatchingOnOff,
+    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = DebugAction_Flags_ShiniesOnOff,
 };
 static void (*const sDebugMenu_Actions_Vars[])(u8) =
 {
@@ -1102,6 +1108,12 @@ static void DebugTask_ChangeCostume_End(u8 taskId)
         Debug_DestroyMenu(taskId);
         EnableBothScriptContexts();
     }
+}
+static void DebugAction_Util_CatchChainStatus(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(Script_CatchingStreak);
 }
 
 // *******************************

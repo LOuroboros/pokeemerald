@@ -442,3 +442,22 @@ PokemonDataInfoBox::
 
 EventScript_PokemonDataInfoBox_Text_ChosenMonStats:
 	.string "Stats of {STR_VAR_1}$"
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Script_CatchingStreak::
+	compare VAR_WILD_POKEMON_CHAIN_COUNT, 0
+	goto_if_eq Script_NoStreak
+	buffernumberstring 4, VAR_WILD_POKEMON_CHAIN_COUNT
+	msgbox Script_CatchingStreak_Text_Status, MSGBOX_NPC
+	end
+
+Script_NoStreak:
+	msgbox Script_Text_NoStreak, MSGBOX_NPC
+	end
+
+Script_Text_NoStreak:
+	.string "Current chain: EMPTY.$"
+
+Script_CatchingStreak_Text_Status:
+	.string "Current chain: {STR_VAR_5} {STR_VAR_4}.$"
