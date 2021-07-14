@@ -234,6 +234,7 @@ gScriptCmdTable:: @ 81DB67C
 	.4byte ScrCmd_getcurrentday             @ 0xe7
 	.4byte ScrCmd_drawinfobox               @ 0xe8
 	.4byte ScrCmd_removeinfobox             @ 0xe9
+	.4byte ScrCmd_setcustomwildbattle       @ 0xea
 
 gScriptCmdTableEnd:: @ 81DBA08
 	.4byte ScrCmd_nop

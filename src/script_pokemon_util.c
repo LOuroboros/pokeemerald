@@ -343,3 +343,59 @@ u8 ScriptGiveCustomMon(u16 species, u8 level, u16 item, u8 ball, u8 nature, u8 a
 
     return sentToPc;
 }
+
+void SetCustomWildMon(u16 species, u8 level, u16 item, u8 nature, u8 abilityNum, u8* evs, u8* ivs, u16* moves, bool8 isShiny)
+{
+    u8 heldItem[2];
+    u8 i;
+
+    ZeroEnemyPartyMons();
+    if (nature == NUM_NATURES || nature == 0xFF)
+        nature = Random() % NUM_NATURES;
+
+    if (isShiny && !FlagGet(FLAG_FORCE_SHINIES))
+    {
+        FlagSet(FLAG_FORCE_SHINIES);
+        CreateShinyMonWithNature(&gEnemyParty[0], species, level, nature);
+        FlagClear(FLAG_FORCE_SHINIES);
+    }
+    else
+    {
+        CreateMonWithNature(&gEnemyParty[0], species, level, 32, nature);
+    }
+
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        // ev
+        if (evs[i] <= 0xFF)
+            SetMonData(&gEnemyParty[0], MON_DATA_HP_EV + i, &evs[i]);
+
+        // iv
+        if (ivs[i] <= USE_RANDOM_IVS)
+            SetMonData(&gEnemyParty[0], MON_DATA_HP_IV + i, &ivs[i]);
+    }
+    CalculateMonStats(&gEnemyParty[0]);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (moves[i] == MOVE_NONE || moves[i] > MOVES_COUNT)
+            continue;
+
+        SetMonMoveSlot(&gEnemyParty[0], moves[i], i);
+    }
+
+    //ability
+    if (abilityNum == 0xFF || GetAbilityBySpecies(species, abilityNum) == 0)
+    {
+        do {
+            abilityNum = Random() % 3;  // includes hidden abilities
+        } while (GetAbilityBySpecies(species, abilityNum) == 0);
+    }
+
+    SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
+
+    //item
+    heldItem[0] = item;
+    heldItem[1] = item >> 8;
+    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
+}

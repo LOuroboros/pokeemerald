@@ -616,7 +616,9 @@ static void CB2_InitBattleInternal(void)
         CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
         if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
             CreateNPCTrainerParty(&gEnemyParty[3], gTrainerBattleOpponent_B, FALSE);
-        SetWildMonHeldItem();
+        if (GetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM) == ITEM_NONE
+         || GetMonData(&gEnemyParty[1], MON_DATA_HELD_ITEM) == ITEM_NONE)
+            SetWildMonHeldItem();
     }
 
     gMain.inBattle = TRUE;

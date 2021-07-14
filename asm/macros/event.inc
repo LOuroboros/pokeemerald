@@ -1782,6 +1782,32 @@
 	.byte 0xe9
 	.endm
 
+	.macro setcustomwildbattle species:req, level:req, item=ITEM_NONE, nature=NUM_NATURES, abilityNum=0, hpEv=0, atkEv=0, defEv=0, speedEv=0, spAtkEv=0, spDefEv=0, hpIv=USE_RANDOM_IVS, atkIv=USE_RANDOM_IVS, defIv=USE_RANDOM_IVS, speedIv=USE_RANDOM_IVS, spAtkIv=USE_RANDOM_IVS, spDefIv=USE_RANDOM_IVS, move1=MOVE_NONE, move2=MOVE_NONE, move3=MOVE_NONE, move4=MOVE_NONE, isShiny=FALSE
+	.byte 0xea
+	.2byte \species
+	.byte \level
+	.2byte \item
+	.byte \nature
+	.byte \abilityNum
+	.byte \hpEv
+	.byte \atkEv
+	.byte \defEv
+	.byte \speedEv
+	.byte \spAtkEv
+	.byte \spDefEv
+	.byte \hpIv
+	.byte \atkIv
+	.byte \defIv
+	.byte \speedIv
+	.byte \spAtkIv
+	.byte \spDefIv
+	.2byte \move1
+	.2byte \move2
+	.2byte \move3
+	.2byte \move4
+	.byte \isShiny
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
