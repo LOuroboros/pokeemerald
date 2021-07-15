@@ -908,7 +908,8 @@
 #define HG_SEQ_GS_D_SHINTO           884 // Sinjoh Ruins
 #define HG_SEQ_GS_E_ARCEUS           885 // Arceus
 #define HG_SEQ_ME_GONIN              886 // Let's Go Together (Unused?)
-#define END_MUS                      HG_SEQ_ME_GONIN 
+#define MUS_SMT3_LARGE_MAP           887 // Large Map (Shin Megami Tensei III: Nocturne)
+#define END_MUS                      MUS_SMT3_LARGE_MAP 
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
