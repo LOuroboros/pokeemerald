@@ -1005,6 +1005,26 @@ Common_EventScript_LegendaryFlewAway:: @ 8273776
 	release
 	end
 
+ItemScript_MultichoiceItem::
+	multichoice 14, 1, MULTI_MULTICHOICE_ITEM, TRUE
+	switch VAR_RESULT
+	case 0, ItemScript_MultichoiceItem_1
+	case 1, ItemScript_MultichoiceItem_2
+	case 2, ItemScript_MultichoiceItem_3
+	case 3, ItemScript_MultichoiceItem_4
+	case 4, ItemScript_MultichoiceItem_5
+
+ItemScript_MultichoiceItem_1::
+ItemScript_MultichoiceItem_2::
+ItemScript_MultichoiceItem_3::
+ItemScript_MultichoiceItem_4::
+	msgbox ItemScript_MultichoiceItem_Text_Test, MSGBOX_NPC
+ItemScript_MultichoiceItem_5::
+	end
+
+ItemScript_MultichoiceItem_Text_Test:
+	.string "Test.$"
+
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/mevent.inc"
 	.include "data/scripts/abnormal_weather.inc"

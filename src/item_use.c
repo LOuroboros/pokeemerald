@@ -70,6 +70,7 @@ static void Task_UseRepel(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8 taskId);
 static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 x, s16 y);
 static void CB2_OpenPokeblockFromBag(void);
+static void ItemUseOnFieldCB_MultichoiceItem(u8 taskId);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -1089,6 +1090,20 @@ void ItemUseOutOfBattle_EnigmaBerry(u8 taskId)
         ItemUseOutOfBattle_CannotUse(taskId);
         break;
     }
+}
+
+void ItemUseOutOfBattle_MultichoiceItem(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_MultichoiceItem;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
+static void ItemUseOnFieldCB_MultichoiceItem(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(ItemScript_MultichoiceItem);
+    DestroyTask(taskId);
 }
 
 void ItemUseInBattle_EnigmaBerry(u8 taskId)
