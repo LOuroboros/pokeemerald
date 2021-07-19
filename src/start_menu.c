@@ -646,6 +646,17 @@ static bool8 HandleStartMenuInput(void)
         return TRUE;
     }
 
+    if (JOY_NEW(L_BUTTON) && JOY_NEW(R_BUTTON))
+    {
+        if (!FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU))
+            FlagSet(FLAG_SYS_ENABLE_DEBUG_MENU);
+        else
+            FlagClear(FLAG_SYS_ENABLE_DEBUG_MENU);
+        ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
+        RemoveStartMenuWindow();
+        InitStartMenu();
+    }
+
     return FALSE;
 }
 

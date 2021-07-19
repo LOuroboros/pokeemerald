@@ -133,6 +133,9 @@ EventScript_Text_CheckSavefileSize:
 EventScript_CheckEVs::
 	lockall
 	faceplayer
+	getpartysize
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_ThereIsNoPokemon
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
@@ -175,6 +178,9 @@ EventScript_Text_ComeBackAnytime:
 EventScript_CheckIVs::
 	lockall
 	faceplayer
+	getpartysize
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_ThereIsNoPokemon
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
@@ -208,9 +214,19 @@ EventScript_CheckIVs_Text_Egg:
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+EventScript_ThereIsNoPokemon::
+	msgbox gText_NoPokemon, MSGBOX_DEFAULT
+	releaseall
+	end
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 EventScript_ForceEggHatch::
 	lockall
 	faceplayer
+	getpartysize
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_ThereIsNoPokemon
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
@@ -401,6 +417,10 @@ EventScript_GetCurrentDay_Text_TodayIs:
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 EventScript_DoWonderTrade::
+	lockall
+	getpartysize
+	compare VAR_RESULT, 0
+	goto_if_eq EventScript_ThereIsNoPokemon
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
@@ -413,7 +433,7 @@ EventScript_DoWonderTrade::
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_DoWonderTrade
 	msgbox EventScript_DoWonderTrade_Text_Done, MSGBOX_DEFAULT
-	closemessage
+	releaseall
 	end
 
 EventScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade:
