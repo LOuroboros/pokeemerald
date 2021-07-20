@@ -25,7 +25,6 @@
 #include "graphics.h"
 #include "pokemon_icon.h"
 #include "trainer_pokemon_sprites.h"
-#include "contest_util.h"
 #include "constants/songs.h"
 #include "constants/game_stat.h"
 #include "constants/battle_frontier.h"
@@ -107,7 +106,7 @@ static bool8 LoadCardGfx(void);
 static void CB2_InitTrainerCard(void);
 static u32 GetCappedGameStat(u8 statId, u32 maxValue);
 static bool8 HasAllFrontierSymbols(void);
-static u8 GetRubyTrainerStars(struct TrainerCard*);
+static u8 GetPlayerTrainerStars(struct TrainerCard*);
 static u16 GetCaughtMonsCount(void);
 static void SetPlayerCardData(struct TrainerCard*, u8);
 static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard*);
@@ -129,10 +128,8 @@ static void PrintNameOnCardBack(void);
 static void PrintHofDebutTimeOnCard(void);
 static void PrintLinkBattleResultsOnCard(void);
 static void PrintTradesStringOnCard(void);
-static void PrintBerryCrushStringOnCard(void);
-static void PrintPokeblockStringOnCard(void);
-static void PrintUnionStringOnCard(void);
-static void PrintContestStringOnCard(void);
+static void PrintPokeblockOrUnionRoomStringOnCard(void);
+static void PrintLinkContestOrBerryCrushStringOnCard(void);
 static void PrintPokemonIconsOnCard(void);
 static void PrintBattleFacilityStringOnCard(void);
 static void PrintStickersOnCard(void);
@@ -141,10 +138,8 @@ static void BufferNameForCardBack(void);
 static void BufferHofDebutTime(void);
 static void BufferLinkBattleResults(void);
 static void BufferNumTrades(void);
-static void BufferBerryCrushPoints(void);
-static void BufferUnionRoomStats(void);
-static void BufferLinkPokeblocksNum(void);
-static void BufferLinkContestNum(void);
+static void BufferLinkPokeblocksNumOrUnionRoomStats(void);
+static void BufferLinkContestNumOrBerryCrushPoints(void);
 static void BufferBattleFacilityStats(void);
 static void PrintStatOnBackOfCard(u8 top, const u8* str1, u8* str2, const u8* color);
 static void LoadStickerGfx(void);
@@ -160,27 +155,25 @@ static bool8 Task_EndCardFlip(struct Task* task);
 static void UpdateCardFlipRegs(u16);
 static void LoadMonIconGfx(void);
 
-static const u32 sTrainerCardStickers_Gfx[]      = INCBIN_U32("graphics/trainer_card/stickers_fr.4bpp.lz");
-static const u16 sUnused_Pal[]                   = INCBIN_U16("graphics/trainer_card/unused.gbapal");
-static const u16 sHoennTrainerCard1Star_Pal[]    = INCBIN_U16("graphics/trainer_card/one_star.gbapal");
-static const u16 sKantoTrainerCard1Star_Pal[]    = INCBIN_U16("graphics/trainer_card/one_star_fr.gbapal");
-static const u16 sHoennTrainerCard2Star_Pal[]    = INCBIN_U16("graphics/trainer_card/two_stars.gbapal");
-static const u16 sKantoTrainerCard2Star_Pal[]    = INCBIN_U16("graphics/trainer_card/two_stars_fr.gbapal");
-static const u16 sHoennTrainerCard3Star_Pal[]    = INCBIN_U16("graphics/trainer_card/three_stars.gbapal");
-static const u16 sKantoTrainerCard3Star_Pal[]    = INCBIN_U16("graphics/trainer_card/three_stars_fr.gbapal");
-static const u16 sHoennTrainerCard4Star_Pal[]    = INCBIN_U16("graphics/trainer_card/four_stars.gbapal");
-static const u16 sKantoTrainerCard4Star_Pal[]    = INCBIN_U16("graphics/trainer_card/four_stars_fr.gbapal");
+// const rom data
+static const u32 sTrainerCardStickers_Gfx[] = INCBIN_U32("graphics/trainer_card/stickers_fr.4bpp.lz");
+static const u16 sHoennTrainerCard1Star_Pal[] = INCBIN_U16("graphics/trainer_card/one_star.gbapal");
+static const u16 sKantoTrainerCard1Star_Pal[] = INCBIN_U16("graphics/trainer_card/one_star_fr.gbapal");
+static const u16 sHoennTrainerCard2Star_Pal[] = INCBIN_U16("graphics/trainer_card/two_stars.gbapal");
+static const u16 sKantoTrainerCard2Star_Pal[] = INCBIN_U16("graphics/trainer_card/two_stars_fr.gbapal");
+static const u16 sHoennTrainerCard3Star_Pal[] = INCBIN_U16("graphics/trainer_card/three_stars.gbapal");
+static const u16 sKantoTrainerCard3Star_Pal[] = INCBIN_U16("graphics/trainer_card/three_stars_fr.gbapal");
+static const u16 sHoennTrainerCard4Star_Pal[] = INCBIN_U16("graphics/trainer_card/four_stars.gbapal");
+static const u16 sKantoTrainerCard4Star_Pal[] = INCBIN_U16("graphics/trainer_card/four_stars_fr.gbapal");
 static const u16 sHoennTrainerCardFemaleBg_Pal[] = INCBIN_U16("graphics/trainer_card/female_bg.gbapal");
 static const u16 sKantoTrainerCardFemaleBg_Pal[] = INCBIN_U16("graphics/trainer_card/female_bg_fr.gbapal");
-static const u16 sHoennTrainerCardBadges_Pal[]   = INCBIN_U16("graphics/trainer_card/badges.gbapal");
-static const u16 sKantoTrainerCardBadges_Pal[]   = INCBIN_U16("graphics/trainer_card/badges_fr.gbapal");
-static const u16 sTrainerCardGold_Pal[]          = INCBIN_U16("graphics/trainer_card/gold.gbapal");
-static const u16 sTrainerCardSticker1_Pal[]      = INCBIN_U16("graphics/trainer_card/stickers_fr1.gbapal");
-static const u16 sTrainerCardSticker2_Pal[]      = INCBIN_U16("graphics/trainer_card/stickers_fr2.gbapal");
-static const u16 sTrainerCardSticker3_Pal[]      = INCBIN_U16("graphics/trainer_card/stickers_fr3.gbapal");
-static const u16 sTrainerCardSticker4_Pal[]      = INCBIN_U16("graphics/trainer_card/stickers_fr4.gbapal");
-static const u32 sHoennTrainerCardBadges_Gfx[]   = INCBIN_U32("graphics/trainer_card/badges.4bpp.lz");
-static const u32 sKantoTrainerCardBadges_Gfx[]   = INCBIN_U32("graphics/trainer_card/badges_fr.4bpp.lz");
+static const u16 sKantoTrainerCardBadges_Pal[] = INCBIN_U16("graphics/trainer_card/badges_fr.gbapal");
+static const u16 sTrainerCardGold_Pal[] = INCBIN_U16("graphics/trainer_card/gold.gbapal");
+static const u16 sTrainerCardSticker1_Pal[] = INCBIN_U16("graphics/trainer_card/stickers_fr1.gbapal");
+static const u16 sTrainerCardSticker2_Pal[] = INCBIN_U16("graphics/trainer_card/stickers_fr2.gbapal");
+static const u16 sTrainerCardSticker3_Pal[] = INCBIN_U16("graphics/trainer_card/stickers_fr3.gbapal");
+static const u16 sTrainerCardSticker4_Pal[] = INCBIN_U16("graphics/trainer_card/stickers_fr4.gbapal");
+static const u32 sKantoTrainerCardBadges_Gfx[] = INCBIN_U32("graphics/trainer_card/badges_fr.4bpp.lz");
 
 static const struct BgTemplate sTrainerCardBgTemplates[4] =
 {
@@ -280,33 +273,33 @@ static const u8 sTrainerPicOffset[2][GENDER_COUNT][2] =
 {
     // Kanto
     {
-        [MALE]   = {13, 4}, 
+        [MALE]   = {13, 4},
         [FEMALE] = {13, 4}
     },
     // Hoenn
     {
-        [MALE]   = {1, 0}, 
+        [MALE]   = {1, 0},
         [FEMALE] = {1, 0}
     },
 };
 
-static const u8 sTrainerPicFacilityClass[][GENDER_COUNT] = 
+static const u8 sTrainerPicFacilityClass[][GENDER_COUNT] =
 {
-    [CARD_TYPE_FRLG] = 
+    [CARD_TYPE_FRLG] =
     {
-        [MALE]   = FACILITY_CLASS_RED, 
+        [MALE]   = FACILITY_CLASS_RED,
         [FEMALE] = FACILITY_CLASS_LEAF
-    }, 
-    [CARD_TYPE_RS] = 
+    },
+    [CARD_TYPE_RS] =
     {
-        [MALE]   = FACILITY_CLASS_RS_BRENDAN, 
+        [MALE]   = FACILITY_CLASS_RS_BRENDAN,
         [FEMALE] = FACILITY_CLASS_RS_MAY
-    }, 
-    [CARD_TYPE_EMERALD] = 
+    },
+    [CARD_TYPE_EMERALD] =
     {
-        [MALE]   = FACILITY_CLASS_RED, 
+        [MALE]   = FACILITY_CLASS_RED,
         [FEMALE] = FACILITY_CLASS_LEAF
-    }
+    },
 };
 
 static bool8 (*const sTrainerCardFlipTasks[])(struct Task *) =
@@ -406,7 +399,7 @@ static void Task_TrainerCard(u8 taskId)
         break;
     // Fade in
     case 7:
-        if (gWirelessCommType == 1 && gReceivedRemoteLinkPlayers == TRUE)
+        if (gWirelessCommType == 1 && gReceivedRemoteLinkPlayers)
         {
             LoadWirelessStatusIndicatorSpriteGfx();
             CreateWirelessStatusIndicatorSprite(230, 150);
@@ -443,7 +436,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         else if (JOY_NEW(B_BUTTON))
         {
-            if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom() == TRUE)
+            if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom())
             {
                 sData->mainState = STATE_WAIT_LINK_PARTNER;
             }
@@ -455,7 +448,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         break;
     case STATE_WAIT_FLIP_TO_BACK:
-        if (IsCardFlipTaskActive() && Overworld_LinkRecvQueueLengthMoreThan2() != TRUE)
+        if (IsCardFlipTaskActive() && !Overworld_LinkRecvQueueLengthMoreThan2())
         {
             PlaySE(SE_RG_CARD_OPEN);
             sData->mainState = STATE_HANDLE_INPUT_BACK;
@@ -464,7 +457,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_HANDLE_INPUT_BACK:
         if (JOY_NEW(B_BUTTON))
         {
-            if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom() == TRUE)
+            if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom())
             {
                 sData->mainState = STATE_WAIT_LINK_PARTNER;
             }
@@ -482,7 +475,7 @@ static void Task_TrainerCard(u8 taskId)
         }
         else if (JOY_NEW(A_BUTTON))
         {
-           if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom() == TRUE)
+           if (gReceivedRemoteLinkPlayers && sData->isLink && InUnionRoom())
            {
                sData->mainState = STATE_WAIT_LINK_PARTNER;
            }
@@ -496,7 +489,7 @@ static void Task_TrainerCard(u8 taskId)
     case STATE_WAIT_LINK_PARTNER:
         SetCloseLinkCallback();
         DrawDialogueFrame(0, 1);
-        AddTextPrinterParameterized(0, 1, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
+        AddTextPrinterParameterized(0, 2, gText_WaitingTrainerFinishReading, 0, 1, 255, 0);
         CopyWindowToVram(0, 3);
         sData->mainState = STATE_CLOSE_CARD_LINK;
         break;
@@ -512,7 +505,7 @@ static void Task_TrainerCard(u8 taskId)
             CloseTrainerCard(taskId);
         break;
     case STATE_WAIT_FLIP_TO_FRONT:
-        if (IsCardFlipTaskActive() && Overworld_LinkRecvQueueLengthMoreThan2() != TRUE)
+        if (IsCardFlipTaskActive() && !Overworld_LinkRecvQueueLengthMoreThan2())
         {
             sData->mainState = STATE_HANDLE_INPUT_FRONT;
             PlaySE(SE_RG_CARD_OPEN);
@@ -526,47 +519,44 @@ static bool8 LoadCardGfx(void)
     switch (sData->gfxLoadState)
     {
     case 0:
-        if (sData->cardType != CARD_TYPE_FRLG)
+        if (sData->isHoenn)
             LZ77UnCompWram(gHoennTrainerCardBg_Tilemap, sData->bgTilemap);
         else
             LZ77UnCompWram(gKantoTrainerCardBg_Tilemap, sData->bgTilemap);
         break;
     case 1:
-        if (sData->cardType != CARD_TYPE_FRLG)
+        if (sData->isHoenn)
             LZ77UnCompWram(gHoennTrainerCardBack_Tilemap, sData->backTilemap);
         else
             LZ77UnCompWram(gKantoTrainerCardBack_Tilemap, sData->backTilemap);
         break;
     case 2:
-        if (!sData->isLink)
+        if (sData->isLink)
         {
-            if (sData->cardType != CARD_TYPE_FRLG)
-                LZ77UnCompWram(gHoennTrainerCardFront_Tilemap, sData->frontTilemap);
-            else
-                LZ77UnCompWram(gKantoTrainerCardFront_Tilemap, sData->frontTilemap);
-        }
-        else
-        {
-            if (sData->cardType != CARD_TYPE_FRLG)
+            if (sData->isHoenn)
                 LZ77UnCompWram(gHoennTrainerCardFrontLink_Tilemap, sData->frontTilemap);
             else
                 LZ77UnCompWram(gKantoTrainerCardFrontLink_Tilemap, sData->frontTilemap);
         }
+        else
+        {
+            if (sData->isHoenn)
+                LZ77UnCompWram(gHoennTrainerCardFront_Tilemap, sData->frontTilemap);
+            else
+                LZ77UnCompWram(gKantoTrainerCardFront_Tilemap, sData->frontTilemap);
+        }
         break;
     case 3:
-        if (sData->cardType != CARD_TYPE_FRLG)
-            LZ77UnCompWram(sHoennTrainerCardBadges_Gfx, sData->badgeTiles);
-        else
-            LZ77UnCompWram(sKantoTrainerCardBadges_Gfx, sData->badgeTiles);
+        LZ77UnCompWram(sKantoTrainerCardBadges_Gfx, sData->badgeTiles);
         break;
     case 4:
-        if (sData->cardType != CARD_TYPE_FRLG)
+        if (sData->isHoenn)
             LZ77UnCompWram(gHoennTrainerCard_Gfx, sData->cardTiles);
         else
             LZ77UnCompWram(gKantoTrainerCard_Gfx, sData->cardTiles);
         break;
     case 5:
-        if (sData->cardType == CARD_TYPE_FRLG)
+        if (!sData->isHoenn)
             LZ77UnCompWram(sTrainerCardStickers_Gfx, sData->stickerTiles);
         break;
     default:
@@ -609,7 +599,7 @@ static void CB2_InitTrainerCard(void)
         gMain.state++;
         break;
     case 6:
-        if (LoadCardGfx() == TRUE)
+        if (LoadCardGfx())
             gMain.state++;
         break;
     case 7:
@@ -625,7 +615,7 @@ static void CB2_InitTrainerCard(void)
         gMain.state++;
         break;
     case 10:
-        if (SetCardBgsAndPals() == TRUE)
+        if (SetCardBgsAndPals())
             gMain.state++;
         break;
     default:
@@ -643,7 +633,7 @@ static u32 GetCappedGameStat(u8 statId, u32 maxValue)
 
 static bool8 HasAllFrontierSymbols(void)
 {
-    u8 i;
+    u32 i;
     for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
     {
         if (!FlagGet(FLAG_SYS_TOWER_SILVER + 2 * i) || !FlagGet(FLAG_SYS_TOWER_GOLD + 2 * i))
@@ -658,27 +648,31 @@ u32 CountPlayerTrainerStars(void)
 
     if (GetGameStat(GAME_STAT_ENTERED_HOF))
         stars++;
-    if (HasAllHoennMons())
+    if (HasAllKantoMons())
         stars++;
-    if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
+    if (HasAllMons())
         stars++;
-    if (HasAllFrontierSymbols())
+    if ((gSaveBlock2Ptr->berryPick.berriesPicked > 199 && gSaveBlock2Ptr->pokeJump.jumpsInRow > 199)
+     || (HasAllFrontierSymbols()))
         stars++;
 
     return stars;
 }
 
-static u8 GetRubyTrainerStars(struct TrainerCard *trainerCard)
+static u8 GetPlayerTrainerStars(struct TrainerCard *trainerCard)
 {
     u8 stars = 0;
 
-    if (trainerCard->hofDebutHours || trainerCard->hofDebutMinutes || trainerCard->hofDebutSeconds)
+    if (trainerCard->hofDebutHours
+     || trainerCard->hofDebutMinutes
+     || trainerCard->hofDebutSeconds)
         stars++;
     if (trainerCard->caughtAllHoenn)
         stars++;
-    if (trainerCard->battleTowerStraightWins > 49)
+    if (trainerCard->hasAllMons)
         stars++;
-    if (trainerCard->hasAllPaintings)
+    if ((trainerCard->berriesPicked > 199 && trainerCard->jumpsInRow > 199)
+     || HasAllFrontierSymbols())
         stars++;
 
     return stars;
@@ -687,7 +681,7 @@ static u8 GetRubyTrainerStars(struct TrainerCard *trainerCard)
 static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
 {
     u32 playTime;
-    u8 i;
+    u32 i;
 
     trainerCard->gender = gSaveBlock2Ptr->playerGender;
     trainerCard->playTimeHours = gSaveBlock2Ptr->playTimeHours;
@@ -708,7 +702,16 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
     }
 
     trainerCard->hasPokedex = FlagGet(FLAG_SYS_POKEDEX_GET);
-    trainerCard->caughtAllHoenn = HasAllHoennMons();
+
+    switch (cardType)
+    {
+    case CARD_TYPE_FRLG:
+        trainerCard->caughtAllHoenn = HasAllKantoMons();
+        break;
+    default:
+        trainerCard->caughtAllHoenn = HasAllHoennMons();
+        break;
+    }
     trainerCard->caughtMonsCount = GetCaughtMonsCount();
 
     trainerCard->trainerId = (gSaveBlock2Ptr->playerTrainerId[1] << 8) | gSaveBlock2Ptr->playerTrainerId[0];
@@ -727,39 +730,34 @@ static void SetPlayerCardData(struct TrainerCard *trainerCard, u8 cardType)
 
     switch (cardType)
     {
-    case CARD_TYPE_EMERALD:
-        trainerCard->battleTowerWins = 0;
-        trainerCard->battleTowerStraightWins = 0;
-    // Seems like GF got CARD_TYPE_FRLG and CARD_TYPE_RS wrong.
     case CARD_TYPE_FRLG:
-        trainerCard->contestsWithFriends = GetCappedGameStat(GAME_STAT_WON_LINK_CONTEST, 999);
-        trainerCard->pokeblocksWithFriends = GetCappedGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
-        if (CountPlayerMuseumPaintings() >= CONTEST_CATEGORIES_COUNT)
-            trainerCard->hasAllPaintings = TRUE;
-        trainerCard->stars = GetRubyTrainerStars(trainerCard);
+        trainerCard->berryCrushPoints = GetCappedGameStat(GAME_STAT_PLAYED_BERRY_CRUSH, 0xFFFF);
+        trainerCard->unionRoomNum = GetCappedGameStat(GAME_STAT_NUM_UNION_ROOM_BATTLES, 0xFFFF);
+        trainerCard->berriesPicked = gSaveBlock2Ptr->berryPick.berriesPicked;
+        trainerCard->jumpsInRow = gSaveBlock2Ptr->pokeJump.jumpsInRow;
+        trainerCard->shouldDrawStickers = TRUE;
+        trainerCard->hasAllMons = HasAllMons();
         break;
     case CARD_TYPE_RS:
-        trainerCard->battleTowerWins = 0;
-        trainerCard->battleTowerStraightWins = 0;
-        trainerCard->contestsWithFriends = 0;
-        trainerCard->pokeblocksWithFriends = 0;
-        trainerCard->hasAllPaintings = 0;
-        trainerCard->stars = 0;
+        trainerCard->battleTowerWins = GetCappedGameStat(sData->trainerCard.battleTowerWins, 9999);
+        trainerCard->battleTowerStraightWins = GetCappedGameStat(sData->trainerCard.battleTowerStraightWins, 9999);
+    default:
+        trainerCard->contestsWithFriends = GetCappedGameStat(GAME_STAT_WON_LINK_CONTEST, 999);
+        trainerCard->pokeblocksWithFriends = GetCappedGameStat(GAME_STAT_POKEBLOCKS_WITH_FRIENDS, 0xFFFF);
         break;
     }
+    trainerCard->stars = GetPlayerTrainerStars(trainerCard);
 }
 
 static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
 {
     memset(trainerCard, 0, sizeof(struct TrainerCard));
     trainerCard->version = GAME_VERSION;
-    SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
+    SetPlayerCardData(trainerCard, VersionToCardType(trainerCard->version));
     trainerCard->hasAllSymbols = HasAllFrontierSymbols();
     trainerCard->frontierBP = gSaveBlock2Ptr->frontier.cardBattlePoints;
-    if (trainerCard->hasAllSymbols)
-        trainerCard->stars++;
 
-    if (trainerCard->gender == FEMALE)
+    if (trainerCard->gender)
         trainerCard->facilityClass = gLinkPlayerFacilityClasses[(trainerCard->trainerId % NUM_FEMALE_LINK_FACILITY_CLASSES) + NUM_MALE_LINK_FACILITY_CLASSES];
     else
         trainerCard->facilityClass = gLinkPlayerFacilityClasses[trainerCard->trainerId % NUM_MALE_LINK_FACILITY_CLASSES];
@@ -767,15 +765,13 @@ static void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCar
 
 void TrainerCard_GenerateCardForPlayer(struct TrainerCard *trainerCard)
 {
-    memset(trainerCard, 0, 0x60);
+    memset(trainerCard, 0, sizeof(struct TrainerCard));
     trainerCard->version = GAME_VERSION;
-    SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
+    SetPlayerCardData(trainerCard, VersionToCardType(trainerCard->version));
     trainerCard->hasAllFrontierSymbols = HasAllFrontierSymbols();
     *((u16*)&trainerCard->berryCrushPoints) = gSaveBlock2Ptr->frontier.cardBattlePoints;
-    if (trainerCard->hasAllFrontierSymbols)
-        trainerCard->stars++;
 
-    if (trainerCard->gender == FEMALE)
+    if (trainerCard->gender)
         trainerCard->facilityClass = gLinkPlayerFacilityClasses[(trainerCard->trainerId % NUM_FEMALE_LINK_FACILITY_CLASSES) + NUM_MALE_LINK_FACILITY_CLASSES];
     else
         trainerCard->facilityClass = gLinkPlayerFacilityClasses[trainerCard->trainerId % NUM_MALE_LINK_FACILITY_CLASSES];
@@ -788,15 +784,11 @@ void CopyTrainerCardData(struct TrainerCard *dst, u16 *src, u8 gameVersion)
 
     switch (VersionToCardType(gameVersion))
     {
-    case CARD_TYPE_FRLG:
-        memcpy(dst, src, 0x60);
-        break;
     case CARD_TYPE_RS:
         memcpy(dst, src, 0x38);
         break;
-    case CARD_TYPE_EMERALD:
+    default:
         memcpy(dst, src, 0x60);
-        dst->berryCrushPoints = 0;
         dst->hasAllSymbols = src[29];
         dst->frontierBP = src[30];
         break;
@@ -805,15 +797,13 @@ void CopyTrainerCardData(struct TrainerCard *dst, u16 *src, u8 gameVersion)
 
 static void SetDataFromTrainerCard(void)
 {
-    u8 i;
+    u32 i;
     u32 badgeFlag;
 
     sData->hasPokedex = FALSE;
     sData->hasHofResult = FALSE;
     sData->hasLinkResults = FALSE;
     sData->hasBattleTowerWins = FALSE;
-    sData->unused_E = FALSE;
-    sData->unused_F = FALSE;
     sData->hasTrades = FALSE;
     memset(sData->badgeCount, 0, sizeof(sData->badgeCount));
     if (sData->trainerCard.hasPokedex)
@@ -824,11 +814,13 @@ static void SetDataFromTrainerCard(void)
      || sData->trainerCard.hofDebutSeconds)
         sData->hasHofResult++;
 
-    if (sData->trainerCard.linkBattleWins || sData->trainerCard.linkBattleLosses)
+    if (sData->trainerCard.linkBattleWins
+     || sData->trainerCard.linkBattleLosses)
         sData->hasLinkResults++;
     if (sData->trainerCard.pokemonTrades)
         sData->hasTrades++;
-    if (sData->trainerCard.battleTowerWins || sData->trainerCard.battleTowerStraightWins)
+    if (sData->trainerCard.battleTowerWins
+     || sData->trainerCard.battleTowerStraightWins)
         sData->hasBattleTowerWins++;
 
     for (i = 0, badgeFlag = FLAG_BADGE01_GET; badgeFlag < FLAG_BADGE01_GET + NUM_BADGES; badgeFlag++, i++)
@@ -957,12 +949,10 @@ static bool8 PrintAllOnCardBack(void)
         PrintTradesStringOnCard();
         break;
     case 4:
-        PrintBerryCrushStringOnCard();
-        PrintPokeblockStringOnCard();
+        PrintPokeblockOrUnionRoomStringOnCard();
         break;
     case 5:
-        PrintUnionStringOnCard();
-        PrintContestStringOnCard();
+        PrintLinkContestOrBerryCrushStringOnCard();
         break;
     case 6:
         PrintPokemonIconsOnCard();
@@ -985,10 +975,8 @@ static void BufferTextsVarsForCardPage2(void)
     BufferHofDebutTime();
     BufferLinkBattleResults();
     BufferNumTrades();
-    BufferBerryCrushPoints();
-    BufferUnionRoomStats();
-    BufferLinkPokeblocksNum();
-    BufferLinkContestNum();
+    BufferLinkPokeblocksNumOrUnionRoomStats();
+    BufferLinkContestNumOrBerryCrushPoints();
     BufferBattleFacilityStats();
 }
 
@@ -996,13 +984,25 @@ static void PrintNameOnCardFront(void)
 {
     u8 buffer[32];
     u8* txtPtr;
+    u8 fontId, left, top;
     txtPtr = StringCopy(buffer, gText_TrainerCardName);
     StringCopy(txtPtr, sData->trainerCard.playerName);
     ConvertInternationalString(txtPtr, sData->language);
-    if (sData->cardType == CARD_TYPE_FRLG)
-        AddTextPrinterParameterized3(1, 1, 20, 28, sTrainerCardTextColors, TEXT_SPEED_FF, buffer);
+
+    if (sData->isHoenn)
+    {
+        fontId = 1;
+        left = 16;
+        top = 33;
+    }
     else
-        AddTextPrinterParameterized3(1, 1, 16, 33, sTrainerCardTextColors, TEXT_SPEED_FF, buffer);
+    {
+        fontId = 2;
+        left = 20;
+        top = 29;
+    }
+
+    AddTextPrinterParameterized3(1, fontId, left, top, sTrainerCardTextColors, TEXT_SPEED_FF, buffer);
 }
 
 static void PrintIdOnCard(void)
@@ -1010,46 +1010,51 @@ static void PrintIdOnCard(void)
     u8 buffer[32];
     u8* txtPtr;
     s32 xPos;
-    u32 top;
+    u8 fontId, var, var2;
     txtPtr = StringCopy(buffer, gText_TrainerCardIDNo);
     ConvertIntToDecimalStringN(txtPtr, sData->trainerCard.trainerId, STR_CONV_MODE_LEADING_ZEROS, 5);
-    if (sData->cardType == CARD_TYPE_FRLG)
+
+    if (sData->isHoenn)
     {
-        xPos = GetStringCenterAlignXOffset(1, buffer, 80) + 132;
-        top = 9;
+        fontId = 1;
+        var = 96;
+        var2 = 120;
     }
     else
     {
-        xPos = GetStringCenterAlignXOffset(1, buffer, 96) + 120;
-        top = 9;
+        fontId = 2;
+        var = 80;
+        var2 = 131;
     }
 
-    AddTextPrinterParameterized3(1, 1, xPos, top, sTrainerCardTextColors, TEXT_SPEED_FF, buffer);
+    xPos = GetStringCenterAlignXOffset(1, buffer, var) + var2;
+    AddTextPrinterParameterized3(1, fontId, xPos, 8 + fontId, sTrainerCardTextColors, TEXT_SPEED_FF, buffer);
 }
 
 static void PrintMoneyOnCard(void)
 {
     s32 xOffset;
-    u8 top;
+    u8 fontId, left, x;
 
-    if (!sData->isHoenn)
-        AddTextPrinterParameterized3(1, 1, 20, 56, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardMoney);
+    if (sData->isHoenn)
+    {
+        fontId = 1;
+        left = 16;
+        x = 128;
+    }
     else
-        AddTextPrinterParameterized3(1, 1, 16, 57, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardMoney);
+    {
+        fontId = 2;
+        left = 20;
+        x = 134;
+    }
 
+    AddTextPrinterParameterized3(1, fontId, left, 58 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardMoney);
     ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.money, STR_CONV_MODE_LEFT_ALIGN, 6);
     StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
-    if (!sData->isHoenn)
-    {
-        xOffset = GetStringRightAlignXOffset(1, gStringVar4, 144);
-        top = 56;
-    }
-    else
-    {
-        xOffset = GetStringRightAlignXOffset(1, gStringVar4, 128);
-        top = 57;
-    }
-    AddTextPrinterParameterized3(1, 1, xOffset, top, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
+
+    xOffset = GetStringRightAlignXOffset(1, gStringVar4, x);
+    AddTextPrinterParameterized3(1, fontId, xOffset, 58 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
 }
 
 static u16 GetCaughtMonsCount(void)
@@ -1057,31 +1062,34 @@ static u16 GetCaughtMonsCount(void)
     if (IsNationalPokedexEnabled())
         return GetNationalPokedexCount(FLAG_GET_CAUGHT);
     else
-        return GetHoennPokedexCount(FLAG_GET_CAUGHT);
+        return GetKantoPokedexCount(FLAG_GET_CAUGHT);
 }
 
 static void PrintPokedexOnCard(void)
 {
     s32 xOffset;
-    u8 top;
+    u8 fontId, left, x;
+
+    if (sData->isHoenn)
+    {
+        fontId = 1;
+        left = 16;
+        x = 128;
+    }
+    else
+    {
+        fontId = 2;
+        left = 20;
+        x = 136;
+    }
+
     if (FlagGet(FLAG_SYS_POKEDEX_GET))
     {
-        if (!sData->isHoenn)
-            AddTextPrinterParameterized3(1, 1, 20, 72, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardPokedex);
-        else
-            AddTextPrinterParameterized3(1, 1, 16, 73, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardPokedex);
-        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString6);
-        if (!sData->isHoenn)
-        {
-            xOffset = GetStringRightAlignXOffset(1, gStringVar4, 144);
-            top = 72;
-        }
-        else
-        {
-            xOffset = GetStringRightAlignXOffset(1, gStringVar4, 128);
-            top = 73;
-        }
-        AddTextPrinterParameterized3(1, 1, xOffset, top, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
+        AddTextPrinterParameterized3(1, fontId, left, 74 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardPokedex);
+        StringCopy(ConvertIntToDecimalStringN(gStringVar4, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_ExpandedPlaceholder_Empty);
+
+        xOffset = GetStringRightAlignXOffset(1, gStringVar4, x);
+        AddTextPrinterParameterized3(1, fontId, xOffset, 74 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
     }
 }
 
@@ -1089,15 +1097,25 @@ static const u8 *const sTimeColonTextColors[] = {sTrainerCardTextColors, sTimeCo
 
 static void PrintTimeOnCard(void)
 {
-    u16 hours;
-    u16 minutes;
+    u8 fontId, left;
+    u16 hours, minutes;
     s32 width;
-    u32 x, y, totalWidth;
+    u32 x, totalWidth;
 
-    if (!sData->isHoenn)
-        AddTextPrinterParameterized3(1, 1, 20, 88, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardTime);
+    if (sData->isHoenn)
+    {
+        fontId = 1;
+        left = 16;
+        x = 128;
+    }
     else
-        AddTextPrinterParameterized3(1, 1, 16, 89, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardTime);
+    {
+        fontId = 2;
+        left = 20;
+        x = 136;
+    }
+
+    AddTextPrinterParameterized3(1, fontId, left, 90 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gText_TrainerCardTime);
 
     if (sData->isLink)
     {
@@ -1114,29 +1132,19 @@ static void PrintTimeOnCard(void)
         hours = 999;
     if (minutes > 59)
         minutes = 59;
-    width = GetStringWidth(1, gText_Colon2, 0);
+    width = GetStringWidth(fontId, gText_Colon2, 0);
 
-    if (!sData->isHoenn)
-    {
-        x = 144;
-        y = 88;
-    }
-    else
-    {
-        x = 128;
-        y = 89;
-    }
     totalWidth = width + 30;
     x -= totalWidth;
 
-    FillWindowPixelRect(1, PIXEL_FILL(0), x, y, totalWidth, 15);
+    FillWindowPixelRect(1, PIXEL_FILL(0), x, 90 - fontId, totalWidth, 15);
     ConvertIntToDecimalStringN(gStringVar4, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized3(1, 1, x, y, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
+    AddTextPrinterParameterized3(1, fontId, x, 90 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
     x += 18;
-    AddTextPrinterParameterized3(1, 1, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SPEED_FF, gText_Colon2);
+    AddTextPrinterParameterized3(1, fontId, x, 90 - fontId, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SPEED_FF, gText_Colon2);
     x += width;
     ConvertIntToDecimalStringN(gStringVar4, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(1, 1, x, y, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
+    AddTextPrinterParameterized3(1, fontId, x, 90 - fontId, sTrainerCardTextColors, TEXT_SPEED_FF, gStringVar4);
 }
 
 static void PrintProfilePhraseOnCard(void)
@@ -1144,12 +1152,14 @@ static void PrintProfilePhraseOnCard(void)
     static const u8 yOffsetsLine1[] = {113, 104};
     static const u8 yOffsetsLine2[] = {129, 120};
 
+    u8 fontId = (sData->isHoenn) ? 1 : 2;
+
     if (sData->isLink)
     {
-        AddTextPrinterParameterized3(1, 1, 8, yOffsetsLine1[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[0]);
-        AddTextPrinterParameterized3(1, 1, GetStringWidth(1, sData->easyChatProfile[0], 0) + 14, yOffsetsLine1[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[1]);
-        AddTextPrinterParameterized3(1, 1, 8, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[2]);
-        AddTextPrinterParameterized3(1, 1, GetStringWidth(1, sData->easyChatProfile[2], 0) + 14, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[3]);
+        AddTextPrinterParameterized3(1, fontId, 8, yOffsetsLine1[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[0]);
+        AddTextPrinterParameterized3(1, fontId, GetStringWidth(1, sData->easyChatProfile[0], 0) + 14, yOffsetsLine1[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[1]);
+        AddTextPrinterParameterized3(1, fontId, 8, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[2]);
+        AddTextPrinterParameterized3(1, fontId, GetStringWidth(1, sData->easyChatProfile[2], 0) + 14, yOffsetsLine2[sData->isHoenn], sTrainerCardTextColors, TEXT_SPEED_FF, sData->easyChatProfile[3]);
     }
 }
 
@@ -1157,7 +1167,7 @@ static void BufferNameForCardBack(void)
 {
     StringCopy(sData->textPlayersCard, sData->trainerCard.playerName);
     ConvertInternationalString(sData->textPlayersCard, sData->language);
-    if (sData->cardType != CARD_TYPE_FRLG)
+    if (sData->isHoenn)
     {
         StringCopy(gStringVar1, sData->textPlayersCard);
         StringExpandPlaceholders(sData->textPlayersCard, gText_Var1sTrainerCard);
@@ -1166,10 +1176,20 @@ static void BufferNameForCardBack(void)
 
 static void PrintNameOnCardBack(void)
 {
-    if (!sData->isHoenn)
-        AddTextPrinterParameterized3(1, 1, 136, 9, sTrainerCardTextColors, TEXT_SPEED_FF, sData->textPlayersCard);
+    u8 fontId, top;
+
+    if (sData->isHoenn)
+    {
+        fontId = 1;
+        top = 9;
+    }
     else
-        AddTextPrinterParameterized3(1, 1, GetStringRightAlignXOffset(1, sData->textPlayersCard, 216), 9, sTrainerCardTextColors, TEXT_SPEED_FF, sData->textPlayersCard);
+    {
+        fontId = 2;
+        top = 11;
+    }
+
+    AddTextPrinterParameterized3(1, fontId, (sData->isHoenn) ? GetStringRightAlignXOffset(1, sData->textPlayersCard, 216) : 138, top, sTrainerCardTextColors, TEXT_SPEED_FF, sData->textPlayersCard);
 }
 
 static const u8 sText_HofTime[] = _("{STR_VAR_1}:{STR_VAR_2}:{STR_VAR_3}");
@@ -1187,11 +1207,23 @@ static void BufferHofDebutTime(void)
 
 static void PrintStatOnBackOfCard(u8 top, const u8* statName, u8* stat, const u8* color)
 {
-    static const u8 xOffsets[] = {8, 16};
-    static const u8 widths[] = {216, 216};
+    static const u8 xOffsets[] = {10, 16};
 
-    AddTextPrinterParameterized3(1, 1, xOffsets[sData->isHoenn], top * 16 + 33, sTrainerCardTextColors, TEXT_SPEED_FF, statName);
-    AddTextPrinterParameterized3(1, 1, GetStringRightAlignXOffset(1, stat, widths[sData->isHoenn]), top * 16 + 33, color, TEXT_SPEED_FF, stat);
+    u8 fontId, var;
+
+    if (sData->isHoenn)
+    {
+        fontId = 1;
+        var = 33;
+    }
+    else
+    {
+        fontId = 2;
+        var = 35;
+    }
+
+    AddTextPrinterParameterized3(1, fontId, xOffsets[sData->isHoenn], top * 16 + var, sTrainerCardTextColors, TEXT_SPEED_FF, statName);
+    AddTextPrinterParameterized3(1, fontId, GetStringRightAlignXOffset(fontId, stat, 216), top * 16 + var, color, TEXT_SPEED_FF, stat);
 }
 
 static void PrintHofDebutTimeOnCard(void)
@@ -1200,11 +1232,11 @@ static void PrintHofDebutTimeOnCard(void)
         PrintStatOnBackOfCard(0, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
 }
 
-static const u8 *const sLinkBattleTexts[] = 
+static const u8 *const sLinkBattleTexts[] =
 {
-    [CARD_TYPE_FRLG]    = gText_LinkBattles, 
-    [CARD_TYPE_RS]      = gText_LinkCableBattles, 
-    [CARD_TYPE_EMERALD] = gText_LinkBattles
+    [CARD_TYPE_FRLG]        = gText_LinkBattles,
+    [CARD_TYPE_RS]          = gText_LinkCableBattles,
+    [CARD_TYPE_EMERALD]     = gText_LinkBattles,
 };
 
 static void BufferLinkBattleResults(void)
@@ -1240,55 +1272,82 @@ static void PrintTradesStringOnCard(void)
         PrintStatOnBackOfCard(2, gText_PokemonTrades, sData->textNumTrades, sTrainerCardStatColors);
 }
 
-static void BufferBerryCrushPoints(void)
+static void BufferLinkPokeblocksNumOrUnionRoomStats(void)
 {
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.berryCrushPoints)
-        ConvertIntToDecimalStringN(sData->textBerryCrushPts, sData->trainerCard.berryCrushPoints, STR_CONV_MODE_RIGHT_ALIGN, 5);
-}
-
-static void PrintBerryCrushStringOnCard(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.berryCrushPoints)
-        PrintStatOnBackOfCard(4, gText_BerryCrush, sData->textBerryCrushPts, sTrainerCardStatColors);
-}
-
-static void BufferUnionRoomStats(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.unionRoomNum)
-        ConvertIntToDecimalStringN(sData->textUnionRoomStats, sData->trainerCard.unionRoomNum, STR_CONV_MODE_RIGHT_ALIGN, 5);
-}
-
-static void PrintUnionStringOnCard(void)
-{
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.unionRoomNum)
-        PrintStatOnBackOfCard(3, gText_UnionTradesAndBattles, sData->textUnionRoomStats, sTrainerCardStatColors);
-}
-
-static void BufferLinkPokeblocksNum(void)
-{
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.pokeblocksWithFriends)
+    if (sData->cardType)
     {
-        ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
-        StringExpandPlaceholders(sData->textNumLinkPokeblocks, gText_NumPokeblocks);
+        if (sData->trainerCard.pokeblocksWithFriends)
+        {
+            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.pokeblocksWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
+            StringExpandPlaceholders(sData->textNumLinkPokeblocks, gText_NumPokeblocks);
+        }
+    }
+    else
+    {
+        if (sData->trainerCard.unionRoomNum)
+            ConvertIntToDecimalStringN(sData->textUnionRoomStats, sData->trainerCard.unionRoomNum, STR_CONV_MODE_RIGHT_ALIGN, 5);
     }
 }
 
-static void PrintPokeblockStringOnCard(void)
+static void PrintPokeblockOrUnionRoomStringOnCard(void)
 {
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.pokeblocksWithFriends)
-        PrintStatOnBackOfCard(3, gText_PokeblocksWithFriends, sData->textNumLinkPokeblocks, sTrainerCardStatColors);
+    if (sData->cardType)
+    {
+        if (sData->trainerCard.pokeblocksWithFriends)
+            PrintStatOnBackOfCard(3, gText_PokeblocksWithFriends, sData->textNumLinkPokeblocks, sTrainerCardStatColors);
+    }
+    else
+    {
+        if (sData->trainerCard.unionRoomNum)
+            PrintStatOnBackOfCard(3, gText_UnionTradesAndBattles, sData->textUnionRoomStats, sTrainerCardStatColors);
+    }
 }
 
-static void BufferLinkContestNum(void)
+static void BufferLinkContestNumOrBerryCrushPoints(void)
 {
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.contestsWithFriends)
-        ConvertIntToDecimalStringN(sData->textNumLinkContests, sData->trainerCard.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
+    if (sData->cardType)
+    {
+        if (sData->trainerCard.contestsWithFriends)
+            ConvertIntToDecimalStringN(sData->textNumLinkContests, sData->trainerCard.contestsWithFriends, STR_CONV_MODE_RIGHT_ALIGN, 5);
+    }
+    else
+    {
+        if (sData->trainerCard.berryCrushPoints && !sData->trainerCard.frontierBP)
+            ConvertIntToDecimalStringN(sData->textBerryCrushPts, sData->trainerCard.berryCrushPoints, STR_CONV_MODE_RIGHT_ALIGN, 5);
+    }
 }
 
-static void PrintContestStringOnCard(void)
+static void PrintLinkContestOrBerryCrushStringOnCard(void)
 {
-    if (sData->cardType != CARD_TYPE_FRLG && sData->trainerCard.contestsWithFriends)
-        PrintStatOnBackOfCard(4, gText_WonContestsWFriends, sData->textNumLinkContests, sTrainerCardStatColors);
+    if (sData->cardType)
+    {
+        if (sData->trainerCard.contestsWithFriends)
+            PrintStatOnBackOfCard(4, gText_WonContestsWFriends, sData->textNumLinkContests, sTrainerCardStatColors);
+    }
+    else
+    {
+        if (sData->trainerCard.berryCrushPoints && !sData->trainerCard.frontierBP)
+            PrintStatOnBackOfCard(4, gText_BerryCrush, sData->textBerryCrushPts, sTrainerCardStatColors);
+    }
+}
+
+static void PrintPokemonIconsOnCard(void)
+{
+    u32 i;
+    u8 paletteSlots[PARTY_SIZE] = {5, 6, 7, 8, 9, 10};
+    u8 xOffsets[PARTY_SIZE] = {0, 4, 8, 12, 16, 20};
+
+    if (!sData->cardType)
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (sData->trainerCard.monSpecies[i])
+            {
+                u8 monSpecies = GetMonIconPaletteIndexFromSpecies(sData->trainerCard.monSpecies[i]);
+                WriteSequenceToBgTilemapBuffer(3, 16 * i + 224, xOffsets[i] + 3, 15, 4, 4, paletteSlots[monSpecies], 1);
+            }
+        }
+    }
 }
 
 static void BufferBattleFacilityStats(void)
@@ -1303,14 +1362,12 @@ static void BufferBattleFacilityStats(void)
             StringExpandPlaceholders(sData->textBattleFacilityStat, gText_WinsStraight);
         }
         break;
-    case CARD_TYPE_EMERALD:
+    default:
         if (sData->trainerCard.frontierBP)
         {
             ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.frontierBP, STR_CONV_MODE_RIGHT_ALIGN, 5);
             StringExpandPlaceholders(sData->textBattleFacilityStat, gText_NumBP);
         }
-        break;
-    case CARD_TYPE_FRLG:
         break;
     }
 }
@@ -1323,45 +1380,23 @@ static void PrintBattleFacilityStringOnCard(void)
         if (sData->hasBattleTowerWins)
             PrintStatOnBackOfCard(5, gText_BattleTower, sData->textBattleFacilityStat, sTrainerCardTextColors);
         break;
-    case CARD_TYPE_EMERALD:
+    default:
         if (sData->trainerCard.frontierBP)
-            PrintStatOnBackOfCard(5, gText_BattlePtsWon, sData->textBattleFacilityStat, sTrainerCardStatColors);
+            PrintStatOnBackOfCard((sData->isHoenn) ? 5 : 4, gText_BattlePtsWon, sData->textBattleFacilityStat, sTrainerCardStatColors);
         break;
-    case CARD_TYPE_FRLG:
-        break;
-    }
-}
-
-static void PrintPokemonIconsOnCard(void)
-{
-    u8 i;
-    u8 paletteSlots[PARTY_SIZE] = {5, 6, 7, 8, 9, 10};
-    u8 xOffsets[PARTY_SIZE] = {0, 4, 8, 12, 16, 20};
-
-    if (sData->cardType == CARD_TYPE_FRLG)
-    {
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            if (sData->trainerCard.monSpecies[i])
-            {
-                u8 monSpecies = GetMonIconPaletteIndexFromSpecies(sData->trainerCard.monSpecies[i]);
-                WriteSequenceToBgTilemapBuffer(3, 16 * i + 224, xOffsets[i] + 3, 15, 4, 4, paletteSlots[monSpecies], 1);
-            }
-        }
     }
 }
 
 static void LoadMonIconGfx(void)
 {
-    u8 i;
+    u32 i;
 
     CpuSet(gMonIconPalettes, sData->monIconPal, 0x60);
     switch (sData->trainerCard.monIconTint)
     {
-    case MON_ICON_TINT_NORMAL:
-        break;
     case MON_ICON_TINT_BLACK:
         TintPalette_CustomTone(sData->monIconPal, 96, 0, 0, 0);
+    case MON_ICON_TINT_NORMAL:
         break;
     case MON_ICON_TINT_PINK:
         TintPalette_CustomTone(sData->monIconPal, 96, 500, 330, 310);
@@ -1381,10 +1416,10 @@ static void LoadMonIconGfx(void)
 
 static void PrintStickersOnCard(void)
 {
-    u8 i;
+    u32 i;
     u8 paletteSlots[4] = {11, 12, 13, 14};
 
-    if (sData->cardType == CARD_TYPE_FRLG && sData->trainerCard.shouldDrawStickers == TRUE)
+    if (!sData->cardType && sData->trainerCard.shouldDrawStickers)
     {
         for (i = 0; i < TRAINER_CARD_STICKER_TYPES; i++)
         {
@@ -1421,18 +1456,17 @@ static u8 SetCardBgsAndPals(void)
         LoadBgTiles(0, sData->cardTiles, 0x1800, 0);
         break;
     case 2:
-        if (sData->cardType != CARD_TYPE_FRLG)
+        LoadPalette(sKantoTrainerCardBadges_Pal, 48, 32);
+        if (sData->isHoenn)
         {
             LoadPalette(sHoennTrainerCardStarPals[sData->trainerCard.stars], 0, 96);
-            LoadPalette(sHoennTrainerCardBadges_Pal, 48, 32);
-            if (sData->trainerCard.gender != MALE)
+            if (sData->trainerCard.gender)
                 LoadPalette(sHoennTrainerCardFemaleBg_Pal, 16, 32);
         }
         else
         {
             LoadPalette(sKantoTrainerCardStarPals[sData->trainerCard.stars], 0, 96);
-            LoadPalette(sKantoTrainerCardBadges_Pal, 48, 32);
-            if (sData->trainerCard.gender != MALE)
+            if (sData->trainerCard.gender)
                 LoadPalette(sKantoTrainerCardFemaleBg_Pal, 16, 32);
         }
         LoadPalette(sTrainerCardGold_Pal, 64, 32);
@@ -1504,10 +1538,10 @@ static void DrawStarsAndBadgesOnCard(void)
         {
             if (sData->badgeCount[i])
             {
-                FillBgTilemapBufferRect(3, tileNum, x, 15, 1, 1, palNum);
-                FillBgTilemapBufferRect(3, tileNum + 1, x + 1, 15, 1, 1, palNum);
-                FillBgTilemapBufferRect(3, tileNum + 16, x, 16, 1, 1, palNum);
-                FillBgTilemapBufferRect(3, tileNum + 17, x + 1, 16, 1, 1, palNum);
+                FillBgTilemapBufferRect(3, tileNum, x, 16, 1, 1, palNum);
+                FillBgTilemapBufferRect(3, tileNum + 1, x + 1, 16, 1, 1, palNum);
+                FillBgTilemapBufferRect(3, tileNum + 16, x, 17, 1, 1, palNum);
+                FillBgTilemapBufferRect(3, tileNum + 17, x + 1, 17, 1, 1, palNum);
             }
         }
     }
@@ -1516,36 +1550,13 @@ static void DrawStarsAndBadgesOnCard(void)
 
 static void DrawCardBackStats(void)
 {
-    if (sData->cardType == CARD_TYPE_FRLG)
+    u8 val, val2;
+
+    if (sData->isHoenn)
     {
-        if (sData->hasTrades)
-        {
-            FillBgTilemapBufferRect(3, 141, 27, 9, 1, 1, 1);
-            FillBgTilemapBufferRect(3, 157, 27, 10, 1, 1, 1);
-        }
-        if (sData->trainerCard.berryCrushPoints)
-        {
-            FillBgTilemapBufferRect(3, 141, 21, 13, 1, 1, 1);
-            FillBgTilemapBufferRect(3, 157, 21, 14, 1, 1, 1);
-        }
-        if (sData->trainerCard.unionRoomNum)
-        {
-            FillBgTilemapBufferRect(3, 141, 27, 11, 1, 1, 1);
-            FillBgTilemapBufferRect(3, 157, 27, 12, 1, 1, 1);
-        }
-    }
-    else
-    {
-        if (sData->hasTrades)
-        {
-            FillBgTilemapBufferRect(3, 141, 27, 9, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 157, 27, 10, 1, 1, 0);
-        }
-        if (sData->trainerCard.contestsWithFriends)
-        {
-            FillBgTilemapBufferRect(3, 141, 27, 13, 1, 1, 0);
-            FillBgTilemapBufferRect(3, 157, 27, 14, 1, 1, 0);
-        }
+        val = 27;
+        val2 = 0;
+
         if (sData->hasBattleTowerWins)
         {
             FillBgTilemapBufferRect(3, 141, 17, 15, 1, 1, 0);
@@ -1553,6 +1564,28 @@ static void DrawCardBackStats(void)
             FillBgTilemapBufferRect(3, 140, 27, 15, 1, 1, 0);
             FillBgTilemapBufferRect(3, 156, 27, 16, 1, 1, 0);
         }
+    }
+    else
+    {
+        val = 21;
+        val2 = 1;
+
+        if (sData->trainerCard.unionRoomNum)
+        {
+            FillBgTilemapBufferRect(3, 141, 27, 11, 1, 1, 1);
+            FillBgTilemapBufferRect(3, 157, 27, 12, 1, 1, 1);
+        }
+    }
+
+    if (sData->hasTrades)
+    {
+        FillBgTilemapBufferRect(3, 141, 27, 9, 1, 1, val2);
+        FillBgTilemapBufferRect(3, 157, 27, 10, 1, 1, val2);
+    }
+    if (sData->trainerCard.contestsWithFriends || sData->trainerCard.berryCrushPoints)
+    {
+        FillBgTilemapBufferRect(3, 141, val, 13, 1, 1, val2);
+        FillBgTilemapBufferRect(3, 157, val, 14, 1, 1, val2);
     }
     CopyBgTilemapBufferToVram(3);
 }
@@ -1585,10 +1618,7 @@ static void FlipTrainerCard(void)
 
 static bool8 IsCardFlipTaskActive(void)
 {
-    if (FindTaskIdByFunc(Task_DoCardFlipTask) == TASK_NONE)
-        return TRUE;
-    else
-        return FALSE;
+    return (FindTaskIdByFunc(Task_DoCardFlipTask) == TASK_NONE) ? TRUE : FALSE;
 }
 
 static void Task_DoCardFlipTask(u8 taskId)
@@ -1617,7 +1647,7 @@ static bool8 Task_BeginCardFlip(struct Task* task)
 static bool8 Task_AnimateCardFlipDown(struct Task* task)
 {
     u32 cardHeight, r5, r10, cardTop, r6, var_24, cardBottom, var;
-    s16 i;
+    s32 i;
 
     sData->allowDMACopy = FALSE;
     if (task->tCardTop >= CARD_FLIP_Y)
@@ -1662,7 +1692,7 @@ static bool8 Task_AnimateCardFlipDown(struct Task* task)
 static bool8 Task_DrawFlippedCardSide(struct Task* task)
 {
     sData->allowDMACopy = FALSE;
-    if (Overworld_LinkRecvQueueLengthMoreThan2() == TRUE)
+    if (Overworld_LinkRecvQueueLengthMoreThan2())
         return FALSE;
 
     do
@@ -1674,28 +1704,28 @@ static bool8 Task_DrawFlippedCardSide(struct Task* task)
             FillBgTilemapBufferRect_Palette0(3, 0, 0, 0, 0x20, 0x20);
             break;
         case 1:
-            if (!sData->onBack)
-            {
-                if (!PrintAllOnCardBack())
-                    return FALSE;
-            }
-            else
+            if (sData->onBack)
             {
                 if (!PrintAllOnCardFront())
                     return FALSE;
             }
+            else
+            {
+                if (!PrintAllOnCardBack())
+                    return FALSE;
+            }
             break;
         case 2:
-            if (!sData->onBack)
-                DrawCardFrontOrBack(sData->backTilemap);
-            else
+            if (sData->onBack)
                 DrawTrainerCardWindow(1);
+            else
+                DrawCardFrontOrBack(sData->backTilemap);
             break;
         case 3:
-            if (!sData->onBack)
-                DrawCardBackStats();
-            else
+            if (sData->onBack)
                 FillWindowPixelBuffer(2, PIXEL_FILL(0));
+            else
+                DrawCardBackStats();
             break;
         case 4:
             if (sData->onBack)
@@ -1708,7 +1738,7 @@ static bool8 Task_DrawFlippedCardSide(struct Task* task)
             return FALSE;
         }
         sData->flipDrawState++;
-    } while (gReceivedRemoteLinkPlayers == 0);
+    } while (!gReceivedRemoteLinkPlayers);
 
     return FALSE;
 }
@@ -1736,7 +1766,7 @@ static bool8 Task_SetCardFlipped(struct Task* task)
 static bool8 Task_AnimateCardFlipUp(struct Task* task)
 {
     u32 cardHeight, r5, r10, cardTop, r6, var_24, cardBottom, var;
-    s16 i;
+    s32 i;
 
     sData->allowDMACopy = FALSE;
     if (task->tCardTop <= 5)
@@ -1791,15 +1821,9 @@ void ShowPlayerTrainerCard(void (*callback)(void))
 {
     sData = AllocZeroed(sizeof(*sData));
     sData->callback2 = callback;
-    if (callback == CB2_ReshowFrontierPass)
-        sData->blendColor = RGB_WHITE;
-    else
-        sData->blendColor = RGB_BLACK;
+    sData->blendColor = (callback == CB2_ReshowFrontierPass) ? RGB_WHITE : RGB_BLACK;
 
-    if (InUnionRoom() == TRUE)
-        sData->isLink = TRUE;
-    else
-        sData->isLink = FALSE;
+    sData->isLink = (InUnionRoom()) ? TRUE : FALSE;
 
     sData->language = GAME_LANGUAGE;
     TrainerCard_GenerateCardForLinkPlayer(&sData->trainerCard);
@@ -1818,7 +1842,7 @@ void ShowTrainerCardInLink(u8 cardId, void (*callback)(void))
 
 static void InitTrainerCardData(void)
 {
-    u8 i;
+    u32 i;
 
     sData->mainState = 0;
     sData->timeColonBlinkTimer = gSaveBlock2Ptr->playTimeVBlanks;
@@ -1842,7 +1866,7 @@ static u8 VersionToCardType(u8 version)
 
 static void CreateTrainerCardTrainerPic(void)
 {
-    if (InUnionRoom() == TRUE && gReceivedRemoteLinkPlayers == 1)
+    if (InUnionRoom() && gReceivedRemoteLinkPlayers == 1)
     {
         CreateTrainerCardTrainerPicSprite(FacilityClassToPicIndex(sData->trainerCard.facilityClass),
                     TRUE,
