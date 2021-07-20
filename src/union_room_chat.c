@@ -930,8 +930,8 @@ static void CB2_LoadInterface(void)
         RunDisplaySubtasks();
         if (!IsDisplaySubtask0Active())
         {
-            BlendPalettes(0xFFFFFFFF, 16, RGB_BLACK);
-            BeginNormalPaletteFade(0xFFFFFFFF, -1, 16, 0, RGB_BLACK);
+            BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+            BeginNormalPaletteFade(PALETTES_ALL, -1, 16, 0, RGB_BLACK);
             SetVBlankCallback(VBlankCB_UnionRoomChatMain);
             gMain.state++;
         }
@@ -1017,12 +1017,12 @@ static void Chat_HandleInput(void)
     switch (sChat->funcState)
     {
     case 0:
-        if (gMain.newKeys & START_BUTTON)
+        if (JOY_NEW(START_BUTTON))
         {
             if (sChat->bufferCursorPos)
                 SetChatFunction(CHAT_FUNC_SEND);
         }
-        else if (gMain.newKeys & SELECT_BUTTON)
+        else if (JOY_NEW(SELECT_BUTTON))
         {
             SetChatFunction(CHAT_FUNC_SWITCH);
         }
@@ -1039,14 +1039,14 @@ static void Chat_HandleInput(void)
                 SetChatFunction(CHAT_FUNC_ASK_QUIT);
             }
         }
-        else if (gMain.newKeys & A_BUTTON)
+        else if (JOY_NEW(A_BUTTON))
         {
             AppendTextToMessage();
             StartDisplaySubtask(CHATDISPLAY_FUNC_UPDATE_MSG, 0);
             StartDisplaySubtask(CHATDISPLAY_FUNC_CURSOR_BLINK, 1);
             sChat->funcState = 1;
         }
-        else if (gMain.newKeys & R_BUTTON)
+        else if (JOY_NEW(R_BUTTON))
         {
             if (sChat->currentPage != UNION_ROOM_KB_PAGE_REGISTER)
             {
@@ -1100,7 +1100,7 @@ static void Chat_Switch(void)
                 shouldSwitchPages = FALSE;
             break;
         case MENU_NOTHING_CHOSEN:
-            if (gMain.newKeys & SELECT_BUTTON)
+            if (JOY_NEW(SELECT_BUTTON))
             {
                 PlaySE(SE_SELECT);
                 Menu_MoveCursor(1);
@@ -1267,7 +1267,7 @@ static void Chat_Exit(void)
     case 5:
         if (IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1302,7 +1302,7 @@ static void Chat_Drop(void)
     case 1:
         if (!IsDisplaySubtaskActive(0) && IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1348,7 +1348,7 @@ static void Chat_Disbanded(void)
     case 2:
         if (IsDisplaySubtaskActive(0) != TRUE && IsLinkTaskFinished() && !sub_8011A9C())
         {
-            sub_800AC34();
+            SetCloseLinkCallback();
             sChat->exitDelayTimer = 0;
             sChat->funcState++;
         }
@@ -1420,13 +1420,13 @@ static void Chat_Register(void)
         }
         break;
     case 1:
-        if (gMain.newKeys & A_BUTTON)
+        if (JOY_NEW(A_BUTTON))
         {
             RegisterTextAtRow();
             StartDisplaySubtask(CHATDISPLAY_FUNC_RETURN_TO_KB, 0);
             sChat->funcState = 3;
         }
-        else if (gMain.newKeys & B_BUTTON)
+        else if (JOY_NEW(B_BUTTON))
         {
             StartDisplaySubtask(CHATDISPLAY_FUNC_CANCEL_REGISTER, 0);
             sChat->funcState = 4;
@@ -1457,7 +1457,7 @@ static void Chat_Register(void)
             sChat->funcState = 6;
         break;
     case 6:
-        if (gMain.newKeys & (A_BUTTON | B_BUTTON))
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
         {
             StartDisplaySubtask(CHATDISPLAY_FUNC_DESTROY_YESNO, 0);
             sChat->funcState = 4;
@@ -1567,7 +1567,7 @@ static void Chat_SaveAndExit(void)
             sChat->funcState = 12;
         break;
     case 12:
-        BeginNormalPaletteFade(0xFFFFFFFF, -1, 0, 16, RGB_BLACK);
+        BeginNormalPaletteFade(PALETTES_ALL, -1, 0, 16, RGB_BLACK);
         sChat->funcState = 13;
         break;
     case 13:
@@ -1591,7 +1591,7 @@ static bool32 HandleDPadInput(void)
 {
     do
     {
-        if (gMain.newAndRepeatedKeys & DPAD_UP)
+        if (JOY_REPEAT(DPAD_UP))
         {
             if (sChat->currentRow > 0)
                 sChat->currentRow--;
@@ -1599,7 +1599,7 @@ static bool32 HandleDPadInput(void)
                 sChat->currentRow = sKeyboardPageMaxRow[sChat->currentPage];
             break;
         }
-        if (gMain.newAndRepeatedKeys & DPAD_DOWN)
+        if (JOY_REPEAT(DPAD_DOWN))
         {
             if (sChat->currentRow < sKeyboardPageMaxRow[sChat->currentPage])
                 sChat->currentRow++;
@@ -1609,7 +1609,7 @@ static bool32 HandleDPadInput(void)
         }
         if (sChat->currentPage != UNION_ROOM_KB_PAGE_REGISTER)
         {
-            if (gMain.newAndRepeatedKeys & DPAD_LEFT)
+            if (JOY_REPEAT(DPAD_LEFT))
             {
                 if (sChat->currentCol > 0)
                     sChat->currentCol--;
@@ -1617,7 +1617,7 @@ static bool32 HandleDPadInput(void)
                     sChat->currentCol = 4;
                 break;
             }
-            else if (gMain.newAndRepeatedKeys & DPAD_RIGHT)
+            else if (JOY_REPEAT(DPAD_RIGHT))
             {
                 if (sChat->currentCol < 4)
                     sChat->currentCol++;
@@ -1646,7 +1646,7 @@ static void AppendTextToMessage(void)
         charsStr = sUnionRoomKeyboardText[sChat->currentPage][sChat->currentRow];
         for (i = 0; i < sChat->currentCol; i++)
         {
-            if (*charsStr == CHAR_SPECIAL_F9)
+            if (*charsStr == CHAR_EXTRA_SYMBOL)
                 charsStr++;
             charsStr++;
         }
@@ -1670,7 +1670,7 @@ static void AppendTextToMessage(void)
     str = GetEndOfMessagePtr();
     while (--strLength != -1 && sChat->bufferCursorPos < MAX_MESSAGE_LENGTH)
     {
-        if (*charsStr == CHAR_SPECIAL_F9)
+        if (*charsStr == CHAR_EXTRA_SYMBOL)
         {
             *str = *charsStr;
             charsStr++;
@@ -1705,7 +1705,7 @@ static void SwitchCaseOfLastMessageCharacter(void)
 
     sChat->lastBufferCursorPos = sChat->bufferCursorPos - 1;
     str = GetLastCharOfMessagePtr();
-    if (*str != CHAR_SPECIAL_F9)
+    if (*str != CHAR_EXTRA_SYMBOL)
     {
         character = sCaseToggleTable[*str];
         if (character)
@@ -1763,7 +1763,7 @@ static u8 *GetLastCharOfMessagePtr(void)
     while (*currChar != EOS)
     {
         lastChar = currChar;
-        if (*currChar == CHAR_SPECIAL_F9)
+        if (*currChar == CHAR_EXTRA_SYMBOL)
             currChar++;
         currChar++;
     }
@@ -1784,7 +1784,7 @@ static u16 GetNumOverflowCharsInMessage(void)
         strLength -= 10;
         for (i = 0; i < strLength; i++)
         {
-            if (*str == CHAR_SPECIAL_F9)
+            if (*str == CHAR_EXTRA_SYMBOL)
                 str++;
 
             str++;
@@ -1925,7 +1925,7 @@ static u8 *GetLimitedMessageStartPtr(void)
     u8 *str = sChat->messageEntryBuffer;
     for (i = 0; i < numChars; i++)
     {
-        if (*str == CHAR_SPECIAL_F9)
+        if (*str == CHAR_EXTRA_SYMBOL)
             *str++;
 
         str++;
@@ -1942,7 +1942,7 @@ static u16 GetLimitedMessageStartPos(void)
     u8 *str = sChat->messageEntryBuffer;
     for (count = 0, i = 0; i < numChars; count++, i++)
     {
-        if (*str == CHAR_SPECIAL_F9)
+        if (*str == CHAR_EXTRA_SYMBOL)
             str++;
 
         str++;
@@ -2157,8 +2157,8 @@ static void FreeDisplay(void)
 
 static void InitDisplay(struct UnionRoomChatDisplay *display)
 {
-    display->yesNoMenuWindowId = 0xFF;
-    display->messageWindowId = 0xFF;
+    display->yesNoMenuWindowId = WINDOW_NONE;
+    display->messageWindowId = WINDOW_NONE;
     display->currLine = 0;
 }
 
@@ -2724,7 +2724,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
     template.paletteNum = 14;
     template.baseBlock = 0x52;
     sDisplay->yesNoMenuWindowId = AddWindow(&template);
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         FillWindowPixelBuffer(sDisplay->yesNoMenuWindowId, PIXEL_FILL(1));
         PutWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2737,7 +2737,7 @@ static void AddYesNoMenuAt(u8 left, u8 top, u8 initialCursorPos)
 
 static void HideYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->yesNoMenuWindowId, FALSE);
         ClearWindowTilemap(sDisplay->yesNoMenuWindowId);
@@ -2746,10 +2746,10 @@ static void HideYesNoMenuWindow(void)
 
 static void DestroyYesNoMenuWindow(void)
 {
-    if (sDisplay->yesNoMenuWindowId != 0xFF)
+    if (sDisplay->yesNoMenuWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->yesNoMenuWindowId);
-        sDisplay->yesNoMenuWindowId = 0xFF;
+        sDisplay->yesNoMenuWindowId = WINDOW_NONE;
     }
 }
 
@@ -2778,7 +2778,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
     sDisplay->messageWindowId = AddWindow(&template);
     windowId = sDisplay->messageWindowId;
-    if (sDisplay->messageWindowId == 0xFF)
+    if (sDisplay->messageWindowId == WINDOW_NONE)
         return;
 
     if (sDisplayStdMessages[msgId].hasPlaceholders)
@@ -2828,7 +2828,7 @@ static void AddStdMessageWindow(int msgId, u16 bg0vofs)
 
 static void HideStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         ClearStdWindowAndFrameToTransparent(sDisplay->messageWindowId, FALSE);
         ClearWindowTilemap(sDisplay->messageWindowId);
@@ -2839,10 +2839,10 @@ static void HideStdMessageWindow(void)
 
 static void DestroyStdMessageWindow(void)
 {
-    if (sDisplay->messageWindowId != 0xFF)
+    if (sDisplay->messageWindowId != WINDOW_NONE)
     {
         RemoveWindow(sDisplay->messageWindowId);
-        sDisplay->messageWindowId = 0xFF;
+        sDisplay->messageWindowId = WINDOW_NONE;
     }
 }
 
@@ -3011,8 +3011,8 @@ static void ResetGpuBgState(void)
     SetGpuReg(REG_OFFSET_BLDCNT, 0);
     ClearGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_WIN0_ON);
-    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, 240));
-    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, 144));
+    SetGpuReg(REG_OFFSET_WIN0H, WIN_RANGE(64, DISPLAY_WIDTH));
+    SetGpuReg(REG_OFFSET_WIN0V, WIN_RANGE(0, DISPLAY_HEIGHT - 16));
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG0 | WININ_WIN0_BG2 | WININ_WIN0_BG3
                               | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);

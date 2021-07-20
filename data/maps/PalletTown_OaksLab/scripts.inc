@@ -15,7 +15,7 @@ OaksLab_OnLoad:
 OaksLab_EventScript_BeginningSetup:
 	setobjectxyperm 5, 6, 11
 	setobjectmovementtype 5, MOVEMENT_TYPE_FACE_UP
-	savebgm MUS_RG_OHKIDO
+	savebgm MUS_RG_OAK
 	setvar VAR_INFLAG3, 2
 	end
 
@@ -129,7 +129,7 @@ OaksLab_EventScript_PlayerInspectsBulbasaursBall::
 	hidemonpic
 	msgbox OaksLab_Text_ThisPokemonIsQuiteEnergetic
 	closemessage
-	playfanfare MUS_RG_FAN5
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	bufferspeciesname 0, SPECIES_BULBASAUR
 	msgbox OaksLab_Text_ReceivedPokemonFromOak
 	waitfanfare
@@ -157,7 +157,7 @@ OaksLab_EventScript_PlayerInspectsCharmandersBall::
 	hidemonpic
 	msgbox OaksLab_Text_ThisPokemonIsQuiteEnergetic
 	closemessage
-	playfanfare MUS_RG_FAN5
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	bufferspeciesname 0, SPECIES_CHARMANDER
 	msgbox OaksLab_Text_ReceivedPokemonFromOak
 	waitfanfare
@@ -185,7 +185,7 @@ OaksLab_EventScript_PlayerInspectsSquirtlesBall::
 	hidemonpic
 	msgbox OaksLab_Text_ThisPokemonIsQuiteEnergetic
 	closemessage
-	playfanfare MUS_RG_FAN5
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	bufferspeciesname 0, SPECIES_SQUIRTLE
 	msgbox OaksLab_Text_ReceivedPokemonFromOak
 	waitfanfare
@@ -221,7 +221,7 @@ OaksLab_EventScript_RivalWalksTowardsCharmandersPokeBall:
 	closemessage
 	removeobject 7
 	setflag FLAG_HIDE_CHARMANDERS_BALL
-	playfanfare MUS_RG_FAN5
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	bufferspeciesname 1, SPECIES_CHARMANDER
 	msgbox OaksLab_Text_RivalReceivedPokemon
 	waitfanfare
@@ -234,7 +234,7 @@ OaksLab_EventScript_RivalWalksTowardsSquirtlesPokeBall:
 	closemessage
 	removeobject 6
 	setflag FLAG_HIDE_SQUIRTLES_BALL
-	playfanfare MUS_RG_FAN5
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	bufferspeciesname 1, SPECIES_SQUIRTLE
 	msgbox OaksLab_Text_RivalReceivedPokemon
 	waitfanfare
@@ -247,7 +247,7 @@ OaksLab_EventScript_RivalWalksTowardsBulbasaurPokeBall:
 	closemessage
 	removeobject 8
 	setflag FLAG_HIDE_BULBASAURS_BALL
-	playfanfare MUS_RG_FAN5
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	bufferspeciesname 1, SPECIES_BULBASAUR
 	msgbox OaksLab_Text_RivalReceivedPokemon
 	waitfanfare
@@ -272,7 +272,7 @@ OaksLab_EventScript_FirstRivalBattle::
 	setflag FLAG_ENABLE_FRLG_BATTLE_MUSIC
 	applymovement 4, Common_Movement_WalkInPlaceFastestDown
 	waitmovement 0
-	playbgm MUS_RG_RIVAL1, 0
+	playbgm MUS_RG_ENCOUNTER_RIVAL, 0
 	msgbox OaksLab_Text_RivalIntro
 	closemessage
 	playse SE_PIN
@@ -344,7 +344,7 @@ OaksLab_EventScript_FirstRivalBattleBulbasaur_Right:
 OaksLab_EventScript_RivalWalksOut:
 	msgbox OaksLab_Text_RivalWalksOut
 	closemessage
-	playbgm MUS_RG_RIVAL1, 0
+	playbgm MUS_RG_ENCOUNTER_RIVAL, 0
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 7
 	goto_if_eq OaksLab_EventScript_RivalWalksOut_Right
@@ -353,7 +353,7 @@ OaksLab_EventScript_RivalWalksOut:
 	applymovement 255, OaksLab_Movement_PlayerFacesTowardsTheRival
 	applymovement 4, OaksLab_Movement_RivalWalksOut2
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject 4
 	fadedefaultbgm
 	setflag FLAG_HIDE_RIVAL_OAKS_LAB
@@ -367,7 +367,7 @@ OaksLab_EventScript_RivalWalksOut_Right:
 	applymovement 255, OaksLab_Movement_PlayerFacesTowardsTheRival_Right
 	applymovement 4, OaksLab_Movement_RivalWalksOut_Right2
 	waitmovement 0
-	playse SE_KAIDAN
+	playse SE_EXIT
 	removeobject 4
 	fadedefaultbgm
 	setflag FLAG_HIDE_RIVAL_OAKS_LAB

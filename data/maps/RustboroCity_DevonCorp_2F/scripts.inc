@@ -194,7 +194,7 @@ RustboroCity_DevonCorp_2F_EventScript_TransferLileepToPC:: @ 8211AB9
 
 RustboroCity_DevonCorp_2F_EventScript_ReceivedLileepFanfare:: @ 8211AC4
 	bufferspeciesname 1, SPECIES_LILEEP
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher
 	waitmessage
 	waitfanfare
@@ -243,7 +243,7 @@ RustboroCity_DevonCorp_2F_EventScript_TransferAnorithToPC:: @ 8211B5C
 
 RustboroCity_DevonCorp_2F_EventScript_ReceivedAnorithFanfare:: @ 8211B67
 	bufferspeciesname 1, SPECIES_ANORITH
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher
 	waitmessage
 	waitfanfare
@@ -259,7 +259,7 @@ RustboroCity_DevonCorp_2F_EventScript_FinishReceivingAnorith:: @ 8211B7A
 RustboroCity_DevonCorp_2F_EventScript_ChooseFossil:: @ 8211B84
 	message RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne
 	waitmessage
-	multichoice 17, 6, MULTI_FOSSIL, 0
+	multichoice 17, 6, MULTI_FOSSIL, FALSE
 	switch VAR_RESULT
 	case 0, RustboroCity_DevonCorp_2F_EventScript_ChooseClawFossil
 	case 1, RustboroCity_DevonCorp_2F_EventScript_ChooseRootFossil

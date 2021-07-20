@@ -235,7 +235,7 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	fadescreenspeed FADE_TO_BLACK, 8
 	setweather WEATHER_ABNORMAL
 	doweather
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, FALSE @ Just do Groudon/Kyogre fight scene
 	special Script_DoRayquazaScene
 	waitstate
 	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFastestLeft
@@ -258,8 +258,8 @@ SootopolisCity_EventScript_LegendariesSceneFromPokeCenter:: @ 81E5946
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, 2
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_GroudonAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -335,7 +335,7 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	fadescreenspeed FADE_TO_BLACK, 8
 	setweather WEATHER_ABNORMAL
 	doweather
-	setvar VAR_0x8004, 0
+	setvar VAR_0x8004, FALSE @ Just do Groudon/Kyogre fight scene
 	special Script_DoRayquazaScene
 	waitstate
 	applymovement LOCALID_KYOGRE, Common_Movement_WalkInPlaceFastestLeft
@@ -358,8 +358,8 @@ SootopolisCity_EventScript_LegendariesSceneFromDive:: @ 81E5A82
 	waitmovement 0
 	waitse
 	playmoncry SPECIES_GROUDON, 2
-	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_GroudonAttack
-	applymovement LOCALID_GROUDON, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_KYOGRE, SootopolisCity_Movement_KyogreDefend
+	applymovement LOCALID_GROUDON, SootopolisCity_Movement_GroudonAttack
 	waitmovement 0
 	setvar VAR_0x8004, 1  @ vertical pan
 	setvar VAR_0x8005, 1  @ horizontal pan
@@ -431,7 +431,7 @@ SootopolisCity_Movement_KyogreAttack: @ 81E5BB8
 	clear_affine_anim
 	step_end
 
-SootopolisCity_Movement_GroudonAttack: @ 81E5BC2
+SootopolisCity_Movement_KyogreDefend: @ 81E5BC2
 	delay_16
 	delay_16
 	delay_16
@@ -464,7 +464,7 @@ SootopolisCity_Movement_KyogreIdle: @ 81E5BD6
 	walk_in_place_slow_left
 	step_end
 
-SootopolisCity_Movement_KyogreDefend: @ 81E5BDD
+SootopolisCity_Movement_GroudonAttack: @ 81E5BDD
 	walk_in_place_slow_right
 	walk_in_place_slow_right
 	walk_in_place_slow_right
@@ -528,10 +528,10 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	removeobject LOCALID_GROUDON
 	removeobject LOCALID_KYOGRE
 	addobject LOCALID_RAYQUAZA
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, TRUE
 	special Script_DoRayquazaScene
 	waitstate
-	playse SE_T_KAMI
+	playse SE_THUNDER
 	special SpawnCameraObject
 	applymovement OBJ_EVENT_ID_CAMERA, SootopolisCity_Movement_PanUp
 	waitmovement 0
@@ -562,7 +562,7 @@ SootopolisCity_EventScript_RayquazaSceneFromPokeCenter:: @ 81E5C1E
 	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar VAR_SKY_PILLAR_STATE, 3
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
-	fadenewbgm MUS_RUNECITY
+	fadenewbgm MUS_SOOTOPOLIS
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 43, 32
@@ -581,7 +581,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	removeobject LOCALID_GROUDON
 	removeobject LOCALID_KYOGRE
 	addobject LOCALID_RAYQUAZA
-	setvar VAR_0x8004, 1
+	setvar VAR_0x8004, TRUE
 	special Script_DoRayquazaScene
 	waitstate
 	special SpawnCameraObject
@@ -615,7 +615,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	clearflag FLAG_SYS_WEATHER_CTRL
 	setvar VAR_SKY_PILLAR_STATE, 2
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
-	fadenewbgm MUS_NAMINORI
+	fadenewbgm MUS_SURF
 	delay 120
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	warpsootopolislegend MAP_SOOTOPOLIS_CITY, 255, 29, 53

@@ -24,7 +24,7 @@ CaveOfOrigin_B1F_EventScript_Wallace:: @ 82357A9
 	goto CaveOfOrigin_B1F_EventScript_WheresRayquaza
 
 CaveOfOrigin_B1F_EventScript_WheresRayquaza:: @ 82357F0
-	multichoice 0, 0, MULTI_WHERES_RAYQUAZA, 0
+	multichoice 0, 0, MULTI_WHERES_RAYQUAZA, FALSE
 	switch VAR_RESULT
 	case 0, CaveOfOrigin_B1F_EventScript_AtCaveOfOrigin
 	case 1, CaveOfOrigin_B1F_EventScript_AtMtPyre
@@ -51,7 +51,7 @@ CaveOfOrigin_B1F_EventScript_DontRemember:: @ 8235842
 CaveOfOrigin_B1F_EventScript_AtSkyPillar:: @ 823584D
 	msgbox CaveOfOrigin_B1F_Text_WellHeadToSkyPillar, MSGBOX_DEFAULT
 	closemessage
-	playse SE_KAIDAN
+	playse SE_EXIT
 	fadescreenspeed FADE_TO_BLACK, 4
 	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 3

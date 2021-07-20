@@ -75,7 +75,7 @@ PalletTown_FatMan::
 
 PalletTown_TriggerLeft::
 	lock
-	playbgm MUS_RG_OHKIDO, 0
+	playbgm MUS_RG_OAK, 0
 	message PalletTown_Text_ProfOak1
 	waitmessage
 	delay 30
@@ -118,7 +118,7 @@ PalletTown_TriggerLeft::
 
 PalletTown_TriggerRight::
 	lock
-	playbgm MUS_RG_OHKIDO, 0
+	playbgm MUS_RG_OAK, 0
 	message PalletTown_Text_ProfOak1
 	waitmessage
 	delay 30

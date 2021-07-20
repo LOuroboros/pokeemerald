@@ -11,7 +11,7 @@
     "id": "MAP_PALLET_TOWN_GREENS_HOUSE2F",
     "layout": "LAYOUT_PALLET_TOWN_GREENS_HOUSE2F",
     "map_type": "MAP_TYPE_INDOOR",
-    "music": "MUS_RG_MASARA",
+    "music": "MUS_RG_PALLET",
     "name": "PalletTown_GreensHouse2F",
     "object_events": [
     ],

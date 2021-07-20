@@ -10,7 +10,7 @@ RedsHouse1F_EventScript_BigDay::
 	applymovement 1, RedsHouse1F_MotherMovement1
 	waitmovement 0
 	msgbox RedsHouse1F_Text_RedPresent, MSGBOX_DEFAULT
-	playfanfare MUS_FANFA4
+	playfanfare MUS_OBTAIN_ITEM
 	message RedsHouse1F_Text_EquippedRunningShoes
 	waitfanfare
 	setflag FLAG_SYS_B_DASH
@@ -36,7 +36,7 @@ RedsHouse1F_EventScript_Mom_Heal::
 	faceplayer
 	msgbox RedsHouse1F_Text_WorriedMom, MSGBOX_DEFAULT
 	fadescreen 1
-	playfanfare MUS_ME_ASA
+	playfanfare MUS_HEAL
 	special HealPlayerParty
 	waitfanfare
 	fadescreen 0

@@ -4,17 +4,25 @@
 #include "constants/berry.h"
 #include "constants/pokemon.h"
 
-#define GFX_TAG_POKEBLOCK       14818
-#define GFX_TAG_POKEBLOCK_CASE  14800
+#define TAG_POKEBLOCK       14818
 
 enum
 {
-    PBLOCK_CLR_BLACK,
+    PBLOCK_CLR_NONE,
     PBLOCK_CLR_RED,
     PBLOCK_CLR_BLUE,
     PBLOCK_CLR_PINK,
     PBLOCK_CLR_GREEN,
-    PBLOCK_CLR_YELLOW
+    PBLOCK_CLR_YELLOW,
+    PBLOCK_CLR_PURPLE,
+    PBLOCK_CLR_INDIGO,
+    PBLOCK_CLR_BROWN,
+    PBLOCK_CLR_LITE_BLUE,
+    PBLOCK_CLR_OLIVE,
+    PBLOCK_CLR_GRAY,
+    PBLOCK_CLR_BLACK,
+    PBLOCK_CLR_WHITE,
+    PBLOCK_CLR_GOLD,
 };
 
 enum
@@ -43,7 +51,7 @@ extern s16 gPokeblockGain;
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void));
 
 // pokeblock feed
-void CB2_PreparePokeblockFeedScene(void);
+void PreparePokeblockFeedScene(void);
 
 // pokeblock
 extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];

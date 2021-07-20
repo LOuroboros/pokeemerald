@@ -25,7 +25,7 @@
     "id": "MAP_ROUTE1",
     "layout": "LAYOUT_ROUTE1",
     "map_type": "MAP_TYPE_ROUTE",
-    "music": "MUS_RG_LOAD01",
+    "music": "MUS_RG_ROUTE1",
     "name": "Route1",
     "object_events": [
         {
