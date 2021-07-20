@@ -35,6 +35,7 @@
 #include "constants/abilities.h"
 #include "constants/flags.h"
 #include "constants/items.h"
+#include "constants/maps.h"
 #include "constants/map_groups.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -57,6 +58,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_HEAL_PARTY,
     DEBUG_UTIL_MENU_ITEM_FLY,
     DEBUG_UTIL_MENU_ITEM_WARP,
+    DEBUG_UTIL_MENU_ITEM_PRESETWARP,
     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
@@ -104,6 +106,25 @@ enum { // Give
 enum { //Sound
     DEBUG_SOUND_MENU_ITEM_SE,
     DEBUG_SOUND_MENU_ITEM_MUS,
+};
+enum { // Preset Warps
+    DEBUG_UTILITIES_PRESETWARP_LITTLEROOT,
+    DEBUG_UTILITIES_PRESETWARP_OLDALE,
+    DEBUG_UTILITIES_PRESETWARP_PETALBURG,
+    DEBUG_UTILITIES_PRESETWARP_RUSTBORO,
+    DEBUG_UTILITIES_PRESETWARP_DEWFORD,
+    DEBUG_UTILITIES_PRESETWARP_SLATEPORT,
+    DEBUG_UTILITIES_PRESETWARP_MAUVILLE,
+    DEBUG_UTILITIES_PRESETWARP_VERDANTURF,
+    DEBUG_UTILITIES_PRESETWARP_FALLARBOR,
+    DEBUG_UTILITIES_PRESETWARP_LAVARIDGE,
+    DEBUG_UTILITIES_PRESETWARP_FORTREE,
+    DEBUG_UTILITIES_PRESETWARP_LILYCOVE,
+    DEBUG_UTILITIES_PRESETWARP_MOSSDEEP,
+    DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG,
+    DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS,
+    DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER,
+    DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER,
 };
 
 // *******************************
@@ -168,6 +189,7 @@ static void DebugTask_HandleMenuInput_Flags(u8);
 static void DebugTask_HandleMenuInput_Vars(u8);
 static void DebugTask_HandleMenuInput_Give(u8);
 static void DebugTask_HandleMenuInput_Sound(u8);
+static void DebugTask_HandleMenuInput_PresetWarp(u8);
 
 static void DebugTask_ChangeCostume_Execute(u8 taskId);
 static void DebugTask_ChangeCostume_End(u8 taskId);
@@ -175,6 +197,7 @@ static void DebugTask_ChangeCostume_End(u8 taskId);
 static void DebugAction_Util_HealParty(u8 taskId);
 static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_Warp_Warp(u8 taskId);
+static void DebugAction_Util_Warp_PresetWarp(u8 taskId);
 static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId);
 static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
@@ -239,6 +262,24 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId);
 static void DebugAction_Sound_MUS(u8 taskId);
 static void DebugAction_Sound_MUS_SelectId(u8 taskId);
 
+static void DebugAction_PresetWarp_LittlerootTown(u8 taskId);
+static void DebugAction_PresetWarp_OldaleTown(u8 taskId);
+static void DebugAction_PresetWarp_PetalburgCity(u8 taskId);
+static void DebugAction_PresetWarp_RustboroCity(u8 taskId);
+static void DebugAction_PresetWarp_DewfordTown(u8 taskId);
+static void DebugAction_PresetWarp_SlateportCity(u8 taskId);
+static void DebugAction_PresetWarp_MauvilleCity(u8 taskId);
+static void DebugAction_PresetWarp_VerdanturfTown(u8 taskId);
+static void DebugAction_PresetWarp_FallarborTown(u8 taskId);
+static void DebugAction_PresetWarp_LavaridgeTown(u8 taskId);
+static void DebugAction_PresetWarp_FortreeCity(u8 taskId);
+static void DebugAction_PresetWarp_LilycoveCity(u8 taskId);
+static void DebugAction_PresetWarp_MossdeepCity(u8 taskId);
+static void DebugAction_PresetWarp_PacifidlogTown(u8 taskId);
+static void DebugAction_PresetWarp_SootopolisCity(u8 taskId);
+static void DebugAction_PresetWarp_EverGrandeCityOuter(u8 taskId);
+static void DebugAction_PresetWarp_EverGrandeCityInner(u8 taskId);
+
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
@@ -271,6 +312,7 @@ static const u8 gDebugText_Cancel[] =           _("Cancel");
 // Util Menu
 static const u8 gDebugText_Util_HealParty[] =               _("Heal Party");
 static const u8 gDebugText_Util_Fly[] =                     _("Fly to map");
+static const u8 gDebugText_Util_PresetWarp[] =              _("Preset Warp");
 static const u8 gDebugText_Util_WarpToMap[] =               _("Warp to map warp");
 static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1}          \n                 \n\n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}            \nMapSec:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
@@ -347,6 +389,24 @@ static const u8 gDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}
 static const u8 gDebugText_Sound_MUS[] =                _("Music");
 static const u8 gDebugText_Sound_MUS_ID[] =             _("Music Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
 static const u8 gDebugText_Sound_Empty[] =              _("");
+// Preset Warps
+static const u8 gDebugText_Map_LittlerootTown[]      = _("Littleroot Town");
+static const u8 gDebugText_Map_OldaleTown[]          = _("Oldale Town");
+static const u8 gDebugText_Map_PetalburgCity[]       = _("Petalburg City");
+static const u8 gDebugText_Map_RustboroCity[]        = _("Rustboro City");
+static const u8 gDebugText_Map_DewfordTown[]         = _("Dewford Town");
+static const u8 gDebugText_Map_SlateportCity[]       = _("Slateport City");
+static const u8 gDebugText_Map_MauvilleCity[]        = _("Mauville City");
+static const u8 gDebugText_Map_VerdanturfTown[]      = _("Verdanturf Town");
+static const u8 gDebugText_Map_FallarborTown[]       = _("Fallarbor Town");
+static const u8 gDebugText_Map_LavaridgeTown[]       = _("Lavaridge Town");
+static const u8 gDebugText_Map_FortreeCity[]         = _("Fortree City");
+static const u8 gDebugText_Map_LilycoveCity[]        = _("Lilycove City");
+static const u8 gDebugText_Map_MossdeepCity[]        = _("Mossdeep City");
+static const u8 gDebugText_Map_PacifidlogTown[]      = _("Pacifidlog Town");
+static const u8 gDebugText_Map_SootopolisCity[]      = _("Sootopolis City");
+static const u8 gDebugText_Map_EverGrandeCityOuter[] = _("Ever Grande City (Outer)");
+static const u8 gDebugText_Map_EverGrandeCityInner[] = _("Ever Grande City (Inner)");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -398,6 +458,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]         = {gDebugText_Util_HealParty,          DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
     [DEBUG_UTIL_MENU_ITEM_FLY]                = {gDebugText_Util_Fly,                DEBUG_UTIL_MENU_ITEM_FLY},
     [DEBUG_UTIL_MENU_ITEM_WARP]               = {gDebugText_Util_WarpToMap,          DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_PRESETWARP]         = {gDebugText_Util_PresetWarp,         DEBUG_UTIL_MENU_ITEM_PRESETWARP},
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]          = {gDebugText_Util_SaveBlockSpace,     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]     = {gDebugText_Util_CheckWallClock,     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]       = {gDebugText_Util_SetWallClock,       DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
@@ -450,6 +511,26 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
     [DEBUG_SOUND_MENU_ITEM_SE]            = {gDebugText_Sound_SE,         DEBUG_SOUND_MENU_ITEM_SE},
     [DEBUG_SOUND_MENU_ITEM_MUS]           = {gDebugText_Sound_MUS,        DEBUG_SOUND_MENU_ITEM_MUS},
 };
+static const struct ListMenuItem sDebugMenu_Items_Utillities_PresetWarp[] =
+{
+    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]       = {gDebugText_Map_LittlerootTown,      DEBUG_UTILITIES_PRESETWARP_LITTLEROOT},
+    [DEBUG_UTILITIES_PRESETWARP_OLDALE]           = {gDebugText_Map_OldaleTown,          DEBUG_UTILITIES_PRESETWARP_OLDALE},
+    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]        = {gDebugText_Map_PetalburgCity,       DEBUG_UTILITIES_PRESETWARP_PETALBURG},
+    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]         = {gDebugText_Map_RustboroCity,        DEBUG_UTILITIES_PRESETWARP_RUSTBORO},
+    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]          = {gDebugText_Map_DewfordTown,         DEBUG_UTILITIES_PRESETWARP_DEWFORD},
+    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]        = {gDebugText_Map_SlateportCity,       DEBUG_UTILITIES_PRESETWARP_SLATEPORT},
+    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]         = {gDebugText_Map_MauvilleCity,        DEBUG_UTILITIES_PRESETWARP_MAUVILLE},
+    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]       = {gDebugText_Map_VerdanturfTown,      DEBUG_UTILITIES_PRESETWARP_VERDANTURF},
+    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]        = {gDebugText_Map_FallarborTown,       DEBUG_UTILITIES_PRESETWARP_FALLARBOR},
+    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]        = {gDebugText_Map_LavaridgeTown,       DEBUG_UTILITIES_PRESETWARP_LAVARIDGE},
+    [DEBUG_UTILITIES_PRESETWARP_FORTREE]          = {gDebugText_Map_FortreeCity,         DEBUG_UTILITIES_PRESETWARP_FORTREE},
+    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]         = {gDebugText_Map_LilycoveCity,        DEBUG_UTILITIES_PRESETWARP_LILYCOVE},
+    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]         = {gDebugText_Map_MossdeepCity,        DEBUG_UTILITIES_PRESETWARP_MOSSDEEP},
+    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]       = {gDebugText_Map_PacifidlogTown,      DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG},
+    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]       = {gDebugText_Map_SootopolisCity,      DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS},
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER] = {gDebugText_Map_EverGrandeCityOuter, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER},
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER] = {gDebugText_Map_EverGrandeCityInner, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER},
+};
 
 // *******************************
 // Menu Actions
@@ -467,6 +548,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]          = DebugAction_Util_HealParty,
     [DEBUG_UTIL_MENU_ITEM_FLY]                 = DebugAction_Util_Fly,
     [DEBUG_UTIL_MENU_ITEM_WARP]                = DebugAction_Util_Warp_Warp,
+    [DEBUG_UTIL_MENU_ITEM_PRESETWARP]          = DebugAction_Util_Warp_PresetWarp,
     [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]           = DebugAction_Util_CheckSaveBlock,
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]      = DebugAction_Util_CheckWallClock,
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]        = DebugAction_Util_SetWallClock,
@@ -519,6 +601,26 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
     [DEBUG_SOUND_MENU_ITEM_SE]      = DebugAction_Sound_SE,
     [DEBUG_SOUND_MENU_ITEM_MUS]     = DebugAction_Sound_MUS,
 };
+static void (*const sDebugMenu_Actions_PresetWarp[])(u8) =
+{
+    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]       = DebugAction_PresetWarp_LittlerootTown,
+    [DEBUG_UTILITIES_PRESETWARP_OLDALE]           = DebugAction_PresetWarp_OldaleTown,
+    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]        = DebugAction_PresetWarp_PetalburgCity,
+    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]         = DebugAction_PresetWarp_RustboroCity,
+    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]          = DebugAction_PresetWarp_DewfordTown,
+    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]        = DebugAction_PresetWarp_SlateportCity,
+    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]         = DebugAction_PresetWarp_MauvilleCity,
+    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]       = DebugAction_PresetWarp_VerdanturfTown,
+    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]        = DebugAction_PresetWarp_FallarborTown,
+    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]        = DebugAction_PresetWarp_LavaridgeTown,
+    [DEBUG_UTILITIES_PRESETWARP_FORTREE]          = DebugAction_PresetWarp_FortreeCity,
+    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]         = DebugAction_PresetWarp_LilycoveCity,
+    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]         = DebugAction_PresetWarp_MossdeepCity,
+    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]       = DebugAction_PresetWarp_PacifidlogTown,
+    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]       = DebugAction_PresetWarp_SootopolisCity,
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER] = DebugAction_PresetWarp_EverGrandeCityOuter,
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER] = DebugAction_PresetWarp_EverGrandeCityInner,
+};
 
 // *******************************
 // Windows
@@ -549,6 +651,16 @@ static const struct WindowTemplate sDebugNumberDisplayLargeWindowTemplate =
     .tilemapTop = 1,
     .width = DEBUG_NUMBER_DISPLAY_SOUND_WIDTH,
     .height = DEBUG_NUMBER_DISPLAY_SOUND_HEIGHT,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+static const struct WindowTemplate sPresetWarpWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = DEBUG_MAIN_MENU_WIDTH + 4,
+    .height = 2 * DEBUG_MAIN_MENU_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -590,6 +702,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_Sound =
     .items = sDebugMenu_Items_Sound,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Sound),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_PresetWarp =
+{
+    .items = sDebugMenu_Items_Utillities_PresetWarp,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utillities_PresetWarp),
 };
 
 // *******************************
@@ -812,6 +930,68 @@ static void DebugAction_Util_Fly(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     SetMainCallback2(CB2_OpenFlyMap);
+}
+
+static void DebugAction_Util_Warp_PresetWarp(u8 taskId)
+{
+    struct ListMenuTemplate menuTemplate;
+    u8 windowId;
+    u8 menuTaskId;
+    u8 inputTaskId;
+
+    // erase existing window
+    Debug_DestroyMenu(taskId);
+
+    // create window
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sPresetWarpWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    // create list menu
+    menuTemplate = sDebugMenu_ListTemplate_PresetWarp;
+    menuTemplate.maxShowed = DEBUG_MAIN_MENU_HEIGHT;
+    menuTemplate.windowId = windowId;
+    menuTemplate.header_X = 0;
+    menuTemplate.item_X = 8;
+    menuTemplate.cursor_X = 0;
+    menuTemplate.upText_Y = 1;
+    menuTemplate.cursorPal = 2;
+    menuTemplate.fillValue = 1;
+    menuTemplate.cursorShadowPal = 3;
+    menuTemplate.lettersSpacing = 1;
+    menuTemplate.itemVerticalPadding = 0;
+    menuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    menuTemplate.fontId = 1;
+    menuTemplate.cursorKind = 0;
+    menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+
+    // draw everything
+    CopyWindowToVram(windowId, 3);
+
+    // create input handler task
+    inputTaskId = CreateTask(DebugTask_HandleMenuInput_PresetWarp, 3);
+    gTasks[inputTaskId].data[0] = menuTaskId;
+    gTasks[inputTaskId].data[1] = windowId;
+}
+
+static void DebugTask_HandleMenuInput_PresetWarp(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        if ((func = sDebugMenu_Actions_PresetWarp[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
+    }
 }
 
 static void DebugAction_Util_Warp_Warp(u8 taskId)
@@ -3766,3 +3946,106 @@ static const u8 *const gSENames[] =
 SOUND_LIST_SE
 };
 #undef X
+
+static void DebugAction_PresetWarp_LittlerootTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_OldaleTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_PetalburgCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_RustboroCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(RUSTBORO_CITY), MAP_NUM(RUSTBORO_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_DewfordTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_SlateportCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(SLATEPORT_CITY), MAP_NUM(SLATEPORT_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_MauvilleCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(MAUVILLE_CITY), MAP_NUM(MAUVILLE_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_VerdanturfTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(VERDANTURF_TOWN), MAP_NUM(VERDANTURF_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_FallarborTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(FALLARBOR_TOWN), MAP_NUM(FALLARBOR_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_LavaridgeTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(LAVARIDGE_TOWN), MAP_NUM(LAVARIDGE_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_FortreeCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(FORTREE_CITY), MAP_NUM(FORTREE_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_LilycoveCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(LILYCOVE_CITY), MAP_NUM(LILYCOVE_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_MossdeepCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(MOSSDEEP_CITY), MAP_NUM(MOSSDEEP_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_PacifidlogTown(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(PACIFIDLOG_TOWN), MAP_NUM(PACIFIDLOG_TOWN), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_SootopolisCity(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(SOOTOPOLIS_CITY), MAP_NUM(SOOTOPOLIS_CITY), 0);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_EverGrandeCityOuter(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), 1);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_EverGrandeCityInner(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestinationToMapWarp(MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), 0);
+    DoWarp();
+}
