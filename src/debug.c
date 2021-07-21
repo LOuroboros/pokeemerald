@@ -3963,31 +3963,31 @@ SOUND_LIST_SE
 static void DebugAction_PresetWarp_LittlerootTown(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_OldaleTown(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PetalburgCity(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), 3);
     DoWarp();
 }
 static void DebugAction_PresetWarp_RustboroCity(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(RUSTBORO_CITY), MAP_NUM(RUSTBORO_CITY), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(RUSTBORO_CITY), MAP_NUM(RUSTBORO_CITY), 3);
     DoWarp();
 }
 static void DebugAction_PresetWarp_DewfordTown(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), 1);
     DoWarp();
 }
 static void DebugAction_PresetWarp_SlateportCity(u8 taskId)
@@ -3999,25 +3999,25 @@ static void DebugAction_PresetWarp_SlateportCity(u8 taskId)
 static void DebugAction_PresetWarp_MauvilleCity(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(MAUVILLE_CITY), MAP_NUM(MAUVILLE_CITY), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(MAUVILLE_CITY), MAP_NUM(MAUVILLE_CITY), 1);
     DoWarp();
 }
 static void DebugAction_PresetWarp_VerdanturfTown(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(VERDANTURF_TOWN), MAP_NUM(VERDANTURF_TOWN), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(VERDANTURF_TOWN), MAP_NUM(VERDANTURF_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_FallarborTown(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(FALLARBOR_TOWN), MAP_NUM(FALLARBOR_TOWN), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(FALLARBOR_TOWN), MAP_NUM(FALLARBOR_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_LavaridgeTown(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(LAVARIDGE_TOWN), MAP_NUM(LAVARIDGE_TOWN), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(LAVARIDGE_TOWN), MAP_NUM(LAVARIDGE_TOWN), 3);
     DoWarp();
 }
 static void DebugAction_PresetWarp_FortreeCity(u8 taskId)
@@ -4029,13 +4029,13 @@ static void DebugAction_PresetWarp_FortreeCity(u8 taskId)
 static void DebugAction_PresetWarp_LilycoveCity(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(LILYCOVE_CITY), MAP_NUM(LILYCOVE_CITY), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(LILYCOVE_CITY), MAP_NUM(LILYCOVE_CITY), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_MossdeepCity(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
-    SetWarpDestinationToMapWarp(MAP_GROUP(MOSSDEEP_CITY), MAP_NUM(MOSSDEEP_CITY), 0);
+    SetWarpDestinationToMapWarp(MAP_GROUP(MOSSDEEP_CITY), MAP_NUM(MOSSDEEP_CITY), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PacifidlogTown(u8 taskId)
