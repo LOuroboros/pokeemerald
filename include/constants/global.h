@@ -89,7 +89,8 @@
 
 #define MALE 0
 #define FEMALE 1
-#define GENDER_COUNT 2
+#define UNDECIDED 2
+#define GENDER_COUNT 3
 
 #define BARD_SONG_LENGTH       6
 #define NUM_STORYTELLER_TALES  4

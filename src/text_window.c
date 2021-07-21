@@ -51,6 +51,8 @@ static const u16 sTextWindowFrame20_Pal[] = INCBIN_U16("graphics/text_window/20.
 
 static const u16 sTextWindowPalettes[][16] =
 {
+    INCBIN_U16("graphics/text_window/male_message_box.gbapal"),
+    INCBIN_U16("graphics/text_window/female_message_box.gbapal"),
     INCBIN_U16("graphics/text_window/message_box.gbapal"),
     INCBIN_U16("graphics/text_window/text_pal1.gbapal"),
     INCBIN_U16("graphics/text_window/text_pal2.gbapal"),
@@ -93,7 +95,12 @@ const struct TilesPal *GetWindowFrameTilesPal(u8 id)
 
 void LoadMessageBoxGfx(u8 windowId, u16 destOffset, u8 palOffset)
 {
-    LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gMessageBox_Gfx, 0x1C0, destOffset);
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gMessageBoxMale_Gfx, 0x1C0, destOffset);
+    else if (gSaveBlock2Ptr->playerGender == FEMALE)
+        LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gMessageBoxFemale_Gfx, 0x1C0, destOffset);
+    else
+        LoadBgTiles(GetWindowAttribute(windowId, WINDOW_BG), gMessageBox_Gfx, 0x1C0, destOffset);
     LoadPalette(GetOverworldTextboxPalettePtr(), palOffset, 0x20);
 }
 
@@ -187,7 +194,12 @@ const u16 *GetTextWindowPalette(u8 id)
 
 const u16 *GetOverworldTextboxPalettePtr(void)
 {
-    return gMessageBox_Pal;
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        return gMessageBoxMale_Pal;
+    else if (gSaveBlock2Ptr->playerGender == FEMALE)
+        return gMessageBoxFemale_Pal;
+    else
+        return gMessageBox_Pal;
 }
 
 void sub_8098C6C(u8 bg, u16 destOffset, u8 palOffset)
