@@ -1292,6 +1292,7 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
         }
         else
         {
+            gSaveBlock2Ptr->playerGender = UNDECIDED;
             InitWindows(gNewGameBirchSpeechTextWindows);
             LoadMainMenuWindowFrameTiles(0, 0xF3);
             LoadMessageBoxGfx(0, 0xFC, 0xF0);
@@ -1601,6 +1602,12 @@ static void Task_NewGameBirchSpeech_ProcessNameYesNoMenu(u8 taskId)
         case -1:
         case 1:
             PlaySE(SE_SELECT);
+            gSaveBlock2Ptr->playerGender = UNDECIDED;
+            ClearWindowTilemap(0);
+            LoadMainMenuWindowFrameTiles(0, 0xF3);
+            LoadMessageBoxGfx(0, 0xFC, 0xF0);
+            PutWindowTilemap(0);
+            CopyWindowToVram(0, 3);
             gTasks[taskId].func = Task_NewGameBirchSpeech_BoyOrGirl;
     }
 }
