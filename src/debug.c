@@ -1080,7 +1080,7 @@ static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
 static void DebugAction_Util_Warp_SelectMap(u8 taskId)
@@ -1138,7 +1138,7 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
@@ -1178,7 +1178,7 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
 
@@ -1341,7 +1341,8 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Flags, sDebugMenu_ListTemplate_Flags);
         return;
     }
 
@@ -1688,7 +1689,8 @@ static void DebugAction_Vars_Select(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Vars, sDebugMenu_ListTemplate_Vars);
         return;
     }
 }
@@ -1736,7 +1738,8 @@ static void DebugAction_Vars_SetValue(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Vars, sDebugMenu_ListTemplate_Vars);
         return;
     }
 
@@ -1859,7 +1862,8 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
 
         PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
@@ -1917,7 +1921,8 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
 
         PlaySE(SE_SELECT);
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 
@@ -2067,7 +2072,8 @@ static void DebugAction_Give_Egg_SelectId(u8 taskId)
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_PokemonSimple(u8 taskId)
@@ -2230,7 +2236,8 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
@@ -2301,7 +2308,8 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 //If complex
@@ -2353,7 +2361,8 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
@@ -2404,7 +2413,8 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
@@ -2461,7 +2471,8 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
@@ -2600,7 +2611,8 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Pokemon_Move(u8 taskId)
@@ -2720,7 +2732,8 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        DebugAction_DestroyExtraWindow(taskId);
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
 static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://github.com/ghoulslash/pokeemerald/tree/custom-givemon
@@ -2951,7 +2964,7 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
         PlaySE(SE_SELECT);
         m4aSongNumStop(gTasks[taskId].data[5]);
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
     }
 }
 
@@ -3029,7 +3042,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
         PlaySE(SE_SELECT);
         // m4aSongNumStop(gTasks[taskId].data[5]);   //Uncomment if music should stop after leaving menu
         Debug_DestroyMenu(taskId);
-        Debug_ShowMainMenu();
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
     }
 }
 
