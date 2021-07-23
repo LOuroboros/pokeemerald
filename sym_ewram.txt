@@ -151,3 +151,4 @@
 	.include "src/debug.o"
 	.include "src/infobox.o"
 	.include "src/rhh_copyright.o"
+	.include "src/registered_items_menu.o"
