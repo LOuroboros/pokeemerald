@@ -4588,3 +4588,36 @@ void BufferChosenMonStats(void)
     StringAppend(sTextBuffer1, sTextBuffer4);
     StringCopy(gStringVar6, sTextBuffer1);
 }
+
+void ModifyMonPrimaryStatusAilment(void)
+{
+    u8 status = STATUS1_NONE;
+
+    switch (VarGet(VAR_TEMP_1))
+    {
+    case STATUS1_POISON:
+        status = STATUS1_POISON;
+        break;
+    case STATUS1_PARALYSIS:
+        status = STATUS1_PARALYSIS;
+        break;
+    case STATUS1_SLEEP:
+        status = STATUS1_SLEEP;
+        break;
+    case STATUS1_FREEZE:
+        status = STATUS1_FREEZE;
+        break;
+    case STATUS1_BURN:
+        status = STATUS1_BURN;
+        break;
+    default:
+        break;
+    }
+
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_STATUS, &status);
+}
+
+u16 CheckMonStatusAilment(void)
+{
+    return GetMonAilment(&gPlayerParty[gSpecialVar_0x8004]);
+}
