@@ -83,9 +83,6 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
     input->pressedRButton = FALSE;
-    input->input_field_1_1 = FALSE;
-    input->input_field_1_2 = FALSE;
-    input->input_field_1_3 = FALSE;
     input->dpadDirection = 0;
     input->pressedLButton = FALSE;
     input->pressedListButton = FALSE;
@@ -112,9 +109,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             if (newKeys & L_BUTTON)
                 input->pressedLButton = TRUE;
             //tx_registered_items_menu
-            if (newKeys & L_BUTTON && gSaveBlock2Ptr->optionsButtonMode != 2)
-                input->pressedListButton = TRUE;
-            else if (newKeys & R_BUTTON)
+            if (newKeys & R_BUTTON && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ON_FOOT))
                 input->pressedListButton = TRUE;
         }
 
@@ -125,7 +120,9 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         }
 
         if (newKeys & R_BUTTON)
+        {
             input->pressedRButton = TRUE;
+        }
     }
 
     if (forcedMove == FALSE)
@@ -160,13 +157,19 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
 
     if (CheckForTrainersWantingBattle() == TRUE)
+    {
         return TRUE;
+    }
 
     if (TryRunOnFrameMapScript() == TRUE)
+    {
         return TRUE;
+    }
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
+    {
         return TRUE;
+    }
     if (input->tookStep)
     {
         IncrementGameStat(GAME_STAT_STEPS);
@@ -175,7 +178,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
             return TRUE;
     }
     if (input->checkStandardWildEncounter && CheckStandardWildEncounter(metatileBehavior) == TRUE)
+    {
         return TRUE;
+    }
     if (input->heldDirection && input->dpadDirection == playerDirection)
     {
         if (TryArrowWarp(&position, metatileBehavior, playerDirection) == TRUE)
@@ -185,7 +190,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     GetInFrontOfPlayerPosition(&position);
     metatileBehavior = MapGridGetMetatileBehaviorAt(position.x, position.y);
     if (input->pressedAButton && TryStartInteractionScript(&position, metatileBehavior, playerDirection) == TRUE)
+    {
         return TRUE;
+    }
 
     if (input->heldDirection2 && input->dpadDirection == playerDirection)
     {
@@ -193,7 +200,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
             return TRUE;
     }
     if (input->pressedAButton && TrySetupDiveDownScript() == TRUE)
+    {
         return TRUE;
+    }
     if (input->pressedStartButton)
     {
         PlaySE(SE_WIN_OPEN);
@@ -212,7 +221,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
 
     if (input->pressedLButton && EnableAutoRun())
+    {
         return TRUE;
+    }
 
     if (input->pressedRButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
