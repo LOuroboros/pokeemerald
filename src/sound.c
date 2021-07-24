@@ -7,6 +7,7 @@
 #include "pokemon.h"
 #include "constants/songs.h"
 #include "task.h"
+#include "event_data.h"
 
 struct Fanfare
 {
@@ -127,51 +128,69 @@ u16 GetCurrentMapMusic(void)
 
 void PlayNewMapMusic(u16 songNum)
 {
-    sCurrentMapMusic = songNum;
-    sNextMapMusic = 0;
-    sMapMusicState = 1;
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        sCurrentMapMusic = songNum;
+        sNextMapMusic = 0;
+        sMapMusicState = 1;
+    }
 }
 
 void StopMapMusic(void)
 {
-    sCurrentMapMusic = 0;
-    sNextMapMusic = 0;
-    sMapMusicState = 1;
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        sCurrentMapMusic = 0;
+        sNextMapMusic = 0;
+        sMapMusicState = 1;
+    }
 }
 
 void FadeOutMapMusic(u8 speed)
 {
-    if (IsNotWaitingForBGMStop())
-        FadeOutBGM(speed);
-    sCurrentMapMusic = 0;
-    sNextMapMusic = 0;
-    sMapMusicState = 5;
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        if (IsNotWaitingForBGMStop())
+            FadeOutBGM(speed);
+        sCurrentMapMusic = 0;
+        sNextMapMusic = 0;
+        sMapMusicState = 5;
+    }
 }
 
 void FadeOutAndPlayNewMapMusic(u16 songNum, u8 speed)
 {
-    FadeOutMapMusic(speed);
-    sCurrentMapMusic = 0;
-    sNextMapMusic = songNum;
-    sMapMusicState = 6;
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        FadeOutMapMusic(speed);
+        sCurrentMapMusic = 0;
+        sNextMapMusic = songNum;
+        sMapMusicState = 6;
+    }
 }
 
 void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
 {
-    FadeOutMapMusic(fadeOutSpeed);
-    sCurrentMapMusic = 0;
-    sNextMapMusic = songNum;
-    sMapMusicState = 7;
-    sMapMusicFadeInSpeed = fadeInSpeed;
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        FadeOutMapMusic(fadeOutSpeed);
+        sCurrentMapMusic = 0;
+        sNextMapMusic = songNum;
+        sMapMusicState = 7;
+        sMapMusicFadeInSpeed = fadeInSpeed;
+    }
 }
 
 void FadeInNewMapMusic(u16 songNum, u8 speed)
 {
-    FadeInNewBGM(songNum, speed);
-    sCurrentMapMusic = songNum;
-    sNextMapMusic = 0;
-    sMapMusicState = 2;
-    sMapMusicFadeInSpeed = 0;
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        FadeInNewBGM(songNum, speed);
+        sCurrentMapMusic = songNum;
+        sNextMapMusic = 0;
+        sMapMusicState = 2;
+        sMapMusicFadeInSpeed = 0;
+    }
 }
 
 bool8 IsNotWaitingForBGMStop(void)

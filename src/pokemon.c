@@ -7192,19 +7192,25 @@ u16 GetBattleBGM(void)
 
 void PlayBattleBGM(void)
 {
-    ResetMapMusic();
-    m4aMPlayAllStop();
-    PlayBGM(GetBattleBGM());
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        ResetMapMusic();
+        m4aMPlayAllStop();
+        PlayBGM(GetBattleBGM());
+    }
 }
 
 void PlayMapChosenOrBattleBGM(u16 songId)
 {
-    ResetMapMusic();
-    m4aMPlayAllStop();
-    if (songId)
-        PlayNewMapMusic(songId);
-    else
-        PlayNewMapMusic(GetBattleBGM());
+    if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
+    {
+        ResetMapMusic();
+        m4aMPlayAllStop();
+        if (songId)
+            PlayNewMapMusic(songId);
+        else
+            PlayNewMapMusic(GetBattleBGM());
+    }
 }
 
 // Identical to PlayMapChosenOrBattleBGM, but uses a task instead

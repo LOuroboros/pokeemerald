@@ -1171,24 +1171,21 @@ void Overworld_ClearSavedMusic(void)
 
 static void TransitionMapMusic(void)
 {
-    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE)
+    u16 newMusic = GetWarpDestinationMusic();
+    u16 currentMusic = GetCurrentMapMusic();
+    if (newMusic != MUS_ABNORMAL_WEATHER && newMusic != MUS_NONE)
     {
-        u16 newMusic = GetWarpDestinationMusic();
-        u16 currentMusic = GetCurrentMapMusic();
-        if (newMusic != MUS_ABNORMAL_WEATHER && newMusic != MUS_NONE)
-        {
-            if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
-                return;
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-                newMusic = MUS_SURF;
-        }
-        if (newMusic != currentMusic)
-        {
-            if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
-                FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
-            else
-                FadeOutAndPlayNewMapMusic(newMusic, 8);
-        }
+        if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
+            return;
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+            newMusic = MUS_SURF;
+    }
+    if (newMusic != currentMusic)
+    {
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+            FadeOutAndFadeInNewMapMusic(newMusic, 4, 4);
+        else
+            FadeOutAndPlayNewMapMusic(newMusic, 8);
     }
 }
 
@@ -1219,7 +1216,7 @@ void TryFadeOutOldMapMusic(void)
 {
     u16 currentMusic = GetCurrentMapMusic();
     u16 warpMusic = GetWarpDestinationMusic();
-    if (FlagGet(FLAG_DONT_TRANSITION_MUSIC) != TRUE && warpMusic != GetCurrentMapMusic())
+    if (warpMusic != GetCurrentMapMusic())
     {
         if (currentMusic == MUS_SURF
             && VarGet(VAR_SKY_PILLAR_STATE) == 2
