@@ -888,7 +888,8 @@ gSongTable:: @ 86B49F0
 	song hg_seq_gs_d_shinto, 0, 0
 	song hg_seq_gs_e_arceus, 0, 0
 	song hg_seq_me_gonin, 2, 2
-	song mus_smt3_large_map, 2, 2
+	song mus_smt3_large_map, 0, 0
+	song mus_kalos_power_plant, 0, 0
 
 	.align 2
 dummy_song_header: @ 86B5D00

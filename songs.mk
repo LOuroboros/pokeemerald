@@ -2333,3 +2333,6 @@ $(MID_SUBDIR)/hg_seq_me_gonin.s: %.s: %.mid
 
 $(MID_SUBDIR)/mus_smt3_large_map.s: %.s: %.mid
 	$(MID) $< $@ -E -R5 -G191 -V086
+
+$(MID_SUBDIR)/mus_kalos_power_plant.s: %.s: %.mid
+	$(MID) $< $@ -E -R5 -G191 -V086

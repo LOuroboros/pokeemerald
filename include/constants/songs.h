@@ -909,7 +909,8 @@
 #define HG_SEQ_GS_E_ARCEUS           885 // Arceus
 #define HG_SEQ_ME_GONIN              886 // Let's Go Together (Unused?)
 #define MUS_SMT3_LARGE_MAP           887 // Large Map (Shin Megami Tensei III: Nocturne)
-#define END_MUS                      MUS_SMT3_LARGE_MAP 
+#define MUS_KALOS_POWER_PLANT        888 // The Kalos Power Plant (Pokémon X/Y) 
+#define END_MUS                      MUS_KALOS_POWER_PLANT 
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
