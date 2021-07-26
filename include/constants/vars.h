@@ -238,13 +238,13 @@
 #define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
 #define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
 #define VAR_EVENT_PICHU_SLOT                 0x40DD
-#define VAR_NEVER_READ_0x40DE                0x40DE // Var is written to, but never read
-#define VAR_NEVER_READ_0x40DF                0x40DF // Var is written to, but never read
-#define VAR_NEVER_READ_0x40E0                0x40E0 // Var is written to, but never read
-#define VAR_NEVER_READ_0x40E1                0x40E1 // Var is written to, but never read
-#define VAR_NEVER_READ_0x40E2                0x40E2 // Var is written to, but never read
-#define VAR_NEVER_READ_0x40E3                0x40E3 // Var is written to, but never read
-#define VAR_NEVER_READ_0x40E4                0x40E4 // var is written to, but never read
+#define VAR_UNUSED_0x40DE                    0x40DE // Var was originally written to, but never read
+#define VAR_UNUSED_0x40DF                    0x40DF // Var was originally written to, but never read
+#define VAR_UNUSED_0x40E0                    0x40E0 // Var was originally written to, but never read
+#define VAR_UNUSED_0x40E1                    0x40E1 // Var was originally written to, but never read
+#define VAR_UNUSED_0x40E2                    0x40E2 // Var was originally written to, but never read
+#define VAR_UNUSED_0x40E3                    0x40E3 // Var was originally written to, but never read
+#define VAR_UNUSED_0x40E4                    0x40E4 // var was originally written to, but never read
 #define VAR_UNUSED_0x40E5                    0x40E5 // Unused Var
 #define VAR_DAILY_SLOTS                      0x40E6
 #define VAR_DAILY_WILDS                      0x40E7

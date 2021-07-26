@@ -84,16 +84,6 @@ bool32 IsNationalPokedexEnabled(void)
         return FALSE;
 }
 
-void DisableMysteryEvent(void)
-{
-    FlagClear(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
-void EnableMysteryEvent(void)
-{
-    FlagSet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
 bool32 IsMysteryEventEnabled(void)
 {
     return FlagGet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
@@ -112,38 +102,6 @@ void EnableMysteryGift(void)
 bool32 IsMysteryGiftEnabled(void)
 {
     return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
-}
-
-void ClearMysteryEventFlags(void)
-{
-    FlagClear(FLAG_MYSTERY_EVENT_DONE);
-    FlagClear(FLAG_MYSTERY_EVENT_1);
-    FlagClear(FLAG_MYSTERY_EVENT_2);
-    FlagClear(FLAG_MYSTERY_EVENT_3);
-    FlagClear(FLAG_MYSTERY_EVENT_4);
-    FlagClear(FLAG_MYSTERY_EVENT_5);
-    FlagClear(FLAG_MYSTERY_EVENT_6);
-    FlagClear(FLAG_MYSTERY_EVENT_7);
-    FlagClear(FLAG_MYSTERY_EVENT_8);
-    FlagClear(FLAG_MYSTERY_EVENT_9);
-    FlagClear(FLAG_MYSTERY_EVENT_10);
-    FlagClear(FLAG_MYSTERY_EVENT_11);
-    FlagClear(FLAG_MYSTERY_EVENT_12);
-    FlagClear(FLAG_MYSTERY_EVENT_13);
-    FlagClear(FLAG_MYSTERY_EVENT_14);
-    FlagClear(FLAG_MYSTERY_EVENT_15);
-}
-
-void ClearMysteryEventVars(void)
-{
-    VarSet(VAR_EVENT_PICHU_SLOT, 0);
-    VarSet(VAR_NEVER_READ_0x40DE, 0);
-    VarSet(VAR_NEVER_READ_0x40DF, 0);
-    VarSet(VAR_NEVER_READ_0x40E0, 0);
-    VarSet(VAR_NEVER_READ_0x40E1, 0);
-    VarSet(VAR_NEVER_READ_0x40E2, 0);
-    VarSet(VAR_NEVER_READ_0x40E3, 0);
-    VarSet(VAR_NEVER_READ_0x40E4, 0);
 }
 
 void DisableResetRTC(void)
