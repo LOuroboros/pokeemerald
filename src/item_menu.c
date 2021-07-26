@@ -975,7 +975,9 @@ void BagMenu_ItemPrintCallback(u8 windowId, s32 itemIndex, u8 y)
             offset = GetStringRightAlignXOffset(7, gStringVar7, 119);
             BagMenu_Print(windowId, 7, gStringVar7, offset, y, 0, 0, -1, 0);
         }
-        else if (gBagPositionStruct.pocket != KEYITEMS_POCKET && ItemId_GetImportance(itemId) == FALSE)
+        else if (gBagPositionStruct.pocket != KEYITEMS_POCKET
+              && gBagPositionStruct.pocket != TMHM_POCKET
+              && ItemId_GetImportance(itemId) == FALSE)
         {
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
             StringExpandPlaceholders(gStringVar7, gText_xVar1);
@@ -1927,7 +1929,8 @@ void ItemMenu_Give(u8 taskId)
     {
         DisplayItemMessage(taskId, 1, gText_CantWriteMail, sub_81AD350);
     }
-    else if (!ItemId_GetImportance(gSpecialVar_ItemId))
+    else if (!ItemId_GetImportance(gSpecialVar_ItemId)
+          && ItemId_GetPocket(gSpecialVar_ItemId) != POCKET_TM_HM)
     {
         if (CalculatePlayerPartyCount() == 0)
             BagMenu_PrintThereIsNoPokemon(taskId);

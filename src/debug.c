@@ -80,6 +80,7 @@ enum { // Flags
     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS,
     DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF,
     DEBUG_FLAG_MENU_ITEM_NATDEXONOFF,
+    DEBUG_FLAG_MENU_ITEM_POKEMONONOFF,
     DEBUG_FLAG_MENU_ITEM_POKENAVONOFF,
     DEBUG_FLAG_MENU_ITEM_FLYANYWHERE,
     DEBUG_FLAG_MENU_ITEM_GETALLBADGES,
@@ -223,6 +224,7 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId);
 static void DebugAction_Flags_SetPokedexFlags(u8);
 static void DebugAction_Flags_SwitchDex(u8);
 static void DebugAction_Flags_SwitchNatDex(u8);
+static void DebugAction_Flags_SwitchPokemon(u8);
 static void DebugAction_Flags_SwitchPokeNav(u8);
 static void DebugAction_Flags_ToggleFlyFlags(u8);
 static void DebugAction_Flags_ToggleBadgeFlags(u8);
@@ -338,6 +340,7 @@ static const u8 gDebugText_Flags_Flags[] =                _("Edit Flags");
 static const u8 gDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
 static const u8 gDebugText_Flags_SwitchDex[] =            _("Pokédex ON/OFF");
 static const u8 gDebugText_Flags_SwitchNationalDex[] =    _("NatDex ON/OFF");
+static const u8 gDebugText_Flags_SwitchPokemon[] =        _("Pokémon ON/OFF");
 static const u8 gDebugText_Flags_SwitchPokeNav[] =        _("PokéNav ON/OFF");
 static const u8 gDebugText_Flags_ToggleFlyFlags[] =       _("Fly Flags ON/OFF");
 static const u8 gDebugText_Flags_ToggleAllBadges[] =      _("All badges ON/OFF");
@@ -481,6 +484,7 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
     [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = {gDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
     [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = {gDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
     [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = {gDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]      = {gDebugText_Flags_SwitchPokemon,       DEBUG_FLAG_MENU_ITEM_POKEMONONOFF},
     [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = {gDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = {gDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
     [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = {gDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
@@ -571,6 +575,7 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = DebugAction_Flags_SetPokedexFlags,
     [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = DebugAction_Flags_SwitchDex,
     [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = DebugAction_Flags_SwitchNatDex,
+    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]      = DebugAction_Flags_SwitchPokemon,
     [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = DebugAction_Flags_SwitchPokeNav,
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = DebugAction_Flags_ToggleFlyFlags,
     [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = DebugAction_Flags_ToggleBadgeFlags,
@@ -1433,6 +1438,19 @@ static void DebugAction_Flags_SwitchNatDex(u8 taskId)
         PlaySE(SE_PC_LOGIN);
     }
 }
+static void DebugAction_Flags_SwitchPokemon(u8 taskId)
+{
+    if (FlagGet(FLAG_SYS_POKEMON_GET))
+    {
+        FlagClear(FLAG_SYS_POKEMON_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_SYS_POKEMON_GET);
+        PlaySE(SE_PC_LOGIN);
+    }
+}
 static void DebugAction_Flags_SwitchPokeNav(u8 taskId)
 {
     if (FlagGet(FLAG_SYS_POKENAV_GET))
@@ -1931,7 +1949,7 @@ static void DebugAction_Give_AllTMs(u8 taskId)
 {
     u16 i;
     PlayFanfare(MUS_OBTAIN_TMHM);
-    for (i = ITEM_TM01; i <= ITEM_TM50; i++)
+    for (i = ITEM_TM01; i <= ITEM_HM08; i++)
         if (!CheckBagHasItem(i, 1))
             AddBagItem(i, 1);
     Debug_DestroyMenu(taskId);
