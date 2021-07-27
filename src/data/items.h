@@ -7548,4 +7548,19 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .secondaryId = 255  //signature z move
     },
+
+// Custom items
+
+    [ITEM_OCARINA] =
+    {
+        .name = _("Ocarina"),
+        .itemId = ITEM_OCARINA,
+        .price = 0,
+        .importance = 1,
+        .description = sOcarinaDesc,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_Ocarina,
+        .secondaryId = 0,
+    },
 };

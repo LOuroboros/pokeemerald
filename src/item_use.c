@@ -15,9 +15,11 @@
 #include "event_scripts.h"
 #include "fieldmap.h"
 #include "field_effect.h"
+#include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
+#include "fldeff.h"
 #include "item.h"
 #include "item_menu.h"
 #include "item_use.h"
@@ -41,7 +43,9 @@
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
 #include "constants/items.h"
+#include "constants/map_types.h"
 #include "constants/songs.h"
+#include "constants/metatile_behaviors.h"
 
 static void SetUpItemUseCallback(u8 taskId);
 static void FieldCB_UseItemOnField(void);
@@ -71,6 +75,14 @@ static void Task_UseRepel(u8 taskId);
 static void Task_CloseCantUseKeyItemMessage(u8 taskId);
 static void SetDistanceOfClosestHiddenItem(u8 taskId, s16 x, s16 y);
 static void CB2_OpenPokeblockFromBag(void);
+static void ItemUseOnFieldCB_SurfOcarina(u8 taskId);
+static void ItemUseOnFieldCB_CutOcarina(u8 taskId);
+static void ItemUseOnFieldCB_RockSmashOcarina(u8 taskId);
+static void ItemUseOnFieldCB_WaterfallOcarina(u8 taskId);
+static void ItemUseOnFieldCB_DiveOcarinaOnSurface(u8 taskId);
+static void ItemUseOnFieldCB_DiveOcarinaUnderwater(u8 taskId);
+static void ItemUseOnFieldCB_FlashOcarina(u8 taskId);
+static void ItemUseOnFieldCB_StrengthOcarina(u8 taskId);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -286,7 +298,9 @@ void ItemUseOutOfBattle_Rod(u8 taskId)
         SetUpItemUseOnFieldCallback(taskId);
     }
     else
+    {
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
 }
 
 static void ItemUseOnFieldCB_Rod(u8 taskId)
@@ -1177,6 +1191,119 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
 void ItemUseOutOfBattle_CannotUse(u8 taskId)
 {
     DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+}
+
+void ItemUseOutOfBattle_Ocarina(u8 taskId)
+{
+    u8 metatileBehavior;
+    extern struct MapPosition gPlayerFacingPosition;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
+    metatileBehavior = MapGridGetMetatileBehaviorAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y);
+    VarSet(VAR_TEMP_1, 1);
+
+    if (SetUpFieldMove_Cut() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_CutOcarina;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (IsPlayerFacingSurfableFishableWater() == TRUE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_SurfOcarina;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_PUSHABLE_BOULDER))
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_StrengthOcarina;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH) && gSaveBlock1Ptr->flashLevel != 0)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_FlashOcarina;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (CheckObjectGraphicsInFrontOfPlayer(OBJ_EVENT_GFX_BREAKABLE_ROCK))
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_RockSmashOcarina;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (MetatileBehavior_IsWaterfall(metatileBehavior) && IsPlayerSurfingNorth())
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_WaterfallOcarina;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (TrySetDiveWarp() == 2)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_DiveOcarinaOnSurface;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else if (gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_DiveOcarinaUnderwater;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+}
+
+static void ItemUseOnFieldCB_CutOcarina(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_CutTree);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_SurfOcarina(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_UseSurf);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_StrengthOcarina(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_StrengthBoulder);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_FlashOcarina(u8 taskId)
+{
+    PlaySE(SE_M_REFLECT);
+    FlagSet(FLAG_SYS_USE_FLASH);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_UseFlash);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_RockSmashOcarina(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_RockSmash);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_WaterfallOcarina(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_UseWaterfall);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_DiveOcarinaOnSurface(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_UseDive);
+    DestroyTask(taskId);
+}
+
+static void ItemUseOnFieldCB_DiveOcarinaUnderwater(u8 taskId)
+{
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(EventScript_UseDiveUnderwater);
+    DestroyTask(taskId);
 }
 
 #undef tUsingRegisteredKeyItem

@@ -450,7 +450,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_GRACIDEA] = {gItemIcon_Gracidea, gItemIconPalette_Gracidea},
     [ITEM_ARMOR_FOSSIL] = {gItemIcon_ArmorFossil, gItemIconPalette_ArmorFossil},
     [ITEM_SKULL_FOSSIL] = {gItemIcon_SkullFossil, gItemIconPalette_SkullFossil},
-	// Gen 5 Items
+    // Gen 5 Items
     [ITEM_EVIOLITE] = {gItemIcon_Eviolite, gItemIconPalette_Eviolite},
     [ITEM_FLOAT_STONE] = {gItemIcon_FloatStone, gItemIconPalette_FloatStone},
     [ITEM_BINDING_BAND] = {gItemIcon_BindingBand, gItemIconPalette_BindingBand},
@@ -496,7 +496,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_PRETTY_FEATHER] = {gItemIcon_PrettyFeather, gItemIconPalette_PrettyFeather},
     [ITEM_SHINY_CHARM] = {gItemIcon_ShinyCharm, gItemIconPalette_ShinyCharm},
     [ITEM_OVAL_CHARM] = {gItemIcon_OvalCharm, gItemIconPalette_OvalCharm},
-	// Gen 6 Items
+    // Gen 6 Items
     [ITEM_ASSAULT_VEST] = {gItemIcon_AssaultVest, gItemIconPalette_AssaultVest},
     [ITEM_PIXIE_PLATE] = {gItemIcon_PixiePlate, gItemIconPalette_PixiePlate},
     [ITEM_SAFETY_GOGGLES] = {gItemIcon_SafetyGoggles, gItemIconPalette_SafetyGoggles},
@@ -559,7 +559,7 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_WEAKNESS_POLICY] = {gItemIcon_WeaknessPolicy, gItemIconPalette_WeaknessPolicy},
     [ITEM_JAW_FOSSIL] = {gItemIcon_JawFossil, gItemIconPalette_JawFossil},
     [ITEM_SAIL_FOSSIL] = {gItemIcon_SailFossil, gItemIconPalette_SailFossil},
-	// Gen 7 Items
+    // Gen 7 Items
     [ITEM_PROTECTIVE_PADS] = {gItemIcon_ProtectivePads, gItemIconPalette_ProtectivePads},
     [ITEM_TERRAIN_EXTENDER] = {gItemIcon_TerrainExtender, gItemIconPalette_TerrainExtender},
     [ITEM_ELECTRIC_SEED] = {gItemIcon_ElectricSeed, gItemIconPalette_ElectricSeed},
@@ -627,4 +627,6 @@ const u32 *const gItemIconTable[][2] =
     [ITEM_SOLGANIUM_Z] = {gItemIcon_SolganiumZ, gItemIconPalette_SolganiumZ},
     [ITEM_TAPUNIUM_Z] = {gItemIcon_TapuniumZ, gItemIconPalette_TapuniumZ},
     [ITEM_ULTRANECROZIUM_Z] = {gItemIcon_UltranecroziumZ, gItemIconPalette_UltranecroziumZ},
+    // Custom items
+    [ITEM_OCARINA] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
 };

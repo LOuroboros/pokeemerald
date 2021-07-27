@@ -1998,7 +1998,7 @@ static const u8 sOldSeaMapDesc[] = _(
     "that shows the way\n"
     "to a certain island.");
 
-	// New items
+// New items
 static const u8 sWideLensDesc[] = _(
     "A magnifying lens\n"
     "that boosts the\n"
@@ -2820,7 +2820,7 @@ static const u8 sPrettyFeatherDesc[] = _(
     "does nothing.");
 
 static const u8 sShinyCharmDesc[] = _(
-	"A charm that will\n"
+    "A charm that will\n"
     "raise the chance\n"
     "of Shiny Pokémon.");
 
@@ -3008,3 +3008,9 @@ static const u8 sUltranecroziumZDesc[] = _(
     "A crystal to turn\n"
     "fused Necrozma\n"
     "into a new form.");
+
+// Custom items
+static const u8 sOcarinaDesc[] = _(
+    "Its melody makes\n"
+    "Pokémon easily\n"
+    "remove obstacles.");

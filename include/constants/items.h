@@ -705,7 +705,10 @@
 #define ITEM_TAPUNIUM_Z               602
 #define ITEM_ULTRANECROZIUM_Z         603
 
-#define ITEMS_COUNT 604
+// Custom
+#define ITEM_OCARINA 604
+
+#define ITEMS_COUNT 605
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // Range of berries given out by various NPCS
