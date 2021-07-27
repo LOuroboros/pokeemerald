@@ -5282,6 +5282,7 @@ const struct Item gItems[] =
         .name = _("Odd Keystone"),
         .itemId = ITEM_ODD_KEYSTONE,
         .price = 2100,
+        .holdEffect = HOLD_EFFECT_ODD_KEYSTONE,
         .description = sOddKeystoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
