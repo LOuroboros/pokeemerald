@@ -91,6 +91,7 @@ enum { // Flags
     DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF,
     DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF,
     DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF,
+    DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF,
 };
 enum { // Vars
     DEBUG_VARS_MENU_ITEM_VARS,
@@ -235,6 +236,7 @@ static void DebugAction_Flags_BagUseOnOff(u8);
 static void DebugAction_Flags_CatchingOnOff(u8);
 static void DebugAction_Flags_ShiniesOnOff(u8);
 static void DebugAction_Flags_EscapingOnOff(u8);
+static void DebugAction_Flags_ExperienceOnOff(u8);
 
 static void DebugAction_Vars_Vars(u8 taskId);
 static void DebugAction_Vars_Select(u8 taskId);
@@ -351,6 +353,7 @@ static const u8 gDebugText_Flags_SwitchBagUse[] =         _("BagUse ON/OFF");
 static const u8 gDebugText_Flags_SwitchCatching[] =       _("Catching ON/OFF");
 static const u8 gDebugText_Flags_SwitchShinies[] =        _("Shiny enc. ON/OFF");
 static const u8 gDebugText_Flags_SwitchEscaping[] =       _("Escaping ON/OFF");
+static const u8 gDebugText_Flags_SwitchExperience[] =     _("Experience ON/OFF");
 static const u8 gDebugText_Flag[] =                       _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
 static const u8 gDebugText_FlagHex[] =                    _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
 static const u8 gDebugText_FlagSet[] =                    _("TRUE");
@@ -495,6 +498,7 @@ static const struct ListMenuItem sDebugMenu_Items_Flags[] =
     [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = {gDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = {gDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]    = {gDebugText_Flags_SwitchEscaping,      DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]  = {gDebugText_Flags_SwitchExperience,    DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF},
 };
 static const struct ListMenuItem sDebugMenu_Items_Vars[] =
 {
@@ -586,6 +590,7 @@ static void (*const sDebugMenu_Actions_Flags[])(u8) =
     [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = DebugAction_Flags_CatchingOnOff,
     [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = DebugAction_Flags_ShiniesOnOff,
     [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]    = DebugAction_Flags_EscapingOnOff,
+    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]  = DebugAction_Flags_ExperienceOnOff,
 };
 static void (*const sDebugMenu_Actions_Vars[])(u8) =
 {
@@ -1594,6 +1599,19 @@ static void DebugAction_Flags_EscapingOnOff(u8 taskId)
     else
     {
         FlagSet(FLAG_DISABLE_ESCAPING_FROM_BATTLE);
+        PlaySE(SE_PC_LOGIN);
+    }
+}
+static void DebugAction_Flags_ExperienceOnOff(u8 taskId)
+{
+    if (FlagGet(FLAG_DISABLE_EXPERIENCE))
+    {
+        FlagClear(FLAG_DISABLE_EXPERIENCE);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_DISABLE_EXPERIENCE);
         PlaySE(SE_PC_LOGIN);
     }
 }
