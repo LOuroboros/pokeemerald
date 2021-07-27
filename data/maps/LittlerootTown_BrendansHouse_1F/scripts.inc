@@ -341,6 +341,23 @@ PlayersHouse_1F_Text_ItsOverWeMissedHim: @ 81F7BF1
 	.string "I think DAD was on, but we missed him.\n"
 	.string "Too bad.$"
 
+PlayersHouse_1F_Text_RunningShoes:
+	.string "Speaking of DAD, he asked me to give\n"
+	.string "you a present he bought for you.$"
+
+PlayersHouse_1F_Text_ReceivedRunningShoes:
+	.string "{PLAYER} received a pair of\nRunning Shoes!$"
+
+PlayersHouse_1F_Text_RunningShoesExplanation:
+	.string "With those Running Shoes, you can\n"
+	.string "get to faraway places much faster.\p"
+	.string "Let me read you the instructions.\p"
+	.string "“Press the B Button to run while\n"
+	.string "wearing your RUNNING SHOES.\p"
+	.string "“Lace up your RUNNING SHOES and hit\n"
+	.string "the road running!”\p"
+	.string "That's what it says.$"
+
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor: @ 81F7C35
 	.string "Oh, yes.\n"
 	.string "One of DAD's friends lives in town.\p"

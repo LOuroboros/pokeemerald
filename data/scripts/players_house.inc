@@ -171,6 +171,17 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale:: @ 829286D
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	msgbox PlayersHouse_1F_Text_RunningShoes, MSGBOX_DEFAULT
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
+	msgbox PlayersHouse_1F_Text_ReceivedRunningShoes, MSGBOX_DEFAULT
+	waitfanfare
+	delay 30
+	setflag FLAG_SYS_B_DASH
+	msgbox PlayersHouse_1F_Text_RunningShoesExplanation, MSGBOX_DEFAULT
+	closemessage
+	delay 30
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_1, 1
@@ -196,6 +207,17 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale:: @ 82928DC
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestRight
 	waitmovement 0
 	msgbox PlayersHouse_1F_Text_ItsOverWeMissedHim, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	msgbox PlayersHouse_1F_Text_RunningShoes, MSGBOX_DEFAULT
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
+	msgbox PlayersHouse_1F_Text_ReceivedRunningShoes, MSGBOX_DEFAULT
+	waitfanfare
+	delay 30
+	setflag FLAG_SYS_B_DASH
+	msgbox PlayersHouse_1F_Text_RunningShoesExplanation, MSGBOX_DEFAULT
+	closemessage
+	delay 30
 	msgbox PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_1, 1
