@@ -43,6 +43,7 @@
 #include "money.h"
 #include "field_weather.h"
 #include "palette.h"
+#include "save.h"
 
 // *******************************
 // Enums
@@ -59,7 +60,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_FLY,
     DEBUG_UTIL_MENU_ITEM_WARP,
     DEBUG_UTIL_MENU_ITEM_PRESETWARP,
-    DEBUG_UTIL_MENU_ITEM_SAVEBLOCK,
+    DEBUG_UTIL_MENU_ITEM_SAVESPACE,
     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK,
     DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY,
@@ -203,7 +204,7 @@ static void DebugAction_Util_Warp_PresetWarp(u8 taskId);
 static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId);
 static void DebugAction_Util_Warp_SelectMap(u8 taskId);
 static void DebugAction_Util_Warp_SelectWarp(u8 taskId);
-static void DebugAction_Util_CheckSaveBlock(u8);
+static void DebugAction_Util_CheckSaveSpace(u8);
 static void DebugAction_Util_CheckWallClock(u8);
 static void DebugAction_Util_SetWallClock(u8);
 static void DebugAction_Util_CheckWeekDay(u8);
@@ -322,7 +323,7 @@ static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1
 static const u8 gDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}            \nMapSec:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelectWarp[] =    _("Warp:             \n{STR_VAR_1}                \n                                  \n{STR_VAR_3}     ");
 static const u8 gDebugText_Util_WarpToMap_SelMax[] =        _("{STR_VAR_1} / {STR_VAR_2}");
-static const u8 gDebugText_Util_SaveBlockSpace[] =          _("SaveBlock Space");
+static const u8 gDebugText_Util_SaveSpace[] =               _("Savefile Size Data");
 static const u8 gDebugText_Util_CheckWallClock[] =          _("Check Wall Clock");
 static const u8 gDebugText_Util_SetWallClock[] =            _("Set Wall Clock");
 static const u8 gDebugText_Util_CheckWeekDay[] =            _("Check Week Day");
@@ -465,7 +466,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_FLY]                = {gDebugText_Util_Fly,                DEBUG_UTIL_MENU_ITEM_FLY},
     [DEBUG_UTIL_MENU_ITEM_WARP]               = {gDebugText_Util_WarpToMap,          DEBUG_UTIL_MENU_ITEM_WARP},
     [DEBUG_UTIL_MENU_ITEM_PRESETWARP]         = {gDebugText_Util_PresetWarp,         DEBUG_UTIL_MENU_ITEM_PRESETWARP},
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]          = {gDebugText_Util_SaveBlockSpace,     DEBUG_UTIL_MENU_ITEM_SAVEBLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SAVESPACE]          = {gDebugText_Util_SaveSpace,          DEBUG_UTIL_MENU_ITEM_SAVESPACE},
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]     = {gDebugText_Util_CheckWallClock,     DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]       = {gDebugText_Util_SetWallClock,       DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
     [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]       = {gDebugText_Util_CheckWeekDay,       DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
@@ -557,7 +558,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_FLY]                 = DebugAction_Util_Fly,
     [DEBUG_UTIL_MENU_ITEM_WARP]                = DebugAction_Util_Warp_Warp,
     [DEBUG_UTIL_MENU_ITEM_PRESETWARP]          = DebugAction_Util_Warp_PresetWarp,
-    [DEBUG_UTIL_MENU_ITEM_SAVEBLOCK]           = DebugAction_Util_CheckSaveBlock,
+    [DEBUG_UTIL_MENU_ITEM_SAVESPACE]           = DebugAction_Util_CheckSaveSpace,
     [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]      = DebugAction_Util_CheckWallClock,
     [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]        = DebugAction_Util_SetWallClock,
     [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]        = DebugAction_Util_CheckWeekDay,
@@ -1192,8 +1193,20 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
     }
 }
 
-static void DebugAction_Util_CheckSaveBlock(u8 taskId)
+static void DebugAction_Util_CheckSaveSpace(u8 taskId)
 {
+    u32 currSb1Size = (sizeof(struct SaveBlock1));
+    u32 currSb2Size = (sizeof(struct SaveBlock2));
+    u32 currPkmnStorageSize = (sizeof(struct PokemonStorage));
+    u32 maxSb1Size = (SECTOR_DATA_SIZE * 4);
+    u32 maxSb2Size = SECTOR_DATA_SIZE;
+    u32 maxPkmnStorageSize = (SECTOR_DATA_SIZE * 9);
+    ConvertIntToDecimalStringN(gStringVar1, currSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar2, currSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar3, currPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar4, maxSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar5, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar6, maxPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(EventScript_CheckSavefileSize);

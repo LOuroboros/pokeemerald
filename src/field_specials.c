@@ -4420,17 +4420,6 @@ u32 GetCurrentMap(void)
     return (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
 }
 
-// used to check saveblock space
-void CheckSavefileSize(void)
-{
-    u32 size = (sizeof(struct SaveBlock1));
-    u32 size2 = (sizeof(struct SaveBlock2));
-    u32 size3 = (sizeof(struct PokemonStorage));
-    ConvertIntToDecimalStringN(gStringVar1, size, STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar2, size2, STR_CONV_MODE_LEFT_ALIGN, 6);
-    ConvertIntToDecimalStringN(gStringVar3, size3, STR_CONV_MODE_LEFT_ALIGN, 6);
-}
-
 // Checks the EVs of a Pokémon in gSpecialVar_0x8004 and stores them in the 6 text buffers
 void CheckMonEVs(void)
 {
