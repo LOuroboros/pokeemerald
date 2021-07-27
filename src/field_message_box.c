@@ -132,7 +132,7 @@ static void StartDrawFieldMessage(void)
 void HideFieldMessageBox(void)
 {
     DestroyTask_DrawFieldMessage();
-    ClearDialogWindowAndFrame(0, 1);
+    ClearDialogWindowAndFrameToTransparent(0, 1);
     sFieldMessageBoxMode = FIELD_MESSAGE_BOX_HIDDEN;
 }
 
