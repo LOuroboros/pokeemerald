@@ -13,6 +13,21 @@ LilycoveCity_DepartmentStore_4F_EventScript_Youngster:: @ 821FDFD
 	msgbox LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves, MSGBOX_NPC
 	end
 
+LilycoveCity_DepartmentStore_4F_EventScript_WomanTwo::
+	compare VAR_STARTER_MON, 1
+	goto_if_eq LilycoveCity_DepartmentStore_4F_EventScript_WomanTwo_Flavor
+	msgbox LilycoveCity_DepartmentStore_4F_Text_IBoughtTheLastTM18, MSGBOX_NPC
+	end
+
+LilycoveCity_DepartmentStore_4F_EventScript_WomanTwo_Flavor:
+	goto_if_set FLAG_HIDE_LILYCOVE_CITY_AQUA_GRUNTS, LilycoveCity_DepartmentStore_4F_EventScript_WomanTwoTwo
+	msgbox LilycoveCity_DepartmentStore_4F_Text_SomeoneBoughtTheLastTM18, MSGBOX_NPC
+	end
+
+LilycoveCity_DepartmentStore_4F_EventScript_WomanTwoTwo:
+	msgbox LilycoveCity_DepartmentStore_4F_Text_WomanObtainedATM18, MSGBOX_NPC
+	end
+
 LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: @ 821FE06
 	lock
 	faceplayer
@@ -70,3 +85,26 @@ LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves: @ 821FF2D
 	.string "I'd like to get all the different TMs,\n"
 	.string "but a POKéMON learns only four moves.$"
 
+LilycoveCity_DepartmentStore_4F_Text_IBoughtTheLastTM18:
+	.string "Lucky me! I bought the last TM18!\p"
+	.string "This TECHNICAL MACHINE can teach\n"
+	.string "the move RAIN DANCE to a POKéMON.\p"
+	.string "With this, my strategy is complete!\n"
+	.string "I will be unstoppable!$"
+
+LilycoveCity_DepartmentStore_4F_Text_SomeoneBoughtTheLastTM18:
+	.string "It looks like someone just bought the\n"
+	.string "last TM18. How problematic.\p"
+	.string "That TECHNICAL MACHINE can teach the\n"
+	.string "move RAIN DANCE to a POKéMON, and I\l"
+	.string "was intending to buy it.$"
+
+LilycoveCity_DepartmentStore_4F_Text_WomanObtainedATM18:
+	.string "Lucky me! I got a TM18!\p"
+	.string "This TECHNICAL MACHINE can teach\n"
+	.string "the move RAIN DANCE to a POKéMON.\p"
+	.string "A man wearing a bandana approached\n"
+	.string "me as I was walking around.\p"
+	.string "He gave it to me before running\n"
+	.string "towards the east with his friends.\p"
+	.string "How very kind of him.$"

@@ -11,6 +11,8 @@ EverGrandeCity_PokemonLeague_1F_OnTransition: @ 82295DD
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
+	compare VAR_ROUTE103_STATE, 1
+	call_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor:: @ 82295ED
@@ -53,6 +55,8 @@ EverGrandeCity_PokemonLeague_1F_Pokemart: @ 8229624
 @ Its assumed the player has the remaining badges
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard:: @ 8229636
 	lockall
+	compare VAR_ROUTE103_STATE, 1
+	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable
 	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 11
@@ -105,6 +109,11 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForth:: @ 82296BB
 	releaseall
 	end
 
+EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable:
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_NotAvailable, MSGBOX_DEFAULT
+	releaseall
+	end
+
 EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight: @ 82296DA
 	walk_down
 	walk_left
@@ -142,4 +151,10 @@ EverGrandeCity_PokemonLeague_1F_Text_HaventObtainedAllBadges: @ 8229787
 EverGrandeCity_PokemonLeague_1F_Text_GoForth: @ 82297EF
 	.string "TRAINER! Believe in yourself and your\n"
 	.string "POKéMON, and go forth!$"
+
+EverGrandeCity_PokemonLeague_1F_Text_NotAvailable:
+    .string "I am so sorry, but you've wasted\n"
+    .string "your time coming here.\p"
+    .string "The POKéMON LEAGUE is closed\n"
+    .string "for the time being.$"
 

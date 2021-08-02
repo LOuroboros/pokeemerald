@@ -7235,17 +7235,6 @@ static const struct TrainerMon sParty_GruntSeafloorCavern5[] = {
     }
 };
 
-static const struct TrainerMon sParty_GruntUnused[] = {
-    {
-        .lvl = 31,
-        .species = SPECIES_WAILMER,
-    },
-    {
-        .lvl = 31,
-        .species = SPECIES_ZUBAT,
-    }
-};
-
 static const struct TrainerMon sParty_GruntMtPyre4[] = {
     {
         .lvl = 30,
@@ -11799,30 +11788,221 @@ static const struct TrainerMon sParty_Everett[] = {
     }
 };
 
-static const struct TrainerMon sParty_Red[] = {
+static const struct TrainerMon sParty_BrendanPostgameMudkip[] = {
     {
-        .lvl = 5,
-        .species = SPECIES_CHARMANDER,
-    }
+        .lvl = 65,
+        .species = SPECIES_EXPLOUD,
+        .heldItem = ITEM_CHOICE_SCARF,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_SWELLOW,
+        .heldItem = ITEM_SILK_SCARF,
+        .moves = {MOVE_BOOMBURST, MOVE_BRAVE_BIRD, MOVE_FOCUS_ENERGY, MOVE_AGILITY},
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_RHYPERIOR,
+        .heldItem = ITEM_ASSAULT_VEST,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_MAGCARGO,
+        .heldItem = ITEM_FOCUS_SASH,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_SHARPEDO,
+        .heldItem = ITEM_BLACK_GLASSES,
+    },
+    {
+        .lvl = 69,
+        .species = SPECIES_SCEPTILE,
+        .heldItem = ITEM_SCEPTILITE,
+        .ability = HIDDEN_ABILITY, // Overgrow
+    },
 };
 
-static const struct TrainerMon sParty_Leaf[] = {
+static const struct TrainerMon sParty_BrendanPostgameTreecko[] = {
     {
-        .lvl = 5,
-        .species = SPECIES_BULBASAUR,
-    }
+        .lvl = 65,
+        .species = SPECIES_EXPLOUD,
+        .heldItem = ITEM_CHOICE_SCARF,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_SWELLOW,
+        .heldItem = ITEM_SILK_SCARF,
+        .moves = {MOVE_BOOMBURST, MOVE_BRAVE_BIRD, MOVE_FOCUS_ENERGY, MOVE_AGILITY},
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_RHYPERIOR,
+        .heldItem = ITEM_ASSAULT_VEST,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_SHARPEDO,
+        .heldItem = ITEM_BLACK_GLASSES,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_BRELOOM,
+        .heldItem = ITEM_TOXIC_ORB,
+        .ability = SECOND_ABILITY, // Poison Heal
+    },
+    {
+        .lvl = 69,
+        .species = SPECIES_BLAZIKEN,
+        .heldItem = ITEM_BLAZIKENITE,
+        .ability = FIRST_ABILITY, // Blaze / Speed Boost
+    },
 };
 
-static const struct TrainerMon sParty_BrendanLinkPlaceholder[] = {
+static const struct TrainerMon sParty_BrendanPostgameTorchic[] = {
     {
-        .lvl = 5,
-        .species = SPECIES_GROUDON,
-    }
+        .lvl = 65,
+        .species = SPECIES_EXPLOUD,
+        .heldItem = ITEM_CHOICE_SCARF,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_SWELLOW,
+        .heldItem = ITEM_SILK_SCARF,
+        .moves = {MOVE_BOOMBURST, MOVE_BRAVE_BIRD, MOVE_FOCUS_ENERGY, MOVE_AGILITY},
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_RHYPERIOR,
+        .heldItem = ITEM_ASSAULT_VEST,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_MAGCARGO,
+        .heldItem = ITEM_FOCUS_SASH,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_BRELOOM,
+        .heldItem = ITEM_TOXIC_ORB,
+        .ability = SECOND_ABILITY, // Poison Heal
+    },
+    {
+        .lvl = 69,
+        .species = SPECIES_SWAMPERT,
+        .heldItem = ITEM_SWAMPERTITE,
+        .moves = {MOVE_HAMMER_ARM, MOVE_RAIN_DANCE, MOVE_EARTHQUAKE, MOVE_MUDDY_WATER},
+        .ability = FIRST_ABILITY, // Torrent / Swift Swim
+    },
 };
 
-static const struct TrainerMon sParty_MayLinkPlaceholder[] = {
+static const struct TrainerMon sParty_MayPostgameMudkip[] = {
     {
-        .lvl = 5,
-        .species = SPECIES_KYOGRE,
-    }
+        .lvl = 65,
+        .species = SPECIES_CLAYDOL,
+        .heldItem = ITEM_LIGHT_CLAY,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_SWELLOW,
+        .heldItem = ITEM_SHARP_BEAK,
+        .moves = {MOVE_BOOMBURST, MOVE_BRAVE_BIRD, MOVE_FOCUS_ENERGY, MOVE_AGILITY},
+        .gender = MON_MALE,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_RAICHU,
+        .heldItem = ITEM_LIGHT_BALL,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_MAGCARGO,
+        .heldItem = ITEM_LEFTOVERS,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_SHARPEDO,
+        .heldItem = ITEM_RAZOR_FANG,
+        .gender = MON_MALE,
+    },
+    {
+        .lvl = 69,
+        .species = SPECIES_SCEPTILE,
+        .heldItem = ITEM_SCEPTILITE,
+    },
+};
+
+static const struct TrainerMon sParty_MayPostgameTreecko[] = {
+    {
+        .lvl = 65,
+        .species = SPECIES_CLAYDOL,
+        .heldItem = ITEM_LIGHT_CLAY,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_SWELLOW,
+        .heldItem = ITEM_SHARP_BEAK,
+        .moves = {MOVE_BOOMBURST, MOVE_BRAVE_BIRD, MOVE_FOCUS_ENERGY, MOVE_AGILITY},
+        .gender = MON_MALE,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_RAICHU,
+        .heldItem = ITEM_LIGHT_BALL,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_SHARPEDO,
+        .heldItem = ITEM_RAZOR_FANG,
+        .gender = MON_MALE,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_BRELOOM,
+        .heldItem = ITEM_FOCUS_SASH,
+        .ability = HIDDEN_ABILITY, // Technician
+    },
+    {
+        .lvl = 69,
+        .species = SPECIES_BLAZIKEN,
+        .heldItem = ITEM_BLAZIKENITE,
+    },
+};
+
+static const struct TrainerMon sParty_MayPostgameTorchic[] = {
+    {
+        .lvl = 65,
+        .species = SPECIES_CLAYDOL,
+        .heldItem = ITEM_LIGHT_CLAY,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_SWELLOW,
+        .heldItem = ITEM_SHARP_BEAK,
+        .moves = {MOVE_BOOMBURST, MOVE_BRAVE_BIRD, MOVE_FOCUS_ENERGY, MOVE_AGILITY},
+        .gender = MON_MALE,
+    },
+    {
+        .lvl = 66,
+        .species = SPECIES_RAICHU,
+        .heldItem = ITEM_LIGHT_BALL,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_MAGCARGO,
+        .heldItem = ITEM_LEFTOVERS,
+    },
+    {
+        .lvl = 67,
+        .species = SPECIES_BRELOOM,
+        .heldItem = ITEM_FOCUS_SASH,
+        .ability = HIDDEN_ABILITY, // Technician
+    },
+    {
+        .lvl = 69,
+        .species = SPECIES_SWAMPERT,
+        .heldItem = ITEM_SWAMPERTITE,
+        .moves = {MOVE_HAMMER_ARM, MOVE_RAIN_DANCE, MOVE_EARTHQUAKE, MOVE_MUDDY_WATER},
+        .ability = FIRST_ABILITY, // Torrent / Swift Swim
+    },
 };
