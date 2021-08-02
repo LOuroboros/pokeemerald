@@ -4049,19 +4049,8 @@ static const struct TrainerMon sParty_Shelby5[] = {
 
 static const struct TrainerMon sParty_Calvin1[] = {
     {
-        .nickname = _("Bahamut"),
-        .ivs = BEST_IV_SPREAD,
         .lvl = 5,
-        .species = SPECIES_CHARMANDER,
-        .heldItem = ITEM_CHARCOAL,
-        .moves = {MOVE_FLAMETHROWER, MOVE_FIRE_SPIN, MOVE_DRAGON_CLAW, MOVE_SUNNY_DAY},
-        .gender = MON_MALE,
-        .nature = NATURE_HARDY,
-        .ability = FIRST_ABILITY, // Blaze
-        .evs = {4, 0, 0, 252, 252, 0},
-        .ball = ITEM_LUXURY_BALL,
-        .shiny = TRUE,
-        .friendship = 0,
+        .species = SPECIES_POOCHYENA,
     }
 };
 
