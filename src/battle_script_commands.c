@@ -4504,7 +4504,22 @@ static void Cmd_playanimation(void)
     }
     #endif
 
-    if (gHitMarker & HITMARKER_NO_ANIMATIONS)
+    if (gBattlescriptCurrInstr[2] == B_ANIM_STATS_CHANGE
+        || gBattlescriptCurrInstr[2] == B_ANIM_SNATCH_MOVE
+        || gBattlescriptCurrInstr[2] == B_ANIM_MEGA_EVOLUTION
+        || gBattlescriptCurrInstr[2] == B_ANIM_ILLUSION_OFF
+        || gBattlescriptCurrInstr[2] == B_ANIM_FORM_CHANGE
+        || gBattlescriptCurrInstr[2] == B_ANIM_SUBSTITUTE_FADE
+        || gBattlescriptCurrInstr[2] == B_ANIM_RAIN_CONTINUES
+        || gBattlescriptCurrInstr[2] == B_ANIM_SUN_CONTINUES
+        || gBattlescriptCurrInstr[2] == B_ANIM_SANDSTORM_CONTINUES
+        || gBattlescriptCurrInstr[2] == B_ANIM_HAIL_CONTINUES)
+    {
+        BtlController_EmitBattleAnimation(0, gBattlescriptCurrInstr[2], *argumentPtr);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gBattlescriptCurrInstr += 7;
+    }
+    else if (gHitMarker & HITMARKER_NO_ANIMATIONS)
     {
         BattleScriptPush(gBattlescriptCurrInstr + 7);
         gBattlescriptCurrInstr = BattleScript_Pausex20;
@@ -4530,8 +4545,22 @@ static void Cmd_playanimation2(void) // animation Id is stored in the first poin
     animationIdPtr = T2_READ_PTR(gBattlescriptCurrInstr + 2);
     argumentPtr = T2_READ_PTR(gBattlescriptCurrInstr + 6);
 
-    if (gHitMarker & HITMARKER_NO_ANIMATIONS
-     || gStatuses3[gActiveBattler] & STATUS3_SEMI_INVULNERABLE)
+    if (*animationIdPtr == B_ANIM_STATS_CHANGE
+        || *animationIdPtr == B_ANIM_SNATCH_MOVE
+        || *animationIdPtr == B_ANIM_MEGA_EVOLUTION
+        || *animationIdPtr == B_ANIM_ILLUSION_OFF
+        || *animationIdPtr == B_ANIM_FORM_CHANGE
+        || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE
+        || *animationIdPtr == B_ANIM_RAIN_CONTINUES
+        || *animationIdPtr == B_ANIM_SUN_CONTINUES
+        || *animationIdPtr == B_ANIM_SANDSTORM_CONTINUES
+        || *animationIdPtr == B_ANIM_HAIL_CONTINUES)
+    {
+        BtlController_EmitBattleAnimation(0, *animationIdPtr, *argumentPtr);
+        MarkBattlerForControllerExec(gActiveBattler);
+        gBattlescriptCurrInstr += 10;
+    }
+    else if (gHitMarker & HITMARKER_NO_ANIMATIONS || gStatuses3[gActiveBattler] & STATUS3_SEMI_INVULNERABLE)
     {
         gBattlescriptCurrInstr += 10;
     }
