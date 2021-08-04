@@ -1248,8 +1248,9 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
-    EnableBothScriptContexts();
     Debug_DestroyMenu(taskId);
+    SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, 255, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
+    DoWarp();
 }
 static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
