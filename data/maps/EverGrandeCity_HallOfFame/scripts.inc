@@ -55,6 +55,10 @@ EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
 EverGrandeCity_HallOfFame_EventScript_GameClearMale:: @ 82298E9
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
+	msgbox EverGrandeCity_HallOfFame_Text_SkipCredits, MSGBOX_YESNO
+	compare VAR_RESULT, NO @ The value of VAR_RESULT will determine if the credits should be skipped
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearMale2
+EverGrandeCity_HallOfFame_EventScript_GameClearMale2:
 	special GameClear
 	waitstate
 	releaseall
@@ -63,6 +67,10 @@ EverGrandeCity_HallOfFame_EventScript_GameClearMale:: @ 82298E9
 EverGrandeCity_HallOfFame_EventScript_GameClearFemale:: @ 82298F5
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
+	msgbox EverGrandeCity_HallOfFame_Text_SkipCredits, MSGBOX_YESNO
+	compare VAR_RESULT, NO @ The value of VAR_RESULT will determine if the credits should be skipped
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearFemale2
+EverGrandeCity_HallOfFame_EventScript_GameClearFemale2:
 	special GameClear
 	waitstate
 	releaseall
@@ -98,4 +106,7 @@ EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames: @ 82299A3
 	.string "name as a TRAINER who triumphed over\l"
 	.string "the POKéMON LEAGUE, and the names of\l"
 	.string "the partners who battled with you.$"
+
+EverGrandeCity_HallOfFame_Text_SkipCredits:
+    .string "Skip the credits scene?$"
 

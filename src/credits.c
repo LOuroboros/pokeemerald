@@ -621,6 +621,13 @@ static void Task_CreditsTheEnd2(u8 taskId)
 
 #define tDelay data[0]
 
+void SkipCreditsSequence(void)
+{
+    SetVBlankCallback(VBlankCB_Credits);
+    SetMainCallback2(CB2_Credits);
+    CreateTask(Task_CreditsTheEnd3, 0);
+}
+
 static void Task_CreditsTheEnd3(u8 taskId)
 {
     ResetGpuAndVram();
@@ -640,7 +647,10 @@ static void Task_CreditsTheEnd3(u8 taskId)
                                 | DISPCNT_OBJ_1D_MAP
                                 | DISPCNT_BG0_ON);
 
-    gTasks[taskId].tDelay = 235; //set this to 215 to actually show "THE END" in time to the last song beat
+    if (VarGet(VAR_RESULT) == 1) // Skipped the credits animation sequence
+        gTasks[taskId].tDelay = 0;
+    else
+        gTasks[taskId].tDelay = 215; // Set to 215 in order to show "THE END" in time to the last song beat
     gTasks[taskId].func = Task_CreditsTheEnd4;
 }
 

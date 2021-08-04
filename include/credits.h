@@ -4,5 +4,6 @@
 extern EWRAM_DATA bool8 gHasHallOfFameRecords;
 
 void CB2_StartCreditsSequence(void);
+void SkipCreditsSequence(void);
 
 #endif // GUARD_CREDITS_H
