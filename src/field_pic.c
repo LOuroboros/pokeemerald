@@ -28,11 +28,11 @@ static const union AnimCmd *const sAnims[] =
     sAnimCmdLoop
 };
 
-static const u32 sPic1Gfx[] = INCBIN_U32("graphics/pokemon/altaria/anim_front.4bpp.lz");
-static const u16 sPic1Pal[] = INCBIN_U16("graphics/pokemon/altaria/normal.gbapal");
-
-static const u32 sPic2Gfx[] = INCBIN_U32("graphics/battle_anims/sprites/duck.4bpp.lz");
-static const u16 sPic2Pal[] = INCBIN_U16("graphics/battle_anims/sprites/duck.gbapal");
+static const u32 sPic1Gfx[] = INCBIN_U32("graphics/mugshots/bak1.4bpp.lz");
+static const u32 sPic2Gfx[] = INCBIN_U32("graphics/mugshots/bak2.4bpp.lz");
+static const u32 sPic3Gfx[] = INCBIN_U32("graphics/mugshots/bak3.4bpp.lz");
+static const u32 sPic4Gfx[] = INCBIN_U32("graphics/mugshots/bak4.4bpp.lz");
+static const u16 sPic1Pal[] = INCBIN_U16("graphics/mugshots/bak1.gbapal");
 
 /* And this is an example script.
 
@@ -56,8 +56,10 @@ FieldPicExample_1pic:
 
 static const struct Pic sPics[] =
 {
-    {sPic1Gfx, sPic1Pal, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64), sAnims},
-    {sPic2Gfx, sPic2Pal, SPRITE_SHAPE(16x16), SPRITE_SIZE(16x16)},
+    {sPic1Gfx, sPic1Pal, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64)},
+    {sPic2Gfx, sPic1Pal, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64)},
+    {sPic3Gfx, sPic1Pal, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64)},
+    {sPic4Gfx, sPic1Pal, SPRITE_SHAPE(64x64), SPRITE_SIZE(64x64)},
 };
 
 static EWRAM_DATA u8 sLastPicId = 0;

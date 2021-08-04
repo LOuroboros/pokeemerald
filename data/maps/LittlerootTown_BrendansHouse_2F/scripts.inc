@@ -283,7 +283,15 @@ PlayersHouse_2F_EventScript_Notebook::
 	end
 
 PlayersHouse_2F_EventScript_GameCube::
+	load_field_pic 0, 126, 34, VAR_TEMP_1
+	load_field_pic 1, 126, 98, VAR_TEMP_2
+	load_field_pic 2, 190, 34, VAR_TEMP_3
+	load_field_pic 3, 190, 98, VAR_TEMP_4
 	msgbox PlayersHouse_2F_Text_ItsAGameCube, MSGBOX_SIGN
+	destroy_field_pic 0, VAR_TEMP_1
+	destroy_field_pic 1, VAR_TEMP_2
+	destroy_field_pic 2, VAR_TEMP_3
+	destroy_field_pic 3, VAR_TEMP_4
 	end
 
 PlayersHouse_2F_Text_ClockIsStopped:
