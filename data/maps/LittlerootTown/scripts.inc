@@ -13,7 +13,6 @@ LittlerootTown_MapScripts:: @ 81E7DCB
 	@ 1: Met Rival
 	@ 2: Saving Birch
 	@ 3: Received Pokedex
-	@ 4: Received Running Shoes
 
 	@ State descriptions for VAR_LITTLEROOT_INTRO_STATE
 	@ 1: In truck male
@@ -45,8 +44,6 @@ LittlerootTown_OnTransition: @ 81E7DDB
 	compare VAR_LITTLEROOT_INTRO_STATE, 2
 	call_if_eq LittlerootTown_EventScript_MoveMomToMaysDoor
 	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_SetTwinPos
-	compare VAR_LITTLEROOT_TOWN_STATE, 3
-	call_if_eq LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
 	compare VAR_LITTLEROOT_HOUSES_STATE_MAY, 4
 	call_if_eq LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	compare VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4
@@ -97,24 +94,6 @@ LittlerootTown_EventScript_SetTwinPos:: @ 81E7E6F
 LittlerootTown_EventScript_SetTwinGuardingRoutePos:: @ 81E7E86
 	setobjectxyperm LOCALID_TWIN, 7, 2
 	setobjectmovementtype LOCALID_TWIN, MOVEMENT_TYPE_FACE_DOWN
-	return
-
-LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos:: @ 81E7E92
-	clearflag FLAG_HIDE_LITTLEROOT_TOWN_MOM_OUTSIDE
-	setobjectmovementtype LOCALID_MOM, MOVEMENT_TYPE_FACE_DOWN
-	checkplayergender
-	compare VAR_RESULT, MALE
-	call_if_eq LittlerootTown_EventScript_SetMomInFrontOfDoorMale
-	compare VAR_RESULT, FEMALE
-	call_if_eq LittlerootTown_EventScript_SetMomInFrontOfDoorFemale
-	return
-
-LittlerootTown_EventScript_SetMomInFrontOfDoorMale:: @ 81E7EB1
-	setobjectxyperm LOCALID_MOM, 5, 9
-	return
-
-LittlerootTown_EventScript_SetMomInFrontOfDoorFemale:: @ 81E7EB9
-	setobjectxyperm LOCALID_MOM, 14, 9
 	return
 
 LittlerootTown_OnFrame: @ 81E7EC1
