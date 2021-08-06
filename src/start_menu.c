@@ -208,7 +208,7 @@ static const struct WindowTemplate sSaveInfoWindowTemplate = {
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = 14,
+    .width = 15,
     .height = 10,
     .paletteNum = 15,
     .baseBlock = 8
@@ -1366,9 +1366,10 @@ static void ShowSaveInfoWindow(void)
     u32 yOffset;
 
     if (!FlagGet(FLAG_SYS_POKEDEX_GET))
-    {
         saveInfoWindow.height -= 2;
-    }
+
+    if (!gSaveBlock2Ptr->savedYear)
+        saveInfoWindow.height -= 2;
 
     sSaveInfoWindowId = AddWindow(&saveInfoWindow);
     DrawStdWindowFrame(sSaveInfoWindowId, FALSE);
@@ -1377,27 +1378,18 @@ static void ShowSaveInfoWindow(void)
     color = TEXT_COLOR_RED;  // Red when female, blue when male.
 
     if (gender == MALE)
-    {
         color = TEXT_COLOR_BLUE;
-    }
 
     // Print region name
     yOffset = 1;
     BufferSaveMenuText(SAVE_MENU_LOCATION, gStringVar7, TEXT_COLOR_GREEN);
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar7, 0, yOffset, 0xFF, NULL);
 
-    // Print player name
-    yOffset += 16;
-    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPlayer, 0, yOffset, 0xFF, NULL);
-    BufferSaveMenuText(SAVE_MENU_NAME, gStringVar7, color);
-    xOffset = GetStringRightAlignXOffset(1, gStringVar7, 0x70);
-    PrintPlayerNameOnWindow(sSaveInfoWindowId, gStringVar7, xOffset, yOffset);
-
     // Print badge count
     yOffset += 16;
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingBadges, 0, yOffset, 0xFF, NULL);
     BufferSaveMenuText(SAVE_MENU_BADGES, gStringVar7, color);
-    xOffset = GetStringRightAlignXOffset(1, gStringVar7, 0x70);
+    xOffset = GetStringRightAlignXOffset(1, gStringVar7, 120);
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar7, xOffset, yOffset, 0xFF, NULL);
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
@@ -1406,7 +1398,7 @@ static void ShowSaveInfoWindow(void)
         yOffset += 16;
         AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingPokedex, 0, yOffset, 0xFF, NULL);
         BufferSaveMenuText(SAVE_MENU_CAUGHT, gStringVar7, color);
-        xOffset = GetStringRightAlignXOffset(1, gStringVar7, 0x70);
+        xOffset = GetStringRightAlignXOffset(1, gStringVar7, 120);
         AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar7, xOffset, yOffset, 0xFF, NULL);
     }
 
@@ -1414,7 +1406,14 @@ static void ShowSaveInfoWindow(void)
     yOffset += 16;
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingTime, 0, yOffset, 0xFF, NULL);
     BufferSaveMenuText(SAVE_MENU_PLAY_TIME, gStringVar7, color);
-    xOffset = GetStringRightAlignXOffset(1, gStringVar7, 0x70);
+    xOffset = GetStringRightAlignXOffset(1, gStringVar7, 120);
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar7, xOffset, yOffset, 0xFF, NULL);
+
+    // Print last save date
+    yOffset += 16;
+    AddTextPrinterParameterized(sSaveInfoWindowId, 1, gText_SavingDate, 0, yOffset, 0xFF, NULL);
+    BufferSaveMenuText(SAVE_MENU_LAST_DATE, gStringVar7, color);
+    xOffset = GetStringRightAlignXOffset(1, gStringVar7, 120);
     AddTextPrinterParameterized(sSaveInfoWindowId, 1, gStringVar7, xOffset, yOffset, 0xFF, NULL);
 
     CopyWindowToVram(sSaveInfoWindowId, 2);

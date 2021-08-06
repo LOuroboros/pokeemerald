@@ -13,7 +13,6 @@ static u16 sSavedIme;
 struct Time gLocalTime;
 
 // const rom
-
 static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
 
 static const s32 sNumDaysInMonths[12] =

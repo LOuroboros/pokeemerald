@@ -2120,9 +2120,6 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
 
     switch (textId)
     {
-        case SAVE_MENU_NAME:
-            StringCopy(string, gSaveBlock2Ptr->playerName);
-            break;
         case SAVE_MENU_CAUGHT:
             if (IsNationalPokedexEnabled())
                 string = ConvertIntToDecimalStringN(string, GetNationalPokedexCount(FLAG_GET_CAUGHT), STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -2146,6 +2143,14 @@ void BufferSaveMenuText(u8 textId, u8 *dest, u8 color)
             }
             *string = flagCount + CHAR_0;
             *endOfString = EOS;
+            break;
+        case SAVE_MENU_LAST_DATE:
+            string = ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->savedDay, STR_CONV_MODE_LEADING_ZEROS, 2);
+            *(string++) = CHAR_SLASH;
+            ConvertIntToDecimalStringN(string++, gSaveBlock2Ptr->savedMonth, STR_CONV_MODE_LEADING_ZEROS, 2);
+            string++;
+            *(string++) = CHAR_SLASH;
+            ConvertIntToDecimalStringN(string, gSaveBlock2Ptr->savedYear, STR_CONV_MODE_LEFT_ALIGN, 4);
             break;
     }
 }

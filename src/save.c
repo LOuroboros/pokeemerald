@@ -12,6 +12,7 @@
 #include "trainer_hill.h"
 #include "link.h"
 #include "constants/game_stat.h"
+#include "rtc.h"
 
 static u16 CalculateChecksum(void *data, u16 size);
 static bool8 DoReadFlashWholeSection(u8 sector, struct SaveSection *section);
@@ -656,9 +657,14 @@ u8 HandleSavingData(u8 saveType)
     u8 i;
     u32 *backupVar = gTrainerHillVBlankCounter;
     u8 *tempAddr;
+    struct SiiRtcInfo rtc;
 
     gTrainerHillVBlankCounter = NULL;
     UpdateSaveAddresses();
+    RtcGetDateTime(&rtc);
+    gSaveBlock2Ptr->savedDay = ConvertBcdToBinary(rtc.day);
+    gSaveBlock2Ptr->savedMonth = ConvertBcdToBinary(rtc.month);
+    gSaveBlock2Ptr->savedYear = (u16)ConvertBcdToBinary(rtc.year) + 2000;
     switch (saveType)
     {
     case SAVE_HALL_OF_FAME_ERASE_BEFORE: // deletes HOF before overwriting HOF completely. unused
