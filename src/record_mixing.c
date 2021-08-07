@@ -1163,71 +1163,6 @@ static void ReceiveApprenticeData(struct Apprentice *mixApprentice, size_t recor
 
 static void sub_80E8578(struct RecordMixingHallRecords *dst, void *hallRecords, size_t recordSize, u32 arg3, s32 linkPlayerCount)
 {
-    s32 i, j, k, l;
-    s32 var_68;
-
-    k = 0;
-    i = 0;
-    while (1)
-    {
-        if (i >= linkPlayerCount)
-            break;
-        if (i != arg3)
-            gUnknown_03001168[k++] = hallRecords;
-
-        if (k == 3)
-            break;
-        hallRecords += recordSize;
-        i++;
-    }
-
-    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
-    {
-        for (j = 0; j < 2; j++)
-        {
-            for (k = 0; k < 3; k++)
-                dst->hallRecords1P[i][j][k] = gSaveBlock2Ptr->hallRecords1P[i][j][k];
-
-            for (k = 0; k < linkPlayerCount - 1; k++)
-            {
-                var_68 = 0;
-                for (l = 0; l < 3; l++)
-                {
-                    if (GetTrainerId(dst->hallRecords1P[i][j][l].id) == GetTrainerId(gUnknown_03001168[k]->onePlayer[i][j].id))
-                    {
-                        var_68++;
-                        if (dst->hallRecords1P[i][j][l].winStreak < gUnknown_03001168[k]->onePlayer[i][j].winStreak)
-                            dst->hallRecords1P[i][j][l] = gUnknown_03001168[k]->onePlayer[i][j];
-                    }
-                }
-                if (var_68 == 0)
-                    dst->hallRecords1P[i][j][k + 3] = gUnknown_03001168[k]->onePlayer[i][j];
-            }
-        }
-    }
-
-    for (j = 0; j < 2; j++)
-    {
-        for (k = 0; k < 3; k++)
-            dst->hallRecords2P[j][k] = gSaveBlock2Ptr->hallRecords2P[j][k];
-
-        for (k = 0; k < linkPlayerCount - 1; k++)
-        {
-            var_68 = 0;
-            for (l = 0; l < 3; l++)
-            {
-                if (GetTrainerId(dst->hallRecords2P[j][l].id1) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id1)
-                 && GetTrainerId(dst->hallRecords2P[j][l].id2) == GetTrainerId(gUnknown_03001168[k]->twoPlayers[j].id2))
-                {
-                    var_68++;
-                    if (dst->hallRecords2P[j][l].winStreak < gUnknown_03001168[k]->twoPlayers[j].winStreak)
-                        dst->hallRecords2P[j][l] = gUnknown_03001168[k]->twoPlayers[j];
-                }
-            }
-            if (var_68 == 0)
-                dst->hallRecords2P[j][k + 3] = gUnknown_03001168[k]->twoPlayers[j];
-        }
-    }
 }
 
 static void sub_80E8880(struct RankingHall1P *arg0, struct RankingHall1P *arg1)
@@ -1282,26 +1217,10 @@ static void sub_80E88CC(struct RankingHall2P *arg0, struct RankingHall2P *arg1)
 
 static void sub_80E8924(struct RecordMixingHallRecords *arg0)
 {
-    s32 i, j;
-
-    for (i = 0; i < HALL_FACILITIES_COUNT; i++)
-    {
-        for (j = 0; j < 2; j++)
-            sub_80E8880(gSaveBlock2Ptr->hallRecords1P[i][j], arg0->hallRecords1P[i][j]);
-    }
-    for (j = 0; j < 2; j++)
-        sub_80E88CC(gSaveBlock2Ptr->hallRecords2P[j], arg0->hallRecords2P[j]);
 }
 
 static void ReceiveRankingHallRecords(struct PlayerHallRecords *hallRecords, size_t recordSize, u32 arg2)
 {
-    u8 linkPlayerCount = GetLinkPlayerCount();
-    struct RecordMixingHallRecords *largeStructPtr = AllocZeroed(sizeof(struct RecordMixingHallRecords));
-
-    sub_80E8578(largeStructPtr, hallRecords, recordSize, arg2, linkPlayerCount);
-    sub_80E8924(largeStructPtr);
-
-    Free(largeStructPtr);
 }
 
 static void GetRecordMixingDaycareMail(struct RecordMixingDaycareMail *dst)
