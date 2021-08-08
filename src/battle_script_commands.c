@@ -9555,20 +9555,24 @@ static void Cmd_pickup(void)
                     if (sPickupProbabilities[j] > rand)
                     {
                         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupItems[lvlDivBy10 + j]);
+                        heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
                         break;
                     }
                     else if (rand == 99 || rand == 98)
                     {
                         SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sRarePickupItems[lvlDivBy10 + (99 - rand)]);
+                        heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
                         break;
                     }
                 }
 
-                gActiveBattler = 0;
-                gLastUsedItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-                PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler]);
-                PREPARE_ITEM_BUFFER(gBattleTextBuff2, gLastUsedItem);
-                PrepareStringBattle(STRINGID_PICKUPREWARD, 0);
+                if (heldItem != ITEM_NONE)
+                {
+                    gActiveBattler = 0;
+                    PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gActiveBattler, gBattlerPartyIndexes[gActiveBattler]);
+                    StringCopy(gBattleTextBuff2, ItemId_GetName(heldItem));
+                    PrepareStringBattle(STRINGID_PICKUPREWARD, 0);
+                }
             }
         }
     }
