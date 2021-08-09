@@ -719,6 +719,9 @@ static void Task_TitleScreenPhase2(u8 taskId)
     SetGpuReg(REG_OFFSET_BG2Y_L, yPos);
     SetGpuReg(REG_OFFSET_BG2Y_H, yPos / 0x10000);
 
+    // Play Rayquaza's cry
+    PlayCry1(SPECIES_RAYQUAZA, 0);
+
     gTasks[taskId].data[5] = 15;
     gTasks[taskId].data[6] = 6;
 }
@@ -728,9 +731,12 @@ static void Task_TitleScreenPhase3(u8 taskId)
 {
     if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(START_BUTTON)))
     {
-        FadeOutBGM(4);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
-        SetMainCallback2(CB2_GoToMainMenu);
+        if (IsCryFinished())
+        {
+            FadeOutBGM(4);
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
+            SetMainCallback2(CB2_GoToMainMenu);
+        }
     }
     else if (JOY_HELD(CLEAR_SAVE_BUTTON_COMBO) == CLEAR_SAVE_BUTTON_COMBO)
     {
