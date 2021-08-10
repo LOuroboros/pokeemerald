@@ -1013,3 +1013,55 @@ bool32 IsPinchBerryItemEffect(u16 holdEffect)
 
     return FALSE;
 }
+
+u8 CountUsedBagItemSlots(void)
+{
+    u8 usedSlots = 0;
+    u8 i;
+
+    for (i = 0; i < BAG_ITEMS_COUNT; i++)
+    {
+        if (gSaveBlock1Ptr->bagPocket_Items[i].itemId != ITEM_NONE)
+            usedSlots++;
+    }
+    return usedSlots;
+}
+
+u8 CountUsedPokeBallItemSlots(void)
+{
+    u8 usedSlots = 0;
+    u8 i;
+
+    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
+    {
+        if (gSaveBlock1Ptr->bagPocket_PokeBalls[i].itemId != ITEM_NONE)
+            usedSlots++;
+    }
+    return usedSlots;
+}
+
+u8 CountUsedBerryItemSlots(void)
+{
+    u8 usedSlots = 0;
+    u8 i;
+
+    for (i = 0; i < BAG_BERRIES_COUNT; i++)
+    {
+        if (gSaveBlock1Ptr->bagPocket_Berries[i].itemId != ITEM_NONE)
+            usedSlots++;
+    }
+    return usedSlots;
+}
+
+u8 CountUsedKeyItemSlots(void)
+{
+    u8 usedSlots = 0;
+    u8 i;
+
+    for (i = 0; i < BAG_KEYITEMS_COUNT; i++)
+    {
+        if (gSaveBlock1Ptr->bagPocket_KeyItems[i].itemId != ITEM_NONE)
+            usedSlots++;
+    }
+    return usedSlots;
+}

@@ -79,5 +79,9 @@ ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
 void DeserializeTmHmItemSlots(void);
 bool32 IsPinchBerryItemEffect(u16 holdEffect);
+u8 CountUsedBagItemSlots(void);
+u8 CountUsedPokeBallItemSlots(void);
+u8 CountUsedBerryItemSlots(void);
+u8 CountUsedKeyItemSlots(void);
 
 #endif // GUARD_ITEM_H
