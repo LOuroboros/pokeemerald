@@ -7111,55 +7111,45 @@ void ClearBattleMonForms(void)
 
 u16 GetBattleBGM(void)
 {
-    u8 trainerClass;
-    u16 battleBgm;
-
-    // Set up for later. Battle track for trainers depends on their Trainer Class.
-    if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-        trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
-    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
-        trainerClass = TRAINER_CLASS_EXPERT;
-    else
-        trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
-
-    // Initial value
-    battleBgm = MUS_VS_WILD;
-
-    switch (gBattleTypeFlags)
+    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+        return MUS_VS_KYOGRE_GROUDON;
+    else if (gBattleTypeFlags & BATTLE_TYPE_REGI)
+        return MUS_VS_REGI;
+    else if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        return MUS_VS_TRAINER;
+    else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-    case BATTLE_TYPE_KYOGRE_GROUDON:
-        battleBgm = MUS_VS_KYOGRE_GROUDON;
-        break;
-    case BATTLE_TYPE_REGI:
-        battleBgm = MUS_VS_REGI;
-        break;
-    case BATTLE_TYPE_LINK:
-    case BATTLE_TYPE_RECORDED_LINK:
-        battleBgm = MUS_VS_TRAINER;
-        break;
-    case BATTLE_TYPE_TRAINER:
+        u8 trainerClass;
+
+        if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+            trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
+        else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
+            trainerClass = TRAINER_CLASS_EXPERT;
+        else
+            trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
+
         switch (trainerClass)
         {
         case TRAINER_CLASS_AQUA_LEADER:
         case TRAINER_CLASS_MAGMA_LEADER:
-            battleBgm = MUS_VS_AQUA_MAGMA_LEADER;
+            return MUS_VS_AQUA_MAGMA_LEADER;
         case TRAINER_CLASS_TEAM_AQUA:
         case TRAINER_CLASS_TEAM_MAGMA:
         case TRAINER_CLASS_AQUA_ADMIN:
         case TRAINER_CLASS_MAGMA_ADMIN:
-            battleBgm = MUS_VS_AQUA_MAGMA;
+            return MUS_VS_AQUA_MAGMA;
         case TRAINER_CLASS_LEADER:
-            battleBgm = MUS_VS_GYM_LEADER;
+            return MUS_VS_GYM_LEADER;
         case TRAINER_CLASS_CHAMPION:
-            battleBgm = MUS_VS_CHAMPION;
+            return MUS_VS_CHAMPION;
         case TRAINER_CLASS_PKMN_TRAINER_3:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-                battleBgm = MUS_VS_RIVAL;
+                return MUS_VS_RIVAL;
             if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, gText_BattleWallyName))
-                battleBgm = MUS_VS_TRAINER;
-            battleBgm = MUS_VS_RIVAL;
+                return MUS_VS_TRAINER;
+            return MUS_VS_RIVAL;
         case TRAINER_CLASS_ELITE_FOUR:
-            battleBgm = MUS_VS_ELITE_FOUR;
+            return MUS_VS_ELITE_FOUR;
         case TRAINER_CLASS_SALON_MAIDEN:
         case TRAINER_CLASS_DOME_ACE:
         case TRAINER_CLASS_PALACE_MAVEN:
@@ -7167,27 +7157,15 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_FACTORY_HEAD:
         case TRAINER_CLASS_PIKE_QUEEN:
         case TRAINER_CLASS_PYRAMID_KING:
-            battleBgm = MUS_VS_FRONTIER_BRAIN;
+            return MUS_VS_FRONTIER_BRAIN;
         default:
-            battleBgm = MUS_VS_TRAINER;
+            return MUS_VS_TRAINER;
         }
-        break;
     }
-
-    if (GetCurrentRegionMapSectionId() == MAPSEC_SAFARI_ZONE)
-    {
-        u8 randomMus = Random() % 4;
-        if (randomMus == 0)
-            battleBgm = DP_SEQ_BA_POKE;
-        else if (randomMus == 1)
-            battleBgm = HG_SEQ_GS_VS_NORAPOKE;
-        else if (randomMus == 2)
-            battleBgm = HG_SEQ_GS_VS_NORAPOKE_KANTO;
-        else if (randomMus == 3)
-            battleBgm = MUS_VS_WILD;
-    }
-
-    return battleBgm;
+    else if (GetCurrentRegionMapSectionId() == MAPSEC_SAFARI_ZONE)
+        return MUS_RG_VS_WILD;
+    else
+        return MUS_VS_WILD;
 }
 
 void PlayBattleBGM(void)
