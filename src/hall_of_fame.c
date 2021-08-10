@@ -774,7 +774,7 @@ static void Task_Hof_HandleExit(u8 taskId)
         if (sHofMonPtr != NULL)
             FREE_AND_SET_NULL(sHofMonPtr);
 
-        if (VarGet(VAR_RESULT) == 1)
+        if (VarGet(VAR_POKEMON_LEAGUE_RUNS_COUNTER) > 1 && VarGet(VAR_RESULT) == 1)
             SkipCreditsSequence();
         else
             StartCredits();
