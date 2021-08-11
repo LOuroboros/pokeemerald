@@ -41,6 +41,7 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "util.h"
 
 /*
     NOTE: This file is large. Some general groups of functions have
@@ -3992,6 +3993,8 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
         LZ77UnCompWram(sStorage->displayMonPalette, sStorage->displayMonPalBuffer);
         CpuCopy32(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);
         LoadPalette(sStorage->displayMonPalBuffer, sStorage->displayMonPalOffset, 0x20);
+        UniquePalette(sStorage->displayMonPalOffset, species, pid, (bool8)sStorage->filler2[2]);
+        CpuCopy32(gPlttBufferFaded + sStorage->displayMonPalOffset, gPlttBufferUnfaded + sStorage->displayMonPalOffset, 32);
         sStorage->displayMonSprite->invisible = FALSE;
     }
     else
