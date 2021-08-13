@@ -78,11 +78,9 @@ u32 gDamagedSaveSectors;
 u32 gSaveCounter;
 struct SaveSection *gFastSaveSection;
 u16 gUnknown_03006208;
-u16 gSaveUnusedVar;
 u16 gSaveFileStatus;
 void (*gGameContinueCallback)(void);
 struct SaveSectionLocation gRamSaveSectionLocations[SECTOR_SAVE_SLOT_LENGTH];
-u16 gSaveUnusedVar2;
 u16 gSaveAttemptStatus;
 
 EWRAM_DATA struct SaveSection gSaveDataBuffer = {0};
@@ -667,9 +665,6 @@ u8 HandleSavingData(u8 saveType)
     gSaveBlock2Ptr->savedYear = (u16)ConvertBcdToBinary(rtc.year) + 2000;
     switch (saveType)
     {
-    case SAVE_HALL_OF_FAME_ERASE_BEFORE: // deletes HOF before overwriting HOF completely. unused
-        for (i = SECTOR_ID_HOF_1; i < SECTORS_COUNT; i++)
-            EraseFlashSector(i);
     case SAVE_HALL_OF_FAME: // hall of fame.
         if (GetGameStat(GAME_STAT_ENTERED_HOF) < 999)
             IncrementGameStat(GAME_STAT_ENTERED_HOF);

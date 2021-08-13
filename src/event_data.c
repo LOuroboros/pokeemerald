@@ -60,7 +60,6 @@ void ClearDailyFlags(void)
 void DisableNationalPokedex(void)
 {
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
-    gSaveBlock2Ptr->pokedex.nationalMagic = 0;
     *nationalDexVar = 0;
     FlagClear(FLAG_SYS_NATIONAL_DEX);
 }
@@ -68,7 +67,6 @@ void DisableNationalPokedex(void)
 void EnableNationalPokedex(void)
 {
     u16 *nationalDexVar = GetVarPointer(VAR_NATIONAL_DEX);
-    gSaveBlock2Ptr->pokedex.nationalMagic = 0xDA;
     *nationalDexVar = 0x302;
     FlagSet(FLAG_SYS_NATIONAL_DEX);
     gSaveBlock2Ptr->pokedex.mode = DEX_MODE_NATIONAL;
@@ -78,7 +76,7 @@ void EnableNationalPokedex(void)
 
 bool32 IsNationalPokedexEnabled(void)
 {
-    if (gSaveBlock2Ptr->pokedex.nationalMagic == 0xDA && VarGet(VAR_NATIONAL_DEX) == 0x302 && FlagGet(FLAG_SYS_NATIONAL_DEX))
+    if (VarGet(VAR_NATIONAL_DEX) == 0x302 && FlagGet(FLAG_SYS_NATIONAL_DEX))
         return TRUE;
     else
         return FALSE;

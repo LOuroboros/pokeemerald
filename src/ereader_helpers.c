@@ -77,7 +77,6 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [0] = {
         .name = __("マキエ$$$$$   "),
         .facilityClass = FACILITY_CLASS_HEX_MANIAC,
-        .unused = 0x1,
         .speechBefore = { EC_WORD_PREPOSTEROUS, EC_WORD_CASE, EC_WORD_THERE, EC_WORD_TO_HER, EC_WORD_CHALLENGE, EC_WORD_JOKING },
         .speechWin = { EC_WORD_HERS, EC_WORD_TRUMP_CARD, EC_MOVE2(SECRET_POWER), EC_WORD_USING, EC_WORD_WON, EC_WORD_EXCL_EXCL },
         .speechLose = { EC_WORD_TO_HER, EC_WORD_WIN, EC_WORD_JOKING, EC_WORD_HIGHS, EC_WORD_SCARY, EC_WORD_ELLIPSIS_EXCL },
@@ -163,7 +162,6 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [1] = {
         .name = __("ハルヒト$$$$   "),
         .facilityClass = FACILITY_CLASS_CAMPER,
-        .unused = 0x1,
         .speechBefore = { EC_MOVE2(BOUNCE), EC_WORD_AS_MUCH_AS, EC_EMPTY_WORD, EC_WORD_THEY_RE, EC_WORD_STRONG, EC_WORD_EXCL },
         .speechWin = { EC_MOVE(FLY), EC_WORD_AS_MUCH_AS, EC_EMPTY_WORD, EC_WORD_THEY_RE, EC_WORD_HAPPY, EC_WORD_EXCL },
         .speechLose = { EC_MOVE2(MINIMIZE), EC_WORD_AS_MUCH_AS, EC_EMPTY_WORD, EC_WORD_THEY_RE, EC_WORD_SAD, EC_WORD_EXCL },
@@ -249,7 +247,6 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [2] = {
         .name = __("メイコ$$$$$   "),
         .facilityClass = FACILITY_CLASS_SCHOOL_KID_F,
-        .unused = 0x1,
         .speechBefore = { EC_WORD_SHINE, EC_WORD_POKEMON, EC_WORD_RELEASE, EC_WORD_WAS, EC_MOVE2(FRUSTRATION), EC_WORD_WITHOUT },
         .speechWin = { EC_WORD_SHINE, EC_WORD_POKEMON, EC_WORD_TO_HER, EC_MOVE2(PRESENT), EC_WORD_KNOWS, EC_WORD_WITHOUT },
         .speechLose = { EC_WORD_THAT, EC_WORD_ABOVE, EC_WORD_LOST, EC_WORD_STORES, EC_WORD_JOKING, EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS },
@@ -335,7 +332,6 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     [3] = {
         .name = __("ピエール$$$$   "),
         .facilityClass = FACILITY_CLASS_GENTLEMAN,
-        .unused = 0x1,
         .speechBefore = { EC_WORD_SHE_WAS, EC_WORD_NO_1, EC_WORD_STRONG, EC_WORD_UNCLE, EC_WORD_THERE, EC_WORD_EXCL },
         .speechWin = { EC_WORD_HAHAHA, EC_WORD_TEACHER, EC_WORD_BECOMES, EC_WORD_GIVE, EC_WORD_IS_IT_QUES, EC_EMPTY_WORD },
         .speechLose = { EC_WORD_OUTSIDE, EC_WORD_UNCLE, EC_WORD_SURPRISE, EC_WORD_THESE, EC_WORD_HEY_QUES, EC_WORD_ELLIPSIS_EXCL },
@@ -420,11 +416,6 @@ static const struct TrainerHillTrainer sTrainerHillTrainerTemplates_JP[] = {
     },
 };
 
-static u8 GetTrainerHillUnkVal(void)
-{
-    return (gSaveBlock1Ptr->trainerHill.unused + 1) % 256;
-}
-
 static bool32 ValidateTrainerChecksum(struct EReaderTrainerHillTrainer * hillTrainer)
 {
     int checksum = CalcByteArraySum((u8 *)hillTrainer, offsetof(typeof(*hillTrainer), checksum));
@@ -482,7 +473,6 @@ static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet * hillSe
 
     memset(hillTag, 0, SECTOR_SIZE);
     hillTag->numTrainers = hillSet->numTrainers;
-    hillTag->unused1 = GetTrainerHillUnkVal();
     hillTag->numFloors = (hillSet->numTrainers + 1) / TRAINER_HILL_TRAINERS_PER_FLOOR;
 
     for (i = 0; i < hillSet->numTrainers; i++)

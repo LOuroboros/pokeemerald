@@ -5,9 +5,7 @@ gDamagedSaveSectors
 gSaveCounter
 gFastSaveSection
 gUnknown_03006208
-gSaveUnusedVar
 gSaveFileStatus
 gGameContinueCallback
 gRamSaveSectionLocations
-gSaveUnusedVar2
 gSaveAttemptStatus
