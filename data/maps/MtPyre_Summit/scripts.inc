@@ -176,6 +176,7 @@ MtPyre_Summit_EventScript_OldLady:: @ 82321A2
 	goto_if_set FLAG_RETURNED_RED_OR_BLUE_ORB, MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned
 	compare VAR_MT_PYRE_STATE, 3
 	call_if_ge MtPyre_Summit_EventScript_OldLadyOrbsReturned
+	goto_if_var_eq VAR_SKY_PILLAR_STATE, 3, MtPyre_Summit_EventScript_OldLadyWondersAboutTheOrbs
 	goto_if_set FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, MtPyre_Summit_EventScript_OldLadyLegendariesAwake
 	msgbox MtPyre_Summit_Text_OrbsHaveBeenTaken, MSGBOX_DEFAULT
 	release
@@ -184,6 +185,11 @@ MtPyre_Summit_EventScript_OldLady:: @ 82321A2
 MtPyre_Summit_EventScript_OldLadyOrbsReturned:: @ 82321CB
 	msgbox MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs, MSGBOX_DEFAULT
 	setflag FLAG_RETURNED_RED_OR_BLUE_ORB
+	release
+	end
+
+MtPyre_Summit_EventScript_OldLadyWondersAboutTheOrbs:
+	msgbox MtPyre_Summit_Text_OldLadyWondersAboutTheOrbs, MSGBOX_DEFAULT
 	release
 	end
 
@@ -252,6 +258,8 @@ MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs:: @ 8232210
 	removeobject LOCALID_ARCHIE
 	removeobject LOCALID_MAXIE
 	setvar VAR_MT_PYRE_STATE, 3
+	clearflag FLAG_HIDE_AQUA_HIDEOUT_ARCHIE
+	clearflag FLAG_HIDE_MAGMA_HIDEOUT_4F_MAXIE
 	releaseall
 	end
 
@@ -545,6 +553,10 @@ MtPyre_Summit_Text_OrbsHaveBeenTaken: @ 8232AD8
 	.string "those sinister men…\p"
 	.string "They must never be apart…\n"
 	.string "I fear something terrible will happen…$"
+
+MtPyre_Summit_Text_OldLadyWondersAboutTheOrbs:
+	.string "I wonder where could those men be…\n"
+	.string "The two men who took the ORBS…$"
 
 MtPyre_Summit_Text_GroudonKyogreAwakened: @ 8232B4F
 	.string "Oh, my goodness…\p"

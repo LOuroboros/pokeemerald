@@ -5,12 +5,23 @@
 .set LOCALID_TABITHA, 5
 .set LOCALID_MAXIE, 6
 .set LOCALID_GROUDON_SLEEPING, 7
+.set LOCALID_ITEM_BALL_CAMERUPTITE, 9
 
 MagmaHideout_4F_MapScripts:: @ 823A55F
+	map_script MAP_SCRIPT_ON_TRANSITION, MagmaHideout_4F_OnTransition
 	.byte 0
+
+MagmaHideout_4F_OnTransition:
+	call_if_not_defeated TRAINER_MAXIE_POSTGAME, MagmaHideout_4F_EventScript_HideCameruptite
+	end
+
+MagmaHideout_4F_EventScript_HideCameruptite:
+	setflag FLAG_ITEM_MAGMA_HIDEOUT_4F_CAMERUPTITE
+	return
 
 MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	lockall
+	goto_if_var_eq VAR_MT_PYRE_STATE, 3, MagmaHideout_4F_EventScript_MaxiePostgame
 	playbgm MUS_ENCOUNTER_MAGMA, FALSE
 	msgbox MagmaHideout_4F_Text_MaxieAwakenGroudon, MSGBOX_DEFAULT
 	closemessage
@@ -77,6 +88,7 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	removeobject LOCALID_GRUNT_3
 	removeobject LOCALID_TABITHA
 	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
+	setflag FLAG_HIDE_MAGMA_HIDEOUT_4F_MAXIE
 	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
@@ -112,6 +124,22 @@ MagmaHideout_4F_Movement_MaxieLookAround: @ 823A680
 	delay_16
 	delay_16
 	step_end
+
+MagmaHideout_4F_EventScript_MaxiePostgame:
+	lock
+	faceplayer
+	trainerbattle_single TRAINER_MAXIE_POSTGAME, MagmaHideout_4F_Text_Maxie, MagmaHideout_4F_Text_MaxieDefeatPostgame, MagmaHideout_4F_EventScript_MaxieDefeated, NO_MUSIC
+	end
+
+MagmaHideout_4F_EventScript_MaxieDefeated:
+	msgbox MagmaHideout_4F_Text_MaxiePostBattle, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	removeobject LOCALID_MAXIE
+	addobject LOCALID_ITEM_BALL_CAMERUPTITE
+	fadescreen FADE_FROM_BLACK
+	release
+	end
 
 MagmaHideout_4F_EventScript_Grunt11:: @ 823A68C
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_11, MagmaHideout_4F_Text_Grunt11Intro, MagmaHideout_4F_Text_Grunt11Defeat
@@ -230,3 +258,38 @@ MagmaHideout_4F_Text_MaxieImGoingAfterGroudon: @ 823ABE2
 	.string "any need for this blasted volcano.\p"
 	.string "I am going after GROUDON, so this\n"
 	.string "is where we part!$"
+
+MagmaHideout_4F_Text_Maxie:
+	.string "MAXIE: Oh… it's you.\p"
+	.string "I've been thinking about a lot of\n"
+	.string "things since our last encounter.\p"
+	.string "… … …\n"
+	.string "No, perhaps even before.\p"
+	.string "When I lost to you in MOSSDEEP\n"
+	.string "CITY I started to consider the\l"
+	.string "possibility that the methods\l"
+	.string "we employed to pursue our goals\l"
+	.string "were misguided.\p"
+	.string "Our paths must have crossed in\n"
+	.string "MT. PYRE for a reason.\p"
+	.string "I shall discover here and now\n"
+	.string "what is it that I am lacking!$"
+
+MagmaHideout_4F_Text_MaxieDefeatPostgame:
+	.string "I start to understand…\n"
+	.string "A strong bond with POKéMON…$"
+
+MagmaHideout_4F_Text_MaxiePostBattle:
+	.string "Your POKéMON and you share a\n"
+	.string "connection, I can tell…\p"
+	.string "Is that what fuels your\n"
+	.string "strength, {PLAYER}?\p"
+	.string "Is that what allowed you to\n"
+	.string "frustrate our plans?\p"
+	.string "Do not misunderstand, this\n"
+	.string "is not the end of TEAM MAGMA.\p"
+	.string "I shall return in due time, and\n"
+	.string "achieve my dreams hence.\p"
+	.string "A peaceful world with plenty of\n"
+	.string "space for everyone to live in…\p"
+	.string "I will make it happen at any cost.$"

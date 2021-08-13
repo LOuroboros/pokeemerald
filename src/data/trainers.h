@@ -11180,4 +11180,30 @@ const struct Trainer gTrainers[] = {
         .partySize = ARRAY_COUNT(sParty_MayPostgameTorchic),
         .party = {.TrainerMon = sParty_MayPostgameTorchic},
     },
+
+    [TRAINER_ARCHIE_POSTGAME] =
+    {
+        .trainerClass = TRAINER_CLASS_AQUA_LEADER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
+        .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
+        .trainerName = _("ARCHIE"),
+        .items = {ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_SUPER_POTION, ITEM_SUPER_POTION},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+        .partySize = ARRAY_COUNT(sParty_ArchiePostgame),
+        .party = {.TrainerMon = sParty_ArchiePostgame},
+    },
+
+    [TRAINER_MAXIE_POSTGAME] =
+    {
+        .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
+        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
+        .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
+        .trainerName = _("MAXIE"),
+        .items = {ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_SUPER_POTION, ITEM_SUPER_POTION},
+        .doubleBattle = FALSE,
+        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
+        .partySize = ARRAY_COUNT(sParty_MaxiePostgame),
+        .party = {.TrainerMon = sParty_MaxiePostgame},
+    },
 };

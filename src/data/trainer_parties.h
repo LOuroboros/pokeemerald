@@ -11978,3 +11978,71 @@ static const struct TrainerMon sParty_MayPostgameTorchic[] = {
         .ability = FIRST_ABILITY, // Torrent / Swift Swim
     },
 };
+
+static const struct TrainerMon sParty_ArchiePostgame[] = {
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 65,
+        .species = SPECIES_WALREIN,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 65,
+        .species = SPECIES_TENTACRUEL,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 65,
+        .species = SPECIES_MUK,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 65,
+        .species = SPECIES_MIGHTYENA,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 65,
+        .species = SPECIES_CROBAT,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 67,
+        .species = SPECIES_SHARPEDO,
+        .heldItem = ITEM_SHARPEDONITE,
+    }
+};
+
+static const struct TrainerMon sParty_MaxiePostgame[] = {
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 62,
+        .species = SPECIES_SWELLOW,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 63,
+        .species = SPECIES_HOUNDOOM,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 64,
+        .species = SPECIES_WEEZING,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 65,
+        .species = SPECIES_MIGHTYENA,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 66,
+        .species = SPECIES_CROBAT,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 67,
+        .species = SPECIES_CAMERUPT,
+        .heldItem = ITEM_CAMERUPTITE,
+    }
+};

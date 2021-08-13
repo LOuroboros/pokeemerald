@@ -374,6 +374,9 @@ Route103_EventScript_AfterMayBattlePostgame::
 	setvar VAR_ROUTE103_STATE, 2
 	setflag FLAG_DEFEATED_RIVAL_POSTGAME
 	setvar VAR_SKY_PILLAR_STATE, 4
+	setvar VAR_MT_PYRE_STATE, 2
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -400,6 +403,9 @@ Route103_EventScript_AfterBrendanBattlePostgame::
 	setvar VAR_ROUTE103_STATE, 2
 	setflag FLAG_DEFEATED_RIVAL_POSTGAME
 	setvar VAR_SKY_PILLAR_STATE, 4
+	setvar VAR_MT_PYRE_STATE, 2
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
+	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
 	goto Route103_EventScript_RivalExit
 	end
 

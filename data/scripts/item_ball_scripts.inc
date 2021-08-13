@@ -657,3 +657,11 @@ MagmaHideout_4F_EventScript_MaxRevive:: @ 829151F
 MagmaHideout_3F_3R_EventScript_ItemEscapeRope:: @ 829152C
 	finditem ITEM_ESCAPE_ROPE
 	end
+
+AquaHideout_B1F_EventScript_ItemSharpedonite::
+	finditem ITEM_SHARPEDONITE
+	end
+
+MagmaHideout_4F_EventScript_ItemCameruptite::
+	finditem ITEM_CAMERUPTITE
+	end
