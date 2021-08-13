@@ -76,6 +76,16 @@ void LoadCompressedEggHatchSpritePalette(const struct CompressedSpritePalette *s
     LoadEggSpritePalette(&dest1, &dest2);
 }
 
+void LoadCompressedUniqueSpritePalette(const struct CompressedSpritePalette *src, u16 species, u32 personality, bool8 isShiny)
+{
+    struct SpritePalette dest;
+
+    LZ77UnCompWram(src->data, gDecompressionBuffer);
+    dest.data = (void*) gDecompressionBuffer;
+    dest.tag = src->tag;
+    LoadUniqueSpritePalette(&dest, species, personality, isShiny);
+}
+
 void LoadCompressedSpritePaletteOverrideBuffer(const struct CompressedSpritePalette *a, void *buffer)
 {
     struct SpritePalette dest;

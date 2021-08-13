@@ -2,6 +2,8 @@
 #include "sprite.h"
 #include "main.h"
 #include "palette.h"
+#include "util.h"
+#include "constants/rgb.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -1642,6 +1644,26 @@ u8 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct Sprit
         sSpritePaletteTags[index] = palette1->tag;
         DoLoadSpriteShortPalette(palette1->data, index * 16);
         DoLoadSpriteShortPalette(palette2->data, index * 16 + 8);
+        return index;
+    }
+}
+
+u8 LoadUniqueSpritePalette(const struct SpritePalette *palette, u16 species, u32 personality, bool8 isShiny)
+{
+    u8 index = IndexOfSpritePaletteTag(palette->tag);
+
+    index = IndexOfSpritePaletteTag(0xFFFF);
+
+    if (index == 0xFF)
+    {
+        return 0xFF;
+    }
+    else
+    {
+        sSpritePaletteTags[index] = palette->tag;
+        DoLoadSpritePalette(palette->data, index * 16);
+        UniquePalette(index * 16 + 0x100, species, personality, isShiny);
+        CpuCopy32(gPlttBufferFaded + index * 16 + 0x100, gPlttBufferUnfaded + index * 16 + 0x100, 32);
         return index;
     }
 }
