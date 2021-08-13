@@ -8603,36 +8603,6 @@ const struct Trainer gTrainers[] = {
         .party = {.TrainerMon = sParty_WallyVR3},
     },
 
-    [TRAINER_WALLY_VR_4] =
-    {
-        .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_WALLY,
-        .trainerName = _("WALLY"),
-        .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .partySize = ARRAY_COUNT(sParty_WallyVR4),
-        .party = {.TrainerMon = sParty_WallyVR4},
-    },
-
-    [TRAINER_WALLY_VR_5] =
-    {
-        .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
-        .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
-        .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
-        .trainerPic = TRAINER_PIC_WALLY,
-        .trainerName = _("WALLY"),
-        .items = {ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE},
-        .doubleBattle = FALSE,
-        .aiFlags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY,
-        .partySize = ARRAY_COUNT(sParty_WallyVR5),
-        .party = {.TrainerMon = sParty_WallyVR5},
-    },
-
     [TRAINER_BRENDAN_LILYCOVE_MUDKIP] =
     {
         .hasCustomTransition = TRUE,

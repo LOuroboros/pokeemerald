@@ -8281,8 +8281,13 @@ static const struct TrainerMon sParty_Ashley[] = {
 
 static const struct TrainerMon sParty_WallyMauville[] = {
     {
-        .ivs = {3, 3, 3, 3, 3, 3},
-        .lvl = 16,
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 15,
+        .species = SPECIES_BUDEW,
+    },
+    {
+        .ivs = {30, 30, 30, 30, 30, 30},
+        .lvl = 18,
         .species = SPECIES_RALTS,
     }
 };
@@ -8323,99 +8328,36 @@ static const struct TrainerMon sParty_WallyVR2[] = {
 static const struct TrainerMon sParty_WallyVR3[] = {
     {
         .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 50,
+        .lvl = 65,
         .species = SPECIES_ALTARIA,
         .moves = {MOVE_AERIAL_ACE, MOVE_SAFEGUARD, MOVE_DRAGON_BREATH, MOVE_DRAGON_DANCE}
     },
     {
         .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 49,
+        .lvl = 64,
         .species = SPECIES_DELCATTY,
         .moves = {MOVE_SING, MOVE_ASSIST, MOVE_CHARM, MOVE_FEINT_ATTACK}
     },
     {
         .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 50,
-        .species = SPECIES_ROSELIA,
-        .moves = {MOVE_MAGICAL_LEAF, MOVE_LEECH_SEED, MOVE_GIGA_DRAIN, MOVE_TOXIC}
+        .lvl = 65,
+        .species = SPECIES_ROSERADE,
+        .heldItem = ITEM_BRIGHT_POWDER,
+        .moves = {MOVE_PETAL_BLIZZARD, MOVE_LEECH_SEED, MOVE_POISON_JAB, MOVE_TOXIC}
     },
     {
         .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 47,
-        .species = SPECIES_MAGNETON,
-        .moves = {MOVE_SUPERSONIC, MOVE_THUNDERBOLT, MOVE_TRI_ATTACK, MOVE_SCREECH}
+        .lvl = 62,
+        .species = SPECIES_MAGNEZONE,
+        .heldItem = ITEM_AIR_BALLOON,
+        .moves = {MOVE_SUPERSONIC, MOVE_THUNDERBOLT, MOVE_FLASH_CANNON, MOVE_SCREECH}
     },
     {
         .ivs = {30, 30, 30, 30, 30, 30},
-        .lvl = 51,
+        .lvl = 66,
         .species = SPECIES_GARDEVOIR,
-        .moves = {MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT}
-    }
-};
-
-static const struct TrainerMon sParty_WallyVR4[] = {
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 53,
-        .species = SPECIES_ALTARIA,
-        .moves = {MOVE_AERIAL_ACE, MOVE_SAFEGUARD, MOVE_DRAGON_BREATH, MOVE_DRAGON_DANCE}
-    },
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 52,
-        .species = SPECIES_DELCATTY,
-        .moves = {MOVE_SING, MOVE_ASSIST, MOVE_CHARM, MOVE_FEINT_ATTACK}
-    },
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 53,
-        .species = SPECIES_ROSELIA,
-        .moves = {MOVE_MAGICAL_LEAF, MOVE_LEECH_SEED, MOVE_GIGA_DRAIN, MOVE_TOXIC}
-    },
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 50,
-        .species = SPECIES_MAGNETON,
-        .moves = {MOVE_SUPERSONIC, MOVE_THUNDERBOLT, MOVE_TRI_ATTACK, MOVE_SCREECH}
-    },
-    {
-        .ivs = {30, 30, 30, 30, 30, 30},
-        .lvl = 54,
-        .species = SPECIES_GARDEVOIR,
-        .moves = {MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT}
-    }
-};
-
-static const struct TrainerMon sParty_WallyVR5[] = {
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 56,
-        .species = SPECIES_ALTARIA,
-        .moves = {MOVE_AERIAL_ACE, MOVE_SAFEGUARD, MOVE_DRAGON_BREATH, MOVE_DRAGON_DANCE}
-    },
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 55,
-        .species = SPECIES_DELCATTY,
-        .moves = {MOVE_SING, MOVE_ASSIST, MOVE_CHARM, MOVE_FEINT_ATTACK}
-    },
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 56,
-        .species = SPECIES_ROSELIA,
-        .moves = {MOVE_MAGICAL_LEAF, MOVE_LEECH_SEED, MOVE_GIGA_DRAIN, MOVE_TOXIC}
-    },
-    {
-        .ivs = {18, 18, 18, 18, 18, 18},
-        .lvl = 53,
-        .species = SPECIES_MAGNETON,
-        .moves = {MOVE_SUPERSONIC, MOVE_THUNDERBOLT, MOVE_TRI_ATTACK, MOVE_SCREECH}
-    },
-    {
-        .ivs = {30, 30, 30, 30, 30, 30},
-        .lvl = 57,
-        .species = SPECIES_GARDEVOIR,
-        .moves = {MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT}
+        .heldItem = ITEM_GARDEVOIRITE,
+        .moves = {MOVE_DAZZLING_GLEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_SHADOW_BALL}
     }
 };
 
