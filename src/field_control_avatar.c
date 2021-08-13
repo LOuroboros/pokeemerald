@@ -143,6 +143,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
         input->dpadDirection = DIR_EAST;
 }
 
+extern const u8 EventScript_SelectWithoutRegisteredItem2[];
 int ProcessPlayerFieldInput(struct FieldInput *input)
 {
     struct MapPosition position;
@@ -214,9 +215,13 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         return TRUE;
     }
+
     if (input->pressedListButton)
     {
-        TxRegItemsMenu_OpenMenu();
+        if (TxRegItemsMenu_CountUsedRegisteredItemSlots() > 0)
+            TxRegItemsMenu_OpenMenu();
+        else
+            ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem2);
         return TRUE;
     }
 

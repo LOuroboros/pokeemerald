@@ -850,6 +850,10 @@ gText_SelectWithoutRegisteredItem:: @ 8272C98
 	.string "An item in the BAG can be\n"
 	.string "registered to SELECT for easy use.$"
 
+gText_RWithoutRegisteredItem::
+	.string "You can register multiple items\n"
+	.string "to {R_BUTTON} for easy use.$"
+
 gText_PokemonTrainerSchoolEmail:: @ 8272CD5
 	.string "There's an e-mail from POKéMON TRAINER\n"
 	.string "SCHOOL.\p"
@@ -935,6 +939,10 @@ gText_LegendaryFlewAway:: @ 8273204
 
 EventScript_SelectWithoutRegisteredItem:: @ 82736B3
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
+	end
+
+EventScript_SelectWithoutRegisteredItem2::
+	msgbox gText_RWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
 	.include "data/scripts/field_poison.inc"

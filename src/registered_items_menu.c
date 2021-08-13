@@ -1,5 +1,6 @@
 //Credits: TheXaman
 #include "global.h"
+#include "constants/global.h"
 #include "constants/songs.h"
 #include "bg.h"
 #include "decoration.h"
@@ -122,6 +123,7 @@ void TxRegItemsMenu_OpenMenu(void)
 {
     u8 taskId = CreateTask(TaskDummy, 0);
     ScriptFreezeObjectEvents();
+    PlaySE(SE_WIN_OPEN);
     gTasks[taskId].func = TxRegItemsMenu_InitMenuFunctions;
 }
 
@@ -497,7 +499,7 @@ u8 TxRegItemsMenu_CountUsedRegisteredItemSlots(void)
     u8 usedSlots = 0;
     u8 i;
 
-    for (i = 0; i < PC_ITEMS_COUNT; i++)
+    for (i = 0; i < BAG_KEYITEMS_COUNT; i++)
     {
         if (gSaveBlock1Ptr->registeredItems[i].itemId != ITEM_NONE)
             usedSlots++;
