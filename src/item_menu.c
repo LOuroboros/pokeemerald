@@ -1537,6 +1537,15 @@ void sub_81AC590(u8 taskId)
     gTasks[taskId].func = Task_BagMenu_HandleInput;
 }
 
+static bool8 IsUnregisterableKeyItem(u16 item)
+{
+    if (ItemId_GetPocket(item) == POCKET_KEY_ITEMS
+     && ItemId_GetFieldFunc(item) == ItemUseOutOfBattle_CannotUse)
+        return TRUE;
+    else
+        return FALSE;
+}
+
 static void OpenContextMenu(u8 unused)
 {
     switch (gBagPositionStruct.location)
@@ -1647,6 +1656,11 @@ static void OpenContextMenu(u8 unused)
                             gBagMenu->contextMenuItemsBuffer[1] = ITEMMENUACTION_DESELECT;
                         else if (TxRegItemsMenu_CheckRegisteredHasItem(gSpecialVar_ItemId))
                             gBagMenu->contextMenuItemsBuffer[1] = ITEMMENUACTION_DESELECT;
+                        if (IsUnregisterableKeyItem(gSpecialVar_ItemId))
+                        {
+                            gBagMenu->contextMenuNumItems = 2;
+                            gBagMenu->contextMenuItemsBuffer[1] = ITEMMENUACTION_CANCEL;
+                        }
                         break;
                     case BALLS_POCKET:
                         gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
