@@ -8364,6 +8364,11 @@ static const struct TrainerMon sParty_WallyVR3[] = {
 static const struct TrainerMon sParty_BrendanLilycoveMudkip[] = {
     {
         .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 28,
+        .species = SPECIES_RHYHORN,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
         .lvl = 31,
         .species = SPECIES_TROPIUS,
     },
@@ -8385,6 +8390,11 @@ static const struct TrainerMon sParty_BrendanLilycoveMudkip[] = {
 };
 
 static const struct TrainerMon sParty_BrendanLilycoveTreecko[] = {
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 28,
+        .species = SPECIES_RHYHORN,
+    },
     {
         .ivs = {18, 18, 18, 18, 18, 18},
         .lvl = 31,
@@ -8410,6 +8420,11 @@ static const struct TrainerMon sParty_BrendanLilycoveTreecko[] = {
 static const struct TrainerMon sParty_BrendanLilycoveTorchic[] = {
     {
         .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 28,
+        .species = SPECIES_RHYHORN,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
         .lvl = 31,
         .species = SPECIES_TROPIUS,
     },
@@ -8431,6 +8446,11 @@ static const struct TrainerMon sParty_BrendanLilycoveTorchic[] = {
 };
 
 static const struct TrainerMon sParty_MayLilycoveMudkip[] = {
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 26,
+        .species = SPECIES_PIKACHU,
+    },
     {
         .ivs = {18, 18, 18, 18, 18, 18},
         .lvl = 31,
@@ -8456,6 +8476,11 @@ static const struct TrainerMon sParty_MayLilycoveMudkip[] = {
 static const struct TrainerMon sParty_MayLilycoveTreecko[] = {
     {
         .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 26,
+        .species = SPECIES_PIKACHU,
+    },
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
         .lvl = 31,
         .species = SPECIES_TROPIUS,
     },
@@ -8477,6 +8502,11 @@ static const struct TrainerMon sParty_MayLilycoveTreecko[] = {
 };
 
 static const struct TrainerMon sParty_MayLilycoveTorchic[] = {
+    {
+        .ivs = {18, 18, 18, 18, 18, 18},
+        .lvl = 26,
+        .species = SPECIES_PIKACHU,
+    },
     {
         .ivs = {18, 18, 18, 18, 18, 18},
         .lvl = 31,
