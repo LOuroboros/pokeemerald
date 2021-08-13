@@ -46,11 +46,11 @@ MauvilleCity_GameCorner_EventScript_Buy50Coins:: @ 820FC33
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, (MAX_COINS + 1 - 50)
 	goto_if_ge MauvilleCity_GameCorner_EventScript_NoRoomForCoins
-	checkmoney COINS_PRICE_50, 0
+	checkmoney COINS_PRICE_50
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	addcoins 50
-	removemoney COINS_PRICE_50, 0
+	removemoney COINS_PRICE_50
 	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_SHOP
@@ -64,11 +64,11 @@ MauvilleCity_GameCorner_EventScript_Buy500Coins:: @ 820FC75
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, (MAX_COINS + 1 - 500)
 	goto_if_ge MauvilleCity_GameCorner_EventScript_NoRoomForCoins
-	checkmoney COINS_PRICE_500, 0
+	checkmoney COINS_PRICE_500
 	compare VAR_RESULT, FALSE
 	goto_if_eq MauvilleCity_GameCorner_EventScript_NotEnoughMoney
 	addcoins 500
-	removemoney COINS_PRICE_500, 0
+	removemoney COINS_PRICE_500
 	updatemoneybox 0, 0
 	updatecoinsbox 1, 6
 	playse SE_SHOP

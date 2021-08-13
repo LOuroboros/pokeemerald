@@ -111,7 +111,7 @@ MtChimney_EventScript_LavaCookieLady:: @ 822EEF3
 	msgbox MtChimney_Text_LavaCookiesJust200, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq MtChimney_EventScript_DeclineLavaCookie
-	checkmoney 200, 0
+	checkmoney 200
 	compare VAR_RESULT, FALSE
 	goto_if_eq MtChimney_EventScript_NotEnoughMoney
 	msgbox MtChimney_Text_ThankYouDear, MSGBOX_DEFAULT
@@ -132,7 +132,7 @@ MtChimney_EventScript_BagIsFull:: @ 822EF51
 	end
 
 MtChimney_EventScript_RemoveMoney:: @ 822EF5E
-	removemoney 200, 0
+	removemoney 200
 	updatemoneybox 0, 0
 	return
 

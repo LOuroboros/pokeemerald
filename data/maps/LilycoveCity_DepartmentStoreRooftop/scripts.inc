@@ -102,27 +102,27 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_Lemonade:: @ 82202FA
 	end
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyFreshWater:: @ 8220305
-	checkmoney 200, 0
+	checkmoney 200
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneySodaPop:: @ 822030C
-	checkmoney 300, 0
+	checkmoney 300
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_CheckMoneyLemonade:: @ 8220313
-	checkmoney 350, 0
+	checkmoney 350
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyFreshWater:: @ 822031A
-	removemoney 200, 0
+	removemoney 200
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneySodaPop:: @ 8220321
-	removemoney 300, 0
+	removemoney 300
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_RemoveMoneyLemonade:: @ 8220328
-	removemoney 350, 0
+	removemoney 350
 	return
 
 LilycoveCity_DepartmentStoreRooftop_EventScript_TryBuyDrink:: @ 822032F

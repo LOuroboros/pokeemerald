@@ -47,14 +47,14 @@ Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop:: @ 8269460
 	end
 
 Route109_SeashoreHouse_EventScript_BuySodaPop:: @ 8269484
-	checkmoney 300, 0
+	checkmoney 300
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route109_SeashoreHouse_EventScript_NotEnoughMoney
 	checkitemspace ITEM_SODA_POP, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route109_SeashoreHouse_EventScript_NotEnoughSpace
 	msgbox Route109_SeashoreHouse_Text_HereYouGo, MSGBOX_DEFAULT
-	removemoney 300, 0
+	removemoney 300
 	updatemoneybox 0, 0
 	giveitem ITEM_SODA_POP
 	hidemoneybox
