@@ -10,8 +10,15 @@ MossdeepCity_MapScripts:: @ 81E4A96
 	.byte 0
 
 MossdeepCity_OnTransition: @ 81E4A9C
+	call_if_unset FLAG_MET_RIVAL_LILYCOVE, MossdeepCity_HideRivalLilycove
 	call_if_set FLAG_SYS_WEATHER_CTRL, Common_EventScript_SetAbnormalWeather
 	end
+
+MossdeepCity_HideRivalLilycove:
+	hideobjectat 17, MAP_LILYCOVE_CITY
+	setflag FLAG_MET_RIVAL_LILYCOVE
+	setflag FLAG_HIDE_LILYCOVE_CITY_RIVAL
+	return
 
 MossdeepCity_EventScript_PokefanF:: @ 81E4AB2
 	lock

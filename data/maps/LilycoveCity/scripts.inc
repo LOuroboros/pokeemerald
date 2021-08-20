@@ -174,13 +174,7 @@ LilycoveCity_EventScript_MuseumSignNoPaintings:: @ 81E2D3A
 
 LilycoveCity_EventScript_HarborSign:: @ 81E2D44
 	lockall
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_HarborSignFerryReady
 	msgbox LilycoveCity_Text_HarborSignUnderConstruction, MSGBOX_DEFAULT
-	releaseall
-	end
-
-LilycoveCity_EventScript_HarborSignFerryReady:: @ 81E2D58
-	msgbox LilycoveCity_Text_HarborSign, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -360,12 +354,7 @@ LilycoveCity_EventScript_MayCollectBadges:: @ 81E2F86
 	return
 
 LilycoveCity_EventScript_MayPokemonLeague:: @ 81E2F8F
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_MayBattleFrontier
 	msgbox LilycoveCity_Text_MayYouGoingToPokemonLeague, MSGBOX_DEFAULT
-	return
-
-LilycoveCity_EventScript_MayBattleFrontier:: @ 81E2FA1
-	msgbox LilycoveCity_Text_MayYouGoingToBattleFrontier, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_DefeatedBrendan:: @ 81E2FAA
@@ -386,12 +375,7 @@ LilycoveCity_EventScript_BrendanCollectBadges:: @ 81E2FE2
 	return
 
 LilycoveCity_EventScript_BrendanPokemonLeague:: @ 81E2FEB
-	goto_if_set FLAG_SYS_GAME_CLEAR, LilycoveCity_EventScript_BrendanBattleFrontier
 	msgbox LilycoveCity_Text_BrendanYouGoingToPokemonLeague, MSGBOX_DEFAULT
-	return
-
-LilycoveCity_EventScript_BrendanBattleFrontier:: @ 81E2FFD
-	msgbox LilycoveCity_Text_BrendanYouGoingToBattleFrontier, MSGBOX_DEFAULT
 	return
 
 LilycoveCity_EventScript_RivalFlyAway:: @ 81E3006
@@ -489,16 +473,6 @@ LilycoveCity_Text_MayYouGoingToPokemonLeague: @ 81E346D
 	.string "but I'll finish my POKéDEX before you!\p"
 	.string "See you!$"
 
-LilycoveCity_Text_MayYouGoingToBattleFrontier: @ 81E353A
-	.string "{PLAYER}{KUN}, what are you going to do?\p"
-	.string "Are you taking the BATTLE FRONTIER\n"
-	.string "challenge?\p"
-	.string "Or, are you going to complete your\n"
-	.string "POKéDEX?\p"
-	.string "I might've lost to you in battling,\n"
-	.string "but I'll finish my POKéDEX before you!\p"
-	.string "See you!$"
-
 LilycoveCity_Text_BrendanShoppingLetsBattle: @ 81E3608
 	.string "{RIVAL}: Oh, hey, it's {PLAYER}.\p"
 	.string "I'm running an errand for my dad.\n"
@@ -546,20 +520,6 @@ LilycoveCity_Text_BrendanYouGoingToPokemonLeague: @ 81E390C
 	.string "Heh, even me--if I trained my POKéMON\n"
 	.string "a bit more, I should be stronger than\l"
 	.string "you, {PLAYER}.\p"
-	.string "Well, anyway, hang in there!$"
-
-LilycoveCity_Text_BrendanYouGoingToBattleFrontier: @ 81E39E3
-	.string "{PLAYER}, what are you going to do?\p"
-	.string "Are you taking the BATTLE FRONTIER\n"
-	.string "challenge?\p"
-	.string "Or, are you going to complete your\n"
-	.string "POKéDEX?\p"
-	.string "Since you're that strong, you should\n"
-	.string "consider the BATTLE FRONTIER.\p"
-	.string "Heh, if I train my POKéMON a bit more,\n"
-	.string "I'll get stronger than you, {PLAYER}.\p"
-	.string "Maybe I should go to the BATTLE\n"
-	.string "FRONTIER.\p"
 	.string "Well, anyway, hang in there!$"
 
 LilycoveCity_Text_MovedLootIntoHideoutToday: @ 81E3B2C
