@@ -3,11 +3,9 @@
 .set LOCALID_DEVON_EMPLOYEE, 9
 .set LOCALID_GRUNT, 10
 .set LOCALID_RIVAL, 14
-.set LOCALID_SCIENTIST, 15
 
 RustboroCity_MapScripts:: @ 81E06BD
 	map_script MAP_SCRIPT_ON_TRANSITION, RustboroCity_OnTransition
-	map_script MAP_SCRIPT_ON_FRAME_TABLE, RustboroCity_OnFrame
 	.byte 0
 
 RustboroCity_OnTransition: @ 81E06C8
@@ -16,128 +14,11 @@ RustboroCity_OnTransition: @ 81E06C8
 	compare VAR_RUSTBORO_CITY_STATE, 6
 	call_if_eq RustboroCity_EventScript_HideMapNamePopup
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
-	compare VAR_RUSTBORO_CITY_STATE, 6
-	goto_if_eq RustboroCity_EventScript_PositionScientistForExit
-	end
-
-RustboroCity_EventScript_PositionScientistForExit:: @ 81E06EC
-	compare VAR_TEMP_0, 11
-	goto_if_eq RustboroCity_EventScript_PositionScientistLeftExit
-	setobjectxyperm LOCALID_SCIENTIST, 12, 15
-	end
-
-RustboroCity_EventScript_PositionScientistLeftExit:: @ 81E06FF
-	setobjectxyperm LOCALID_SCIENTIST, 11, 15
 	end
 
 RustboroCity_EventScript_HideMapNamePopup:: @ 81E0707
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	return
-
-RustboroCity_OnFrame: @ 81E070B
-	map_script_2 VAR_RUSTBORO_CITY_STATE, 6, RustboroCity_EventScript_ScientistAddMatchCall
-	.2byte 0
-
-RustboroCity_EventScript_ScientistAddMatchCall:: @ 81E0715
-	lockall
-	setvar VAR_ROUTE104_STATE, 1
-	applymovement OBJ_EVENT_ID_PLAYER, RustboroCity_Movement_PlayerWalkDown
-	waitmovement 0
-	playse SE_EXIT
-	delay 10
-	addobject LOCALID_SCIENTIST
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistApproachPlayer
-	waitmovement 0
-	playse SE_PIN
-	applymovement LOCALID_SCIENTIST, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement LOCALID_SCIENTIST, Common_Movement_Delay48
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
-	waitmovement 0
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistWalkInPlaceDown
-	waitmovement 0
-	msgbox RustboroCity_Text_DevelopedNewPokenavFeature, MSGBOX_DEFAULT
-	closemessage
-	setflag FLAG_HAS_MATCH_CALL
-	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestLeft
-	waitmovement 0
-	playse SE_CLICK
-	delay 10
-	playse SE_CLICK
-	delay 10
-	playse SE_CLICK
-	delay 10
-	playse SE_CLICK
-	delay 20
-	applymovement LOCALID_SCIENTIST, Common_Movement_WalkInPlaceFastestDown
-	waitmovement 0
-	msgbox RustboroCity_Text_AddedMatchCallPleaseCallMrStone, MSGBOX_DEFAULT
-	closemessage
-	delay 20
-	goto RustboroCity_EventScript_MatchCallTutorial
-
-RustboroCity_EventScript_PleaseSelectPokenav:: @ 81E07AC
-	msgbox RustboroCity_Text_PleaseSelectPokenav, MSGBOX_DEFAULT
-	closemessage
-	delay 10
-	goto RustboroCity_EventScript_MatchCallTutorial
-
-RustboroCity_EventScript_MatchCallTutorial:: @ 81E07BD
-	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	special ScriptMenu_CreateStartMenuForPokenavTutorial
-	waitstate
-	switch VAR_RESULT
-	case 0, RustboroCity_EventScript_PleaseSelectPokenav
-	case 1, RustboroCity_EventScript_PleaseSelectPokenav
-	case 2, RustboroCity_EventScript_PleaseSelectPokenav
-	case 4, RustboroCity_EventScript_PleaseSelectPokenav
-	case 5, RustboroCity_EventScript_PleaseSelectPokenav
-	case 6, RustboroCity_EventScript_PleaseSelectPokenav
-	case 7, RustboroCity_EventScript_PleaseSelectPokenav
-	case MULTI_B_PRESSED, RustboroCity_EventScript_PleaseSelectPokenav
-	special OpenPokenavForTutorial
-	waitstate
-	delay 20
-	msgbox RustboroCity_Text_IdBetterGetBackToWork, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_SCIENTIST, RustboroCity_Movement_ScientistLeave
-	waitmovement 0
-	playse SE_EXIT
-	removeobject LOCALID_SCIENTIST
-	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
-	setvar VAR_RUSTBORO_CITY_STATE, 7
-	clearflag FLAG_HIDE_MAP_NAME_POPUP
-	releaseall
-	end
-
-RustboroCity_Movement_ScientistWalkInPlaceDown: @ 81E084E
-	walk_in_place_down
-	step_end
-
-RustboroCity_Movement_PlayerWalkDown: @ 81E0850
-	walk_down
-	step_end
-
-RustboroCity_Movement_ScientistApproachPlayer: @ 81E0852
-	walk_down
-	delay_16
-	step_end
-
-@ Unused
-RustboroCity_Movement_ScientistWalkAroundPlayer: @ 81E0855
-	delay_16
-	walk_left
-	walk_down
-	walk_down
-	walk_right
-	walk_in_place_fastest_up
-	delay_16
-	step_end
-
-RustboroCity_Movement_ScientistLeave: @ 81E085D
-	walk_up
-	step_end
 
 RustboroCity_EventScript_FatMan:: @ 81E085F
 	lock
@@ -207,11 +88,6 @@ RustboroCity_EventScript_DevonCorpSign:: @ 81E08EC
 
 RustboroCity_EventScript_GymSign:: @ 81E08F5
 	msgbox RustboroCity_Text_GymSign, MSGBOX_SIGN
-	end
-
-@ Unused
-RustboroCity_EventScript_DevonCorpBranchOfficeSign:: @ 81E08FE
-	msgbox RustboroCity_Text_DevonCorpBranchOfficeSign, MSGBOX_SIGN
 	end
 
 RustboroCity_EventScript_CitySign:: @ 81E0907
@@ -322,69 +198,6 @@ RustboroCity_EventScript_StolenGoodsScene:: @ 81E09CD
 	releaseall
 	end
 
-@ Unused
-RustboroCity_EventScript_ShadyCharacterTookOff:: @ 81E0A3B
-	msgbox RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel, MSGBOX_DEFAULT
-	return
-
-@ Unused
-RustboroCity_EventScript_YouGotItThankYou:: @ 81E0A44
-	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
-	return
-
-@ Unknown, unused employee movements. Based on the differences in movement theyre for approaching an object (probably the player) in different positions
-RustboroCity_EventScript_EmployeeApproachUp:: @ 81E0A4D
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachUp
-	waitmovement 0
-	return
-
-@ Unused, see above
-RustboroCity_EventScript_EmployeeApproachLeft:: @ 81E0A58
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachLeft
-	waitmovement 0
-	return
-
-@ Unused, see above
-RustboroCity_EventScript_EmployeeApproachRight:: @ 81E0A63
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachRight
-	waitmovement 0
-	return
-
-@ Unused, see above
-RustboroCity_EventScript_EmployeeApproachDown:: @ 81E0A6E
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachDown
-	waitmovement 0
-	return
-
-@ Unused, similar movement to the above scripts
-RustboroCity_EventScript_EmployeeApproachPlayerFar:: @ 81E0A79
-	applymovement LOCALID_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerFar
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
-	waitmovement 0
-	return
-
-@ Unused
-RustboroCity_Movement_GruntEscapeExtended: @ 81E0A8E
-	walk_fastest_right
-	walk_fastest_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	walk_fast_up
-	step_end
-
 RustboroCity_Movement_GruntEscape: @ 81E0AA0
 	walk_fastest_right
 	walk_fastest_right
@@ -422,49 +235,6 @@ RustboroCity_Movement_EmployeeChaseGrunt2: @ 81E0AB9
 	walk_up
 	walk_up
 	walk_up
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachUp: @ 81E0AC1
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachLeft: @ 81E0AC5
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachRight: @ 81E0ACA
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachDown: @ 81E0ACF
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	step_end
-
-@ Functionally unused
-RustboroCity_Movement_EmployeeApproachPlayerFar: @ 81E0AD5
-	walk_down
-	walk_down
-	walk_down
-	walk_right
-	walk_right
-	walk_right
-	walk_in_place_fastest_down
 	step_end
 
 RustboroCity_EventScript_DevonEmployee1:: @ 81E0ADD
@@ -1290,32 +1060,6 @@ RustboroCity_Text_TrainersSchoolSign: @ 81E2253
 
 RustboroCity_Text_CuttersHouse: @ 81E2296
 	.string "CUTTER'S HOUSE$"
-
-RustboroCity_Text_DevelopedNewPokenavFeature: @ 81E22A5
-	.string "I've been developing an added feature\n"
-	.string "for the POKéNAV…\p"
-	.string "And it turned out great!\p"
-	.string "{PLAYER}, may I see that POKéNAV?\n"
-	.string "The one our PRESIDENT gave you?$"
-
-RustboroCity_Text_AddedMatchCallPleaseCallMrStone: @ 81E2331
-	.string "There you go, {PLAYER}!\p"
-	.string "I added a new feature named\n"
-	.string "MATCH CALL to your POKéNAV.\p"
-	.string "Using the MATCH CALL feature,\n"
-	.string "you can chat with people who have\l"
-	.string "been registered in your POKéNAV.\p"
-	.string "{PLAYER}, our PRESIDENT STONE should\n"
-	.string "be registered in your POKéNAV.\p"
-	.string "Test it out.\n"
-	.string "Please give our PRESIDENT a call.$"
-
-RustboroCity_Text_PleaseSelectPokenav: @ 81E2449
-	.string "Please select the POKéNAV.$"
-
-RustboroCity_Text_IdBetterGetBackToWork: @ 81E2464
-	.string "Okay, I'd better get back to work.\n"
-	.string "Please take care, {PLAYER}!$"
 
 RustboroCity_Text_YouCanHave2On2Battle: @ 81E249D
 	.string "Did you know this?\p"
