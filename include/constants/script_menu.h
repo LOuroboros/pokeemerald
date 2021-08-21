@@ -118,7 +118,7 @@
 #define MULTI_TOURNEY_NO_RECORD            107
 #define MULTI_TV_LATI                      108
 #define MULTI_BATTLE_TOWER_FEELINGS        109
-#define MULTI_WHERES_RAYQUAZA              110
+#define MULTI_UNUSED_110                   110
 #define MULTI_SLATEPORT_TENT_RULES         111
 #define MULTI_FALLARBOR_TENT_RULES         112
 #define MULTI_TAG_MATCH_TYPE               113

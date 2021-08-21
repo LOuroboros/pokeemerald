@@ -751,14 +751,6 @@ static const struct MenuAction MultichoiceList_BattleTowerFeelings[] =
     {gText_IWontTell},
 };
 
-static const struct MenuAction MultichoiceList_WheresRayquaza[] =
-{
-    {gText_CaveOfOrigin},
-    {gText_MtPyre},
-    {gText_SkyPillar},
-    {gText_DontRemember},
-};
-
 static const struct MenuAction MultichoiceList_SlateportTentRules[] =
 {
     {gText_BasicRules},
@@ -911,7 +903,6 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_TOURNEY_NO_RECORD]          = MULTICHOICE(MultichoiceList_TourneyNoRecord),
     [MULTI_TV_LATI]                    = MULTICHOICE(MultichoiceList_TVLati),
     [MULTI_BATTLE_TOWER_FEELINGS]      = MULTICHOICE(MultichoiceList_BattleTowerFeelings),
-    [MULTI_WHERES_RAYQUAZA]            = MULTICHOICE(MultichoiceList_WheresRayquaza),
     [MULTI_SLATEPORT_TENT_RULES]       = MULTICHOICE(MultichoiceList_SlateportTentRules),
     [MULTI_FALLARBOR_TENT_RULES]       = MULTICHOICE(MultichoiceList_FallarborTentRules),
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
