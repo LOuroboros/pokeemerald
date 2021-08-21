@@ -2030,3 +2030,74 @@
 	settotemboost \battler, 0, 0, 0, 0, 0, 0, 2
 	.endm
 
+	@ Call \dest if \var is less than \value.
+	.macro call_if_var_lt var:req, value:req, dest:req
+	compare \var, \value
+	call_if 0, \dest
+	.endm
+
+	@ Call \dest if \var is equal than \value.
+	.macro call_if_var_eq var:req, value:req, dest:req
+	compare \var, \value
+	call_if 1, \dest
+	.endm
+
+	@ Call \dest if \var is greater than \value.
+	.macro call_if_var_gt var:req, value:req, dest:req
+	compare \var, \value
+	call_if 2, \dest
+	.endm
+
+	@ Call \dest if \var is less or equal than \value.
+	.macro call_if_var_le var:req, value:req, dest:req
+	compare \var, \value
+	call_if 3, \dest
+	.endm
+
+	@ Call \dest if \var is greater or equal than \value.
+	.macro call_if_var_ge var:req, value:req, dest:req
+	compare \var, \value
+	call_if 4, \dest
+	.endm
+
+	@ Call \dest if \var is not equal to \value.
+	.macro call_if_var_ne var:req, value:req, dest:req
+	compare \var, \value
+	call_if 5, \dest
+	.endm
+
+	@ Go to \dest if \var is less than \value.
+	.macro goto_if_var_lt var:req, value:req, dest:req
+	compare \var, \value
+	goto_if 0, \dest
+	.endm
+
+	@ Go to \dest if \var is equal than \value.
+	.macro goto_if_var_eq var:req, value:req, dest:req
+	compare \var, \value
+	goto_if 1, \dest
+	.endm
+
+	@ Go to \dest if \var is greater than \value.
+	.macro goto_if_var_gt var:req, value:req, dest:req
+	compare \var, \value
+	goto_if 2, \dest
+	.endm
+
+	@ Go to \dest if \var is less or equal than \value.
+	.macro goto_if_var_le var:req, value:req, dest:req
+	compare \var, \value
+	goto_if 3, \dest
+	.endm
+
+	@ Go to \dest if \var is greater or equal than \value.
+	.macro goto_if_var_ge var:req, value:req, dest:req
+	compare \var, \value
+	goto_if 4, \dest
+	.endm
+
+	@ Go to \dest if \var is not equal to \value.
+	.macro goto_if_var_ne var:req, value:req, dest:req
+	compare \var, \value
+	goto_if 5, \dest
+	.endm
