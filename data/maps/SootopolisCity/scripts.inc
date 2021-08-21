@@ -613,7 +613,7 @@ SootopolisCity_EventScript_RayquazaSceneFromDive:: @ 81E5CCE
 	special WaitWeather
 	waitstate
 	clearflag FLAG_SYS_WEATHER_CTRL
-	setvar VAR_SKY_PILLAR_STATE, 2
+	setvar VAR_SKY_PILLAR_STATE, 3
 	clearflag FLAG_LEGENDARIES_IN_SOOTOPOLIS
 	fadenewbgm MUS_SURF
 	delay 120

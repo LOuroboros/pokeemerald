@@ -373,6 +373,7 @@ Route103_EventScript_AfterMayBattlePostgame::
 	msgbox Route103_Text_MayTimeToHeadBackForGood, MSGBOX_DEFAULT
 	setvar VAR_ROUTE103_STATE, 2
 	setflag FLAG_DEFEATED_RIVAL_POSTGAME
+	setvar VAR_SKY_PILLAR_STATE, 4
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -398,6 +399,7 @@ Route103_EventScript_AfterBrendanBattlePostgame::
 	msgbox Route103_Text_BrendanTimeToHeadBackForGood, MSGBOX_DEFAULT
 	setvar VAR_ROUTE103_STATE, 2
 	setflag FLAG_DEFEATED_RIVAL_POSTGAME
+	setvar VAR_SKY_PILLAR_STATE, 4
 	goto Route103_EventScript_RivalExit
 	end
 
