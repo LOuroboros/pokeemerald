@@ -268,16 +268,13 @@ MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle:: @ 822400C
 	goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
 
 MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle:: @ 8224032
-	special ReducePlayerPartyToSelectedMons
-	frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
-	setvar VAR_0x8004, SPECIAL_BATTLE_STEVEN
-	setvar VAR_0x8005, 0
-	special DoSpecialTrainerBattle
-	waitstate
-	frontier_saveparty
-	special LoadPlayerParty
-	switch VAR_RESULT
-	case 1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
+	setvar VAR_MUGSHOT_ID, MUGSHOT_MAXIE
+	multi_2_vs_2 TRAINER_MAXIE_MOSSDEEP, 0, TRAINER_TABITHA_MOSSDEEP, MossdeepCity_SpaceCenter_Text_TabithaDefeat, TRAINER_STEVEN_MOSSDEEP, TRAINER_BACK_PIC_STEVEN
+	specialvar VAR_RESULT, GetBattleOutcome
+	goto_if_var_eq VAR_RESULT, B_OUTCOME_WON, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
+	goto_if_var_eq VAR_RESULT, B_OUTCOME_LOST, MossdeepCity_SpaceCenter_2F_EventScript_WasDefeatedByMaxieTabitha
+
+MossdeepCity_SpaceCenter_2F_EventScript_WasDefeatedByMaxieTabitha:
 	fadescreen FADE_TO_BLACK
 	special SetCB2WhiteOut
 	waitstate
@@ -319,10 +316,11 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha:: @ 8224071
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenThankYou, MSGBOX_DEFAULT
 	closemessage
 	specialvar VAR_RESULT, GetPlayerFacingDirection
-	compare VAR_RESULT, DIR_SOUTH
-	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceLeft
 	compare VAR_RESULT, DIR_WEST
 	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceDown
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, DIR_SOUTH
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceLeft
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenFoundSomething, MSGBOX_DEFAULT
 	faceplayer
 	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenSaysPlayerShouldKeepIt, MSGBOX_DEFAULT
@@ -358,16 +356,6 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest:: @ 8224152
 	turnobject LOCALID_STEVEN, DIR_EAST
 	return
 
-MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceLeft:
-	applymovement LOCALID_STEVEN, Common_Movement_FaceLeft
-	waitmovement 0
-	delay 40
-	playse SE_PIN
-	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
-	waitmovement 0
-	delay 20
-	return
-
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceDown:
 	applymovement LOCALID_STEVEN, Common_Movement_FaceDown
 	waitmovement 0
@@ -378,14 +366,15 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceDown:
 	delay 20
 	return
 
-MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer:: @ 8224157
-@	setvar VAR_MUGSHOT_ID, MUGSHOT_MAXIE
-	trainerbattle TRAINER_BATTLE_SET_TRAINER_A, TRAINER_MAXIE_MOSSDEEP, 0, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand, MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand
-	end
-
-MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer:: @ 8224166
-	trainerbattle TRAINER_BATTLE_SET_TRAINER_B, TRAINER_TABITHA_MOSSDEEP, 0, MossdeepCity_SpaceCenter_Text_TabithaDefeat, MossdeepCity_SpaceCenter_Text_TabithaDefeat
-	end
+MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceLeft:
+	applymovement LOCALID_STEVEN, Common_Movement_FaceLeft
+	waitmovement 0
+	delay 40
+	playse SE_PIN
+	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 20
+	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall:: @ 8224175
 	lockall
