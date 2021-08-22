@@ -91,283 +91,274 @@
 #define FLAG_UNUSED_0x04F                 0x4F
 
 // Scripts
-#define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
-#define FLAG_SET_WALL_CLOCK                      0x51
-#define FLAG_RESCUED_BIRCH                       0x52
-#define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
-
-#define FLAG_UNUSED_0x054                    0x54  // Unused Flag
-#define FLAG_UNUSED_0x055                    0x55  // Unused Flag
-
-#define FLAG_HIDE_CONTEST_POKE_BALL          0x56  // Always set after new game, object it hides is added directly
-#define FLAG_MET_RIVAL_MOM                   0x57
-#define FLAG_BIRCH_AIDE_MET                  0x58
-#define FLAG_DECLINED_BIKE                   0x59
-#define FLAG_RECEIVED_BIKE                   0x5A
-#define FLAG_WATTSON_REMATCH_AVAILABLE       0x5B
-#define FLAG_COLLECTED_ALL_SILVER_SYMBOLS    0x5C
-#define FLAG_GOOD_LUCK_SAFARI_ZONE           0x5D // Set after talking to NPC blocking Safari Zone entrance/exit once.
-#define FLAG_RECEIVED_WAILMER_PAIL           0x5E
-#define FLAG_RECEIVED_POKEBLOCK_CASE         0x5F
-#define FLAG_RECEIVED_SECRET_POWER           0x60
-#define FLAG_MET_TEAM_AQUA_HARBOR            0x61
-#define FLAG_TV_EXPLAINED                    0x62
-#define FLAG_MAUVILLE_GYM_BARRIERS_STATE     0x63
-#define FLAG_UNUSED_0x64                     0x64 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x65                     0x65 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x66                     0x66 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x67                     0x67 // Originally a leftover from the RS version of Mossdeep City's Gym.
-
-#define FLAG_UNUSED_0x068                    0x68  // Unused Flag
-
-#define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
-#define FLAG_RECEIVED_HM04                   0x6A
-#define FLAG_RECEIVED_HM06                   0x6B
-#define FLAG_WHITEOUT_TO_LAVARIDGE           0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
-#define FLAG_RECEIVED_HM05                   0x6D
-#define FLAG_RECEIVED_HM02                   0x6E
-#define FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT  0x6F
-#define FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE  0x70
-#define FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE 0x71 // Unused Flag. Used in R/S to indicate whether player defeated or caught Groudon/Kyogre in Cave of Origin.
-#define FLAG_SCOTT_CALL_BATTLE_FRONTIER      0x72 // Used in order to activate a phone call from Scott, inviting the player to the SS Tidal.
-#define FLAG_RECEIVED_METEORITE              0x73
-#define FLAG_ADVENTURE_STARTED               0x74 // RECEIVED Pokédex.
-#define FLAG_DEFEATED_MAGMA_SPACE_CENTER     0x75 // Set when Team Magma is defeated at Mossdeep's Space Center.
-#define FLAG_MET_HIDDEN_POWER_GIVER          0x76
-
-#define FLAG_CANCEL_BATTLE_ROOM_CHALLENGE    0x77
-
-#define FLAG_LANDMARK_MIRAGE_TOWER           0x78
-#define FLAG_RECEIVED_TM31                   0x79
-#define FLAG_RECEIVED_HM03                   0x7A
-#define FLAG_RECEIVED_HM08                   0x7B
-#define FLAG_REGISTER_RIVAL_POKENAV          0x7C
-#define FLAG_DEFEATED_RIVAL_ROUTE_104        0x7D
-#define FLAG_DEFEATED_WALLY_VICTORY_ROAD     0x7E
-#define FLAG_MET_PRETTY_PETAL_SHOP_OWNER     0x7F
-#define FLAG_ENABLE_ROXANNE_FIRST_CALL       0x80 // Set after defeating Brawly. This will activate a call with Roxanne in order to register her.
-#define FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN  0x81
-#define FLAG_DEFEATED_RIVAL_ROUTE103         0x82
-#define FLAG_RECEIVED_DOLL_LANETTE           0x83
-#define FLAG_RECEIVED_POTION_OLDALE          0x84
-#define FLAG_RECEIVED_AMULET_COIN            0x85
-#define FLAG_PENDING_DAYCARE_EGG             0x86
-#define FLAG_THANKED_FOR_PLAYING_WITH_WALLY  0x87
-#define FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL 0x88 // Set after defeating Wally outside Mauville Gym. Will activate a call later to register Wally.
-#define FLAG_RECEIVED_HM01                   0x89
-#define FLAG_SCOTT_CALL_FORTREE_GYM          0x8A // Triggers call from Scott after defeating Winona
-#define FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY   0x8B
-#define FLAG_RECEIVED_6_SODA_POP             0x8C
-#define FLAG_DEFEATED_SEASHORE_HOUSE         0x8D
-#define FLAG_DEVON_GOODS_STOLEN              0x8E
-#define FLAG_RECOVERED_DEVON_GOODS           0x8F
-#define FLAG_RETURNED_DEVON_GOODS            0x90
-#define FLAG_CAUGHT_LUGIA                    0x91
-#define FLAG_CAUGHT_HO_OH                    0x92
-#define FLAG_MR_BRINEY_SAILING_INTRO         0x93
-#define FLAG_DOCK_REJECTED_DEVON_GOODS       0x94
-#define FLAG_DELIVERED_DEVON_GOODS           0x95
-#define FLAG_MYSTERY_EVENT_DONE              0x96 // Originally Unused, leftover from R/S
-#define FLAG_RECEIVED_CASTFORM               0x97
-#define FLAG_RECEIVED_SUPER_ROD              0x98
-#define FLAG_RUSTBORO_NPC_TRADE_COMPLETED    0x99
-#define FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED  0x9A
-#define FLAG_FORTREE_NPC_TRADE_COMPLETED     0x9B
-#define FLAG_BATTLE_FRONTIER_TRADE_DONE      0x9C
-#define FLAG_FORCE_MIRAGE_TOWER_VISIBLE      0x9D
-#define FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE   0x9E
-#define FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN 0x9F
-#define FLAG_COOL_PAINTING_MADE              0xA0
-#define FLAG_BEAUTY_PAINTING_MADE            0xA1
-#define FLAG_CUTE_PAINTING_MADE              0xA2
-#define FLAG_SMART_PAINTING_MADE             0xA3
-#define FLAG_TOUGH_PAINTING_MADE             0xA4
-#define FLAG_RECEIVED_TM39                   0xA5
-#define FLAG_RECEIVED_TM08                   0xA6
-#define FLAG_RECEIVED_TM34                   0xA7
-#define FLAG_RECEIVED_TM50                   0xA8
-#define FLAG_RECEIVED_TM42                   0xA9
-#define FLAG_RECEIVED_TM40                   0xAA
-#define FLAG_RECEIVED_TM04                   0xAB
-#define FLAG_RECEIVED_TM03                   0xAC
-#define FLAG_DECORATION_0                    0xAD
-#define FLAG_DECORATION_1                    0xAE
-#define FLAG_DECORATION_2                    0xAF
-#define FLAG_DECORATION_3                    0xB0
-#define FLAG_DECORATION_4                    0xB1
-#define FLAG_DECORATION_5                    0xB2
-#define FLAG_DECORATION_6                    0xB3
-#define FLAG_DECORATION_7                    0xB4
-#define FLAG_DECORATION_8                    0xB5
-#define FLAG_DECORATION_9                    0xB6
-#define FLAG_DECORATION_10                   0xB7
-#define FLAG_DECORATION_11                   0xB8
-#define FLAG_DECORATION_12                   0xB9
-#define FLAG_DECORATION_13                   0xBA
-#define FLAG_DECORATION_14                   0xBB
-#define FLAG_RECEIVED_POKENAV                0xBC
-#define FLAG_DELIVERED_STEVEN_LETTER         0xBD
-#define FLAG_DEFEATED_WALLY_MAUVILLE         0xBE
-#define FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F  0xBF
-#define FLAG_RECEIVED_SUN_STONE_MOSSDEEP     0xC0
-#define FLAG_WALLY_SPEECH                    0xC1
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1   0xC2 // Leftover from the RS version of Puzzle Room 7, functionally unused
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2   0xC3 //
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3   0xC4 //
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4   0xC5 //
-#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5   0xC6 //
-#define FLAG_RUSTURF_TUNNEL_OPENED           0xC7
-#define FLAG_RECEIVED_RED_SCARF              0xC8
-#define FLAG_RECEIVED_BLUE_SCARF             0xC9
-#define FLAG_RECEIVED_PINK_SCARF             0xCA
-#define FLAG_RECEIVED_GREEN_SCARF            0xCB
-#define FLAG_RECEIVED_YELLOW_SCARF           0xCC
-#define FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER    0xCD
-#define FLAG_ENCOUNTERED_LATIAS_OR_LATIOS    0xCE
-#define FLAG_MET_ARCHIE_METEOR_FALLS         0xCF
-#define FLAG_GOT_BASEMENT_KEY_FROM_WATTSON   0xD0
-#define FLAG_GOT_TM24_FROM_WATTSON           0xD1
-#define FLAG_FAN_CLUB_STRENGTH_SHARED        0xD2 // Set when you rate the strength of another trainer in Lilycove's Trainer Fan Club.
-#define FLAG_DEFEATED_RIVAL_RUSTBORO         0xD3
-#define FLAG_RECEIVED_RED_OR_BLUE_ORB        0xD4
-#define FLAG_RECEIVED_PREMIER_BALL_RUSTBORO  0xD5
-#define FLAG_ENABLE_WALLY_MATCH_CALL         0xD6
-#define FLAG_ENABLE_SCOTT_MATCH_CALL         0xD7
-#define FLAG_ENABLE_MOM_MATCH_CALL           0xD8
-#define FLAG_MET_DIVING_TREASURE_HUNTER      0xD9
-#define FLAG_MET_WAILMER_TRAINER             0xDA
-#define FLAG_EVIL_LEADER_PLEASE_STOP         0xDB
-#define FLAG_UNUSED_0xDC                     0xDC // Not really used.
-#define FLAG_RECEIVED_GO_GOGGLES             0xDD
-#define FLAG_WINGULL_SENT_ON_ERRAND          0xDE
-#define FLAG_RECEIVED_MENTAL_HERB            0xDF
-#define FLAG_WINGULL_DELIVERED_MAIL          0xE0
-#define FLAG_RECEIVED_20_COINS               0xE1
-#define FLAG_RECEIVED_STARTER_DOLL           0xE2
-#define FLAG_RECEIVED_GOOD_ROD               0xE3
-#define FLAG_REGI_DOORS_OPENED               0xE4
-#define FLAG_RECEIVED_TM27                   0xE5
-#define FLAG_RECEIVED_TM36                   0xE6
-#define FLAG_RECEIVED_TM05                   0xE7
-#define FLAG_RECEIVED_TM19                   0xE8
-#define FLAG_UNUSED_0x0E9                    0xE9 // Unused Flag
-#define FLAG_RECEIVED_TM44                   0xEA
-#define FLAG_RECEIVED_TM45                   0xEB
-#define FLAG_RECEIVED_GLASS_ORNAMENT         0xEC
-#define FLAG_RECEIVED_SILVER_SHIELD          0xED
-#define FLAG_RECEIVED_GOLD_SHIELD            0xEE
-#define FLAG_USED_STORAGE_KEY                0xEF
-#define FLAG_USED_ROOM_1_KEY                 0xF0
-#define FLAG_USED_ROOM_2_KEY                 0xF1
-#define FLAG_USED_ROOM_4_KEY                 0xF2
-#define FLAG_USED_ROOM_6_KEY                 0xF3
-#define FLAG_MET_PROF_COZMO                  0xF4
-#define FLAG_RECEIVED_WAILMER_DOLL           0xF5
-#define FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104 0xF6
-#define FLAG_DEFEATED_SS_TIDAL_TRAINERS      0xF7
-#define FLAG_RECEIVED_SPELON_BERRY           0xF8
-#define FLAG_RECEIVED_PAMTRE_BERRY           0xF9
-#define FLAG_RECEIVED_WATMEL_BERRY           0xFA
-#define FLAG_RECEIVED_DURIN_BERRY            0xFB
-#define FLAG_RECEIVED_BELUE_BERRY            0xFC
-#define FLAG_ENABLE_RIVAL_MATCH_CALL         0xFD
-#define FLAG_RECEIVED_CHARCOAL               0xFE
-#define FLAG_LATIOS_OR_LATIAS_ROAMING        0xFF
-#define FLAG_HIDE_SPECIAL_BALLS_SELLER       0x100
-#define FLAG_RECEIVED_OLD_ROD                0x101
-#define FLAG_RECEIVED_COIN_CASE              0x102
-#define FLAG_RETURNED_RED_OR_BLUE_ORB        0x103
-#define FLAG_RECEIVED_TM49                   0x104
-#define FLAG_RECEIVED_TM28                   0x105
-#define FLAG_RECEIVED_TM09                   0x106
-#define FLAG_ENTERED_ELITE_FOUR              0x107
-#define FLAG_RECEIVED_TM10                   0x108
-#define FLAG_RECEIVED_TM41                   0x109
-#define FLAG_RECEIVED_LAVARIDGE_EGG          0x10A
-#define FLAG_RECEIVED_REVIVED_FOSSIL_MON     0x10B
-#define FLAG_SECRET_BASE_REGISTRY_ENABLED    0x10C
-#define FLAG_RECEIVED_TM46                   0x10D
-#define FLAG_CONTEST_SKETCH_CREATED          0x10E  // Set but never read
-#define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE   0x10F
-#define FLAG_RECEIVED_EXP_SHARE              0x110
-#define FLAG_POKERUS_EXPLAINED               0x111
-#define FLAG_RECEIVED_RUNNING_SHOES          0x112
-#define FLAG_RECEIVED_QUICK_CLAW             0x113
-#define FLAG_RECEIVED_KINGS_ROCK             0x114
-#define FLAG_RECEIVED_MACHO_BRACE            0x115
-#define FLAG_RECEIVED_SOOTHE_BELL            0x116
-#define FLAG_RECEIVED_WHITE_HERB             0x117
-#define FLAG_RECEIVED_SOFT_SAND              0x118
-#define FLAG_ENABLE_PROF_BIRCH_MATCH_CALL    0x119
-#define FLAG_RECEIVED_CLEANSE_TAG            0x11A
-#define FLAG_RECEIVED_FOCUS_BAND             0x11B
-#define FLAG_DECLINED_WALLY_BATTLE_MAUVILLE  0x11C
-#define FLAG_RECEIVED_DEVON_SCOPE            0x11D
-#define FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE  0x11E
-#define FLAG_MET_DEVON_EMPLOYEE              0x11F
-#define FLAG_MET_RIVAL_RUSTBORO              0x120
-#define FLAG_RECEIVED_SILK_SCARF             0x121
-#define FLAG_NOT_READY_FOR_BATTLE_ROUTE_120  0x122
-#define FLAG_RECEIVED_SS_TICKET              0x123
-#define FLAG_MET_RIVAL_LILYCOVE              0x124
-#define FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE 0x125
-#define FLAG_EXCHANGED_SCANNER               0x126
-#define FLAG_KECLEON_FLED_FORTREE            0x127
-#define FLAG_PETALBURG_MART_EXPANDED_ITEMS   0x128
-#define FLAG_RECEIVED_MIRACLE_SEED           0x129
-#define FLAG_RECEIVED_BELDUM                 0x12A
-#define FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK   0x12B
-#define FLAG_MET_FANCLUB_YOUNGER_BROTHER     0x12C
-#define FLAG_RIVAL_LEFT_FOR_ROUTE103         0x12D
-#define FLAG_OMIT_DIVE_FROM_STEVEN_LETTER    0x12E
-#define FLAG_HAS_MATCH_CALL                  0x12F
-#define FLAG_ADDED_MATCH_CALL_TO_POKENAV     0x130
-#define FLAG_REGISTERED_STEVEN_POKENAV       0x131
-#define FLAG_ENABLE_NORMAN_MATCH_CALL        0x132
-#define FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN 0x133 // Set after you follow Steven to the entrance of the Cave of Origin.
-#define FLAG_MET_ARCHIE_SOOTOPOLIS           0x134
-#define FLAG_MET_MAXIE_SOOTOPOLIS            0x135
-#define FLAG_MET_SCOTT_RUSTBORO              0x136
-#define FLAG_WALLACE_GOES_TO_SKY_PILLAR      0x137 // Set after speaking to Wallace within the Cave of Origin.
-#define FLAG_RECEIVED_HM07                   0x138
-#define FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS    0x139
-#define FLAG_RECEIVED_AURORA_TICKET          0x13A
-#define FLAG_RECEIVED_MYSTIC_TICKET          0x13B
-#define FLAG_RECEIVED_OLD_SEA_MAP            0x13C
-#define FLAG_UNUSED_MYSTERY_GIFT_0x13D       0x13D
-#define FLAG_UNUSED_MYSTERY_GIFT_0x13E       0x13E
-#define FLAG_UNUSED_MYSTERY_GIFT_0x13F       0x13F
-#define FLAG_UNUSED_MYSTERY_GIFT_0x140       0x140
-#define FLAG_UNUSED_MYSTERY_GIFT_0x141       0x141
-#define FLAG_UNUSED_MYSTERY_GIFT_0x142       0x142
-#define FLAG_UNUSED_MYSTERY_GIFT_0x143       0x143
-#define FLAG_UNUSED_MYSTERY_GIFT_0x144       0x144
-#define FLAG_UNUSED_MYSTERY_GIFT_0x145       0x145
-#define FLAG_UNUSED_MYSTERY_GIFT_0x146       0x146
-#define FLAG_UNUSED_MYSTERY_GIFT_0x147       0x147
-#define FLAG_UNUSED_MYSTERY_GIFT_0x148       0x148
-#define FLAG_UNUSED_MYSTERY_GIFT_0x149       0x149
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14A       0x14A
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14B       0x14B
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14C       0x14C
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14D       0x14D
-
-#define FLAG_MIRAGE_TOWER_VISIBLE            0x14E
-#define FLAG_CHOSE_ROOT_FOSSIL               0x14F
-#define FLAG_CHOSE_CLAW_FOSSIL               0x150
-#define FLAG_RECEIVED_POWDER_JAR             0x151
-
-#define FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER 0x152
-
-#define FLAG_MET_BATTLE_FRONTIER_BREEDER     0x153
-#define FLAG_MET_BATTLE_FRONTIER_MANIAC      0x154
-#define FLAG_ENTERED_CONTEST                 0x155
-#define FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN  0x156
-#define FLAG_MET_BATTLE_FRONTIER_GAMBLER     0x157
-#define FLAG_ENABLE_MR_STONE_POKENAV         0x158
-#define FLAG_NURSE_MENTIONS_GOLD_CARD        0x159
-#define FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR  0x15A
-#define FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR 0x15B
+#define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL             0x50
+#define FLAG_SET_WALL_CLOCK                                 0x51
+#define FLAG_RESCUED_BIRCH                                  0x52
+#define FLAG_LEGENDARIES_IN_SOOTOPOLIS                      0x53
+#define FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_MASTER_BALL 0x54  // Originally Unused Flag
+#define FLAG_UNUSED_0x055                                   0x55  // Unused Flag
+#define FLAG_HIDE_CONTEST_POKE_BALL                         0x56  // Always set after new game, object it hides is added directly
+#define FLAG_MET_RIVAL_MOM                                  0x57
+#define FLAG_BIRCH_AIDE_MET                                 0x58
+#define FLAG_DECLINED_BIKE                                  0x59
+#define FLAG_RECEIVED_BIKE                                  0x5A
+#define FLAG_WATTSON_REMATCH_AVAILABLE                      0x5B
+#define FLAG_COLLECTED_ALL_SILVER_SYMBOLS                   0x5C
+#define FLAG_GOOD_LUCK_SAFARI_ZONE                          0x5D // Set after talking to NPC blocking Safari Zone entrance/exit once.
+#define FLAG_RECEIVED_WAILMER_PAIL                          0x5E
+#define FLAG_RECEIVED_POKEBLOCK_CASE                        0x5F
+#define FLAG_RECEIVED_SECRET_POWER                          0x60
+#define FLAG_MET_TEAM_AQUA_HARBOR                           0x61
+#define FLAG_TV_EXPLAINED                                   0x62
+#define FLAG_MAUVILLE_GYM_BARRIERS_STATE                    0x63
+#define FLAG_UNUSED_0x64                                    0x64 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_UNUSED_0x65                                    0x65 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_UNUSED_0x66                                    0x66 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_UNUSED_0x67                                    0x67 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_UNUSED_0x068                                   0x68  // Unused Flag
+#define FLAG_OCEANIC_MUSEUM_MET_REPORTER                    0x69
+#define FLAG_RECEIVED_HM04                                  0x6A
+#define FLAG_RECEIVED_HM06                                  0x6B
+#define FLAG_WHITEOUT_TO_LAVARIDGE                          0x6C // Set after defeating Flannery, so the player cant white out from poison before receiving Go Goggles
+#define FLAG_RECEIVED_HM05                                  0x6D
+#define FLAG_RECEIVED_HM02                                  0x6E
+#define FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT                 0x6F
+#define FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE                 0x70
+#define FLAG_UNUSED_RS_LEGENDARY_BATTLE_DONE                0x71 // Unused Flag. Used in R/S to indicate whether player defeated or caught Groudon/Kyogre in Cave of Origin.
+#define FLAG_SCOTT_CALL_BATTLE_FRONTIER                     0x72 // Used in order to activate a phone call from Scott, inviting the player to the SS Tidal.
+#define FLAG_RECEIVED_METEORITE                             0x73
+#define FLAG_ADVENTURE_STARTED                              0x74 // RECEIVED Pokédex.
+#define FLAG_DEFEATED_MAGMA_SPACE_CENTER                    0x75 // Set when Team Magma is defeated at Mossdeep's Space Center.
+#define FLAG_MET_HIDDEN_POWER_GIVER                         0x76
+#define FLAG_CANCEL_BATTLE_ROOM_CHALLENGE                   0x77
+#define FLAG_LANDMARK_MIRAGE_TOWER                          0x78
+#define FLAG_RECEIVED_TM31                                  0x79
+#define FLAG_RECEIVED_HM03                                  0x7A
+#define FLAG_RECEIVED_HM08                                  0x7B
+#define FLAG_REGISTER_RIVAL_POKENAV                         0x7C
+#define FLAG_DEFEATED_RIVAL_ROUTE_104                       0x7D
+#define FLAG_DEFEATED_WALLY_VICTORY_ROAD                    0x7E
+#define FLAG_MET_PRETTY_PETAL_SHOP_OWNER                    0x7F
+#define FLAG_ENABLE_ROXANNE_FIRST_CALL                      0x80 // Set after defeating Brawly. This will activate a call with Roxanne in order to register her.
+#define FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN                 0x81
+#define FLAG_DEFEATED_RIVAL_ROUTE103                        0x82
+#define FLAG_RECEIVED_DOLL_LANETTE                          0x83
+#define FLAG_RECEIVED_POTION_OLDALE                         0x84
+#define FLAG_RECEIVED_AMULET_COIN                           0x85
+#define FLAG_PENDING_DAYCARE_EGG                            0x86
+#define FLAG_THANKED_FOR_PLAYING_WITH_WALLY                 0x87
+#define FLAG_ENABLE_FIRST_WALLY_POKENAV_CALL                0x88 // Set after defeating Wally outside Mauville Gym. Will activate a call later to register Wally.
+#define FLAG_RECEIVED_HM01                                  0x89
+#define FLAG_SCOTT_CALL_FORTREE_GYM                         0x8A // Triggers call from Scott after defeating Winona
+#define FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY                  0x8B
+#define FLAG_RECEIVED_6_SODA_POP                            0x8C
+#define FLAG_DEFEATED_SEASHORE_HOUSE                        0x8D
+#define FLAG_DEVON_GOODS_STOLEN                             0x8E
+#define FLAG_RECOVERED_DEVON_GOODS                          0x8F
+#define FLAG_RETURNED_DEVON_GOODS                           0x90
+#define FLAG_CAUGHT_LUGIA                                   0x91
+#define FLAG_CAUGHT_HO_OH                                   0x92
+#define FLAG_MR_BRINEY_SAILING_INTRO                        0x93
+#define FLAG_DOCK_REJECTED_DEVON_GOODS                      0x94
+#define FLAG_DELIVERED_DEVON_GOODS                          0x95
+#define FLAG_MYSTERY_EVENT_DONE                             0x96 // Originally Unused, leftover from R/S
+#define FLAG_RECEIVED_CASTFORM                              0x97
+#define FLAG_RECEIVED_SUPER_ROD                             0x98
+#define FLAG_RUSTBORO_NPC_TRADE_COMPLETED                   0x99
+#define FLAG_PACIFIDLOG_NPC_TRADE_COMPLETED                 0x9A
+#define FLAG_FORTREE_NPC_TRADE_COMPLETED                    0x9B
+#define FLAG_BATTLE_FRONTIER_TRADE_DONE                     0x9C
+#define FLAG_FORCE_MIRAGE_TOWER_VISIBLE                     0x9D
+#define FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE                  0x9E
+#define FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN    0x9F
+#define FLAG_COOL_PAINTING_MADE                             0xA0
+#define FLAG_BEAUTY_PAINTING_MADE                           0xA1
+#define FLAG_CUTE_PAINTING_MADE                             0xA2
+#define FLAG_SMART_PAINTING_MADE                            0xA3
+#define FLAG_TOUGH_PAINTING_MADE                            0xA4
+#define FLAG_RECEIVED_TM39                                  0xA5
+#define FLAG_RECEIVED_TM08                                  0xA6
+#define FLAG_RECEIVED_TM34                                  0xA7
+#define FLAG_RECEIVED_TM50                                  0xA8
+#define FLAG_RECEIVED_TM42                                  0xA9
+#define FLAG_RECEIVED_TM40                                  0xAA
+#define FLAG_RECEIVED_TM04                                  0xAB
+#define FLAG_RECEIVED_TM03                                  0xAC
+#define FLAG_DECORATION_0                                   0xAD
+#define FLAG_DECORATION_1                                   0xAE
+#define FLAG_DECORATION_2                                   0xAF
+#define FLAG_DECORATION_3                                   0xB0
+#define FLAG_DECORATION_4                                   0xB1
+#define FLAG_DECORATION_5                                   0xB2
+#define FLAG_DECORATION_6                                   0xB3
+#define FLAG_DECORATION_7                                   0xB4
+#define FLAG_DECORATION_8                                   0xB5
+#define FLAG_DECORATION_9                                   0xB6
+#define FLAG_DECORATION_10                                  0xB7
+#define FLAG_DECORATION_11                                  0xB8
+#define FLAG_DECORATION_12                                  0xB9
+#define FLAG_DECORATION_13                                  0xBA
+#define FLAG_DECORATION_14                                  0xBB
+#define FLAG_RECEIVED_POKENAV                               0xBC
+#define FLAG_DELIVERED_STEVEN_LETTER                        0xBD
+#define FLAG_DEFEATED_WALLY_MAUVILLE                        0xBE
+#define FLAG_DEFEATED_GRUNT_SPACE_CENTER_1F                 0xBF
+#define FLAG_RECEIVED_SUN_STONE_MOSSDEEP                    0xC0
+#define FLAG_WALLY_SPEECH                                   0xC1
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_1                  0xC2 // Leftover from the RS version of Puzzle Room 7, functionally unused
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_2                  0xC3 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_3                  0xC4 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_4                  0xC5 //
+#define FLAG_TRICK_HOUSE_PUZZLE_7_SWITCH_5                  0xC6 //
+#define FLAG_RUSTURF_TUNNEL_OPENED                          0xC7
+#define FLAG_RECEIVED_RED_SCARF                             0xC8
+#define FLAG_RECEIVED_BLUE_SCARF                            0xC9
+#define FLAG_RECEIVED_PINK_SCARF                            0xCA
+#define FLAG_RECEIVED_GREEN_SCARF                           0xCB
+#define FLAG_RECEIVED_YELLOW_SCARF                          0xCC
+#define FLAG_INTERACTED_WITH_STEVEN_SPACE_CENTER            0xCD
+#define FLAG_ENCOUNTERED_LATIAS_OR_LATIOS                   0xCE
+#define FLAG_MET_ARCHIE_METEOR_FALLS                        0xCF
+#define FLAG_GOT_BASEMENT_KEY_FROM_WATTSON                  0xD0
+#define FLAG_GOT_TM24_FROM_WATTSON                          0xD1
+#define FLAG_FAN_CLUB_STRENGTH_SHARED                       0xD2 // Set when you rate the strength of another trainer in Lilycove's Trainer Fan Club.
+#define FLAG_DEFEATED_RIVAL_RUSTBORO                        0xD3
+#define FLAG_RECEIVED_RED_OR_BLUE_ORB                       0xD4
+#define FLAG_RECEIVED_PREMIER_BALL_RUSTBORO                 0xD5
+#define FLAG_ENABLE_WALLY_MATCH_CALL                        0xD6
+#define FLAG_ENABLE_SCOTT_MATCH_CALL                        0xD7
+#define FLAG_ENABLE_MOM_MATCH_CALL                          0xD8
+#define FLAG_MET_DIVING_TREASURE_HUNTER                     0xD9
+#define FLAG_MET_WAILMER_TRAINER                            0xDA
+#define FLAG_EVIL_LEADER_PLEASE_STOP                        0xDB
+#define FLAG_UNUSED_0xDC                                    0xDC // Not really used.
+#define FLAG_RECEIVED_GO_GOGGLES                            0xDD
+#define FLAG_WINGULL_SENT_ON_ERRAND                         0xDE
+#define FLAG_RECEIVED_MENTAL_HERB                           0xDF
+#define FLAG_WINGULL_DELIVERED_MAIL                         0xE0
+#define FLAG_RECEIVED_20_COINS                              0xE1
+#define FLAG_RECEIVED_STARTER_DOLL                          0xE2
+#define FLAG_RECEIVED_GOOD_ROD                              0xE3
+#define FLAG_REGI_DOORS_OPENED                              0xE4
+#define FLAG_RECEIVED_TM27                                  0xE5
+#define FLAG_RECEIVED_TM36                                  0xE6
+#define FLAG_RECEIVED_TM05                                  0xE7
+#define FLAG_RECEIVED_TM19                                  0xE8
+#define FLAG_UNUSED_0x0E9                                   0xE9 // Unused Flag
+#define FLAG_RECEIVED_TM44                                  0xEA
+#define FLAG_RECEIVED_TM45                                  0xEB
+#define FLAG_RECEIVED_GLASS_ORNAMENT                        0xEC
+#define FLAG_RECEIVED_SILVER_SHIELD                         0xED
+#define FLAG_RECEIVED_GOLD_SHIELD                           0xEE
+#define FLAG_USED_STORAGE_KEY                               0xEF
+#define FLAG_USED_ROOM_1_KEY                                0xF0
+#define FLAG_USED_ROOM_2_KEY                                0xF1
+#define FLAG_USED_ROOM_4_KEY                                0xF2
+#define FLAG_USED_ROOM_6_KEY                                0xF3
+#define FLAG_MET_PROF_COZMO                                 0xF4
+#define FLAG_RECEIVED_WAILMER_DOLL                          0xF5
+#define FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104                0xF6
+#define FLAG_DEFEATED_SS_TIDAL_TRAINERS                     0xF7
+#define FLAG_RECEIVED_SPELON_BERRY                          0xF8
+#define FLAG_RECEIVED_PAMTRE_BERRY                          0xF9
+#define FLAG_RECEIVED_WATMEL_BERRY                          0xFA
+#define FLAG_RECEIVED_DURIN_BERRY                           0xFB
+#define FLAG_RECEIVED_BELUE_BERRY                           0xFC
+#define FLAG_ENABLE_RIVAL_MATCH_CALL                        0xFD
+#define FLAG_RECEIVED_CHARCOAL                              0xFE
+#define FLAG_LATIOS_OR_LATIAS_ROAMING                       0xFF
+#define FLAG_HIDE_SPECIAL_BALLS_SELLER                      0x100
+#define FLAG_RECEIVED_OLD_ROD                               0x101
+#define FLAG_RECEIVED_COIN_CASE                             0x102
+#define FLAG_RETURNED_RED_OR_BLUE_ORB                       0x103
+#define FLAG_RECEIVED_TM49                                  0x104
+#define FLAG_RECEIVED_TM28                                  0x105
+#define FLAG_RECEIVED_TM09                                  0x106
+#define FLAG_ENTERED_ELITE_FOUR                             0x107
+#define FLAG_RECEIVED_TM10                                  0x108
+#define FLAG_RECEIVED_TM41                                  0x109
+#define FLAG_RECEIVED_LAVARIDGE_EGG                         0x10A
+#define FLAG_RECEIVED_REVIVED_FOSSIL_MON                    0x10B
+#define FLAG_SECRET_BASE_REGISTRY_ENABLED                   0x10C
+#define FLAG_RECEIVED_TM46                                  0x10D
+#define FLAG_CONTEST_SKETCH_CREATED                         0x10E  // Set but never read
+#define FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE                  0x10F
+#define FLAG_RECEIVED_EXP_SHARE                             0x110
+#define FLAG_POKERUS_EXPLAINED                              0x111
+#define FLAG_RECEIVED_RUNNING_SHOES                         0x112
+#define FLAG_RECEIVED_QUICK_CLAW                            0x113
+#define FLAG_RECEIVED_KINGS_ROCK                            0x114
+#define FLAG_RECEIVED_MACHO_BRACE                           0x115
+#define FLAG_RECEIVED_SOOTHE_BELL                           0x116
+#define FLAG_RECEIVED_WHITE_HERB                            0x117
+#define FLAG_RECEIVED_SOFT_SAND                             0x118
+#define FLAG_ENABLE_PROF_BIRCH_MATCH_CALL                   0x119
+#define FLAG_RECEIVED_CLEANSE_TAG                           0x11A
+#define FLAG_RECEIVED_FOCUS_BAND                            0x11B
+#define FLAG_DECLINED_WALLY_BATTLE_MAUVILLE                 0x11C
+#define FLAG_RECEIVED_DEVON_SCOPE                           0x11D
+#define FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE                 0x11E
+#define FLAG_MET_DEVON_EMPLOYEE                             0x11F
+#define FLAG_MET_RIVAL_RUSTBORO                             0x120
+#define FLAG_RECEIVED_SILK_SCARF                            0x121
+#define FLAG_NOT_READY_FOR_BATTLE_ROUTE_120                 0x122
+#define FLAG_RECEIVED_SS_TICKET                             0x123
+#define FLAG_MET_RIVAL_LILYCOVE                             0x124
+#define FLAG_MET_RIVAL_IN_HOUSE_AFTER_LILYCOVE              0x125
+#define FLAG_EXCHANGED_SCANNER                              0x126
+#define FLAG_KECLEON_FLED_FORTREE                           0x127
+#define FLAG_PETALBURG_MART_EXPANDED_ITEMS                  0x128
+#define FLAG_RECEIVED_MIRACLE_SEED                          0x129
+#define FLAG_RECEIVED_BELDUM                                0x12A
+#define FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK                  0x12B
+#define FLAG_MET_FANCLUB_YOUNGER_BROTHER                    0x12C
+#define FLAG_RIVAL_LEFT_FOR_ROUTE103                        0x12D
+#define FLAG_OMIT_DIVE_FROM_STEVEN_LETTER                   0x12E
+#define FLAG_HAS_MATCH_CALL                                 0x12F
+#define FLAG_ADDED_MATCH_CALL_TO_POKENAV                    0x130
+#define FLAG_REGISTERED_STEVEN_POKENAV                      0x131
+#define FLAG_ENABLE_NORMAN_MATCH_CALL                       0x132
+#define FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN                0x133 // Set after you follow Steven to the entrance of the Cave of Origin.
+#define FLAG_MET_ARCHIE_SOOTOPOLIS                          0x134
+#define FLAG_MET_MAXIE_SOOTOPOLIS                           0x135
+#define FLAG_MET_SCOTT_RUSTBORO                             0x136
+#define FLAG_WALLACE_GOES_TO_SKY_PILLAR                     0x137 // Set after speaking to Wallace within the Cave of Origin.
+#define FLAG_RECEIVED_HM07                                  0x138
+#define FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS                   0x139
+#define FLAG_RECEIVED_AURORA_TICKET                         0x13A
+#define FLAG_RECEIVED_MYSTIC_TICKET                         0x13B
+#define FLAG_RECEIVED_OLD_SEA_MAP                           0x13C
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13D                      0x13D
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13E                      0x13E
+#define FLAG_UNUSED_MYSTERY_GIFT_0x13F                      0x13F
+#define FLAG_UNUSED_MYSTERY_GIFT_0x140                      0x140
+#define FLAG_UNUSED_MYSTERY_GIFT_0x141                      0x141
+#define FLAG_UNUSED_MYSTERY_GIFT_0x142                      0x142
+#define FLAG_UNUSED_MYSTERY_GIFT_0x143                      0x143
+#define FLAG_UNUSED_MYSTERY_GIFT_0x144                      0x144
+#define FLAG_UNUSED_MYSTERY_GIFT_0x145                      0x145
+#define FLAG_UNUSED_MYSTERY_GIFT_0x146                      0x146
+#define FLAG_UNUSED_MYSTERY_GIFT_0x147                      0x147
+#define FLAG_UNUSED_MYSTERY_GIFT_0x148                      0x148
+#define FLAG_UNUSED_MYSTERY_GIFT_0x149                      0x149
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14A                      0x14A
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14B                      0x14B
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14C                      0x14C
+#define FLAG_UNUSED_MYSTERY_GIFT_0x14D                      0x14D
+#define FLAG_MIRAGE_TOWER_VISIBLE                           0x14E
+#define FLAG_CHOSE_ROOT_FOSSIL                              0x14F
+#define FLAG_CHOSE_CLAW_FOSSIL                              0x150
+#define FLAG_RECEIVED_POWDER_JAR                            0x151
+#define FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER                0x152
+#define FLAG_MET_BATTLE_FRONTIER_BREEDER                    0x153
+#define FLAG_MET_BATTLE_FRONTIER_MANIAC                     0x154
+#define FLAG_ENTERED_CONTEST                                0x155
+#define FLAG_MET_SLATEPORT_FANCLUB_CHAIRMAN                 0x156
+#define FLAG_MET_BATTLE_FRONTIER_GAMBLER                    0x157
+#define FLAG_ENABLE_MR_STONE_POKENAV                        0x158
+#define FLAG_NURSE_MENTIONS_GOLD_CARD                       0x159
+#define FLAG_MET_FRONTIER_BEAUTY_MOVE_TUTOR                 0x15A
+#define FLAG_MET_FRONTIER_SWIMMER_MOVE_TUTOR                0x15B
 
 // Trainer Rematch Flags
 #define FLAG_MATCH_CALL_REGISTERED           0x15C

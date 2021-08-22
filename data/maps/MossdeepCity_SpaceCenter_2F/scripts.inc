@@ -316,7 +316,18 @@ MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha:: @ 8224071
 	turnobject LOCALID_RICH_BOY, DIR_NORTH
 	call MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayer
 	fadescreen FADE_FROM_BLACK
-	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome, MSGBOX_DEFAULT
+	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenThankYou, MSGBOX_DEFAULT
+	closemessage
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	compare VAR_RESULT, DIR_SOUTH
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceLeft
+	compare VAR_RESULT, DIR_WEST
+	call_if_eq MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceDown
+	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenFoundSomething, MSGBOX_DEFAULT
+	faceplayer
+	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenSaysPlayerShouldKeepIt, MSGBOX_DEFAULT
+	giveitem ITEM_MASTER_BALL
+	msgbox MossdeepCity_SpaceCenter_2F_Text_StevenComeSeeMeAtHome, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
 	setflag FLAG_DEFEATED_MAGMA_SPACE_CENTER
@@ -345,6 +356,26 @@ MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerSouth:: @ 822414D
 
 MossdeepCity_SpaceCenter_2F_EventScript_StevenFacePlayerWest:: @ 8224152
 	turnobject LOCALID_STEVEN, DIR_EAST
+	return
+
+MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceLeft:
+	applymovement LOCALID_STEVEN, Common_Movement_FaceLeft
+	waitmovement 0
+	delay 40
+	playse SE_PIN
+	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 20
+	return
+
+MossdeepCity_SpaceCenter_2F_EventScript_StevenFaceDown:
+	applymovement LOCALID_STEVEN, Common_Movement_FaceDown
+	waitmovement 0
+	delay 40
+	playse SE_PIN
+	applymovement LOCALID_STEVEN, Common_Movement_ExclamationMark
+	waitmovement 0
+	delay 20
 	return
 
 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer:: @ 8224157
@@ -481,7 +512,7 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano: @ 82246F0
 	.string "It will be savage!$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle: @ 82247FF
-	.string "STEVEN: {PLAYER}{KUN}!\n"
+	.string "STEVEN: {PLAYER}!\n"
 	.string "You're going to help me?\p"
 	.string "Let's go into battle together!\n"
 	.string "Are you ready?$"
@@ -518,11 +549,23 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp: @ 82249DC
 	.string "There appear to be more important\n"
 	.string "matters that I must examine…$"
 
-MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome: @ 8224A4A
+MossdeepCity_SpaceCenter_2F_Text_StevenThankYou:
 	.string "STEVEN: Whew, that was too tense.\n"
-	.string "{PLAYER}{KUN}, thank you.\p"
-	.string "I have something to give you as\n"
-	.string "thanks for your support.\p"
+	.string "{PLAYER}, thank you.$"
+
+MossdeepCity_SpaceCenter_2F_Text_StevenFoundSomething:
+	.string "Hmm? What is this?\n"
+	.string "This looks just like…\p"
+	.string "Yes, there's no doubt.\p"
+	.string "They must have dropped it by\n"
+	.string "accident when they ran away.$"
+
+MossdeepCity_SpaceCenter_2F_Text_StevenSaysPlayerShouldKeepIt:
+	.string "{PLAYER}, you should keep it.$"
+
+MossdeepCity_SpaceCenter_2F_Text_StevenComeSeeMeAtHome:
+	.string "I have something else to give you\n"
+	.string "as thanks for your support.\p"
 	.string "Please come see me at home\n"
 	.string "after this.\p"
 	.string "Oh, yes, I don't live in RUSTBORO CITY.\n"
