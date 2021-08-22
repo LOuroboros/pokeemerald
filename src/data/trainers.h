@@ -443,6 +443,8 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_ARCHIE] =
     {
+        .hasCustomTransition = TRUE,
+        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_AQUA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
         .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
@@ -7847,6 +7849,8 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_MAXIE_MAGMA_HIDEOUT] =
     {
+        .hasCustomTransition = TRUE,
+        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -7860,6 +7864,8 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_MAXIE_MT_CHIMNEY] =
     {
+        .hasCustomTransition = TRUE,
+        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -9568,6 +9574,8 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_MAXIE_MOSSDEEP] =
     {
+        //.hasCustomTransition = TRUE,
+        //.transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -11183,6 +11191,8 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_ARCHIE_POSTGAME] =
     {
+        .hasCustomTransition = TRUE,
+        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_AQUA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
         .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
@@ -11196,6 +11206,8 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_MAXIE_POSTGAME] =
     {
+        .hasCustomTransition = TRUE,
+        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,

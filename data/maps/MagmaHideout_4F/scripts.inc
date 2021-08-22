@@ -73,6 +73,7 @@ MagmaHideout_4F_EventScript_Maxie:: @ 823A560
 	waitmovement 0
 	msgbox MagmaHideout_4F_Text_MaxieOhItWasYou, MSGBOX_DEFAULT
 	closemessage
+	setvar VAR_MUGSHOT_ID, MUGSHOT_MAXIE
 	trainerbattle_no_intro TRAINER_MAXIE_MAGMA_HIDEOUT, MagmaHideout_4F_Text_MaxieDefeat
 	msgbox MagmaHideout_4F_Text_MaxieImGoingAfterGroudon, MSGBOX_DEFAULT
 	closemessage
@@ -128,6 +129,7 @@ MagmaHideout_4F_Movement_MaxieLookAround: @ 823A680
 MagmaHideout_4F_EventScript_MaxiePostgame:
 	lock
 	faceplayer
+	setvar VAR_MUGSHOT_ID, MUGSHOT_MAXIE
 	trainerbattle_single TRAINER_MAXIE_POSTGAME, MagmaHideout_4F_Text_Maxie, MagmaHideout_4F_Text_MaxieDefeatPostgame, MagmaHideout_4F_EventScript_MaxieDefeated, NO_MUSIC
 	end
 
