@@ -46,6 +46,7 @@ EverGrandeCity_SidneysRoom_EventScript_WalkInCloseDoor:: @ 8227F57
 EverGrandeCity_SidneysRoom_EventScript_Sidney:: @ 8227F64
 	lock
 	faceplayer
+	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_SidneysRoom_EventScript_SidneyRematch
 	goto_if_set FLAG_DEFEATED_ELITE_4_SIDNEY, EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_SidneysRoom_Text_IntroSpeech, MSGBOX_DEFAULT
@@ -60,8 +61,38 @@ EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech:: @ 8227F8B
 
 EverGrandeCity_SidneysRoom_EventScript_Defeated:: @ 8227F95
 	setflag FLAG_DEFEATED_ELITE_4_SIDNEY
+	setflag FLAG_REMATCH_SIDNEY
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_SidneysRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_SidneysRoom_EventScript_SidneyRematch:
+	goto_if_set FLAG_DEFEATED_ELITE_4_SIDNEY, EverGrandeCity_SidneysRoom_EventScript_PostRematchSpeech
+	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	call_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 2, EverGrandeCity_SidneysRoom_EventScript_SidneyRematchIntro2
+	call_if_var_eq VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_SidneysRoom_EventScript_SidneyRematchIntro1
+	trainerbattle_no_intro TRAINER_SIDNEY_REMATCH, EverGrandeCity_SidneysRoom_Text_DefeatRematch
+	goto EverGrandeCity_SidneysRoom_EventScript_DefeatedRematch
+	end
+
+EverGrandeCity_SidneysRoom_EventScript_SidneyRematchIntro1:
+	msgbox EverGrandeCity_SidneysRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	return
+
+EverGrandeCity_SidneysRoom_EventScript_SidneyRematchIntro2:
+	msgbox EverGrandeCity_SidneysRoom_Text_RematchIntroSpeech2, MSGBOX_DEFAULT
+	return
+
+EverGrandeCity_SidneysRoom_EventScript_PostRematchSpeech::
+	msgbox EverGrandeCity_SidneysRoom_Text_PostRematchSpeech, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_SidneysRoom_EventScript_DefeatedRematch:
+	setflag FLAG_DEFEATED_ELITE_4_SIDNEY
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
+	msgbox EverGrandeCity_SidneysRoom_Text_PostRematchSpeech, MSGBOX_DEFAULT
 	release
 	end
 
@@ -86,3 +117,35 @@ EverGrandeCity_SidneysRoom_Text_PostBattleSpeech: @ 82280EC
 	.string "Now, go on to the next room and enjoy\l"
 	.string "your next battle!$"
 
+EverGrandeCity_SidneysRoom_Text_RematchIntroSpeech:
+	.string "Yo, champion! Welcome back!\n"
+	.string "You're looking real good!\p"
+	.string "If you're here, that means you\n"
+	.string "want to take on the POKéMON LEAGUE\l"
+	.string "challenge again, isn't that right?\p"
+	.string "Heh heh… you better get ready then!\p"
+	.string "Our new champion gave us artifacts\n"
+	.string "called “KEY STONES”.\p"
+	.string "They allow our POKéMON to perform an\n"
+	.string "action called “MEGA EVOLUTION”, and\l"
+	.string "that means we're crazy stronger!\p"
+	.string "Let's do this, {PLAYER}!\n"
+	.string "Let's have an excellent battle!$"
+
+EverGrandeCity_SidneysRoom_Text_RematchIntroSpeech2:
+	.string "Yo, champion! Welcome back!\n"
+	.string "You're looking real good!\p"
+	.string "If you're here, that means you\n"
+	.string "want to take on the POKéMON LEAGUE\l"
+	.string "challenge again, isn't that right?\p"
+	.string "Come on then, let's have a battle\n"
+	.string "that can only be staged here!$"
+
+EverGrandeCity_SidneysRoom_Text_DefeatRematch:
+	.string "Well, well, I lose again!$"
+
+EverGrandeCity_SidneysRoom_Text_PostRematchSpeech:
+	.string "Heh… you really are the strongest…\n"
+	.string "Eh, I had fun, so whatever.\p"
+	.string "Go on to the next room!\n"
+	.string "Your next battle awaits!$"

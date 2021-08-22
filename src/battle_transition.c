@@ -515,42 +515,45 @@ static const TransitionStateFunc sPhase2_Mugshot_Funcs[] =
 
 static const u8 sMugshotsTrainerPicIDsTable[MUGSHOTS_COUNT] =
 {
-    [MUGSHOT_SIDNEY]   = TRAINER_PIC_ELITE_FOUR_SIDNEY,
-    [MUGSHOT_PHOEBE]   = TRAINER_PIC_ELITE_FOUR_PHOEBE,
-    [MUGSHOT_GLACIA]   = TRAINER_PIC_ELITE_FOUR_GLACIA,
-    [MUGSHOT_DRAKE]    = TRAINER_PIC_ELITE_FOUR_DRAKE,
-    [MUGSHOT_CHAMPION] = TRAINER_PIC_CHAMPION_WALLACE,
-    [MUGSHOT_MAY]      = TRAINER_PIC_MAY,
-    [MUGSHOT_BRENDAN]  = TRAINER_PIC_BRENDAN,
-    [MUGSHOT_WALLY]    = TRAINER_PIC_WALLY,
-    [MUGSHOT_ARCHIE]   = TRAINER_PIC_AQUA_LEADER_ARCHIE,
-    [MUGSHOT_MAXIE]    = TRAINER_PIC_MAGMA_LEADER_MAXIE,
+    [MUGSHOT_SIDNEY]           = TRAINER_PIC_ELITE_FOUR_SIDNEY,
+    [MUGSHOT_PHOEBE]           = TRAINER_PIC_ELITE_FOUR_PHOEBE,
+    [MUGSHOT_GLACIA]           = TRAINER_PIC_ELITE_FOUR_GLACIA,
+    [MUGSHOT_DRAKE]            = TRAINER_PIC_ELITE_FOUR_DRAKE,
+    [MUGSHOT_CHAMPION_WALLACE] = TRAINER_PIC_CHAMPION_WALLACE,
+    [MUGSHOT_MAY]              = TRAINER_PIC_MAY,
+    [MUGSHOT_BRENDAN]          = TRAINER_PIC_BRENDAN,
+    [MUGSHOT_WALLY]            = TRAINER_PIC_WALLY,
+    [MUGSHOT_ARCHIE]           = TRAINER_PIC_AQUA_LEADER_ARCHIE,
+    [MUGSHOT_MAXIE]            = TRAINER_PIC_MAGMA_LEADER_MAXIE,
+    [MUGSHOT_CHAMPION_STEVEN]  = TRAINER_PIC_STEVEN,
 };
 static const s16 sMugshotsOpponentRotationScales[MUGSHOTS_COUNT][2] =
 {
-    [MUGSHOT_SIDNEY]   = {0x200, 0x200},
-    [MUGSHOT_PHOEBE]   = {0x200, 0x200},
-    [MUGSHOT_GLACIA]   = {0x1B0, 0x1B0},
-    [MUGSHOT_DRAKE]    = {0x1A0, 0x1A0},
-    [MUGSHOT_CHAMPION] = {0x188, 0x188},
-    [MUGSHOT_MAY]      = {0x200, 0x200},
-    [MUGSHOT_BRENDAN]  = {0x200, 0x200},
-    [MUGSHOT_WALLY]    = {0x200, 0x200},
-    [MUGSHOT_ARCHIE]   = {0x200, 0x200},
-    [MUGSHOT_MAXIE]    = {0x200, 0x200},
+    [MUGSHOT_SIDNEY]           = {0x200, 0x200},
+    [MUGSHOT_PHOEBE]           = {0x200, 0x200},
+    [MUGSHOT_GLACIA]           = {0x1B0, 0x1B0},
+    [MUGSHOT_DRAKE]            = {0x1A0, 0x1A0},
+    [MUGSHOT_CHAMPION_WALLACE] = {0x188, 0x188},
+    [MUGSHOT_MAY]              = {0x200, 0x200},
+    [MUGSHOT_BRENDAN]          = {0x200, 0x200},
+    [MUGSHOT_WALLY]            = {0x200, 0x200},
+    [MUGSHOT_ARCHIE]           = {0x200, 0x200},
+    [MUGSHOT_MAXIE]            = {0x200, 0x200},
+    [MUGSHOT_CHAMPION_STEVEN]  = {0x200, 0x200},
 };
 static const s16 sMugshotsOpponentCoords[MUGSHOTS_COUNT][2] =
 {
-    [MUGSHOT_SIDNEY]   = { 0, 0},
-    [MUGSHOT_PHOEBE]   = { 0, 0},
-    [MUGSHOT_GLACIA]   = {-4, 4},
-    [MUGSHOT_DRAKE]    = { 0, 5},
-    [MUGSHOT_CHAMPION] = {-8, 7},
-    [MUGSHOT_MAY]      = { 0, 0},
-    [MUGSHOT_BRENDAN]  = { 0, 0},
-    [MUGSHOT_WALLY]    = { 0, 0},
-    [MUGSHOT_ARCHIE]   = { 0, 0},
-    [MUGSHOT_MAXIE]    = { 0, 0},
+    [MUGSHOT_SIDNEY]           = { 0, 0},
+    [MUGSHOT_PHOEBE]           = { 0, 0},
+    [MUGSHOT_GLACIA]           = {-4, 4},
+    [MUGSHOT_DRAKE]            = { 0, 5},
+    [MUGSHOT_CHAMPION_WALLACE] = {-8, 7},
+    [MUGSHOT_MAY]              = { 0, 0},
+    [MUGSHOT_BRENDAN]          = { 0, 0},
+    [MUGSHOT_WALLY]            = { 0, 0},
+    [MUGSHOT_ARCHIE]           = { 0, 0},
+    [MUGSHOT_MAXIE]            = { 0, 0},
+    [MUGSHOT_CHAMPION_STEVEN]  = { 0, 0},
 };
 
 static const TransitionSpriteCallback sTrainerPicSpriteCbs[] =
@@ -780,7 +783,7 @@ static const u16 sMugshotPal_Sidney[] = INCBIN_U16("graphics/battle_transitions/
 static const u16 sMugshotPal_Phoebe[] = INCBIN_U16("graphics/battle_transitions/phoebe_bg.gbapal");
 static const u16 sMugshotPal_Glacia[] = INCBIN_U16("graphics/battle_transitions/glacia_bg.gbapal");
 static const u16 sMugshotPal_Drake[] = INCBIN_U16("graphics/battle_transitions/drake_bg.gbapal");
-static const u16 sMugshotPal_Champion[] = INCBIN_U16("graphics/battle_transitions/wallace_bg.gbapal");
+static const u16 sMugshotPal_ChampionWallace[] = INCBIN_U16("graphics/battle_transitions/wallace_bg.gbapal");
 static const u16 sMugshotPal_Brendan[] = INCBIN_U16("graphics/battle_transitions/brendan_bg.gbapal");
 static const u16 sMugshotPal_May[] = INCBIN_U16("graphics/battle_transitions/may_bg.gbapal");
 static const u16 sMugshotPal_RivalBrendan[] = INCBIN_U16("graphics/battle_transitions/rival_brendan_bg.gbapal");
@@ -788,19 +791,21 @@ static const u16 sMugshotPal_RivalMay[] = INCBIN_U16("graphics/battle_transition
 static const u16 sMugshotPal_Wally[] = INCBIN_U16("graphics/battle_transitions/wally.gbapal");
 static const u16 sMugshotPal_Archie[] = INCBIN_U16("graphics/battle_transitions/archie.gbapal");
 static const u16 sMugshotPal_Maxie[] = INCBIN_U16("graphics/battle_transitions/maxie.gbapal");
+static const u16 sMugshotPal_ChampionSteven[] = INCBIN_U16("graphics/battle_transitions/steven_bg.gbapal");
 
 static const u16 *const sOpponentMugshotsPals[MUGSHOTS_COUNT] =
 {
-    [MUGSHOT_SIDNEY]   = sMugshotPal_Sidney,
-    [MUGSHOT_PHOEBE]   = sMugshotPal_Phoebe,
-    [MUGSHOT_GLACIA]   = sMugshotPal_Glacia,
-    [MUGSHOT_DRAKE]    = sMugshotPal_Drake,
-    [MUGSHOT_CHAMPION] = sMugshotPal_Champion,
-    [MUGSHOT_MAY]      = sMugshotPal_RivalMay,
-    [MUGSHOT_BRENDAN]  = sMugshotPal_RivalBrendan,
-    [MUGSHOT_WALLY]    = sMugshotPal_Wally,
-    [MUGSHOT_ARCHIE]   = sMugshotPal_Archie,
-    [MUGSHOT_MAXIE]    = sMugshotPal_Maxie,
+    [MUGSHOT_SIDNEY]           = sMugshotPal_Sidney,
+    [MUGSHOT_PHOEBE]           = sMugshotPal_Phoebe,
+    [MUGSHOT_GLACIA]           = sMugshotPal_Glacia,
+    [MUGSHOT_DRAKE]            = sMugshotPal_Drake,
+    [MUGSHOT_CHAMPION_WALLACE] = sMugshotPal_ChampionWallace,
+    [MUGSHOT_MAY]              = sMugshotPal_RivalMay,
+    [MUGSHOT_BRENDAN]          = sMugshotPal_RivalBrendan,
+    [MUGSHOT_WALLY]            = sMugshotPal_Wally,
+    [MUGSHOT_ARCHIE]           = sMugshotPal_Archie,
+    [MUGSHOT_MAXIE]            = sMugshotPal_Maxie,
+    [MUGSHOT_CHAMPION_STEVEN]  = sMugshotPal_ChampionSteven,
 };
 
 static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =
@@ -2059,7 +2064,10 @@ static void Phase2Task_Drake(u8 taskId)
 
 static void Phase2Task_Champion(u8 taskId)
 {
-    gTasks[taskId].tMugshotId = MUGSHOT_CHAMPION;
+    if (VarGet(VAR_POKEMON_LEAGUE_RUNS_COUNTER) >= 1)
+        gTasks[taskId].tMugshotId = MUGSHOT_CHAMPION_STEVEN;
+    else
+        gTasks[taskId].tMugshotId = MUGSHOT_CHAMPION_WALLACE;
     Phase2Task_MugShotTransition(taskId);
 }
 

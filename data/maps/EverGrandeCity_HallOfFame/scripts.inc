@@ -19,6 +19,7 @@ EverGrandeCity_HallOfFame_OnFrame: @ 8229846
 
 EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
 	lockall
+	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_HallOfFame_EventScript_EnterHallOfFameAgain
 	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
 	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
 	waitmovement 0
@@ -26,6 +27,40 @@ EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
 	waitmovement 0
 	msgbox EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
+	waitmovement 0
+	delay 20
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	waitmovement 0
+	msgbox EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestUp
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestUp
+	waitmovement 0
+	delay 20
+	dofieldeffect FLDEFF_HALL_OF_FAME_RECORD
+	waitfieldeffect FLDEFF_HALL_OF_FAME_RECORD
+	delay 40
+	setvar VAR_TEMP_1, 1
+	call EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags
+	checkplayergender
+	compare VAR_RESULT, MALE
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearMale
+	compare VAR_RESULT, FEMALE
+	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearFemale
+	end
+
+EverGrandeCity_HallOfFame_EventScript_EnterHallOfFameAgain:
+	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
+	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
+	waitmovement 0
+	applymovement LOCALID_WALLACE, Common_Movement_WalkInPlaceFastestRight
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFastestLeft
+	waitmovement 0
+	msgbox EverGrandeCity_HallOfFame_Text_YouKnowWhatWeDoHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
 	applymovement OBJ_EVENT_ID_PLAYER, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2
@@ -120,3 +155,9 @@ EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames: @ 82299A3
 EverGrandeCity_HallOfFame_Text_SkipCredits:
     .string "Skip the credits scene?$"
 
+EverGrandeCity_HallOfFame_Text_YouKnowWhatWeDoHere:
+	.string "STEVEN: As you already know, here\n"
+	.string "we keep records of POKéMON that\l"
+	.string "prevailed through the challenge\l"
+	.string "imposed by the POKéMON LEAGUE\l"
+	.string "and came out victorious.$"

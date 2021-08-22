@@ -41,6 +41,7 @@ EverGrandeCity_DrakesRoom_EventScript_CloseDoor:: @ 82286ED
 EverGrandeCity_DrakesRoom_EventScript_Drake:: @ 82286F3
 	lock
 	faceplayer
+	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_DrakesRoom_EventScript_DrakeRematch
 	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_DrakesRoom_Text_IntroSpeech, MSGBOX_DEFAULT
@@ -57,8 +58,38 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated:: @ 8228724
 	setvar VAR_0x8004, FANCOUNTER_DEFEATED_DRAKE
 	special Script_TryGainNewFanFromCounter
 	setflag FLAG_DEFEATED_ELITE_4_DRAKE
+	setflag FLAG_REMATCH_DRAKE
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_DrakesRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_DrakesRoom_EventScript_DrakeRematch:
+	goto_if_set FLAG_DEFEATED_ELITE_4_DRAKE, EverGrandeCity_DrakesRoom_EventScript_PostRematchSpeech
+	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	call_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 2, EverGrandeCity_DrakesRoom_EventScript_DrakeRematchIntro2
+	call_if_var_eq VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_DrakesRoom_EventScript_DrakeRematchIntro1
+	trainerbattle_no_intro TRAINER_DRAKE_REMATCH, EverGrandeCity_DrakesRoom_Text_DefeatRematch
+	goto EverGrandeCity_DrakesRoom_EventScript_DefeatedRematch
+	end
+
+EverGrandeCity_DrakesRoom_EventScript_DrakeRematchIntro2:
+	msgbox EverGrandeCity_DrakesRoom_Text_RematchIntroSpeech2, MSGBOX_DEFAULT
+	return
+
+EverGrandeCity_DrakesRoom_EventScript_DrakeRematchIntro1:
+	msgbox EverGrandeCity_DrakesRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	return
+
+EverGrandeCity_DrakesRoom_EventScript_PostRematchSpeech::
+	msgbox EverGrandeCity_DrakesRoom_Text_PostRematchSpeech, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_DrakesRoom_EventScript_DefeatedRematch:
+	setflag FLAG_DEFEATED_ELITE_4_DRAKE
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
+	msgbox EverGrandeCity_DrakesRoom_Text_PostRematchSpeech, MSGBOX_DEFAULT
 	release
 	end
 
@@ -91,3 +122,27 @@ EverGrandeCity_DrakesRoom_Text_PostBattleSpeech: @ 82288B0
 	.string "Go! Go onwards!\n"
 	.string "The CHAMPION is waiting!$"
 
+EverGrandeCity_DrakesRoom_Text_RematchIntroSpeech:
+	.string "I've been waiting for you!\p"
+	.string "Challengers like you who pour\n"
+	.string "everything they have into their\l"
+	.string "battles are the ones who get us\l"
+	.string "fired up the most!\p"
+	.string "My SALAMENCE and I can't wait\n"
+	.string "any longer! Get ready!$"
+
+EverGrandeCity_DrakesRoom_Text_RematchIntroSpeech2:
+	.string "Oh! I've been waiting for you!\p"
+	.string "My POKéMON and I are ready to\n"
+	.string "show you everything we've got!\p"
+	.string "Well then, let's see if you can\n"
+	.string "overcome my challenge!$"
+
+EverGrandeCity_DrakesRoom_Text_DefeatRematch:
+	.string "Spectacular!$"
+
+EverGrandeCity_DrakesRoom_Text_PostRematchSpeech:
+	.string "That was a mighty-fine battle!\n"
+	.string "Me and my POKéMON are satisfied.\p"
+	.string "Press onward, {PLAYER}!\n"
+	.string "The current champion awaits!$"

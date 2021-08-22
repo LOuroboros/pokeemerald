@@ -2264,6 +2264,12 @@ MatchCall_Text_Sidney:: @ 82B34CC
 	.string "I'll always be here!\n"
 	.string "I'll be waiting!$"
 
+MatchCall_Text_Sidney2::
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+	.string "SIDNEY appears to be out of\n"
+	.string "the POKéNAV's service area…$"
+
 MatchCall_Text_Phoebe:: @ 82B3561
 	.string "PHOEBE: Hi, {PLAYER}!\p"
 	.string "How about coming back here again\n"
@@ -2272,6 +2278,12 @@ MatchCall_Text_Phoebe:: @ 82B3561
 	.string "your bond has grown with your\l"
 	.string "POKéMON.$"
 
+MatchCall_Text_Phoebe2::
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+	.string "PHOEBE appears to be out of\n"
+	.string "the POKéNAV's service area…$"
+
 MatchCall_Text_Glacia:: @ 82B35E4
 	.string "GLACIA: Hello, {PLAYER}.\p"
 	.string "I trust you haven't become\n"
@@ -2279,6 +2291,12 @@ MatchCall_Text_Glacia:: @ 82B35E4
 	.string "If you feel the need to cool your\n"
 	.string "hot emotions just a little, do come\l"
 	.string "to the POKéMON LEAGUE…$"
+
+MatchCall_Text_Glacia2::
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+	.string "GLACIA appears to be out of\n"
+	.string "the POKéNAV's service area…$"
 
 MatchCall_Text_Drake:: @ 82B368B
 	.string "DRAKE: That voice… {PLAYER}, is it?\n"
@@ -2291,6 +2309,12 @@ MatchCall_Text_Drake:: @ 82B368B
 	.string "battles, there is no substitute for\l"
 	.string "the POKéMON LEAGUE!\p"
 	.string "Don't you agree, {PLAYER}?$"
+
+MatchCall_Text_Drake2::
+	.string "… … … … … …\n"
+	.string "… … … … … …\p"
+	.string "DRAKE appears to be out of\n"
+	.string "the POKéNAV's service area…$"
 
 MatchCall_Text_Wallace:: @ 82B3790
 	.string "WALLACE: Hello, {PLAYER}{KUN}.\n"
@@ -2830,6 +2854,17 @@ MatchCall_Text_Steven7:: @ 82B5ED9
 	.string "… … … … … …\p"
 	.string "I hope we can meet again\n"
 	.string "somewhere!$"
+
+MatchCall_Text_Steven8::
+	.string "STEVEN: {PLAYER}, congratulations\n"
+	.string "for entering the HALL OF FAME!\p"
+	.string "We at the POKéMON LEAGUE are always\n"
+	.string "ready for a rematch!\p"
+	.string "By the way, do you know about the\n"
+	.string "BATTLE FRONTIER? I heard it's a\l"
+	.string "place filled with facilities where\l"
+	.string "many unconventional types of battles\l"
+	.string "take place.$"
 
 MatchCall_Text_BirchRegisterCall: @ 82B5F52
 	.string "PROF. BIRCH: Oh, {PLAYER}{KUN}!\n"

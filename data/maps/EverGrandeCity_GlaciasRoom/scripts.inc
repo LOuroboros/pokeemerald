@@ -40,6 +40,7 @@ EverGrandeCity_GlaciasRoom_EventScript_CloseDoor:: @ 8228463
 EverGrandeCity_GlaciasRoom_EventScript_Glacia:: @ 8228469
 	lock
 	faceplayer
+	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch
 	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech
 	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
 	msgbox EverGrandeCity_GlaciasRoom_Text_IntroSpeech, MSGBOX_DEFAULT
@@ -54,8 +55,38 @@ EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech:: @ 8228490
 
 EverGrandeCity_GlaciasRoom_EventScript_Defeated:: @ 822849A
 	setflag FLAG_DEFEATED_ELITE_4_GLACIA
+	setflag FLAG_REMATCH_GLACIA
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
 	msgbox EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch:
+	goto_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_PostRematchSpeech
+	playbgm MUS_ENCOUNTER_ELITE_FOUR, FALSE
+	call_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 2, EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematchIntro2
+	call_if_var_eq VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematchIntro1
+	trainerbattle_no_intro TRAINER_GLACIA_REMATCH, EverGrandeCity_GlaciasRoom_Text_DefeatRematch
+	goto EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch
+	end
+
+EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematchIntro2:
+	msgbox EverGrandeCity_GlaciasRoom_Text_RematchIntroSpeech2, MSGBOX_DEFAULT
+	return
+
+EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematchIntro1:
+	msgbox EverGrandeCity_GlaciasRoom_Text_RematchIntroSpeech, MSGBOX_DEFAULT
+	return
+
+EverGrandeCity_GlaciasRoom_EventScript_PostRematchSpeech::
+	msgbox EverGrandeCity_GlaciasRoom_Text_PostRematchSpeech, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch:
+	setflag FLAG_DEFEATED_ELITE_4_GLACIA
+	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
+	msgbox EverGrandeCity_GlaciasRoom_Text_PostRematchSpeech, MSGBOX_DEFAULT
 	release
 	end
 
@@ -82,3 +113,25 @@ EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech: @ 8228640
 	.string "And there, confirm the truly fearsome\n"
 	.string "side of the POKéMON LEAGUE.$"
 
+EverGrandeCity_GlaciasRoom_Text_RematchIntroSpeech:
+	.string "Yes! At last you're back!\p"
+	.string "Your burning-hot soul will be the\n"
+	.string "perfect test for our Mega Evolution\l"
+	.string "that can freeze everything!$"
+
+EverGrandeCity_GlaciasRoom_Text_RematchIntroSpeech2:
+	.string "Welcome back, {PLAYER}!\n"
+	.string "It is good to see you again!\p"
+	.string "I wonder what is it that you\n"
+	.string "will show me today.\p"
+	.string "Since it is you, I can go all out\n"
+	.string "without holding anything back!$"
+
+EverGrandeCity_GlaciasRoom_Text_DefeatRematch:
+	.string "Your will burns so strongly…$"
+
+EverGrandeCity_GlaciasRoom_Text_PostRematchSpeech:
+	.string "What a hot and passionate spirit!\n"
+	.string "Well done!\p"
+	.string "Continue onward!\n"
+	.string "DRAKE is also eager to fight you!$"

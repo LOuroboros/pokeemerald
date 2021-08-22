@@ -145,7 +145,7 @@ enum { // Preset Warps
     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE,
     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA,
     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE,
-    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_WALLACE,
+    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION,
 };
 
 // *******************************
@@ -316,7 +316,7 @@ static void DebugAction_PresetWarp_PkmnLeagueSidney(u8 taskId);
 static void DebugAction_PresetWarp_PkmnLeaguePhoebe(u8 taskId);
 static void DebugAction_PresetWarp_PkmnLeagueGlacia(u8 taskId);
 static void DebugAction_PresetWarp_PkmnLeagueDrake(u8 taskId);
-static void DebugAction_PresetWarp_PkmnLeagueWallace(u8 taskId);
+static void DebugAction_PresetWarp_PkmnLeagueChampion(u8 taskId);
 
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
@@ -461,7 +461,7 @@ static const u8 gDebugText_Map_PkmnLeagueSidney[]    = _("Pokémon League (Sidne
 static const u8 gDebugText_Map_PkmnLeaguePhoebe[]    = _("Pokémon League (Phoebe)");
 static const u8 gDebugText_Map_PkmnLeagueGlacia[]    = _("Pokémon League (Glacia)");
 static const u8 gDebugText_Map_PkmnLeagueDrake[]     = _("Pokémon League (Drake)");
-static const u8 gDebugText_Map_PkmnLeagueWallace[]   = _("Pokémon League (Wallace)");
+static const u8 gDebugText_Map_PkmnLeagueChampion[]  = _("Pokémon League (Champion)");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -580,28 +580,28 @@ static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 };
 static const struct ListMenuItem sDebugMenu_Items_Utillities_PresetWarp[] =
 {
-    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]          = {gDebugText_Map_LittlerootTown,      DEBUG_UTILITIES_PRESETWARP_LITTLEROOT},
-    [DEBUG_UTILITIES_PRESETWARP_OLDALE]              = {gDebugText_Map_OldaleTown,          DEBUG_UTILITIES_PRESETWARP_OLDALE},
-    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]           = {gDebugText_Map_PetalburgCity,       DEBUG_UTILITIES_PRESETWARP_PETALBURG},
-    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]            = {gDebugText_Map_RustboroCity,        DEBUG_UTILITIES_PRESETWARP_RUSTBORO},
-    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]             = {gDebugText_Map_DewfordTown,         DEBUG_UTILITIES_PRESETWARP_DEWFORD},
-    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]           = {gDebugText_Map_SlateportCity,       DEBUG_UTILITIES_PRESETWARP_SLATEPORT},
-    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]            = {gDebugText_Map_MauvilleCity,        DEBUG_UTILITIES_PRESETWARP_MAUVILLE},
-    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]          = {gDebugText_Map_VerdanturfTown,      DEBUG_UTILITIES_PRESETWARP_VERDANTURF},
-    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]           = {gDebugText_Map_FallarborTown,       DEBUG_UTILITIES_PRESETWARP_FALLARBOR},
-    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]           = {gDebugText_Map_LavaridgeTown,       DEBUG_UTILITIES_PRESETWARP_LAVARIDGE},
-    [DEBUG_UTILITIES_PRESETWARP_FORTREE]             = {gDebugText_Map_FortreeCity,         DEBUG_UTILITIES_PRESETWARP_FORTREE},
-    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]            = {gDebugText_Map_LilycoveCity,        DEBUG_UTILITIES_PRESETWARP_LILYCOVE},
-    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]            = {gDebugText_Map_MossdeepCity,        DEBUG_UTILITIES_PRESETWARP_MOSSDEEP},
-    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]          = {gDebugText_Map_PacifidlogTown,      DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG},
-    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]          = {gDebugText_Map_SootopolisCity,      DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS},
-    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER]    = {gDebugText_Map_EverGrandeCityOuter, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER},
-    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER]    = {gDebugText_Map_EverGrandeCityInner, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY]  = {gDebugText_Map_PkmnLeagueSidney,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE]  = {gDebugText_Map_PkmnLeaguePhoebe,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]  = {gDebugText_Map_PkmnLeagueGlacia,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]   = {gDebugText_Map_PkmnLeagueDrake,     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_WALLACE] = {gDebugText_Map_PkmnLeagueWallace,   DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_WALLACE},
+    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]           = {gDebugText_Map_LittlerootTown,      DEBUG_UTILITIES_PRESETWARP_LITTLEROOT},
+    [DEBUG_UTILITIES_PRESETWARP_OLDALE]               = {gDebugText_Map_OldaleTown,          DEBUG_UTILITIES_PRESETWARP_OLDALE},
+    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]            = {gDebugText_Map_PetalburgCity,       DEBUG_UTILITIES_PRESETWARP_PETALBURG},
+    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]             = {gDebugText_Map_RustboroCity,        DEBUG_UTILITIES_PRESETWARP_RUSTBORO},
+    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]              = {gDebugText_Map_DewfordTown,         DEBUG_UTILITIES_PRESETWARP_DEWFORD},
+    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]            = {gDebugText_Map_SlateportCity,       DEBUG_UTILITIES_PRESETWARP_SLATEPORT},
+    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]             = {gDebugText_Map_MauvilleCity,        DEBUG_UTILITIES_PRESETWARP_MAUVILLE},
+    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]           = {gDebugText_Map_VerdanturfTown,      DEBUG_UTILITIES_PRESETWARP_VERDANTURF},
+    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]            = {gDebugText_Map_FallarborTown,       DEBUG_UTILITIES_PRESETWARP_FALLARBOR},
+    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]            = {gDebugText_Map_LavaridgeTown,       DEBUG_UTILITIES_PRESETWARP_LAVARIDGE},
+    [DEBUG_UTILITIES_PRESETWARP_FORTREE]              = {gDebugText_Map_FortreeCity,         DEBUG_UTILITIES_PRESETWARP_FORTREE},
+    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]             = {gDebugText_Map_LilycoveCity,        DEBUG_UTILITIES_PRESETWARP_LILYCOVE},
+    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]             = {gDebugText_Map_MossdeepCity,        DEBUG_UTILITIES_PRESETWARP_MOSSDEEP},
+    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]           = {gDebugText_Map_PacifidlogTown,      DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG},
+    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]           = {gDebugText_Map_SootopolisCity,      DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS},
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER]     = {gDebugText_Map_EverGrandeCityOuter, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER},
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER]     = {gDebugText_Map_EverGrandeCityInner, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY]   = {gDebugText_Map_PkmnLeagueSidney,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE]   = {gDebugText_Map_PkmnLeaguePhoebe,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]   = {gDebugText_Map_PkmnLeagueGlacia,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]    = {gDebugText_Map_PkmnLeagueDrake,     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION] = {gDebugText_Map_PkmnLeagueChampion,  DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION},
 };
 
 // *******************************
@@ -687,28 +687,28 @@ static void (*const sDebugMenu_Actions_Sound[])(u8) =
 };
 static void (*const sDebugMenu_Actions_PresetWarp[])(u8) =
 {
-    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]          = DebugAction_PresetWarp_LittlerootTown,
-    [DEBUG_UTILITIES_PRESETWARP_OLDALE]              = DebugAction_PresetWarp_OldaleTown,
-    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]           = DebugAction_PresetWarp_PetalburgCity,
-    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]            = DebugAction_PresetWarp_RustboroCity,
-    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]             = DebugAction_PresetWarp_DewfordTown,
-    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]           = DebugAction_PresetWarp_SlateportCity,
-    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]            = DebugAction_PresetWarp_MauvilleCity,
-    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]          = DebugAction_PresetWarp_VerdanturfTown,
-    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]           = DebugAction_PresetWarp_FallarborTown,
-    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]           = DebugAction_PresetWarp_LavaridgeTown,
-    [DEBUG_UTILITIES_PRESETWARP_FORTREE]             = DebugAction_PresetWarp_FortreeCity,
-    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]            = DebugAction_PresetWarp_LilycoveCity,
-    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]            = DebugAction_PresetWarp_MossdeepCity,
-    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]          = DebugAction_PresetWarp_PacifidlogTown,
-    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]          = DebugAction_PresetWarp_SootopolisCity,
-    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER]    = DebugAction_PresetWarp_EverGrandeCityOuter,
-    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER]    = DebugAction_PresetWarp_EverGrandeCityInner,
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY]  = DebugAction_PresetWarp_PkmnLeagueSidney,
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE]  = DebugAction_PresetWarp_PkmnLeaguePhoebe,
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]  = DebugAction_PresetWarp_PkmnLeagueGlacia,
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]   = DebugAction_PresetWarp_PkmnLeagueDrake,
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_WALLACE] = DebugAction_PresetWarp_PkmnLeagueWallace,
+    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]           = DebugAction_PresetWarp_LittlerootTown,
+    [DEBUG_UTILITIES_PRESETWARP_OLDALE]               = DebugAction_PresetWarp_OldaleTown,
+    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]            = DebugAction_PresetWarp_PetalburgCity,
+    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]             = DebugAction_PresetWarp_RustboroCity,
+    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]              = DebugAction_PresetWarp_DewfordTown,
+    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]            = DebugAction_PresetWarp_SlateportCity,
+    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]             = DebugAction_PresetWarp_MauvilleCity,
+    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]           = DebugAction_PresetWarp_VerdanturfTown,
+    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]            = DebugAction_PresetWarp_FallarborTown,
+    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]            = DebugAction_PresetWarp_LavaridgeTown,
+    [DEBUG_UTILITIES_PRESETWARP_FORTREE]              = DebugAction_PresetWarp_FortreeCity,
+    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]             = DebugAction_PresetWarp_LilycoveCity,
+    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]             = DebugAction_PresetWarp_MossdeepCity,
+    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]           = DebugAction_PresetWarp_PacifidlogTown,
+    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]           = DebugAction_PresetWarp_SootopolisCity,
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER]     = DebugAction_PresetWarp_EverGrandeCityOuter,
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER]     = DebugAction_PresetWarp_EverGrandeCityInner,
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY]   = DebugAction_PresetWarp_PkmnLeagueSidney,
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE]   = DebugAction_PresetWarp_PkmnLeaguePhoebe,
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]   = DebugAction_PresetWarp_PkmnLeagueGlacia,
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]    = DebugAction_PresetWarp_PkmnLeagueDrake,
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION] = DebugAction_PresetWarp_PkmnLeagueChampion,
 };
 
 // *******************************
@@ -748,7 +748,7 @@ static const struct WindowTemplate sPresetWarpWindowTemplate =
     .bg = 0,
     .tilemapLeft = 1,
     .tilemapTop = 1,
-    .width = DEBUG_MAIN_MENU_WIDTH + 4,
+    .width = DEBUG_MAIN_MENU_WIDTH + 5,
     .height = 2 * DEBUG_MAIN_MENU_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 1,
@@ -4361,7 +4361,7 @@ static void DebugAction_PresetWarp_PkmnLeagueDrake(u8 taskId)
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_DRAKES_ROOM), MAP_NUM(EVER_GRANDE_CITY_DRAKES_ROOM), 255, 6, 7);
     DoWarp();
 }
-static void DebugAction_PresetWarp_PkmnLeagueWallace(u8 taskId)
+static void DebugAction_PresetWarp_PkmnLeagueChampion(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_HALL4), MAP_NUM(EVER_GRANDE_CITY_HALL4), 255, 5, 4);

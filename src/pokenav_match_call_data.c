@@ -242,6 +242,7 @@ static const match_call_text_data_t sStevenTextScripts[] = {
     { MatchCall_Text_Steven5, FLAG_DEFEATED_MOSSDEEP_GYM,          0xFFFF },
     { MatchCall_Text_Steven6, FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN, 0xFFFF },
     { MatchCall_Text_Steven7, FLAG_SYS_GAME_CLEAR,                 0xFFFF },
+    { MatchCall_Text_Steven8, FLAG_IS_CHAMPION_AGAIN,              0xFFFF },
     { NULL,                   0xFFFF,                              0xFFFF },
 };
 
@@ -498,8 +499,9 @@ static const struct MatchCallStructTrainer sJuanMatchCallHeader =
 };
 
 static const match_call_text_data_t sSidneyTextScripts[] = {
-    { MatchCall_Text_Sidney, 0xFFFF, 0xFFFF },
-    { NULL,                  0xFFFF, 0xFFFF }
+    { MatchCall_Text_Sidney,                             0xFFFF, 0xFFFF },
+    { MatchCall_Text_Sidney2,     FLAG_CANT_REACH_BY_MATCH_CALL, 0xFFFF },
+    { NULL,                                              0xFFFF, 0xFFFF }
 };
 
 static const struct MatchCallStructTrainer sSidneyMatchCallHeader =
@@ -514,8 +516,9 @@ static const struct MatchCallStructTrainer sSidneyMatchCallHeader =
 };
 
 static const match_call_text_data_t sPhoebeTextScripts[] = {
-    { MatchCall_Text_Phoebe, 0xFFFF, 0xFFFF },
-    { NULL,                  0xFFFF, 0xFFFF }
+    { MatchCall_Text_Phoebe,                         0xFFFF, 0xFFFF },
+    { MatchCall_Text_Phoebe2, FLAG_CANT_REACH_BY_MATCH_CALL, 0xFFFF },
+    { NULL,                                          0xFFFF, 0xFFFF }
 };
 
 static const struct MatchCallStructTrainer sPhoebeMatchCallHeader =
@@ -530,8 +533,9 @@ static const struct MatchCallStructTrainer sPhoebeMatchCallHeader =
 };
 
 static const match_call_text_data_t sGlaciaTextScripts[] = {
-    { MatchCall_Text_Glacia, 0xFFFF, 0xFFFF },
-    { NULL,                  0xFFFF, 0xFFFF }
+    { MatchCall_Text_Glacia,                         0xFFFF, 0xFFFF },
+    { MatchCall_Text_Glacia2, FLAG_CANT_REACH_BY_MATCH_CALL, 0xFFFF },
+    { NULL,                                          0xFFFF, 0xFFFF }
 };
 
 static const struct MatchCallStructTrainer sGlaciaMatchCallHeader =
@@ -546,8 +550,9 @@ static const struct MatchCallStructTrainer sGlaciaMatchCallHeader =
 };
 
 static const match_call_text_data_t sDrakeTextScripts[] = {
-    { MatchCall_Text_Drake, 0xFFFF, 0xFFFF },
-    { NULL,                 0xFFFF, 0xFFFF }
+    { MatchCall_Text_Drake,                         0xFFFF, 0xFFFF },
+    { MatchCall_Text_Drake2, FLAG_CANT_REACH_BY_MATCH_CALL, 0xFFFF },
+    { NULL,                                         0xFFFF, 0xFFFF }
 };
 
 static const struct MatchCallStructTrainer sDrakeMatchCallHeader =

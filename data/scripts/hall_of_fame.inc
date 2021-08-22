@@ -1,5 +1,6 @@
 EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 	special SetChampionSaveWarp
+	call_if_set FLAG_IS_CHAMPION, EventScript_HallOfFame_EventScript_IsChampionAgain
 	setflag FLAG_IS_CHAMPION
 	call EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries
 	compare VAR_FOSSIL_MANIAC_STATE, 0
@@ -26,6 +27,11 @@ EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags:: @ 82717C1
 	call_if_eq EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent
 	call_if_set FLAG_DEFEATED_RIVAL_POSTGAME, EverGrandeCity_HallOfFame_EventScript_Birch_LabState
 	clearflag FLAG_DEFEATED_RIVAL_POSTGAME
+	call_if_unset FLAG_DEFEATED_METEOR_FALLS_STEVEN, EverGrandeCity_HallOfFame_EventScript_CantPhoneCallTheE4
+	return
+
+EventScript_HallOfFame_EventScript_IsChampionAgain:
+	setflag FLAG_IS_CHAMPION_AGAIN
 	return
 
 EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries:: @ 8271829
@@ -56,4 +62,8 @@ EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent:: @ 8271851
 
 EverGrandeCity_HallOfFame_EventScript_Birch_LabState:
 	setvar VAR_BIRCH_LAB_STATE, 6
+	return
+
+EverGrandeCity_HallOfFame_EventScript_CantPhoneCallTheE4:
+	setflag FLAG_CANT_REACH_BY_MATCH_CALL
 	return

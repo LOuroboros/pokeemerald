@@ -18,6 +18,8 @@ MeteorFalls_StevensCave_EventScript_Steven:: @ 823B182
 	trainerbattle_no_intro TRAINER_STEVEN, MeteorFalls_StevensCave_Text_StevenDefeat
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_METEOR_FALLS_STEVEN
+	setflag FLAG_HIDE_METEOR_FALLS_STEVEN
+	clearflag FLAG_CANT_REACH_BY_MATCH_CALL
 	release
 	end
 

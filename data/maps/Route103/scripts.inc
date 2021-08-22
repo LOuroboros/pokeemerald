@@ -371,12 +371,7 @@ Route103_EventScript_StartMayBattleMudkipPostgame::
 
 Route103_EventScript_AfterMayBattlePostgame::
 	msgbox Route103_Text_MayTimeToHeadBackForGood, MSGBOX_DEFAULT
-	setvar VAR_ROUTE103_STATE, 2
-	setflag FLAG_DEFEATED_RIVAL_POSTGAME
-	setvar VAR_SKY_PILLAR_STATE, 4
-	setvar VAR_MT_PYRE_STATE, 2
-	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
-	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
+	call Route103_EventScript_UpdateFlagsAndVarsAfterPostgameRivalBattle
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -400,14 +395,19 @@ Route103_EventScript_StartBrendanBattleMudkipPostgame::
 
 Route103_EventScript_AfterBrendanBattlePostgame::
 	msgbox Route103_Text_BrendanTimeToHeadBackForGood, MSGBOX_DEFAULT
+	call Route103_EventScript_UpdateFlagsAndVarsAfterPostgameRivalBattle
+	goto Route103_EventScript_RivalExit
+	end
+
+Route103_EventScript_UpdateFlagsAndVarsAfterPostgameRivalBattle:
 	setvar VAR_ROUTE103_STATE, 2
 	setflag FLAG_DEFEATED_RIVAL_POSTGAME
 	setvar VAR_SKY_PILLAR_STATE, 4
 	setvar VAR_MT_PYRE_STATE, 2
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
 	clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
-	goto Route103_EventScript_RivalExit
-	end
+	clearflag FLAG_HIDE_METEOR_FALLS_STEVEN
+	return
 
 Route103_Text_MayRoute103Pokemon: @ 81EC7A6
 	.string "{RIVAL}: Let's see… The POKéMON found\n"

@@ -25,6 +25,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/battle_anim.h"
+#include "event_data.h"
 
 struct BattleBackground
 {
@@ -799,9 +800,18 @@ void DrawMainBattleBackground(void)
             }
             else if (trainerClass == TRAINER_CLASS_CHAMPION)
             {
-                LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
-                LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
-                LoadCompressedPalette(gBattleTerrainPalette_StadiumWallace, 0x20, 0x60);
+                if (trainerClass == TRAINER_CLASS_CHAMPION && VarGet(VAR_POKEMON_LEAGUE_RUNS_COUNTER) >= 1)
+                {
+                    LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+                    LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+                    LoadCompressedPalette(gBattleTerrainPalette_StadiumSteven, 0x20, 0x60);
+                }
+                else
+                {
+                    LZDecompressVram(gBattleTerrainTiles_Stadium, (void*)(BG_CHAR_ADDR(2)));
+                    LZDecompressVram(gBattleTerrainTilemap_Stadium, (void*)(BG_SCREEN_ADDR(26)));
+                    LoadCompressedPalette(gBattleTerrainPalette_StadiumWallace, 0x20, 0x60);
+                }
                 return;
             }
         }
@@ -1369,9 +1379,14 @@ bool8 LoadChosenBattleElement(u8 caseId)
                     LoadCompressedPalette(gBattleTerrainPalette_BuildingLeader, 0x20, 0x60);
                     break;
                 }
-                else if (trainerClass == TRAINER_CLASS_CHAMPION)
+                else if (trainerClass == TRAINER_CLASS_CHAMPION && VarGet(VAR_POKEMON_LEAGUE_RUNS_COUNTER) == 0)
                 {
                     LoadCompressedPalette(gBattleTerrainPalette_StadiumWallace, 0x20, 0x60);
+                    break;
+                }
+                else if (trainerClass == TRAINER_CLASS_CHAMPION && VarGet(VAR_POKEMON_LEAGUE_RUNS_COUNTER) >= 1)
+                {
+                    LoadCompressedPalette(gBattleTerrainPalette_StadiumSteven, 0x20, 0x60);
                     break;
                 }
             }

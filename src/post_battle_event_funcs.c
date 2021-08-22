@@ -81,7 +81,7 @@ int GameClear(void)
         }
     }
 
-    VarSet(VAR_POKEMON_LEAGUE_RUNS_COUNTER, VAR_POKEMON_LEAGUE_RUNS_COUNTER + 1);
+    VarSet(VAR_POKEMON_LEAGUE_RUNS_COUNTER, VarGet(VAR_POKEMON_LEAGUE_RUNS_COUNTER) + 1);
 
     SetMainCallback2(CB2_DoHallOfFameScreen);
     return 0;

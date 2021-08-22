@@ -11,13 +11,16 @@ EverGrandeCity_PokemonLeague_1F_OnTransition: @ 82295DD
 	setrespawn HEAL_LOCATION_EVER_GRANDE_CITY_POKEMON_LEAGUE
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	call_if_unset FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
-	compare VAR_ROUTE103_STATE, 1
-	call_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
+	call_if_unset FLAG_DEFEATED_METEOR_FALLS_STEVEN, EverGrandeCity_PokemonLeague_1F_EventScript_TryMakeGuardsBlockDoor
 	end
 
 EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor:: @ 82295ED
 	setobjectxyperm LOCALID_GUARD_1, 9, 2
 	setobjectxyperm LOCALID_GUARD_2, 10, 2
+	return
+
+EverGrandeCity_PokemonLeague_1F_EventScript_TryMakeGuardsBlockDoor:
+	call_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_PokemonLeague_1F_EventScript_GuardsBlockDoor
 	return
 
 EverGrandeCity_PokemonLeague_1F_EventScript_Nurse:: @ 82295FC
@@ -55,8 +58,8 @@ EverGrandeCity_PokemonLeague_1F_Pokemart: @ 8229624
 @ Its assumed the player has the remaining badges
 EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard:: @ 8229636
 	lockall
-	compare VAR_ROUTE103_STATE, 1
-	goto_if_eq EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable
+	call_if_set FLAG_DEFEATED_METEOR_FALLS_STEVEN, EverGrandeCity_PokemonLeague_1F_EventScript_NewChampion
+	call_if_unset FLAG_DEFEATED_METEOR_FALLS_STEVEN, EverGrandeCity_PokemonLeague_1F_EventScript_CheckIfNotAvailable
 	goto_if_set FLAG_ENTERED_ELITE_FOUR, EverGrandeCity_PokemonLeague_1F_EventScript_GoForth
 	getplayerxy VAR_TEMP_0, VAR_TEMP_1
 	compare VAR_TEMP_0, 11
@@ -109,8 +112,17 @@ EverGrandeCity_PokemonLeague_1F_EventScript_GoForth:: @ 82296BB
 	releaseall
 	end
 
+EverGrandeCity_PokemonLeague_1F_EventScript_CheckIfNotAvailable:
+	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable
+	return
+
 EverGrandeCity_PokemonLeague_1F_EventScript_NotAvailable:
 	msgbox EverGrandeCity_PokemonLeague_1F_Text_NotAvailable, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EverGrandeCity_PokemonLeague_1F_EventScript_NewChampion:
+	msgbox EverGrandeCity_PokemonLeague_1F_Text_NewChampion, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -158,3 +170,9 @@ EverGrandeCity_PokemonLeague_1F_Text_NotAvailable:
     .string "The POKéMON LEAGUE is closed\n"
     .string "for the time being.$"
 
+EverGrandeCity_PokemonLeague_1F_Text_NewChampion:
+	.string "The POKéMON LEAGUE has been\n"
+	.string "injected with new strength.\p"
+	.string "Former champion, believe in\n"
+	.string "yourself and your POKéMON!\p"
+	.string "Good luck!$"
