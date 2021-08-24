@@ -1,4 +1,4 @@
-MysteryEventScript_MysticTicket:: 
+MysteryEventScript_MysticTicket::
 	setvaddress MysteryEventScript_MysticTicket
 	lock
 	faceplayer
@@ -23,14 +23,14 @@ MysteryEventScript_MysticTicket::
 	release
 	end
 
-MysticTicket_NoBagSpace: 
+MysticTicket_NoBagSpace:
 	vmessage sText_MysticTicketBagFull
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-MysticTicket_Obtained: 
+MysticTicket_Obtained:
 	vmessage sText_MysticTicketThankYou
 	waitmessage
 	waitbuttonpress

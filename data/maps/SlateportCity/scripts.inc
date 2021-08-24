@@ -19,12 +19,12 @@
 .set LOCALID_GRUNT_11, 33
 .set LOCALID_SCOTT, 35
 
-SlateportCity_MapScripts:: 
+SlateportCity_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SlateportCity_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SlateportCity_OnFrame
 	.byte 0
 
-SlateportCity_OnTransition: 
+SlateportCity_OnTransition:
 	setvar VAR_SLATEPORT_MUSEUM_1F_STATE, 0
 	call SlateportCity_EventScript_EnterSlateport
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -33,13 +33,13 @@ SlateportCity_OnTransition:
 	call_if_eq SlateportCity_EventScript_SetReadyForScottScene
 	end
 
-SlateportCity_EventScript_EnterSlateport:: 
+SlateportCity_EventScript_EnterSlateport::
 	setflag FLAG_VISITED_SLATEPORT_CITY
 	setvar VAR_CONTEST_HALL_STATE, 0
 	setflag FLAG_HIDE_SLATEPORT_CITY_CONTEST_REPORTER
 	return
 
-SlateportCity_EventScript_MovePeopleForSternInterview:: 
+SlateportCity_EventScript_MovePeopleForSternInterview::
 	setobjectxyperm LOCALID_CAPT_STERN, 28, 13
 	setobjectxyperm LOCALID_OLD_WOMAN, 25, 13
 	setobjectxyperm LOCALID_RICH_BOY, 25, 14
@@ -56,7 +56,7 @@ SlateportCity_EventScript_MovePeopleForSternInterview::
 	setobjectmovementtype LOCALID_MAN_1, MOVEMENT_TYPE_FACE_LEFT
 	return
 
-SlateportCity_EventScript_SetReadyForScottScene:: 
+SlateportCity_EventScript_SetReadyForScottScene::
 	setflag FLAG_HIDE_MAP_NAME_POPUP
 	getplayerxy VAR_0x8004, VAR_0x8005
 	compare VAR_0x8004, 30
@@ -65,16 +65,16 @@ SlateportCity_EventScript_SetReadyForScottScene::
 	setobjectmovementtype LOCALID_SCOTT, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
-SlateportCity_EventScript_MoveScottLeft:: 
+SlateportCity_EventScript_MoveScottLeft::
 	setobjectxyperm LOCALID_SCOTT, 22, 27
 	setobjectmovementtype LOCALID_SCOTT, MOVEMENT_TYPE_FACE_RIGHT
 	return
 
-SlateportCity_OnFrame: 
+SlateportCity_OnFrame:
 	map_script_2 VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 1, SlateportCity_EventScript_ScottScene
 	.2byte 0
 
-SlateportCity_EventScript_ScottScene:: 
+SlateportCity_EventScript_ScottScene::
 	lockall
 	addobject LOCALID_SCOTT
 	applymovement OBJ_EVENT_ID_PLAYER, SlateportCity_Movement_PlayerFaceScott
@@ -110,13 +110,13 @@ SlateportCity_EventScript_ScottScene::
 	releaseall
 	end
 
-SlateportCity_Movement_PlayerFaceScott: 
+SlateportCity_Movement_PlayerFaceScott:
 	delay_16
 	delay_8
 	walk_in_place_fastest_left
 	step_end
 
-SlateportCity_Movement_ScottApproachPlayer: 
+SlateportCity_Movement_ScottApproachPlayer:
 	walk_right
 	walk_right
 	walk_right
@@ -126,7 +126,7 @@ SlateportCity_Movement_ScottApproachPlayer:
 	walk_right
 	step_end
 
-SlateportCity_Movement_ScottExit: 
+SlateportCity_Movement_ScottExit:
 	walk_left
 	walk_left
 	walk_left
@@ -137,7 +137,7 @@ SlateportCity_Movement_ScottExit:
 	walk_left
 	step_end
 
-SlateportCity_EventScript_EnergyGuru:: 
+SlateportCity_EventScript_EnergyGuru::
 	lock
 	faceplayer
 	message SlateportCity_Text_EnergyGuruSellWhatYouNeed
@@ -147,7 +147,7 @@ SlateportCity_EventScript_EnergyGuru::
 	release
 	end
 
-SlateportCity_Pokemart_EnergyGuru: 
+SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_PROTEIN
 	.2byte ITEM_IRON
 	.2byte ITEM_CARBOS
@@ -158,7 +158,7 @@ SlateportCity_Pokemart_EnergyGuru:
 	release
 	end
 
-SlateportCity_EventScript_EffortRibbonWoman:: 
+SlateportCity_EventScript_EffortRibbonWoman::
 	lock
 	faceplayer
 	bufferleadmonspeciesname 0
@@ -178,17 +178,17 @@ SlateportCity_EventScript_EffortRibbonWoman::
 	release
 	end
 
-SlateportCity_EventScript_MonEVsNotMaxed:: 
+SlateportCity_EventScript_MonEVsNotMaxed::
 	msgbox SlateportCity_Text_GoForItLittleHarder, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_MonHasEffortRibbon:: 
+SlateportCity_EventScript_MonHasEffortRibbon::
 	msgbox SlateportCity_Text_EffortRibbonLooksGoodOnIt, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_Cook:: 
+SlateportCity_EventScript_Cook::
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -197,12 +197,12 @@ SlateportCity_EventScript_Cook::
 	release
 	end
 
-SlateportCity_EventScript_CookSternInterview:: 
+SlateportCity_EventScript_CookSternInterview::
 	msgbox SlateportCity_Text_CaptainComeBackWithBigFish, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_OldWoman:: 
+SlateportCity_EventScript_OldWoman::
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -211,12 +211,12 @@ SlateportCity_EventScript_OldWoman::
 	release
 	end
 
-SlateportCity_EventScript_OldWomanSternInterview:: 
+SlateportCity_EventScript_OldWomanSternInterview::
 	msgbox SlateportCity_Text_CaptSternBeingInterviewed, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_Girl:: 
+SlateportCity_EventScript_Girl::
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -226,17 +226,17 @@ SlateportCity_EventScript_Girl::
 	release
 	end
 
-SlateportCity_EventScript_GirlSternInterview:: 
+SlateportCity_EventScript_GirlSternInterview::
 	msgbox SlateportCity_Text_InterviewerSoCool, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_GirlSecretBase:: 
+SlateportCity_EventScript_GirlSecretBase::
 	msgbox SlateportCity_Text_BuyBricksSoDecorWontGetDirty, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_RichBoy:: 
+SlateportCity_EventScript_RichBoy::
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -245,22 +245,22 @@ SlateportCity_EventScript_RichBoy::
 	release
 	end
 
-SlateportCity_EventScript_RichBoySternInterview:: 
+SlateportCity_EventScript_RichBoySternInterview::
 	msgbox SlateportCity_Text_SternSaysDiscoveredSomething, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_FatMan:: 
+SlateportCity_EventScript_FatMan::
 	compare VAR_SLATEPORT_CITY_STATE, 1
 	goto_if_eq SlateportCity_EventScript_FatManSternInterview
 	msgbox SlateportCity_Text_BushedHikingFromMauville, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_FatManSternInterview:: 
+SlateportCity_EventScript_FatManSternInterview::
 	msgbox SlateportCity_Text_AmIOnTV, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_Man1:: 
+SlateportCity_EventScript_Man1::
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -269,12 +269,12 @@ SlateportCity_EventScript_Man1::
 	release
 	end
 
-SlateportCity_EventScript_Man1SternInterview:: 
+SlateportCity_EventScript_Man1SternInterview::
 	msgbox SlateportCity_Text_CaptainsACelebrity, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_Woman1:: 
+SlateportCity_EventScript_Woman1::
 	lock
 	faceplayer
 	goto_if_set FLAG_DOCK_REJECTED_DEVON_GOODS, SlateportCity_EventScript_Woman1AquaGone
@@ -282,16 +282,16 @@ SlateportCity_EventScript_Woman1::
 	release
 	end
 
-SlateportCity_EventScript_Woman1AquaGone:: 
+SlateportCity_EventScript_Woman1AquaGone::
 	msgbox SlateportCity_Text_VisitedMuseumOften, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_BattleTentSign:: 
+SlateportCity_EventScript_BattleTentSign::
 	msgbox SlateportCity_Text_BattleTentSign, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_SternsShipyardSign:: 
+SlateportCity_EventScript_SternsShipyardSign::
 	lockall
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_SternsShipyardFerryComplete
 	goto_if_set FLAG_BADGE07_GET, SlateportCity_EventScript_SternsShipyardNearsCompletion
@@ -299,49 +299,49 @@ SlateportCity_EventScript_SternsShipyardSign::
 	releaseall
 	end
 
-SlateportCity_EventScript_SternsShipyardNearsCompletion:: 
+SlateportCity_EventScript_SternsShipyardNearsCompletion::
 	msgbox SlateportCity_Text_SternsShipyardNearsCompletion, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_EventScript_SternsShipyardFerryComplete:: 
+SlateportCity_EventScript_SternsShipyardFerryComplete::
 	msgbox SlateportCity_Text_SternsShipyardFerryComplete, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_EventScript_PokemonFanClubSign:: 
+SlateportCity_EventScript_PokemonFanClubSign::
 	msgbox SlateportCity_Text_PokemonFanClubSign, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_OceanicMuseumSign:: 
+SlateportCity_EventScript_OceanicMuseumSign::
 	msgbox SlateportCity_Text_OceanicMuseumSign, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_CitySign:: 
+SlateportCity_EventScript_CitySign::
 	msgbox SlateportCity_Text_CitySign, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_MarketSign:: 
+SlateportCity_EventScript_MarketSign::
 	msgbox SlateportCity_Text_MarketSign, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_HarborSign:: 
+SlateportCity_EventScript_HarborSign::
 	lockall
 	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_EventScript_HarborSignFerryComplete
 	msgbox SlateportCity_Text_HarborFerryUnderConstruction, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_EventScript_HarborSignFerryComplete:: 
+SlateportCity_EventScript_HarborSignFerryComplete::
 	msgbox SlateportCity_Text_HarborSign, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SlateportCity_EventScript_NameRatersHouseSign:: 
+SlateportCity_EventScript_NameRatersHouseSign::
 	msgbox SlateportCity_Text_NameRatersHouseSign, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_Maniac:: 
+SlateportCity_EventScript_Maniac::
 	lock
 	faceplayer
 	compare VAR_SLATEPORT_CITY_STATE, 1
@@ -351,32 +351,32 @@ SlateportCity_EventScript_Maniac::
 	end
 
 @ Unclear if the text here was meant to be different, but its not
-SlateportCity_EventScript_ManiacSternInterview:: 
+SlateportCity_EventScript_ManiacSternInterview::
 	msgbox SlateportCity_Text_GetNameRaterToHelpYou, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_Woman2:: 
+SlateportCity_EventScript_Woman2::
 	msgbox SlateportCity_Text_CantChangeTradeMonName, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_Sailor1:: 
+SlateportCity_EventScript_Sailor1::
 	msgbox SlateportCity_Text_SeaIsSoWet, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_Sailor2:: 
+SlateportCity_EventScript_Sailor2::
 	msgbox SlateportCity_Text_SinkOldBoats, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_PokefanF:: 
+SlateportCity_EventScript_PokefanF::
 	msgbox SlateportCity_Text_BuyTooMuch, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_Man2:: 
+SlateportCity_EventScript_Man2::
 	msgbox SlateportCity_Text_BattleTentBuiltRecently, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_AquaGrunt1:: 
+SlateportCity_EventScript_AquaGrunt1::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_QuitPushing, MSGBOX_DEFAULT
@@ -386,7 +386,7 @@ SlateportCity_EventScript_AquaGrunt1::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt2:: 
+SlateportCity_EventScript_AquaGrunt2::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_AquaHasPolicy, MSGBOX_DEFAULT
@@ -396,7 +396,7 @@ SlateportCity_EventScript_AquaGrunt2::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt3:: 
+SlateportCity_EventScript_AquaGrunt3::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_BossIsBrilliant, MSGBOX_DEFAULT
@@ -406,7 +406,7 @@ SlateportCity_EventScript_AquaGrunt3::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt4:: 
+SlateportCity_EventScript_AquaGrunt4::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_WhatsNewSchemeIWonder, MSGBOX_DEFAULT
@@ -416,7 +416,7 @@ SlateportCity_EventScript_AquaGrunt4::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt5:: 
+SlateportCity_EventScript_AquaGrunt5::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_ShouldTakeItAll, MSGBOX_DEFAULT
@@ -426,7 +426,7 @@ SlateportCity_EventScript_AquaGrunt5::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt6:: 
+SlateportCity_EventScript_AquaGrunt6::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_DontButtIn, MSGBOX_DEFAULT
@@ -436,7 +436,7 @@ SlateportCity_EventScript_AquaGrunt6::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt7:: 
+SlateportCity_EventScript_AquaGrunt7::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_RemindsMeOfLongLineForGames, MSGBOX_DEFAULT
@@ -446,7 +446,7 @@ SlateportCity_EventScript_AquaGrunt7::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt8:: 
+SlateportCity_EventScript_AquaGrunt8::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_WhyAreWeLiningUp, MSGBOX_DEFAULT
@@ -456,7 +456,7 @@ SlateportCity_EventScript_AquaGrunt8::
 	release
 	end
 
-SlateportCity_EventScript_AquaGrunt9:: 
+SlateportCity_EventScript_AquaGrunt9::
 	lock
 	faceplayer
 	playse SE_PIN
@@ -489,16 +489,16 @@ SlateportCity_EventScript_AquaGrunt9::
 	release
 	end
 
-SlateportCity_Movement_DelayAquaGrunt: 
+SlateportCity_Movement_DelayAquaGrunt:
 	delay_16
 	delay_16
 	step_end
 
-SlateportCity_EventScript_AquaGrunt10:: 
+SlateportCity_EventScript_AquaGrunt10::
 	msgbox SlateportCity_Text_ShouldveBroughtMyGameBoy, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_AquaGrunt11:: 
+SlateportCity_EventScript_AquaGrunt11::
 	lock
 	faceplayer
 	msgbox SlateportCity_Text_HotSpringsAfterOperation, MSGBOX_DEFAULT
@@ -508,7 +508,7 @@ SlateportCity_EventScript_AquaGrunt11::
 	release
 	end
 
-SlateportCity_EventScript_DollClerk:: 
+SlateportCity_EventScript_DollClerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -519,7 +519,7 @@ SlateportCity_EventScript_DollClerk::
 	end
 
 	.align 2
-SlateportCity_PokemartDecor_Dolls: 
+SlateportCity_PokemartDecor_Dolls:
 	.2byte DECOR_AZURILL_DOLL
 	.2byte DECOR_MARILL_DOLL
 	.2byte DECOR_SKITTY_DOLL
@@ -527,12 +527,12 @@ SlateportCity_PokemartDecor_Dolls:
 	release
 	end
 
-SlateportCity_EventScript_ComeBackWithSecretPower:: 
+SlateportCity_EventScript_ComeBackWithSecretPower::
 	msgbox gText_ComeBackWithSecretPower, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_DecorClerk:: 
+SlateportCity_EventScript_DecorClerk::
 	lock
 	faceplayer
 	goto_if_unset FLAG_RECEIVED_SECRET_POWER, SlateportCity_EventScript_ComeBackWithSecretPower
@@ -543,7 +543,7 @@ SlateportCity_EventScript_DecorClerk::
 	release
 	end
 
-SlateportCity_PokemartDecor: 
+SlateportCity_PokemartDecor:
 	.2byte DECOR_RED_BRICK
 	.2byte DECOR_BLUE_BRICK
 	.2byte DECOR_YELLOW_BRICK
@@ -562,7 +562,7 @@ SlateportCity_PokemartDecor:
 	release
 	end
 
-SlateportCity_EventScript_PowerTMClerk:: 
+SlateportCity_EventScript_PowerTMClerk::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -573,7 +573,7 @@ SlateportCity_EventScript_PowerTMClerk::
 	end
 
 	.align 2
-SlateportCity_Pokemart_PowerTMs: 
+SlateportCity_Pokemart_PowerTMs:
 	.2byte ITEM_TM10  @ Hidden Power
 	.2byte ITEM_TM43  @ Secret Power
 	.2byte ITEM_NONE
@@ -581,7 +581,7 @@ SlateportCity_Pokemart_PowerTMs:
 	end
 
 @ Scene with Capt Sterns interview and Team Aqua announcing plans to steal Submarine
-SlateportCity_EventScript_CaptStern:: 
+SlateportCity_EventScript_CaptStern::
 	lockall
 	msgbox SlateportCity_Text_SternMoveAheadWithExploration, MSGBOX_DEFAULT
 	msgbox SlateportCity_Text_GabbyWonderfulThanksForInterview, MSGBOX_DEFAULT
@@ -638,7 +638,7 @@ SlateportCity_EventScript_CaptStern::
 	releaseall
 	end
 
-SlateportCity_Movement_OldWomanConcern: 
+SlateportCity_Movement_OldWomanConcern:
 	delay_16
 	delay_16
 	emote_question_mark
@@ -648,7 +648,7 @@ SlateportCity_Movement_OldWomanConcern:
 	walk_in_place_fastest_left
 	step_end
 
-SlateportCity_Movement_ManConcern: 
+SlateportCity_Movement_ManConcern:
 	emote_question_mark
 	walk_in_place_fastest_up
 	delay_16
@@ -658,7 +658,7 @@ SlateportCity_Movement_ManConcern:
 	walk_in_place_fastest_left
 	step_end
 
-SlateportCity_Movement_GabbyExit: 
+SlateportCity_Movement_GabbyExit:
 	delay_16
 	walk_left
 	walk_left
@@ -673,7 +673,7 @@ SlateportCity_Movement_GabbyExit:
 	walk_left
 	step_end
 
-SlateportCity_Movement_TyExit: 
+SlateportCity_Movement_TyExit:
 	walk_down
 	walk_left
 	walk_left
@@ -689,19 +689,19 @@ SlateportCity_Movement_TyExit:
 	walk_left
 	step_end
 
-SlateportCity_Movement_Unused: 
+SlateportCity_Movement_Unused:
 	walk_down
 	walk_in_place_fastest_up
 	step_end
 
-SlateportCity_Movement_SternEnterHarbor: 
+SlateportCity_Movement_SternEnterHarbor:
 	walk_right
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-SlateportCity_Movement_SternWatchGabbyAndTyExit: 
+SlateportCity_Movement_SternWatchGabbyAndTyExit:
 	delay_16
 	delay_16
 	delay_16
@@ -711,7 +711,7 @@ SlateportCity_Movement_SternWatchGabbyAndTyExit:
 	walk_left
 	step_end
 
-SlateportCity_Movement_PlayerEnterHarbor: 
+SlateportCity_Movement_PlayerEnterHarbor:
 	walk_in_place_fastest_right
 	delay_16
 	delay_16
@@ -719,7 +719,7 @@ SlateportCity_Movement_PlayerEnterHarbor:
 	walk_up
 	step_end
 
-SlateportCity_Movement_PlayerFaceStern: 
+SlateportCity_Movement_PlayerFaceStern:
 	delay_16
 	delay_16
 	delay_16
@@ -730,19 +730,19 @@ SlateportCity_Movement_PlayerFaceStern:
 	walk_in_place_fastest_down
 	step_end
 
-SlateportCity_EventScript_Ty:: 
+SlateportCity_EventScript_Ty::
 	msgbox SlateportCity_Text_BigSmileForCamera, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_Gabby:: 
+SlateportCity_EventScript_Gabby::
 	msgbox SlateportCity_Text_MostInvaluableExperience, MSGBOX_SIGN
 	end
 
-SlateportCity_EventScript_Man3:: 
+SlateportCity_EventScript_Man3::
 	msgbox SlateportCity_Text_WonderIfLighthouseStartlesPokemon, MSGBOX_NPC
 	end
 
-SlateportCity_EventScript_BerryPowderClerk:: 
+SlateportCity_EventScript_BerryPowderClerk::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_POWDER_JAR, SlateportCity_EventScript_ReceivedPowderJar
@@ -753,7 +753,7 @@ SlateportCity_EventScript_BerryPowderClerk::
 	release
 	end
 
-SlateportCity_EventScript_ReceivedPowderJar:: 
+SlateportCity_EventScript_ReceivedPowderJar::
 	setvar VAR_0x8004, 1
 	specialvar VAR_RESULT, HasEnoughBerryPowder
 	compare VAR_RESULT, FALSE
@@ -763,12 +763,12 @@ SlateportCity_EventScript_ReceivedPowderJar::
 	goto SlateportCity_EventScript_ChooseBerryPowderItem
 	end
 
-SlateportCity_EventScript_ExplainBerryPowder:: 
+SlateportCity_EventScript_ExplainBerryPowder::
 	msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
 	release
 	end
 
-SlateportCity_EventScript_ChooseBerryPowderItem:: 
+SlateportCity_EventScript_ChooseBerryPowderItem::
 	message SlateportCity_Text_ExchangeWhatWithIt
 	waitmessage
 	setvar VAR_0x8004, SCROLL_MULTI_BERRY_POWDER_VENDOR
@@ -790,90 +790,90 @@ SlateportCity_EventScript_ChooseBerryPowderItem::
 	case MULTI_B_PRESSED, SlateportCity_EventScript_CancelPowderItemSelect
 	end
 
-SlateportCity_EventScript_EnergyPowder:: 
+SlateportCity_EventScript_EnergyPowder::
 	bufferitemname 0, ITEM_ENERGY_POWDER
 	setvar VAR_0x8008, ITEM_ENERGY_POWDER
 	setvar VAR_0x8009, 50
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_EnergyRoot:: 
+SlateportCity_EventScript_EnergyRoot::
 	bufferitemname 0, ITEM_ENERGY_ROOT
 	setvar VAR_0x8008, ITEM_ENERGY_ROOT
 	setvar VAR_0x8009, 80
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_HealPowder:: 
+SlateportCity_EventScript_HealPowder::
 	bufferitemname 0, ITEM_HEAL_POWDER
 	setvar VAR_0x8008, ITEM_HEAL_POWDER
 	setvar VAR_0x8009, 50
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_RevivalHerb:: 
+SlateportCity_EventScript_RevivalHerb::
 	bufferitemname 0, ITEM_REVIVAL_HERB
 	setvar VAR_0x8008, ITEM_REVIVAL_HERB
 	setvar VAR_0x8009, 300
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Protein:: 
+SlateportCity_EventScript_Protein::
 	bufferitemname 0, ITEM_PROTEIN
 	setvar VAR_0x8008, ITEM_PROTEIN
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Iron:: 
+SlateportCity_EventScript_Iron::
 	bufferitemname 0, ITEM_IRON
 	setvar VAR_0x8008, ITEM_IRON
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Carbos:: 
+SlateportCity_EventScript_Carbos::
 	bufferitemname 0, ITEM_CARBOS
 	setvar VAR_0x8008, ITEM_CARBOS
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Calcium:: 
+SlateportCity_EventScript_Calcium::
 	bufferitemname 0, ITEM_CALCIUM
 	setvar VAR_0x8008, ITEM_CALCIUM
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_Zinc:: 
+SlateportCity_EventScript_Zinc::
 	bufferitemname 0, ITEM_ZINC
 	setvar VAR_0x8008, ITEM_ZINC
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_HPUp:: 
+SlateportCity_EventScript_HPUp::
 	bufferitemname 0, ITEM_HP_UP
 	setvar VAR_0x8008, ITEM_HP_UP
 	setvar VAR_0x8009, 1000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_PPUp:: 
+SlateportCity_EventScript_PPUp::
 	bufferitemname 0, ITEM_PP_UP
 	setvar VAR_0x8008, ITEM_PP_UP
 	setvar VAR_0x8009, 3000
 	goto SlateportCity_EventScript_TryBuyBerryPowderItem
 	end
 
-SlateportCity_EventScript_CancelPowderItemSelect:: 
+SlateportCity_EventScript_CancelPowderItemSelect::
 	msgbox SlateportCity_Text_ComeBackToTradeBerryPowder, MSGBOX_DEFAULT
 	special RemoveBerryPowderVendorMenu
 	release
 	end
 
-SlateportCity_EventScript_TryBuyBerryPowderItem:: 
+SlateportCity_EventScript_TryBuyBerryPowderItem::
 	msgbox SlateportCity_Text_ExchangeBerryPowderForItem, MSGBOX_YESNO
 	compare VAR_RESULT, NO
 	goto_if_eq SlateportCity_EventScript_ChooseBerryPowderItem
@@ -895,18 +895,18 @@ SlateportCity_EventScript_TryBuyBerryPowderItem::
 	release
 	end
 
-SlateportCity_EventScript_NoRoomForBerryPowderItem:: 
+SlateportCity_EventScript_NoRoomForBerryPowderItem::
 	msgbox gText_TheBagIsFull, MSGBOX_DEFAULT
 	special RemoveBerryPowderVendorMenu
 	release
 	end
 
-SlateportCity_EventScript_NotEnoughBerryPowder:: 
+SlateportCity_EventScript_NotEnoughBerryPowder::
 	msgbox SlateportCity_Text_DontHaveEnoughBerryPowder, MSGBOX_DEFAULT
 	goto SlateportCity_EventScript_ChooseBerryPowderItem
 	end
 
-SlateportCity_EventScript_ScottBattleTentScene:: 
+SlateportCity_EventScript_ScottBattleTentScene::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceUp
 	waitmovement 0
@@ -929,23 +929,23 @@ SlateportCity_EventScript_ScottBattleTentScene::
 	releaseall
 	end
 
-SlateportCity_Movement_PushPlayerDown: 
+SlateportCity_Movement_PushPlayerDown:
 	lock_facing_direction
 	walk_down
 	unlock_facing_direction
 	step_end
 
-SlateportCity_Movement_PlayerWatchScottExit: 
+SlateportCity_Movement_PlayerWatchScottExit:
 	delay_16
 	walk_in_place_fastest_right
 	step_end
 
-SlateportCity_Movement_ScottExitBattleTent: 
+SlateportCity_Movement_ScottExitBattleTent:
 	delay_8
 	walk_down
 	step_end
 
-SlateportCity_Movement_ScottExitAfterBattleTent: 
+SlateportCity_Movement_ScottExitAfterBattleTent:
 	walk_right
 	walk_right
 	walk_right
@@ -956,193 +956,193 @@ SlateportCity_Movement_ScottExitAfterBattleTent:
 	walk_right
 	step_end
 
-SlateportCity_EventScript_BerryCrushRankingsSign:: 
+SlateportCity_EventScript_BerryCrushRankingsSign::
 	lockall
 	special ShowBerryCrushRankings
 	waitstate
 	releaseall
 	end
 
-SlateportCity_Text_EnergyGuruSellWhatYouNeed: 
+SlateportCity_Text_EnergyGuruSellWhatYouNeed:
 	.string "I'm the ENERGY GURU! I'll go for it and\n"
 	.string "sell you what you need!$"
 
-SlateportCity_Text_OhYourPokemon: 
+SlateportCity_Text_OhYourPokemon:
 	.string "Oh?\n"
 	.string "Your {STR_VAR_1}…$"
 
-SlateportCity_Text_PleaseGiveItThisEffortRibbon: 
+SlateportCity_Text_PleaseGiveItThisEffortRibbon:
 	.string "Went for it stupendously!\p"
 	.string "As its reward, please give it this\n"
 	.string "EFFORT RIBBON.$"
 
-SlateportCity_Text_ReceivedEffortRibbon: 
+SlateportCity_Text_ReceivedEffortRibbon:
 	.string "{PLAYER} received the EFFORT RIBBON.$"
 
-SlateportCity_Text_PutEffortRibbonOnMon: 
+SlateportCity_Text_PutEffortRibbonOnMon:
 	.string "{PLAYER} put the EFFORT RIBBON\n"
 	.string "on {STR_VAR_1}.$"
 
-SlateportCity_Text_GoForItLittleHarder: 
+SlateportCity_Text_GoForItLittleHarder:
 	.string "You have to go for it a little harder.\p"
 	.string "If you do, I'll give your POKéMON\n"
 	.string "something nice.$"
 
-SlateportCity_Text_EffortRibbonLooksGoodOnIt: 
+SlateportCity_Text_EffortRibbonLooksGoodOnIt:
 	.string "Oh! Your {STR_VAR_1}, that EFFORT\n"
 	.string "RIBBON looks good on it!$"
 
-SlateportCity_Text_WonderIfLighthouseStartlesPokemon: 
+SlateportCity_Text_WonderIfLighthouseStartlesPokemon:
 	.string "The light of the lighthouse reaches\n"
 	.string "dozens of miles away.\p"
 	.string "I wonder if it doesn't startle POKéMON\n"
 	.string "in the sea.$"
 
-SlateportCity_Text_SeaweedFullOfLife: 
+SlateportCity_Text_SeaweedFullOfLife:
 	.string "Ooh, look at this!\p"
 	.string "The seaweed you can get around these\n"
 	.string "parts is fresh and full of life.\p"
 	.string "Why, it looks like it can even rear up\n"
 	.string "and attack!$"
 
-SlateportCity_Text_HowTownIsBornAndGrows: 
+SlateportCity_Text_HowTownIsBornAndGrows:
 	.string "Where the water is clean, the fruits\n"
 	.string "of bountiful harvest gather.\p"
 	.string "And where people gather, a market\n"
 	.string "soon starts.\p"
 	.string "That is how a town is born and grows.$"
 
-SlateportCity_Text_SlateportWonderfulPlace: 
+SlateportCity_Text_SlateportWonderfulPlace:
 	.string "Shopping where you can breathe the\n"
 	.string "scent of the ocean…\p"
 	.string "SLATEPORT is such a wonderful place!$"
 
-SlateportCity_Text_BuyBricksSoDecorWontGetDirty: 
+SlateportCity_Text_BuyBricksSoDecorWontGetDirty:
 	.string "If you put DOLLS or CUSHIONS on\n"
 	.string "the floor, they'll get dirty.\p"
 	.string "I'm going to buy some BRICKS so my\n"
 	.string "DOLLS and CUSHIONS won't get dirty\l"
 	.string "when I leave them out.$"
 
-SlateportCity_Text_GoingToCompeteInBattleTent: 
+SlateportCity_Text_GoingToCompeteInBattleTent:
 	.string "Wroooar! I'm going to compete in\n"
 	.string "the BATTLE TENT, too!\p"
 	.string "But before that, I need to catch\n"
 	.string "some POKéMON!$"
 
-SlateportCity_Text_BushedHikingFromMauville: 
+SlateportCity_Text_BushedHikingFromMauville:
 	.string "Whew… I'm just bushed…\p"
 	.string "I hiked over from MAUVILLE CITY.\n"
 	.string "But, boy, this city's huge.\p"
 	.string "If I'd known this, I would've ridden\n"
 	.string "my BIKE here.$"
 
-SlateportCity_Text_EveryoneCallsHimCaptStern: 
+SlateportCity_Text_EveryoneCallsHimCaptStern:
 	.string "STERN, the fellow who built the\n"
 	.string "MUSEUM, also happens to be the leader\l"
 	.string "of an undersea exploration team.\p"
 	.string "So, everyone calls him CAPT. STERN.$"
 
-SlateportCity_Text_WhatsLongLineOverThere: 
+SlateportCity_Text_WhatsLongLineOverThere:
 	.string "What is that over there?\n"
 	.string "That long line…$"
 
-SlateportCity_Text_VisitedMuseumOften: 
+SlateportCity_Text_VisitedMuseumOften:
 	.string "When I was a child, I visited\n"
 	.string "the MUSEUM often.\p"
 	.string "I used to dream about the mysteries of\n"
 	.string "the sea after seeing the exhibits.$"
 
-SlateportCity_Text_QuitPushing: 
+SlateportCity_Text_QuitPushing:
 	.string "Hey, there! Quit pushing!\n"
 	.string "This is the line, can't you see?$"
 
-SlateportCity_Text_AquaHasPolicy: 
+SlateportCity_Text_AquaHasPolicy:
 	.string "TEAM AQUA has a policy of\n"
 	.string "assembling and dispersing at\l"
 	.string "the operation site.$"
 
-SlateportCity_Text_BossIsBrilliant: 
+SlateportCity_Text_BossIsBrilliant:
 	.string "Our BOSS is brilliant.\p"
 	.string "What would he want to do with\n"
 	.string "a MUSEUM now?$"
 
-SlateportCity_Text_WhatsNewSchemeIWonder: 
+SlateportCity_Text_WhatsNewSchemeIWonder:
 	.string "What's the new scheme, I wonder?\p"
 	.string "Our BOSS is scary when he's mad, so\n"
 	.string "I'd better not screw things up…$"
 
-SlateportCity_Text_ShouldTakeItAll: 
+SlateportCity_Text_ShouldTakeItAll:
 	.string "If there's something we need in\n"
 	.string "the MUSEUM, we should take it all!$"
 
-SlateportCity_Text_DontButtIn: 
+SlateportCity_Text_DontButtIn:
 	.string "Hey, you there!\n"
 	.string "Don't butt in!$"
 
-SlateportCity_Text_RemindsMeOfLongLineForGames: 
+SlateportCity_Text_RemindsMeOfLongLineForGames:
 	.string "A long line, huh?\p"
 	.string "It reminds me of the times I lined up to\n"
 	.string "buy smash-hit games…$"
 
-SlateportCity_Text_WhyAreWeLiningUp: 
+SlateportCity_Text_WhyAreWeLiningUp:
 	.string "Why are we even lining up and paying?\n"
 	.string "We should just march in!$"
 
-SlateportCity_Text_WhatDoYouWant: 
+SlateportCity_Text_WhatDoYouWant:
 	.string "What?\n"
 	.string "What do you want?$"
 
-SlateportCity_Text_IllReadSignForYou: 
+SlateportCity_Text_IllReadSignForYou:
 	.string "You want to read this sign?\n"
 	.string "I'll read it for you!$"
 
-SlateportCity_Text_SaysSomethingLikeSeaIsEndless: 
+SlateportCity_Text_SaysSomethingLikeSeaIsEndless:
 	.string "Let's see…\p"
 	.string "Um… I think it says something like\n"
 	.string "“the life in the sea is endless.”\p"
 	.string "Yup, I'm pretty sure that's what\n"
 	.string "it says.$"
 
-SlateportCity_Text_ShouldveBroughtMyGameBoy: 
+SlateportCity_Text_ShouldveBroughtMyGameBoy:
 	.string "Grumble…\p"
 	.string "I should've brought my Game Boy\n"
 	.string "Advance so I wouldn't get bored in line…\p"
 	.string "Grumble…$"
 
-SlateportCity_Text_HotSpringsAfterOperation: 
+SlateportCity_Text_HotSpringsAfterOperation:
 	.string "When this operation's over, I'll take\n"
 	.string "you to a hot spring spa!\p"
 	.string "That's what our leader said.\n"
 	.string "I can't wait!$"
 
-SlateportCity_Text_SeaIsSoWet: 
+SlateportCity_Text_SeaIsSoWet:
 	.string "The sea is just so vast…\p"
 	.string "Could the sea have been made by\n"
 	.string "the tears shed by POKéMON?$"
 
-SlateportCity_Text_SinkOldBoats: 
+SlateportCity_Text_SinkOldBoats:
 	.string "Do you know what they do with old\n"
 	.string "ships that become too creaky to sail?\p"
 	.string "They sink them in the sea so they\n"
 	.string "become habitats for POKéMON.$"
 
-SlateportCity_Text_BuyTooMuch: 
+SlateportCity_Text_BuyTooMuch:
 	.string "Whenever I visit here, I get carried\n"
 	.string "away and buy too much.$"
 
-SlateportCity_Text_GetNameRaterToHelpYou: 
+SlateportCity_Text_GetNameRaterToHelpYou:
 	.string "If you want to change your POKéMON's\n"
 	.string "nickname, you'll have to get the NAME\l"
 	.string "RATER to help you.$"
 
-SlateportCity_Text_CantChangeTradeMonName: 
+SlateportCity_Text_CantChangeTradeMonName:
 	.string "Any POKéMON you get in a trade,\n"
 	.string "you can't change its nickname.\p"
 	.string "The original TRAINER's love for that\n"
 	.string "POKéMON is in the nickname.$"
 
-SlateportCity_Text_BattleTentBuiltRecently: 
+SlateportCity_Text_BattleTentBuiltRecently:
 	.string "Recently, a BATTLE TENT was built\n"
 	.string "in SLATEPORT.\p"
 	.string "GYMS are fun, but the BATTLE TENT's\n"
@@ -1150,62 +1150,62 @@ SlateportCity_Text_BattleTentBuiltRecently:
 	.string "You should go find tough POKéMON\n"
 	.string "for the BATTLE TENT!$"
 
-SlateportCity_Text_CaptSternBeingInterviewed: 
+SlateportCity_Text_CaptSternBeingInterviewed:
 	.string "I was hoping that it was a famous star\n"
 	.string "so I could get an autograph.\p"
 	.string "But who's that being interviewed?\n"
 	.string "Isn't that CAPT. STERN?$"
 
-SlateportCity_Text_InterviewerSoCool: 
+SlateportCity_Text_InterviewerSoCool:
 	.string "That lady interviewer is so cool\n"
 	.string "and pretty.\p"
 	.string "When I grow up, I'm going to be\n"
 	.string "an international journalist!$"
 
-SlateportCity_Text_SternSaysDiscoveredSomething: 
+SlateportCity_Text_SternSaysDiscoveredSomething:
 	.string "CAPT. STERN says they discovered\n"
 	.string "something at the bottom of the sea.\p"
 	.string "I wonder what it is?\n"
 	.string "What could it be?$"
 
-SlateportCity_Text_CaptainComeBackWithBigFish: 
+SlateportCity_Text_CaptainComeBackWithBigFish:
 	.string "What's going on here?\p"
 	.string "Did the good CAPTAIN come back with\n"
 	.string "a big fish from the ocean floor?$"
 
-SlateportCity_Text_AmIOnTV: 
+SlateportCity_Text_AmIOnTV:
 	.string "Hey! Are you watching?\n"
 	.string "Am I on TV?$"
 
-SlateportCity_Text_CaptainsACelebrity: 
+SlateportCity_Text_CaptainsACelebrity:
 	.string "A TV interview! Here!\n"
 	.string "The CAPTAIN's a celebrity!$"
 
-SlateportCity_Text_BigSmileForCamera: 
+SlateportCity_Text_BigSmileForCamera:
 	.string "TY: Okay, CAPT. STERN, a big smile\n"
 	.string "for the camera!$"
 
-SlateportCity_Text_MostInvaluableExperience: 
+SlateportCity_Text_MostInvaluableExperience:
 	.string "GABBY: I see, I see. You've had a most\n"
 	.string "invaluable experience…$"
 
-SlateportCity_Text_SternMoveAheadWithExploration: 
+SlateportCity_Text_SternMoveAheadWithExploration:
 	.string "CAPT. STERN: Yes, indeed. We intend to\n"
 	.string "move ahead with our exploration.$"
 
-SlateportCity_Text_GabbyWonderfulThanksForInterview: 
+SlateportCity_Text_GabbyWonderfulThanksForInterview:
 	.string "GABBY: That's wonderful, CAPT. STERN!\n"
 	.string "Thank you for taking the time from\l"
 	.string "your busy schedule to talk to us.\p"
 	.string "We hope we can interview you again\n"
 	.string "with news of more discoveries!$"
 
-SlateportCity_Text_SternWhewFirstInterview: 
+SlateportCity_Text_SternWhewFirstInterview:
 	.string "CAPT. STERN: Whew…\p"
 	.string "That was my first time to be filmed for\n"
 	.string "TV. That was nerve-wracking.$"
 
-SlateportCity_Text_OhPlayerWeMadeDiscovery: 
+SlateportCity_Text_OhPlayerWeMadeDiscovery:
 	.string "Oh! {PLAYER}!\n"
 	.string "You're looking great!\p"
 	.string "We made a huge discovery on our last\n"
@@ -1215,7 +1215,7 @@ SlateportCity_Text_OhPlayerWeMadeDiscovery:
 	.string "We think it's the habitat of a POKéMON\n"
 	.string "that's said to have been long extinct.$"
 
-SlateportCity_Text_AquaWillAssumeControlOfSubmarine: 
+SlateportCity_Text_AquaWillAssumeControlOfSubmarine:
 	.string "Fufufu…\n"
 	.string "CAPT. STERN, I presume.\p"
 	.string "We of TEAM AQUA will assume\n"
@@ -1226,77 +1226,77 @@ SlateportCity_Text_AquaWillAssumeControlOfSubmarine:
 	.string "Just watch and learn what TEAM\l"
 	.string "AQUA has planned!$"
 
-SlateportCity_Text_SternWhatWasAllThat: 
+SlateportCity_Text_SternWhatWasAllThat:
 	.string "CAPT. STERN: What was that all about?\p"
 	.string "It sounded like someone using\n"
 	.string "a megaphone…\p"
 	.string "Where did it come from?$"
 
-SlateportCity_Text_FromHarborTryingToTakeSub: 
+SlateportCity_Text_FromHarborTryingToTakeSub:
 	.string "It's from the HARBOR!\p"
 	.string "The submarine!\n"
 	.string "They're trying to take it!$"
 
-SlateportCity_Text_PleaseComeWithMe: 
+SlateportCity_Text_PleaseComeWithMe:
 	.string "{PLAYER}!\n"
 	.string "Please, come with me!$"
 
-SlateportCity_Text_BattleTentSign: 
+SlateportCity_Text_BattleTentSign:
 	.string "BATTLE TENT SLATEPORT SITE\n"
 	.string "“Find it! The ultimate POKéMON!”$"
 
-SlateportCity_Text_SternsShipyardWantedSign: 
+SlateportCity_Text_SternsShipyardWantedSign:
 	.string "STERN'S SHIPYARD\p"
 	.string "“Wanted: A sailor capable of sailing\n"
 	.string "in all currents.”$"
 
-SlateportCity_Text_SternsShipyardNearsCompletion: 
+SlateportCity_Text_SternsShipyardNearsCompletion:
 	.string "STERN'S SHIPYARD\p"
 	.string "“The ferry S.S. TIDAL nears\n"
 	.string "completion for serving the ports of\l"
 	.string "SLATEPORT and LILYCOVE.”$"
 
-SlateportCity_Text_SternsShipyardFerryComplete: 
+SlateportCity_Text_SternsShipyardFerryComplete:
 	.string "STERN'S SHIPYARD\p"
 	.string "“Boarding of the SLATEPORT-LILYCOVE\n"
 	.string "ferry S.S. TIDAL is handled at the\l"
 	.string "HARBOR.”$"
 
-SlateportCity_Text_PokemonFanClubSign: 
+SlateportCity_Text_PokemonFanClubSign:
 	.string "POKéMON FAN CLUB\n"
 	.string "“Calling all fans of POKéMON!”$"
 
-SlateportCity_Text_OceanicMuseumSign: 
+SlateportCity_Text_OceanicMuseumSign:
 	.string "“The endless sea sustains\n"
 	.string "all life.”\p"
 	.string "OCEANIC MUSEUM$"
 
-SlateportCity_Text_CitySign: 
+SlateportCity_Text_CitySign:
 	.string "SLATEPORT CITY\p"
 	.string "“The port where people and POKéMON\n"
 	.string "cross paths.”$"
 
-SlateportCity_Text_MarketSign: 
+SlateportCity_Text_MarketSign:
 	.string "SLATEPORT MARKET\n"
 	.string "“Unique items found nowhere else!”$"
 
-SlateportCity_Text_HarborFerryUnderConstruction: 
+SlateportCity_Text_HarborFerryUnderConstruction:
 	.string "SLATEPORT HARBOR\p"
 	.string "“The ferry S.S. TIDAL is under\n"
 	.string "construction in the SHIPYARD.\p"
 	.string "“Service is scheduled to begin\n"
 	.string "shortly.”$"
 
-SlateportCity_Text_HarborSign: 
+SlateportCity_Text_HarborSign:
 	.string "SLATEPORT HARBOR\p"
 	.string "“Enjoy a delightful cruise on\n"
 	.string "the ferry S.S. TIDAL.”$"
 
-SlateportCity_Text_NameRatersHouseSign: 
+SlateportCity_Text_NameRatersHouseSign:
 	.string "NAME RATER'S HOUSE\n"
 	.string "“POKéMON nicknames rated.”$"
 
-SlateportCity_Text_ExplainBerries: 
+SlateportCity_Text_ExplainBerries:
 	.string "If a wild POKéMON gets hurt, it heals\n"
 	.string "itself by chewing on BERRIES.\p"
 	.string "Did you know that?\p"
@@ -1311,7 +1311,7 @@ SlateportCity_Text_ExplainBerries:
 	.string "I've got something good for someone\n"
 	.string "like you.$"
 
-SlateportCity_Text_ExplainBerryPowder: 
+SlateportCity_Text_ExplainBerryPowder:
 	.string "I recently had machines installed at\n"
 	.string "POKéMON CENTERS for crushing BERRIES.\p"
 	.string "The BERRY CRUSH machines are at\n"
@@ -1322,39 +1322,39 @@ SlateportCity_Text_ExplainBerryPowder:
 	.string "I can make you all sorts of medicine\n"
 	.string "if you bring me lots of BERRY POWDER.$"
 
-SlateportCity_Text_BroughtMeSomeBerryPowder: 
+SlateportCity_Text_BroughtMeSomeBerryPowder:
 	.string "Have you brought me some\n"
 	.string "BERRY POWDER?$"
 
-SlateportCity_Text_ExchangeWhatWithIt: 
+SlateportCity_Text_ExchangeWhatWithIt:
 	.string "What would you like to exchange\n"
 	.string "it with?$"
 
-SlateportCity_Text_ExchangeBerryPowderForItem: 
+SlateportCity_Text_ExchangeBerryPowderForItem:
 	.string "Okay, you want to exchange your\n"
 	.string "BERRY POWDER for one {STR_VAR_1}?$"
 
-SlateportCity_Text_DontHaveEnoughBerryPowder: 
+SlateportCity_Text_DontHaveEnoughBerryPowder:
 	.string "Oh, dear. You don't have enough\n"
 	.string "BERRY POWDER.$"
 
-SlateportCity_Text_FineBerryPowderTradeSomethingElse: 
+SlateportCity_Text_FineBerryPowderTradeSomethingElse:
 	.string "This is fine BERRY POWDER.\n"
 	.string "It will make excellent medicine.\p"
 	.string "Would you like to trade more of your\n"
 	.string "BERRY POWDER for something else?$"
 
-SlateportCity_Text_WhenYouGetMoreBringItToMe: 
+SlateportCity_Text_WhenYouGetMoreBringItToMe:
 	.string "Okay! When you get some more\n"
 	.string "BERRY POWDER, bring it to me, please!$"
 
-SlateportCity_Text_ComeBackToTradeBerryPowder: 
+SlateportCity_Text_ComeBackToTradeBerryPowder:
 	.string "Come back if you'd like to trade your\n"
 	.string "BERRY POWDER for some medicine.\p"
 	.string "I'm always running a bazaar here.\p"
 	.string "Did you know?$"
 
-SlateportCity_Text_YouDroveTeamAquaAway: 
+SlateportCity_Text_YouDroveTeamAquaAway:
 	.string "SCOTT: Huh?\n"
 	.string "I'm sure I met you somewhere before.\p"
 	.string "Have I introduced myself to you?\n"
@@ -1363,22 +1363,22 @@ SlateportCity_Text_YouDroveTeamAquaAway:
 	.string "here like they were stung.\p"
 	.string "Let me guess--you drove them away?$"
 
-SlateportCity_Text_MaybeThisTrainer: 
+SlateportCity_Text_MaybeThisTrainer:
 	.string "SCOTT: Hmm…\n"
 	.string "Maybe, just maybe, this TRAINER…$"
 
-SlateportCity_Text_LetsRegisterEachOther: 
+SlateportCity_Text_LetsRegisterEachOther:
 	.string "SCOTT: All right! I think you're going\n"
 	.string "to become a good friend.\p"
 	.string "So, let's register each other in our\n"
 	.string "POKéNAVS.\p"
 	.string "… … … … … …$"
 
-SlateportCity_Text_RegisteredScott: 
+SlateportCity_Text_RegisteredScott:
 	.string "Registered this SCOTT person\n"
 	.string "in the POKéNAV.$"
 
-SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou: 
+SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou:
 	.string "SCOTT: What I'd like to do is tag along\n"
 	.string "with you, but I do want to keep an eye\l"
 	.string "on the talents of other people, too.\p"
@@ -1386,7 +1386,7 @@ SlateportCity_Text_KeepEyeOnTrainersBeSeeingYou:
 	.string "a bit more.\p"
 	.string "Be seeing you, {PLAYER}!$"
 
-SlateportCity_Text_TakingBattleTentChallenge: 
+SlateportCity_Text_TakingBattleTentChallenge:
 	.string "SCOTT: Oh, hey!\n"
 	.string "If it isn't {PLAYER}!\p"
 	.string "{PLAYER}, let me guess--you're going\n"

@@ -1,9 +1,9 @@
 .set LOCALID_WALLACE, 1
 
-CaveOfOrigin_B1F_MapScripts:: 
+CaveOfOrigin_B1F_MapScripts::
 	.byte 0
 
-CaveOfOrigin_B1F_EventScript_Wallace:: 
+CaveOfOrigin_B1F_EventScript_Wallace::
 	lock
 	faceplayer
 	msgbox CaveOfOrigin_B1F_Text_WallaceStory, MSGBOX_DEFAULT
@@ -31,7 +31,7 @@ CaveOfOrigin_B1F_EventScript_Wallace::
 	release
 	end
 
-CaveOfOrigin_B1F_Text_WallaceStory: 
+CaveOfOrigin_B1F_Text_WallaceStory:
 	.string "Ah, so you are {PLAYER}?\n"
 	.string "I've heard tales of your exploits.\p"
 	.string "My name is WALLACE.\p"
@@ -54,7 +54,7 @@ CaveOfOrigin_B1F_Text_WallaceStory:
 	.string "the distant past.\p"
 	.string "But where could RAYQUAZA be…$"
 
-CaveOfOrigin_B1F_Text_LetsHeadToSkyPillar: 
+CaveOfOrigin_B1F_Text_LetsHeadToSkyPillar:
 	.string "WALLACE: The SKY PILLAR!\p"
 	.string "That's it!\n"
 	.string "It must be the SKY PILLAR!\p"

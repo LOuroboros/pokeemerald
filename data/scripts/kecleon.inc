@@ -1,53 +1,53 @@
-Route120_EventScript_Kecleon1:: 
+Route120_EventScript_Kecleon1::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 1
 	goto EventScript_Kecleon
 	end
 
-Route120_EventScript_Kecleon2:: 
+Route120_EventScript_Kecleon2::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 2
 	goto EventScript_Kecleon
 	end
 
-Route120_EventScript_Kecleon3:: 
+Route120_EventScript_Kecleon3::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 3
 	goto EventScript_Kecleon
 	end
 
-Route120_EventScript_Kecleon4:: 
+Route120_EventScript_Kecleon4::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 4
 	goto EventScript_Kecleon
 	end
 
-Route120_EventScript_Kecleon5:: 
+Route120_EventScript_Kecleon5::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 5
 	goto EventScript_Kecleon
 	end
 
-Route119_EventScript_Kecleon1:: 
+Route119_EventScript_Kecleon1::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 6
 	goto EventScript_Kecleon
 	end
 
-Route119_EventScript_Kecleon2:: 
+Route119_EventScript_Kecleon2::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 7
 	goto EventScript_Kecleon
 	end
 
-EventScript_Kecleon:: 
+EventScript_Kecleon::
 	checkitem ITEM_DEVON_SCOPE, 1
 	compare VAR_RESULT, 1
 	goto_if_eq EventScript_AskUseDevonScope
@@ -55,14 +55,14 @@ EventScript_Kecleon::
 	release
 	end
 
-EventScript_AskUseDevonScope:: 
+EventScript_AskUseDevonScope::
 	msgbox Kecleon_Text_WantToUseDevonScope, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq EventScript_BattleKecleon
 	release
 	end
 
-EventScript_BattleKecleon:: 
+EventScript_BattleKecleon::
 	msgbox Kecleon_Text_UseDevonScopeMonAttacked, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
@@ -87,11 +87,11 @@ EventScript_BattleKecleon::
 	release
 	end
 
-EventScript_RemoveKecleon:: 
+EventScript_RemoveKecleon::
 	goto Common_EventScript_RemoveStaticPokemon
 	end
 
-Movement_KecleonAppears: 
+Movement_KecleonAppears:
 	set_visible
 	delay_4
 	set_invisible

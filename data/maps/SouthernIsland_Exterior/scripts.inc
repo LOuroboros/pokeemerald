@@ -1,15 +1,15 @@
 .set LOCALID_SAILOR, 1
 .set LOCALID_SS_TIDAL, 2
 
-SouthernIsland_Exterior_MapScripts:: 
+SouthernIsland_Exterior_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SouthernIsland_Exterior_OnTransition
 	.byte 0
 
-SouthernIsland_Exterior_OnTransition: 
+SouthernIsland_Exterior_OnTransition:
 	setflag FLAG_LANDMARK_SOUTHERN_ISLAND
 	end
 
-SouthernIsland_Exterior_EventScript_Sailor:: 
+SouthernIsland_Exterior_EventScript_Sailor::
 	lock
 	faceplayer
 	msgbox EventTicket_Text_SouthernIslandSailBack, MSGBOX_YESNO
@@ -28,31 +28,31 @@ SouthernIsland_Exterior_EventScript_Sailor::
 	release
 	end
 
-SouthernIsland_Exterior_EventScript_AsYouLike:: 
+SouthernIsland_Exterior_EventScript_AsYouLike::
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	release
 	end
 
-Ferry_EventScript_DepartIslandSouth:: 
+Ferry_EventScript_DepartIslandSouth::
 	applymovement OBJ_EVENT_ID_PLAYER, Ferry_EventScript_DepartIslandBoardSouth
 	waitmovement 0
 	return
 
-Ferry_EventScript_DepartIslandWest:: 
+Ferry_EventScript_DepartIslandWest::
 	applymovement OBJ_EVENT_ID_PLAYER, Ferry_EventScript_DepartIslandBoardWest
 	waitmovement 0
 	return
 
-Ferry_EventScript_DepartIslandBoardSouth: 
+Ferry_EventScript_DepartIslandBoardSouth:
 	walk_down
 	step_end
 
-Ferry_EventScript_DepartIslandBoardWest: 
+Ferry_EventScript_DepartIslandBoardWest:
 	walk_left
 	walk_in_place_fastest_down
 	step_end
 
-SouthernIsland_Exterior_EventScript_Sign:: 
+SouthernIsland_Exterior_EventScript_Sign::
 	msgbox SouthernIsland_Exterior_Text_Sign, MSGBOX_SIGN
 	end
 

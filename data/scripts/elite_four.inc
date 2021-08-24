@@ -1,4 +1,4 @@
-PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles:: 
+PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_Delay32
 	waitmovement 0
 	playse SE_DOOR
@@ -17,7 +17,7 @@ PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles::
 	special DrawWholeMapView
 	return
 
-PokemonLeague_EliteFour_EventScript_WalkInCloseDoor:: 
+PokemonLeague_EliteFour_EventScript_WalkInCloseDoor::
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkUp6
 	waitmovement 0
 	playse SE_TRUCK_DOOR
@@ -31,7 +31,7 @@ PokemonLeague_EliteFour_EventScript_WalkInCloseDoor::
 	return
 
 @ Essentially unused, only necessary when re-entering an Elite Four room after defeating the member, which isnt normally possible
-PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom:: 
+PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom::
 	setmetatile 6, 1, METATILE_EliteFour_OpenDoor_Frame, 0
 	setmetatile 6, 2, METATILE_EliteFour_OpenDoor_Opening, 0
 	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
@@ -52,7 +52,7 @@ PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom::
 	setmetatile 12, 2, METATILE_EliteFour_LeftSpotlightOff, 1
 	return
 
-PokemonLeague_EliteFour_EventScript_CloseDoor:: 
+PokemonLeague_EliteFour_EventScript_CloseDoor::
 	setmetatile 5, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
 	setmetatile 6, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1
 	setmetatile 7, 12, METATILE_EliteFour_EntryDoor_ClosedTop, 1

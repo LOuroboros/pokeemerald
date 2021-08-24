@@ -1,17 +1,17 @@
-SootopolisCity_MysteryEventsHouse_B1F_MapScripts:: 
+SootopolisCity_MysteryEventsHouse_B1F_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_MysteryEventsHouse_B1F_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_MysteryEventsHouse_B1F_OnFrame
 	.byte 0
 
-SootopolisCity_MysteryEventsHouse_B1F_OnTransition: 
+SootopolisCity_MysteryEventsHouse_B1F_OnTransition:
 	special SetEReaderTrainerGfxId
 	end
 
-SootopolisCity_MysteryEventsHouse_B1F_OnFrame: 
+SootopolisCity_MysteryEventsHouse_B1F_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer
 	.2byte 0
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer:: 
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement
 	waitmovement 0
@@ -39,26 +39,26 @@ SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleVisitingTrainer::
 	releaseall
 	end
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie:: 
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie::
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 3
 	msgbox SootopolisCity_MysteryEventsHouse_B1F_Text_MatchEndedUpDraw, MSGBOX_DEFAULT
 	return
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon:: 
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon::
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 1
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
-SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost:: 
+SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost::
 	setvar VAR_SOOTOPOLIS_MYSTERY_EVENTS_STATE, 2
 	special ShowFieldMessageStringVar4
 	waitmessage
 	waitbuttonpress
 	return
 
-SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement: 
+SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement:
 	walk_down
 	walk_down
 	walk_down
@@ -66,7 +66,7 @@ SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement:
 	walk_right
 	step_end
 
-SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement: 
+SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement:
 	walk_left
 	walk_left
 	walk_up

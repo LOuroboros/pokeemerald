@@ -1,24 +1,24 @@
-SootopolisCity_Gym_1F_MapScripts:: 
+SootopolisCity_Gym_1F_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, SootopolisCity_Gym_1F_OnFrame
 	map_script MAP_SCRIPT_ON_RESUME, SootopolisCity_Gym_1F_OnResume
 	map_script MAP_SCRIPT_ON_LOAD, SootopolisCity_Gym_1F_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, SootopolisCity_Gym_1F_OnTransition
 	.byte 0
 
-SootopolisCity_Gym_1F_OnTransition: 
+SootopolisCity_Gym_1F_OnTransition:
 	setvar VAR_ICE_STEP_COUNT, 1
 	end
 
-SootopolisCity_Gym_1F_OnResume: 
+SootopolisCity_Gym_1F_OnResume:
 	setstepcallback STEP_CB_SOOTOPOLIS_ICE
 	end
 
-SootopolisCity_Gym_1F_OnLoad: 
+SootopolisCity_Gym_1F_OnLoad:
 	call SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles
 	special SetSootopolisGymCrackedIceMetatiles
 	end
 
-SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles:: 
+SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles::
 	compare VAR_ICE_STEP_COUNT, 8
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_StopCheckingStairs  @ All stairs ice
 	compare VAR_ICE_STEP_COUNT, 28
@@ -27,23 +27,23 @@ SootopolisCity_Gym_1F_EventScript_CheckSetStairMetatiles::
 	goto_if_lt SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs
 	setmetatile 8, 4, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 5, METATILE_SootopolisGym_Stairs, 0
-SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs:: 
+SootopolisCity_Gym_1F_EventScript_OpenFirstAndSecondStairs::
 	setmetatile 8, 10, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 11, METATILE_SootopolisGym_Stairs, 0
-SootopolisCity_Gym_1F_EventScript_OpenFirstStairs:: 
+SootopolisCity_Gym_1F_EventScript_OpenFirstStairs::
 	setmetatile 8, 15, METATILE_SootopolisGym_Stairs, 0
 	setmetatile 8, 16, METATILE_SootopolisGym_Stairs, 0
-SootopolisCity_Gym_1F_EventScript_StopCheckingStairs:: 
+SootopolisCity_Gym_1F_EventScript_StopCheckingStairs::
 	return
 
-SootopolisCity_Gym_1F_OnFrame: 
+SootopolisCity_Gym_1F_OnFrame:
 	map_script_2 VAR_ICE_STEP_COUNT, 8, SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs
 	map_script_2 VAR_ICE_STEP_COUNT, 28, SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs
 	map_script_2 VAR_ICE_STEP_COUNT, 67, SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs
 	map_script_2 VAR_ICE_STEP_COUNT, 0, SootopolisCity_Gym_1F_EventScript_FallThroughIce
 	.2byte 0
 
-SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs:: 
+SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs::
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
 	playse SE_ICE_STAIRS
@@ -51,7 +51,7 @@ SootopolisCity_Gym_1F_EventScript_UnlockFirstStairs::
 	special DrawWholeMapView
 	end
 
-SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs:: 
+SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs::
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
 	playse SE_ICE_STAIRS
@@ -59,7 +59,7 @@ SootopolisCity_Gym_1F_EventScript_UnlockSecondStairs::
 	special DrawWholeMapView
 	end
 
-SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs:: 
+SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs::
 	addvar VAR_ICE_STEP_COUNT, 1
 	delay 40
 	playse SE_ICE_STAIRS
@@ -67,7 +67,7 @@ SootopolisCity_Gym_1F_EventScript_UnlockThirdStairs::
 	special DrawWholeMapView
 	end
 
-SootopolisCity_Gym_1F_EventScript_FallThroughIce:: 
+SootopolisCity_Gym_1F_EventScript_FallThroughIce::
 	lockall
 	delay 20
 	applymovement OBJ_EVENT_ID_PLAYER, SootopolisCity_Gym_1F_Movement_FallThroughIce
@@ -78,11 +78,11 @@ SootopolisCity_Gym_1F_EventScript_FallThroughIce::
 	waitstate
 	end
 
-SootopolisCity_Gym_1F_Movement_FallThroughIce: 
+SootopolisCity_Gym_1F_Movement_FallThroughIce:
 	set_invisible
 	step_end
 
-SootopolisCity_Gym_1F_EventScript_Juan:: 
+SootopolisCity_Gym_1F_EventScript_Juan::
 	trainerbattle_single TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanIntro, SootopolisCity_Gym_1F_Text_JuanDefeat, SootopolisCity_Gym_1F_EventScript_JuanDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -93,7 +93,7 @@ SootopolisCity_Gym_1F_EventScript_Juan::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_JuanDefeated:: 
+SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -119,7 +119,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_GiveWaterPulse:: 
+SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
 	giveitem ITEM_TM03
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
@@ -127,7 +127,7 @@ SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
 	setflag FLAG_RECEIVED_TM03
 	return
 
-SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2:: 
+SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2::
 	giveitem ITEM_TM03
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -136,17 +136,17 @@ SootopolisCity_Gym_1F_EventScript_GiveWaterPulse2::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge:: 
+SootopolisCity_Gym_1F_EventScript_GoGetFortreeBadge::
 	msgbox SootopolisCity_Gym_1F_Text_GoGetFortreeBadge, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_JuanRematch:: 
+SootopolisCity_Gym_1F_EventScript_JuanRematch::
 	trainerbattle_rematch_double TRAINER_JUAN_1, SootopolisCity_Gym_1F_Text_JuanPreRematch, SootopolisCity_Gym_1F_Text_JuanRematchDefeat, SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons
 	msgbox SootopolisCity_Gym_1F_Text_JuanPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-SootopolisCity_Gym_1F_EventScript_GymGuide:: 
+SootopolisCity_Gym_1F_EventScript_GymGuide::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_SOOTOPOLIS_GYM, SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory
@@ -154,34 +154,34 @@ SootopolisCity_Gym_1F_EventScript_GymGuide::
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory:: 
+SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory::
 	msgbox SootopolisCity_Gym_1F_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
 
-SootopolisCity_Gym_1F_EventScript_LeftGymStatue:: 
+SootopolisCity_Gym_1F_EventScript_LeftGymStatue::
 	lockall
 	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_GymStatueCertified
 	goto SootopolisCity_Gym_1F_EventScript_GymStatue
 	end
 
-SootopolisCity_Gym_1F_EventScript_RightGymStatue:: 
+SootopolisCity_Gym_1F_EventScript_RightGymStatue::
 	lockall
 	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Gym_1F_EventScript_GymStatueCertified
 	goto SootopolisCity_Gym_1F_EventScript_GymStatue
 	end
 
-SootopolisCity_Gym_1F_EventScript_GymStatueCertified:: 
+SootopolisCity_Gym_1F_EventScript_GymStatueCertified::
 	msgbox SootopolisCity_Gym_1F_Text_GymStatueCertified, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SootopolisCity_Gym_1F_EventScript_GymStatue:: 
+SootopolisCity_Gym_1F_EventScript_GymStatue::
 	msgbox SootopolisCity_Gym_1F_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SootopolisCity_Gym_1F_Text_GymGuideAdvice: 
+SootopolisCity_Gym_1F_Text_GymGuideAdvice:
 	.string "Yo! How's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
 	.string "SOOTOPOLIS's GYM LEADER JUAN is\n"
@@ -193,14 +193,14 @@ SootopolisCity_Gym_1F_Text_GymGuideAdvice:
 	.string "The rest of the way, you have to\n"
 	.string "go for it yourself!$"
 
-SootopolisCity_Gym_1F_Text_GymGuidePostVictory: 
+SootopolisCity_Gym_1F_Text_GymGuidePostVictory:
 	.string "Yow! You've beaten even JUAN, who\n"
 	.string "was supposedly the best in all HOENN!\p"
 	.string "Okay! Check out your TRAINER CARD.\p"
 	.string "If you've gotten all the BADGES, you're\n"
 	.string "set for the POKéMON LEAGUE challenge!$"
 
-SootopolisCity_Gym_1F_Text_JuanIntro: 
+SootopolisCity_Gym_1F_Text_JuanIntro:
 	.string "Let me ask you.\n"
 	.string "Did you know?\l"
 	.string "Ah, I should not be so coy.\p"
@@ -223,7 +223,7 @@ SootopolisCity_Gym_1F_Text_JuanIntro:
 @ the gDisplayedStringBattle buffer that it's put into, and it stomps all over the gBattleTextBuffs
 @ after, as well as the otherwise unused array after that. One wonders if that's the reason for
 @ the existence of that unused array of ints.
-SootopolisCity_Gym_1F_Text_JuanDefeat: 
+SootopolisCity_Gym_1F_Text_JuanDefeat:
 	.string "Ahahaha, excellent!\n"
 	.string "Very well, you are the winner.\p"
 	.string "From you, I sense the brilliant shine\n"
@@ -238,11 +238,11 @@ SootopolisCity_Gym_1F_Text_JuanDefeat:
 	.string "Rather than my clothes, I shall reward\n"
 	.string "you with this, the RAIN BADGE!$"
 
-SootopolisCity_Gym_1F_Text_ReceivedRainBadge: 
+SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
 	.string "{PLAYER} received the RAIN BADGE\n"
 	.string "from JUAN.$"
 
-SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis: 
+SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "Having the RAIN BADGE shall assure you\n"
 	.string "the full obedience of all your POKéMON\l"
 	.string "to your every command.\p"
@@ -252,18 +252,18 @@ SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "And, so that you never forget the\n"
 	.string "battle we shared, take this…$"
 
-SootopolisCity_Gym_1F_Text_ExplainWaterPulse: 
+SootopolisCity_Gym_1F_Text_ExplainWaterPulse:
 	.string "The TECHNICAL MACHINE I handed you\n"
 	.string "contains WATER PULSE.\p"
 	.string "In use, it will occasionally confuse\n"
 	.string "the target with ultrasonic waves.\p"
 	.string "… … … … … …$"
 
-SootopolisCity_Gym_1F_Text_RegisteredJuan: 
+SootopolisCity_Gym_1F_Text_RegisteredJuan:
 	.string "Registered GYM LEADER JUAN\n"
 	.string "in the POKéNAV.$"
 
-SootopolisCity_Gym_1F_Text_JuanPostBattle: 
+SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "The TRAINERS who have gathered all\n"
 	.string "the GYM BADGES of HOENN should make\l"
 	.string "way to the ultimate destination.\p"
@@ -273,22 +273,22 @@ SootopolisCity_Gym_1F_Text_JuanPostBattle:
 	.string "There, you shall find the POKéMON\n"
 	.string "LEAGUE.$"
 
-SootopolisCity_Gym_1F_Text_GoGetFortreeBadge: 
+SootopolisCity_Gym_1F_Text_GoGetFortreeBadge:
 	.string "There remains but one BADGE to\n"
 	.string "obtain in HOENN.\p"
 	.string "If you wish to challenge the POKéMON\n"
 	.string "LEAGUE, you must obtain the last\l"
 	.string "BADGE from the GYM in FORTREE.$"
 
-SootopolisCity_Gym_1F_Text_GymStatue: 
+SootopolisCity_Gym_1F_Text_GymStatue:
 	.string "SOOTOPOLIS CITY POKéMON GYM$"
 
-SootopolisCity_Gym_1F_Text_GymStatueCertified: 
+SootopolisCity_Gym_1F_Text_GymStatueCertified:
 	.string "SOOTOPOLIS CITY POKéMON GYM\p"
 	.string "JUAN'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-SootopolisCity_Gym_1F_Text_JuanPreRematch: 
+SootopolisCity_Gym_1F_Text_JuanPreRematch:
 	.string "JUAN: Ah, this GYM had returned to its\n"
 	.string "usual state of serenity…\p"
 	.string "But our young typhoon has returned\n"
@@ -297,11 +297,11 @@ SootopolisCity_Gym_1F_Text_JuanPreRematch:
 	.string "I shall be delighted to dance with you\n"
 	.string "as often as you wish!$"
 
-SootopolisCity_Gym_1F_Text_JuanRematchDefeat: 
+SootopolisCity_Gym_1F_Text_JuanRematchDefeat:
 	.string "Ahahaha, you are the winner!\n"
 	.string "You have defeated me again!$"
 
-SootopolisCity_Gym_1F_Text_JuanPostRematch: 
+SootopolisCity_Gym_1F_Text_JuanPostRematch:
 	.string "JUAN: If I told you to become my\n"
 	.string "apprentice, you will refuse, I am sure.\p"
 	.string "I would like to make a gift of my coat\n"
@@ -311,7 +311,7 @@ SootopolisCity_Gym_1F_Text_JuanPostRematch:
 	.string "And that, my friend, is a certain sign\n"
 	.string "of nobility!$"
 
-SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons: 
+SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons:
 	.string "JUAN: Ah, this GYM had returned to its\n"
 	.string "usual state of serenity…\p"
 	.string "But our young typhoon has returned\n"

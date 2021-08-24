@@ -9,7 +9,7 @@
 
 	.arm
 
-Start: 
+Start:
 	b Init
 
 	.include "asm/rom_header.inc"
@@ -18,15 +18,15 @@ Start:
 	.word 0
 
 	.global GPIOPortData
-GPIOPortData: 
+GPIOPortData:
 	.2byte 0
 
 	.global GPIOPortDirection
-GPIOPortDirection: 
+GPIOPortDirection:
 	.2byte 0
 
 	.global GPIOPortReadEnable
-GPIOPortReadEnable: 
+GPIOPortReadEnable:
 	.2byte 0
 
 
@@ -107,7 +107,7 @@ GPIOPortReadEnable:
 	.arm
 	.align 2, 0
 	.global Init
-Init: 
+Init:
 	mov r0, #PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
@@ -135,7 +135,7 @@ sp_irq: .word IWRAM_END - 0x60
 	.arm
 	.align 2, 0
 	.global IntrMain
-IntrMain: 
+IntrMain:
 	mov r3, #REG_BASE
 	add r3, r3, #OFFSET_REG_IE
 	ldr r2, [r3]

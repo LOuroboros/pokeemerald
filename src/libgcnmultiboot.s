@@ -15,7 +15,7 @@
 	.text
 
 	thumb_func_start GameCubeMultiBoot_Hash
-GameCubeMultiBoot_Hash: 
+GameCubeMultiBoot_Hash:
 	push {r4,lr}
 	ldr r4, pool_HashVal
 	eors r3, r1
@@ -36,7 +36,7 @@ GameCubeMultiBoot_Hash_SkipEor:
 
 	thumb_func_start GameCubeMultiBoot_Main
 @ void GameCubeMultiBoot_Main(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_Main: 
+GameCubeMultiBoot_Main:
 	ldr r1, [r0, #GCMB_STRUCT_SERIAL_INTR_HANDLER]
 	cmp r1, #0
 	beq _082DEDAA
@@ -181,7 +181,7 @@ pool_NintendoLogo: .4byte RomHeaderNintendoLogo
 
 	thumb_func_start GameCubeMultiBoot_ExecuteProgram
 @ void GameCubeMultiBoot_ExecuteProgram(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_ExecuteProgram: 
+GameCubeMultiBoot_ExecuteProgram:
 	ldrb r1, [r0, 0x2]
 	cmp r1, 0x2
 	bne GameCubeMultiBoot_ExecuteProgram_Fail
@@ -197,7 +197,7 @@ GameCubeMultiBoot_ExecuteProgram_Fail:
 
 	thumb_func_start GameCubeMultiBoot_Init
 @ void GameCubeMultiBoot_Init(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_Init: 
+GameCubeMultiBoot_Init:
 	ldr r3, pool_InterruptRegs
 
 @ Save IME register.
@@ -268,7 +268,7 @@ GameCubeMultiBoot_Init_ClearStructLoop:
 
 	non_word_aligned_thumb_func_start GameCubeMultiBoot_HandleSerialInterrupt
 @ void GameCubeMultiBoot_HandleSerialInterrupt(struct GameCubeMultiBoot *mb);
-GameCubeMultiBoot_HandleSerialInterrupt: 
+GameCubeMultiBoot_HandleSerialInterrupt:
 	ldr r3, pool_SerialRegs
 
 @ Acknowledge reset/receive/send flags.
@@ -326,7 +326,7 @@ GameCubeMultiBoot_BeginHandshake:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckGameCodeSent: 
+GcMbIntrHandler_CheckGameCodeSent:
 	lsls r1, 31
 	bcc GcMbIntrHandler_Stop @ stop if send failed
 	bmi GameCubeMultiBoot_CheckHandshakeResponse @ branch if receive is complete
@@ -338,7 +338,7 @@ GcMbIntrHandler_CheckGameCodeSent:
 
 	.align 2, 0
 
-GcMbIntrHandler_CheckHandshakeResponse: 
+GcMbIntrHandler_CheckHandshakeResponse:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ stop if not
 
@@ -354,7 +354,7 @@ GameCubeMultiBoot_CheckHandshakeResponse:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DEF44: 
+GcMbIntrHandler_82DEF44:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r1, [r3, OFFSET_REG_JOY_RECV - 0x120]
@@ -392,7 +392,7 @@ _082DEF72:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DEF84: 
+GcMbIntrHandler_82DEF84:
 	lsls r1, 31
 	bcc GcMbIntrHandler_Stop @ stop if send failed
 	bmi _082DEF94 @ branch if receive is complete
@@ -401,7 +401,7 @@ GcMbIntrHandler_82DEF84:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DEF90: 
+GcMbIntrHandler_82DEF90:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 _082DEF94:
@@ -424,7 +424,7 @@ _082DEFA6:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DEFB4: 
+GcMbIntrHandler_82DEFB4:
 	lsrs r1, 1 @ is receive complete?
 	bcc GcMbIntrHandler_Stop @ branch if not
 	ldr r2, [r0, #GCMB_STRUCT_CUR_DEST_PTR]
@@ -465,7 +465,7 @@ _082DEFE2:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DEFF0: 
+GcMbIntrHandler_82DEFF0:
 	lsls r1, 31
 	bcc _082DEFE2 @ branch if send failed
 	bmi _082DF000 @ branch if receive is complete
@@ -474,7 +474,7 @@ GcMbIntrHandler_82DEFF0:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DEFFC: 
+GcMbIntrHandler_82DEFFC:
 	lsrs r1, 1 @ is receive complete?
 	bcc _082DEFE2 @ branch if not
 
@@ -489,14 +489,14 @@ _082DF000:
 
 	.align 2, 0
 
-GcMbIntrHandler_82DF010: 
+GcMbIntrHandler_82DF010:
 	b GcMbIntrHandler_Stop
 
 	thumb_func_end GameCubeMultiBoot_HandleSerialInterrupt
 
 	non_word_aligned_thumb_func_start GameCubeMultiBoot_Quit
 @ void GameCubeMultiBoot_Quit();
-GameCubeMultiBoot_Quit: 
+GameCubeMultiBoot_Quit:
 	ldr r3, pool_InterruptRegs
 
 @ Save IME register.

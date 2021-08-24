@@ -1,15 +1,15 @@
 .set LOCALID_ATTENDANT, 1
 
-BattleFrontier_BattlePikeCorridor_MapScripts:: 
+BattleFrontier_BattlePikeCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePikeCorridor_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeCorridor_OnWarp
 	.byte 0
 
-BattleFrontier_BattlePikeCorridor_OnFrame: 
+BattleFrontier_BattlePikeCorridor_OnFrame:
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor
 	.2byte 0
 
-BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor:: 
+BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor::
 	delay 16
 	frontier_set FRONTIER_DATA_BATTLE_NUM, 1
 	pike_cleartrainerids
@@ -29,34 +29,34 @@ BattleFrontier_BattlePikeCorridor_EventScript_EnterCorridor::
 	waitstate
 	end
 
-BattleFrontier_BattlePikeCorridor_OnWarp: 
+BattleFrontier_BattlePikeCorridor_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePikeCorridor_EventScript_TurnPlayerNorth
 	.2byte 0
 
-BattleFrontier_BattlePikeCorridor_EventScript_TurnPlayerNorth:: 
+BattleFrontier_BattlePikeCorridor_EventScript_TurnPlayerNorth::
 	setvar VAR_TEMP_1, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor: 
+BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor:
 	walk_up
 	walk_up
 	step_end
 
-BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor: 
+BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor:
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor: 
+BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor:
 	walk_up
 	walk_up
 	walk_left
 	face_down
 	step_end
 
-BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun: 
+BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun:
 	.string "Your Battle Choice challenge\n"
 	.string "has now begun…$"
 

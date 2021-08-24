@@ -1,3 +1,3 @@
-BattleColosseum_2P_MapScripts:: 
+BattleColosseum_2P_MapScripts::
 	.byte 0
 

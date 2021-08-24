@@ -298,7 +298,7 @@ static void SpriteCallback_PorygonHit(struct Sprite* sprite)
         StartSpriteAnim(sprite, ANIM_PORY_GO_UP);
         sprite->callback = SpriteCallbackDummy;
     }
-        
+
 
     if (sprite->sTimer % 8 == 0)
     {

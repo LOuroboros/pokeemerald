@@ -1,4 +1,4 @@
-MysteryEventScript_AuroraTicket:: 
+MysteryEventScript_AuroraTicket::
 	setvaddress MysteryEventScript_AuroraTicket
 	lock
 	faceplayer
@@ -22,14 +22,14 @@ MysteryEventScript_AuroraTicket::
 	release
 	end
 
-AuroraTicket_NoBagSpace: 
+AuroraTicket_NoBagSpace:
 	vmessage sText_AuroraTicketBagFull
 	waitmessage
 	waitbuttonpress
 	release
 	end
 
-AuroraTicket_Obtained: 
+AuroraTicket_Obtained:
 	vmessage sText_AuroraTicketThankYou
 	waitmessage
 	waitbuttonpress

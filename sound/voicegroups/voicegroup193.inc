@@ -1,5 +1,5 @@
 	.align 2
-voicegroup193:: @ 
+voicegroup193:: @
 	voice_directsound 60, 20, DirectSoundWaveData_dp_mute_conga_16, 255, 0, 255, 176
 	voice_directsound 60, 24, DirectSoundWaveData_dp_060conga, 255, 0, 255, 176
 	voice_directsound 57, 26, DirectSoundWaveData_dp_060conga, 255, 0, 255, 176

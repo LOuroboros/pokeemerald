@@ -1,3 +1,3 @@
-SeafloorCavern_Room6_MapScripts:: 
+SeafloorCavern_Room6_MapScripts::
 	.byte 0
 

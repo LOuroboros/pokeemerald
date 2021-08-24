@@ -1121,8 +1121,8 @@ static u8 SetUpCopyrightScreen(void)
 
     case 30:
         RhhIntro_LoadCopyrightBgGraphics();
-        BeginNormalPaletteFade(0x00000001, 0, 0x10, 0, RGB_BLACK); 
-        UpdatePaletteFade(); 
+        BeginNormalPaletteFade(0x00000001, 0, 0x10, 0, RGB_BLACK);
+        UpdatePaletteFade();
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         gMain.state++;
         break;
@@ -1130,7 +1130,7 @@ static u8 SetUpCopyrightScreen(void)
     case 31:
         RhhIntro_LoadCopyrightSpriteGraphics();
         RhhIntro_CreateCopyRightSprites();
-        UpdatePaletteFade(); 
+        UpdatePaletteFade();
         GameCubeMultiBoot_Main(&gMultibootProgramStruct);
         gMain.state++;
         break;

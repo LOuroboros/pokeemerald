@@ -1,30 +1,30 @@
-SecretBase_Text_TreeCanBeClimbed: 
+SecretBase_Text_TreeCanBeClimbed:
 	.string "If some vines drop down, this tree can\n"
 	.string "be climbed.$"
 
-SecretBase_Text_TreeUseSecretPower: 
+SecretBase_Text_TreeUseSecretPower:
 	.string "If some vines drop down, this tree can\n"
 	.string "be climbed.\p"
 	.string "Use the SECRET POWER?$"
 
-SecretBase_Text_VineDroppedDown: 
+SecretBase_Text_VineDroppedDown:
 	.string "A thick vine dropped down!$"
 
-SecretBase_Text_ClumpOfGrass: 
+SecretBase_Text_ClumpOfGrass:
 	.string "If this clump of grass can be moved,\n"
 	.string "it might be possible to go inside.$"
 
-SecretBase_Text_ClumpUseSecretPower: 
+SecretBase_Text_ClumpUseSecretPower:
 	.string "If this clump of grass can be moved,\n"
 	.string "it might be possible to go inside.\p"
 	.string "Use the SECRET POWER?$"
 
-SecretBase_Text_DiscoveredSmallEntrance: 
+SecretBase_Text_DiscoveredSmallEntrance:
 	.string "Discovered a small entrance!$"
 
 	.include "data/text/secret_base_trainers.inc"
 
-SecretBase_EventScript_CheckEntrance:: 
+SecretBase_EventScript_CheckEntrance::
 	special GetSecretBaseTypeInFrontOfPlayer
 	special CheckPlayerHasSecretBase
 	compare VAR_RESULT, TRUE
@@ -46,7 +46,7 @@ SecretBase_EventScript_CheckEntrance::
 	goto_if_eq SecretBase_EventScript_Shrub
 	end
 
-SecretBase_EventScript_Cave:: 
+SecretBase_EventScript_Cave::
 	lockall
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
@@ -61,24 +61,24 @@ SecretBase_EventScript_Cave::
 	goto SecretBase_EventScript_CaveEnter
 	end
 
-SecretBase_EventScript_CaveUseSecretPower:: 
+SecretBase_EventScript_CaveUseSecretPower::
 	lockall
 	dofieldeffect FLDEFF_USE_SECRET_POWER_CAVE
 	waitstate
 	goto SecretBase_EventScript_CaveEnter
 	end
 
-SecretBase_EventScript_CaveNoSecretPower:: 
+SecretBase_EventScript_CaveNoSecretPower::
 	msgbox SecretBase_Text_SmallIndentInWall, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SecretBase_EventScript_CaveEnter:: 
+SecretBase_EventScript_CaveEnter::
 	msgbox SecretBase_Text_DiscoveredSmallCavern, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_InitSecretBase
 	end
 
-SecretBase_EventScript_Tree:: 
+SecretBase_EventScript_Tree::
 	lockall
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_TreeNoSecretPower
@@ -93,24 +93,24 @@ SecretBase_EventScript_Tree::
 	goto SecretBase_EventScript_TreeEnter
 	end
 
-SecretBase_EventScript_TreeUseSecretPower:: 
+SecretBase_EventScript_TreeUseSecretPower::
 	lockall
 	dofieldeffect FLDEFF_USE_SECRET_POWER_TREE
 	waitstate
 	goto SecretBase_EventScript_TreeEnter
 	end
 
-SecretBase_EventScript_TreeNoSecretPower:: 
+SecretBase_EventScript_TreeNoSecretPower::
 	msgbox SecretBase_Text_TreeCanBeClimbed, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SecretBase_EventScript_TreeEnter:: 
+SecretBase_EventScript_TreeEnter::
 	msgbox SecretBase_Text_VineDroppedDown, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_InitSecretBase
 	end
 
-SecretBase_EventScript_Shrub:: 
+SecretBase_EventScript_Shrub::
 	lockall
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_ShrubNoSecretPower
@@ -125,24 +125,24 @@ SecretBase_EventScript_Shrub::
 	goto SecretBase_EventScript_ShrubEnter
 	end
 
-SecretBase_EventScript_ShrubUseSecretPower:: 
+SecretBase_EventScript_ShrubUseSecretPower::
 	lockall
 	dofieldeffect FLDEFF_USE_SECRET_POWER_SHRUB
 	waitstate
 	goto SecretBase_EventScript_ShrubEnter
 	end
 
-SecretBase_EventScript_ShrubNoSecretPower:: 
+SecretBase_EventScript_ShrubNoSecretPower::
 	msgbox SecretBase_Text_ClumpOfGrass, MSGBOX_DEFAULT
 	releaseall
 	end
 
-SecretBase_EventScript_ShrubEnter:: 
+SecretBase_EventScript_ShrubEnter::
 	msgbox SecretBase_Text_DiscoveredSmallEntrance, MSGBOX_DEFAULT
 	goto SecretBase_EventScript_InitSecretBase
 	end
 
-SecretBase_EventScript_InitSecretBase:: 
+SecretBase_EventScript_InitSecretBase::
 	closemessage
 	playse SE_EXIT
 	setvar VAR_INIT_SECRET_BASE, 0
@@ -156,7 +156,7 @@ SecretBase_EventScript_InitSecretBase::
 	waitstate
 	end
 
-SecretBase_EventScript_FirstEntrance:: 
+SecretBase_EventScript_FirstEntrance::
 	applymovement OBJ_EVENT_ID_PLAYER, SecretBase_Movement_EnterBase
 	waitmovement 0
 	setvar VAR_INIT_SECRET_BASE, 1
@@ -168,19 +168,19 @@ SecretBase_EventScript_FirstEntrance::
 	special ClearAndLeaveSecretBase
 	end
 
-SecretBase_EventScript_SetAsBase:: 
+SecretBase_EventScript_SetAsBase::
 	closemessage
 	setflag FLAG_RECEIVED_SECRET_POWER
 	special EnterNewlyCreatedSecretBase
 	waitstate
 	end
 
-SecretBase_Movement_EnterBase: 
+SecretBase_Movement_EnterBase:
 	walk_up
 	walk_up
 	step_end
 
-SecretBase_EventScript_Enter:: 
+SecretBase_EventScript_Enter::
 	lockall
 	setvar VAR_INIT_SECRET_BASE, 1
 	playse SE_EXIT
@@ -193,14 +193,14 @@ SecretBase_EventScript_Enter::
 	waitstate
 	end
 
-SecretBase_EventScript_EnterPlayersBase:: 
+SecretBase_EventScript_EnterPlayersBase::
 	setflag FLAG_DECORATION_0
 	special EnterSecretBase
 	setvar VAR_SECRET_BASE_INITIALIZED, 0
 	waitstate
 	end
 
-SecretBase_EventScript_AlreadyHasSecretBase:: 
+SecretBase_EventScript_AlreadyHasSecretBase::
 	checkpartymove MOVE_SECRET_POWER
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq SecretBase_EventScript_NoSecretPower
@@ -241,7 +241,7 @@ SecretBase_EventScript_AlreadyHasSecretBase::
 	releaseall
 	end
 
-SecretBase_EventScript_NoSecretPower:: 
+SecretBase_EventScript_NoSecretPower::
 	lockall
 	compare VAR_0x8007, SECRET_BASE_RED_CAVE
 	goto_if_eq SecretBase_EventScript_CaveNoSecretPower
@@ -257,12 +257,12 @@ SecretBase_EventScript_NoSecretPower::
 	goto_if_eq SecretBase_EventScript_ShrubNoSecretPower
 	end
 
-SecretBase_EventScript_CancelOnEntrance:: 
+SecretBase_EventScript_CancelOnEntrance::
 	closemessage
 	releaseall
 	end
 
-SecretBase_EventScript_SetDecorationFlags:: 
+SecretBase_EventScript_SetDecorationFlags::
 	setflag FLAG_DECORATION_1
 	setflag FLAG_DECORATION_2
 	setflag FLAG_DECORATION_3
@@ -279,28 +279,28 @@ SecretBase_EventScript_SetDecorationFlags::
 	setflag FLAG_DECORATION_14
 	return
 
-SecretBase_EventScript_InitDecorations:: 
+SecretBase_EventScript_InitDecorations::
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, 0
 	special InitSecretBaseDecorationSprites
 	setvar VAR_SECRET_BASE_INITIALIZED, 1
 	end
 
-SecretBase_EventScript_SetDecoration:: 
+SecretBase_EventScript_SetDecoration::
 	setvar VAR_0x8005, 0
 	goto SecretBase_EventScript_SetDecoration2
 	end
 
-SecretBase_EventScript_SetDecoration2:: 
+SecretBase_EventScript_SetDecoration2::
 	special SetDecoration
 	end
 
-SecretBase_EventScript_PutAwayDecoration:: 
+SecretBase_EventScript_PutAwayDecoration::
 	setvar VAR_0x8004, 0
 	goto SecretBase_EventScript_PutAwayDecorationLoop
 	end
 
-SecretBase_EventScript_PutAwayDecorationLoop:: 
+SecretBase_EventScript_PutAwayDecorationLoop::
 	special PutAwayDecorationIteration
 	compare VAR_RESULT, 1
 	goto_if_eq SecretBase_EventScript_PutAwayDecorationEnd
@@ -312,10 +312,10 @@ SecretBase_EventScript_PutAwayDecorationLoop::
 	goto SecretBase_EventScript_PutAwayDecorationLoop
 	end
 
-SecretBase_EventScript_PutAwayDecorationEnd:: 
+SecretBase_EventScript_PutAwayDecorationEnd::
 	end
 
-SecretBase_EventScript_RecordMixTrainer:: 
+SecretBase_EventScript_RecordMixTrainer::
 	special GetSecretBaseOwnerAndState
 	compare VAR_0x8004, 0
 	goto_if_eq SecretBase_EventScript_Trainer0
@@ -340,7 +340,7 @@ SecretBase_EventScript_RecordMixTrainer::
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer0:: 
+SecretBase_EventScript_Trainer0::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer0PreChampion
@@ -358,12 +358,12 @@ SecretBase_EventScript_Trainer0::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer0PreChampion:: 
+SecretBase_EventScript_Trainer0PreChampion::
 	msgbox SecretBase_Text_Trainer0PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer0DeclineBattle:: 
+SecretBase_EventScript_Trainer0DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -371,13 +371,13 @@ SecretBase_EventScript_Trainer0DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer0PostBattle:: 
+SecretBase_EventScript_Trainer0PostBattle::
 	msgbox SecretBase_Text_Trainer0PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer1:: 
+SecretBase_EventScript_Trainer1::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer1PreChampion
@@ -395,12 +395,12 @@ SecretBase_EventScript_Trainer1::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer1PreChampion:: 
+SecretBase_EventScript_Trainer1PreChampion::
 	msgbox SecretBase_Text_Trainer1PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer1DeclineBattle:: 
+SecretBase_EventScript_Trainer1DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -408,13 +408,13 @@ SecretBase_EventScript_Trainer1DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer1PostBattle:: 
+SecretBase_EventScript_Trainer1PostBattle::
 	msgbox SecretBase_Text_Trainer1PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer2:: 
+SecretBase_EventScript_Trainer2::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer2PreChampion
@@ -432,12 +432,12 @@ SecretBase_EventScript_Trainer2::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer2PreChampion:: 
+SecretBase_EventScript_Trainer2PreChampion::
 	msgbox SecretBase_Text_Trainer2PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer2DeclineBattle:: 
+SecretBase_EventScript_Trainer2DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -445,13 +445,13 @@ SecretBase_EventScript_Trainer2DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer2PostBattle:: 
+SecretBase_EventScript_Trainer2PostBattle::
 	msgbox SecretBase_Text_Trainer2PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer3:: 
+SecretBase_EventScript_Trainer3::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer3PreChampion
@@ -469,12 +469,12 @@ SecretBase_EventScript_Trainer3::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer3PreChampion:: 
+SecretBase_EventScript_Trainer3PreChampion::
 	msgbox SecretBase_Text_Trainer3PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer3DeclineBattle:: 
+SecretBase_EventScript_Trainer3DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -482,13 +482,13 @@ SecretBase_EventScript_Trainer3DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer3PostBattle:: 
+SecretBase_EventScript_Trainer3PostBattle::
 	msgbox SecretBase_Text_Trainer3PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer4:: 
+SecretBase_EventScript_Trainer4::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer4PreChampion
@@ -506,12 +506,12 @@ SecretBase_EventScript_Trainer4::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer4PreChampion:: 
+SecretBase_EventScript_Trainer4PreChampion::
 	msgbox SecretBase_Text_Trainer4PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer4DeclineBattle:: 
+SecretBase_EventScript_Trainer4DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -519,13 +519,13 @@ SecretBase_EventScript_Trainer4DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer4PostBattle:: 
+SecretBase_EventScript_Trainer4PostBattle::
 	msgbox SecretBase_Text_Trainer4PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer5:: 
+SecretBase_EventScript_Trainer5::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer5PreChampion
@@ -543,12 +543,12 @@ SecretBase_EventScript_Trainer5::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer5PreChampion:: 
+SecretBase_EventScript_Trainer5PreChampion::
 	msgbox SecretBase_Text_Trainer5PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer5DeclineBattle:: 
+SecretBase_EventScript_Trainer5DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -556,13 +556,13 @@ SecretBase_EventScript_Trainer5DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer5PostBattle:: 
+SecretBase_EventScript_Trainer5PostBattle::
 	msgbox SecretBase_Text_Trainer5PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer6:: 
+SecretBase_EventScript_Trainer6::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer6PreChampion
@@ -580,12 +580,12 @@ SecretBase_EventScript_Trainer6::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer6PreChampion:: 
+SecretBase_EventScript_Trainer6PreChampion::
 	msgbox SecretBase_Text_Trainer6PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer6DeclineBattle:: 
+SecretBase_EventScript_Trainer6DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -593,13 +593,13 @@ SecretBase_EventScript_Trainer6DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer6PostBattle:: 
+SecretBase_EventScript_Trainer6PostBattle::
 	msgbox SecretBase_Text_Trainer6PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer7:: 
+SecretBase_EventScript_Trainer7::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer7PreChampion
@@ -617,12 +617,12 @@ SecretBase_EventScript_Trainer7::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer7PreChampion:: 
+SecretBase_EventScript_Trainer7PreChampion::
 	msgbox SecretBase_Text_Trainer7PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer7DeclineBattle:: 
+SecretBase_EventScript_Trainer7DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -630,13 +630,13 @@ SecretBase_EventScript_Trainer7DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer7PostBattle:: 
+SecretBase_EventScript_Trainer7PostBattle::
 	msgbox SecretBase_Text_Trainer7PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer8:: 
+SecretBase_EventScript_Trainer8::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer8PreChampion
@@ -654,12 +654,12 @@ SecretBase_EventScript_Trainer8::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer8PreChampion:: 
+SecretBase_EventScript_Trainer8PreChampion::
 	msgbox SecretBase_Text_Trainer8PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer8DeclineBattle:: 
+SecretBase_EventScript_Trainer8DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -667,13 +667,13 @@ SecretBase_EventScript_Trainer8DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer8PostBattle:: 
+SecretBase_EventScript_Trainer8PostBattle::
 	msgbox SecretBase_Text_Trainer8PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
 @ VAR_RESULT is initially set by GetSecretBaseOwnerAndState
-SecretBase_EventScript_Trainer9:: 
+SecretBase_EventScript_Trainer9::
 	lock
 	faceplayer
 	goto_if_unset FLAG_SYS_GAME_CLEAR, SecretBase_EventScript_Trainer9PreChampion
@@ -691,12 +691,12 @@ SecretBase_EventScript_Trainer9::
 	goto SecretBase_EventScript_BattleTrainer
 	end
 
-SecretBase_EventScript_Trainer9PreChampion:: 
+SecretBase_EventScript_Trainer9PreChampion::
 	msgbox SecretBase_Text_Trainer9PreChampion, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_Trainer9DeclineBattle:: 
+SecretBase_EventScript_Trainer9DeclineBattle::
 	special DeclinedSecretBaseBattle
 	setvar VAR_RESULT, 0
 	special SetBattledOwnerFromResult
@@ -704,12 +704,12 @@ SecretBase_EventScript_Trainer9DeclineBattle::
 	release
 	end
 
-SecretBase_EventScript_Trainer9PostBattle:: 
+SecretBase_EventScript_Trainer9PostBattle::
 	msgbox SecretBase_Text_Trainer9PostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-SecretBase_EventScript_BattleTrainer:: 
+SecretBase_EventScript_BattleTrainer::
 	special PrepSecretBaseBattleFlags
 	setvar VAR_0x8004, SPECIAL_BATTLE_SECRET_BASE
 	setvar VAR_0x8005, 0
@@ -725,59 +725,59 @@ SecretBase_EventScript_BattleTrainer::
 	release
 	end
 
-SecretBase_EventScript_DrewSecretBaseBattle:: 
+SecretBase_EventScript_DrewSecretBaseBattle::
 	special DrewSecretBaseBattle
 	return
 
-SecretBase_EventScript_WonSecretBaseBattle:: 
+SecretBase_EventScript_WonSecretBaseBattle::
 	special WonSecretBaseBattle
 	return
 
-SecretBase_EventScript_LostSecretBaseBattle:: 
+SecretBase_EventScript_LostSecretBaseBattle::
 	special LostSecretBaseBattle
 	return
 
 	.include "data/scripts/secret_power_tm.inc"
 
-SecretBase_EventScript_DollInteract:: 
+SecretBase_EventScript_DollInteract::
 	special CheckInteractedWithFriendsDollDecor
 	end
 
-SecretBase_EventScript_CushionInteract:: 
+SecretBase_EventScript_CushionInteract::
 	special CheckInteractedWithFriendsCushionDecor
 	end
 
-SecretBase_Text_AllDecorationsWillBeReturned: 
+SecretBase_Text_AllDecorationsWillBeReturned:
 	.string "All decorations and furniture in your\n"
 	.string "SECRET BASE will be returned to your PC.\p"
 	.string "Is that okay?$"
 
-SecretBase_Text_WantToRegisterSecretBase: 
+SecretBase_Text_WantToRegisterSecretBase:
 	.string "Do you want to register\n"
 	.string "{STR_VAR_1}'s SECRET BASE?$"
 
-SecretBase_Text_AlreadyRegisteredDelete: 
+SecretBase_Text_AlreadyRegisteredDelete:
 	.string "This data is already registered.\n"
 	.string "Would you like to delete it?$"
 
-SecretBase_Text_TooManyBasesDeleteSome: 
+SecretBase_Text_TooManyBasesDeleteSome:
 	.string "Up to 10 locations can be registered.\p"
 	.string "Delete a location if you want to\n"
 	.string "register another location.$"
 
-SecretBase_Text_RegistrationCompleted: 
+SecretBase_Text_RegistrationCompleted:
 	.string "Registration completed.$"
 
-SecretBase_Text_DataUnregistered: 
+SecretBase_Text_DataUnregistered:
 	.string "Data has been unregistered.$"
 
-SecretBase_Text_BootUpPC: 
+SecretBase_Text_BootUpPC:
 	.string "{PLAYER} booted up the PC.$"
 
-SecretBase_Text_WhatWouldYouLikeToDo: 
+SecretBase_Text_WhatWouldYouLikeToDo:
 	.string "What would you like to do?$"
 
-SecretBase_Text_RegistryInfo: 
+SecretBase_Text_RegistryInfo:
 	.string "Once registered, a SECRET BASE will not\n"
 	.string "disappear unless the other TRAINER\l"
 	.string "moves it to a different location.\p"
@@ -787,27 +787,27 @@ SecretBase_Text_RegistryInfo:
 	.string "Up to ten SECRET BASE locations\n"
 	.string "may be registered.$"
 
-SecretBase_Text_BattleTowerShield: 
+SecretBase_Text_BattleTowerShield:
 	.string "A shield of {STR_VAR_2} that marks winning\n"
 	.string "{STR_VAR_1} times in a row at the BATTLE TOWER.$"
 
-SecretBase_Text_ToyTV: 
+SecretBase_Text_ToyTV:
 	.string "A realistic toy TV. It could be easily\n"
 	.string "mistaken for the real thing.$"
 
-SecretBase_Text_SeedotTV: 
+SecretBase_Text_SeedotTV:
 	.string "A toy TV shaped like a SEEDOT.\n"
 	.string "It looks ready to roll away on its own…$"
 
-SecretBase_Text_SkittyTV: 
+SecretBase_Text_SkittyTV:
 	.string "A toy TV shaped like a SKITTY.\n"
 	.string "It looks ready to stroll away…$"
 
-SecretBase_Text_WouldYouLikeToMoveBases: 
+SecretBase_Text_WouldYouLikeToMoveBases:
 	.string "You may only make one SECRET BASE.\p"
 	.string "Would you like to move from the SECRET\n"
 	.string "BASE near {STR_VAR_1}?$"
 
-SecretBase_Text_MovingCompletedUseSecretPower: 
+SecretBase_Text_MovingCompletedUseSecretPower:
 	.string "Moving completed.\p"
 	.string "Would you like to use the SECRET POWER?$"

@@ -1,3 +1,3 @@
-TradeCenter_MapScripts:: 
+TradeCenter_MapScripts::
 	.byte 0
 

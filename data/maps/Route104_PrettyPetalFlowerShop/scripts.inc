@@ -1,21 +1,21 @@
 .set LOCALID_OWNER, 1
 
-Route104_PrettyPetalFlowerShop_MapScripts:: 
+Route104_PrettyPetalFlowerShop_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route104_PrettyPetalFlowerShop_OnTransition
 	.byte 0
 
-Route104_PrettyPetalFlowerShop_OnTransition: 
+Route104_PrettyPetalFlowerShop_OnTransition:
 	setflag FLAG_LANDMARK_FLOWER_SHOP
 	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner
 	goto_if_unset FLAG_BADGE03_GET, Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner
 	setflag FLAG_TEMP_1
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner:: 
+Route104_PrettyPetalFlowerShop_EventScript_MoveShopOwner::
 	setobjectxyperm LOCALID_OWNER, 4, 6
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_ShopOwner:: 
+Route104_PrettyPetalFlowerShop_EventScript_ShopOwner::
 	lock
 	faceplayer
 	goto_if_set FLAG_TEMP_1, Route104_PrettyPetalFlowerShop_EventScript_SellDecorations
@@ -30,7 +30,7 @@ Route104_PrettyPetalFlowerShop_EventScript_ShopOwner::
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet:: 
+Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet::
 	msgbox Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	call_if_eq Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
@@ -39,15 +39,15 @@ Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet::
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries:: 
+Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries::
 	msgbox Route104_PrettyPetalFlowerShop_Text_BerriesExplanation, MSGBOX_DEFAULT
 	return
 
-Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries:: 
+Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries::
 	msgbox Route104_PrettyPetalFlowerShop_Text_FlowersBringHappiness, MSGBOX_DEFAULT
 	return
 
-Route104_PrettyPetalFlowerShop_EventScript_SellDecorations:: 
+Route104_PrettyPetalFlowerShop_EventScript_SellDecorations::
 	message gText_PlayerWhatCanIDoForYou
 	waitmessage
 	pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_Plants
@@ -56,7 +56,7 @@ Route104_PrettyPetalFlowerShop_EventScript_SellDecorations::
 	end
 
 	.align 2
-Route104_PrettyPetalFlowerShop_Pokemart_Plants: 
+Route104_PrettyPetalFlowerShop_Pokemart_Plants:
 	.2byte DECOR_RED_PLANT
 	.2byte DECOR_TROPICAL_PLANT
 	.2byte DECOR_PRETTY_FLOWERS
@@ -67,7 +67,7 @@ Route104_PrettyPetalFlowerShop_Pokemart_Plants:
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl:: 
+Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl::
 	lock
 	faceplayer
 	goto_if_unset FLAG_RECEIVED_WAILMER_PAIL, Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail
@@ -75,7 +75,7 @@ Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl::
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail:: 
+Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail::
 	msgbox Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis, MSGBOX_DEFAULT
 	giveitem ITEM_WAILMER_PAIL
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
@@ -83,7 +83,7 @@ Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail::
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl:: 
+Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl::
 	lock
 	faceplayer
 	dotimebasedevents
@@ -99,7 +99,7 @@ Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl::
 	release
 	end
 
-Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry:: 
+Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry::
 	msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
 	release
 	end

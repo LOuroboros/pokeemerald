@@ -1,7 +1,7 @@
-MossdeepCity_Gym_MapScripts:: 
+MossdeepCity_Gym_MapScripts::
 	.byte 0
 
-MossdeepCity_Gym_EventScript_TateAndLiza:: 
+MossdeepCity_Gym_EventScript_TateAndLiza::
 	trainerbattle_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaIntro, MossdeepCity_Gym_Text_TateAndLizaDefeat, MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons, MossdeepCity_Gym_EventScript_TateAndLizaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -11,7 +11,7 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	release
 	end
 
-MossdeepCity_Gym_EventScript_TateAndLizaDefeated:: 
+MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	message MossdeepCity_Gym_Text_ReceivedMindBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
@@ -42,7 +42,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	release
 	end
 
-MossdeepCity_Gym_EventScript_GiveCalmMind2:: 
+MossdeepCity_Gym_EventScript_GiveCalmMind2::
 	giveitem ITEM_TM04
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_ShowBagIsFull
@@ -51,7 +51,7 @@ MossdeepCity_Gym_EventScript_GiveCalmMind2::
 	release
 	end
 
-MossdeepCity_Gym_EventScript_GiveCalmMind:: 
+MossdeepCity_Gym_EventScript_GiveCalmMind::
 	giveitem ITEM_TM04
 	compare VAR_RESULT, FALSE
 	goto_if_eq Common_EventScript_BagIsFull
@@ -59,79 +59,79 @@ MossdeepCity_Gym_EventScript_GiveCalmMind::
 	setflag FLAG_RECEIVED_TM04
 	return
 
-MossdeepCity_Gym_EventScript_TateAndLizaRematch:: 
+MossdeepCity_Gym_EventScript_TateAndLizaRematch::
 	trainerbattle_rematch_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaPreRematch, MossdeepCity_Gym_Text_TateAndLizaRematchDefeat, MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons
 	msgbox MossdeepCity_Gym_Text_TateAndLizaPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_WarpToEntrance:: 
+MossdeepCity_Gym_EventScript_WarpToEntrance::
 	lockall
 	warpmossdeepgym MAP_MOSSDEEP_CITY_GYM, 255, 7, 30
 	waitstate
 	releaseall
 	end
 
-MossdeepCity_Gym_EventScript_Preston:: 
+MossdeepCity_Gym_EventScript_Preston::
 	trainerbattle_single TRAINER_PRESTON, MossdeepCity_Gym_Text_PrestonIntro, MossdeepCity_Gym_Text_PrestonDefeat
 	msgbox MossdeepCity_Gym_Text_PrestonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Virgil:: 
+MossdeepCity_Gym_EventScript_Virgil::
 	trainerbattle_single TRAINER_VIRGIL, MossdeepCity_Gym_Text_VirgilIntro, MossdeepCity_Gym_Text_VirgilDefeat
 	msgbox MossdeepCity_Gym_Text_VirgilPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Blake:: 
+MossdeepCity_Gym_EventScript_Blake::
 	trainerbattle_single TRAINER_BLAKE, MossdeepCity_Gym_Text_BlakeIntro, MossdeepCity_Gym_Text_BlakeDefeat
 	msgbox MossdeepCity_Gym_Text_BlakePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Hannah:: 
+MossdeepCity_Gym_EventScript_Hannah::
 	trainerbattle_single TRAINER_HANNAH, MossdeepCity_Gym_Text_HannahIntro, MossdeepCity_Gym_Text_HannahDefeat
 	msgbox MossdeepCity_Gym_Text_HannahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Samantha:: 
+MossdeepCity_Gym_EventScript_Samantha::
 	trainerbattle_single TRAINER_SAMANTHA, MossdeepCity_Gym_Text_SamanthaIntro, MossdeepCity_Gym_Text_SamanthaDefeat
 	msgbox MossdeepCity_Gym_Text_SamanthaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Maura:: 
+MossdeepCity_Gym_EventScript_Maura::
 	trainerbattle_single TRAINER_MAURA, MossdeepCity_Gym_Text_MauraIntro, MossdeepCity_Gym_Text_MauraDefeat
 	msgbox MossdeepCity_Gym_Text_MauraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Sylvia:: 
+MossdeepCity_Gym_EventScript_Sylvia::
 	trainerbattle_single TRAINER_SYLVIA, MossdeepCity_Gym_Text_SylviaIntro, MossdeepCity_Gym_Text_SylviaDefeat
 	msgbox MossdeepCity_Gym_Text_SylviaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Nate:: 
+MossdeepCity_Gym_EventScript_Nate::
 	trainerbattle_single TRAINER_NATE, MossdeepCity_Gym_Text_NateIntro, MossdeepCity_Gym_Text_NateDefeat
 	msgbox MossdeepCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Macey:: 
+MossdeepCity_Gym_EventScript_Macey::
 	trainerbattle_single TRAINER_MACEY, MossdeepCity_Gym_Text_MaceyIntro, MossdeepCity_Gym_Text_MaceyDefeat
 	msgbox MossdeepCity_Gym_Text_MaceyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Clifford:: 
+MossdeepCity_Gym_EventScript_Clifford::
 	trainerbattle_single TRAINER_CLIFFORD, MossdeepCity_Gym_Text_CliffordIntro, MossdeepCity_Gym_Text_CliffordDefeat
 	msgbox MossdeepCity_Gym_Text_CliffordPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Nicholas:: 
+MossdeepCity_Gym_EventScript_Nicholas::
 	trainerbattle_single TRAINER_NICHOLAS, MossdeepCity_Gym_Text_NicholasIntro, MossdeepCity_Gym_Text_NicholasDefeat
 	msgbox MossdeepCity_Gym_Text_NicholasPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_Kathleen:: 
+MossdeepCity_Gym_EventScript_Kathleen::
 	trainerbattle_single TRAINER_KATHLEEN, MossdeepCity_Gym_Text_KathleenIntro, MossdeepCity_Gym_Text_KathleenDefeat
 	msgbox MossdeepCity_Gym_Text_KathleenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MossdeepCity_Gym_EventScript_GymGuide:: 
+MossdeepCity_Gym_EventScript_GymGuide::
 	lock
 	faceplayer
 	goto_if_set FLAG_DEFEATED_MOSSDEEP_GYM, MossdeepCity_Gym_EventScript_GymGuidePostVictory
@@ -139,34 +139,34 @@ MossdeepCity_Gym_EventScript_GymGuide::
 	release
 	end
 
-MossdeepCity_Gym_EventScript_GymGuidePostVictory:: 
+MossdeepCity_Gym_EventScript_GymGuidePostVictory::
 	msgbox MossdeepCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_Gym_EventScript_LeftGymStatue:: 
+MossdeepCity_Gym_EventScript_LeftGymStatue::
 	lockall
 	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_GymStatueCertified
 	goto MossdeepCity_Gym_EventScript_GymStatue
 	end
 
-MossdeepCity_Gym_EventScript_RightGymStatue:: 
+MossdeepCity_Gym_EventScript_RightGymStatue::
 	lockall
 	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Gym_EventScript_GymStatueCertified
 	goto MossdeepCity_Gym_EventScript_GymStatue
 	end
 
-MossdeepCity_Gym_EventScript_GymStatueCertified:: 
+MossdeepCity_Gym_EventScript_GymStatueCertified::
 	msgbox MossdeepCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
 	releaseall
 	end
 
-MossdeepCity_Gym_EventScript_GymStatue:: 
+MossdeepCity_Gym_EventScript_GymStatue::
 	msgbox MossdeepCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end
 
-MossdeepCity_Gym_EventScript_YellowFloorSwitch:: 
+MossdeepCity_Gym_EventScript_YellowFloorSwitch::
 	playse SE_SWITCH
 	waitse
 	playse SE_REPEL
@@ -178,7 +178,7 @@ MossdeepCity_Gym_EventScript_YellowFloorSwitch::
 	freerotatingtilepuzzle
 	end
 
-MossdeepCity_Gym_EventScript_BlueFloorSwitch:: 
+MossdeepCity_Gym_EventScript_BlueFloorSwitch::
 	playse SE_SWITCH
 	waitse
 	playse SE_REPEL
@@ -190,7 +190,7 @@ MossdeepCity_Gym_EventScript_BlueFloorSwitch::
 	freerotatingtilepuzzle
 	end
 
-MossdeepCity_Gym_EventScript_GreenFloorSwitch:: 
+MossdeepCity_Gym_EventScript_GreenFloorSwitch::
 	playse SE_SWITCH
 	waitse
 	playse SE_REPEL
@@ -202,7 +202,7 @@ MossdeepCity_Gym_EventScript_GreenFloorSwitch::
 	freerotatingtilepuzzle
 	end
 
-MossdeepCity_Gym_EventScript_PurpleFloorSwitch:: 
+MossdeepCity_Gym_EventScript_PurpleFloorSwitch::
 	playse SE_SWITCH
 	waitse
 	playse SE_REPEL
@@ -214,7 +214,7 @@ MossdeepCity_Gym_EventScript_PurpleFloorSwitch::
 	freerotatingtilepuzzle
 	end
 
-MossdeepCity_Gym_EventScript_RedFloorSwitch:: 
+MossdeepCity_Gym_EventScript_RedFloorSwitch::
 	playse SE_SWITCH
 	waitse
 	playse SE_REPEL
@@ -226,7 +226,7 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch::
 	freerotatingtilepuzzle
 	end
 
-MossdeepCity_Gym_Text_GymGuideAdvice: 
+MossdeepCity_Gym_Text_GymGuideAdvice:
 	.string "Yo, how's it going, CHAMPION-bound\n"
 	.string "{PLAYER}?\p"
 	.string "The GYM LEADERS here use\n"
@@ -240,46 +240,46 @@ MossdeepCity_Gym_Text_GymGuideAdvice:
 	.string "them how tight you are with your\l"
 	.string "POKéMON. Go for it!$"
 
-MossdeepCity_Gym_Text_GymGuidePostVictory: 
+MossdeepCity_Gym_Text_GymGuidePostVictory:
 	.string "Wow, you're astounding!\n"
 	.string "You're one great TRAINER!$"
 
-MossdeepCity_Gym_Text_PrestonIntro: 
+MossdeepCity_Gym_Text_PrestonIntro:
 	.string "Battles hinge on the strength of your\n"
 	.string "spirit! The weak-spirited will never win!$"
 
-MossdeepCity_Gym_Text_PrestonDefeat: 
+MossdeepCity_Gym_Text_PrestonDefeat:
 	.string "I lost!\n"
 	.string "I must temper my spirit again!$"
 
-MossdeepCity_Gym_Text_PrestonPostBattle: 
+MossdeepCity_Gym_Text_PrestonPostBattle:
 	.string "The indecisive lose.\n"
 	.string "That's my warning to you.$"
 
-MossdeepCity_Gym_Text_VirgilIntro: 
+MossdeepCity_Gym_Text_VirgilIntro:
 	.string "Let me see your talent!$"
 
-MossdeepCity_Gym_Text_VirgilDefeat: 
+MossdeepCity_Gym_Text_VirgilDefeat:
 	.string "You possess spectacular talent!$"
 
-MossdeepCity_Gym_Text_VirgilPostBattle: 
+MossdeepCity_Gym_Text_VirgilPostBattle:
 	.string "If there are prodigies in the world,\n"
 	.string "then our GYM LEADERS are them!\p"
 	.string "However, you may be even more talented\n"
 	.string "than them…$"
 
-MossdeepCity_Gym_Text_BlakeIntro: 
+MossdeepCity_Gym_Text_BlakeIntro:
 	.string "Fufufufu… Watch me levitate a POKé\n"
 	.string "BALL telekinetically!\p"
 	.string "Wrooooooooaaaar!\n"
 	.string "… … … … … … …\p"
 	.string "Sometimes, I'm out of sync…$"
 
-MossdeepCity_Gym_Text_BlakeDefeat: 
+MossdeepCity_Gym_Text_BlakeDefeat:
 	.string "My POKéMON battling skills are out\n"
 	.string "of sync, too!$"
 
-MossdeepCity_Gym_Text_BlakePostBattle: 
+MossdeepCity_Gym_Text_BlakePostBattle:
 	.string "A POKé BALL was too heavy to lift\n"
 	.string "psychically. But this dust bunny…\p"
 	.string "Whoooooooooooooooh!\n"
@@ -287,127 +287,127 @@ MossdeepCity_Gym_Text_BlakePostBattle:
 	.string "No, I'm not cheating!\n"
 	.string "I didn't blow on it! Honestly!$"
 
-MossdeepCity_Gym_Text_HannahIntro: 
+MossdeepCity_Gym_Text_HannahIntro:
 	.string "When you lose to me, don't be too hard\n"
 	.string "on yourself.\p"
 	.string "It's not that you're weak--I'm just\n"
 	.string "too strong!$"
 
-MossdeepCity_Gym_Text_HannahDefeat: 
+MossdeepCity_Gym_Text_HannahDefeat:
 	.string "You're just too strong!$"
 
-MossdeepCity_Gym_Text_HannahPostBattle: 
+MossdeepCity_Gym_Text_HannahPostBattle:
 	.string "I'm not going to get down on myself for\n"
 	.string "losing. I just need to train harder.\p"
 	.string "Positive thinking--that's my strong\n"
 	.string "point!$"
 
-MossdeepCity_Gym_Text_SamanthaIntro: 
+MossdeepCity_Gym_Text_SamanthaIntro:
 	.string "I see it…\n"
 	.string "I see your future…\p"
 	.string "If you can beat me, I will tell you\n"
 	.string "your future!$"
 
-MossdeepCity_Gym_Text_SamanthaDefeat: 
+MossdeepCity_Gym_Text_SamanthaDefeat:
 	.string "I surrender!$"
 
-MossdeepCity_Gym_Text_SamanthaPostBattle: 
+MossdeepCity_Gym_Text_SamanthaPostBattle:
 	.string "You will wage a terrifically intense\n"
 	.string "battle with our GYM LEADERS…\p"
 	.string "The result…\n"
 	.string "You won't hear it from me!$"
 
-MossdeepCity_Gym_Text_MauraIntro: 
+MossdeepCity_Gym_Text_MauraIntro:
 	.string "The roads you have traveled…\n"
 	.string "What you have experienced…\p"
 	.string "Come at me with everything you've\n"
 	.string "learned!$"
 
-MossdeepCity_Gym_Text_MauraDefeat: 
+MossdeepCity_Gym_Text_MauraDefeat:
 	.string "You've traveled a path of greatness!$"
 
-MossdeepCity_Gym_Text_MauraPostBattle: 
+MossdeepCity_Gym_Text_MauraPostBattle:
 	.string "A bright future awaits those who have\n"
 	.string "worked diligently.\p"
 	.string "For those who lazed idly, there is\n"
 	.string "only despair at the end.\p"
 	.string "What goes around comes around…$"
 
-MossdeepCity_Gym_Text_SylviaIntro: 
+MossdeepCity_Gym_Text_SylviaIntro:
 	.string "Even at the risk of life, I will win\n"
 	.string "this battle!$"
 
-MossdeepCity_Gym_Text_SylviaDefeat: 
+MossdeepCity_Gym_Text_SylviaDefeat:
 	.string "What you do…\n"
 	.string "It horrifies me…$"
 
-MossdeepCity_Gym_Text_SylviaPostBattle: 
+MossdeepCity_Gym_Text_SylviaPostBattle:
 	.string "How dare you beat me…\p"
 	.string "It won't be my fault if something\n"
 	.string "horrible befalls you…$"
 
-MossdeepCity_Gym_Text_NateIntro: 
+MossdeepCity_Gym_Text_NateIntro:
 	.string "Hohoho.\p"
 	.string "You need me to show you how tenacious\n"
 	.string "the PSYCHIC type can be.$"
 
-MossdeepCity_Gym_Text_NateDefeat: 
+MossdeepCity_Gym_Text_NateDefeat:
 	.string "Oh! My, my!\n"
 	.string "Your battle style is fantastic!$"
 
-MossdeepCity_Gym_Text_NatePostBattle: 
+MossdeepCity_Gym_Text_NatePostBattle:
 	.string "I… I don't let defeat rattle m-me,\n"
 	.string "however b-badly.$"
 
-MossdeepCity_Gym_Text_KathleenIntro: 
+MossdeepCity_Gym_Text_KathleenIntro:
 	.string "Let me show you a perfectly awful,\n"
 	.string "horrifying time!$"
 
-MossdeepCity_Gym_Text_KathleenDefeat: 
+MossdeepCity_Gym_Text_KathleenDefeat:
 	.string "N-nooooo!$"
 
-MossdeepCity_Gym_Text_KathleenPostBattle: 
+MossdeepCity_Gym_Text_KathleenPostBattle:
 	.string "Your vitality is contagious!\n"
 	.string "Get away from me quickly!$"
 
-MossdeepCity_Gym_Text_CliffordIntro: 
+MossdeepCity_Gym_Text_CliffordIntro:
 	.string "I may be past my prime, but I suggest\n"
 	.string "you not patronize me.$"
 
-MossdeepCity_Gym_Text_CliffordDefeat: 
+MossdeepCity_Gym_Text_CliffordDefeat:
 	.string "Ah, you overflow with the power\n"
 	.string "of youth!$"
 
-MossdeepCity_Gym_Text_CliffordPostBattle: 
+MossdeepCity_Gym_Text_CliffordPostBattle:
 	.string "It seems that I could not overcome\n"
 	.string "your youthful energy.$"
 
-MossdeepCity_Gym_Text_MaceyIntro: 
+MossdeepCity_Gym_Text_MaceyIntro:
 	.string "You're not getting through to the end!\n"
 	.string "Not if I can help it!$"
 
-MossdeepCity_Gym_Text_MaceyDefeat: 
+MossdeepCity_Gym_Text_MaceyDefeat:
 	.string "How could you be so ludicrously\n"
 	.string "strong?$"
 
-MossdeepCity_Gym_Text_MaceyPostBattle: 
+MossdeepCity_Gym_Text_MaceyPostBattle:
 	.string "Humph! You may be strong, but you're\n"
 	.string "not suitable for the PSYCHIC type!\p"
 	.string "The way you battle is somehow brutal!$"
 
-MossdeepCity_Gym_Text_NicholasIntro: 
+MossdeepCity_Gym_Text_NicholasIntro:
 	.string "Wroooar! Have a taste of my super\n"
 	.string "POKéMON hard-battling power!$"
 
-MossdeepCity_Gym_Text_NicholasDefeat: 
+MossdeepCity_Gym_Text_NicholasDefeat:
 	.string "Oh!\n"
 	.string "Done in!$"
 
-MossdeepCity_Gym_Text_NicholasPostBattle: 
+MossdeepCity_Gym_Text_NicholasPostBattle:
 	.string "All right! I think I'll develop a special\n"
 	.string "invincible POKéMON power next.$"
 
-MossdeepCity_Gym_Text_TateAndLizaIntro: 
+MossdeepCity_Gym_Text_TateAndLizaIntro:
 	.string "TATE: Hehehe… Were you surprised?\p"
 	.string "LIZA: Fufufu… Were you surprised?\p"
 	.string "TATE: That there are two GYM LEADERS?\n"
@@ -421,24 +421,24 @@ MossdeepCity_Gym_Text_TateAndLizaIntro:
 	.string "TATE: This combination of ours…\n"
 	.string "LIZA: Can you beat it?$"
 
-MossdeepCity_Gym_Text_TateAndLizaDefeat: 
+MossdeepCity_Gym_Text_TateAndLizaDefeat:
 	.string "TATE: What?! Our combination…\n"
 	.string "LIZA: Was shattered!\p"
 	.string "TATE: It can't be helped. You've won…\n"
 	.string "LIZA: So, in recognition, take this.$"
 
-MossdeepCity_Gym_Text_ReceivedMindBadge: 
+MossdeepCity_Gym_Text_ReceivedMindBadge:
 	.string "{PLAYER} received the MIND BADGE\n"
 	.string "from TATE and LIZA.$"
 
-MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis: 
+MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
 	.string "TATE: The MIND BADGE enhances the\n"
 	.string "SP. ATK and SP. DEF of POKéMON.\p"
 	.string "LIZA: It also lets you use the HM move\n"
 	.string "DIVE outside of battle.\p"
 	.string "TATE: You should also take this, too.$"
 
-MossdeepCity_Gym_Text_ExplainCalmMind: 
+MossdeepCity_Gym_Text_ExplainCalmMind:
 	.string "TATE: That TM04 contains…\n"
 	.string "LIZA: CALM MIND!\p"
 	.string "TATE: It raises SP. ATK and…\n"
@@ -447,18 +447,18 @@ MossdeepCity_Gym_Text_ExplainCalmMind:
 	.string "LIZA: For PSYCHIC POKéMON!\p"
 	.string "… … … … … …$"
 
-MossdeepCity_Gym_Text_RegisteredTateAndLiza: 
+MossdeepCity_Gym_Text_RegisteredTateAndLiza:
 	.string "Registered GYM LEADERS TATE & LIZA\n"
 	.string "in the POKéNAV.$"
 
-MossdeepCity_Gym_Text_TateAndLizaPostBattle: 
+MossdeepCity_Gym_Text_TateAndLizaPostBattle:
 	.string "TATE: Looks like the bond between you\n"
 	.string "and your POKéMON is far stronger than\l"
 	.string "the bond that we share as twins.\p"
 	.string "LIZA: You will become even stronger!\n"
 	.string "We've battled you, so we know.$"
 
-MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons: 
+MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons:
 	.string "TATE: Hehehe… Were you surprised?\p"
 	.string "LIZA: That there are two GYM LEADERS?\p"
 	.string "TATE: Oops, you have only one…\n"
@@ -467,15 +467,15 @@ MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons:
 	.string "LIZA: If you want to challenge us,\n"
 	.string "bring some more POKéMON.$"
 
-MossdeepCity_Gym_Text_GymStatue: 
+MossdeepCity_Gym_Text_GymStatue:
 	.string "MOSSDEEP CITY POKéMON GYM$"
 
-MossdeepCity_Gym_Text_GymStatueCertified: 
+MossdeepCity_Gym_Text_GymStatueCertified:
 	.string "MOSSDEEP CITY POKéMON GYM\p"
 	.string "LIZA AND TATE'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
-MossdeepCity_Gym_Text_TateAndLizaPreRematch: 
+MossdeepCity_Gym_Text_TateAndLizaPreRematch:
 	.string "TATE: POKéMON…\n"
 	.string "LIZA: POKéMON…\p"
 	.string "TATE: By changing the party's mix…\n"
@@ -487,17 +487,17 @@ MossdeepCity_Gym_Text_TateAndLizaPreRematch:
 	.string "TATE: Our combination…\n"
 	.string "LIZA: We'll show you again and again!$"
 
-MossdeepCity_Gym_Text_TateAndLizaRematchDefeat: 
+MossdeepCity_Gym_Text_TateAndLizaRematchDefeat:
 	.string "TATE: You and your POKéMON…\n"
 	.string "LIZA: It's as if you were siblings!$"
 
-MossdeepCity_Gym_Text_TateAndLizaPostRematch: 
+MossdeepCity_Gym_Text_TateAndLizaPostRematch:
 	.string "TATE: You can knock us down,\n"
 	.string "but we'll never stay down!\p"
 	.string "LIZA: Because the two of us,\n"
 	.string "we always support each other!$"
 
-MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons: 
+MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons:
 	.string "TATE: You're back again…\n"
 	.string "LIZA: You're back again…\p"
 	.string "TATE: To give us a rematch.\n"

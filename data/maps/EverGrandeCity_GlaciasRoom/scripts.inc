@@ -1,43 +1,43 @@
-EverGrandeCity_GlaciasRoom_MapScripts:: 
+EverGrandeCity_GlaciasRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_GlaciasRoom_OnFrame
 	map_script MAP_SCRIPT_ON_LOAD, EverGrandeCity_GlaciasRoom_OnLoad
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_GlaciasRoom_OnWarp
 	.byte 0
 
-EverGrandeCity_GlaciasRoom_OnWarp: 
+EverGrandeCity_GlaciasRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth
 	.2byte 0
 
-EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth:: 
+EverGrandeCity_GlaciasRoom_EventScript_PlayerTurnNorth::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_GlaciasRoom_OnFrame: 
+EverGrandeCity_GlaciasRoom_OnFrame:
 	map_script_2 VAR_ELITE_4_STATE, 2, EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor
 	.2byte 0
 
-EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor:: 
+EverGrandeCity_GlaciasRoom_EventScript_WalkInCloseDoor::
 	lockall
 	call PokemonLeague_EliteFour_EventScript_WalkInCloseDoor
 	setvar VAR_ELITE_4_STATE, 3
 	releaseall
 	end
 
-EverGrandeCity_GlaciasRoom_OnLoad: 
+EverGrandeCity_GlaciasRoom_OnLoad:
 	call_if_set FLAG_DEFEATED_ELITE_4_GLACIA, EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom
 	compare VAR_ELITE_4_STATE, 3
 	call_if_eq EverGrandeCity_GlaciasRoom_EventScript_CloseDoor
 	end
 
-EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom:: 
+EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom::
 	call PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom
 	return
 
-EverGrandeCity_GlaciasRoom_EventScript_CloseDoor:: 
+EverGrandeCity_GlaciasRoom_EventScript_CloseDoor::
 	call PokemonLeague_EliteFour_EventScript_CloseDoor
 	return
 
-EverGrandeCity_GlaciasRoom_EventScript_Glacia:: 
+EverGrandeCity_GlaciasRoom_EventScript_Glacia::
 	lock
 	faceplayer
 	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_GlaciasRoom_EventScript_GlaciaRematch
@@ -48,12 +48,12 @@ EverGrandeCity_GlaciasRoom_EventScript_Glacia::
 	goto EverGrandeCity_GlaciasRoom_EventScript_Defeated
 	end
 
-EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech:: 
+EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech::
 	msgbox EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech, MSGBOX_DEFAULT
 	release
 	end
 
-EverGrandeCity_GlaciasRoom_EventScript_Defeated:: 
+EverGrandeCity_GlaciasRoom_EventScript_Defeated::
 	setflag FLAG_DEFEATED_ELITE_4_GLACIA
 	setflag FLAG_REMATCH_GLACIA
 	call PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles
@@ -90,7 +90,7 @@ EverGrandeCity_GlaciasRoom_EventScript_DefeatedRematch:
 	release
 	end
 
-EverGrandeCity_GlaciasRoom_Text_IntroSpeech: 
+EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
 	.string "Welcome, my name is GLACIA\n"
 	.string "of the ELITE FOUR.\p"
 	.string "I've traveled from afar to HOENN\n"
@@ -101,14 +101,14 @@ EverGrandeCity_GlaciasRoom_Text_IntroSpeech:
 	.string "It would please me to no end if I could\n"
 	.string "go all out against you!$"
 
-EverGrandeCity_GlaciasRoom_Text_Defeat: 
+EverGrandeCity_GlaciasRoom_Text_Defeat:
 	.string "You and your POKéMON…\n"
 	.string "How hot your spirits burn!\p"
 	.string "The all-consuming heat overwhelms.\p"
 	.string "It's no surprise that my icy skills\n"
 	.string "failed to harm you.$"
 
-EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech: 
+EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech:
 	.string "Advance to the next room.\p"
 	.string "And there, confirm the truly fearsome\n"
 	.string "side of the POKéMON LEAGUE.$"

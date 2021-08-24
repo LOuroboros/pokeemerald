@@ -1,9 +1,9 @@
 .set LOCALID_STEVEN, 1
 
-GraniteCave_StevensRoom_MapScripts:: 
+GraniteCave_StevensRoom_MapScripts::
 	.byte 0
 
-GraniteCave_StevensRoom_EventScript_Steven:: 
+GraniteCave_StevensRoom_EventScript_Steven::
 	lock
 	faceplayer
 	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
@@ -38,28 +38,28 @@ GraniteCave_StevensRoom_EventScript_Steven::
 	release
 	end
 
-GraniteCave_StevensRoom_EventScript_StevenExitNorth:: 
+GraniteCave_StevensRoom_EventScript_StevenExitNorth::
 	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_StevenExitWestEast:: 
+GraniteCave_StevensRoom_EventScript_StevenExitWestEast::
 	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_StevenExitSouth:: 
+GraniteCave_StevensRoom_EventScript_StevenExitSouth::
 	applymovement OBJ_EVENT_ID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
 	applymovement LOCALID_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
 	waitmovement 0
 	return
 
-GraniteCave_StevensRoom_EventScript_BagFull:: 
+GraniteCave_StevensRoom_EventScript_BagFull::
 	msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
 	return
 
-GraniteCave_StevensRoom_Movement_StevenExit: 
+GraniteCave_StevensRoom_Movement_StevenExit:
 	walk_up
 	walk_up
 	walk_up
@@ -68,14 +68,14 @@ GraniteCave_StevensRoom_Movement_StevenExit:
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit: 
+GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit:
 	delay_16
 	delay_16
 	delay_16
 	walk_in_place_fastest_up
 	step_end
 
-GraniteCave_StevensRoom_Movement_StevenExitSouth: 
+GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	walk_left
 	walk_up
 	walk_up
@@ -86,14 +86,14 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Text_ImStevenLetterForMe: 
+GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
 	.string "My name is STEVEN.\p"
 	.string "I'm interested in rare stones,\n"
 	.string "so I travel here and there.\p"
 	.string "Oh?\n"
 	.string "A LETTER for me?$"
 
-GraniteCave_StevensRoom_Text_ThankYouTakeThis: 
+GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "STEVEN: Okay, thank you.\p"
 	.string "You went through all this trouble to\n"
 	.string "deliver that. I need to thank you.\p"
@@ -102,7 +102,7 @@ GraniteCave_StevensRoom_Text_ThankYouTakeThis:
 	.string "It contains my favorite move,\n"
 	.string "STEEL WING.$"
 
-GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister: 
+GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
 	.string "STEVEN: Your POKéMON appear quite\n"
 	.string "capable.\p"
 	.string "If you keep training, you could even\n"
@@ -113,14 +113,14 @@ GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
 	.string "our POKéNAVS.\p"
 	.string "… … … … … …$"
 
-GraniteCave_StevensRoom_Text_RegisteredSteven: 
+GraniteCave_StevensRoom_Text_RegisteredSteven:
 	.string "Registered STEVEN\n"
 	.string "in the POKéNAV.$"
 
-GraniteCave_StevensRoom_Text_IveGotToHurryAlong: 
+GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
 	.string "Now, I've got to hurry along.$"
 
-GraniteCave_StevensRoom_Text_OhBagIsFull: 
+GraniteCave_StevensRoom_Text_OhBagIsFull:
 	.string "Oh, your BAG is full…\n"
 	.string "That's too bad, then.$"
 

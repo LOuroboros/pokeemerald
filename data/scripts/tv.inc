@@ -1,4 +1,4 @@
-EventScript_TV:: 
+EventScript_TV::
 	lockall
 	incrementgamestat GAME_STAT_WATCHED_TV
 	special ResetTVShowState
@@ -15,7 +15,7 @@ EventScript_TV::
 	goto EventScript_TryDoPokeNews
 	end
 
-EventScript_TryDoTVShow:: 
+EventScript_TryDoTVShow::
 	specialvar VAR_0x8004, GetRandomActiveShowIdx
 	compare VAR_0x8004, 255
 	goto_if_eq EventScript_MomDadMightLikeThis2
@@ -28,14 +28,14 @@ EventScript_TryDoTVShow::
 	goto_if_ne EventScript_DoTVShow
 	end
 
-EventScript_MomDadMightLikeThis1:: 
+EventScript_MomDadMightLikeThis1::
 	special GetMomOrDadStringForTVMessage
 	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	special TurnOffTVScreen
 	releaseall
 	end
 
-EventScript_PlayersHouseMovie:: 
+EventScript_PlayersHouseMovie::
 	msgbox PlayersHouse_1F_Text_TheresAMovieOnTV, MSGBOX_DEFAULT
 	releaseall
 	end
@@ -43,7 +43,7 @@ EventScript_PlayersHouseMovie::
 @ special InitRoamer is a junk call. Its input var (VAR_0x8004) hasn't been set, and
 @ It's called again when Mom actually asks for the color, overwriting
 @ whatever it does here.
-EventScript_PlayersHouseLatiNewsFlash:: 
+EventScript_PlayersHouseLatiNewsFlash::
 	msgbox PlayersHouse_1F_Text_LatiEmergencyNewsFlash, MSGBOX_DEFAULT
 	special InitRoamer
 	clearflag FLAG_SYS_TV_LATIAS_LATIOS
@@ -52,7 +52,7 @@ EventScript_PlayersHouseLatiNewsFlash::
 	releaseall
 	end
 
-EventScript_DoTVShow:: 
+EventScript_DoTVShow::
 	special DoTVShow
 	waitmessage
 	waitbuttonpress
@@ -61,19 +61,19 @@ EventScript_DoTVShow::
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_TurnOffTV:: 
+EventScript_TurnOffTV::
 	special TurnOffTVScreen
 	setflag FLAG_SYS_TV_WATCH
 	releaseall
 	end
 
-EventScript_MomDadMightLikeThis2:: 
+EventScript_MomDadMightLikeThis2::
 	special GetMomOrDadStringForTVMessage
 	msgbox gText_MomOrDadMightLikeThisProgram, MSGBOX_DEFAULT
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_TryDoPokeNews:: 
+EventScript_TryDoPokeNews::
 	special DoPokeNews
 	compare VAR_RESULT, FALSE
 	goto_if_eq EventScript_TryDoTVShow
@@ -82,7 +82,7 @@ EventScript_TryDoPokeNews::
 	goto EventScript_TurnOffTV
 	end
 
-EventScript_DoInSearchOfTrainers:: 
+EventScript_DoInSearchOfTrainers::
 	special DoTVShowInSearchOfTrainers
 	waitmessage
 	waitbuttonpress

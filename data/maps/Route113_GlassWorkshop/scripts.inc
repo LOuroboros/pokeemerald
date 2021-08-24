@@ -1,4 +1,4 @@
-Route113_GlassWorkshop_MapScripts:: 
+Route113_GlassWorkshop_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, Route113_GlassWorkshop_OnTransition
 	.byte 0
 
@@ -11,17 +11,17 @@ Route113_GlassWorkshop_MapScripts::
 	.set PRETTY_DESK_PRICE,  8000
 	.set LOWEST_ASH_PRICE,   BLUE_FLUTE_PRICE
 
-Route113_GlassWorkshop_OnTransition: 
+Route113_GlassWorkshop_OnTransition:
 	setflag FLAG_LANDMARK_GLASS_WORKSHOP
 	compare VAR_GLASS_WORKSHOP_STATE, 1
 	call_if_eq Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack
 	end
 
-Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack:: 
+Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack::
 	setvar VAR_GLASS_WORKSHOP_STATE, 2
 	return
 
-Route113_GlassWorkshop_EventScript_GlassWorker:: 
+Route113_GlassWorkshop_EventScript_GlassWorker::
 	lock
 	faceplayer
 	compare VAR_GLASS_WORKSHOP_STATE, 10
@@ -37,12 +37,12 @@ Route113_GlassWorkshop_EventScript_GlassWorker::
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_ExplainSootSack:: 
+Route113_GlassWorkshop_EventScript_ExplainSootSack::
 	msgbox Route113_GlassWorkshop_Text_ExplainSootSack, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_CheckCollectedAsh:: 
+Route113_GlassWorkshop_EventScript_CheckCollectedAsh::
 	checkitem ITEM_SOOT_SACK, 1
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route113_GlassWorkshop_EventScript_SootSackNotInBag
@@ -54,12 +54,12 @@ Route113_GlassWorkshop_EventScript_CheckCollectedAsh::
 	goto Route113_GlassWorkshop_EventScript_ChooseGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_SootSackNotInBag:: 
+Route113_GlassWorkshop_EventScript_SootSackNotInBag::
 	msgbox Route113_GlassWorkshop_Text_HaventGotYourSootSack, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_ChooseGlassItem:: 
+Route113_GlassWorkshop_EventScript_ChooseGlassItem::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8004, SCROLL_MULTI_GLASS_WORKSHOP_VENDOR
 	special ShowScrollableMultichoice
@@ -76,7 +76,7 @@ Route113_GlassWorkshop_EventScript_ChooseGlassItem::
 	case MULTI_B_PRESSED, Route113_GlassWorkshop_EventScript_CancelGlassItemSelect
 	end
 
-Route113_GlassWorkshop_EventScript_BlueFlute:: 
+Route113_GlassWorkshop_EventScript_BlueFlute::
 	setvar VAR_0x8008, ITEM_BLUE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, BLUE_FLUTE_PRICE
@@ -90,7 +90,7 @@ Route113_GlassWorkshop_EventScript_BlueFlute::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_YellowFlute:: 
+Route113_GlassWorkshop_EventScript_YellowFlute::
 	setvar VAR_0x8008, ITEM_YELLOW_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, YELLOW_FLUTE_PRICE
@@ -104,7 +104,7 @@ Route113_GlassWorkshop_EventScript_YellowFlute::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_RedFlute:: 
+Route113_GlassWorkshop_EventScript_RedFlute::
 	setvar VAR_0x8008, ITEM_RED_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, RED_FLUTE_PRICE
@@ -118,7 +118,7 @@ Route113_GlassWorkshop_EventScript_RedFlute::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_WhiteFlute:: 
+Route113_GlassWorkshop_EventScript_WhiteFlute::
 	setvar VAR_0x8008, ITEM_WHITE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, WHITE_FLUTE_PRICE
@@ -132,7 +132,7 @@ Route113_GlassWorkshop_EventScript_WhiteFlute::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_BlackFlute:: 
+Route113_GlassWorkshop_EventScript_BlackFlute::
 	setvar VAR_0x8008, ITEM_BLACK_FLUTE
 	bufferitemname 0, VAR_0x8008
 	setvar VAR_0x800A, BLACK_FLUTE_PRICE
@@ -146,7 +146,7 @@ Route113_GlassWorkshop_EventScript_BlackFlute::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_PrettyChair:: 
+Route113_GlassWorkshop_EventScript_PrettyChair::
 	setvar VAR_0x8009, 1
 	setvar VAR_0x8008, DECOR_PRETTY_CHAIR
 	bufferdecorationname 0, VAR_0x8008
@@ -161,7 +161,7 @@ Route113_GlassWorkshop_EventScript_PrettyChair::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_PrettyDesk:: 
+Route113_GlassWorkshop_EventScript_PrettyDesk::
 	setvar VAR_0x8009, 1
 	setvar VAR_0x8008, DECOR_PRETTY_DESK
 	bufferdecorationname 0, VAR_0x8008
@@ -176,12 +176,12 @@ Route113_GlassWorkshop_EventScript_PrettyDesk::
 	goto Route113_GlassWorkshop_EventScript_MakeGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_CancelGlassItemSelect:: 
+Route113_GlassWorkshop_EventScript_CancelGlassItemSelect::
 	msgbox Route113_GlassWorkshop_Text_AllThatAshButDontWantAnything, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_NotEnoughAsh:: 
+Route113_GlassWorkshop_EventScript_NotEnoughAsh::
 	setvar VAR_0x800A, LOWEST_ASH_PRICE
 	subvar VAR_0x800A, VAR_ASH_GATHER_COUNT
 	buffernumberstring 0, VAR_0x800A
@@ -189,7 +189,7 @@ Route113_GlassWorkshop_EventScript_NotEnoughAsh::
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_NotEnoughAshForItem:: 
+Route113_GlassWorkshop_EventScript_NotEnoughAshForItem::
 	subvar VAR_0x800A, VAR_ASH_GATHER_COUNT
 	buffernumberstring 1, VAR_0x800A
 	message Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem
@@ -197,13 +197,13 @@ Route113_GlassWorkshop_EventScript_NotEnoughAshForItem::
 	goto Route113_GlassWorkshop_EventScript_ChooseGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_ChooseDifferentItem:: 
+Route113_GlassWorkshop_EventScript_ChooseDifferentItem::
 	message Route113_GlassWorkshop_Text_WhichWouldYouLike
 	waitmessage
 	goto Route113_GlassWorkshop_EventScript_ChooseGlassItem
 	end
 
-Route113_GlassWorkshop_EventScript_MakeGlassItem:: 
+Route113_GlassWorkshop_EventScript_MakeGlassItem::
 	msgbox Route113_GlassWorkshop_Text_IllMakeItemForYou, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
@@ -219,31 +219,31 @@ Route113_GlassWorkshop_EventScript_MakeGlassItem::
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_GiveGlassFlute:: 
+Route113_GlassWorkshop_EventScript_GiveGlassFlute::
 	giveitem VAR_0x8008
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route113_GlassWorkshop_EventScript_NoRoomForFlute
 	return
 
-Route113_GlassWorkshop_EventScript_GiveGlassDecor:: 
+Route113_GlassWorkshop_EventScript_GiveGlassDecor::
 	givedecoration VAR_0x8008
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route113_GlassWorkshop_EventScript_NoRoomForDecor
 	return
 
-Route113_GlassWorkshop_EventScript_NoRoomForFlute:: 
+Route113_GlassWorkshop_EventScript_NoRoomForFlute::
 	call Common_EventScript_BagIsFull
 	msgbox Route113_GlassWorkshop_Text_NoRoomInBag, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_NoRoomForDecor:: 
+Route113_GlassWorkshop_EventScript_NoRoomForDecor::
 	call Common_EventScript_NoRoomForDecor
 	msgbox Route113_GlassWorkshop_Text_NoRoomInPC, MSGBOX_DEFAULT
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom:: 
+Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom::
 	switch VAR_GLASS_WORKSHOP_STATE
 	case 10, Route113_GlassWorkshop_EventScript_GiveBlueFlute
 	case 11, Route113_GlassWorkshop_EventScript_GiveYellowFlute
@@ -254,56 +254,56 @@ Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom::
 	case 16, Route113_GlassWorkshop_EventScript_GivePrettyDesk
 	end
 
-Route113_GlassWorkshop_EventScript_GiveBlueFlute:: 
+Route113_GlassWorkshop_EventScript_GiveBlueFlute::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8008, ITEM_BLUE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveYellowFlute:: 
+Route113_GlassWorkshop_EventScript_GiveYellowFlute::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8008, ITEM_YELLOW_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveRedFlute:: 
+Route113_GlassWorkshop_EventScript_GiveRedFlute::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8008, ITEM_RED_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveWhiteFlute:: 
+Route113_GlassWorkshop_EventScript_GiveWhiteFlute::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8008, ITEM_WHITE_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GiveBlackFlute:: 
+Route113_GlassWorkshop_EventScript_GiveBlackFlute::
 	setvar VAR_0x8009, 0
 	setvar VAR_0x8008, ITEM_BLACK_FLUTE
 	bufferitemname 0, VAR_0x8008
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GivePrettyChair:: 
+Route113_GlassWorkshop_EventScript_GivePrettyChair::
 	setvar VAR_0x8009, 1
 	setvar VAR_0x8008, DECOR_PRETTY_CHAIR
 	bufferdecorationname 0, DECOR_PRETTY_CHAIR
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_GivePrettyDesk:: 
+Route113_GlassWorkshop_EventScript_GivePrettyDesk::
 	setvar VAR_0x8009, 1
 	setvar VAR_0x8008, DECOR_PRETTY_DESK
 	bufferdecorationname 0, DECOR_PRETTY_DESK
 	goto Route113_GlassWorkshop_EventScript_TryGiveItemAgain
 	end
 
-Route113_GlassWorkshop_EventScript_TryGiveItemAgain:: 
+Route113_GlassWorkshop_EventScript_TryGiveItemAgain::
 	msgbox Route113_GlassWorkshop_Text_IveFinishedGlassItem, MSGBOX_DEFAULT
 	compare VAR_0x8009, 0
 	call_if_eq Route113_GlassWorkshop_EventScript_GiveGlassFlute
@@ -313,11 +313,11 @@ Route113_GlassWorkshop_EventScript_TryGiveItemAgain::
 	release
 	end
 
-Route113_GlassWorkshop_EventScript_NinjaBoy:: 
+Route113_GlassWorkshop_EventScript_NinjaBoy::
 	msgbox Route113_GlassWorkshop_Text_FunToBlowGlassFlute, MSGBOX_NPC
 	end
 
-Route113_GlassWorkshop_Text_GoCollectAshWithThis: 
+Route113_GlassWorkshop_Text_GoCollectAshWithThis:
 	.string "This area is covered in volcanic ash,\n"
 	.string "huff-puff!\p"
 	.string "I'm specially gifted, huff-puff.\p"
@@ -325,7 +325,7 @@ Route113_GlassWorkshop_Text_GoCollectAshWithThis:
 	.string "and make items, huff-puff.\p"
 	.string "Go collect ashes with this, huff-puff.$"
 
-Route113_GlassWorkshop_Text_ExplainSootSack: 
+Route113_GlassWorkshop_Text_ExplainSootSack:
 	.string "Just take that SOOT SACK and walk\n"
 	.string "through piles of ash, huff-puff.\p"
 	.string "And it will fill up with the volcanic ash,\n"
@@ -333,11 +333,11 @@ Route113_GlassWorkshop_Text_ExplainSootSack:
 	.string "Once you think you've collected a good\n"
 	.string "amount, come see me, huff-puff.$"
 
-Route113_GlassWorkshop_Text_LetsSeeCollectedAshes: 
+Route113_GlassWorkshop_Text_LetsSeeCollectedAshes:
 	.string "Have you collected ashes, huff-puff?\n"
 	.string "Let me see, huff-puff.$"
 
-Route113_GlassWorkshop_Text_NotEnoughAshNeedX: 
+Route113_GlassWorkshop_Text_NotEnoughAshNeedX:
 	.string "Hmmm…\n"
 	.string "There's not enough ash here, huff-puff.\l"
 	.string "I can't make glass with this, huff-puff.\p"
@@ -345,25 +345,25 @@ Route113_GlassWorkshop_Text_NotEnoughAshNeedX:
 	.string "you'll need to walk for me to make you\l"
 	.string "a BLUE FLUTE, huff-puff.$"
 
-Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike: 
+Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike:
 	.string "Oh!\n"
 	.string "You've got a lot of ashes, huff-puff!\p"
 	.string "I'll make you a glass item, huff-puff!\n"
 	.string "Which one would you like, huff-puff?$"
 
-Route113_GlassWorkshop_Text_IsThatTheItemForYou: 
+Route113_GlassWorkshop_Text_IsThatTheItemForYou:
 	.string "A {STR_VAR_1}, huff-puff?\n"
 	.string "Is that the one for you, huff-puff?$"
 
-Route113_GlassWorkshop_Text_WhichWouldYouLike: 
+Route113_GlassWorkshop_Text_WhichWouldYouLike:
 	.string "Which one would you like, huff-puff?$"
 
-Route113_GlassWorkshop_Text_IllMakeItemForYou: 
+Route113_GlassWorkshop_Text_IllMakeItemForYou:
 	.string "A {STR_VAR_1} it is, then, huff-puff!\p"
 	.string "Okay! I'll make it for you, huff-puff.\n"
 	.string "Just wait a little while, huff-puff.$"
 
-Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem: 
+Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem:
 	.string "A {STR_VAR_1}, huff-puff?\p"
 	.string "There's not enough ash here to make\n"
 	.string "that, though, huff-puff.\p"
@@ -373,33 +373,33 @@ Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem:
 	.string "Which item would you rather have me\n"
 	.string "make instead, huff-puff?$"
 
-Route113_GlassWorkshop_Text_AllThatAshButDontWantAnything: 
+Route113_GlassWorkshop_Text_AllThatAshButDontWantAnything:
 	.string "You've collected all that ash, but you\n"
 	.string "don't want anything, huff-puff?$"
 
-Route113_GlassWorkshop_Text_IveFinishedGlassItem: 
+Route113_GlassWorkshop_Text_IveFinishedGlassItem:
 	.string "Ah, I've finished your {STR_VAR_1}.\n"
 	.string "Take it, huff-puff.$"
 
-Route113_GlassWorkshop_Text_NoRoomInBag: 
+Route113_GlassWorkshop_Text_NoRoomInBag:
 	.string "Oh?\n"
 	.string "You've no room in your BAG, huff-puff.\p"
 	.string "I'll hold on to it, so come back later,\n"
 	.string "huff-puff.$"
 
-Route113_GlassWorkshop_Text_NoRoomInPC: 
+Route113_GlassWorkshop_Text_NoRoomInPC:
 	.string "Oh?\n"
 	.string "You've no room in your PC, huff-puff?\p"
 	.string "I'll hold on to it, so come back later,\n"
 	.string "huff-puff.$"
 
-Route113_GlassWorkshop_Text_HaventGotYourSootSack: 
+Route113_GlassWorkshop_Text_HaventGotYourSootSack:
 	.string "Hah? You haven't got your SOOT SACK\n"
 	.string "with you, huff-puff.\p"
 	.string "You have to keep it with you to collect\n"
 	.string "volcanic ash, huff-puff.$"
 
-Route113_GlassWorkshop_Text_FunToBlowGlassFlute: 
+Route113_GlassWorkshop_Text_FunToBlowGlassFlute:
 	.string "It's fun to blow a glass flute while\n"
 	.string "my boss is talking.\p"
 	.string "Huff-huff! Puff-puff!$"

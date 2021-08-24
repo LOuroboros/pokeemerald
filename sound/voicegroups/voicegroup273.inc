@@ -1,5 +1,5 @@
 	.align 2
-voicegroup273:: @ 
+voicegroup273:: @
 	voice_directsound 60, 0, DirectSoundWaveData_hg_pno4c2, 255, 249, 0, 224
 	voice_directsound 60, 0, DirectSoundWaveData_hg_pno4a2, 255, 249, 0, 224
 	voice_directsound 60, 0, DirectSoundWaveData_hg_pno4f3, 255, 249, 0, 205

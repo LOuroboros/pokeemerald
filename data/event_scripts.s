@@ -64,7 +64,7 @@
 
 	.include "data/script_cmd_table.inc"
 
-gSpecialVars:: 
+gSpecialVars::
 	.4byte gSpecialVar_0x8000
 	.4byte gSpecialVar_0x8001
 	.4byte gSpecialVar_0x8002
@@ -90,7 +90,7 @@ gSpecialVars::
 
 	.include "data/specials.inc"
 
-gStdScripts:: 
+gStdScripts::
 	.4byte Std_ObtainItem              @ STD_OBTAIN_ITEM
 	.4byte Std_FindItem                @ STD_FIND_ITEM
 	.4byte Std_MsgboxNPC               @ MSGBOX_NPC
@@ -102,7 +102,7 @@ gStdScripts::
 	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
 	.4byte Std_10
-gStdScripts_End:: 
+gStdScripts_End::
 
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"
@@ -579,12 +579,12 @@ gStdScripts_End::
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
 
-EventScript_WhiteOut:: 
+EventScript_WhiteOut::
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	goto EventScript_ResetMrBriney
 	end
 
-EventScript_ResetMrBriney:: 
+EventScript_ResetMrBriney::
 	compare VAR_BRINEY_LOCATION, 1
 	goto_if_eq EventScript_MoveMrBrineyToHouse
 	compare VAR_BRINEY_LOCATION, 2
@@ -593,7 +593,7 @@ EventScript_ResetMrBriney::
 	goto_if_eq EventScript_MoveMrBrineyToRoute109
 	end
 
-EventScript_MoveMrBrineyToHouse:: 
+EventScript_MoveMrBrineyToHouse::
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
@@ -603,7 +603,7 @@ EventScript_MoveMrBrineyToHouse::
 	clearflag FLAG_HIDE_BRINEYS_HOUSE_PEEKO
 	end
 
-EventScript_MoveMrBrineyToDewford:: 
+EventScript_MoveMrBrineyToDewford::
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
@@ -614,7 +614,7 @@ EventScript_MoveMrBrineyToDewford::
 	clearflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	end
 
-EventScript_MoveMrBrineyToRoute109:: 
+EventScript_MoveMrBrineyToRoute109::
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
@@ -625,7 +625,7 @@ EventScript_MoveMrBrineyToRoute109::
 	clearflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
 	end
 
-EverGrandeCity_HallOfFame_EventScript_ResetEliteFour:: 
+EverGrandeCity_HallOfFame_EventScript_ResetEliteFour::
 	clearflag FLAG_DEFEATED_ELITE_4_SIDNEY
 	clearflag FLAG_DEFEATED_ELITE_4_PHOEBE
 	clearflag FLAG_DEFEATED_ELITE_4_GLACIA
@@ -633,7 +633,7 @@ EverGrandeCity_HallOfFame_EventScript_ResetEliteFour::
 	setvar VAR_ELITE_4_STATE, 0
 	return
 
-Common_EventScript_UpdateBrineyLocation:: 
+Common_EventScript_UpdateBrineyLocation::
 	goto_if_unset FLAG_RECEIVED_POKENAV, Common_EventScript_NopReturn
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, Common_EventScript_NopReturn
 	goto_if_unset FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT, EventScript_SetBrineyLocation_House
@@ -641,15 +641,15 @@ Common_EventScript_UpdateBrineyLocation::
 	goto_if_unset FLAG_HIDE_ROUTE_109_MR_BRINEY, EventScript_SetBrineyLocation_Route109
 	return
 
-EventScript_SetBrineyLocation_House:: 
+EventScript_SetBrineyLocation_House::
 	setvar VAR_BRINEY_LOCATION, 1
 	return
 
-EventScript_SetBrineyLocation_Dewford:: 
+EventScript_SetBrineyLocation_Dewford::
 	setvar VAR_BRINEY_LOCATION, 2
 	return
 
-EventScript_SetBrineyLocation_Route109:: 
+EventScript_SetBrineyLocation_Route109::
 	setvar VAR_BRINEY_LOCATION, 3
 	return
 
@@ -659,32 +659,32 @@ EventScript_SetBrineyLocation_Route109::
 	.include "data/scripts/pc.inc"
 
 @ scripts/notices.inc? signs.inc? See comment about text/notices.inc
-Common_EventScript_ShowPokemartSign:: 
+Common_EventScript_ShowPokemartSign::
 	msgbox gText_PokemartSign, MSGBOX_SIGN
 	end
 
-Common_EventScript_ShowPokemonCenterSign:: 
+Common_EventScript_ShowPokemonCenterSign::
 	msgbox gText_PokemonCenterSign, MSGBOX_SIGN
 	end
 
-Common_ShowEasyChatScreen:: 
+Common_ShowEasyChatScreen::
 	fadescreen FADE_TO_BLACK
 	special ShowEasyChatScreen
 	fadescreen FADE_FROM_BLACK
 	return
 
-Common_EventScript_ReadyPetalburgGymForBattle:: 
+Common_EventScript_ReadyPetalburgGymForBattle::
 	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS
 	return
 
-Common_EventScript_BufferTrendyPhrase:: 
+Common_EventScript_BufferTrendyPhrase::
 	dotimebasedevents
 	setvar VAR_0x8004, 0
 	special BufferTrendyPhraseString
 	return
 
-EventScript_BackupMrBrineyLocation:: 
+EventScript_BackupMrBrineyLocation::
 	copyvar VAR_0x8008, VAR_BRINEY_LOCATION
 	setvar VAR_BRINEY_LOCATION, 0
 	return
@@ -693,34 +693,34 @@ EventScript_BackupMrBrineyLocation::
 	.include "data/scripts/rival_graphics.inc"
 	.include "data/scripts/set_gym_trainers.inc"
 
-Common_EventScript_ShowBagIsFull:: 
+Common_EventScript_ShowBagIsFull::
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_BagIsFull:: 
+Common_EventScript_BagIsFull::
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_ShowNoRoomForDecor:: 
+Common_EventScript_ShowNoRoomForDecor::
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	release
 	end
 
-Common_EventScript_NoRoomForDecor:: 
+Common_EventScript_NoRoomForDecor::
 	msgbox gText_NoRoomLeftForAnother, MSGBOX_DEFAULT
 	return
 
-Common_EventScript_SetAbnormalWeather:: 
+Common_EventScript_SetAbnormalWeather::
 	setweather WEATHER_ABNORMAL
 	return
 
-Common_EventScript_PlayGymBadgeFanfare:: 
+Common_EventScript_PlayGymBadgeFanfare::
 	playfanfare MUS_OBTAIN_BADGE
 	waitfanfare
 	return
 
-Common_EventScript_OutOfCenterPartyHeal:: 
+Common_EventScript_OutOfCenterPartyHeal::
 	fadescreen FADE_TO_BLACK
 	playfanfare MUS_HEAL
 	waitfanfare
@@ -728,7 +728,7 @@ Common_EventScript_OutOfCenterPartyHeal::
 	fadescreen FADE_FROM_BLACK
 	return
 
-EventScript_RegionMap:: 
+EventScript_RegionMap::
 	lockall
 	msgbox Common_Text_LookCloserAtMap, MSGBOX_DEFAULT
 	fadescreen FADE_TO_BLACK
@@ -737,12 +737,12 @@ EventScript_RegionMap::
 	releaseall
 	end
 
-Common_EventScript_PlayBrineysBoatMusic:: 
+Common_EventScript_PlayBrineysBoatMusic::
 	setflag FLAG_DONT_TRANSITION_MUSIC
 	playbgm MUS_SAILING, FALSE
 	return
 
-Common_EventScript_StopBrineysBoatMusic:: 
+Common_EventScript_StopBrineysBoatMusic::
 	clearflag FLAG_DONT_TRANSITION_MUSIC
 	fadedefaultbgm
 	return
@@ -750,13 +750,13 @@ Common_EventScript_StopBrineysBoatMusic::
 	.include "data/scripts/prof_birch.inc"
 
 @ Below could be split as ferry.inc aside from the Rusturf tunnel script
-Common_EventScript_FerryDepart:: 
+Common_EventScript_FerryDepart::
 	delay 60
 	applymovement VAR_0x8004, Movement_FerryDepart
 	waitmovement 0
 	return
 
-Movement_FerryDepart: 
+Movement_FerryDepart:
 	walk_slow_right
 	walk_slow_right
 	walk_slow_right
@@ -766,7 +766,7 @@ Movement_FerryDepart:
 	walk_right
 	step_end
 
-EventScript_HideMrBriney:: 
+EventScript_HideMrBriney::
 	setflag FLAG_HIDE_MR_BRINEY_DEWFORD_TOWN
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY
@@ -778,7 +778,7 @@ EventScript_HideMrBriney::
 	setvar VAR_BRINEY_LOCATION, 0
 	return
 
-RusturfTunnel_EventScript_SetRusturfTunnelOpen:: 
+RusturfTunnel_EventScript_SetRusturfTunnelOpen::
 	removeobject LOCALID_WANDAS_BF
 	removeobject LOCALID_WANDA
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WANDAS_BOYFRIEND
@@ -787,7 +787,7 @@ RusturfTunnel_EventScript_SetRusturfTunnelOpen::
 	setflag FLAG_RUSTURF_TUNNEL_OPENED
 	return
 
-Common_EventScript_FerryDepartIsland:: 
+Common_EventScript_FerryDepartIsland::
 	compare VAR_FACING, DIR_SOUTH
 	call_if_eq Ferry_EventScript_DepartIslandSouth
 	compare VAR_FACING, DIR_WEST
@@ -800,13 +800,13 @@ Common_EventScript_FerryDepartIsland::
 	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/kecleon.inc"
 
-Common_EventScript_NameReceivedPartyMon:: 
+Common_EventScript_NameReceivedPartyMon::
 	fadescreen FADE_TO_BLACK
 	special ChangePokemonNickname
 	waitstate
 	return
 
-Common_EventScript_PlayerHandedOverTheItem:: 
+Common_EventScript_PlayerHandedOverTheItem::
 	bufferitemname 0, VAR_0x8004
 	playfanfare MUS_OBTAIN_TMHM
 	message gText_PlayerHandedOverTheItem
@@ -825,28 +825,28 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/text/obtain_item.inc"
 
 @ The below and surf.inc could be split into some text/notices.inc
-gText_PokemartSign:: 
+gText_PokemartSign::
 	.string "“Selected items for your convenience!”\n"
 	.string "POKéMON MART$"
 
-gText_PokemonCenterSign:: 
+gText_PokemonCenterSign::
 	.string "“Rejuvenate your tired partners!”\n"
 	.string "POKéMON CENTER$"
 
-gText_MomOrDadMightLikeThisProgram:: 
+gText_MomOrDadMightLikeThisProgram::
 	.string "{STR_VAR_1} might like this program.\n"
 	.string "… … … … … … … … … … … … … … … …\p"
 	.string "Better get going!$"
 
-gText_WhichFloorWouldYouLike:: 
+gText_WhichFloorWouldYouLike::
 	.string "Welcome to LILYCOVE DEPARTMENT STORE.\p"
 	.string "Which floor would you like?$"
 
-gText_SandstormIsVicious:: 
+gText_SandstormIsVicious::
 	.string "The sandstorm is vicious.\n"
 	.string "It's impossible to keep going.$"
 
-gText_SelectWithoutRegisteredItem:: 
+gText_SelectWithoutRegisteredItem::
 	.string "An item in the BAG can be\n"
 	.string "registered to SELECT for easy use.$"
 
@@ -854,7 +854,7 @@ gText_RWithoutRegisteredItem::
 	.string "You can register multiple items\n"
 	.string "to {R_BUTTON} for easy use.$"
 
-gText_PokemonTrainerSchoolEmail:: 
+gText_PokemonTrainerSchoolEmail::
 	.string "There's an e-mail from POKéMON TRAINER\n"
 	.string "SCHOOL.\p"
 	.string "… … … … … …\p"
@@ -863,21 +863,21 @@ gText_PokemonTrainerSchoolEmail::
 	.string "move sets chosen for POKéMON.\p"
 	.string "… … … … … …$"
 
-gText_PlayerHouseBootPC:: 
+gText_PlayerHouseBootPC::
 	.string "{PLAYER} booted up the PC.$"
 
-gText_PokeblockLinkCanceled:: 
+gText_PokeblockLinkCanceled::
 	.string "The link was canceled.$"
 
-gText_PlayerWhitedOut:: 
+gText_PlayerWhitedOut::
 	.string "{PLAYER} is out of usable\n"
 	.string "POKéMON!\p{PLAYER} whited out!$"
 
-gText_RegisteredTrainerinPokeNav:: 
+gText_RegisteredTrainerinPokeNav::
 	.string "Registered {STR_VAR_1} {STR_VAR_2}\n"
 	.string "in the POKéNAV.$"
 
-gText_ComeBackWithSecretPower:: 
+gText_ComeBackWithSecretPower::
 	.string "Do you know the TM SECRET POWER?\p"
 	.string "Our group, we love the TM SECRET\n"
 	.string "POWER.\p"
@@ -886,7 +886,7 @@ gText_ComeBackWithSecretPower::
 	.string "We'll accept you as a member and sell\n"
 	.string "you good stuff in secrecy.$"
 
-gText_PokerusExplanation:: 
+gText_PokerusExplanation::
 	.string "Your POKéMON may be infected with\n"
 	.string "POKéRUS.\p"
 	.string "Little is known about the POKéRUS\n"
@@ -897,47 +897,47 @@ gText_PokerusExplanation::
 
 	.include "data/text/surf.inc"
 
-gText_DoorOpenedFarAway:: 
+gText_DoorOpenedFarAway::
 	.string "It sounded as if a door opened\n"
 	.string "somewhere far away.$"
 
-gText_BigHoleInTheWall:: 
+gText_BigHoleInTheWall::
 	.string "There is a big hole in the wall.$"
 
-gText_SorryWirelessClubAdjustments:: 
+gText_SorryWirelessClubAdjustments::
 	.string "I'm terribly sorry.\n"
 	.string "The POKéMON WIRELESS CLUB is\l"
 	.string "undergoing adjustments now.$"
 
-gText_UndergoingAdjustments:: 
+gText_UndergoingAdjustments::
 	.string "It appears to be undergoing\n"
 	.string "adjustments…$"
 
-gText_PlayerHandedOverTheItem:: 
+gText_PlayerHandedOverTheItem::
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-gText_ThankYouForAccessingMysteryGift:: 
+gText_ThankYouForAccessingMysteryGift::
 	.string "Thank you for accessing the\n"
 	.string "MYSTERY GIFT System.$"
 
-gText_PlayerFoundOneTMHM:: 
+gText_PlayerFoundOneTMHM::
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
 
-gText_Sudowoodo_Attacked:: 
+gText_Sudowoodo_Attacked::
 	.string "The weird tree doesn't like the\n"
 	.string "WAILMER PAIL!\p"
 	.string "The weird tree attacked!$"
 
-gText_LegendaryFlewAway:: 
+gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} flew away!$"
 
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/mevent.inc"
 	.include "data/text/abnormal_weather.inc"
 
-EventScript_SelectWithoutRegisteredItem:: 
+EventScript_SelectWithoutRegisteredItem::
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
 
@@ -947,10 +947,10 @@ EventScript_SelectWithoutRegisteredItem2::
 
 	.include "data/scripts/field_poison.inc"
 
-Common_EventScript_NopReturn:: 
+Common_EventScript_NopReturn::
 	return
 
-EventScript_CableClub_SetVarResult0:: 
+EventScript_CableClub_SetVarResult0::
 	setvar VAR_RESULT, 0
 	return
 
@@ -1028,22 +1028,22 @@ EventScript_WonderTradeManager_Text_7:
 EventScript_DoWonderTrade_Text_WannaPerformAnotherWonderTrade:
 	.string "Do you want to perform\nanother WONDER TRADE?$"
 
-Common_EventScript_WirelessClubAttendant:: 
+Common_EventScript_WirelessClubAttendant::
 	call CableClub_EventScript_WirelessClubAttendant
 	end
 
-Common_EventScript_DirectCornerAttendant:: 
+Common_EventScript_DirectCornerAttendant::
 	call CableClub_EventScript_DirectCornerAttendant
 	end
 
-Common_EventScript_RemoveStaticPokemon:: 
+Common_EventScript_RemoveStaticPokemon::
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK
 	release
 	end
 
-Common_EventScript_LegendaryFlewAway:: 
+Common_EventScript_LegendaryFlewAway::
 	fadescreenswapbuffers FADE_TO_BLACK
 	removeobject VAR_LAST_TALKED
 	fadescreenswapbuffers FADE_FROM_BLACK

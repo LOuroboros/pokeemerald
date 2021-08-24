@@ -1,15 +1,15 @@
-FortreeCity_House3_MapScripts:: 
+FortreeCity_House3_MapScripts::
 	.byte 0
 
-FortreeCity_House3_EventScript_Maniac:: 
+FortreeCity_House3_EventScript_Maniac::
 	msgbox FortreeCity_House3_Text_MetStevenHadAmazingPokemon, MSGBOX_NPC
 	end
 
-FortreeCity_House3_EventScript_SchoolKidM:: 
+FortreeCity_House3_EventScript_SchoolKidM::
 	msgbox FortreeCity_House3_Text_OhYouHavePokedex, MSGBOX_NPC
 	end
 
-FortreeCity_House3_Text_MetStevenHadAmazingPokemon: 
+FortreeCity_House3_Text_MetStevenHadAmazingPokemon:
 	.string "While speaking about POKéDEXES,\n"
 	.string "I remembered something.\p"
 	.string "I met this TRAINER, STEVEN, when\n"
@@ -21,7 +21,7 @@ FortreeCity_House3_Text_MetStevenHadAmazingPokemon:
 	.string "He might even be stronger than the\n"
 	.string "GYM LEADER in this town…$"
 
-FortreeCity_House3_Text_OhYouHavePokedex: 
+FortreeCity_House3_Text_OhYouHavePokedex:
 	.string "What's that thing you have there?\p"
 	.string "… … … … … …\p"
 	.string "Oh, it's called a POKéDEX?\n"

@@ -1,3 +1,3 @@
-ShoalCave_HighTideEntranceRoom_MapScripts:: 
+ShoalCave_HighTideEntranceRoom_MapScripts::
 	.byte 0
 

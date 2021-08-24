@@ -1,4 +1,4 @@
-EventScript_UseSurf:: 
+EventScript_UseSurf::
 	checkpartymove MOVE_SURF
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_EndUseSurf
@@ -10,7 +10,7 @@ EventScript_UseSurf::
 	goto_if_eq EventScript_ReleaseUseSurf
 	msgbox gText_PlayerUsedSurf, MSGBOX_DEFAULT
 	dofieldeffect FLDEFF_USE_SURF
-EventScript_ReleaseUseSurf:: 
+EventScript_ReleaseUseSurf::
 	releaseall
-EventScript_EndUseSurf:: 
+EventScript_EndUseSurf::
 	end

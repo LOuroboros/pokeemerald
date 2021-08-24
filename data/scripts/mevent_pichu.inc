@@ -1,9 +1,9 @@
-MysteryEventScript_SurfPichu:: 
+MysteryEventScript_SurfPichu::
 	setvaddress MysteryEventScript_SurfPichu
 	vgoto_if_unset FLAG_MYSTERY_EVENT_DONE, SurfPichu_GiveIfPossible
 	returnram
 
-SurfPichu_GiveIfPossible: 
+SurfPichu_GiveIfPossible:
 	specialvar VAR_EVENT_PICHU_SLOT, CalculatePlayerPartyCount
 	compare VAR_EVENT_PICHU_SLOT, PARTY_SIZE
 	vgoto_if_eq SurfPichu_FullParty
@@ -19,7 +19,7 @@ SurfPichu_GiveIfPossible:
 	release
 	end
 
-SurfPichu_FullParty: 
+SurfPichu_FullParty:
 	lock
 	faceplayer
 	vmessage sText_FullParty
@@ -28,7 +28,7 @@ SurfPichu_FullParty:
 	release
 	end
 
-SurfPichu_GiveEgg: 
+SurfPichu_GiveEgg:
 	giveegg SPECIES_PICHU
 	setmoneventlegal VAR_EVENT_PICHU_SLOT
 	setmonmetlocation VAR_EVENT_PICHU_SLOT, METLOC_FATEFUL_ENCOUNTER
@@ -44,23 +44,23 @@ SurfPichu_GiveEgg:
 	vgoto_if_eq SurfPichu_Slot5
 	return
 
-SurfPichu_Slot1: 
+SurfPichu_Slot1:
 	setmonmove 1, 2, MOVE_SURF
 	return
 
-SurfPichu_Slot2:: 
+SurfPichu_Slot2::
 	setmonmove 2, 2, MOVE_SURF
 	return
 
-SurfPichu_Slot3: 
+SurfPichu_Slot3:
 	setmonmove 3, 2, MOVE_SURF
 	return
 
-SurfPichu_Slot4: 
+SurfPichu_Slot4:
 	setmonmove 4, 2, MOVE_SURF
 	return
 
-SurfPichu_Slot5: 
+SurfPichu_Slot5:
 	setmonmove 5, 2, MOVE_SURF
 	return
 

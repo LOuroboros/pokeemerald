@@ -3,10 +3,10 @@
 .set LOCALID_VICTORIA, 3
 .set LOCALID_VICKY, 4
 
-Route111_WinstrateFamilysHouse_MapScripts:: 
+Route111_WinstrateFamilysHouse_MapScripts::
 	.byte 0
 
-Route111_WinstrateFamilysHouse_EventScript_Victor:: 
+Route111_WinstrateFamilysHouse_EventScript_Victor::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_VICTOR
@@ -14,7 +14,7 @@ Route111_WinstrateFamilysHouse_EventScript_Victor::
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_Victoria:: 
+Route111_WinstrateFamilysHouse_EventScript_Victoria::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_VICTORIA
@@ -27,12 +27,12 @@ Route111_WinstrateFamilysHouse_EventScript_Victoria::
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace:: 
+Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace::
 	msgbox Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_Vivi:: 
+Route111_WinstrateFamilysHouse_EventScript_Vivi::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_VIVI
@@ -40,7 +40,7 @@ Route111_WinstrateFamilysHouse_EventScript_Vivi::
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_Vicky:: 
+Route111_WinstrateFamilysHouse_EventScript_Vicky::
 	lock
 	faceplayer
 	setvar VAR_0x8008, LOCALID_VICKY
@@ -50,19 +50,19 @@ Route111_WinstrateFamilysHouse_EventScript_Vicky::
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo:: 
+Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo::
 	msgbox Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort, MSGBOX_DEFAULT
 	goto Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection
 	end
 
-Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection:: 
+Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
 	closemessage
 	applymovement VAR_0x8008, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
 	end
 
-Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou: 
+Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
 	.string "You're the first TRAINER I've seen who\n"
 	.string "deploys POKéMON so masterfully.\p"
 	.string "But, I should tell you--my son is\n"
@@ -70,7 +70,7 @@ Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
 	.string "He even took the POKéMON LEAGUE\n"
 	.string "challenge, I'll have you know.$"
 
-Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace: 
+Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace:
 	.string "We use this MACHO BRACE to more\n"
 	.string "effectively strengthen our POKéMON\l"
 	.string "in training.\p"
@@ -78,18 +78,18 @@ Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace:
 	.string "I don't know if you need it, but we\l"
 	.string "would like you to have our MACHO BRACE.$"
 
-Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles: 
+Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
 	.string "When it comes to POKéMON battles,\n"
 	.string "we tend to be pretty passionate.$"
 
-Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers: 
+Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
 	.string "Mommy is stronger than Daddy.\p"
 	.string "I'm stronger than Mommy.\p"
 	.string "And Grandma's stronger than me!\p"
 	.string "But my big brother is even stronger\n"
 	.string "than Grandma.$"
 
-Route111_WinstrateFamilysHouse_Text_GrandsonStrong: 
+Route111_WinstrateFamilysHouse_Text_GrandsonStrong:
 	.string "There's no question that you're strong.\p"
 	.string "But if you were to battle my grandson,\n"
 	.string "you'd end up crying in frustration.\p"
@@ -100,7 +100,7 @@ Route111_WinstrateFamilysHouse_Text_GrandsonStrong:
 	.string "Knowing my grandson, he could be the\n"
 	.string "CHAMPION already!$"
 
-Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort: 
+Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort:
 	.string "My grandson must be challenging the\n"
 	.string "POKéMON LEAGUE CHAMPION by now.\p"
 	.string "Knowing my grandson, he could be the\n"

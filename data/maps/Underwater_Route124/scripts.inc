@@ -1,3 +1,3 @@
-Underwater_Route124_MapScripts:: 
+Underwater_Route124_MapScripts::
 	.byte 0
 

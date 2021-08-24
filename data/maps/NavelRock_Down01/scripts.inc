@@ -1,3 +1,3 @@
-NavelRock_Down01_MapScripts:: 
+NavelRock_Down01_MapScripts::
 	.byte 0
 

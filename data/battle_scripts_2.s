@@ -13,7 +13,7 @@
 	.section script_data, "aw", %progbits
 
 	.align 2
-gBattlescriptsForBallThrow:: 
+gBattlescriptsForBallThrow::
 	.4byte BattleScript_BallThrow        @ ITEM_NONE
 	.4byte BattleScript_BallThrow        @ ITEM_MASTER_BALL
 	.4byte BattleScript_BallThrow        @ ITEM_ULTRA_BALL
@@ -44,7 +44,7 @@ gBattlescriptsForBallThrow::
 	.4byte BattleScript_BallThrow        @ ITEM_PREMIER_BALL
 
 	.align 2
-gBattlescriptsForUsingItem:: 
+gBattlescriptsForUsingItem::
 	.4byte BattleScript_PlayerUsesItem
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_FULL_RESTORE
 	.4byte BattleScript_OpponentUsesHealItem        @ AI_ITEM_HEAL_HP
@@ -53,11 +53,11 @@ gBattlescriptsForUsingItem::
 	.4byte BattleScript_OpponentUsesGuardSpec       @ AI_ITEM_GUARD_SPEC
 
 	.align 2
-gBattlescriptsForRunningByItem:: 
+gBattlescriptsForRunningByItem::
 	.4byte BattleScript_RunByUsingItem
 
 	.align 2
-gBattlescriptsForSafariActions:: 
+gBattlescriptsForSafariActions::
 	.4byte BattleScript_ActionWatchesCarefully
 	.4byte BattleScript_ActionGetNear
 	.4byte BattleScript_ActionThrowPokeblock

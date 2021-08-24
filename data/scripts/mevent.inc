@@ -1,4 +1,4 @@
-EventScript_Questionnaire:: 
+EventScript_Questionnaire::
 	lockall
 	msgbox Mevent_Text_FillOutQuestionnaire, MSGBOX_YESNO
 	compare VAR_RESULT, NO
@@ -18,7 +18,7 @@ EventScript_Questionnaire::
 	goto_if_eq Mevent_EventScript_QuestionnaireThankYou
 	end
 
-Mevent_EventScript_PlayerInputMysteryEventPhrase:: 
+Mevent_EventScript_PlayerInputMysteryEventPhrase::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, Mevent_EventScript_QuestionnaireThankYou
 	goto_if_set FLAG_SYS_MYSTERY_EVENT_ENABLE, Mevent_EventScript_QuestionnaireThankYou
 	applymovement VAR_0x8008, Common_Movement_FaceDown
@@ -34,7 +34,7 @@ Mevent_EventScript_PlayerInputMysteryEventPhrase::
 	releaseall
 	end
 
-Mevent_EventScript_PlayerInputMysteryGiftPhrase:: 
+Mevent_EventScript_PlayerInputMysteryGiftPhrase::
 	goto_if_unset FLAG_SYS_POKEDEX_GET, Mevent_EventScript_QuestionnaireThankYou
 	goto_if_set FLAG_SYS_MYSTERY_GIFT_ENABLE, Mevent_EventScript_QuestionnaireThankYou
 	applymovement VAR_0x8008, Common_Movement_FaceDown
@@ -50,11 +50,11 @@ Mevent_EventScript_PlayerInputMysteryGiftPhrase::
 	releaseall
 	end
 
-Mevent_EventScript_Release:: 
+Mevent_EventScript_Release::
 	releaseall
 	end
 
-Mevent_EventScript_QuestionnaireThankYou:: 
+Mevent_EventScript_QuestionnaireThankYou::
 	applymovement VAR_0x8008, Common_Movement_FaceDown
 	waitmovement 0
 	msgbox Mevent_Text_QuestionnaireThankYou, MSGBOX_DEFAULT

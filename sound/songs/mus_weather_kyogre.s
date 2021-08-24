@@ -64,9 +64,9 @@ mus_weather_kyogre_1_000:
 	.byte		        41*mus_weather_kyogre_mvl/mxv
 	.byte		MOD   , 5
 	.byte	W48
-	.byte		EOT   
+	.byte		EOT
 	.byte		MOD   , 0
-	.byte		TIE   , Bn3 
+	.byte		TIE   , Bn3
 	.byte	W96
 	.byte		MOD   , 9
 	.byte	W12
@@ -100,11 +100,11 @@ mus_weather_kyogre_1_000:
 	.byte	W04
 	.byte		        10*mus_weather_kyogre_mvl/mxv
 	.byte	W24
-	.byte		EOT   
+	.byte		EOT
 	.byte		PAN   , c_v+0
 	.byte		VOL   , 10*mus_weather_kyogre_mvl/mxv
 	.byte		MOD   , 0
-	.byte		TIE   , As3 
+	.byte		TIE   , As3
 	.byte	W48
 	.byte		VOL   , 10*mus_weather_kyogre_mvl/mxv
 	.byte	W32
@@ -142,7 +142,7 @@ mus_weather_kyogre_1_001:
 	.byte		        41*mus_weather_kyogre_mvl/mxv
 	.byte	W48
 	.byte	PEND
-	.byte		EOT   , As3 
+	.byte		EOT   , As3
 	.byte		TIE   , Bn3 , v112
 	.byte	W96
 mus_weather_kyogre_1_002:
@@ -178,27 +178,27 @@ mus_weather_kyogre_1_002:
 	.byte		        10*mus_weather_kyogre_mvl/mxv
 	.byte	W24
 	.byte	PEND
-	.byte		EOT   , Bn3 
+	.byte		EOT   , Bn3
 	.byte	PATT
 	 .word	mus_weather_kyogre_1_000
 	.byte	PATT
 	 .word	mus_weather_kyogre_1_001
-	.byte		EOT   , As3 
+	.byte		EOT   , As3
 	.byte		TIE   , Bn3 , v112
 	.byte	W96
 	.byte	PATT
 	 .word	mus_weather_kyogre_1_002
-	.byte		EOT   , Bn3 
+	.byte		EOT   , Bn3
 	.byte	PATT
 	 .word	mus_weather_kyogre_1_000
 	.byte	PATT
 	 .word	mus_weather_kyogre_1_001
-	.byte		EOT   , As3 
+	.byte		EOT   , As3
 	.byte		TIE   , Bn3 , v112
 	.byte	W96
 	.byte	PATT
 	 .word	mus_weather_kyogre_1_002
-	.byte		EOT   , Bn3 
+	.byte		EOT   , Bn3
 	.byte	GOTO
 	 .word	mus_weather_kyogre_1_B1
 	.byte	FINE
@@ -304,28 +304,28 @@ mus_weather_kyogre_3_B1:
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Dn1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N12   , Ds1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , Ds2 
+	.byte		N08   , Ds2
 	.byte	W08
-	.byte		N04   , Dn1 
+	.byte		N04   , Dn1
 	.byte	W08
 mus_weather_kyogre_3_000:
 	.byte		N08   , Ds1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v056
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		        Dn1 , v112
 	.byte	W08
@@ -335,17 +335,17 @@ mus_weather_kyogre_3_000:
 	.byte	W08
 	.byte		        Dn1 , v112
 	.byte	W08
-	.byte		N02   , Ds1 
+	.byte		N02   , Ds1
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N08   , Dn1 
+	.byte		N08   , Dn1
 	.byte	W08
-	.byte		N04   , Ds1 
+	.byte		N04   , Ds1
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte	PEND
 mus_weather_kyogre_3_001:
@@ -353,28 +353,28 @@ mus_weather_kyogre_3_001:
 	.byte	W08
 	.byte		N04   , En1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Ds1 , v112
 	.byte	W08
 	.byte		N04   , En1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , En1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , En2 
+	.byte		N08   , En2
 	.byte	W08
-	.byte		N04   , En1 
+	.byte		N04   , En1
 	.byte	W08
 	.byte	PEND
-	.byte		N08   
+	.byte		N08
 	.byte	W08
 	.byte		N04   , En1 , v056
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
@@ -384,15 +384,15 @@ mus_weather_kyogre_3_001:
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
-	.byte		N02   , En1 
+	.byte		N02   , En1
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		PAN   , c_v-62
 	.byte		VOL   , 42*mus_weather_kyogre_mvl/mxv
-	.byte		N24   
+	.byte		N24
 	.byte	W04
 	.byte		VOL   , 47*mus_weather_kyogre_mvl/mxv
 	.byte	W04
@@ -406,25 +406,25 @@ mus_weather_kyogre_3_001:
 	.byte		        60*mus_weather_kyogre_mvl/mxv
 	.byte		PAN   , c_v+0
 	.byte		MOD   , 2
-	.byte		N08   , Dn1 
+	.byte		N08   , Dn1
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Dn1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N12   , Ds1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , Ds2 
+	.byte		N08   , Ds2
 	.byte	W08
-	.byte		N04   , Dn1 
+	.byte		N04   , Dn1
 	.byte	W08
 	.byte	PATT
 	 .word	mus_weather_kyogre_3_000
@@ -435,7 +435,7 @@ mus_weather_kyogre_3_002:
 	.byte	W08
 	.byte		N04   , En1 , v056
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
@@ -445,15 +445,15 @@ mus_weather_kyogre_3_002:
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
-	.byte		N02   , En1 
+	.byte		N02   , En1
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		PAN   , c_v-62
 	.byte		VOL   , 42*mus_weather_kyogre_mvl/mxv
-	.byte		N24   
+	.byte		N24
 	.byte	W04
 	.byte		VOL   , 47*mus_weather_kyogre_mvl/mxv
 	.byte	W04
@@ -471,21 +471,21 @@ mus_weather_kyogre_3_003:
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Dn1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N12   , Ds1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , Ds2 
+	.byte		N08   , Ds2
 	.byte	W08
-	.byte		N04   , Dn1 
+	.byte		N04   , Dn1
 	.byte	W08
 	.byte	PEND
 	.byte	PATT
@@ -552,7 +552,7 @@ mus_weather_kyogre_4_000:
 	.byte		        73*mus_weather_kyogre_mvl/mxv
 	.byte	W12
 	.byte	PEND
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 	.byte		VOL   , 40*mus_weather_kyogre_mvl/mxv
 	.byte		TIE   , Ds3 , v112
 	.byte	W48
@@ -578,11 +578,11 @@ mus_weather_kyogre_4_000:
 	.byte	W12
 	.byte		        10*mus_weather_kyogre_mvl/mxv
 	.byte	W12
-	.byte		EOT   
+	.byte		EOT
 	.byte		PAN   , c_v+63
 	.byte		VOL   , 27*mus_weather_kyogre_mvl/mxv
 	.byte		MOD   , 2
-	.byte		N24   , Bn1 
+	.byte		N24   , Bn1
 	.byte	W04
 	.byte		VOL   , 42*mus_weather_kyogre_mvl/mxv
 	.byte	W04
@@ -598,13 +598,13 @@ mus_weather_kyogre_4_000:
 	.byte		PAN   , c_v+0
 	.byte		VOL   , 10*mus_weather_kyogre_mvl/mxv
 	.byte		MOD   , 2
-	.byte		TIE   , Ds3 
+	.byte		TIE   , Ds3
 	.byte	W48
 	.byte		VOL   , 13*mus_weather_kyogre_mvl/mxv
 	.byte	W48
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_000
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 mus_weather_kyogre_4_001:
 	.byte		VOL   , 40*mus_weather_kyogre_mvl/mxv
 	.byte		TIE   , Ds3 , v112
@@ -630,7 +630,7 @@ mus_weather_kyogre_4_002:
 	.byte		        10*mus_weather_kyogre_mvl/mxv
 	.byte	W12
 	.byte	PEND
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 	.byte		PAN   , c_v+63
 	.byte		VOL   , 27*mus_weather_kyogre_mvl/mxv
 	.byte		N24   , Bn1 , v112
@@ -655,12 +655,12 @@ mus_weather_kyogre_4_003:
 	.byte	PEND
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_000
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_001
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_002
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 	.byte		PAN   , c_v+63
 	.byte		VOL   , 27*mus_weather_kyogre_mvl/mxv
 	.byte		N24   , Bn1 , v112
@@ -679,12 +679,12 @@ mus_weather_kyogre_4_003:
 	 .word	mus_weather_kyogre_4_003
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_000
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_001
 	.byte	PATT
 	 .word	mus_weather_kyogre_4_002
-	.byte		EOT   , Ds3 
+	.byte		EOT   , Ds3
 	.byte		PAN   , c_v+63
 	.byte		VOL   , 27*mus_weather_kyogre_mvl/mxv
 	.byte		N24   , Bn1 , v112
@@ -718,9 +718,9 @@ mus_weather_kyogre_5_000:
 	.byte	W24
 	.byte		        Cn1 , v112
 	.byte	W24
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W24
 	.byte		        Cn1 , v088
 	.byte	W08
@@ -730,9 +730,9 @@ mus_weather_kyogre_5_001:
 	.byte	W24
 	.byte		        Cn1 , v112
 	.byte	W24
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
 	.byte		        Dn1 , v127
 	.byte	W08
@@ -794,28 +794,28 @@ mus_weather_kyogre_6_B1:
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Dn1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N12   , Ds1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , Ds2 
+	.byte		N08   , Ds2
 	.byte	W08
-	.byte		N04   , Dn1 
+	.byte		N04   , Dn1
 	.byte	W08
 mus_weather_kyogre_6_000:
 	.byte		N08   , Ds1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v056
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		        Dn1 , v112
 	.byte	W08
@@ -825,17 +825,17 @@ mus_weather_kyogre_6_000:
 	.byte	W08
 	.byte		        Dn1 , v112
 	.byte	W08
-	.byte		N02   , Ds1 
+	.byte		N02   , Ds1
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N08   , Dn1 
+	.byte		N08   , Dn1
 	.byte	W08
-	.byte		N04   , Ds1 
+	.byte		N04   , Ds1
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte	PEND
 mus_weather_kyogre_6_001:
@@ -843,28 +843,28 @@ mus_weather_kyogre_6_001:
 	.byte	W08
 	.byte		N04   , En1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Ds1 , v112
 	.byte	W08
 	.byte		N04   , En1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , En1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , En2 
+	.byte		N08   , En2
 	.byte	W08
-	.byte		N04   , En1 
+	.byte		N04   , En1
 	.byte	W08
 	.byte	PEND
-	.byte		N08   
+	.byte		N08
 	.byte	W08
 	.byte		N04   , En1 , v056
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
@@ -874,117 +874,117 @@ mus_weather_kyogre_6_001:
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
-	.byte		N02   , En1 
+	.byte		N02   , En1
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N24   
+	.byte		N24
 	.byte	W12
 	.byte		MOD   , 13
 	.byte	W12
 	.byte		VOICE , 84
 	.byte		MOD   , 0
 	.byte		BEND  , c_v+0
-	.byte		N16   , As4 
+	.byte		N16   , As4
 	.byte	W16
-	.byte		N04   , Cs5 
+	.byte		N04   , Cs5
 	.byte	W08
-	.byte		        Cn5 
+	.byte		        Cn5
 	.byte	W16
-	.byte		        An4 
+	.byte		        An4
 	.byte	W08
-	.byte		        Ds4 
+	.byte		        Ds4
 	.byte	W08
-	.byte		        Dn4 
+	.byte		        Dn4
 	.byte	W08
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W16
-	.byte		        An4 
+	.byte		        An4
 	.byte	W08
-	.byte		        As4 
+	.byte		        As4
 	.byte	W08
-	.byte		N40   , Ds4 
+	.byte		N40   , Ds4
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W28
 	.byte		        0
-	.byte		N04   , Dn4 
+	.byte		N04   , Dn4
 	.byte	W04
-	.byte		        Ds4 
+	.byte		        Ds4
 	.byte	W04
-	.byte		N24   , Fs4 
+	.byte		N24   , Fs4
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W12
 	.byte		        0
-	.byte		N24   , Gs4 
+	.byte		N24   , Gs4
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W12
 	.byte		        0
-	.byte		N08   , Bn4 
+	.byte		N08   , Bn4
 	.byte	W08
-	.byte		N04   , As4 
+	.byte		N04   , As4
 	.byte	W08
-	.byte		        Fs4 
+	.byte		        Fs4
 	.byte	W08
-	.byte		N08   , Gs4 
+	.byte		N08   , Gs4
 	.byte	W08
-	.byte		N04   , Bn4 
+	.byte		N04   , Bn4
 	.byte	W08
-	.byte		        As4 
+	.byte		        As4
 	.byte	W08
-	.byte		        Fs5 
+	.byte		        Fs5
 	.byte	W08
-	.byte		        Gs5 
+	.byte		        Gs5
 	.byte	W16
-	.byte		        Fs4 
+	.byte		        Fs4
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N42   , Ds4 
+	.byte		N42   , Ds4
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W30
 	.byte		        0
-	.byte		N04   , Dn4 
+	.byte		N04   , Dn4
 	.byte	W04
-	.byte		        Ds4 
+	.byte		        Ds4
 	.byte	W02
-	.byte		N24   , Fs4 
+	.byte		N24   , Fs4
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W12
 	.byte		        0
-	.byte		N24   , Gs4 
+	.byte		N24   , Gs4
 	.byte	W14
 	.byte		MOD   , 7
 	.byte	W10
 	.byte		        0
 	.byte		BEND  , c_v+2
-	.byte		N08   , Dn1 
+	.byte		N08   , Dn1
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N08   , Dn1 , v112
 	.byte	W08
 	.byte		N04   , Ds1 , v076
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		N12   , Ds1 , v112
 	.byte	W16
-	.byte		N04   
+	.byte		N04
 	.byte	W16
-	.byte		N08   , Ds2 
+	.byte		N08   , Ds2
 	.byte	W08
-	.byte		N04   , Dn1 
+	.byte		N04   , Dn1
 	.byte	W08
 	.byte	PATT
 	 .word	mus_weather_kyogre_6_000
@@ -994,7 +994,7 @@ mus_weather_kyogre_6_001:
 	.byte	W08
 	.byte		N04   , En1 , v056
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
@@ -1004,90 +1004,90 @@ mus_weather_kyogre_6_001:
 	.byte	W08
 	.byte		        Ds1 , v112
 	.byte	W08
-	.byte		N02   , En1 
+	.byte		N02   , En1
 	.byte	W04
-	.byte		N02   
+	.byte		N02
 	.byte	W04
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N24   
+	.byte		N24
 	.byte	W24
 	.byte		VOICE , 83
 	.byte		BEND  , c_v+0
-	.byte		N16   , As3 
+	.byte		N16   , As3
 	.byte	W16
-	.byte		N04   , Cs4 
+	.byte		N04   , Cs4
 	.byte	W08
-	.byte		        Cn4 
+	.byte		        Cn4
 	.byte	W16
-	.byte		        An3 
+	.byte		        An3
 	.byte	W08
-	.byte		        Ds3 
+	.byte		        Ds3
 	.byte	W08
-	.byte		        Dn3 
+	.byte		        Dn3
 	.byte	W08
-	.byte		        Fs4 
+	.byte		        Fs4
 	.byte	W16
-	.byte		        An3 
+	.byte		        An3
 	.byte	W08
-	.byte		        As3 
+	.byte		        As3
 	.byte	W08
-	.byte		N40   , Ds3 
+	.byte		N40   , Ds3
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W28
 	.byte		        0
-	.byte		N04   , Dn3 
+	.byte		N04   , Dn3
 	.byte	W04
-	.byte		        Ds3 
+	.byte		        Ds3
 	.byte	W04
-	.byte		N24   , Fs3 
+	.byte		N24   , Fs3
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W12
 	.byte		        0
-	.byte		N24   , Gs3 
+	.byte		N24   , Gs3
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W12
 	.byte		        0
-	.byte		N08   , Bn3 
+	.byte		N08   , Bn3
 	.byte	W08
-	.byte		N04   , As3 
+	.byte		N04   , As3
 	.byte	W08
-	.byte		        Fs3 
+	.byte		        Fs3
 	.byte	W08
-	.byte		N08   , Gs3 
+	.byte		N08   , Gs3
 	.byte	W08
-	.byte		N04   , Bn3 
+	.byte		N04   , Bn3
 	.byte	W08
-	.byte		        As3 
+	.byte		        As3
 	.byte	W08
-	.byte		        Fs4 
+	.byte		        Fs4
 	.byte	W08
-	.byte		        Gs4 
+	.byte		        Gs4
 	.byte	W16
-	.byte		        Fs3 
+	.byte		        Fs3
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N04   
+	.byte		N04
 	.byte	W08
-	.byte		N42   , Ds3 
+	.byte		N42   , Ds3
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W30
 	.byte		        0
-	.byte		N04   , Dn3 
+	.byte		N04   , Dn3
 	.byte	W04
-	.byte		        Ds3 
+	.byte		        Ds3
 	.byte	W02
-	.byte		N24   , Fs3 
+	.byte		N24   , Fs3
 	.byte	W12
 	.byte		MOD   , 7
 	.byte	W12
 	.byte		        0
-	.byte		N24   , Gs3 
+	.byte		N24   , Gs3
 	.byte	W14
 	.byte		MOD   , 7
 	.byte	W10

@@ -1,6 +1,6 @@
 	.align 2
 
-gSongTable:: 
+gSongTable::
 	song mus_dummy, 0, 0
 	song se_use_item, 1, 1
 	song se_pc_login, 1, 1
@@ -890,5 +890,5 @@ gSongTable::
 	song hg_seq_me_gonin, 2, 2
 
 	.align 2
-dummy_song_header: 
+dummy_song_header:
 	.byte 0, 0, 0, 0

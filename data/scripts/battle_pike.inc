@@ -1,9 +1,9 @@
 @ Note: LOCALIDs shared with BattleFrontier_BattlePikeRoomNormal
-BattleFrontier_BattlePikeRoom_MapScripts: 
+BattleFrontier_BattlePikeRoom_MapScripts:
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePikeRoom_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePikeRoom_OnWarp
 
-BattleFrontier_BattlePikeRoom_OnTransition: 
+BattleFrontier_BattlePikeRoom_OnTransition:
 	pike_setroomobjects
 	pike_getroomtype
 	switch VAR_RESULT
@@ -17,36 +17,36 @@ BattleFrontier_BattlePikeRoom_OnTransition:
 	case PIKE_ROOM_BRAIN, BattleFrontier_BattlePikeRoomNormal_EventScript_SetBrainRoomObjPos
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_SetDoubleBattleObjPos:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_SetDoubleBattleObjPos::
 	setobjectxyperm LOCALID_OBJ_0, 2, 5
 	setobjectxyperm LOCALID_OBJ_1, 6, 5
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_SetTwoObjectRoomPos:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_SetTwoObjectRoomPos::
 	setobjectxyperm LOCALID_OBJ_0, 4, 4
 	setobjectxyperm LOCALID_OBJ_1, 3, 4
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_SetOneObjectRoomPos:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_SetOneObjectRoomPos::
 	setobjectxyperm LOCALID_OBJ_0, 4, 4
 	setobjectxyperm LOCALID_OBJ_1, 0, 0
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_SetNPCRoomObjPos:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_SetNPCRoomObjPos::
 	setobjectxyperm LOCALID_OBJ_0, 5, 5
 	setobjectxyperm LOCALID_OBJ_1, 0, 0
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_SetBrainRoomObjPos:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_SetBrainRoomObjPos::
 	setobjectxyperm LOCALID_OBJ_0, 4, 3
 	setobjectxyperm LOCALID_OBJ_1, 4, 4
 	end
 
-BattleFrontier_BattlePikeRoom_OnWarp: 
+BattleFrontier_BattlePikeRoom_OnWarp:
 	map_script_2 VAR_TEMP_4, 0, BattleFrontier_BattlePikeRoomNormal_EventScript_InitRoomObjects
 	.2byte 0
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_InitRoomObjects:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_InitRoomObjects::
 	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_LINK_RECEPTIONIST
 	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_LINK_RECEPTIONIST
 	pike_getroomtype
@@ -63,33 +63,33 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_InitRoomObjects::
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_InitTwoObjectRoom:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_InitTwoObjectRoom::
 	setvar VAR_TEMP_4, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_InitBrainRoomObjects:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_InitBrainRoomObjects::
 	setvar VAR_TEMP_4, 1
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	hideobjectat LOCALID_OBJ_0, MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL  @ Pike Queen hidden initially
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_LeftRoomWarp:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_LeftRoomWarp::
 	setvar VAR_0x8007, PIKE_ROOM_LEFT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_CenterRoomWarp:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_CenterRoomWarp::
 	setvar VAR_0x8007, PIKE_ROOM_CENTER
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_RightRoomWarp:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_RightRoomWarp::
 	setvar VAR_0x8007, PIKE_ROOM_RIGHT
 	goto BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp::
 	pike_get PIKE_DATA_WIN_STREAK
 	addvar VAR_RESULT, 1
 	pike_set PIKE_DATA_WIN_STREAK, VAR_RESULT
@@ -110,7 +110,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_RoomWarp::
 	case PIKE_ROOM_BRAIN, BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	waitmovement 0
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
@@ -118,7 +118,7 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpNPCRoom::
 	waitstate
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpWildMonRoom:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpWildMonRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	waitmovement 0
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
@@ -126,12 +126,12 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_WarpWildMonRoom::
 	waitstate
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_SetEnteredRoom::
 	setvar VAR_TEMP_3, 1
 	setvar VAR_TEMP_2, 1
 	end
 
-BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack::
 	setvar VAR_TEMP_3, 0
 	setvar VAR_TEMP_2, 0
 	lockall
@@ -139,12 +139,12 @@ BattleFrontier_BattlePikeThreePathRoom_EventScript_NoTurningBack::
 	closemessage
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_SetEnteredRoom:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_SetEnteredRoom::
 	setvar VAR_TEMP_3, 1
 	setvar VAR_TEMP_2, 1
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_NoTurningBack:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_NoTurningBack::
 	setvar VAR_TEMP_3, 0
 	setvar VAR_TEMP_2, 0
 	lockall
@@ -152,7 +152,7 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_NoTurningBack::
 	closemessage
 	end
 
-BattleFrontier_BattlePikeRoomNormal_EventScript_Exit:: 
+BattleFrontier_BattlePikeRoomNormal_EventScript_Exit::
 	pike_ispartyfullhealth
 	compare VAR_RESULT, TRUE
 	call_if_eq BattleFrontier_BattlePikeRoom_EventScript_DisableHealing
@@ -172,29 +172,29 @@ BattleFrontier_BattlePikeRoomNormal_EventScript_Exit::
 	waitstate
 	end
 
-BattleFrontier_BattlePikeRoom_EventScript_DisableHealing:: 
+BattleFrontier_BattlePikeRoom_EventScript_DisableHealing::
 	pike_nohealing TRUE
 	return
 
-BattleFrontier_BattlePikeRoom_EventScript_EnableHealing:: 
+BattleFrontier_BattlePikeRoom_EventScript_EnableHealing::
 	pike_nohealing FALSE
 	return
 
-BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom:: 
+BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	waitmovement 0
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL, 255, 2, 7
 	return
 
-BattleFrontier_BattlePikeRoom_EventScript_WarpToThreePathRoom:: 
+BattleFrontier_BattlePikeRoom_EventScript_WarpToThreePathRoom::
 	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattlePikeRoom_Movement_HidePlayer
 	waitmovement 0
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
 	warpsilent MAP_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM, 255, 6, 10
 	return
 
-BattleFrontier_BattlePikeRoomWildMons_EventScript_Exit:: 
+BattleFrontier_BattlePikeRoomWildMons_EventScript_Exit::
 	pike_exitwildmonroom
 	pike_ispartyfullhealth
 	compare VAR_RESULT, TRUE
@@ -215,12 +215,12 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_Exit::
 	waitstate
 	end
 
-BattleFrontier_BattlePikeRoomWildMons_EventScript_SetEnteredRoom:: 
+BattleFrontier_BattlePikeRoomWildMons_EventScript_SetEnteredRoom::
 	setvar VAR_TEMP_3, 1
 	setvar VAR_TEMP_2, 1
 	end
 
-BattleFrontier_BattlePikeRoomWildMons_EventScript_NoTurningBack:: 
+BattleFrontier_BattlePikeRoomWildMons_EventScript_NoTurningBack::
 	setvar VAR_TEMP_3, 0
 	setvar VAR_TEMP_2, 0
 	lockall
@@ -228,13 +228,13 @@ BattleFrontier_BattlePikeRoomWildMons_EventScript_NoTurningBack::
 	closemessage
 	end
 
-BattleFrontier_BattlePike_EventScript_Retire:: 
+BattleFrontier_BattlePike_EventScript_Retire::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS CHALLENGE_STATUS_LOST
 	warp MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY, 255, 5, 6
 	waitstate
 	end
 
-BattleFrontier_BattlePikeRoom_OnResume: 
+BattleFrontier_BattlePikeRoom_OnResume:
 	setorcopyvar VAR_0x8006, VAR_RESULT  @ Save VAR_RESULT from being overwritten
 	frontier_get FRONTIER_DATA_CHALLENGE_STATUS
 	compare VAR_RESULT, CHALLENGE_STATUS_PAUSED
@@ -242,14 +242,14 @@ BattleFrontier_BattlePikeRoom_OnResume:
 	compare VAR_RESULT, CHALLENGE_STATUS_SAVING
 	goto_if_eq BattleFrontier_BattlePikeThreePathRoom_EventScript_EndOnResume
 	call BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves
-BattleFrontier_BattlePikeThreePathRoom_EventScript_EndOnResume:: 
+BattleFrontier_BattlePikeThreePathRoom_EventScript_EndOnResume::
 	setorcopyvar VAR_RESULT, VAR_0x8006
 	end
 
-BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves:: 
+BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves::
 	frontier_resetsketch
 	return
 
-BattleFrontier_BattlePikeRoom_Movement_HidePlayer: 
+BattleFrontier_BattlePikeRoom_Movement_HidePlayer:
 	set_invisible
 	step_end

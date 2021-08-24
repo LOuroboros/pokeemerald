@@ -3,7 +3,7 @@
 .set LOCALID_ATTENDANT_2, 3
 .set LOCALID_PARTNER, 4
 
-BattleFrontier_BattleTowerMultiCorridor_MapScripts:: 
+BattleFrontier_BattleTowerMultiCorridor_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattleTowerMultiCorridor_OnTransition
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnWarp
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattleTowerMultiCorridor_OnFrame
@@ -13,14 +13,14 @@ BattleFrontier_BattleTowerMultiCorridor_MapScripts::
 	@ The player is represented instead by LOCALID_PLAYER, and has the gfx id VAR_OBJ_GFX_ID_F
 	@ The multi partner is represented by LOCALID_PARTNER, and has the gfx id VAR_OBJ_GFX_ID_E
 
-BattleFrontier_BattleTowerMultiCorridor_OnTransition: 
+BattleFrontier_BattleTowerMultiCorridor_OnTransition:
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS
 	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_LINK_MULTIS
 	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx
 	end
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx::
 	tower_setpartnergfx
 	checkplayergender
 	compare VAR_RESULT, FEMALE
@@ -28,30 +28,30 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx::
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale::
 	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx::
 	special SetBattleTowerLinkPlayerGfx
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_OnWarp: 
+BattleFrontier_BattleTowerMultiCorridor_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects
 	.2byte 0
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_SetUpObjects::
 	hideobjectat OBJ_EVENT_ID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	hideobjectat LOCALID_PLAYER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	hideobjectat LOCALID_PARTNER, MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR
 	special OffsetCameraForBattle
 	end
 
-BattleFrontier_BattleTowerMultiCorridor_OnFrame: 
+BattleFrontier_BattleTowerMultiCorridor_OnFrame:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor
 	.2byte 0
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	lockall
 	setflag FLAG_ENABLE_MULTI_CORRIDOR_DOOR
 	setvar VAR_0x8004, 14  @ x coord of far door, used by DrawDoor
@@ -94,7 +94,7 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_EnterCorridor::
 	releaseall
 	end
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom::
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom
 	compare VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES
@@ -105,23 +105,23 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToBattleRoom::
 	call_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToNormalBattleRoom::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM, 255, 4, 8
 	waitstate
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToMultiBattleRoom::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 4, 5
 	waitstate
 	return
 
 @ Unnecessary duplicate of the above
-BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom:: 
+BattleFrontier_BattleTowerMultiCorridor_EventScript_WarpToLinkMultiBattleRoom::
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_BATTLE_ROOM, 255, 4, 5
 	waitstate
 	return
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor:
 	walk_down
 	walk_right
 	walk_right
@@ -131,7 +131,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerWalkToDoor:
 	walk_right
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor:
 	walk_down
 	walk_left
 	walk_left
@@ -141,7 +141,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerWalkToDoor:
 	walk_left
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor:
 	walk_right
 	walk_right
 	walk_right
@@ -152,7 +152,7 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PlayerAttendantWalkToDoor:
 	walk_in_place_fastest_right
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor:
 	walk_left
 	walk_left
 	walk_left
@@ -163,19 +163,19 @@ BattleFrontier_BattleTowerMultiCorridor_Movement_PartnerAttendantWalkToDoor:
 	walk_in_place_fastest_left
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_TrainerEnterDoor:
 	delay_16
 	walk_up
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_AttendantEnterDoor:
 	walk_up
 	set_invisible
 	step_end
 
-BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator: 
+BattleFrontier_BattleTowerMultiCorridor_Movement_ExitElevator:
 	walk_down
 	step_end
 

@@ -1,3 +1,3 @@
-MagmaHideout_2F_3R_MapScripts:: 
+MagmaHideout_2F_3R_MapScripts::
 	.byte 0
 

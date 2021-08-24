@@ -1,9 +1,9 @@
 .set LOCALID_STEVEN, 1
 
-MeteorFalls_StevensCave_MapScripts:: 
+MeteorFalls_StevensCave_MapScripts::
 	.byte 0
 
-MeteorFalls_StevensCave_EventScript_Steven:: 
+MeteorFalls_StevensCave_EventScript_Steven::
 	lock
 	goto_if_set FLAG_DEFEATED_METEOR_FALLS_STEVEN, MeteorFalls_StevensCave_EventScript_Defeated
 	waitse
@@ -23,14 +23,14 @@ MeteorFalls_StevensCave_EventScript_Steven::
 	release
 	end
 
-MeteorFalls_StevensCave_EventScript_Defeated:: 
+MeteorFalls_StevensCave_EventScript_Defeated::
 	applymovement LOCALID_STEVEN, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
 	release
 	end
 
-MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst: 
+MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "STEVEN: Oh, wow, {PLAYER}.\n"
 	.string "I'm amazed you knew where to find me.\p"
 	.string "Do you, uh…maybe think of me as\n"
@@ -43,11 +43,11 @@ MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "Okay, {PLAYER}, if you're going to mount\n"
 	.string "a serious challenge, expect the worst!$"
 
-MeteorFalls_StevensCave_Text_StevenDefeat: 
+MeteorFalls_StevensCave_Text_StevenDefeat:
 	.string "You…\n"
 	.string "I had no idea you'd become so strong…$"
 
-MeteorFalls_StevensCave_Text_MyPredictionCameTrue: 
+MeteorFalls_StevensCave_Text_MyPredictionCameTrue:
 	.string "STEVEN: Come to think of it, ever since\n"
 	.string "our paths first crossed in GRANITE\l"
 	.string "CAVE in DEWFORD, I had this feeling.\p"

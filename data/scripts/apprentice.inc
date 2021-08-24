@@ -1,6 +1,6 @@
 .set LOCALID_APPRENTICE, 6
 
-BattleFrontier_BattleTowerLobby_EventScript_Apprentice:: 
+BattleFrontier_BattleTowerLobby_EventScript_Apprentice::
 	lock
 	faceplayer
 	apprentice_gavelvlmode
@@ -10,7 +10,7 @@ BattleFrontier_BattleTowerLobby_EventScript_Apprentice::
 	compare VAR_0x8004, FALSE  @ Always TRUE here
 	goto_if_eq Apprentice_EventScript_AskQuestion
 	goto_if_set FLAG_DAILY_APPRENTICE_LEAVES, Apprentice_EventScript_Gone
-Apprentice_EventScript_AskQuestion: 
+Apprentice_EventScript_AskQuestion:
 	apprentice_getquestion
 	compare VAR_RESULT, APPRENTICE_QUESTION_WHICH_MON
 	goto_if_eq Apprentice_EventScript_UseWhichMon
@@ -26,10 +26,10 @@ Apprentice_EventScript_AskQuestion:
 	releaseall
 	end
 
-Apprentice_EventScript_FirstMeeting: 
+Apprentice_EventScript_FirstMeeting:
 	apprentice_buff 0, APPRENTICE_BUFF_NAME
 	apprentice_msg FALSE, APPRENTICE_MSG_PLEASE_TEACH
-Apprentice_EventScript_WhichLvlMode: 
+Apprentice_EventScript_WhichLvlMode:
 	apprentice_menu APPRENTICE_ASK_YES_NO
 	compare VAR_RESULT, 1
 	goto_if_eq Apprentice_EventScript_RejectTeach
@@ -48,11 +48,11 @@ Apprentice_EventScript_WhichLvlMode:
 	end
 
 @ Its impossible to fully reject an Apprentice, they just keep asking for you to teach them
-Apprentice_EventScript_RejectTeach: 
+Apprentice_EventScript_RejectTeach:
 	apprentice_msg FALSE, APPRENTICE_MSG_REJECT
 	goto Apprentice_EventScript_WhichLvlMode
 
-Apprentice_EventScript_UseWhichMon: 
+Apprentice_EventScript_UseWhichMon:
 	apprentice_initquestion APPRENTICE_QUESTION_WHICH_MON
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES1
 	apprentice_buff 1, APPRENTICE_BUFF_SPECIES2
@@ -80,24 +80,24 @@ Apprentice_EventScript_UseWhichMon:
 	goto Apprentice_EventScript_Leave
 	end
 
-Apprentice_EventScript_ChoseFirstMon: 
+Apprentice_EventScript_ChoseFirstMon:
 	setvar VAR_0x8007, APPRENTICE_BUFF_SPECIES1
 	return
 
-Apprentice_EventScript_ChoseSecondMon: 
+Apprentice_EventScript_ChoseSecondMon:
 	setvar VAR_0x8007, APPRENTICE_BUFF_SPECIES2
 	return
 
-Apprentice_EventScript_LastMonSelected: 
+Apprentice_EventScript_LastMonSelected:
 	apprentice_randomizequestions
 	return
 
-Apprentice_EventScript_UseWhatHeldItem: 
+Apprentice_EventScript_UseWhatHeldItem:
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg TRUE, APPRENTICE_MSG_WHAT_HELD_ITEM
 	apprentice_freequestion
-Apprentice_EventScript_ChooseHoldItem: 
+Apprentice_EventScript_ChooseHoldItem:
 	fadescreen FADE_TO_BLACK
 	setvar VAR_RESULT, 0
 	apprentice_openbag
@@ -117,7 +117,7 @@ Apprentice_EventScript_ChooseHoldItem:
 	goto Apprentice_EventScript_Leave
 	end
 
-Apprentice_EventScript_ConfirmHoldNothing: 
+Apprentice_EventScript_ConfirmHoldNothing:
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
 	apprentice_msg FALSE, APPRENTICE_MSG_HOLD_NOTHING
@@ -125,7 +125,7 @@ Apprentice_EventScript_ConfirmHoldNothing:
 	apprentice_freequestion
 	compare VAR_RESULT, 0
 	goto_if_eq Apprentice_EventScript_ChooseHoldItem
-Apprentice_EventScript_HoldNothing: 
+Apprentice_EventScript_HoldNothing:
 	apprentice_msg TRUE, APPRENTICE_MSG_THANKS_NO_HELD_ITEM
 	apprentice_answeredquestion
 	call Apprentice_EventScript_SetHideFlags
@@ -138,7 +138,7 @@ Apprentice_EventScript_HoldNothing:
 
 @ Because Battle Tower mons may not hold the same item, the player must suggest a
 @ different item if theyve already told the Apprentice to use it for another mon
-Apprentice_EventScript_AlreadySuggestedItem: 
+Apprentice_EventScript_AlreadySuggestedItem:
 	apprentice_initquestion APPRENTICE_QUESTION_WHAT_ITEM
 	apprentice_buff 0, APPRENTICE_BUFF_ITEM
 	apprentice_buff 1, APPRENTICE_BUFF_SPECIES3
@@ -150,7 +150,7 @@ Apprentice_EventScript_AlreadySuggestedItem:
 	goto Apprentice_EventScript_HoldNothing
 	end
 
-Apprentice_EventScript_UseWhichMove: 
+Apprentice_EventScript_UseWhichMove:
 	apprentice_initquestion APPRENTICE_QUESTION_WHICH_MOVE
 	apprentice_buff 0, APPRENTICE_BUFF_SPECIES3
 	apprentice_buff 1, APPRENTICE_BUFF_MOVE1
@@ -175,15 +175,15 @@ Apprentice_EventScript_UseWhichMove:
 	goto Apprentice_EventScript_Leave
 	end
 
-Apprentice_EventScript_ChoseMove1: 
+Apprentice_EventScript_ChoseMove1:
 	setvar VAR_0x8007, APPRENTICE_BUFF_MOVE1
 	return
 
-Apprentice_EventScript_ChoseMove2: 
+Apprentice_EventScript_ChoseMove2:
 	setvar VAR_0x8007, APPRENTICE_BUFF_MOVE2
 	return
 
-Apprentice_EventScript_PutWhichMonFirst: 
+Apprentice_EventScript_PutWhichMonFirst:
 	apprentice_msg FALSE, APPRENTICE_MSG_WHICH_MON_FIRST
 	apprentice_menu APPRENTICE_ASK_3SPECIES
 	apprentice_setleadmon VAR_RESULT
@@ -199,7 +199,7 @@ Apprentice_EventScript_PutWhichMonFirst:
 	end
 
 @ Last question, after which the Apprentice leaves (and is saved) to be replaced by another
-Apprentice_EventScript_PickWinSpeech: 
+Apprentice_EventScript_PickWinSpeech:
 	apprentice_msg TRUE, APPRENTICE_MSG_PICK_WIN_SPEECH
 	apprentice_shiftsaved
 	setvar VAR_0x8004, EASY_CHAT_TYPE_APPRENTICE
@@ -218,12 +218,12 @@ Apprentice_EventScript_PickWinSpeech:
 	goto Apprentice_EventScript_Leave
 	end
 
-Apprentice_EventScript_SetHideFlags: 
+Apprentice_EventScript_SetHideFlags:
 	setflag FLAG_HIDE_APPRENTICE
 	setflag FLAG_DAILY_APPRENTICE_LEAVES
 	return
 
-Apprentice_EventScript_LeaveNorth: 
+Apprentice_EventScript_LeaveNorth:
 	apprentice_shouldleave
 	compare VAR_0x8004, FALSE  @ Always TRUE here
 	goto_if_eq Apprentice_EventScript_DontMove
@@ -231,7 +231,7 @@ Apprentice_EventScript_LeaveNorth:
 	waitmovement 0
 	end
 
-Apprentice_EventScript_Leave: 
+Apprentice_EventScript_Leave:
 	apprentice_shouldleave
 	compare VAR_0x8004, FALSE  @ Always TRUE here
 	goto_if_eq Apprentice_EventScript_DontMove
@@ -239,17 +239,17 @@ Apprentice_EventScript_Leave:
 	waitmovement 0
 	end
 
-Apprentice_EventScript_Gone: 
+Apprentice_EventScript_Gone:
 	release
 	releaseall
 	end
 
-Apprentice_EventScript_DontMove: 
+Apprentice_EventScript_DontMove:
 	end
 
-Apprentice_Movement_LeaveNorth: 
+Apprentice_Movement_LeaveNorth:
 	walk_fast_right
-Apprentice_Movement_Leave: 
+Apprentice_Movement_Leave:
 	walk_fast_down
 	walk_fast_down
 	walk_fast_right

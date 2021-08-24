@@ -10,15 +10,15 @@
 .equ LOCALID_BOAT_R104, 7
 .equ LOCALID_BRINEY_R104, 8
 
-DewfordTown_MapScripts:: 
+DewfordTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, DewfordTown_OnTransition
 	.byte 0
 
-DewfordTown_OnTransition: 
+DewfordTown_OnTransition:
 	setflag FLAG_VISITED_DEWFORD_TOWN
 	end
 
-DewfordTown_EventScript_Briney:: 
+DewfordTown_EventScript_Briney::
 	lock
 	faceplayer
 	goto_if_unset FLAG_DELIVERED_STEVEN_LETTER, DewfordTown_EventScript_ReturnToPetalburgPrompt
@@ -32,27 +32,27 @@ DewfordTown_EventScript_Briney::
 	case MULTI_B_PRESSED, DewfordTown_EventScript_CancelSailSelect
 	end
 
-DewfordTown_EventScript_ChoosePetalburg:: 
+DewfordTown_EventScript_ChoosePetalburg::
 	msgbox DewfordTown_Text_PetalburgWereSettingSail, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_SailToPetalburg
 	release
 	end
 
-DewfordTown_EventScript_ChooseSlateport:: 
+DewfordTown_EventScript_ChooseSlateport::
 	msgbox DewfordTown_Text_SlateportWereSettingSail, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_SailToSlateport
 	release
 	end
 
-DewfordTown_EventScript_CancelSailSelect:: 
+DewfordTown_EventScript_CancelSailSelect::
 	msgbox DewfordTown_Text_JustTellMeWhenYouNeedToSetSail, MSGBOX_DEFAULT
 	closemessage
 	release
 	end
 
-DewfordTown_EventScript_ReturnToPetalburgPrompt:: 
+DewfordTown_EventScript_ReturnToPetalburgPrompt::
 	msgbox DewfordTown_Text_SetSailBackToPetalburg, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq DewfordTown_EventScript_SailBackToPetalburg
@@ -60,29 +60,29 @@ DewfordTown_EventScript_ReturnToPetalburgPrompt::
 	release
 	end
 
-DewfordTown_EventScript_SailBackToPetalburg:: 
+DewfordTown_EventScript_SailBackToPetalburg::
 	msgbox DewfordTown_Text_PetalburgWereSettingSail2, MSGBOX_DEFAULT
 	closemessage
 	goto DewfordTown_EventScript_SailToPetalburg
 	end
 
-DewfordTown_EventScript_Woman:: 
+DewfordTown_EventScript_Woman::
 	msgbox DewfordTown_Text_TinyIslandCommunity, MSGBOX_NPC
 	end
 
-DewfordTown_EventScript_TownSign:: 
+DewfordTown_EventScript_TownSign::
 	msgbox DewfordTown_Text_TownSign, MSGBOX_SIGN
 	end
 
-DewfordTown_EventScript_GymSign:: 
+DewfordTown_EventScript_GymSign::
 	msgbox DewfordTown_Text_GymSign, MSGBOX_SIGN
 	end
 
-DewfordTown_EventScript_HallSign:: 
+DewfordTown_EventScript_HallSign::
 	msgbox DewfordTown_Text_HallSign, MSGBOX_SIGN
 	end
 
-DewfordTown_EventScript_OldRodFisherman:: 
+DewfordTown_EventScript_OldRodFisherman::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_OLD_ROD, DewfordTown_EventScript_HowsFishing
@@ -93,7 +93,7 @@ DewfordTown_EventScript_OldRodFisherman::
 	goto_if_eq DewfordTown_EventScript_NotGettingItchToFish
 	end
 
-DewfordTown_EventScript_GiveOldRod:: 
+DewfordTown_EventScript_GiveOldRod::
 	msgbox DewfordTown_Text_GiveYouOneOfMyRods, MSGBOX_DEFAULT
 	giveitem ITEM_OLD_ROD
 	setflag FLAG_RECEIVED_OLD_ROD
@@ -101,12 +101,12 @@ DewfordTown_EventScript_GiveOldRod::
 	release
 	end
 
-DewfordTown_EventScript_NotGettingItchToFish:: 
+DewfordTown_EventScript_NotGettingItchToFish::
 	msgbox DewfordTown_Text_ThatsTooBadThen, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_EventScript_HowsFishing:: 
+DewfordTown_EventScript_HowsFishing::
 	message DewfordTown_Text_HowsYourFishing
 	waitmessage
 	multichoice 20, 8, MULTI_HOWS_FISHING, TRUE
@@ -116,17 +116,17 @@ DewfordTown_EventScript_HowsFishing::
 	goto_if_eq DewfordTown_EventScript_FishingNotSoGood
 	end
 
-DewfordTown_EventScript_FishingExcellent:: 
+DewfordTown_EventScript_FishingExcellent::
 	msgbox DewfordTown_Text_GreatHaulInSomeBigOnes, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_EventScript_FishingNotSoGood:: 
+DewfordTown_EventScript_FishingNotSoGood::
 	msgbox DewfordTown_Text_FishingAdvice, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_EventScript_SailToPetalburg:: 
+DewfordTown_EventScript_SailToPetalburg::
 	call EventScript_BackupMrBrineyLocation
 	setobjectpriority LOCALID_BRINEY_DEWFORD, MAP_DEWFORD_TOWN, 0
 	setobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN, 0
@@ -158,7 +158,7 @@ DewfordTown_EventScript_SailToPetalburg::
 	release
 	end
 
-DewfordTown_EventScript_SailToSlateport:: 
+DewfordTown_EventScript_SailToSlateport::
 	call EventScript_BackupMrBrineyLocation
 	setobjectpriority LOCALID_BRINEY_DEWFORD, MAP_DEWFORD_TOWN, 0
 	setobjectpriority OBJ_EVENT_ID_PLAYER, MAP_DEWFORD_TOWN, 1
@@ -196,15 +196,15 @@ DewfordTown_EventScript_SailToSlateport::
 	release
 	end
 
-DewfordTown_EventScript_LandedSlateportDeliverGoods:: 
+DewfordTown_EventScript_LandedSlateportDeliverGoods::
 	msgbox DewfordTown_Text_BrineyLandedInSlateportDeliverGoods, MSGBOX_DEFAULT
 	return
 
-DewfordTown_EventScript_LandedSlateport:: 
+DewfordTown_EventScript_LandedSlateport::
 	msgbox DewfordTown_Text_BrineyLandedInSlateport, MSGBOX_DEFAULT
 	return
 
-DewfordTown_Movement_SailToPetalburg: 
+DewfordTown_Movement_SailToPetalburg:
 	walk_up
 	walk_up
 	walk_fast_up
@@ -401,7 +401,7 @@ DewfordTown_Movement_SailToPetalburg:
 	walk_up
 	step_end
 
-DewfordTown_Movement_SailToSlateport: 
+DewfordTown_Movement_SailToSlateport:
 	walk_right
 	walk_fast_right
 	walk_fast_right
@@ -575,34 +575,34 @@ DewfordTown_Movement_SailToSlateport:
 	walk_fast_up
 	step_end
 
-DewfordTown_Movement_PlayerBoardBoat: 
+DewfordTown_Movement_PlayerBoardBoat:
 	walk_right
 	walk_up
 	step_end
 
-DewfordTown_Movement_ExitBoatPetalburg: 
+DewfordTown_Movement_ExitBoatPetalburg:
 	walk_up
 	walk_up
 	walk_up
 	step_end
 
-DewfordTown_Movement_ExitBoatSlateport: 
+DewfordTown_Movement_ExitBoatSlateport:
 	walk_up
 	walk_up
 	walk_up
 	walk_in_place_fastest_down
 	step_end
 
-DewfordTown_Movement_BrineyBoardBoat: 
+DewfordTown_Movement_BrineyBoardBoat:
 	walk_up
 	step_end
 
-DewfordTown_Movement_BrineyExitBoat: 
+DewfordTown_Movement_BrineyExitBoat:
 	walk_up
 	walk_up
 	step_end
 
-DewfordTown_EventScript_TrendyPhraseBoy:: 
+DewfordTown_EventScript_TrendyPhraseBoy::
 	lock
 	faceplayer
 	call Common_EventScript_BufferTrendyPhrase
@@ -613,12 +613,12 @@ DewfordTown_EventScript_TrendyPhraseBoy::
 	goto_if_eq DewfordTown_EventScript_RejectTrendyPhrase
 	end
 
-DewfordTown_EventScript_ConfirmTrendyPhrase:: 
+DewfordTown_EventScript_ConfirmTrendyPhrase::
 	msgbox DewfordTown_Text_YeahDefinitionOfInRightNow, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_EventScript_RejectTrendyPhrase:: 
+DewfordTown_EventScript_RejectTrendyPhrase::
 	msgbox DewfordTown_Text_TellMeWhatsNewAndIn, MSGBOX_DEFAULT
 	setvar VAR_0x8004, EASY_CHAT_TYPE_TRENDY_PHRASE
 	call Common_ShowEasyChatScreen
@@ -630,7 +630,7 @@ DewfordTown_EventScript_RejectTrendyPhrase::
 	goto_if_eq DewfordTown_EventScript_CancelNewTrendyPhrase
 	end
 
-DewfordTown_EventScript_GiveNewTrendyPhrase:: 
+DewfordTown_EventScript_GiveNewTrendyPhrase::
 	incrementgamestat GAME_STAT_STARTED_TRENDS
 	compare VAR_0x8004, FALSE
 	goto_if_eq DewfordTown_EventScript_PhraseNotTrendyEnough
@@ -638,90 +638,90 @@ DewfordTown_EventScript_GiveNewTrendyPhrase::
 	release
 	end
 
-DewfordTown_EventScript_CancelNewTrendyPhrase:: 
+DewfordTown_EventScript_CancelNewTrendyPhrase::
 	msgbox DewfordTown_Text_HearOfAnyTrendsComeShareWithMe, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_EventScript_PhraseNotTrendyEnough:: 
+DewfordTown_EventScript_PhraseNotTrendyEnough::
 	msgbox DewfordTown_Text_XHuhIThinkYIsCool, MSGBOX_DEFAULT
 	release
 	end
 
-DewfordTown_Text_TinyIslandCommunity: 
+DewfordTown_Text_TinyIslandCommunity:
 	.string "DEWFORD is a tiny island community.\n"
 	.string "If something gets trendy here,\l"
 	.string "everyone picks up on it right away.$"
 
-DewfordTown_Text_TownSign: 
+DewfordTown_Text_TownSign:
 	.string "DEWFORD TOWN\n"
 	.string "“A tiny island in the blue sea.”$"
 
-DewfordTown_Text_GymSign: 
+DewfordTown_Text_GymSign:
 	.string "DEWFORD TOWN POKéMON GYM\n"
 	.string "LEADER: BRAWLY\l"
 	.string "“A big wave in fighting!”$"
 
-DewfordTown_Text_HallSign: 
+DewfordTown_Text_HallSign:
 	.string "DEWFORD HALL\n"
 	.string "“Everyone's information exchange!”$"
 
-Route104_Text_LandedInDewfordDeliverLetter: 
+Route104_Text_LandedInDewfordDeliverLetter:
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "We've hit land in DEWFORD.\p"
 	.string "I suppose you're off to deliver that\n"
 	.string "LETTER to, who was it now, STEVEN!$"
 
-DewfordTown_Text_SetSailBackToPetalburg: 
+DewfordTown_Text_SetSailBackToPetalburg:
 	.string "MR. BRINEY: Have you delivered your\n"
 	.string "LETTER?\p"
 	.string "Or were you meaning to sail back to\n"
 	.string "PETALBURG?$"
 
-DewfordTown_Text_PetalburgWereSettingSail2: 
+DewfordTown_Text_PetalburgWereSettingSail2:
 	.string "MR. BRINEY: PETALBURG it is, then!\p"
 	.string "Anchors aweigh!\n"
 	.string "PEEKO, we're setting sail, my darling!$"
 
-DewfordTown_Text_GoDeliverIllBeWaiting: 
+DewfordTown_Text_GoDeliverIllBeWaiting:
 	.string "MR. BRINEY: Then you go on and deliver\n"
 	.string "the LETTER. I'll be waiting.$"
 
-DewfordTown_Text_BrineyLandedInDewford: 
+DewfordTown_Text_BrineyLandedInDewford:
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "We've hit land in DEWFORD!\p"
 	.string "You just go on and tell me whenever\n"
 	.string "you want to set sail again!$"
 
-DewfordTown_Text_WhereAreWeBound: 
+DewfordTown_Text_WhereAreWeBound:
 	.string "MR. BRINEY: Ahoy!\n"
 	.string "For you, I'll go out to sea anytime!\p"
 	.string "Now, my friend, where are we bound?$"
 
-DewfordTown_Text_PetalburgWereSettingSail: 
+DewfordTown_Text_PetalburgWereSettingSail:
 	.string "MR. BRINEY: PETALBURG, is it?\p"
 	.string "Anchors aweigh!\n"
 	.string "PEEKO, we're setting sail, my darling!$"
 
-DewfordTown_Text_SlateportWereSettingSail: 
+DewfordTown_Text_SlateportWereSettingSail:
 	.string "MR. BRINEY: SLATEPORT, is it?\p"
 	.string "Anchors aweigh!\n"
 	.string "PEEKO, we're setting sail, my darling!$"
 
-DewfordTown_Text_JustTellMeWhenYouNeedToSetSail: 
+DewfordTown_Text_JustTellMeWhenYouNeedToSetSail:
 	.string "MR. BRINEY: You just tell me whenever\n"
 	.string "you need to set sail again!$"
 
-DewfordTown_Text_GettingItchToFish: 
+DewfordTown_Text_GettingItchToFish:
 	.string "This is a renowned fishing spot.\n"
 	.string "Are you getting the itch to fish?$"
 
-DewfordTown_Text_GiveYouOneOfMyRods: 
+DewfordTown_Text_GiveYouOneOfMyRods:
 	.string "I hear you, and I like what\n"
 	.string "you're saying!\p"
 	.string "I'll give you one of my fishing RODS.$"
 
-DewfordTown_Text_ThrowInFishingAdvice: 
+DewfordTown_Text_ThrowInFishingAdvice:
 	.string "And, as an added bonus, I'll even throw\n"
 	.string "in a little fishing advice!\p"
 	.string "First, you want to face the water,\n"
@@ -733,19 +733,19 @@ DewfordTown_Text_ThrowInFishingAdvice:
 	.string "you need to time the pulls on your ROD\l"
 	.string "to haul them in.$"
 
-DewfordTown_Text_ThatsTooBadThen: 
+DewfordTown_Text_ThatsTooBadThen:
 	.string "Oh, is that so?\n"
 	.string "That's too bad, then.$"
 
-DewfordTown_Text_HowsYourFishing: 
+DewfordTown_Text_HowsYourFishing:
 	.string "Yo!\n"
 	.string "How's your fishing?$"
 
-DewfordTown_Text_GreatHaulInSomeBigOnes: 
+DewfordTown_Text_GreatHaulInSomeBigOnes:
 	.string "Is that right! That's great!\n"
 	.string "Haul in some big ones!$"
 
-DewfordTown_Text_FishingAdvice: 
+DewfordTown_Text_FishingAdvice:
 	.string "Oh, hey, don't get down on yourself!\n"
 	.string "I'll give you a little fishing advice.\p"
 	.string "First, you want to face the water,\n"
@@ -757,7 +757,7 @@ DewfordTown_Text_FishingAdvice:
 	.string "you need to time the pulls on your ROD\l"
 	.string "to haul them in.$"
 
-DewfordTown_Text_XIsTheBiggestHappeningThingRight: 
+DewfordTown_Text_XIsTheBiggestHappeningThingRight:
 	.string "I like what's hip, happening, and trendy.\n"
 	.string "I'm always checking it out.\p"
 	.string "Listen, have you heard about this new\n"
@@ -771,13 +771,13 @@ DewfordTown_Text_XIsTheBiggestHappeningThingRight:
 	.string "“{STR_VAR_1}”\l"
 	.string "is the biggest happening thing, right?$"
 
-DewfordTown_Text_TellMeWhatsNewAndIn: 
+DewfordTown_Text_TellMeWhatsNewAndIn:
 	.string "Hunh?\n"
 	.string "It's not the hip and happening thing?\p"
 	.string "Well, hey, you have to tell me,\n"
 	.string "what's new and what's “in”?$"
 
-DewfordTown_Text_OfCourseIKnowAboutThat: 
+DewfordTown_Text_OfCourseIKnowAboutThat:
 	.string "Hunh?\n"
 	.string "“{STR_VAR_2}”?\p"
 	.string "… …\p"
@@ -795,18 +795,18 @@ DewfordTown_Text_OfCourseIKnowAboutThat:
 	.string "Now, “{STR_VAR_2}” is\n"
 	.string "what's vital and in tune with the times!$"
 
-DewfordTown_Text_XHuhIThinkYIsCool: 
+DewfordTown_Text_XHuhIThinkYIsCool:
 	.string "Hmm…\n"
 	.string "“{STR_VAR_2},” huh?\p"
 	.string "But personally, I think\n"
 	.string "“{STR_VAR_1}”\l"
 	.string "is what's real in cool.$"
 
-DewfordTown_Text_HearOfAnyTrendsComeShareWithMe: 
+DewfordTown_Text_HearOfAnyTrendsComeShareWithMe:
 	.string "Well, if you hear of any happening new\n"
 	.string "trends, come share them with me, okay?$"
 
-DewfordTown_Text_YeahDefinitionOfInRightNow: 
+DewfordTown_Text_YeahDefinitionOfInRightNow:
 	.string "Yeah, absolutely right!\p"
 	.string "“{STR_VAR_1}” is the\n"
 	.string "definition of “in” right now.$"

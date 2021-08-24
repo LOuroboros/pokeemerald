@@ -1,15 +1,15 @@
-LilycoveCity_DepartmentStore_4F_MapScripts:: 
+LilycoveCity_DepartmentStore_4F_MapScripts::
 	.byte 0
 
-LilycoveCity_DepartmentStore_4F_EventScript_Gentleman:: 
+LilycoveCity_DepartmentStore_4F_EventScript_Gentleman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_Woman:: 
+LilycoveCity_DepartmentStore_4F_EventScript_Woman::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_Youngster:: 
+LilycoveCity_DepartmentStore_4F_EventScript_Youngster::
 	msgbox LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves, MSGBOX_NPC
 	end
 
@@ -28,7 +28,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_WomanTwoTwo:
 	msgbox LilycoveCity_DepartmentStore_4F_Text_WomanObtainedATM18, MSGBOX_NPC
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft:: 
+LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -39,7 +39,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkLeft::
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs: 
+LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
 	.2byte ITEM_TM38  @ Fire Blast
 	.2byte ITEM_TM25  @ Thunder
 	.2byte ITEM_TM14  @ Blizzard
@@ -48,7 +48,7 @@ LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs:
 	release
 	end
 
-LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight:: 
+LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 	lock
 	faceplayer
 	message gText_HowMayIServeYou
@@ -59,7 +59,7 @@ LilycoveCity_DepartmentStore_4F_EventScript_ClerkRight::
 	end
 
 	.align 2
-LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs: 
+LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	.2byte ITEM_TM17  @ Protect
 	.2byte ITEM_TM20  @ Safeguard
 	.2byte ITEM_TM33  @ Reflect
@@ -68,20 +68,20 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	release
 	end
 
-LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM: 
+LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
 	.string "Hmm…\p"
 	.string "An attacking move…\n"
 	.string "Or a defensive move…\p"
 	.string "It's no easy matter to decide which TM\n"
 	.string "moves should be taught to POKéMON…$"
 
-LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs: 
+LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
 	.string "There are so many different kinds of\n"
 	.string "TM moves.\p"
 	.string "A catalog I read said there are fifty\n"
 	.string "different kinds.$"
 
-LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves: 
+LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
 	.string "I'd like to get all the different TMs,\n"
 	.string "but a POKéMON learns only four moves.$"
 

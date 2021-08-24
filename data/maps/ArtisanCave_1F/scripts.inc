@@ -1,3 +1,3 @@
-ArtisanCave_1F_MapScripts:: 
+ArtisanCave_1F_MapScripts::
 	.byte 0
 

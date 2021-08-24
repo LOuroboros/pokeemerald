@@ -1,7 +1,7 @@
-MossdeepCity_House4_MapScripts:: 
+MossdeepCity_House4_MapScripts::
 	.byte 0
 
-MossdeepCity_House4_EventScript_Woman:: 
+MossdeepCity_House4_EventScript_Woman::
 	lock
 	faceplayer
 	goto_if_set FLAG_SYS_GAME_CLEAR, MossdeepCity_House4_EventScript_CanBattleAtSecretBases
@@ -9,12 +9,12 @@ MossdeepCity_House4_EventScript_Woman::
 	release
 	end
 
-MossdeepCity_House4_EventScript_CanBattleAtSecretBases:: 
+MossdeepCity_House4_EventScript_CanBattleAtSecretBases::
 	msgbox MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_House4_EventScript_NinjaBoy:: 
+MossdeepCity_House4_EventScript_NinjaBoy::
 	lock
 	faceplayer
 	special CheckPlayerHasSecretBase
@@ -25,12 +25,12 @@ MossdeepCity_House4_EventScript_NinjaBoy::
 	release
 	end
 
-MossdeepCity_House4_EventScript_NoSecretBase:: 
+MossdeepCity_House4_EventScript_NoSecretBase::
 	msgbox MossdeepCity_House4_Text_MakeSecretBase, MSGBOX_DEFAULT
 	release
 	end
 
-MossdeepCity_House4_EventScript_Skitty:: 
+MossdeepCity_House4_EventScript_Skitty::
 	lock
 	faceplayer
 	waitse
@@ -40,23 +40,23 @@ MossdeepCity_House4_EventScript_Skitty::
 	release
 	end
 
-MossdeepCity_House4_Text_BrotherLikesToFindBases: 
+MossdeepCity_House4_Text_BrotherLikesToFindBases:
 	.string "My little brother says he likes to go\n"
 	.string "find people's SECRET BASES.$"
 
-MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle: 
+MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle:
 	.string "My little brother says he likes to\n"
 	.string "visit people's SECRET BASES and have\l"
 	.string "POKéMON battles.$"
 
-MossdeepCity_House4_Text_YouMadeSecretBaseNearX: 
+MossdeepCity_House4_Text_YouMadeSecretBaseNearX:
 	.string "Was it you who made a SECRET BASE\n"
 	.string "near {STR_VAR_1}?$"
 
-MossdeepCity_House4_Text_MakeSecretBase: 
+MossdeepCity_House4_Text_MakeSecretBase:
 	.string "You should make a SECRET BASE\n"
 	.string "somewhere. I'll go find it!$"
 
-MossdeepCity_House4_Text_Skitty: 
+MossdeepCity_House4_Text_Skitty:
 	.string "SKITTY: Miyaan?$"
 

@@ -1,65 +1,65 @@
-ShoalCave_LowTideInnerRoom_MapScripts:: 
+ShoalCave_LowTideInnerRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, ShoalCave_LowTideInnerRoom_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, ShoalCave_LowTideInnerRoom_OnTransition
 	.byte 0
 
-ShoalCave_LowTideInnerRoom_OnTransition: 
+ShoalCave_LowTideInnerRoom_OnTransition:
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_SetHighTide
 	goto ShoalCave_LowTideInnerRoom_EventScript_SetLowTide
 
-ShoalCave_LowTideInnerRoom_EventScript_SetHighTide:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetHighTide::
 	setmaplayoutindex LAYOUT_SHOAL_CAVE_HIGH_TIDE_INNER_ROOM
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetLowTide:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetLowTide::
 	setmaplayoutindex LAYOUT_SHOAL_CAVE_LOW_TIDE_INNER_ROOM
 	end
 
-ShoalCave_LowTideInnerRoom_OnLoad: 
+ShoalCave_LowTideInnerRoom_OnLoad:
 	call ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles::
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2
 	setmetatile 31, 8, METATILE_Cave_ShoalCave_DirtPile_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles2::
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3
 	goto_if_set FLAG_SYS_SHOAL_TIDE, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3
 	setmetatile 14, 26, METATILE_Cave_ShoalCave_DirtPile_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles3::
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4
 	setmetatile 41, 20, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles4::
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5
 	setmetatile 41, 10, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles5::
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6
 	setmetatile 6, 9, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	goto ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatiles6::
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd
 	setmetatile 16, 13, METATILE_Cave_ShoalCave_BlueStone_Large, 1
 	return
 
-ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd:: 
+ShoalCave_LowTideInnerRoom_EventScript_SetShoalItemMetatilesEnd::
 	return
 
-ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1:: 
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_1, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
 	giveitem ITEM_SHOAL_SHELL
@@ -71,12 +71,12 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell1::
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell:: 
+ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell::
 	msgbox ShoalCave_Text_WasShoallShellNowNothing, MSGBOX_DEFAULT
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2:: 
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_2, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
 	giveitem ITEM_SHOAL_SHELL
@@ -88,7 +88,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell2::
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3:: 
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_3, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
 	giveitem ITEM_SHOAL_SHELL
@@ -100,7 +100,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3::
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4:: 
+ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SHELL_4, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell
 	giveitem ITEM_SHOAL_SHELL
@@ -112,7 +112,7 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4::
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1:: 
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_1, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt
 	giveitem ITEM_SHOAL_SALT
@@ -124,12 +124,12 @@ ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt1::
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt:: 
+ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt::
 	msgbox ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT
 	releaseall
 	end
 
-ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2:: 
+ShoalCave_LowTideInnerRoom_EventScript_ShoalSalt2::
 	lockall
 	goto_if_set FLAG_RECEIVED_SHOAL_SALT_2, ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt
 	giveitem ITEM_SHOAL_SALT

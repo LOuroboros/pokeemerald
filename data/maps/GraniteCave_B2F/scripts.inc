@@ -1,3 +1,3 @@
-GraniteCave_B2F_MapScripts:: 
+GraniteCave_B2F_MapScripts::
 	.byte 0
 

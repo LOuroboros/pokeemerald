@@ -1,10 +1,10 @@
 .set LOCALID_SAILOR, 1
 .set LOCALID_SS_TIDAL, 2
 
-BirthIsland_Harbor_MapScripts:: 
+BirthIsland_Harbor_MapScripts::
 	.byte 0
 
-BirthIsland_Harbor_EventScript_Sailor:: 
+BirthIsland_Harbor_EventScript_Sailor::
 	lock
 	faceplayer
 	msgbox BirthIsland_Harbor_Text_SailorReturn, MSGBOX_YESNO
@@ -23,7 +23,7 @@ BirthIsland_Harbor_EventScript_Sailor::
 	release
 	end
 
-BirthIsland_Harbor_EventScript_AsYouLike:: 
+BirthIsland_Harbor_EventScript_AsYouLike::
 	msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
 	release
 	end

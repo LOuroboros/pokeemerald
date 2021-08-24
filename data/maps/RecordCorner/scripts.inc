@@ -1,3 +1,3 @@
-RecordCorner_MapScripts:: 
+RecordCorner_MapScripts::
 	.byte 0
 

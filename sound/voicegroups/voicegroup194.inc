@@ -1,5 +1,5 @@
 	.align 2
-voicegroup194:: @ 
+voicegroup194:: @
 	voice_directsound 59, 20, DirectSoundWaveData_dp_china_cynbal, 255, 250, 0, 226
 	voice_directsound 60, 30, DirectSoundWaveData_dp_ridecap, 255, 250, 0, 232
 	voice_directsound 60, 58, DirectSoundWaveData_dp_tambourine_16, 255, 0, 255, 1

@@ -293,7 +293,7 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
         range = sHueShiftShinyRange;
     else
         range = sHueShiftNormalRange;
-    
+
     shift = (value % (range * 2 + 1)) - range;
 
     for (i = 0; i < 16; i++)
@@ -304,7 +304,7 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
         s32 g = (data1->g * 1000) / 31;
         s32 b = (data1->b * 1000) / 31;
         s32 maxv, minv, d, h, s, l, o, p, q;
-        
+
         if (r > g)
             maxv = r;
         else
@@ -317,12 +317,12 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
             minv = g;
         if (b < minv)
             minv = b;
-        
+
         d = maxv - minv;
         h = 0;
         s = 0;
         l = (maxv + minv) / 2;
-        
+
         if  (maxv != minv)
         {
             if (l > 500)
@@ -346,20 +346,20 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
             }
             h /= 6;
         }
-        
+
         h = (h + shift + 1000) % 1000;
-        
+
         if (s != 0)
         {
             o = (h + 333) % 1000;
-            
+
             if (l < 500)
                 p = l * (s + 1000) / 1000;
             else
                 p = l + s - l * s / 1000;
-            
+
             q = l * 2 - p;
-            
+
             if (o < 167)
                 r = q + (p - q) * o * 6 / 1000;
             else if (o < 500)
@@ -368,9 +368,9 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
                 r = q + (p - q) * (667 - o) * 6 / 1000;
             else
                 r = q;
-            
+
             o = h;
-            
+
             if (o < 167)
                 g = q + (p - q) * o * 6 / 1000;
             else if (o < 500)
@@ -379,9 +379,9 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
                 g = q + (p - q) * (667 - o) * 6 / 1000;
             else
                 g = q;
-            
+
             o = (h + 1000 - 333) % 1000;
-            
+
             if (o < 167)
                 b = q + (p - q) * o * 6 / 1000;
             else if (o < 500)
@@ -397,7 +397,7 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
             g = l;
             b = l;
         }
-    
+
         gPlttBufferFaded[index] = RGB((u8)(r * 31 / 1000), (u8)(g * 31 / 1000), (u8)(b * 31 / 1000));
     }
 }

@@ -1,3 +1,3 @@
-Route122_MapScripts:: 
+Route122_MapScripts::
 	.byte 0
 

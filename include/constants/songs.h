@@ -121,7 +121,7 @@
 #define SE_BALL_TRAY_BALL            115 // SE_TB_KON
 #define SE_BALL_TRAY_EXIT            116 // SE_TB_KARA
 #define SE_GLASS_FLUTE               117 // SE_BIDORO
-// Move SFX 
+// Move SFX
 #define SE_M_THUNDERBOLT             118 // SE_W085
 #define SE_M_THUNDERBOLT2            119 // SE_W085B
 #define SE_M_HARDEN                  120 // SE_W231
@@ -252,7 +252,7 @@
 #define SE_M_STAT_DECREASE           245 // SE_W287B
 #define SE_M_HAZE                    246 // SE_W114
 #define SE_M_HYPER_BEAM2             247 // SE_W063B
-// FRLG SFX 
+// FRLG SFX
 #define SE_RG_DOOR                   248 // SE_RG_W_DOOR
 #define SE_RG_CARD_FLIP              249 // SE_RG_CARD1
 #define SE_RG_CARD_FLIPPING          250 // SE_RG_CARD2
@@ -267,8 +267,8 @@
 #define SE_RG_HELP_ERROR             259 // SE_RG_HELP_NG
 #define SE_RG_DEOXYS_MOVE            260 // SE_RG_DEOMOV
 #define SE_RG_POKE_JUMP_SUCCESS      261 // SE_RG_EXCELLENT
-#define SE_RG_POKE_JUMP_FAILURE      262 // SE_RG_NAWAMISS 
-// New Emerald SFX 
+#define SE_RG_POKE_JUMP_FAILURE      262 // SE_RG_NAWAMISS
+// New Emerald SFX
 #define SE_POKENAV_CALL              263 // SE_TOREEYE
 #define SE_POKENAV_HANG_UP           264 // SE_TOREOFF
 #define SE_ARENA_TIMEUP1             265 // SE_HANTEI1
@@ -330,7 +330,7 @@
 #define PH_NURSE_SOLO                320
 #define END_SE                       PH_NURSE_SOLO
 
-// Ruby & Sapphire Music 
+// Ruby & Sapphire Music
 #define START_MUS                    MUS_LITTLEROOT_TEST
 #define MUS_LITTLEROOT_TEST          321 // MUS_TETSUJI
 #define MUS_GSC_ROUTE38              322 // MUS_FIELD13
@@ -450,7 +450,7 @@
 #define MUS_VS_ELITE_FOUR            436 // MUS_BATTLE38
 #define MUS_VS_AQUA_MAGMA_LEADER     437 // MUS_BATTLE30
 
-// FireRed & LeafGreen Music 
+// FireRed & LeafGreen Music
 #define MUS_RG_FOLLOW_ME             438 // MUS_RG_ANNAI
 #define MUS_RG_GAME_CORNER           439 // MUS_RG_SLOT
 #define MUS_RG_ROCKET_HIDEOUT        440 // MUS_RG_AJITO
@@ -538,8 +538,8 @@
 #define MUS_VS_FRONTIER_BRAIN        520 // MUS_VS_FRONT
 #define MUS_VS_MEW                   521 // MUS_VS_MEW
 #define MUS_B_DOME_LOBBY             522 // MUS_B_DOME1
- 
-// Diamond & Pearl Music 
+
+// Diamond & Pearl Music
 #define DP_SEQ_TITLE00               523 // Opening Movie (Part 1)
 #define DP_SEQ_TITLE01               524 // Opening Movie (Part 2)
 #define DP_SEQ_OPENING               525 // Introduction
@@ -695,7 +695,7 @@
 #define DP_SEQ_AUS                   675 // Hall of Origin
 #define DP_SEQ_BA_SECRET1            676 // Battle! Arceus
 
-// Platinum Music 
+// Platinum Music
 #define PL_SEQ_TITLE00               677 // Title Screen
 #define PL_SEQ_TITLE01               678 // Press Start
 #define PL_SEQ_TV_HOUSOU             679 // Special Program: "Let's Ask Prof. Rowan!" (Part 1)
@@ -730,8 +730,8 @@
 #define PL_SEQ_PL_BA_BRAIN           708 // Battle! (Frontier Brain)
 #define PL_SEQ_PL_WINBRAIN           709 // Victory! (Frontier Brain)
 #define PL_SEQ_PL_BA_REGI            710 // Battle! (Regirock / Regice / Registeel)
- 
-// HeartGold & SoulSilver Music 
+
+// HeartGold & SoulSilver Music
 #define HG_SEQ_GS_TITLE              711 // Opening Movie
 #define HG_SEQ_GS_POKEMON_THEME      712 // Title Screen
 #define HG_SEQ_GS_STARTING           713 // An Adventure Begins!
@@ -908,7 +908,7 @@
 #define HG_SEQ_GS_D_SHINTO           884 // Sinjoh Ruins
 #define HG_SEQ_GS_E_ARCEUS           885 // Arceus
 #define HG_SEQ_ME_GONIN              886 // Let's Go Together (Unused?)
-#define END_MUS                      HG_SEQ_ME_GONIN 
+#define END_MUS                      HG_SEQ_ME_GONIN
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

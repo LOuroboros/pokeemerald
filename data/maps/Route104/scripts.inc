@@ -2,37 +2,37 @@
 @  These are labeled in DewfordTown/scripts.inc
 .set LOCALID_RIVAL, 34
 
-Route104_MapScripts:: 
+Route104_MapScripts::
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, Route104_OnFrame
 	map_script MAP_SCRIPT_ON_TRANSITION, Route104_OnTransition
 	.byte 0
 
-Route104_OnFrame: 
+Route104_OnFrame:
 	map_script_2 VAR_BOARD_BRINEY_BOAT_STATE, 1, Route104_EventScript_StartSailToDewford
 	.2byte 0
 
-Route104_EventScript_StartSailToDewford:: 
+Route104_EventScript_StartSailToDewford::
 	lockall
 	goto Route104_EventScript_SailToDewford
 	end
 
-Route104_OnTransition: 
+Route104_OnTransition:
 	call Common_EventScript_SetupRivalGfxId
 	call Route104_EventScript_TrySetRivalPos
 	call Route104_EventScript_ShowOrHideWhiteHerbFlorist
 	end
 
-Route104_EventScript_ShowOrHideWhiteHerbFlorist:: 
+Route104_EventScript_ShowOrHideWhiteHerbFlorist::
 	goto_if_unset FLAG_MET_PRETTY_PETAL_SHOP_OWNER, Route104_EventScript_HideWhiteHerbFlorist
 	goto_if_unset FLAG_BADGE03_GET, Route104_EventScript_HideWhiteHerbFlorist
 	clearflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
-Route104_EventScript_HideWhiteHerbFlorist:: 
+Route104_EventScript_HideWhiteHerbFlorist::
 	setflag FLAG_HIDE_ROUTE_104_WHITE_HERB_FLORIST
 	return
 
-Route104_EventScript_TrySetRivalPos:: 
+Route104_EventScript_TrySetRivalPos::
 	compare VAR_BOARD_BRINEY_BOAT_STATE, 1
 	goto_if_ge Route104_EventScript_DontSetRivalPos
 	goto_if_set FLAG_MET_RIVAL_RUSTBORO, Route104_EventScript_DontSetRivalPos
@@ -40,17 +40,17 @@ Route104_EventScript_TrySetRivalPos::
 	setobjectxyperm LOCALID_RIVAL, 17, 52
 	return
 
-Route104_EventScript_DontSetRivalPos:: 
+Route104_EventScript_DontSetRivalPos::
 	return
 
-Route104_EventScript_Rival:: 
+Route104_EventScript_Rival::
 	lockall
 	setvar VAR_0x8008, 1
 	applymovement LOCALID_RIVAL, Common_Movement_FacePlayer
 	waitmovement 0
 	goto Route104_EventScript_RivalEncounter
 
-Route104_EventScript_RivalTrigger:: 
+Route104_EventScript_RivalTrigger::
 	lockall
 	setflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_RUSTBORO_CITY_STATE, 8
@@ -75,7 +75,7 @@ Route104_EventScript_RivalTrigger::
 	goto Route104_EventScript_RivalEncounter
 
 @ Unused, shares script with Rustboro encounter instead
-Route104_EventScript_PlayRivalMusic:: 
+Route104_EventScript_PlayRivalMusic::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq Route104_EventScript_PlayMayMusic
@@ -83,15 +83,15 @@ Route104_EventScript_PlayRivalMusic::
 	goto_if_eq Route104_EventScript_PlayBrendanMusic
 	return
 
-Route104_EventScript_PlayMayMusic:: 
+Route104_EventScript_PlayMayMusic::
 	playbgm MUS_ENCOUNTER_MAY, TRUE
 	return
 
-Route104_EventScript_PlayBrendanMusic:: 
+Route104_EventScript_PlayBrendanMusic::
 	playbgm MUS_ENCOUNTER_BRENDAN, TRUE
 	return
 
-Route104_EventScript_RivalEncounter:: 
+Route104_EventScript_RivalEncounter::
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq Route104_EventScript_MayEncounter
@@ -99,7 +99,7 @@ Route104_EventScript_RivalEncounter::
 	goto_if_eq Route104_EventScript_BrendanEncounter
 	end
 
-Route104_EventScript_MayEncounter:: 
+Route104_EventScript_MayEncounter::
 	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, Route104_EventScript_MayDefeated
 	goto_if_set FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_MayAskToBattle
 	setflag FLAG_REGISTER_RIVAL_POKENAV
@@ -128,21 +128,21 @@ Route104_EventScript_MayEncounter::
 	releaseall
 	end
 
-Route104_Movement_RivalWalkSlowLeft: 
+Route104_Movement_RivalWalkSlowLeft:
 	walk_slow_left
 	step_end
 
-Route104_Movement_RivalApproachPlayer: 
+Route104_Movement_RivalApproachPlayer:
 	walk_down
 	face_right
 	step_end
 
-Route104_Movement_PlayerFaceRival: 
+Route104_Movement_PlayerFaceRival:
 	delay_4
 	walk_in_place_fastest_left
 	step_end
 
-Route104_EventScript_MayAskToBattle:: 
+Route104_EventScript_MayAskToBattle::
 	msgbox Route104_Text_MayLetsBattle, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_BattleMay
@@ -150,7 +150,7 @@ Route104_EventScript_MayAskToBattle::
 	releaseall
 	end
 
-Route104_EventScript_BattleMay:: 
+Route104_EventScript_BattleMay::
 	msgbox Route104_Text_MayIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route104_EventScript_BattleMayTreecko
@@ -158,37 +158,37 @@ Route104_EventScript_BattleMay::
 	case 2, Route104_EventScript_BattleMayMudkip
 	end
 
-Route104_EventScript_MayDefeated:: 
+Route104_EventScript_MayDefeated::
 	msgbox Route104_Text_MayPostBattle, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
 	call_if_eq Route104_EventScript_RestoreMusic
 	releaseall
 	end
 
-Route104_EventScript_RestoreMusic:: 
+Route104_EventScript_RestoreMusic::
 	savebgm MUS_DUMMY
 	fadedefaultbgm
 	return
 
-Route104_EventScript_BattleMayTreecko:: 
+Route104_EventScript_BattleMayTreecko::
 	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TREECKO, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
-Route104_EventScript_BattleMayTorchic:: 
+Route104_EventScript_BattleMayTorchic::
 	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_TORCHIC, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
-Route104_EventScript_BattleMayMudkip:: 
+Route104_EventScript_BattleMayMudkip::
 	trainerbattle_no_intro TRAINER_MAY_RUSTBORO_MUDKIP, Route104_Text_MayDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_MayDefeated
 	end
 
-Route104_EventScript_BrendanEncounter:: 
+Route104_EventScript_BrendanEncounter::
 	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE_104, Route104_EventScript_BrendanDefeated
 	goto_if_set FLAG_REGISTER_RIVAL_POKENAV, Route104_EventScript_BrendanAskToBattle
 	setflag FLAG_REGISTER_RIVAL_POKENAV
@@ -217,7 +217,7 @@ Route104_EventScript_BrendanEncounter::
 	releaseall
 	end
 
-Route104_EventScript_BrendanAskToBattle:: 
+Route104_EventScript_BrendanAskToBattle::
 	msgbox Route104_Text_BrendanLetsBattle, MSGBOX_YESNO
 	compare VAR_RESULT, YES
 	goto_if_eq Route104_EventScript_BattleBrendan
@@ -225,7 +225,7 @@ Route104_EventScript_BrendanAskToBattle::
 	releaseall
 	end
 
-Route104_EventScript_BattleBrendan:: 
+Route104_EventScript_BattleBrendan::
 	msgbox Route104_Text_BrendanIntro, MSGBOX_DEFAULT
 	switch VAR_STARTER_MON
 	case 0, Route104_EventScript_BattleBrendanTreecko
@@ -233,42 +233,42 @@ Route104_EventScript_BattleBrendan::
 	case 2, Route104_EventScript_BattleBrendanMudkip
 	end
 
-Route104_EventScript_BrendanDefeated:: 
+Route104_EventScript_BrendanDefeated::
 	msgbox Route104_Text_BrendanPostBattle, MSGBOX_DEFAULT
 	compare VAR_0x8008, 0
 	call_if_eq Route104_EventScript_RestoreMusic
 	releaseall
 	end
 
-Route104_EventScript_BattleBrendanTreecko:: 
+Route104_EventScript_BattleBrendanTreecko::
 	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TREECKO, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
-Route104_EventScript_BattleBrendanTorchic:: 
+Route104_EventScript_BattleBrendanTorchic::
 	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_TORCHIC, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
-Route104_EventScript_BattleBrendanMudkip:: 
+Route104_EventScript_BattleBrendanMudkip::
 	trainerbattle_no_intro TRAINER_BRENDAN_RUSTBORO_MUDKIP, Route104_Text_BrendanDefeat
 	setflag FLAG_DEFEATED_RIVAL_ROUTE_104
 	goto Route104_EventScript_BrendanDefeated
 	end
 
-Route104_Movement_PlayerBackUp: 
+Route104_Movement_PlayerBackUp:
 	lock_facing_direction
 	walk_down
 	unlock_facing_direction
 	step_end
 
-Route104_Movement_RivalExitBrineysCottage: 
+Route104_Movement_RivalExitBrineysCottage:
 	walk_down
 	step_end
 
-Route104_EventScript_ExpertF:: 
+Route104_EventScript_ExpertF::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_ReceivedBerry
@@ -281,12 +281,12 @@ Route104_EventScript_ExpertF::
 	release
 	end
 
-Route104_EventScript_ReceivedBerry:: 
+Route104_EventScript_ReceivedBerry::
 	msgbox Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_WhiteHerbFlorist:: 
+Route104_EventScript_WhiteHerbFlorist::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_ReceivedWhiteHerb
@@ -298,48 +298,48 @@ Route104_EventScript_WhiteHerbFlorist::
 	release
 	end
 
-Route104_EventScript_ReceivedWhiteHerb:: 
+Route104_EventScript_ReceivedWhiteHerb::
 	msgbox Route104_Text_FlowerShopSellingSaplings, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_Girl1:: 
+Route104_EventScript_Girl1::
 	msgbox Route104_Text_BrineyLivesInSeasideCottage, MSGBOX_NPC
 	end
 
-Route104_EventScript_BugCatcher:: 
+Route104_EventScript_BugCatcher::
 	msgbox Route104_Text_WhatsItLikeAtBottomOfSea, MSGBOX_SIGN
 	end
 
-Route104_EventScript_BrineysCottageSign:: 
+Route104_EventScript_BrineysCottageSign::
 	msgbox Route104_Text_MrBrineysCottage, MSGBOX_SIGN
 	end
 
-Route104_EventScript_RouteSignPetalburg:: 
+Route104_EventScript_RouteSignPetalburg::
 	msgbox Route104_Text_RouteSignPetalburg, MSGBOX_SIGN
 	end
 
-Route104_EventScript_RouteSignRustboro:: 
+Route104_EventScript_RouteSignRustboro::
 	msgbox Route104_Text_RouteSignRustboro, MSGBOX_SIGN
 	end
 
-Route104_EventScript_FlowerShopSign:: 
+Route104_EventScript_FlowerShopSign::
 	msgbox Route104_Text_PrettyPetalFlowShop, MSGBOX_SIGN
 	end
 
-Route104_EventScript_TrainerTipsDoubleBattles:: 
+Route104_EventScript_TrainerTipsDoubleBattles::
 	msgbox Route104_Text_TrainerTipsDoubleBattles, MSGBOX_SIGN
 	end
 
-Route104_EventScript_Boy1:: 
+Route104_EventScript_Boy1::
 	msgbox Route104_Text_ThrowBallAtWeakenedPokemon, MSGBOX_NPC
 	end
 
-Route104_EventScript_Woman:: 
+Route104_EventScript_Woman::
 	msgbox Route104_Text_OnlyThrowBallAtWildPokemon, MSGBOX_NPC
 	end
 
-Route104_EventScript_Boy2:: 
+Route104_EventScript_Boy2::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
@@ -351,16 +351,16 @@ Route104_EventScript_Boy2::
 	release
 	end
 
-Route104_EventScript_ReceivedBulletSeed:: 
+Route104_EventScript_ReceivedBulletSeed::
 	msgbox Route104_Text_TMsAreOneTimeUse, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_Girl2:: 
+Route104_EventScript_Girl2::
 	msgbox Route104_Text_ImNotATrainer, MSGBOX_NPC
 	end
 
-Route104_EventScript_SailToDewford:: 
+Route104_EventScript_SailToDewford::
 	setobjectpriority LOCALID_BRINEY_R104, MAP_ROUTE104, 0
 	setobjectpriority OBJ_EVENT_ID_PLAYER, MAP_ROUTE104, 0
 	applymovement LOCALID_BRINEY_R104, Route104_Movement_BrineyBoardBoat
@@ -374,13 +374,13 @@ Route104_EventScript_SailToDewford::
 	goto_if_unset FLAG_ENABLE_NORMAN_MATCH_CALL, Route104_EventScript_SailToDewfordDadCalls
 	end
 
-Route104_EventScript_SailToDewfordNoCall:: 
+Route104_EventScript_SailToDewfordNoCall::
 	applymovement LOCALID_BOAT_R104, Route104_Movement_SailToDewford
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_SailToDewford
 	waitmovement 0
 	goto Route104_EventScript_ArriveInDewford
 
-Route104_EventScript_SailToDewfordDadCalls:: 
+Route104_EventScript_SailToDewfordDadCalls::
 	applymovement LOCALID_BOAT_R104, Route104_Movement_SailToDewfordBeforeDadCalls
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_SailToDewfordBeforeDadCalls
 	waitmovement 0
@@ -399,7 +399,7 @@ Route104_EventScript_SailToDewfordDadCalls::
 	waitmovement 0
 	goto Route104_EventScript_ArriveInDewford
 
-Route104_EventScript_ArriveInDewford:: 
+Route104_EventScript_ArriveInDewford::
 	delay 50
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_PlayerExitBoat
 	waitmovement 0
@@ -427,17 +427,17 @@ Route104_EventScript_ArriveInDewford::
 	goto_if_set FLAG_DELIVERED_STEVEN_LETTER, Route104_EventScript_LandedInDewford
 	end
 
-Route104_EventScript_DeliverLetterReminder:: 
+Route104_EventScript_DeliverLetterReminder::
 	msgbox Route104_Text_LandedInDewfordDeliverLetter, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route104_EventScript_LandedInDewford:: 
+Route104_EventScript_LandedInDewford::
 	msgbox DewfordTown_Text_BrineyLandedInDewford, MSGBOX_DEFAULT
 	releaseall
 	end
 
-Route104_Movement_SailToDewfordBeforeDadCalls: 
+Route104_Movement_SailToDewfordBeforeDadCalls:
 	walk_down
 	walk_down
 	walk_down
@@ -537,7 +537,7 @@ Route104_Movement_SailToDewfordBeforeDadCalls:
 	walk_fastest_down
 	step_end
 
-Route104_Movement_SailToDewfordAfterDadCalls: 
+Route104_Movement_SailToDewfordAfterDadCalls:
 	walk_fastest_down
 	walk_fastest_down
 	walk_fastest_down
@@ -637,7 +637,7 @@ Route104_Movement_SailToDewfordAfterDadCalls:
 	walk_down
 	step_end
 
-Route104_Movement_SailToDewford: 
+Route104_Movement_SailToDewford:
 	walk_down
 	walk_down
 	walk_down
@@ -834,43 +834,43 @@ Route104_Movement_SailToDewford:
 	walk_down
 	step_end
 
-Route104_Movement_PlayerBoardBoat: 
+Route104_Movement_PlayerBoardBoat:
 	walk_left
 	walk_down
 	walk_down
 	step_end
 
-Route104_Movement_PlayerExitBoat: 
+Route104_Movement_PlayerExitBoat:
 	walk_down
 	step_end
 
-Route104_Movement_PlayerMoveForBriney: 
+Route104_Movement_PlayerMoveForBriney:
 	walk_down
 	walk_left
 	walk_in_place_fastest_right
 	step_end
 
-Route104_Movement_BrineyBoardBoat: 
+Route104_Movement_BrineyBoardBoat:
 	walk_down
 	walk_down
 	step_end
 
-Route104_Movement_BrineyExitBoat: 
+Route104_Movement_BrineyExitBoat:
 	walk_down
 	walk_in_place_fastest_left
 	step_end
 
-Route104_EventScript_Ivan:: 
+Route104_EventScript_Ivan::
 	trainerbattle_single TRAINER_IVAN, Route104_Text_IvanIntro, Route104_Text_IvanDefeat
 	msgbox Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Billy:: 
+Route104_EventScript_Billy::
 	trainerbattle_single TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat
 	msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Haley:: 
+Route104_EventScript_Haley::
 	trainerbattle_single TRAINER_HALEY_1, Route104_Text_HaleyIntro, Route104_Text_HaleyDefeat, Route104_EventScript_TryRegisterHaleyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -883,37 +883,37 @@ Route104_EventScript_Haley::
 	release
 	end
 
-Route104_EventScript_TryRegisterHaleyAfterBattle:: 
+Route104_EventScript_TryRegisterHaleyAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaleyAfterBattle
 	release
 	end
 
-Route104_EventScript_RegisterHaleyAfterBattle:: 
+Route104_EventScript_RegisterHaleyAfterBattle::
 	msgbox Route104_Text_HaleyRegister2, MSGBOX_DEFAULT
 	register_matchcall TRAINER_HALEY_1
 	release
 	end
 
-Route104_EventScript_TryRegisterHaley:: 
+Route104_EventScript_TryRegisterHaley::
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterHaley
 	msgbox Route104_Text_HaleyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_RegisterHaley:: 
+Route104_EventScript_RegisterHaley::
 	msgbox Route104_Text_HaleyRegister1, MSGBOX_DEFAULT
 	register_matchcall TRAINER_HALEY_1
 	release
 	end
 
-Route104_EventScript_RematchHaley:: 
+Route104_EventScript_RematchHaley::
 	trainerbattle_rematch TRAINER_HALEY_1, Route104_Text_HaleyRematchIntro, Route104_Text_HaleyRematchDefeat
 	msgbox Route104_Text_HaleyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Winston:: 
+Route104_EventScript_Winston::
 	trainerbattle_single TRAINER_WINSTON_1, Route104_Text_WinstonIntro, Route104_Text_WinstonDefeat, Route104_EventScript_TryRegisterWinstonAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -926,37 +926,37 @@ Route104_EventScript_Winston::
 	release
 	end
 
-Route104_EventScript_TryRegisterWinstonAfterBattle:: 
+Route104_EventScript_TryRegisterWinstonAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinstonAfterBattle
 	release
 	end
 
-Route104_EventScript_RegisterWinstonAfterBattle:: 
+Route104_EventScript_RegisterWinstonAfterBattle::
 	msgbox Route104_Text_WinstonRegister2, MSGBOX_DEFAULT
 	register_matchcall TRAINER_WINSTON_1
 	release
 	end
 
-Route104_EventScript_TryRegisterWinston:: 
+Route104_EventScript_TryRegisterWinston::
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterWinston
 	msgbox Route104_Text_WinstonPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_RegisterWinston:: 
+Route104_EventScript_RegisterWinston::
 	msgbox Route104_Text_WinstonRegister1, MSGBOX_DEFAULT
 	register_matchcall TRAINER_WINSTON_1
 	release
 	end
 
-Route104_EventScript_RematchWinston:: 
+Route104_EventScript_RematchWinston::
 	trainerbattle_rematch TRAINER_WINSTON_1, Route104_Text_WinstonRematchIntro, Route104_Text_WinstonRematchDefeat
 	msgbox Route104_Text_WinstonPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Cindy:: 
+Route104_EventScript_Cindy::
 	trainerbattle_single TRAINER_CINDY_1, Route104_Text_CindyIntro, Route104_Text_CindyDefeat, Route104_EventScript_TryRegisterCindyAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -969,100 +969,100 @@ Route104_EventScript_Cindy::
 	release
 	end
 
-Route104_EventScript_TryRegisterCindyAfterBattle:: 
+Route104_EventScript_TryRegisterCindyAfterBattle::
 	special PlayerFaceTrainerAfterBattle
 	waitmovement 0
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindyAfterBattle
 	release
 	end
 
-Route104_EventScript_RegisterCindyAfterBattle:: 
+Route104_EventScript_RegisterCindyAfterBattle::
 	msgbox Route104_Text_CindyRegister2, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CINDY_1
 	release
 	end
 
-Route104_EventScript_TryRegisterCindy:: 
+Route104_EventScript_TryRegisterCindy::
 	goto_if_set FLAG_HAS_MATCH_CALL, Route104_EventScript_RegisterCindy
 	msgbox Route104_Text_CindyPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_RegisterCindy:: 
+Route104_EventScript_RegisterCindy::
 	msgbox Route104_Text_CindyRegister1, MSGBOX_DEFAULT
 	register_matchcall TRAINER_CINDY_1
 	release
 	end
 
-Route104_EventScript_RematchCindy:: 
+Route104_EventScript_RematchCindy::
 	trainerbattle_rematch TRAINER_CINDY_1, Route104_Text_CindyRematchIntro, Route104_Text_CindyRematchDefeat
 	msgbox Route104_Text_CindyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route104_EventScript_Gina:: 
+Route104_EventScript_Gina::
 	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_GinaIntro, Route104_Text_GinaDefeat, Route104_Text_GinaNotEnoughMons
 	special GetPlayerBigGuyGirlString
 	msgbox Route104_Text_GinaPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_Mia:: 
+Route104_EventScript_Mia::
 	trainerbattle_double TRAINER_GINA_AND_MIA_1, Route104_Text_MiaIntro, Route104_Text_MiaDefeat, Route104_Text_MiaNotEnoughMons
 	special GetPlayerBigGuyGirlString
 	msgbox Route104_Text_MiaPostBattle, MSGBOX_DEFAULT
 	release
 	end
 
-Route104_EventScript_Darian:: 
+Route104_EventScript_Darian::
 	trainerbattle_single TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat
 	msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route104_Text_BrineyLivesInSeasideCottage: 
+Route104_Text_BrineyLivesInSeasideCottage:
 	.string "That seaside cottage is where\n"
 	.string "MR. BRINEY lives.\p"
 	.string "He was once a mighty sailor who never\n"
 	.string "feared the sea, however stormy.$"
 
-Route104_Text_WhatsItLikeAtBottomOfSea: 
+Route104_Text_WhatsItLikeAtBottomOfSea:
 	.string "The sea, huh?\p"
 	.string "I wonder what it's like at the bottom\n"
 	.string "of the sea?$"
 
-Route104_Text_ThrowBallAtWeakenedPokemon: 
+Route104_Text_ThrowBallAtWeakenedPokemon:
 	.string "If you're going to throw a POKé BALL,\n"
 	.string "weaken the wild POKéMON first.\p"
 	.string "It will be easier to catch if it's been\n"
 	.string "poisoned, burned, or lulled to sleep.$"
 
-Route104_Text_OnlyThrowBallAtWildPokemon: 
+Route104_Text_OnlyThrowBallAtWildPokemon:
 	.string "You're a thief if you try to steal\n"
 	.string "someone else's POKéMON.\p"
 	.string "You should throw POKé BALLS only at\n"
 	.string "wild POKéMON.$"
 
-Route104_Text_ImNotATrainer: 
+Route104_Text_ImNotATrainer:
 	.string "Oh, no, I'm not a TRAINER.\p"
 	.string "But that's right, if TRAINERS lock eyes,\n"
 	.string "it's a challenge to battle.\p"
 	.string "If you don't want to battle, stay out\n"
 	.string "of their sight.$"
 
-Route104_Text_LikeFillingMouthWithSeedsTakeThis: 
+Route104_Text_LikeFillingMouthWithSeedsTakeThis:
 	.string "I like filling my mouth with seeds,\n"
 	.string "then spitting them out fast!\p"
 	.string "You can have this, so you try it out!\p"
 	.string "Use it on a POKéMON, and it will learn\n"
 	.string "a move for firing seeds rapidly.$"
 
-Route104_Text_TMsAreOneTimeUse: 
+Route104_Text_TMsAreOneTimeUse:
 	.string "A word of advice!\p"
 	.string "A TM, TECHNICAL MACHINE, is good only\n"
 	.string "for one-time use.\p"
 	.string "Once you use it, it's gone.\n"
 	.string "Think twice before using it!$"
 
-Route104_Text_DontNeedThisTakeIt: 
+Route104_Text_DontNeedThisTakeIt:
 	.string "This FLOWER SHOP started selling\n"
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
@@ -1070,27 +1070,27 @@ Route104_Text_DontNeedThisTakeIt:
 	.string "I don't need this WHITE HERB anymore.\n"
 	.string "Would you take it, please?$"
 
-Route104_Text_FlowerShopSellingSaplings: 
+Route104_Text_FlowerShopSellingSaplings:
 	.string "This FLOWER SHOP started selling\n"
 	.string "saplings recently.\p"
 	.string "It made me so happy, I went overboard\n"
 	.string "shopping. Where should I put them?$"
 
-Route104_Text_MrBrineysCottage: 
+Route104_Text_MrBrineysCottage:
 	.string "MR. BRINEY'S COTTAGE$"
 
-Route104_Text_RouteSignPetalburg: 
+Route104_Text_RouteSignPetalburg:
 	.string "ROUTE 1O4\n"
 	.string "{RIGHT_ARROW} PETALBURG CITY$"
 
-Route104_Text_RouteSignRustboro: 
+Route104_Text_RouteSignRustboro:
 	.string "ROUTE 1O4\n"
 	.string "{UP_ARROW} RUSTBORO CITY$"
 
-Route104_Text_PrettyPetalFlowShop: 
+Route104_Text_PrettyPetalFlowShop:
 	.string "PRETTY PETAL FLOWER SHOP$"
 
-Route104_Text_TrainerTipsDoubleBattles: 
+Route104_Text_TrainerTipsDoubleBattles:
 	.string "TRAINER TIPS\p"
 	.string "In the HOENN region there are pairs\n"
 	.string "of TRAINERS who challenge others\l"
@@ -1101,45 +1101,45 @@ Route104_Text_TrainerTipsDoubleBattles:
 	.string "left of the list and the top one.\l"
 	.string "Watch how POKéMON are lined up.$"
 
-Route104_Text_MayWeShouldRegister: 
+Route104_Text_MayWeShouldRegister:
 	.string "{RIVAL}: Oh, hi, {PLAYER}!\p"
 	.string "DEVON upgraded your POKéNAV with\n"
 	.string "the MATCH CALL system, huh?\p"
 	.string "We should register each other so we\n"
 	.string "can get in contact anytime.$"
 
-Route104_Text_RegisteredMay: 
+Route104_Text_RegisteredMay:
 	.string "{PLAYER} registered MAY\n"
 	.string "in the POKéNAV.$"
 
-Route104_Text_MayHowsYourPokedex: 
+Route104_Text_MayHowsYourPokedex:
 	.string "{RIVAL}: Oh, by the way, {PLAYER},\n"
 	.string "how's your POKéDEX coming along?$"
 
-Route104_Text_MayMinesDecentLetsBattle: 
+Route104_Text_MayMinesDecentLetsBattle:
 	.string "Mine's looking pretty decent.\n"
 	.string "So…\l"
 	.string "How about a little battle?$"
 
-Route104_Text_MayHaventRaisedPokemon: 
+Route104_Text_MayHaventRaisedPokemon:
 	.string "{RIVAL}: Oh, what's the matter?\p"
 	.string "Haven't you caught or raised your\n"
 	.string "POKéMON very much?\p"
 	.string "That's not very good for a TRAINER!$"
 
-Route104_Text_MayLetsBattle: 
+Route104_Text_MayLetsBattle:
 	.string "{RIVAL}: So, what do you think?\n"
 	.string "How about a little battle here?$"
 
-Route104_Text_MayIntro: 
+Route104_Text_MayIntro:
 	.string "{RIVAL}: You just became a TRAINER,\n"
 	.string "{PLAYER}. I'm not going to lose!$"
 
-Route104_Text_MayDefeat: 
+Route104_Text_MayDefeat:
 	.string "Yikes!\n"
 	.string "You're better than I expected!$"
 
-Route104_Text_MayPostBattle: 
+Route104_Text_MayPostBattle:
 	.string "{RIVAL}: I can tell you've gotten pretty\n"
 	.string "good with the way you handle POKéMON.\p"
 	.string "But instead of only making them\n"
@@ -1147,43 +1147,43 @@ Route104_Text_MayPostBattle:
 	.string "It's important to become friends with\n"
 	.string "POKéMON, too.$"
 
-Route104_Text_BrendanWeShouldRegister: 
+Route104_Text_BrendanWeShouldRegister:
 	.string "{RIVAL}: Oh, hey, {PLAYER}!\p"
 	.string "Cool, you had DEVON install the MATCH\n"
 	.string "CALL system on your POKéNAV!\p"
 	.string "Let's register each other in our\n"
 	.string "POKéNAVS so we can keep in touch.$"
 
-Route104_Text_RegisteredBrendan: 
+Route104_Text_RegisteredBrendan:
 	.string "{PLAYER} registered BRENDAN\n"
 	.string "in the POKéNAV.$"
 
-Route104_Text_BrendanHowsYourPokedex: 
+Route104_Text_BrendanHowsYourPokedex:
 	.string "{RIVAL}: {PLAYER}, how's your POKéDEX?\n"
 	.string "Have you filled in any pages yet?$"
 
-Route104_Text_BrendanDoingGreatLetsBattle: 
+Route104_Text_BrendanDoingGreatLetsBattle:
 	.string "Me, I'm doing great!\p"
 	.string "Want to check out how good I am with\n"
 	.string "a battle?$"
 
-Route104_Text_BrendanNoConfidence: 
+Route104_Text_BrendanNoConfidence:
 	.string "{RIVAL}: What's the matter? Don't have\n"
 	.string "any confidence in your POKéMON?$"
 
-Route104_Text_BrendanLetsBattle: 
+Route104_Text_BrendanLetsBattle:
 	.string "{RIVAL}: What's up?\n"
 	.string "Want to have a battle with me?$"
 
-Route104_Text_BrendanIntro: 
+Route104_Text_BrendanIntro:
 	.string "{RIVAL}: I know you just became\n"
 	.string "a TRAINER, but I won't go easy!$"
 
-Route104_Text_BrendanDefeat: 
+Route104_Text_BrendanDefeat:
 	.string "Hmm…\n"
 	.string "You're pretty good.$"
 
-Route104_Text_BrendanPostBattle: 
+Route104_Text_BrendanPostBattle:
 	.string "{RIVAL}: You've gotten pretty decent\n"
 	.string "at handling POKéMON.\p"
 	.string "But, you know, you shouldn't just be\n"
