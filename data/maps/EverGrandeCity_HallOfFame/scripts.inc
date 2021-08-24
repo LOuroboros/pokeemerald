@@ -1,23 +1,23 @@
 .set LOCALID_WALLACE, 1
 
-EverGrandeCity_HallOfFame_MapScripts:: @ 822982C
+EverGrandeCity_HallOfFame_MapScripts:: 
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, EverGrandeCity_HallOfFame_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, EverGrandeCity_HallOfFame_OnWarp
 	.byte 0
 
-EverGrandeCity_HallOfFame_OnWarp: @ 8229837
+EverGrandeCity_HallOfFame_OnWarp: 
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth
 	.2byte 0
 
-EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth:: @ 8229841
+EverGrandeCity_HallOfFame_EventScript_TurnPlayerNorth:: 
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	end
 
-EverGrandeCity_HallOfFame_OnFrame: @ 8229846
+EverGrandeCity_HallOfFame_OnFrame: 
 	map_script_2 VAR_TEMP_1, 0, EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame
 	.2byte 0
 
-EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: @ 8229850
+EverGrandeCity_HallOfFame_EventScript_EnterHallOfFame:: 
 	lockall
 	goto_if_var_ge VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1, EverGrandeCity_HallOfFame_EventScript_EnterHallOfFameAgain
 	applymovement LOCALID_WALLACE, EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1
@@ -87,7 +87,7 @@ EverGrandeCity_HallOfFame_EventScript_EnterHallOfFameAgain:
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearFemale
 	end
 
-EverGrandeCity_HallOfFame_EventScript_GameClearMale:: @ 82298E9
+EverGrandeCity_HallOfFame_EventScript_GameClearMale:: 
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
 	compare VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1
@@ -104,7 +104,7 @@ EverGrandeCity_HallOfFame_EventScript_SkipCreditsMale:
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearMale2
 	goto EverGrandeCity_HallOfFame_EventScript_GameClearMale2
 
-EverGrandeCity_HallOfFame_EventScript_GameClearFemale:: @ 82298F5
+EverGrandeCity_HallOfFame_EventScript_GameClearFemale:: 
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	fadescreenspeed FADE_TO_BLACK, 24
 	compare VAR_POKEMON_LEAGUE_RUNS_COUNTER, 1
@@ -121,7 +121,7 @@ EverGrandeCity_HallOfFame_EventScript_SkipCreditsFemale:
 	goto_if_eq EverGrandeCity_HallOfFame_EventScript_GameClearFemale2
 	goto EverGrandeCity_HallOfFame_EventScript_GameClearFemale2
 
-EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1: @ 8229901
+EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1: 
 	walk_up
 	walk_up
 	walk_up
@@ -130,7 +130,7 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1: @ 8229901
 	walk_up
 	step_end
 
-EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2: @ 8229908
+EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2: 
 	walk_up
 	walk_up
 	walk_up
@@ -138,7 +138,7 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2: @ 8229908
 	walk_up
 	step_end
 
-EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions: @ 822990E
+EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions: 
 	.string "WALLACE: This room…\p"
 	.string "This is where we keep records of\n"
 	.string "POKéMON that prevailed through\l"
@@ -146,7 +146,7 @@ EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions: @ 822990E
 	.string "It is here that the LEAGUE CHAMPIONS\n"
 	.string "are honored.$"
 
-EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames: @ 82299A3
+EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames: 
 	.string "WALLACE: Come on, let's record your\n"
 	.string "name as a TRAINER who triumphed over\l"
 	.string "the POKéMON LEAGUE, and the names of\l"

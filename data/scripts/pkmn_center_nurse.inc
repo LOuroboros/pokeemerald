@@ -1,4 +1,4 @@
-Common_EventScript_PkmnCenterNurse:: @ 827191E
+Common_EventScript_PkmnCenterNurse:: 
     lock
     faceplayer
     specialvar VAR_RESULT, CountPlayerTrainerStars
@@ -16,7 +16,7 @@ Common_EventScript_PkmnCenterNurse2:
     compare VAR_RESULT, NO
     goto_if_eq EventScript_PkmnCenterNurse_Goodbye
 
-EventScript_PkmnCenterNurse_GoldCard:: @ 8271A68
+EventScript_PkmnCenterNurse_GoldCard:: 
     goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_AskForUsual
     msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT
     playse SE_PIN
@@ -32,7 +32,7 @@ EventScript_PkmnCenterNurse_GoldCard:: @ 8271A68
     release
     end
 
-EventScript_PkmnCenterNurse_AskForUsual:: @ 8271AAC
+EventScript_PkmnCenterNurse_AskForUsual:: 
     msgbox gText_YouWantTheUsual, MSGBOX_YESNO
     compare VAR_RESULT, YES
     goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
@@ -40,12 +40,12 @@ EventScript_PkmnCenterNurse_AskForUsual:: @ 8271AAC
     release
     end
 
-EventScript_PkmnCenterNurse_Goodbye:: @ 8271954
+EventScript_PkmnCenterNurse_Goodbye:: 
     msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
     release
     end
 
-EventScript_PkmnCenterNurse_HealPkmn:: @ 827195A
+EventScript_PkmnCenterNurse_HealPkmn:: 
     getgamestat GAME_STAT_USED_POKECENTER
     compare VAR_RESULT, 1
     call_if_ge EventScript_PkmnCenterNurse_HealPkmnAgain
@@ -70,7 +70,7 @@ EventScript_PkmnCenterNurse_HealPkmnForTheFirstTime:
     waitmessage
     return
 
-EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 8271993
+EventScript_PkmnCenterNurse_TakeAndHealPkmn:: 
     applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestLeft
     waitmovement 0
     dofieldeffect FLDEFF_POKECENTER_HEAL
@@ -80,7 +80,7 @@ EventScript_PkmnCenterNurse_TakeAndHealPkmn:: @ 8271993
     special HealPlayerParty
     return
 
-EventScript_PkmnCenterNurse_CheckPokerus:: @ 8271A43
+EventScript_PkmnCenterNurse_CheckPokerus:: 
     specialvar VAR_RESULT, IsPokerusInParty
     compare VAR_RESULT, FALSE
     goto_if_eq EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom
@@ -88,7 +88,7 @@ EventScript_PkmnCenterNurse_CheckPokerus:: @ 8271A43
     setflag FLAG_POKERUS_EXPLAINED
     return
 
-EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom:: @ 82719B1
+EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom:: 
     specialvar VAR_RESULT, PlayerNotAtTrainerHillEntrance
     compare VAR_RESULT, TRUE
     goto_if_eq EventScript_PkmnCenterNurse_ReturnPkmn
@@ -99,7 +99,7 @@ EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom:: @ 82719B1
     release
     end
 
-EventScript_PkmnCenterNurse_ReturnPkmn:: @ 82719E2
+EventScript_PkmnCenterNurse_ReturnPkmn:: 
     goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_ReturnPkmn2
     message gText_RestoredPkmnToFullHealth
     waitmessage
@@ -109,7 +109,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn:: @ 82719E2
     release
     end
 
-EventScript_PkmnCenterNurse_ReturnPkmn2:: @ 8271A03
+EventScript_PkmnCenterNurse_ReturnPkmn2:: 
     message gText_ThankYouForWaiting
     waitmessage
     applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
@@ -118,7 +118,7 @@ EventScript_PkmnCenterNurse_ReturnPkmn2:: @ 8271A03
     release
     end
 
-EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom:: @ 8271A19
+EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom:: 
     goto_if_set FLAG_NURSE_UNION_ROOM_REMINDER, EventScript_PkmnCenterNurse_ReturnPkmn
 	special InitUnionRoom
     msgbox gText_RestoredPkmnToFullHealth, MSGBOX_DEFAULT
@@ -131,7 +131,7 @@ EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom:: @ 8271A19
     release
     end
 
-Movement_PkmnCenterNurse_Bow: @ 8271AD0
+Movement_PkmnCenterNurse_Bow: 
     nurse_joy_bow
     delay_16
     step_end

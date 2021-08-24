@@ -1,14 +1,14 @@
 .set LOCALID_FOSSIL, 1
 
-DesertUnderpass_MapScripts:: @ 823AF37
+DesertUnderpass_MapScripts:: 
 	map_script MAP_SCRIPT_ON_TRANSITION, DesertUnderpass_OnTransition
 	.byte 0
 
-DesertUnderpass_OnTransition: @ 823AF3D
+DesertUnderpass_OnTransition: 
 	setflag FLAG_LANDMARK_DESERT_UNDERPASS
 	end
 
-DesertUnderpass_EventScript_Fossil:: @ 823AF41
+DesertUnderpass_EventScript_Fossil:: 
 	lock
 	faceplayer
 	goto_if_set FLAG_CHOSE_ROOT_FOSSIL, DesertUnderpass_EventScript_GiveClawFossil
@@ -16,7 +16,7 @@ DesertUnderpass_EventScript_Fossil:: @ 823AF41
 	release
 	end
 
-DesertUnderpass_EventScript_GiveClawFossil:: @ 823AF57
+DesertUnderpass_EventScript_GiveClawFossil:: 
 	checkitemspace ITEM_CLAW_FOSSIL, 1
 	compare VAR_RESULT, FALSE
 	call_if_eq Common_EventScript_ShowBagIsFull
@@ -25,7 +25,7 @@ DesertUnderpass_EventScript_GiveClawFossil:: @ 823AF57
 	release
 	end
 
-DesertUnderpass_EventScript_GiveRootFossil:: @ 823AF68
+DesertUnderpass_EventScript_GiveRootFossil:: 
 	checkitemspace ITEM_ROOT_FOSSIL, 1
 	compare VAR_RESULT, FALSE
 	call_if_eq Common_EventScript_ShowBagIsFull

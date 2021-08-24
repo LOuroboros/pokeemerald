@@ -1,4 +1,4 @@
-EventScript_RepelWoreOff:: @ 82A4B2A
+EventScript_RepelWoreOff:: 
 	msgbox Text_RepelWoreOff, MSGBOX_SIGN
 	checkitem ITEM_REPEL, 1
 	compare VAR_RESULT, TRUE
@@ -29,7 +29,7 @@ EventScript_RepelWoreOff_Chose:
 EventScript_RepelWoreOff_End:
 	end
 
-Text_RepelWoreOff: @ 82A4B33
+Text_RepelWoreOff: 
 	.string "REPEL's effect wore off…$"
 Text_RepelAskAnother:
 	.string "Would you like to use another one?$"

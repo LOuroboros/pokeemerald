@@ -1,4 +1,4 @@
-EventScript_FieldPoison:: @ 82736BC
+EventScript_FieldPoison:: 
 	lockall
 	special TryFieldPoisonSurvive
 	waitstate

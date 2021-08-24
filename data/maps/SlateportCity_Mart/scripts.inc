@@ -1,21 +1,21 @@
-SlateportCity_Mart_MapScripts:: @ 820DC48
+SlateportCity_Mart_MapScripts:: 
 	.byte 0
 
-SlateportCity_Mart_EventScript_BlackBelt:: @ 820DC76
+SlateportCity_Mart_EventScript_BlackBelt:: 
 	msgbox SlateportCity_Mart_Text_SomeItemsOnlyAtMart, MSGBOX_NPC
 	end
 
-SlateportCity_Mart_EventScript_Man:: @ 820DC7F
+SlateportCity_Mart_EventScript_Man:: 
 	msgbox SlateportCity_Mart_Text_GreatBallIsBetter, MSGBOX_NPC
 	end
 
-SlateportCity_Mart_Text_SomeItemsOnlyAtMart: @ 820DC88
+SlateportCity_Mart_Text_SomeItemsOnlyAtMart: 
 	.string "The MARKET does have some interesting\n"
 	.string "merchandise.\p"
 	.string "But there are some items you can only\n"
 	.string "get at a POKéMON MART.$"
 
-SlateportCity_Mart_Text_GreatBallIsBetter: @ 820DCF8
+SlateportCity_Mart_Text_GreatBallIsBetter: 
 	.string "A GREAT BALL is better than a POKé BALL\n"
 	.string "at catching POKéMON.\p"
 	.string "With this, I should be able to get that\n"
