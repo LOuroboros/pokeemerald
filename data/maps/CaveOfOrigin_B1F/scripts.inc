@@ -32,7 +32,7 @@ CaveOfOrigin_B1F_EventScript_Wallace:: @ 82357A9
 	end
 
 CaveOfOrigin_B1F_Text_WallaceStory: @ 823586E
-	.string "Ah, so you are {PLAYER}{KUN}?\n"
+	.string "Ah, so you are {PLAYER}?\n"
 	.string "I've heard tales of your exploits.\p"
 	.string "My name is WALLACE.\p"
 	.string "I was once the GYM LEADER of\n"
