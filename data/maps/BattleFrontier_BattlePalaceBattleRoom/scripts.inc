@@ -29,13 +29,13 @@ BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfx:: @ 824F833
 
 @ The opponent's gfx are set to the players by default
 BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxMale:: @ 824F84B
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	specialvar VAR_OBJ_GFX_ID_1, GetPlayerCostumeId
+	specialvar VAR_OBJ_GFX_ID_0, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_EventScript_SetPlayerGfxFemale:: @ 824F856
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	specialvar VAR_OBJ_GFX_ID_1, GetPlayerCostumeId
+	specialvar VAR_OBJ_GFX_ID_0, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattlePalaceBattleRoom_OnFrame: @ 824F861

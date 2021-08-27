@@ -34,11 +34,11 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx:: @ 824BCDC
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale:: @ 824BCF4
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	specialvar VAR_OBJ_GFX_ID_1, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale:: @ 824BCFA
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	specialvar VAR_OBJ_GFX_ID_1, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattleDomeBattleRoom_OnFrame: @ 824BD00

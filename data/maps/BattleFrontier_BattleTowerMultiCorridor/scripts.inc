@@ -25,11 +25,11 @@ BattleFrontier_BattleTowerMultiCorridor_EventScript_SetObjGfx:: @ 8248D71
 	checkplayergender
 	compare VAR_RESULT, FEMALE
 	goto_if_eq BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale
-	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_BRENDAN_NORMAL
+	specialvar VAR_OBJ_GFX_ID_F, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_SetPlayerGfxFemale:: @ 8248D8B
-	setvar VAR_OBJ_GFX_ID_F, OBJ_EVENT_GFX_MAY_NORMAL
+	specialvar VAR_OBJ_GFX_ID_F, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattleTowerMultiCorridor_EventScript_SetLinkPlayerGfx:: @ 8248D91

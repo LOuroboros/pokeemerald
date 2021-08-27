@@ -23,24 +23,8 @@ BattleFrontier_BattleArenaBattleRoom_OnResume: @ 825749C
 
 BattleFrontier_BattleArenaBattleRoom_OnTransition: @ 82574A0
 	frontier_settrainers
-	call BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfx
+	specialvar VAR_OBJ_GFX_ID_1, GetPlayerCostumeId
 	end
-
-BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfx:: @ 82574AE
-	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale
-	return
-
-BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxMale:: @ 82574C6
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-BattleFrontier_BattleArenaBattleRoom_EventScript_SetPlayerGfxFemale:: @ 82574CC
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
-	return
 
 BattleFrontier_BattleArenaBattleRoom_OnFrame: @ 82574D2
 	map_script_2 VAR_TEMP_0, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_EnterRoom
