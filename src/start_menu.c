@@ -646,6 +646,7 @@ static bool8 HandleStartMenuInput(void)
         return TRUE;
     }
 
+#ifdef DEBUG_MODE_ENABLED
     if (JOY_NEW(L_BUTTON) && JOY_NEW(R_BUTTON))
     {
         if (!FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU))
@@ -656,6 +657,7 @@ static bool8 HandleStartMenuInput(void)
         RemoveStartMenuWindow();
         InitStartMenu();
     }
+#endif
 
     return FALSE;
 }
@@ -770,10 +772,12 @@ static bool8 StartMenuOptionCallback(void)
 
 static bool8 StartMenuDebugCallback(void)
 {
+#ifdef DEBUG_MODE_ENABLED
     PlaySE(SE_WIN_OPEN);
     Debug_ShowMainMenu();
 
     return TRUE;
+#endif
 }
 
 static bool8 StartMenuExitCallback(void)

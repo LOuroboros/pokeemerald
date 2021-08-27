@@ -48,6 +48,8 @@
 #include "daycare.h"
 #include "constants/daycare.h"
 
+#ifdef DEBUG_MODE_ENABLED
+
 // *******************************
 // Enums
 enum { // Main
@@ -194,7 +196,6 @@ struct DebugMonData
 // *******************************
 // Define functions
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
-void Debug_ShowMainMenu(void);
 static void Debug_DestroyMenu(u8);
 static void DebugAction_Cancel(u8);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
@@ -798,13 +799,18 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_PresetWarp =
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utillities_PresetWarp),
 };
+#endif
 
 // *******************************
 // Functions universal
 void Debug_ShowMainMenu(void)
 {
+#ifdef DEBUG_MODE_ENABLED
     Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
+#endif
 }
+
+#ifdef DEBUG_MODE_ENABLED
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
 {
     struct ListMenuTemplate menuTemplate;
@@ -4367,3 +4373,4 @@ static void DebugAction_PresetWarp_PkmnLeagueChampion(u8 taskId)
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_HALL4), MAP_NUM(EVER_GRANDE_CITY_HALL4), 255, 5, 4);
     DoWarp();
 }
+#endif
