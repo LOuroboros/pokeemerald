@@ -15,7 +15,6 @@ struct Main
     /*0x00C*/ IntrCallback vblankCallback;
     /*0x010*/ IntrCallback hblankCallback;
     /*0x014*/ IntrCallback vcountCallback;
-    /*0x018*/ IntrCallback serialCallback;
 
     /*0x01C*/ vu16 intrCheck;
 
@@ -61,7 +60,6 @@ void InitKeys(void);
 void SetVBlankCallback(IntrCallback callback);
 void SetHBlankCallback(IntrCallback callback);
 void SetVCountCallback(IntrCallback callback);
-void SetSerialCallback(IntrCallback callback);
 void InitFlashTimer(void);
 void SetTrainerHillVBlankCounter(u32 *var);
 void ClearTrainerHillVBlankCounter(void);
