@@ -47,6 +47,7 @@
 #include "coins.h"
 #include "daycare.h"
 #include "constants/daycare.h"
+#include "debug.h"
 
 #ifdef DEBUG_MODE_ENABLED
 
@@ -799,18 +800,14 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_PresetWarp =
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utillities_PresetWarp),
 };
-#endif
 
 // *******************************
 // Functions universal
 void Debug_ShowMainMenu(void)
 {
-#ifdef DEBUG_MODE_ENABLED
     Debug_ShowMenu(DebugTask_HandleMenuInput_Main, sDebugMenu_ListTemplate_Main);
-#endif
 }
 
-#ifdef DEBUG_MODE_ENABLED
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate)
 {
     struct ListMenuTemplate menuTemplate;

@@ -168,7 +168,9 @@ static const struct MenuAction sStartMenuItems[] =
     {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
     {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
+#ifdef DEBUG_MODE_ENABLED
     {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
+#endif
     {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
     {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
     {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
@@ -322,8 +324,10 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
 
+#ifdef DEBUG_MODE_ENABLED
     if (FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU) == TRUE)
         AddStartMenuAction(MENU_ACTION_DEBUG);
+#endif
 
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -617,24 +621,16 @@ static bool8 HandleStartMenuInput(void)
 
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
 
-        if (gMenuCallback != StartMenuSaveCallback
-         && gMenuCallback != StartMenuExitCallback
-         && gMenuCallback != StartMenuSafariZoneRetireCallback
-         && gMenuCallback != StartMenuBattlePyramidRetireCallback)
+    #ifdef DEBUG_MODE_ENABLED
+        if (gMenuCallback == StartMenuDebugCallback)
         {
-            if (gMenuCallback == StartMenuDebugCallback)
-            {
-                PlayerFreeze();
-                sub_808BCF4();
-                ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
-                RemoveStartMenuWindow();
-                ScriptContext2_Enable();
-            }
-            else
-            {
-                FadeScreen(FADE_TO_BLACK, 0);
-            }
+            PlayerFreeze();
+            sub_808BCF4();
+            ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
+            RemoveStartMenuWindow();
+            ScriptContext2_Enable();
         }
+    #endif
 
         return FALSE;
     }
@@ -647,7 +643,7 @@ static bool8 HandleStartMenuInput(void)
     }
 
 #ifdef DEBUG_MODE_ENABLED
-    if (JOY_NEW(L_BUTTON) && JOY_NEW(R_BUTTON))
+    if (JOY_NEW(UNLOCK_DEBUG_MENU_COMBO) == UNLOCK_DEBUG_MENU_COMBO)
     {
         if (!FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU))
             FlagSet(FLAG_SYS_ENABLE_DEBUG_MENU);
