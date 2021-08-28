@@ -9394,20 +9394,20 @@ static void SpriteCB_ItemIcon_HideParty(struct Sprite *sprite)
 //  SECTION: General utility
 //------------------------------------------------------------------------------
 
-
-// Unused, leftover from FRLG
-static void BackupPokemonStorage(void/*struct PokemonStorage * dest*/)
-{
-    //*dest = *gPokemonStoragePtr;
-}
-
-// Unused, leftover from FRLG
-static void RestorePokemonStorage(void/*struct PokemonStorage * src*/)
-{
-    //*gPokemonStoragePtr = *src;
-}
-
 // Functions here are general utility functions.
+
+// Originally Unused, leftover from FRLG
+static void BackupPokemonStorage(struct PokemonStorage * dest)
+{
+    *dest = *gPokemonStoragePtr;
+}
+
+// Originally Unused, leftover from FRLG
+static void RestorePokemonStorage(struct PokemonStorage * src)
+{
+    *gPokemonStoragePtr = *src;
+}
+
 u8 StorageGetCurrentBox(void)
 {
     return gPokemonStoragePtr->currentBox;
