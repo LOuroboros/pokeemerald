@@ -200,7 +200,7 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
 
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
 
-const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
+const struct SpritePalette gTrainerFrontPicPaletteTable[] =
 {
     TRAINER_PAL(HIKER, gTrainerPalette_Hiker),
     TRAINER_PAL(AQUA_GRUNT_M, gTrainerPalette_AquaGruntM),
