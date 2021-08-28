@@ -4001,30 +4001,9 @@ static void PartyMenuStartSpriteAnim(u8 spriteId, u8 animNum)
     StartSpriteAnim(&gSprites[spriteId], animNum);
 }
 
-// Unused. Might explain the large blank section in gPartyMenuPokeballSmall_Gfx
-// At the very least this is how the unused anim cmds for sSpriteAnimTable_MenuPokeballSmall were meant to be accessed
-static void SpriteCB_BounceConfirmCancelButton(u8 spriteId, u8 spriteId2, u8 animNum)
-{
-    if (animNum == 0)
-    {
-        StartSpriteAnim(&gSprites[spriteId], 2);
-        StartSpriteAnim(&gSprites[spriteId2], 4);
-        gSprites[spriteId].pos2.y = 0;
-        gSprites[spriteId2].pos2.y = 0;
-    }
-    else
-    {
-        StartSpriteAnim(&gSprites[spriteId], 3);
-        StartSpriteAnim(&gSprites[spriteId2], 5);
-        gSprites[spriteId].pos2.y = -4;
-        gSprites[spriteId2].pos2.y = 4;
-    }
-}
-
 static void LoadPartyMenuPokeballGfx(void)
 {
     LoadCompressedSpriteSheet(&sSpriteSheet_MenuPokeball);
-    LoadCompressedSpriteSheet(&sSpriteSheet_MenuPokeballSmall);
     LoadCompressedSpritePalette(&sSpritePalette_MenuPokeball);
 }
 

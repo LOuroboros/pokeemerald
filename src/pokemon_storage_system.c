@@ -9974,4 +9974,3 @@ static void TilemapUtil_Draw(u8 id)
         tiles += adder;
     }
 }
-

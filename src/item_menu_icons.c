@@ -26,8 +26,6 @@ static void SpriteCB_SwitchPocketRotatingBallContinue(struct Sprite *sprite);
 // static const rom data
 static const u16 gRotatingBall_Pal[] = INCBIN_U16("graphics/interface/bag_spinner.gbapal");
 static const u8 gRotatingBall[] = INCBIN_U8("graphics/interface/bag_spinner.4bpp");
-static const u8 gCherryUnused[] = INCBIN_U8("graphics/unused/cherry.4bpp");
-static const u16 gCherryUnused_Pal[] = INCBIN_U16("graphics/unused/cherry.gbapal");
 
 static const struct OamData sBagOamData =
 {

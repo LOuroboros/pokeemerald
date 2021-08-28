@@ -241,17 +241,6 @@ gTileset_PokemonFanClub::
 	.4byte NULL @ animation callback
 
 	.align 2
-gTileset_Unused1::
-	.byte TRUE @ is compressed
-	.byte TRUE @ is secondary tileset
-	.2byte 0 @ padding
-	.4byte gTilesetTiles_Unused1
-	.4byte gTilesetPalettes_Unused1
-	.4byte gMetatiles_Unused1
-	.4byte gMetatileAttributes_Unused1
-	.4byte NULL @ animation callback
-
-	.align 2
 gTileset_MeteorFalls::
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
@@ -425,17 +414,6 @@ gTileset_InsideOfTruck::
 	.4byte gTilesetPalettes_InsideOfTruck
 	.4byte gMetatiles_InsideOfTruck
 	.4byte gMetatileAttributes_InsideOfTruck
-	.4byte NULL @ animation callback
-
-	.align 2
-gTileset_Unused2::
-	.byte TRUE @ is compressed
-	.byte TRUE @ is secondary tileset
-	.2byte 0 @ padding
-	.4byte gTilesetTiles_Unused2
-	.4byte gTilesetPalettes_Unused2
-	.4byte gMetatiles_Unused2
-	.4byte gMetatileAttributes_Unused2
 	.4byte NULL @ animation callback
 
 	.align 2
