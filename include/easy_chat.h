@@ -133,7 +133,6 @@ u16 GetNewHipsterPhraseToTeach(void);
 u16 EasyChat_GetNumWordsInGroup(u8);
 u16 GetRandomEasyChatWordFromUnlockedGroup(u16);
 void DoEasyChatScreen(u8 type, u16 *words, MainCallback callback, u8 displayedPersonType);
-void InitQuestionnaireWords(void);
 void UnlockAdditionalPhrase(u8 additionalPhraseId);
 
 #endif // GUARD_EASYCHAT_H

@@ -18,7 +18,6 @@
 #include "overworld.h"
 #include "palette.h"
 #include "union_room.h"
-#include "mevent2.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"
@@ -997,21 +996,7 @@ void CB2_ReturnFromCableClubBattle(void)
     UpdateTrainerFansAfterLinkBattle();
 
     if (gSpecialVar_0x8004 == USING_SINGLE_BATTLE || gSpecialVar_0x8004 == USING_DOUBLE_BATTLE)
-    {
         UpdatePlayerLinkBattleRecords(gLocalLinkPlayerId ^ 1);
-        if (gWirelessCommType)
-        {
-            switch (gBattleOutcome)
-            {
-            case B_OUTCOME_WON:
-                RecordIdOfWonderCardSenderByEventType(0, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
-                break;
-            case B_OUTCOME_LOST:
-                RecordIdOfWonderCardSenderByEventType(1, gLinkPlayers[GetMultiplayerId() ^ 1].trainerId);
-                break;
-            }
-        }
-    }
 
     if (InUnionRoom() == TRUE)
         gMain.savedCallback = CB2_ReturnFromUnionRoomBattle;

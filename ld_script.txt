@@ -57,16 +57,9 @@ SECTIONS {
         src/link_rfu_3.o(.text);
         src/link_rfu_2.o(.text);
         src/union_room.o(.text);
-        src/mystery_gift.o(.text);
         src/union_room_player_avatar.o(.text);
         src/wireless_communication_status_screen.o(.text);
         src/union_room_battle.o(.text);
-        src/mevent2.o(.text);
-        src/mevent_801BAAC.o(.text);
-        src/mevent_server.o(.text);
-        src/mevent_client.o(.text);
-        src/mevent_server_helpers.o(.text);
-        src/mevent_news.o(.text);
         src/union_room_chat.o(.text);
         src/berry_crush.o(.text);
         src/berry_powder.o(.text);
@@ -235,7 +228,6 @@ SECTIONS {
         src/palette_util.o(.text);
         src/confetti_util.o(.text);
         src/save.o(.text);
-        src/mystery_event_script.o(.text);
         src/field_effect_helpers.o(.text);
         src/contest_ai.o(.text);
         src/battle_anim_sound_tasks.o(.text);
@@ -259,7 +251,6 @@ SECTIONS {
         src/lottery_corner.o(.text);
         src/diploma.o(.text);
         src/berry_tag_screen.o(.text);
-        src/mystery_event_menu.o(.text);
         src/save_failed_screen.o(.text);
         src/braille_puzzles.o(.text);
         src/pokeblock_feed.o(.text);
@@ -316,9 +307,7 @@ SECTIONS {
         src/pokenav_ribbons_2.o(.text);
         src/pokenav_match_call_data.o(.text);
         src/menu_specialized.o(.text);
-        src/ereader_helpers.o(.text);
         src/faraway_island.o(.text);
-        src/ereader_screen.o(.text);
         src/trainer_hill.o(.text);
         src/rayquaza_scene.o(.text);
         src/walda_phrase.o(.text);
@@ -342,7 +331,6 @@ SECTIONS {
         data/field_effect_scripts.o(script_data);
         data/battle_scripts_2.o(script_data);
         data/contest_ai_scripts.o(script_data);
-        data/mystery_event_script_cmd_table.o(script_data);
     } =0
 
     lib_text :
@@ -445,15 +433,9 @@ SECTIONS {
         src/link_rfu_2.o(.rodata);
         src/link_rfu_2.o(.rodata.str1.4);
         src/union_room.o(.rodata);
-        src/mystery_gift.o(.rodata);
         src/union_room_player_avatar.o(.rodata);
         src/wireless_communication_status_screen.o(.rodata);
         src/union_room_battle.o(.rodata);
-        src/mevent2.o(.rodata);
-        src/mevent_801BAAC.o(.rodata);
-        src/mevent_server.o(.rodata);
-        src/mevent_client.o(.rodata);
-        src/mevent_scripts.o(.rodata);
         src/union_room_chat.o(.rodata);
         src/berry_crush.o(.rodata);
         src/berry_powder.o(.rodata);
@@ -619,7 +601,6 @@ SECTIONS {
         src/diploma.o(.rodata);
         src/strings.o(.rodata);
         src/berry_tag_screen.o(.rodata);
-        src/mystery_event_menu.o(.rodata);
         src/save_failed_screen.o(.rodata);
         src/braille_puzzles.o(.rodata);
         src/pokeblock_feed.o(.rodata);
@@ -672,9 +653,7 @@ SECTIONS {
         src/pokenav_ribbons_2.o(.rodata);
         src/pokenav_match_call_data.o(.rodata);
         src/menu_specialized.o(.rodata);
-        src/ereader_helpers.o(.rodata);
         src/faraway_island.o(.rodata);
-        src/ereader_screen.o(.rodata);
         src/trainer_hill.o(.rodata);
         src/rayquaza_scene.o(.rodata);
         src/walda_phrase.o(.rodata);
@@ -682,8 +661,6 @@ SECTIONS {
         src/battle_transition_frontier.o(.rodata);
         src/text_input_strings.o(.rodata);
         data/fonts.o(.rodata);
-        src/mystery_event_msg.o(.rodata);
-        data/mystery_event.o(.rodata);
         src/debug.o(.rodata);
         src/wonder_trade.o(.rodata);
         src/infobox.o(.rodata);

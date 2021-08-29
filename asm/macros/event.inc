@@ -76,20 +76,9 @@
 	.byte \function
 	.endm
 
-	@ Executes a script stored in a default RAM location.
-	.macro returnram
-	.byte 0x0c
-	.endm
-
 	@ Terminates script execution and "resets the script RAM".
 	.macro killscript
 	.byte 0x0d
-	.endm
-
-	@ Sets some status related to Mystery Event.
-	.macro setmysteryeventstatus value:req
-	.byte 0x0e
-	.byte \value
 	.endm
 
 	@ Sets the specified script bank to value.

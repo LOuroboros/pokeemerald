@@ -55,6 +55,7 @@
 #include "constants/weather.h"
 #include "constants/battle_transition.h"
 #include "constants/infobox.h"
+#include "constants/region_map_sections.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -917,10 +918,6 @@ gText_PlayerHandedOverTheItem::
 	.string "{PLAYER} handed over the\n"
 	.string "{STR_VAR_1}.$"
 
-gText_ThankYouForAccessingMysteryGift::
-	.string "Thank you for accessing the\n"
-	.string "MYSTERY GIFT System.$"
-
 gText_PlayerFoundOneTMHM::
 	.string "{PLAYER} found one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
@@ -934,7 +931,6 @@ gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} flew away!$"
 
 	.include "data/text/pc_transfer.inc"
-	.include "data/text/mevent.inc"
 	.include "data/text/abnormal_weather.inc"
 
 EventScript_SelectWithoutRegisteredItem::
@@ -1053,7 +1049,6 @@ Common_EventScript_LegendaryFlewAway::
 	end
 
 	.include "data/scripts/pc_transfer.inc"
-	.include "data/scripts/mevent.inc"
 	.include "data/scripts/abnormal_weather.inc"
 	.include "data/scripts/trainer_script.inc"
 	.include "data/scripts/berry_tree.inc"
@@ -1109,3 +1104,4 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 	.include "data/scripts/misc_scripts.inc"
+	.include "data/scripts/questionnaire.inc"

@@ -159,9 +159,6 @@ extern u8 gUnionRoomRequestedMonType;
 
 u8 CreateTask_CreateTradeMenu(void);
 void SetUsingUnionRoomStartMenu(void);
-void MEvent_CreateTask_CardOrNewsWithFriend(u32 arg0);
-void MEvent_CreateTask_CardOrNewsOverWireless(u32 arg0);
-void MEvent_CreateTask_Leader(u32 arg0);
 u8 CreateTask_ListenToWireless(void);
 void StartUnionRoomBattle(u16 battleFlags);
 

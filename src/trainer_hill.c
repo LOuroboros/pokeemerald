@@ -3,7 +3,6 @@
 #include "battle.h"
 #include "battle_tower.h"
 #include "battle_setup.h"
-#include "ereader_helpers.h"
 #include "event_data.h"
 #include "event_scripts.h"
 #include "fieldmap.h"

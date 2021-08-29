@@ -1,7 +1,6 @@
 #include "global.h"
 #include "script.h"
 #include "event_data.h"
-#include "mevent.h"
 #include "util.h"
 #include "constants/map_scripts.h"
 
@@ -346,35 +345,7 @@ void TryRunOnWarpIntoMapScript(void)
         ScriptContext2_RunNewScript(ptr);
 }
 
-u32 CalculateRamScriptChecksum(void)
-{
-    return 0;
-}
-
-void ClearRamScript(void)
-{
-}
-
-bool8 InitRamScript(const u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId)
-{
-    return FALSE;
-}
-
 const u8 *GetRamScript(u8 objectId, const u8 *script)
 {
     return script;
-}
-
-bool32 ValidateSavedRamScript(void)
-{
-    return FALSE;
-}
-
-u8 *GetSavedRamScriptIfValid(void)
-{
-    return NULL;
-}
-
-void InitRamScript_NoObjectEvent(u8 *script, u16 scriptSize)
-{
 }

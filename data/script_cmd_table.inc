@@ -12,9 +12,9 @@ gScriptCmdTable::
 	.4byte ScrCmd_callstd                   @ 0x09
 	.4byte ScrCmd_gotostd_if                @ 0x0a
 	.4byte ScrCmd_callstd_if                @ 0x0b
-	.4byte ScrCmd_returnram                 @ 0x0c
+	.4byte ScrCmd_nop1                      @ 0x0c
 	.4byte ScrCmd_killscript                @ 0x0d
-	.4byte ScrCmd_setmysteryeventstatus     @ 0x0e
+	.4byte ScrCmd_nop1                      @ 0x0e
 	.4byte ScrCmd_loadword                  @ 0x0f
 	.4byte ScrCmd_loadbyte                  @ 0x10
 	.4byte ScrCmd_writebytetoaddr           @ 0x11
@@ -207,9 +207,9 @@ gScriptCmdTable::
 	.4byte ScrCmd_nop1                      @ 0xcc
 	.4byte ScrCmd_setmoneventlegal          @ 0xcd
 	.4byte ScrCmd_checkmoneventlegal        @ 0xce
-	.4byte ScrCmd_gotoram                   @ 0xcf
+	.4byte ScrCmd_nop1                      @ 0xcf
 	.4byte ScrCmd_nop1                      @ 0xd0
-	.4byte ScrCmd_warpspinenter             @ 0xd1
+	.4byte ScrCmd_nop1                      @ 0xd1
 	.4byte ScrCmd_setmonmetlocation         @ 0xd2
 	.4byte ScrCmd_moverotatingtileobjects   @ 0xd3
 	.4byte ScrCmd_turnrotatingtileobjects   @ 0xd4

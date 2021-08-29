@@ -27,7 +27,6 @@
 #include "main.h"
 #include "menu.h"
 #include "money.h"
-#include "mystery_event_script.h"
 #include "palette.h"
 #include "party_menu.h"
 #include "pokemon_storage_system.h"
@@ -285,25 +284,10 @@ bool8 ScrCmd_callstd_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_returnram(struct ScriptContext *ctx)
-{
-    ScriptJump(ctx, gRamScriptRetAddr);
-    return FALSE;
-}
-
 bool8 ScrCmd_killscript(struct ScriptContext *ctx)
 {
-    ClearRamScript();
     StopScript(ctx);
     return TRUE;
-}
-
-bool8 ScrCmd_setmysteryeventstatus(struct ScriptContext *ctx)
-{
-    u8 value = ScriptReadByte(ctx);
-
-    SetMysteryEventScriptStatus(value);
-    return FALSE;
 }
 
 bool8 ScrCmd_loadword(struct ScriptContext *ctx)
@@ -2242,37 +2226,6 @@ bool8 ScrCmd_checkmoneventlegal(struct ScriptContext *ctx)
 
     gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_EVENT_LEGAL, NULL);
     return FALSE;
-}
-
-// TODO: Should be renamed. Name implies general usage, but its specifically for Wonder Card
-// See GetSavedRamScriptIfValid, which is NULL if ValidateReceivedWonderCard returns FALSE
-bool8 ScrCmd_gotoram(struct ScriptContext *ctx)
-{
-    const u8* script = GetSavedRamScriptIfValid();
-
-    if (script)
-    {
-        gRamScriptRetAddr = ctx->scriptPtr;
-        ScriptJump(ctx, script);
-    }
-    return FALSE;
-}
-
-// Unused
-// For the warp used by the Aqua Hideout, see DoTeleportTileWarp
-bool8 ScrCmd_warpspinenter(struct ScriptContext *ctx)
-{
-    u8 mapGroup = ScriptReadByte(ctx);
-    u8 mapNum = ScriptReadByte(ctx);
-    u8 warpId = ScriptReadByte(ctx);
-    u16 x = VarGet(ScriptReadHalfword(ctx));
-    u16 y = VarGet(ScriptReadHalfword(ctx));
-
-    SetWarpDestination(mapGroup, mapNum, warpId, x, y);
-    SetSpinStartFacingDir(GetPlayerFacingDirection());
-    DoSpinEnterWarp();
-    ResetInitialPlayerAvatarState();
-    return TRUE;
 }
 
 bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)

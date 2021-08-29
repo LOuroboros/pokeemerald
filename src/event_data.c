@@ -82,26 +82,6 @@ bool32 IsNationalPokedexEnabled(void)
         return FALSE;
 }
 
-bool32 IsMysteryEventEnabled(void)
-{
-    return FlagGet(FLAG_SYS_MYSTERY_EVENT_ENABLE);
-}
-
-void DisableMysteryGift(void)
-{
-    FlagClear(FLAG_SYS_MYSTERY_GIFT_ENABLE);
-}
-
-void EnableMysteryGift(void)
-{
-    FlagSet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
-}
-
-bool32 IsMysteryGiftEnabled(void)
-{
-    return FlagGet(FLAG_SYS_MYSTERY_GIFT_ENABLE);
-}
-
 void DisableResetRTC(void)
 {
     VarSet(VAR_RESET_RTC_ENABLE, 0);

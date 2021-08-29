@@ -237,7 +237,7 @@
 #define VAR_REGISTER_BIRCH_STATE             0x40DA
 #define VAR_UNUSED_0x40DB                    0x40DB // Unused Var
 #define VAR_UNUSED_0x40DC                    0x40DC // Unused Var
-#define VAR_EVENT_PICHU_SLOT                 0x40DD
+#define VAR_UNUSED_0x40DD                    0x40DD
 #define VAR_UNUSED_0x40DE                    0x40DE // Var was originally written to, but never read
 #define VAR_UNUSED_0x40DF                    0x40DF // Var was originally written to, but never read
 #define VAR_UNUSED_0x40E0                    0x40E0 // Var was originally written to, but never read

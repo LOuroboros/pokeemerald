@@ -399,7 +399,6 @@ gSpecials::
 	def_special ClearQuizLadyQuestionAndAnswer
 	def_special QuizLadySetCustomQuestion
 	def_special QuizLadyTakePrizeForCustomQuiz
-	def_special GetMysteryEventCardVal
 	def_special QuizLadyRecordCustomQuizData
 	def_special QuizLadySetWaitingForChallenger
 	def_special BufferQuizCorrectAnswer
@@ -429,11 +428,9 @@ gSpecials::
 	def_special ShowWirelessCommunicationScreen
 	def_special InitUnionRoom
 	def_special BufferUnionRoomPlayerName
-	def_special sub_801DC20
 	def_special ChooseMonForWirelessMinigame
 	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
-	def_special ValidateReceivedWonderCard
 	def_special HasAtLeastOneBerry
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice

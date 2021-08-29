@@ -16,7 +16,6 @@
 #include "task.h"
 #include "text.h"
 #include "save.h"
-#include "mystery_gift.h"
 
 struct SioInfo
 {
@@ -1912,7 +1911,7 @@ static void RfuCheckErrorStatus(void)
 {
     if (Rfu.errorState == 1 && lman.childClockSlave_flag == 0)
     {
-        if (gMain.callback2 == c2_mystery_gift_e_reader_run || lman.init_param->mboot_flag)
+        if (lman.init_param->mboot_flag)
             gWirelessCommType = 2;
         SetMainCallback2(CB2_LinkError);
         gMain.savedCallback = CB2_LinkError;

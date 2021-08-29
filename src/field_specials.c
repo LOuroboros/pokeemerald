@@ -22,7 +22,6 @@
 #include "link.h"
 #include "list_menu.h"
 #include "main.h"
-#include "mevent.h"
 #include "match_call.h"
 #include "menu.h"
 #include "overworld.h"
@@ -56,7 +55,6 @@
 #include "constants/heal_locations.h"
 #include "constants/map_types.h"
 #include "constants/maps.h"
-#include "constants/mevent.h"
 #include "constants/script_menu.h"
 #include "constants/slot_machine.h"
 #include "constants/songs.h"
@@ -1673,25 +1671,6 @@ void BufferLottoTicketNumber(void)
         gStringVar1[2] = CHAR_0;
         gStringVar1[3] = CHAR_0;
         ConvertIntToDecimalStringN(gStringVar1 + 4, gSpecialVar_Result, STR_CONV_MODE_LEFT_ALIGN, CountDigits(gSpecialVar_Result));
-    }
-}
-
-u16 GetMysteryEventCardVal(void)
-{
-    switch (gSpecialVar_Result)
-    {
-        case GET_NUM_STAMPS:
-            return mevent_081445C0(GET_NUM_STAMPS_INTERNAL);
-        case GET_MAX_STAMPS:
-            return mevent_081445C0(GET_MAX_STAMPS_INTERNAL);
-        case GET_CARD_BATTLES_WON:
-            return mevent_081445C0(GET_CARD_BATTLES_WON_INTERNAL);
-        case 3: // Never occurs
-            return mevent_081445C0(1);
-        case 4: // Never occurs
-            return mevent_081445C0(2);
-        default:
-            return 0;
     }
 }
 

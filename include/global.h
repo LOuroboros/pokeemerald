@@ -364,7 +364,6 @@ struct BattleFrontier
     /*0xCE0*/ u16 towerWinStreaks[4][2];
     /*0xCF0*/ u16 towerRecordWinStreaks[4][2];
     /*0xD00*/ u16 battledBrainFlags;
-    /*0xD02*/ u16 towerSinglesStreak; // Never read
     /*0xD04*/ u16 towerNumWins; // Increments to MAX_STREAK but never read otherwise
     /*0xD06*/ u8 towerBattleOutcome;
     /*0xD07*/ u8 towerLvlMode;
@@ -488,7 +487,6 @@ struct SaveBlock2
     /*0x??*/ struct PlayersApprentice playerApprentice;
     /*0x??*/ struct Apprentice apprentices[APPRENTICE_COUNT];
     /*0x???*/ struct BerryCrush berryCrush;
-    /*0x???*/ struct BerryPickingResults berryPick;
     /*0x???*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
     /*0x???*/ struct BattleFrontier frontier;
               bool8 autoRun;
@@ -824,14 +822,6 @@ struct SaveTrainerHill
     /*0x3D6E*/ u16 tag:2;
 };
 
-struct MysteryEventStruct
-{
-    u8 unk_0_0:2;
-    u8 unk_0_2:3;
-    u8 unk_0_5:3;
-    u8 unk_1;
-};
-
  struct WonderNews
 {
     u16 unk_00;
@@ -868,31 +858,6 @@ struct MysteryEventStruct
     u32 crc;
     struct WonderCard data;
 };
-
- struct MEventBuffer_3430_Sub
-{
-    u16 unk_00;
-    u16 unk_02;
-    u16 unk_04;
-    u16 unk_06;
-    u16 unk_08[2][7];
-};
-
- struct MEventBuffer_3430
-{
-    u32 crc;
-    struct MEventBuffer_3430_Sub data;
-};
-
- struct MEventBuffers
-{
-    /*0x000 0x322C*/ struct WonderNewsSaveStruct wonderNews;
-    /*0x1c0 0x33EC*/ struct WonderCardSaveStruct wonderCard;
-    /*0x310 0x353C*/ struct MEventBuffer_3430 buffer_310;
-    /*0x338 0x3564*/ u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
-    /*0x340 0x356C*/ struct MysteryEventStruct unk_340;
-    /*0x344 0x3570*/ u32 unk_344[2][5];
-}; // 0x36C 0x3598
 
 // For external event data storage. The majority of these may have never been used.
 // In Emerald, the only known used fields are the PokeCoupon and BoxRS ones, but hacking the distribution discs allows Emerald to receive events and set the others

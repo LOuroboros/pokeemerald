@@ -161,7 +161,7 @@
 #define FLAG_MR_BRINEY_SAILING_INTRO                        0x93
 #define FLAG_DOCK_REJECTED_DEVON_GOODS                      0x94
 #define FLAG_DELIVERED_DEVON_GOODS                          0x95
-#define FLAG_MYSTERY_EVENT_DONE                             0x96 // Originally Unused, leftover from R/S
+#define FLAG_UNUSED_0x96                                    0x96 // Originally Unused, leftover from R/S
 #define FLAG_RECEIVED_CASTFORM                              0x97
 #define FLAG_RECEIVED_SUPER_ROD                             0x98
 #define FLAG_RUSTBORO_NPC_TRADE_COMPLETED                   0x99
@@ -328,23 +328,23 @@
 #define FLAG_RECEIVED_AURORA_TICKET                         0x13A
 #define FLAG_RECEIVED_MYSTIC_TICKET                         0x13B
 #define FLAG_RECEIVED_OLD_SEA_MAP                           0x13C
-#define FLAG_UNUSED_MYSTERY_GIFT_0x13D                      0x13D
-#define FLAG_UNUSED_MYSTERY_GIFT_0x13E                      0x13E
-#define FLAG_UNUSED_MYSTERY_GIFT_0x13F                      0x13F
-#define FLAG_UNUSED_MYSTERY_GIFT_0x140                      0x140
-#define FLAG_UNUSED_MYSTERY_GIFT_0x141                      0x141
-#define FLAG_UNUSED_MYSTERY_GIFT_0x142                      0x142
-#define FLAG_UNUSED_MYSTERY_GIFT_0x143                      0x143
-#define FLAG_UNUSED_MYSTERY_GIFT_0x144                      0x144
-#define FLAG_UNUSED_MYSTERY_GIFT_0x145                      0x145
-#define FLAG_UNUSED_MYSTERY_GIFT_0x146                      0x146
-#define FLAG_UNUSED_MYSTERY_GIFT_0x147                      0x147
-#define FLAG_UNUSED_MYSTERY_GIFT_0x148                      0x148
-#define FLAG_UNUSED_MYSTERY_GIFT_0x149                      0x149
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14A                      0x14A
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14B                      0x14B
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14C                      0x14C
-#define FLAG_UNUSED_MYSTERY_GIFT_0x14D                      0x14D
+#define FLAG_UNUSED_0x13D                                   0x13D
+#define FLAG_UNUSED_0x13E                                   0x13E
+#define FLAG_UNUSED_0x13F                                   0x13F
+#define FLAG_UNUSED_0x140                                   0x140
+#define FLAG_UNUSED_0x141                                   0x141
+#define FLAG_UNUSED_0x142                                   0x142
+#define FLAG_UNUSED_0x143                                   0x143
+#define FLAG_UNUSED_0x144                                   0x144
+#define FLAG_UNUSED_0x145                                   0x145
+#define FLAG_UNUSED_0x146                                   0x146
+#define FLAG_UNUSED_0x147                                   0x147
+#define FLAG_UNUSED_0x148                                   0x148
+#define FLAG_UNUSED_0x149                                   0x149
+#define FLAG_UNUSED_0x14A                                   0x14A
+#define FLAG_UNUSED_0x14B                                   0x14B
+#define FLAG_UNUSED_0x14C                                   0x14C
+#define FLAG_UNUSED_0x14D                                   0x14D
 #define FLAG_MIRAGE_TOWER_VISIBLE                           0x14E
 #define FLAG_CHOSE_ROOT_FOSSIL                              0x14F
 #define FLAG_CHOSE_CLAW_FOSSIL                              0x150
@@ -729,7 +729,7 @@
 // Event Flags
 #define FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG                      0x2BC
 #define FLAG_HIDE_APPRENTICE                                        0x2BD
-#define FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN                0x2BE
+#define FLAG_UNUSED_0x2BE                                           0x2BE
 #define FLAG_HIDE_UNION_ROOM_PLAYER_1                               0x2BF
 #define FLAG_HIDE_UNION_ROOM_PLAYER_2                               0x2C0
 #define FLAG_HIDE_UNION_ROOM_PLAYER_3                               0x2C1
@@ -1414,7 +1414,7 @@
 #define FLAG_LANDMARK_FIERY_PATH                    (SYSTEM_FLAGS + 0x4A)
 
 #define FLAG_SYS_PC_LANETTE                         (SYSTEM_FLAGS + 0x4B)
-#define FLAG_SYS_MYSTERY_EVENT_ENABLE               (SYSTEM_FLAGS + 0x4C)
+#define FLAG_OBTAINED_PICHU_EGG                     (SYSTEM_FLAGS + 0x4C)
 #define FLAG_SYS_ENC_UP_ITEM                        (SYSTEM_FLAGS + 0x4D)
 #define FLAG_SYS_ENC_DOWN_ITEM                      (SYSTEM_FLAGS + 0x4E)
 #define FLAG_SYS_BRAILLE_DIG                        (SYSTEM_FLAGS + 0x4F)
@@ -1471,7 +1471,7 @@
 #define FLAG_ARRIVED_AT_MARINE_CAVE_EMERGE_SPOT     (SYSTEM_FLAGS + 0x79)
 #define FLAG_ARRIVED_AT_TERRA_CAVE_ENTRANCE         (SYSTEM_FLAGS + 0x7A)
 
-#define FLAG_SYS_MYSTERY_GIFT_ENABLE                (SYSTEM_FLAGS + 0x7B)
+#define FLAG_UNUSED_0x8DB                           (SYSTEM_FLAGS + 0x7B)
 
 #define FLAG_ENTERED_MIRAGE_TOWER                   (SYSTEM_FLAGS + 0x7C)
 #define FLAG_LANDMARK_ALTERING_CAVE                 (SYSTEM_FLAGS + 0x7D)
