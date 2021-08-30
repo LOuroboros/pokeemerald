@@ -149,6 +149,13 @@ enum { // Preset Warps
     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA,
     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE,
     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID,
+    DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER,
 };
 
 // *******************************
@@ -319,6 +326,13 @@ static void DebugAction_PresetWarp_PkmnLeaguePhoebe(u8 taskId);
 static void DebugAction_PresetWarp_PkmnLeagueGlacia(u8 taskId);
 static void DebugAction_PresetWarp_PkmnLeagueDrake(u8 taskId);
 static void DebugAction_PresetWarp_PkmnLeagueChampion(u8 taskId);
+static void DebugAction_PresetWarp_BattleFactory(u8 taskId);
+static void DebugAction_PresetWarp_BattleArena(u8 taskId);
+static void DebugAction_PresetWarp_BattleDome(u8 taskId);
+static void DebugAction_PresetWarp_BattlePike(u8 taskId);
+static void DebugAction_PresetWarp_BattlePalace(u8 taskId);
+static void DebugAction_PresetWarp_BattlePyramid(u8 taskId);
+static void DebugAction_PresetWarp_BattleTower(u8 taskId);
 
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
@@ -464,6 +478,13 @@ static const u8 gDebugText_Map_PkmnLeaguePhoebe[]    = _("Pokémon League (Phoeb
 static const u8 gDebugText_Map_PkmnLeagueGlacia[]    = _("Pokémon League (Glacia)");
 static const u8 gDebugText_Map_PkmnLeagueDrake[]     = _("Pokémon League (Drake)");
 static const u8 gDebugText_Map_PkmnLeagueChampion[]  = _("Pokémon League (Champion)");
+static const u8 gDebugText_Map_BattleFactory[]       = _("Battle Factory");
+static const u8 gDebugText_Map_BattleArena[]         = _("Battle Arena");
+static const u8 gDebugText_Map_BattleDome[]          = _("Battle Dome");
+static const u8 gDebugText_Map_BattlePike[]          = _("Battle Pike");
+static const u8 gDebugText_Map_BattlePalace[]        = _("Battle Palace");
+static const u8 gDebugText_Map_BattlePyramid[]       = _("Battle Pyramid");
+static const u8 gDebugText_Map_BattleTower[]         = _("Battle Tower");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -604,6 +625,13 @@ static const struct ListMenuItem sDebugMenu_Items_Utillities_PresetWarp[] =
     [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]   = {gDebugText_Map_PkmnLeagueGlacia,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA},
     [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]    = {gDebugText_Map_PkmnLeagueDrake,     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE},
     [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION] = {gDebugText_Map_PkmnLeagueChampion,  DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY]       = {gDebugText_Map_BattleFactory,       DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA]         = {gDebugText_Map_BattleArena,         DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME]          = {gDebugText_Map_BattleDome,          DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE]          = {gDebugText_Map_BattlePike,          DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE]        = {gDebugText_Map_BattlePalace,        DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID]       = {gDebugText_Map_BattlePyramid,       DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER]         = {gDebugText_Map_BattleTower,         DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER},
 };
 
 // *******************************
@@ -711,6 +739,13 @@ static void (*const sDebugMenu_Actions_PresetWarp[])(u8) =
     [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]   = DebugAction_PresetWarp_PkmnLeagueGlacia,
     [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]    = DebugAction_PresetWarp_PkmnLeagueDrake,
     [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION] = DebugAction_PresetWarp_PkmnLeagueChampion,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY]       = DebugAction_PresetWarp_BattleFactory,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA]         = DebugAction_PresetWarp_BattleArena,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME]          = DebugAction_PresetWarp_BattleDome,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE]          = DebugAction_PresetWarp_BattlePike,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE]        = DebugAction_PresetWarp_BattlePalace,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID]       = DebugAction_PresetWarp_BattlePyramid,
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER]         = DebugAction_PresetWarp_BattleTower,
 };
 
 // *******************************
@@ -4368,6 +4403,48 @@ static void DebugAction_PresetWarp_PkmnLeagueChampion(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_HALL4), MAP_NUM(EVER_GRANDE_CITY_HALL4), 255, 5, 4);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattleFactory(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_WEST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST), 255, 11, 39);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattleArena(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 39, 30);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattleDome(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_WEST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST), 255, 19, 18);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattlePike(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_WEST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST), 255, 42, 30);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattlePalace(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 45, 57);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattlePyramid(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 58, 15);
+    DoWarp();
+}
+static void DebugAction_PresetWarp_BattleTower(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 16, 15);
     DoWarp();
 }
 #endif
