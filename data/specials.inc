@@ -544,3 +544,4 @@ gSpecials::
 	def_special ModifyMonPrimaryStatusAilment
 	def_special CheckMonStatusAilment
 	def_special GetPlayerCostumeId
+	def_special HeadbuttWildEncounter
