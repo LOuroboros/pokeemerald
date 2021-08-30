@@ -357,134 +357,134 @@ extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 
 // Text
 // Main Menu
-static const u8 gDebugText_Utilities[] =        _("Utilities");
-static const u8 gDebugText_Flags[] =            _("Flags");
-static const u8 gDebugText_Vars[] =             _("Variables");
-static const u8 gDebugText_Give[] =             _("Give X");
-static const u8 gDebugText_Sound[] =            _("Sound");
-static const u8 gDebugText_Cancel[] =           _("Cancel");
+static const u8 sDebugText_Utilities[] =        _("Utilities");
+static const u8 sDebugText_Flags[] =            _("Flags");
+static const u8 sDebugText_Vars[] =             _("Variables");
+static const u8 sDebugText_Give[] =             _("Give X");
+static const u8 sDebugText_Sound[] =            _("Sound");
+static const u8 sDebugText_Cancel[] =           _("Cancel");
 // Util Menu
-static const u8 gDebugText_Util_HealParty[] =               _("Heal Party");
-static const u8 gDebugText_Util_Fly[] =                     _("Fly to map");
-static const u8 gDebugText_Util_PresetWarp[] =              _("Preset Warp");
-static const u8 gDebugText_Util_WarpToMap[] =               _("Warp to map warp");
-static const u8 gDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1}          \n                 \n\n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}            \nMapSec:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelectWarp[] =    _("Warp:             \n{STR_VAR_1}                \n                                  \n{STR_VAR_3}     ");
-static const u8 gDebugText_Util_WarpToMap_SelMax[] =        _("{STR_VAR_1} / {STR_VAR_2}");
-static const u8 gDebugText_Util_SaveSpace[] =               _("Savefile Size Data");
-static const u8 gDebugText_Util_CheckWallClock[] =          _("Check Wall Clock");
-static const u8 gDebugText_Util_SetWallClock[] =            _("Set Wall Clock");
-static const u8 gDebugText_Util_CheckWeekDay[] =            _("Check Week Day");
-static const u8 gDebugText_Util_WatchCredits[] =            _("Watch Credits");
-static const u8 gDebugText_Util_Trainer_Name[] =            _("Trainer name");
-static const u8 gDebugText_Util_Rival_Name[] =              _("Rival name");
-static const u8 gDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
-static const u8 gDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
-static const u8 gDebugText_Util_CheckEVs[] =                _("Check EVs");
-static const u8 gDebugText_Util_CheckIVs[] =                _("Check IVs");
-static const u8 gDebugText_Util_ForceEggHatch[] =           _("Force Egg Hatch");
-static const u8 gDebugText_Util_OpenPC[] =                  _("Open PC");
-static const u8 gDebugText_Util_DoWonderTrade[] =           _("Do a Wonder Trade");
-static const u8 gDebugText_Util_ChangeCostume[] =           _("Change Costume");
-static const u8 gDebugText_Util_CatchChainStatus[] =        _("Catch Chain Status");
-static const u8 gDebugText_Util_CreateDaycareEgg[] =        _("Create Daycare Egg");
-static const u8 gDebugText_Util_ClearBag[] =                _("Clear Bag");
+static const u8 sDebugText_Util_HealParty[] =               _("Heal Party");
+static const u8 sDebugText_Util_Fly[] =                     _("Fly to map");
+static const u8 sDebugText_Util_PresetWarp[] =              _("Preset Warp");
+static const u8 sDebugText_Util_WarpToMap[] =               _("Warp to map warp");
+static const u8 sDebugText_Util_WarpToMap_SelectMapGroup[] =_("Group: {STR_VAR_1}          \n                 \n\n{STR_VAR_3}     ");
+static const u8 sDebugText_Util_WarpToMap_SelectMap[] =     _("Map: {STR_VAR_1}            \nMapSec:          \n{STR_VAR_2}                       \n{STR_VAR_3}     ");
+static const u8 sDebugText_Util_WarpToMap_SelectWarp[] =    _("Warp:             \n{STR_VAR_1}                \n                                  \n{STR_VAR_3}     ");
+static const u8 sDebugText_Util_WarpToMap_SelMax[] =        _("{STR_VAR_1} / {STR_VAR_2}");
+static const u8 sDebugText_Util_SaveSpace[] =               _("Savefile Size Data");
+static const u8 sDebugText_Util_CheckWallClock[] =          _("Check Wall Clock");
+static const u8 sDebugText_Util_SetWallClock[] =            _("Set Wall Clock");
+static const u8 sDebugText_Util_CheckWeekDay[] =            _("Check Week Day");
+static const u8 sDebugText_Util_WatchCredits[] =            _("Watch Credits");
+static const u8 sDebugText_Util_Trainer_Name[] =            _("Trainer name");
+static const u8 sDebugText_Util_Rival_Name[] =              _("Rival name");
+static const u8 sDebugText_Util_Trainer_Gender[] =          _("Toggle T. Gender");
+static const u8 sDebugText_Util_Trainer_Id[] =              _("New Trainer Id");
+static const u8 sDebugText_Util_CheckEVs[] =                _("Check EVs");
+static const u8 sDebugText_Util_CheckIVs[] =                _("Check IVs");
+static const u8 sDebugText_Util_ForceEggHatch[] =           _("Force Egg Hatch");
+static const u8 sDebugText_Util_OpenPC[] =                  _("Open PC");
+static const u8 sDebugText_Util_DoWonderTrade[] =           _("Do a Wonder Trade");
+static const u8 sDebugText_Util_ChangeCostume[] =           _("Change Costume");
+static const u8 sDebugText_Util_CatchChainStatus[] =        _("Catch Chain Status");
+static const u8 sDebugText_Util_CreateDaycareEgg[] =        _("Create Daycare Egg");
+static const u8 sDebugText_Util_ClearBag[] =                _("Clear Bag");
 // Flags Menu
-static const u8 gDebugText_Flags_Flags[] =                _("Edit Flags");
-static const u8 gDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
-static const u8 gDebugText_Flags_SwitchDex[] =            _("Pokédex ON/OFF");
-static const u8 gDebugText_Flags_SwitchNationalDex[] =    _("NatDex ON/OFF");
-static const u8 gDebugText_Flags_SwitchPokemon[] =        _("Pokémon ON/OFF");
-static const u8 gDebugText_Flags_SwitchPokeNav[] =        _("PokéNav ON/OFF");
-static const u8 gDebugText_Flags_ToggleFlyFlags[] =       _("Fly Flags ON/OFF");
-static const u8 gDebugText_Flags_ToggleAllBadges[] =      _("All badges ON/OFF");
-static const u8 gDebugText_Flags_SwitchCollision[] =      _("Collision ON/OFF");
-static const u8 gDebugText_Flags_SwitchEncounter[] =      _("Encounter ON/OFF");
-static const u8 gDebugText_Flags_SwitchTrainerSee[] =     _("TrainerSee ON/OFF");
-static const u8 gDebugText_Flags_SwitchBagUse[] =         _("BagUse ON/OFF");
-static const u8 gDebugText_Flags_SwitchCatching[] =       _("Catching ON/OFF");
-static const u8 gDebugText_Flags_SwitchShinies[] =        _("Shiny enc. ON/OFF");
-static const u8 gDebugText_Flags_SwitchEscaping[] =       _("Escaping ON/OFF");
-static const u8 gDebugText_Flags_SwitchExperience[] =     _("Experience ON/OFF");
-static const u8 gDebugText_Flag[] =                       _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
-static const u8 gDebugText_FlagHex[] =                    _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
-static const u8 gDebugText_FlagSet[] =                    _("TRUE");
-static const u8 gDebugText_FlagUnset[] =                  _("FALSE");
+static const u8 sDebugText_Flags_Flags[] =                _("Edit Flags");
+static const u8 sDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
+static const u8 sDebugText_Flags_SwitchDex[] =            _("Pokédex ON/OFF");
+static const u8 sDebugText_Flags_SwitchNationalDex[] =    _("NatDex ON/OFF");
+static const u8 sDebugText_Flags_SwitchPokemon[] =        _("Pokémon ON/OFF");
+static const u8 sDebugText_Flags_SwitchPokeNav[] =        _("PokéNav ON/OFF");
+static const u8 sDebugText_Flags_ToggleFlyFlags[] =       _("Fly Flags ON/OFF");
+static const u8 sDebugText_Flags_ToggleAllBadges[] =      _("All badges ON/OFF");
+static const u8 sDebugText_Flags_SwitchCollision[] =      _("Collision ON/OFF");
+static const u8 sDebugText_Flags_SwitchEncounter[] =      _("Encounter ON/OFF");
+static const u8 sDebugText_Flags_SwitchTrainerSee[] =     _("TrainerSee ON/OFF");
+static const u8 sDebugText_Flags_SwitchBagUse[] =         _("BagUse ON/OFF");
+static const u8 sDebugText_Flags_SwitchCatching[] =       _("Catching ON/OFF");
+static const u8 sDebugText_Flags_SwitchShinies[] =        _("Shiny enc. ON/OFF");
+static const u8 sDebugText_Flags_SwitchEscaping[] =       _("Escaping ON/OFF");
+static const u8 sDebugText_Flags_SwitchExperience[] =     _("Experience ON/OFF");
+static const u8 sDebugText_Flag[] =                       _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
+static const u8 sDebugText_FlagHex[] =                    _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
+static const u8 sDebugText_FlagSet[] =                    _("TRUE");
+static const u8 sDebugText_FlagUnset[] =                  _("FALSE");
 // Variables Menu
-static const u8 gDebugText_Vars_Vars[] =             _("Edit Vars");
-static const u8 gDebugText_VariableHex[] =           _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
-static const u8 gDebugText_Variable[] =              _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
-static const u8 gDebugText_VariableValueSet[] =      _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
+static const u8 sDebugText_Vars_Vars[] =             _("Edit Vars");
+static const u8 sDebugText_VariableHex[] =           _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
+static const u8 sDebugText_Variable[] =              _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
+static const u8 sDebugText_VariableValueSet[] =      _("Var: {STR_VAR_1}             \nVal: {STR_VAR_3}             \n{STR_VAR_2}");
 // Give Menu
-static const u8 gDebugText_Give_GiveItem[] =            _("Give Item");
-static const u8 gDebugText_ItemQuantity[] =             _("Quantity:       \n{STR_VAR_1}    \n\n{STR_VAR_2}");
-static const u8 gDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
-static const u8 gDebugText_Give_AllTMs[] =              _("Give All TMs");
-static const u8 gDebugText_Give_Egg[] =                 _("Give Egg");
-static const u8 gDebugText_Give_GivePokemonSimple[] =   _("Give Pkmn (Basic)");
-static const u8 gDebugText_Give_GivePokemonComplex[] =  _("Give Pkmn (Adv.)");
-static const u8 gDebugText_PokemonID[] =                _("Species: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
-static const u8 gDebugText_PokemonLevel[] =             _("Level:                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
-static const u8 gDebugText_PokemonShiny[] =             _("Shiny:                   \n   {STR_VAR_2}             \n              \n                ");
-static const u8 gDebugText_PokemonNature[] =            _("NatureId: {STR_VAR_3}          \n{STR_VAR_1}          \n          \n{STR_VAR_2}");
-static const u8 gDebugText_PokemonAbility[] =           _("AbilityNum: {STR_VAR_3}          \n{STR_VAR_1}          \n          \n{STR_VAR_2}");
-static const u8 gDebugText_PokemonIVs[] =               _("All IVs:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonIV_0[] =              _("IV HP:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonIV_1[] =              _("IV Attack:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonIV_2[] =              _("IV Defense:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonIV_3[] =              _("IV Speed:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonIV_4[] =              _("IV Sp. Attack:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonIV_5[] =              _("IV Sp. Defense:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
-static const u8 gDebugText_PokemonMove_0[] =            _("Move 0: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
-static const u8 gDebugText_PokemonMove_1[] =            _("Move 1: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
-static const u8 gDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
-static const u8 gDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
-static const u8 gDebugText_Give_MaxMoney[] =            _("Give Max. Money");
-static const u8 gDebugText_Give_FillPCBoxes[] =         _("Fill PC Boxes");
-static const u8 gDebugText_Give_FillPCItemStorage[] =   _("Fill PC Items");
-static const u8 gDebugText_Give_FillItemsPocket[] =     _("Fill Items Pocket");
-static const u8 gDebugText_Give_FillPokeBallsPocket[] = _("Fill Poké Balls Pocket");
-static const u8 gDebugText_Give_FillBerriesPocket[] =   _("Fill Berries Pocket");
-static const u8 gDebugText_Give_FillKeyItemsPocket[] =  _("Fill Key Items Pocket");
-static const u8 gDebugText_Give_MaxCoins[] =            _("Give Max. Coins");
-static const u8 gDebugText_Give_GiveCHEAT[] =           _("CHEAT start");
+static const u8 sDebugText_Give_GiveItem[] =            _("Give Item");
+static const u8 sDebugText_ItemQuantity[] =             _("Quantity:       \n{STR_VAR_1}    \n\n{STR_VAR_2}");
+static const u8 sDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
+static const u8 sDebugText_Give_AllTMs[] =              _("Give All TMs");
+static const u8 sDebugText_Give_Egg[] =                 _("Give Egg");
+static const u8 sDebugText_Give_GivePokemonSimple[] =   _("Give Pkmn (Basic)");
+static const u8 sDebugText_Give_GivePokemonComplex[] =  _("Give Pkmn (Adv.)");
+static const u8 sDebugText_PokemonID[] =                _("Species: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
+static const u8 sDebugText_PokemonLevel[] =             _("Level:                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
+static const u8 sDebugText_PokemonShiny[] =             _("Shiny:                   \n   {STR_VAR_2}             \n              \n                ");
+static const u8 sDebugText_PokemonNature[] =            _("NatureId: {STR_VAR_3}          \n{STR_VAR_1}          \n          \n{STR_VAR_2}");
+static const u8 sDebugText_PokemonAbility[] =           _("AbilityNum: {STR_VAR_3}          \n{STR_VAR_1}          \n          \n{STR_VAR_2}");
+static const u8 sDebugText_PokemonIVs[] =               _("All IVs:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonIV_0[] =              _("IV HP:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonIV_1[] =              _("IV Attack:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonIV_2[] =              _("IV Defense:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonIV_3[] =              _("IV Speed:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonIV_4[] =              _("IV Sp. Attack:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonIV_5[] =              _("IV Sp. Defense:               \n    {STR_VAR_3}            \n             \n{STR_VAR_2}          ");
+static const u8 sDebugText_PokemonMove_0[] =            _("Move 0: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
+static const u8 sDebugText_PokemonMove_1[] =            _("Move 1: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
+static const u8 sDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
+static const u8 sDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
+static const u8 sDebugText_Give_MaxMoney[] =            _("Give Max. Money");
+static const u8 sDebugText_Give_FillPCBoxes[] =         _("Fill PC Boxes");
+static const u8 sDebugText_Give_FillPCItemStorage[] =   _("Fill PC Items");
+static const u8 sDebugText_Give_FillItemsPocket[] =     _("Fill Items Pocket");
+static const u8 sDebugText_Give_FillPokeBallsPocket[] = _("Fill Poké Balls Pocket");
+static const u8 sDebugText_Give_FillBerriesPocket[] =   _("Fill Berries Pocket");
+static const u8 sDebugText_Give_FillKeyItemsPocket[] =  _("Fill Key Items Pocket");
+static const u8 sDebugText_Give_MaxCoins[] =            _("Give Max. Coins");
+static const u8 sDebugText_Give_GiveCHEAT[] =           _("CHEAT start");
 // Sound Mneu
-static const u8 gDebugText_Sound_SE[] =                 _("Effects");
-static const u8 gDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 gDebugText_Sound_MUS[] =                _("Music");
-static const u8 gDebugText_Sound_MUS_ID[] =             _("Music Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
-static const u8 gDebugText_Sound_Empty[] =              _("");
+static const u8 sDebugText_Sound_SE[] =                 _("Effects");
+static const u8 sDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
+static const u8 sDebugText_Sound_MUS[] =                _("Music");
+static const u8 sDebugText_Sound_MUS_ID[] =             _("Music Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
+static const u8 sDebugText_Sound_Empty[] =              _("");
 // Preset Warps
-static const u8 gDebugText_Map_LittlerootTown[]      = _("Littleroot Town");
-static const u8 gDebugText_Map_OldaleTown[]          = _("Oldale Town");
-static const u8 gDebugText_Map_PetalburgCity[]       = _("Petalburg City");
-static const u8 gDebugText_Map_RustboroCity[]        = _("Rustboro City");
-static const u8 gDebugText_Map_DewfordTown[]         = _("Dewford Town");
-static const u8 gDebugText_Map_SlateportCity[]       = _("Slateport City");
-static const u8 gDebugText_Map_MauvilleCity[]        = _("Mauville City");
-static const u8 gDebugText_Map_VerdanturfTown[]      = _("Verdanturf Town");
-static const u8 gDebugText_Map_FallarborTown[]       = _("Fallarbor Town");
-static const u8 gDebugText_Map_LavaridgeTown[]       = _("Lavaridge Town");
-static const u8 gDebugText_Map_FortreeCity[]         = _("Fortree City");
-static const u8 gDebugText_Map_LilycoveCity[]        = _("Lilycove City");
-static const u8 gDebugText_Map_MossdeepCity[]        = _("Mossdeep City");
-static const u8 gDebugText_Map_PacifidlogTown[]      = _("Pacifidlog Town");
-static const u8 gDebugText_Map_SootopolisCity[]      = _("Sootopolis City");
-static const u8 gDebugText_Map_EverGrandeCityOuter[] = _("Ever Grande City (Outer)");
-static const u8 gDebugText_Map_EverGrandeCityInner[] = _("Ever Grande City (Inner)");
-static const u8 gDebugText_Map_PkmnLeagueSidney[]    = _("Pokémon League (Sidney)");
-static const u8 gDebugText_Map_PkmnLeaguePhoebe[]    = _("Pokémon League (Phoebe)");
-static const u8 gDebugText_Map_PkmnLeagueGlacia[]    = _("Pokémon League (Glacia)");
-static const u8 gDebugText_Map_PkmnLeagueDrake[]     = _("Pokémon League (Drake)");
-static const u8 gDebugText_Map_PkmnLeagueChampion[]  = _("Pokémon League (Champion)");
-static const u8 gDebugText_Map_BattleFactory[]       = _("Battle Factory");
-static const u8 gDebugText_Map_BattleArena[]         = _("Battle Arena");
-static const u8 gDebugText_Map_BattleDome[]          = _("Battle Dome");
-static const u8 gDebugText_Map_BattlePike[]          = _("Battle Pike");
-static const u8 gDebugText_Map_BattlePalace[]        = _("Battle Palace");
-static const u8 gDebugText_Map_BattlePyramid[]       = _("Battle Pyramid");
-static const u8 gDebugText_Map_BattleTower[]         = _("Battle Tower");
+static const u8 sDebugText_Map_LittlerootTown[]      = _("Littleroot Town");
+static const u8 sDebugText_Map_OldaleTown[]          = _("Oldale Town");
+static const u8 sDebugText_Map_PetalburgCity[]       = _("Petalburg City");
+static const u8 sDebugText_Map_RustboroCity[]        = _("Rustboro City");
+static const u8 sDebugText_Map_DewfordTown[]         = _("Dewford Town");
+static const u8 sDebugText_Map_SlateportCity[]       = _("Slateport City");
+static const u8 sDebugText_Map_MauvilleCity[]        = _("Mauville City");
+static const u8 sDebugText_Map_VerdanturfTown[]      = _("Verdanturf Town");
+static const u8 sDebugText_Map_FallarborTown[]       = _("Fallarbor Town");
+static const u8 sDebugText_Map_LavaridgeTown[]       = _("Lavaridge Town");
+static const u8 sDebugText_Map_FortreeCity[]         = _("Fortree City");
+static const u8 sDebugText_Map_LilycoveCity[]        = _("Lilycove City");
+static const u8 sDebugText_Map_MossdeepCity[]        = _("Mossdeep City");
+static const u8 sDebugText_Map_PacifidlogTown[]      = _("Pacifidlog Town");
+static const u8 sDebugText_Map_SootopolisCity[]      = _("Sootopolis City");
+static const u8 sDebugText_Map_EverGrandeCityOuter[] = _("Ever Grande City (Outer)");
+static const u8 sDebugText_Map_EverGrandeCityInner[] = _("Ever Grande City (Inner)");
+static const u8 sDebugText_Map_PkmnLeagueSidney[]    = _("Pokémon League (Sidney)");
+static const u8 sDebugText_Map_PkmnLeaguePhoebe[]    = _("Pokémon League (Phoebe)");
+static const u8 sDebugText_Map_PkmnLeagueGlacia[]    = _("Pokémon League (Glacia)");
+static const u8 sDebugText_Map_PkmnLeagueDrake[]     = _("Pokémon League (Drake)");
+static const u8 sDebugText_Map_PkmnLeagueChampion[]  = _("Pokémon League (Champion)");
+static const u8 sDebugText_Map_BattleFactory[]       = _("Battle Factory");
+static const u8 sDebugText_Map_BattleArena[]         = _("Battle Arena");
+static const u8 sDebugText_Map_BattleDome[]          = _("Battle Dome");
+static const u8 sDebugText_Map_BattlePike[]          = _("Battle Pike");
+static const u8 sDebugText_Map_BattlePalace[]        = _("Battle Palace");
+static const u8 sDebugText_Map_BattlePyramid[]       = _("Battle Pyramid");
+static const u8 sDebugText_Map_BattleTower[]         = _("Battle Tower");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -523,115 +523,115 @@ static const s32 sPowersOfTen[] =
 // List Menu Items
 static const struct ListMenuItem sDebugMenu_Items_Main[] =
 {
-    [DEBUG_MENU_ITEM_UTILITIES]     = {gDebugText_Utilities,    DEBUG_MENU_ITEM_UTILITIES},
-    [DEBUG_MENU_ITEM_FLAGS]         = {gDebugText_Flags,        DEBUG_MENU_ITEM_FLAGS},
-    [DEBUG_MENU_ITEM_VARS]          = {gDebugText_Vars,         DEBUG_MENU_ITEM_VARS},
-    [DEBUG_MENU_ITEM_GIVE]          = {gDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
-    [DEBUG_MENU_ITEM_SOUND]         = {gDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
-    [DEBUG_MENU_ITEM_CANCEL]        = {gDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL}
+    [DEBUG_MENU_ITEM_UTILITIES]     = {sDebugText_Utilities,    DEBUG_MENU_ITEM_UTILITIES},
+    [DEBUG_MENU_ITEM_FLAGS]         = {sDebugText_Flags,        DEBUG_MENU_ITEM_FLAGS},
+    [DEBUG_MENU_ITEM_VARS]          = {sDebugText_Vars,         DEBUG_MENU_ITEM_VARS},
+    [DEBUG_MENU_ITEM_GIVE]          = {sDebugText_Give,         DEBUG_MENU_ITEM_GIVE},
+    [DEBUG_MENU_ITEM_SOUND]         = {sDebugText_Sound,        DEBUG_MENU_ITEM_SOUND},
+    [DEBUG_MENU_ITEM_CANCEL]        = {sDebugText_Cancel,       DEBUG_MENU_ITEM_CANCEL}
 };
 
 static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 {
-    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]             = {gDebugText_Util_HealParty,           DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
-    [DEBUG_UTIL_MENU_ITEM_FLY]                    = {gDebugText_Util_Fly,                 DEBUG_UTIL_MENU_ITEM_FLY},
-    [DEBUG_UTIL_MENU_ITEM_WARP]                   = {gDebugText_Util_WarpToMap,           DEBUG_UTIL_MENU_ITEM_WARP},
-    [DEBUG_UTIL_MENU_ITEM_PRESETWARP]             = {gDebugText_Util_PresetWarp,          DEBUG_UTIL_MENU_ITEM_PRESETWARP},
-    [DEBUG_UTIL_MENU_ITEM_SAVESPACE]              = {gDebugText_Util_SaveSpace,           DEBUG_UTIL_MENU_ITEM_SAVESPACE},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]         = {gDebugText_Util_CheckWallClock,      DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]           = {gDebugText_Util_SetWallClock,        DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
-    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]           = {gDebugText_Util_CheckWeekDay,        DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
-    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]           = {gDebugText_Util_WatchCredits,        DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]           = {gDebugText_Util_Trainer_Name,        DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
-    [DEBUG_UTIL_MENU_ITEM_RIVAL_NAME]             = {gDebugText_Util_Rival_Name,          DEBUG_UTIL_MENU_ITEM_RIVAL_NAME},
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]         = {gDebugText_Util_Trainer_Gender,      DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
-    [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]             = {gDebugText_Util_Trainer_Id,          DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
-    [DEBUG_UTIL_MENU_ITEM_CHECKEVS]               = {gDebugText_Util_CheckEVs,            DEBUG_UTIL_MENU_ITEM_CHECKEVS},
-    [DEBUG_UTIL_MENU_ITEM_CHECKIVS]               = {gDebugText_Util_CheckIVs,            DEBUG_UTIL_MENU_ITEM_CHECKIVS},
-    [DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH]          = {gDebugText_Util_ForceEggHatch,       DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH},
-    [DEBUG_UTIL_MENU_ITEM_OPEN_PC]                = {gDebugText_Util_OpenPC,              DEBUG_UTIL_MENU_ITEM_OPEN_PC},
-    [DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE]        = {gDebugText_Util_DoWonderTrade,       DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE},
-    [DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME]         = {gDebugText_Util_ChangeCostume,       DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME},
-    [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]     = {gDebugText_Util_CatchChainStatus,    DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS},
-    [DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG]     = {gDebugText_Util_CreateDaycareEgg,    DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG},
-    [DEBUG_UTIL_MENU_ITEM_CLEAR_BAG]              = {gDebugText_Util_ClearBag,            DEBUG_UTIL_MENU_ITEM_CLEAR_BAG},
+    [DEBUG_UTIL_MENU_ITEM_HEAL_PARTY]             = {sDebugText_Util_HealParty,           DEBUG_UTIL_MENU_ITEM_HEAL_PARTY},
+    [DEBUG_UTIL_MENU_ITEM_FLY]                    = {sDebugText_Util_Fly,                 DEBUG_UTIL_MENU_ITEM_FLY},
+    [DEBUG_UTIL_MENU_ITEM_WARP]                   = {sDebugText_Util_WarpToMap,           DEBUG_UTIL_MENU_ITEM_WARP},
+    [DEBUG_UTIL_MENU_ITEM_PRESETWARP]             = {sDebugText_Util_PresetWarp,          DEBUG_UTIL_MENU_ITEM_PRESETWARP},
+    [DEBUG_UTIL_MENU_ITEM_SAVESPACE]              = {sDebugText_Util_SaveSpace,           DEBUG_UTIL_MENU_ITEM_SAVESPACE},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK]         = {sDebugText_Util_CheckWallClock,      DEBUG_UTIL_MENU_ITEM_CHECKWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK]           = {sDebugText_Util_SetWallClock,        DEBUG_UTIL_MENU_ITEM_SETWALLCLOCK},
+    [DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY]           = {sDebugText_Util_CheckWeekDay,        DEBUG_UTIL_MENU_ITEM_CHECKWEEKDAY},
+    [DEBUG_UTIL_MENU_ITEM_WATCHCREDITS]           = {sDebugText_Util_WatchCredits,        DEBUG_UTIL_MENU_ITEM_WATCHCREDITS},
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_NAME]           = {sDebugText_Util_Trainer_Name,        DEBUG_UTIL_MENU_ITEM_TRAINER_NAME},
+    [DEBUG_UTIL_MENU_ITEM_RIVAL_NAME]             = {sDebugText_Util_Rival_Name,          DEBUG_UTIL_MENU_ITEM_RIVAL_NAME},
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER]         = {sDebugText_Util_Trainer_Gender,      DEBUG_UTIL_MENU_ITEM_TRAINER_GENDER},
+    [DEBUG_UTIL_MENU_ITEM_TRAINER_ID]             = {sDebugText_Util_Trainer_Id,          DEBUG_UTIL_MENU_ITEM_TRAINER_ID},
+    [DEBUG_UTIL_MENU_ITEM_CHECKEVS]               = {sDebugText_Util_CheckEVs,            DEBUG_UTIL_MENU_ITEM_CHECKEVS},
+    [DEBUG_UTIL_MENU_ITEM_CHECKIVS]               = {sDebugText_Util_CheckIVs,            DEBUG_UTIL_MENU_ITEM_CHECKIVS},
+    [DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH]          = {sDebugText_Util_ForceEggHatch,       DEBUG_UTIL_MENU_ITEM_FORCEEGGHATCH},
+    [DEBUG_UTIL_MENU_ITEM_OPEN_PC]                = {sDebugText_Util_OpenPC,              DEBUG_UTIL_MENU_ITEM_OPEN_PC},
+    [DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE]        = {sDebugText_Util_DoWonderTrade,       DEBUG_UTIL_MENU_ITEM_DO_WONDER_TRADE},
+    [DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME]         = {sDebugText_Util_ChangeCostume,       DEBUG_UTIL_MENU_ITEM_CHANGE_COSTUME},
+    [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]     = {sDebugText_Util_CatchChainStatus,    DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS},
+    [DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG]     = {sDebugText_Util_CreateDaycareEgg,    DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG},
+    [DEBUG_UTIL_MENU_ITEM_CLEAR_BAG]              = {sDebugText_Util_ClearBag,            DEBUG_UTIL_MENU_ITEM_CLEAR_BAG},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
-    [DEBUG_FLAG_MENU_ITEM_FLAGS]             = {gDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = {gDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = {gDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
-    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = {gDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
-    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]      = {gDebugText_Flags_SwitchPokemon,       DEBUG_FLAG_MENU_ITEM_POKEMONONOFF},
-    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = {gDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
-    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = {gDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = {gDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
-    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]   = {gDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]   = {gDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF] = {gDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]     = {gDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = {gDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = {gDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]    = {gDebugText_Flags_SwitchEscaping,      DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]  = {gDebugText_Flags_SwitchExperience,    DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLAGS]             = {sDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = {sDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = {sDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = {sDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]      = {sDebugText_Flags_SwitchPokemon,       DEBUG_FLAG_MENU_ITEM_POKEMONONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = {sDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = {sDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = {sDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
+    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]   = {sDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]   = {sDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF] = {sDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]     = {sDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = {sDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = {sDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]    = {sDebugText_Flags_SwitchEscaping,      DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]  = {sDebugText_Flags_SwitchExperience,    DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF},
 };
 static const struct ListMenuItem sDebugMenu_Items_Vars[] =
 {
-    [DEBUG_VARS_MENU_ITEM_VARS]   = {gDebugText_Vars_Vars,       DEBUG_FLAG_MENU_ITEM_FLAGS},
+    [DEBUG_VARS_MENU_ITEM_VARS]   = {sDebugText_Vars_Vars,       DEBUG_FLAG_MENU_ITEM_FLAGS},
 };
 static const struct ListMenuItem sDebugMenu_Items_Give[] =
 {
-    [DEBUG_GIVE_MENU_GIVE_ITEM]              = {gDebugText_Give_GiveItem,            DEBUG_GIVE_MENU_GIVE_ITEM},
-    [DEBUG_GIVE_MENU_GIVE_ALL_TMS]           = {gDebugText_Give_AllTMs,              DEBUG_GIVE_MENU_GIVE_ALL_TMS},
-    [DEBUG_GIVE_MENU_GIVE_EGG]               = {gDebugText_Give_Egg,                 DEBUG_GIVE_MENU_GIVE_EGG},
-    [DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE]    = {gDebugText_Give_GivePokemonSimple,   DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE},
-    [DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX]   = {gDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX},
-    [DEBUG_GIVE_MENU_GIVE_MAX_MONEY]         = {gDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_GIVE_MAX_MONEY},
-    [DEBUG_GIVE_MENU_GIVE_MAX_COINS]         = {gDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_GIVE_MAX_COINS},
-    [DEBUG_GIVE_MENU_FILL_PC_BOXES]          = {gDebugText_Give_FillPCBoxes,         DEBUG_GIVE_MENU_FILL_PC_BOXES},
-    [DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE]   = {gDebugText_Give_FillPCItemStorage,   DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE},
-    [DEBUG_GIVE_MENU_FILL_ITEMS_POCKET]      = {gDebugText_Give_FillItemsPocket,     DEBUG_GIVE_MENU_FILL_ITEMS_POCKET},
-    [DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET] = {gDebugText_Give_FillPokeBallsPocket, DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET},
-    [DEBUG_GIVE_MENU_FILL_BERRIES_POCKET]    = {gDebugText_Give_FillBerriesPocket,   DEBUG_GIVE_MENU_FILL_BERRIES_POCKET},
-    [DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET]  = {gDebugText_Give_FillKeyItemsPocket,  DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET},
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = {gDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
+    [DEBUG_GIVE_MENU_GIVE_ITEM]              = {sDebugText_Give_GiveItem,            DEBUG_GIVE_MENU_GIVE_ITEM},
+    [DEBUG_GIVE_MENU_GIVE_ALL_TMS]           = {sDebugText_Give_AllTMs,              DEBUG_GIVE_MENU_GIVE_ALL_TMS},
+    [DEBUG_GIVE_MENU_GIVE_EGG]               = {sDebugText_Give_Egg,                 DEBUG_GIVE_MENU_GIVE_EGG},
+    [DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE]    = {sDebugText_Give_GivePokemonSimple,   DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE},
+    [DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX]   = {sDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX},
+    [DEBUG_GIVE_MENU_GIVE_MAX_MONEY]         = {sDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_GIVE_MAX_MONEY},
+    [DEBUG_GIVE_MENU_GIVE_MAX_COINS]         = {sDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_GIVE_MAX_COINS},
+    [DEBUG_GIVE_MENU_FILL_PC_BOXES]          = {sDebugText_Give_FillPCBoxes,         DEBUG_GIVE_MENU_FILL_PC_BOXES},
+    [DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE]   = {sDebugText_Give_FillPCItemStorage,   DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE},
+    [DEBUG_GIVE_MENU_FILL_ITEMS_POCKET]      = {sDebugText_Give_FillItemsPocket,     DEBUG_GIVE_MENU_FILL_ITEMS_POCKET},
+    [DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET] = {sDebugText_Give_FillPokeBallsPocket, DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET},
+    [DEBUG_GIVE_MENU_FILL_BERRIES_POCKET]    = {sDebugText_Give_FillBerriesPocket,   DEBUG_GIVE_MENU_FILL_BERRIES_POCKET},
+    [DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET]  = {sDebugText_Give_FillKeyItemsPocket,  DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET},
+    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = {sDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
 };
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
-    [DEBUG_SOUND_MENU_ITEM_SE]            = {gDebugText_Sound_SE,         DEBUG_SOUND_MENU_ITEM_SE},
-    [DEBUG_SOUND_MENU_ITEM_MUS]           = {gDebugText_Sound_MUS,        DEBUG_SOUND_MENU_ITEM_MUS},
+    [DEBUG_SOUND_MENU_ITEM_SE]            = {sDebugText_Sound_SE,         DEBUG_SOUND_MENU_ITEM_SE},
+    [DEBUG_SOUND_MENU_ITEM_MUS]           = {sDebugText_Sound_MUS,        DEBUG_SOUND_MENU_ITEM_MUS},
 };
 static const struct ListMenuItem sDebugMenu_Items_Utillities_PresetWarp[] =
 {
-    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]           = {gDebugText_Map_LittlerootTown,      DEBUG_UTILITIES_PRESETWARP_LITTLEROOT},
-    [DEBUG_UTILITIES_PRESETWARP_OLDALE]               = {gDebugText_Map_OldaleTown,          DEBUG_UTILITIES_PRESETWARP_OLDALE},
-    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]            = {gDebugText_Map_PetalburgCity,       DEBUG_UTILITIES_PRESETWARP_PETALBURG},
-    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]             = {gDebugText_Map_RustboroCity,        DEBUG_UTILITIES_PRESETWARP_RUSTBORO},
-    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]              = {gDebugText_Map_DewfordTown,         DEBUG_UTILITIES_PRESETWARP_DEWFORD},
-    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]            = {gDebugText_Map_SlateportCity,       DEBUG_UTILITIES_PRESETWARP_SLATEPORT},
-    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]             = {gDebugText_Map_MauvilleCity,        DEBUG_UTILITIES_PRESETWARP_MAUVILLE},
-    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]           = {gDebugText_Map_VerdanturfTown,      DEBUG_UTILITIES_PRESETWARP_VERDANTURF},
-    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]            = {gDebugText_Map_FallarborTown,       DEBUG_UTILITIES_PRESETWARP_FALLARBOR},
-    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]            = {gDebugText_Map_LavaridgeTown,       DEBUG_UTILITIES_PRESETWARP_LAVARIDGE},
-    [DEBUG_UTILITIES_PRESETWARP_FORTREE]              = {gDebugText_Map_FortreeCity,         DEBUG_UTILITIES_PRESETWARP_FORTREE},
-    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]             = {gDebugText_Map_LilycoveCity,        DEBUG_UTILITIES_PRESETWARP_LILYCOVE},
-    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]             = {gDebugText_Map_MossdeepCity,        DEBUG_UTILITIES_PRESETWARP_MOSSDEEP},
-    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]           = {gDebugText_Map_PacifidlogTown,      DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG},
-    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]           = {gDebugText_Map_SootopolisCity,      DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS},
-    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER]     = {gDebugText_Map_EverGrandeCityOuter, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER},
-    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER]     = {gDebugText_Map_EverGrandeCityInner, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY]   = {gDebugText_Map_PkmnLeagueSidney,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE]   = {gDebugText_Map_PkmnLeaguePhoebe,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]   = {gDebugText_Map_PkmnLeagueGlacia,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]    = {gDebugText_Map_PkmnLeagueDrake,     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE},
-    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION] = {gDebugText_Map_PkmnLeagueChampion,  DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY]       = {gDebugText_Map_BattleFactory,       DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA]         = {gDebugText_Map_BattleArena,         DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME]          = {gDebugText_Map_BattleDome,          DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE]          = {gDebugText_Map_BattlePike,          DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE]        = {gDebugText_Map_BattlePalace,        DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID]       = {gDebugText_Map_BattlePyramid,       DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID},
-    [DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER]         = {gDebugText_Map_BattleTower,         DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER},
+    [DEBUG_UTILITIES_PRESETWARP_LITTLEROOT]           = {sDebugText_Map_LittlerootTown,      DEBUG_UTILITIES_PRESETWARP_LITTLEROOT},
+    [DEBUG_UTILITIES_PRESETWARP_OLDALE]               = {sDebugText_Map_OldaleTown,          DEBUG_UTILITIES_PRESETWARP_OLDALE},
+    [DEBUG_UTILITIES_PRESETWARP_PETALBURG]            = {sDebugText_Map_PetalburgCity,       DEBUG_UTILITIES_PRESETWARP_PETALBURG},
+    [DEBUG_UTILITIES_PRESETWARP_RUSTBORO]             = {sDebugText_Map_RustboroCity,        DEBUG_UTILITIES_PRESETWARP_RUSTBORO},
+    [DEBUG_UTILITIES_PRESETWARP_DEWFORD]              = {sDebugText_Map_DewfordTown,         DEBUG_UTILITIES_PRESETWARP_DEWFORD},
+    [DEBUG_UTILITIES_PRESETWARP_SLATEPORT]            = {sDebugText_Map_SlateportCity,       DEBUG_UTILITIES_PRESETWARP_SLATEPORT},
+    [DEBUG_UTILITIES_PRESETWARP_MAUVILLE]             = {sDebugText_Map_MauvilleCity,        DEBUG_UTILITIES_PRESETWARP_MAUVILLE},
+    [DEBUG_UTILITIES_PRESETWARP_VERDANTURF]           = {sDebugText_Map_VerdanturfTown,      DEBUG_UTILITIES_PRESETWARP_VERDANTURF},
+    [DEBUG_UTILITIES_PRESETWARP_FALLARBOR]            = {sDebugText_Map_FallarborTown,       DEBUG_UTILITIES_PRESETWARP_FALLARBOR},
+    [DEBUG_UTILITIES_PRESETWARP_LAVARIDGE]            = {sDebugText_Map_LavaridgeTown,       DEBUG_UTILITIES_PRESETWARP_LAVARIDGE},
+    [DEBUG_UTILITIES_PRESETWARP_FORTREE]              = {sDebugText_Map_FortreeCity,         DEBUG_UTILITIES_PRESETWARP_FORTREE},
+    [DEBUG_UTILITIES_PRESETWARP_LILYCOVE]             = {sDebugText_Map_LilycoveCity,        DEBUG_UTILITIES_PRESETWARP_LILYCOVE},
+    [DEBUG_UTILITIES_PRESETWARP_MOSSDEEP]             = {sDebugText_Map_MossdeepCity,        DEBUG_UTILITIES_PRESETWARP_MOSSDEEP},
+    [DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG]           = {sDebugText_Map_PacifidlogTown,      DEBUG_UTILITIES_PRESETWARP_PACIFIDLOG},
+    [DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS]           = {sDebugText_Map_SootopolisCity,      DEBUG_UTILITIES_PRESETWARP_SOOTOPOLIS},
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER]     = {sDebugText_Map_EverGrandeCityOuter, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_OUTER},
+    [DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER]     = {sDebugText_Map_EverGrandeCityInner, DEBUG_UTILITIES_PRESETWARP_EVERGRANDE_INNER},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY]   = {sDebugText_Map_PkmnLeagueSidney,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_SIDNEY},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE]   = {sDebugText_Map_PkmnLeaguePhoebe,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_PHOEBE},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA]   = {sDebugText_Map_PkmnLeagueGlacia,    DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_GLACIA},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE]    = {sDebugText_Map_PkmnLeagueDrake,     DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_DRAKE},
+    [DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION] = {sDebugText_Map_PkmnLeagueChampion,  DEBUG_UTILITIES_PRESETWARP_PKMN_LEAGUE_CHAMPION},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY]       = {sDebugText_Map_BattleFactory,       DEBUG_UTILITIES_PRESETWARP_BATTLE_FACTORY},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA]         = {sDebugText_Map_BattleArena,         DEBUG_UTILITIES_PRESETWARP_BATTLE_ARENA},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME]          = {sDebugText_Map_BattleDome,          DEBUG_UTILITIES_PRESETWARP_BATTLE_DOME},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE]          = {sDebugText_Map_BattlePike,          DEBUG_UTILITIES_PRESETWARP_BATTLE_PIKE},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE]        = {sDebugText_Map_BattlePalace,        DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID]       = {sDebugText_Map_BattlePyramid,       DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID},
+    [DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER]         = {sDebugText_Map_BattleTower,         DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER},
 };
 
 // *******************************
@@ -1138,9 +1138,9 @@ static void DebugAction_Util_Warp_Warp(u8 taskId)
 
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar2, MAP_GROUPS_COUNT-1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelMax);
+    StringExpandPlaceholders(gStringVar1, sDebugText_Util_WarpToMap_SelMax);
     StringCopy(gStringVar3, gText_DigitIndicator[0]);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectMapGroup);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Util_WarpToMap_SelectMapGroup);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Util_Warp_SelectMapGroup;
@@ -1181,9 +1181,9 @@ static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         ConvertIntToDecimalStringN(gStringVar2, MAP_GROUPS_COUNT-1, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelMax);
+        StringExpandPlaceholders(gStringVar1, sDebugText_Util_WarpToMap_SelMax);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectMapGroup);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Util_WarpToMap_SelectMapGroup);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -1195,10 +1195,10 @@ static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         ConvertIntToDecimalStringN(gStringVar2, MAP_GROUP_COUNT[gTasks[taskId].data[5]]-1, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelMax);
+        StringExpandPlaceholders(gStringVar1, sDebugText_Util_WarpToMap_SelMax);
         GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(gTasks[taskId].data[5], gTasks[taskId].data[3])->regionMapSectionId, 0);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectMap);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Util_WarpToMap_SelectMap);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Util_Warp_SelectMap;
@@ -1242,10 +1242,10 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         ConvertIntToDecimalStringN(gStringVar2, MAP_GROUP_COUNT[gTasks[taskId].data[5]]-1, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringExpandPlaceholders(gStringVar1, gDebugText_Util_WarpToMap_SelMax);
+        StringExpandPlaceholders(gStringVar1, sDebugText_Util_WarpToMap_SelMax);
         GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(gTasks[taskId].data[5], gTasks[taskId].data[3])->regionMapSectionId, 0);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectMap);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Util_WarpToMap_SelectMap);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -1257,7 +1257,7 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId)
 
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectWarp);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Util_WarpToMap_SelectWarp);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
         gTasks[taskId].func = DebugAction_Util_Warp_SelectWarp;
     }
@@ -1288,7 +1288,7 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
 
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Util_WarpToMap_SelectWarp);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Util_WarpToMap_SelectWarp);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -1481,13 +1481,13 @@ static void DebugAction_Flags_Flags(u8 taskId)
     //Display initial Flag
     ConvertIntToDecimalStringN(gStringVar1, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
     ConvertIntToHexStringN(gStringVar2, 0, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar1, gDebugText_FlagHex);
+    StringExpandPlaceholders(gStringVar1, sDebugText_FlagHex);
     if (FlagGet(0) == TRUE)
-        StringCopyPadded(gStringVar2, gDebugText_FlagSet, CHAR_SPACE, 15);
+        StringCopyPadded(gStringVar2, sDebugText_FlagSet, CHAR_SPACE, 15);
     else
-        StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+        StringCopyPadded(gStringVar2, sDebugText_FlagUnset, CHAR_SPACE, 15);
     StringCopy(gStringVar3, gText_DigitIndicator[0]);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Flag);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Flag);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Flags_FlagsSelect;
@@ -1546,13 +1546,13 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
     {
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar1, gDebugText_FlagHex);
+        StringExpandPlaceholders(gStringVar1, sDebugText_FlagHex);
         if (FlagGet(gTasks[taskId].data[3]) == TRUE)
-            StringCopyPadded(gStringVar2, gDebugText_FlagSet, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, sDebugText_FlagSet, CHAR_SPACE, 15);
         else
-            StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, sDebugText_FlagUnset, CHAR_SPACE, 15);
         StringCopy(gStringVar3, gText_DigitIndicator[gTasks[taskId].data[4]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Flag);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Flag);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 }
@@ -1785,11 +1785,11 @@ static void DebugAction_Vars_Vars(u8 taskId)
     //Display initial Variable
     ConvertIntToDecimalStringN(gStringVar1, VARS_START, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
     ConvertIntToHexStringN(gStringVar2, VARS_START, STR_CONV_MODE_LEFT_ALIGN, 4);
-    StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+    StringExpandPlaceholders(gStringVar1, sDebugText_VariableHex);
     ConvertIntToDecimalStringN(gStringVar3, 0, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
     StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Variable);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Variable);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Vars_Select;
@@ -1838,7 +1838,7 @@ static void DebugAction_Vars_Select(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+        StringExpandPlaceholders(gStringVar1, sDebugText_VariableHex);
         if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value, if 65535 the value hasnt been set
             gTasks[taskId].data[5] = 0;
         else
@@ -1847,7 +1847,7 @@ static void DebugAction_Vars_Select(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
 
         //Combine str's to full window string
-        StringExpandPlaceholders(gStringVar4, gDebugText_Variable);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Variable);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -1859,7 +1859,7 @@ static void DebugAction_Vars_Select(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+        StringExpandPlaceholders(gStringVar1, sDebugText_VariableHex);
         if (VarGetIfExist(gTasks[taskId].data[3]) == 65535) //Current value if 65535 the value hasnt been set
             gTasks[taskId].data[5] = 0;
         else
@@ -1867,7 +1867,7 @@ static void DebugAction_Vars_Select(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[5], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
-        StringExpandPlaceholders(gStringVar4, gDebugText_VariableValueSet);
+        StringExpandPlaceholders(gStringVar4, sDebugText_VariableValueSet);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].data[6] = gTasks[taskId].data[5]; //New value selector
@@ -1936,12 +1936,12 @@ static void DebugAction_Vars_SetValue(u8 taskId)
 
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         ConvertIntToHexStringN(gStringVar2, gTasks[taskId].data[3], STR_CONV_MODE_LEFT_ALIGN, 4);
-        StringExpandPlaceholders(gStringVar1, gDebugText_VariableHex);
+        StringExpandPlaceholders(gStringVar1, sDebugText_VariableHex);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[6], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_VARIABLES);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]); //Current digit
-        StringExpandPlaceholders(gStringVar4, gDebugText_VariableValueSet);
+        StringExpandPlaceholders(gStringVar4, sDebugText_VariableValueSet);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 }
@@ -1968,7 +1968,7 @@ static void DebugAction_Give_Item(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
     CopyItemName(1, gStringVar1);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, gDebugText_ItemID);
+    StringExpandPlaceholders(gStringVar4, sDebugText_ItemID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     gTasks[taskId].func = DebugAction_Give_Item_SelectId;
@@ -2014,7 +2014,7 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         CopyItemName(gTasks[taskId].data[3], gStringVar1);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-        StringExpandPlaceholders(gStringVar4, gDebugText_ItemID);
+        StringExpandPlaceholders(gStringVar4, sDebugText_ItemID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         FreeSpriteTilesByTag(ITEM_TAG);                         //Destroy item icon
@@ -2036,7 +2036,7 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEM_QUANTITY);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, gDebugText_ItemQuantity);
+        StringExpandPlaceholders(gStringVar4, sDebugText_ItemQuantity);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Give_Item_SelectQuantity;
@@ -2085,7 +2085,7 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEM_QUANTITY);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, gDebugText_ItemQuantity);
+        StringExpandPlaceholders(gStringVar4, sDebugText_ItemQuantity);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -2166,7 +2166,7 @@ static void DebugAction_Give_Egg(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringCopy(gStringVar1, gSpeciesNames[1]);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, gDebugText_PokemonID);
+    StringExpandPlaceholders(gStringVar4, sDebugText_PokemonID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     //Set task data
@@ -2222,7 +2222,7 @@ static void DebugAction_Give_Egg_SelectId(u8 taskId)
         StringCopy(gStringVar1, gSpeciesNames[gTasks[taskId].data[3]]); //CopyItemName(gTasks[taskId].data[3], gStringVar1);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 4);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonID);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]);
@@ -2287,7 +2287,7 @@ static void DebugAction_Give_PokemonSimple(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, 3);
     StringCopy(gStringVar1, gSpeciesNames[1]);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, gDebugText_PokemonID);
+    StringExpandPlaceholders(gStringVar4, sDebugText_PokemonID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     //Set task data
@@ -2330,7 +2330,7 @@ static void DebugAction_Give_PokemonComplex(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, 4);
     StringCopy(gStringVar1, gSpeciesNames[1]);
     StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-    StringExpandPlaceholders(gStringVar4, gDebugText_PokemonID);
+    StringExpandPlaceholders(gStringVar4, sDebugText_PokemonID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
 
@@ -2388,7 +2388,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         StringCopy(gStringVar1, gSpeciesNames[gTasks[taskId].data[3]]); //CopyItemName(gTasks[taskId].data[3], gStringVar1);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 4);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonID);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]);
@@ -2412,7 +2412,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 3);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonLevel);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonLevel);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectLevel;
@@ -2459,7 +2459,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 3);
         StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonLevel);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonLevel);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -2482,8 +2482,8 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
 
             ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 0);
             StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-            StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonShiny);
+            StringCopyPadded(gStringVar2, sDebugText_FlagUnset, CHAR_SPACE, 15);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonShiny);
             AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
             gTasks[taskId].func = DebugAction_Give_Pokemon_SelectShiny;
@@ -2520,12 +2520,12 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
         }
 
         if (gTasks[taskId].data[3] == 1)
-            StringCopyPadded(gStringVar2, gDebugText_FlagSet, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, sDebugText_FlagSet, CHAR_SPACE, 15);
         else
-            StringCopyPadded(gStringVar2, gDebugText_FlagUnset, CHAR_SPACE, 15);
+            StringCopyPadded(gStringVar2, sDebugText_FlagUnset, CHAR_SPACE, 15);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 0);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonShiny);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonShiny);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -2539,7 +2539,7 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar1, gNatureNamePointers[0]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonNature);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonNature);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectNature;
@@ -2575,7 +2575,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar1, gNatureNamePointers[gTasks[taskId].data[3]]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonNature);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonNature);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -2591,7 +2591,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         abilityId = GetAbilityBySpecies(sDebugMonData->mon_speciesId, 0);
         StringCopy(gStringVar1, gAbilityNames[abilityId]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonAbility);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonAbility);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectAbility;
@@ -2636,7 +2636,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
         StringCopy(gStringVar1, gAbilityNames[abilityId]);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonAbility);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonAbility);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -2649,7 +2649,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
         StringCopyPadded(gStringVar3, gStringVar3, CHAR_SPACE, 15);
-        StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_0);
+        StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_0);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
         gTasks[taskId].func = DebugAction_Give_Pokemon_SelectIVs;
@@ -2697,22 +2697,22 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
         switch (gTasks[taskId].data[7])
         {
         case 0:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_0);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_0);
             break;
         case 1:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_1);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_1);
             break;
         case 2:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_2);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_2);
             break;
         case 3:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_3);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_3);
             break;
         case 4:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_4);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_4);
             break;
         case 5:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_5);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_5);
             break;
         }
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -2756,22 +2756,22 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
             switch (gTasks[taskId].data[7])
             {
             case 0:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_0);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_0);
                 break;
             case 1:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_1);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_1);
                 break;
             case 2:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_2);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_2);
                 break;
             case 3:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_3);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_3);
                 break;
             case 4:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_4);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_4);
                 break;
             case 5:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonIV_5);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonIV_5);
                 break;
             }
             AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -2788,7 +2788,7 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
             StringCopy(gStringVar1, gMoveNames[gTasks[taskId].data[3]]);
             StringCopyPadded(gStringVar1, gStringVar1, CHAR_SPACE, 15);
             ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 3);
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_0);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_0);
             AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
 
             gTasks[taskId].func = DebugAction_Give_Pokemon_Move;
@@ -2838,16 +2838,16 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
         switch (gTasks[taskId].data[7])
         {
         case 0:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_0);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_0);
             break;
         case 1:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_1);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_1);
             break;
         case 2:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_2);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_2);
             break;
         case 3:
-            StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_3);
+            StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_3);
             break;
         }
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -2890,16 +2890,16 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
             switch (gTasks[taskId].data[7])
             {
             case 0:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_0);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_0);
                 break;
             case 1:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_1);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_1);
                 break;
             case 2:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_2);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_2);
                 break;
             case 3:
-                StringExpandPlaceholders(gStringVar4, gDebugText_PokemonMove_3);
+                StringExpandPlaceholders(gStringVar4, sDebugText_PokemonMove_3);
                 break;
             }
             AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
@@ -3222,7 +3222,7 @@ static void DebugAction_Sound_SE(u8 taskId)
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
     ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
     StringCopyPadded(gStringVar1, gSENames[0], CHAR_SPACE, 35);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Sound_SE_ID);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Sound_SE_ID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     StopMapMusic(); //Stop map music to better hear sounds
@@ -3262,7 +3262,7 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         StringCopyPadded(gStringVar1, gSENames[gTasks[taskId].data[3]-1], CHAR_SPACE, 35);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Sound_SE_ID);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_SE_ID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
@@ -3299,7 +3299,7 @@ static void DebugAction_Sound_MUS(u8 taskId)
     StringCopy(gStringVar2, gText_DigitIndicator[0]);
     ConvertIntToDecimalStringN(gStringVar3, START_MUS, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
     StringCopyPadded(gStringVar1, gBGMNames[0], CHAR_SPACE, 35);
-    StringExpandPlaceholders(gStringVar4, gDebugText_Sound_MUS_ID);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Sound_MUS_ID);
     AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
 
     StopMapMusic(); //Stop map music to better hear new music
@@ -3340,7 +3340,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
         StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
         StringCopyPadded(gStringVar1, gBGMNames[gTasks[taskId].data[3]-START_MUS], CHAR_SPACE, 35);
         ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_ITEMS);
-        StringExpandPlaceholders(gStringVar4, gDebugText_Sound_MUS_ID);
+        StringExpandPlaceholders(gStringVar4, sDebugText_Sound_MUS_ID);
         AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
     }
 
