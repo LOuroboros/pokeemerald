@@ -1053,6 +1053,11 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
     sSmallPokeballAnim_Open,
 };
 
+static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
+{
+    gPartyMenuPokeballSmall_Gfx, 0x0300, 0x04b1
+};
+
 // Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
 {
