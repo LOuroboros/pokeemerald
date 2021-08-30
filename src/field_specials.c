@@ -4589,3 +4589,8 @@ u16 CheckMonStatusAilment(void)
 {
     return GetMonAilment(&gPlayerParty[gSpecialVar_0x8004]);
 }
+
+u8 GetPlayerCostumeId(void)
+{
+    return GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_NORMAL, gSaveBlock2Ptr->playerGender);
+}

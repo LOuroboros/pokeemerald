@@ -821,19 +821,19 @@ EventScript_SwapPlayersCostumeExtended:
 	case MULTI_B_PRESSED, EventScript_SwapPlayersCostumeEnd
 
 EventScript_SetPkmnTrainerCostume:
-	compare VAR_COSTUME_SELECTION, 0
+	compare VAR_TEMP_1, 0
 	goto_if_eq EventScript_AlreadyWearingIt
-	setvar VAR_COSTUME_SELECTION, 0
+	setvar VAR_TEMP_1, 0
 	goto EventScript_ChangeCostume
 EventScript_SetLegacyCostume:
-	compare VAR_COSTUME_SELECTION, 1
+	compare VAR_TEMP_1, 1
 	goto_if_eq EventScript_AlreadyWearingIt
-	setvar VAR_COSTUME_SELECTION, 1
+	setvar VAR_TEMP_1, 1
 	goto EventScript_ChangeCostume
 EventScript_SetPokedexHolderCostume:
-	compare VAR_COSTUME_SELECTION, 2
+	compare VAR_TEMP_1, 2
 	goto_if_eq EventScript_AlreadyWearingIt
-	setvar VAR_COSTUME_SELECTION, 2
+	setvar VAR_TEMP_1, 2
 	goto EventScript_ChangeCostume
 
 EventScript_AlreadyWearingIt:

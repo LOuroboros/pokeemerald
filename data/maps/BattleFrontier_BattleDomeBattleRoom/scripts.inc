@@ -26,19 +26,11 @@ BattleFrontier_BattleDomeBattleRoom_OnTransition:
 	end
 
 BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfx::
-	checkplayergender
-	compare VAR_RESULT, MALE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale
-	compare VAR_RESULT, FEMALE
-	goto_if_eq BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale
+	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoSetPlayerGfx
 	return
 
-BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxMale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
-	return
-
-BattleFrontier_BattleDomeBattleRoom_EventScript_SetPlayerGfxFemale::
-	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+BattleFrontier_BattleDomeBattleRoom_EventScript_DoSetPlayerGfx::
+	specialvar VAR_OBJ_GFX_ID_1, GetPlayerCostumeId
 	return
 
 BattleFrontier_BattleDomeBattleRoom_OnFrame:
