@@ -468,6 +468,9 @@ const u8 gInitialMovementTypeFacingDirections[] = {
 #define OBJ_EVENT_PAL_TAG_ADVENTURES_BRENDAN      0x1124
 #define OBJ_EVENT_PAL_TAG_ADVENTURES_MAY          0x1125
 #define OBJ_EVENT_PAL_TAG_WALLACE                 0x1126
+#define OBJ_EVENT_PAL_TAG_BRAWLY                  0x1127
+#define OBJ_EVENT_PAL_TAG_FLANNERY                0x1128
+#define OBJ_EVENT_PAL_TAG_NORMAN                  0x1129
 #define OBJ_EVENT_PAL_TAG_NONE                    0x11FF
 
 #include "data/object_events/object_event_graphics_info_pointers.h"
@@ -517,6 +520,9 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_AdventuresBrendan,     OBJ_EVENT_PAL_TAG_ADVENTURES_BRENDAN},
     {gObjectEventPal_AdventuresMay,         OBJ_EVENT_PAL_TAG_ADVENTURES_MAY},
     {gObjectEventPal_Wallace,               OBJ_EVENT_PAL_TAG_WALLACE},
+    {gObjectEventPal_Brawly,                OBJ_EVENT_PAL_TAG_BRAWLY},
+    {gObjectEventPal_Flannery,              OBJ_EVENT_PAL_TAG_FLANNERY},
+    {gObjectEventPal_Norman,                OBJ_EVENT_PAL_TAG_NORMAN},
     {NULL,                                  0x0000},
 };
 

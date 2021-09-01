@@ -444,7 +444,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_ARCHIE] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_AQUA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
         .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
@@ -3396,6 +3395,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_SIDNEY] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_SIDNEY,
@@ -3409,6 +3409,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_PHOEBE] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_PHOEBE,
@@ -3422,6 +3423,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_GLACIA] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_GLACIA,
@@ -3435,6 +3437,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_DRAKE] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_DRAKE,
@@ -3448,6 +3451,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_ROXANNE_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_ROXANNE,
@@ -3461,6 +3465,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_BRAWLY_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_BRAWLY,
@@ -3474,6 +3479,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_WATTSON_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_WATTSON,
@@ -3487,6 +3493,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_FLANNERY_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_FLANNERY,
@@ -3500,6 +3507,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_NORMAN_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_NORMAN,
@@ -3513,6 +3521,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_WINONA_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_WINONA,
@@ -3526,6 +3535,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
@@ -3539,6 +3549,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_JUAN_1] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_JUAN,
@@ -6751,7 +6762,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_1] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
@@ -6766,7 +6776,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_103_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6781,7 +6790,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_110_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6796,7 +6804,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_119_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6811,7 +6818,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_103_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6826,7 +6832,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_110_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6841,7 +6846,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_119_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6856,7 +6860,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_103_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6871,7 +6874,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_110_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6886,7 +6888,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_ROUTE_119_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -6901,7 +6902,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_103_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -6916,7 +6916,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_110_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -6931,7 +6930,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_119_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -6946,7 +6944,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_103_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -6961,7 +6958,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_110_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -6976,7 +6972,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_119_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -6991,7 +6986,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_103_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7006,7 +7000,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_110_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7021,7 +7014,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_ROUTE_119_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7725,7 +7717,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_RUSTBORO_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7740,7 +7731,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_RUSTBORO_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7820,7 +7810,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_RUSTBORO_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -7835,7 +7824,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_RUSTBORO_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -7850,7 +7838,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAXIE_MAGMA_HIDEOUT] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -7865,7 +7852,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAXIE_MT_CHIMNEY] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -8569,7 +8555,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_MAUVILLE] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
@@ -8584,7 +8569,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_2] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
@@ -8599,7 +8583,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_WALLY_VR_3] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_WALLY,
@@ -8614,7 +8597,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_LILYCOVE_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -8629,7 +8611,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_LILYCOVE_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -8644,7 +8625,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_LILYCOVE_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -8659,7 +8639,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_LILYCOVE_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -8674,7 +8653,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_LILYCOVE_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -8689,7 +8667,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_LILYCOVE_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -9575,7 +9552,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAXIE_MOSSDEEP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -10019,7 +9995,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_RUSTBORO_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10034,7 +10009,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_RUSTBORO_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10048,6 +10022,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_ROXANNE_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_ROXANNE,
@@ -10061,6 +10036,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_BRAWLY_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_BRAWLY,
@@ -10074,6 +10050,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_WATTSON_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_WATTSON,
@@ -10087,6 +10064,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_FLANNERY_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_FLANNERY,
@@ -10100,6 +10078,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_NORMAN_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_NORMAN,
@@ -10113,6 +10092,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_WINONA_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_WINONA,
@@ -10126,6 +10106,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_TATE_AND_LIZA_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_LEADER_TATE_AND_LIZA,
@@ -10139,6 +10120,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_JUAN_2] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_LEADER_JUAN,
@@ -10178,6 +10160,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_STEVEN] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_STEVEN,
@@ -10790,7 +10773,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_POSTGAME_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -10805,7 +10787,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_POSTGAME_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -10820,7 +10801,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_BRENDAN_POSTGAME_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_BRENDAN,
@@ -10835,7 +10815,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_POSTGAME_MUDKIP] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10850,7 +10829,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_POSTGAME_TREECKO] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10865,7 +10843,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAY_POSTGAME_TORCHIC] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_PKMN_TRAINER_3,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE,
         .trainerPic = TRAINER_PIC_MAY,
@@ -10880,7 +10857,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_ARCHIE_POSTGAME] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_AQUA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_AQUA,
         .trainerPic = TRAINER_PIC_AQUA_LEADER_ARCHIE,
@@ -10895,7 +10871,6 @@ const struct Trainer gTrainers[] = {
     [TRAINER_MAXIE_POSTGAME] =
     {
         .hasCustomTransition = TRUE,
-        .transition = B_TRANSITION_MUGSHOT,
         .trainerClass = TRAINER_CLASS_MAGMA_LEADER,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MAGMA,
         .trainerPic = TRAINER_PIC_MAGMA_LEADER_MAXIE,
@@ -10922,6 +10897,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_SIDNEY_REMATCH] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_SIDNEY,
@@ -10935,6 +10911,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_PHOEBE_REMATCH] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_PHOEBE,
@@ -10948,6 +10925,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_GLACIA_REMATCH] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_GLACIA,
@@ -10961,6 +10939,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_DRAKE_REMATCH] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_ELITE_FOUR,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,
         .trainerPic = TRAINER_PIC_ELITE_FOUR_DRAKE,
@@ -10974,6 +10953,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_CHAMPION_STEVEN] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_CHAMPION,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_STEVEN,

@@ -817,19 +817,7 @@ u8 GetTrainerBattleTransition(void)
         return B_TRANSITION_CHAMPION;
 
     if (gTrainers[gTrainerBattleOpponent_A].hasCustomTransition)
-        return gTrainers[gTrainerBattleOpponent_A].transition;
-
-    if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_ELITE_FOUR)
-    {
-        if (gTrainerBattleOpponent_A == TRAINER_SIDNEY || gTrainerBattleOpponent_A == TRAINER_SIDNEY_REMATCH)
-            return B_TRANSITION_SIDNEY;
-        if (gTrainerBattleOpponent_A == TRAINER_PHOEBE || gTrainerBattleOpponent_A == TRAINER_PHOEBE_REMATCH)
-            return B_TRANSITION_PHOEBE;
-        if (gTrainerBattleOpponent_A == TRAINER_GLACIA || gTrainerBattleOpponent_A == TRAINER_GLACIA_REMATCH)
-            return B_TRANSITION_GLACIA;
-        if (gTrainerBattleOpponent_A == TRAINER_DRAKE || gTrainerBattleOpponent_A == TRAINER_DRAKE_REMATCH)
-            return B_TRANSITION_DRAKE;
-    }
+        return B_TRANSITION_MUGSHOT;
 
     if (gTrainers[gTrainerBattleOpponent_A].trainerClass == TRAINER_CLASS_CHAMPION)
         return B_TRANSITION_CHAMPION;

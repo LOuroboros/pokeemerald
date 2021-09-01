@@ -112,6 +112,7 @@
 #define TRAINER_PIC_RS_MAY                92
 #define TRAINER_PIC_ADVENTURES_BRENDAN    93
 #define TRAINER_PIC_ADVENTURES_MAY        94
+#define TRAINER_PIC_COUNT                 TRAINER_PIC_ADVENTURES_MAY + 1
 
 #define TRAINER_BACK_PIC_BRENDAN                0
 #define TRAINER_BACK_PIC_MAY                    1

@@ -124,7 +124,6 @@ AquaHideout_B1F_EventScript_Grunt7::
 AquaHideout_B1F_EventScript_Archie::
 	lock
 	faceplayer
-	setvar VAR_MUGSHOT_ID, MUGSHOT_ARCHIE
 	trainerbattle_single TRAINER_ARCHIE_POSTGAME, AquaHideout_B1F_Text_Archie, AquaHideout_B1F_Text_ArchieDefeat, AquaHideout_B1F_EventScript_ArchieDefeated, NO_MUSIC
 	end
 

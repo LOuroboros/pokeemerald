@@ -55,8 +55,7 @@ struct Trainer
     bool8 doubleBattle;
     u32 aiFlags;
     u8 partySize;
-    /*0x24*/ u8 transition:7;
-             u8 hasCustomTransition:1;
+    u8 hasCustomTransition:1;
     /*0x28*/ union TrainerMonPtr party;
 };
 
