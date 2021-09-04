@@ -2935,6 +2935,7 @@ BattleScript_PayDayMoneyAndPickUpItems::
 	end2
 
 BattleScript_LocalBattleLost::
+	jumpifhalfword CMP_EQUAL, gTrainerBattleMode, TRAINER_BATTLE_EARLY_RIVAL, BattleScript_NoWhiteoutBattleLost
 	jumpifbattletype BATTLE_TYPE_DOME, BattleScript_CheckDomeDrew
 	jumpifbattletype BATTLE_TYPE_FRONTIER, BattleScript_LocalBattleLostPrintTrainersWinText
 	jumpifbattletype BATTLE_TYPE_TRAINER_HILL, BattleScript_LocalBattleLostPrintTrainersWinText
@@ -2967,6 +2968,16 @@ BattleScript_LocalBattleLostDoTrainer2WinText::
 	waitstate
 	printstring STRINGID_TRAINER2WINTEXT
 BattleScript_LocalBattleLostEnd_::
+	end2
+
+BattleScript_NoWhiteoutBattleLost::
+	printstring STRINGID_TRAINER1RECALLPKMN
+	waitmessage 0x40
+	returnatktoball
+	waitstate
+	trainerslidein BS_ATTACKER
+	waitstate
+	printstring STRINGID_TRAINER1WINTEXT
 	end2
 
 BattleScript_FrontierLinkBattleLost::
