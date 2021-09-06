@@ -3,6 +3,8 @@
 #include "sprite.h"
 #include "palette.h"
 #include "constants/rgb.h"
+#include "event_data.h"
+#include "constants/flags.h"
 
 const u32 gBitTable[] =
 {
@@ -293,6 +295,9 @@ void UniquePalette(u16 palOffset, u16 species, u32 personality, bool8 isShiny)
         range = sHueShiftShinyRange;
     else
         range = sHueShiftNormalRange;
+
+    if (isShiny && FlagGet(FLAG_DISABLE_SHINY_HUE_SHIFT))
+        range = 0;
 
     shift = (value % (range * 2 + 1)) - range;
 

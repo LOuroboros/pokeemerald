@@ -94,7 +94,7 @@ enum { // Flags
     DEBUG_FLAG_MENU_ITEM_POKENAVONOFF,
     DEBUG_FLAG_MENU_ITEM_FLYANYWHERE,
     DEBUG_FLAG_MENU_ITEM_GETALLBADGES,
-    DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF,
+    DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF,
     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF,
     DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF,
     DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF,
@@ -102,6 +102,7 @@ enum { // Flags
     DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF,
     DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF,
     DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF,
+    DEBUG_FLAG_MENU_ITEM_SHINY_HUE_SHIFT_ONOFF,
 };
 enum { // Vars
     DEBUG_VARS_MENU_ITEM_VARS,
@@ -268,6 +269,7 @@ static void DebugAction_Flags_CatchingOnOff(u8);
 static void DebugAction_Flags_ShiniesOnOff(u8);
 static void DebugAction_Flags_EscapingOnOff(u8);
 static void DebugAction_Flags_ExperienceOnOff(u8);
+static void DebugAction_Flags_ShinyHueShiftOnOff(u8);
 
 static void DebugAction_Vars_Vars(u8 taskId);
 static void DebugAction_Vars_Select(u8 taskId);
@@ -407,6 +409,7 @@ static const u8 sDebugText_Flags_SwitchCatching[] =       _("Catching ON/OFF");
 static const u8 sDebugText_Flags_SwitchShinies[] =        _("Shiny enc. ON/OFF");
 static const u8 sDebugText_Flags_SwitchEscaping[] =       _("Escaping ON/OFF");
 static const u8 sDebugText_Flags_SwitchExperience[] =     _("Experience ON/OFF");
+static const u8 sDebugText_Flags_SwitchShinyHueShift[] =  _("Shiny Hue Shift ON/OFF");
 static const u8 sDebugText_Flag[] =                       _("Flag: {STR_VAR_1}   \n{STR_VAR_2}                   \n{STR_VAR_3}");
 static const u8 sDebugText_FlagHex[] =                    _("{STR_VAR_1}           \n0x{STR_VAR_2}             ");
 static const u8 sDebugText_FlagSet[] =                    _("TRUE");
@@ -558,22 +561,23 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
-    [DEBUG_FLAG_MENU_ITEM_FLAGS]             = {sDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = {sDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = {sDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
-    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = {sDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
-    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]      = {sDebugText_Flags_SwitchPokemon,       DEBUG_FLAG_MENU_ITEM_POKEMONONOFF},
-    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = {sDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
-    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = {sDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = {sDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
-    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]   = {sDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]   = {sDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF] = {sDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]     = {sDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = {sDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = {sDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]    = {sDebugText_Flags_SwitchEscaping,      DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF},
-    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]  = {sDebugText_Flags_SwitchExperience,    DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLAGS]                 = {sDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]          = {sDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]          = {sDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]           = {sDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]          = {sDebugText_Flags_SwitchPokemon,       DEBUG_FLAG_MENU_ITEM_POKEMONONOFF},
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]          = {sDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]           = {sDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]          = {sDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
+    [DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF]       = {sDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]       = {sDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]     = {sDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]         = {sDebugText_Flags_SwitchBagUse,        DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]        = {sDebugText_Flags_SwitchCatching,      DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]         = {sDebugText_Flags_SwitchShinies,       DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]        = {sDebugText_Flags_SwitchEscaping,      DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]      = {sDebugText_Flags_SwitchExperience,    DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF},
+    [DEBUG_FLAG_MENU_ITEM_SHINY_HUE_SHIFT_ONOFF] = {sDebugText_Flags_SwitchShinyHueShift, DEBUG_FLAG_MENU_ITEM_SHINY_HUE_SHIFT_ONOFF},
 };
 static const struct ListMenuItem sDebugMenu_Items_Vars[] =
 {
@@ -672,22 +676,23 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
-    [DEBUG_FLAG_MENU_ITEM_FLAGS]             = DebugAction_Flags_Flags,
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]      = DebugAction_Flags_SetPokedexFlags,
-    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]      = DebugAction_Flags_SwitchDex,
-    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]       = DebugAction_Flags_SwitchNatDex,
-    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]      = DebugAction_Flags_SwitchPokemon,
-    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]      = DebugAction_Flags_SwitchPokeNav,
-    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]       = DebugAction_Flags_ToggleFlyFlags,
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]      = DebugAction_Flags_ToggleBadgeFlags,
-    [DEBUG_FLAG_MENU_ITEM_COLISSION_ONOFF]   = DebugAction_Flags_CollisionOnOff,
-    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]   = DebugAction_Flags_EncounterOnOff,
-    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF] = DebugAction_Flags_TrainerSeeOnOff,
-    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]     = DebugAction_Flags_BagUseOnOff,
-    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]    = DebugAction_Flags_CatchingOnOff,
-    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]     = DebugAction_Flags_ShiniesOnOff,
-    [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]    = DebugAction_Flags_EscapingOnOff,
-    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]  = DebugAction_Flags_ExperienceOnOff,
+    [DEBUG_FLAG_MENU_ITEM_FLAGS]                 = DebugAction_Flags_Flags,
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]          = DebugAction_Flags_SetPokedexFlags,
+    [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]          = DebugAction_Flags_SwitchDex,
+    [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]           = DebugAction_Flags_SwitchNatDex,
+    [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]          = DebugAction_Flags_SwitchPokemon,
+    [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]          = DebugAction_Flags_SwitchPokeNav,
+    [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]           = DebugAction_Flags_ToggleFlyFlags,
+    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]          = DebugAction_Flags_ToggleBadgeFlags,
+    [DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF]       = DebugAction_Flags_CollisionOnOff,
+    [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]       = DebugAction_Flags_EncounterOnOff,
+    [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]     = DebugAction_Flags_TrainerSeeOnOff,
+    [DEBUG_FLAG_MENU_ITEM_BAG_USE_ONOFF]         = DebugAction_Flags_BagUseOnOff,
+    [DEBUG_FLAG_MENU_ITEM_CATCHING_ONOFF]        = DebugAction_Flags_CatchingOnOff,
+    [DEBUG_FLAG_MENU_ITEM_SHINIES_ONOFF]         = DebugAction_Flags_ShiniesOnOff,
+    [DEBUG_FLAG_MENU_ITEM_ESCAPING_ONOFF]        = DebugAction_Flags_EscapingOnOff,
+    [DEBUG_FLAG_MENU_ITEM_EXPERIENCE_ONOFF]      = DebugAction_Flags_ExperienceOnOff,
+    [DEBUG_FLAG_MENU_ITEM_SHINY_HUE_SHIFT_ONOFF] = DebugAction_Flags_ShinyHueShiftOnOff,
 };
 static void (*const sDebugMenu_Actions_Vars[])(u8) =
 {
@@ -1763,6 +1768,19 @@ static void DebugAction_Flags_ExperienceOnOff(u8 taskId)
     else
     {
         FlagSet(FLAG_DISABLE_EXPERIENCE);
+        PlaySE(SE_PC_LOGIN);
+    }
+}
+static void DebugAction_Flags_ShinyHueShiftOnOff(u8 taskId)
+{
+    if (FlagGet(FLAG_DISABLE_SHINY_HUE_SHIFT))
+    {
+        FlagClear(FLAG_DISABLE_SHINY_HUE_SHIFT);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_DISABLE_SHINY_HUE_SHIFT);
         PlaySE(SE_PC_LOGIN);
     }
 }
