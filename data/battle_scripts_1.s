@@ -4227,7 +4227,28 @@ BattleScript_EffectSwallow::
 	attackstring
 	ppreduce
 	stockpiletohpheal BattleScript_SwallowFail
-	goto BattleScript_PresentHealTarget
+	attackanimation
+	waitanimation
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	printstring STRINGID_PKMNREGAINEDHEALTH
+	waitmessage B_WAIT_TIME_LONG
+	playstatchangeanimation BS_TARGET, BIT_DEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO
+	setstatchanger STAT_DEF, 2, FALSE
+	setbyte gBattleCommunication STAT_DEF
+	stattextbuffer BS_TARGET
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playstatchangeanimation BS_TARGET, BIT_DEF | BIT_SPDEF, STAT_CHANGE_NEGATIVE | STAT_CHANGE_BY_TWO
+	setstatchanger STAT_SPDEF, 2, FALSE
+	setbyte gBattleCommunication STAT_SPDEF
+	stattextbuffer BS_TARGET
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	printstring STRINGID_TARGETSTOCKPILEDEFFECTWOREOFF
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_SwallowFail::
 	pause B_WAIT_TIME_SHORT
