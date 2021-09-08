@@ -4,6 +4,7 @@
 #include "palette.h"
 #include "util.h"
 #include "constants/rgb.h"
+#include "day_night.h"
 
 #define MAX_SPRITE_COPY_REQUESTS 64
 
@@ -1644,6 +1645,27 @@ u8 LoadEggSpritePalette(const struct SpritePalette *palette1, const struct Sprit
         sSpritePaletteTags[index] = palette1->tag;
         DoLoadSpriteShortPalette(palette1->data, index * 16);
         DoLoadSpriteShortPalette(palette2->data, index * 16 + 8);
+        return index;
+    }
+}
+
+u8 LoadSpritePaletteDayNight(const struct SpritePalette *palette)
+{
+    u8 index = IndexOfSpritePaletteTag(palette->tag);
+
+    if (index != 0xFF)
+        return index;
+
+    index = IndexOfSpritePaletteTag(0xFFFF);
+
+    if (index == 0xFF)
+    {
+        return 0xFF;
+    }
+    else
+    {
+        sSpritePaletteTags[index] = palette->tag;
+        DoLoadSpritePaletteDayNight(palette->data, index * 16);
         return index;
     }
 }
