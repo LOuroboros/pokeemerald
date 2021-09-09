@@ -572,8 +572,10 @@
 #define STRINGID_MICLEBERRYACTIVATES             568
 #define STRINGID_PKMNSHOOKOFFTHETAUNT            569
 #define STRINGID_PKMNGOTOVERITSINFATUATION       570
+#define STRINGID_TRAINER1PKMNCOMEBACK            571
+#define STRINGID_PLAYERWHITEOUT3                 572
 
-#define BATTLESTRINGS_COUNT                      571
+#define BATTLESTRINGS_COUNT                      573
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.

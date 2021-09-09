@@ -684,6 +684,15 @@
 	.elseif \type == TRAINER_BATTLE_HILL
 		.4byte \pointer1 @ text
 		.4byte \pointer2 @ text
+	.elseif \type == TRAINER_BATTLE_NO_WHITEOUT_NO_INTRO
+		.4byte \pointer1 @ lose text
+		.4byte \pointer2 @ win text
+		.4byte \pointer3 @ event script
+	.elseif \type == TRAINER_BATTLE_NO_WHITEOUT
+		.4byte \pointer1 @ intro text
+		.4byte \pointer2 @ lose text
+		.4byte \pointer3 @ win text
+		.4byte \pointer4 @ event script
 	.endif
 	.endm
 
@@ -728,6 +737,25 @@
 	trainerbattle TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT, \trainer, 0, \lose_text
 	.endm
 
+	@ Starts a trainer battle, skipping intro text, takes a trainer, lose text, win text, and optionally, an event script
+	@ If no event script is provided, the macro behaves like trainerbattle_single
+	.macro trainerbattle_no_whiteout_no_intro trainer:req, lose_text:req, win_text:req, event_script=FALSE
+	.if \event_script == FALSE
+	trainerbattle TRAINER_BATTLE_NO_WHITEOUT_NO_INTRO, \trainer, 0, \lose_text, \win_text, 0
+	.else
+	trainerbattle TRAINER_BATTLE_NO_WHITEOUT_NO_INTRO, \trainer, 0, \lose_text, \win_text, \event_script
+	.endif
+	.endm
+
+	@ Starts a trainer battle, takes a trainer, intro text, lose text, win text, and optionally, an event script
+	@ If no event script is provided, the macro behaves like trainerbattle_single
+	.macro trainerbattle_no_whiteout trainer:req, intro_text:req, lose_text:req, win_text:req, event_script=FALSE
+	.if \event_script == FALSE
+	trainerbattle TRAINER_BATTLE_NO_WHITEOUT, \trainer, 0, \intro_text, \lose_text, \win_text, 0
+	.else
+	trainerbattle TRAINER_BATTLE_NO_WHITEOUT, \trainer, 0, \intro_text, \lose_text, \win_text, \event_script
+	.endif
+	.endm
 
 	@ Starts a trainer battle using the battle information stored in RAM (usually by trainerbattle, which actually calls this
 	@ command behind-the-scenes), and blocks script execution until the battle finishes.

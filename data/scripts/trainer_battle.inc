@@ -7,6 +7,18 @@ EventScript_TrainerApproach::
 	waitstate
 	goto EventScript_ShowTrainerIntroMsg
 
+EventScript_NoWhiteoutNoIntroTrainerBattle::
+	lock
+	faceplayer
+	applymovement VAR_LAST_TALKED, Movement_RevealTrainer
+	waitmovement 0
+	specialvar VAR_RESULT, GetTrainerFlag
+	compare VAR_RESULT, FALSE
+	goto_if_ne EventScript_NoNormalTrainerBattle
+	special PlayTrainerEncounterMusic
+	special SetTrainerFacingDirection
+	goto EventScript_DoTrainerBattle
+
 EventScript_TryDoNormalTrainerBattle::
 	lock
 	faceplayer
