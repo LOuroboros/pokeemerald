@@ -45,6 +45,7 @@ Route103_EventScript_RivalMay::
 	applymovement LOCALID_RIVAL, Common_Movement_Delay48
 	waitmovement 0
 	msgbox Route103_Text_MayLetsBattle, MSGBOX_DEFAULT
+	setflag FLAG_DISABLE_MONEY_REWARD
 	switch VAR_STARTER_MON
 	case 0, Route103_EventScript_StartMayBattleTreecko
 	case 1, Route103_EventScript_StartMayBattleTorchic
@@ -71,42 +72,38 @@ Route103_EventScript_RivalBrendan::
 	end
 
 Route103_EventScript_StartMayBattleTreecko::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
+	trainerbattle_no_whiteout_no_intro TRAINER_MAY_ROUTE_103_TREECKO, Route103_Text_MayDefeated, Route103_Text_MayVictorious, Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleTorchic::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
+	trainerbattle_no_whiteout_no_intro TRAINER_MAY_ROUTE_103_TORCHIC, Route103_Text_MayDefeated, Route103_Text_MayVictorious, Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartMayBattleMudkip::
-	trainerbattle_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated
-	goto Route103_EventScript_AfterMayBattle
+	trainerbattle_no_whiteout_no_intro TRAINER_MAY_ROUTE_103_MUDKIP, Route103_Text_MayDefeated, Route103_Text_MayVictorious, Route103_EventScript_AfterMayBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTreecko::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
+	trainerbattle_no_whiteout_no_intro TRAINER_BRENDAN_ROUTE_103_TREECKO, Route103_Text_BrendanDefeated, Route103_Text_BrendanVictorious, Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleTorchic::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
+	trainerbattle_no_whiteout_no_intro TRAINER_BRENDAN_ROUTE_103_TORCHIC, Route103_Text_BrendanDefeated, Route103_Text_BrendanVictorious, Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_StartBrendanBattleMudkip::
-	trainerbattle_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated
-	goto Route103_EventScript_AfterBrendanBattle
+	trainerbattle_no_whiteout_no_intro TRAINER_BRENDAN_ROUTE_103_MUDKIP, Route103_Text_BrendanDefeated, Route103_Text_BrendanVictorious, Route103_EventScript_AfterBrendanBattle
 	end
 
 Route103_EventScript_AfterMayBattle::
 	msgbox Route103_Text_MayTimeToHeadBack, MSGBOX_DEFAULT
+	clearflag FLAG_DISABLE_MONEY_REWARD
 	goto Route103_EventScript_RivalExit
 	end
 
 Route103_EventScript_AfterBrendanBattle::
 	msgbox Route103_Text_BrendanTimeToHeadBack, MSGBOX_DEFAULT
+	clearflag FLAG_DISABLE_MONEY_REWARD
 	goto Route103_EventScript_RivalExit
 	end
 
@@ -414,6 +411,10 @@ Route103_Text_MayDefeated:
 	.string "Wow! That's great!\n"
 	.string "{PLAYER}, you're pretty good!$"
 
+Route103_Text_MayVictorious:
+	.string "Wow! That's great!\n"
+	.string "You're a quick learner, {PLAYER}!$"
+
 Route103_Text_MayTimeToHeadBack:
 	.string "{RIVAL}: I think I know why my dad has\n"
 	.string "an eye out for you now.\p"
@@ -438,6 +439,10 @@ Route103_Text_BrendanLetsBattle:
 
 Route103_Text_BrendanDefeated:
 	.string "Huh, {PLAYER}, you're not too shabby.$"
+
+Route103_Text_BrendanVictorious:
+	.string "Hey, you're pretty good {PLAYER}!\n"
+	.string "Are you really a newbie?$"
 
 Route103_Text_BrendanTimeToHeadBack:
 	.string "{RIVAL}: I think I get it.\n"

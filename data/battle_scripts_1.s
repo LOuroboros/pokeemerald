@@ -12,6 +12,7 @@
 #include "constants/trainers.h"
 #include "constants/battle_config.h"
 #include "constants/battle_setup.h"
+#include "constants/flags.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/battle_script.inc"
 	.include "constants/constants.inc"
@@ -5115,6 +5116,7 @@ BattleScript_LocalBattleWonLoseTexts::
 	waitstate
 	printstring STRINGID_TRAINER2LOSETEXT
 BattleScript_LocalBattleWonReward::
+	jumpifset FLAG_DISABLE_MONEY_REWARD, BattleScript_PayDayMoneyAndPickUpItems
 	getmoneyreward
 	printstring STRINGID_PLAYERGOTMONEY
 	waitmessage B_WAIT_TIME_LONG

@@ -54,7 +54,7 @@
 #define FLAG_DISABLE_EXPERIENCE           0x2A
 #define FLAG_DEFEATED_RIVAL_POSTGAME      0x2B
 #define FLAG_DISABLE_SHINY_HUE_SHIFT      0x2C
-#define FLAG_UNUSED_0x02D                 0x2D
+#define FLAG_DISABLE_MONEY_REWARD         0x2D
 #define FLAG_UNUSED_0x02E                 0x2E
 #define FLAG_UNUSED_0x02F                 0x2F
 #define FLAG_UNUSED_0x030                 0x30
