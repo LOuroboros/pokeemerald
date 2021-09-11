@@ -1,5 +1,5 @@
 	.align 2
-voicegroup195:: @
+voicegroup195:: @ 
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sty_piano_g1_16, 255, 249, 0, 226
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sty_piano_c2_16, 255, 249, 0, 226
 	voice_directsound 60, 0, DirectSoundWaveData_dp_sty_piano_c3_16, 255, 249, 0, 208

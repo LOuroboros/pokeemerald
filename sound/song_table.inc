@@ -738,12 +738,12 @@ gSongTable::
 	song hg_seq_gs_c_kikyou, 0, 0
 	song hg_seq_gs_to_madatsubomi1, 0, 0
 	song hg_seq_gs_eye_bouzu, 0, 0
-    song hg_seq_gs_fs, 0, 0
-    song hg_seq_me_tamago_get, 2, 2
-    song hg_seq_gs_e_maiko_theme, 0, 0
-    song hg_seq_gs_d_chikatsuuro, 0, 0
-    song hg_seq_me_item, 2, 2
-    song hg_seq_gs_d_unknown_iseki, 0, 0
+	song hg_seq_gs_fs, 0, 0
+	song hg_seq_me_tamago_get, 2, 2
+	song hg_seq_gs_e_maiko_theme, 0, 0
+	song hg_seq_gs_d_chikatsuuro, 0, 0
+	song hg_seq_me_item, 2, 2
+	song hg_seq_gs_d_unknown_iseki, 0, 0
 	song hg_seq_gs_radio_unknown, 0, 0
 	song hg_seq_me_hyouka2, 2, 2
 	song hg_seq_gs_t_hiwada, 0, 0
@@ -760,11 +760,11 @@ gSongTable::
 	song hg_seq_gs_vs_gymreader, 0, 0
 	song hg_seq_gs_win3, 0, 0
 	song hg_seq_me_badge, 2, 2
-    song hg_seq_gs_radio_jingle, 0, 0
-    song hg_seq_gs_aikotoba, 0, 0
-    song hg_seq_me_waza, 2, 2
-    song hg_seq_gs_game, 0, 0
-    song hg_seq_gs_gameatari, 0, 0
+	song hg_seq_gs_radio_jingle, 0, 0
+	song hg_seq_gs_aikotoba, 0, 0
+	song hg_seq_me_waza, 2, 2
+	song hg_seq_gs_game, 0, 0
+	song hg_seq_gs_gameatari, 0, 0
 	song hg_seq_me_cardgame1, 2, 2
 	song hg_seq_me_cardgame2, 2, 2
 	song hg_seq_me_acce, 2, 2

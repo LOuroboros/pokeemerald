@@ -1,5 +1,5 @@
 	.align 2
-voicegroup192:: @
+voicegroup192:: @ 
 	voice_directsound 60, 0, DirectSoundWaveData_dp_whistle_c5_16, 255, 247, 78, 196
 	voice_programmable_wave_alt 60, 0, ProgrammableWaveData_sq25half, 1, 2, 6, 2   @ triple up of 070
 	voice_directsound 60, 0, DirectSoundWaveData_dp_orchhitmajor60, 255, 200, 255, 171

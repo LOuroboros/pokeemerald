@@ -1,5 +1,5 @@
 	.align 2
-voicegroup232:: @
+voicegroup232:: @ 
 	voice_directsound 80, 40, DirectSoundWaveData_hg_130jdrumh, 255, 0, 227, 171
 	voice_directsound 81, 40, DirectSoundWaveData_hg_130jdrumh, 255, 0, 227, 171
 	voice_directsound 82, 40, DirectSoundWaveData_hg_130jdrumh, 255, 0, 227, 171

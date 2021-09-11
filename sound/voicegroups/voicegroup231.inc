@@ -1,5 +1,5 @@
 	.align 2
-voicegroup231:: @
+voicegroup231:: @ 
 	voice_directsound 63, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
 	voice_directsound 64, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171
 	voice_directsound 65, 105, DirectSoundWaveData_dp_060conga, 255, 0, 255, 171

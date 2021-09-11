@@ -910,6 +910,57 @@
 #define HG_SEQ_ME_GONIN              886 // Let's Go Together (Unused?)
 #define END_MUS                      HG_SEQ_ME_GONIN
 
+// Alt. labels for fanfares
+#define MUS_DP_TV_END               DP_SEQ_TV_END
+#define MUS_DP_OBTAIN_ITEM          DP_SEQ_FANFA4
+#define MUS_DP_HEAL                 DP_SEQ_ASA
+#define MUS_DP_OBTAIN_KEY_ITEM      DP_SEQ_FANFA3
+#define MUS_DP_OBTAIN_TMHM          DP_SEQ_WAZA
+#define MUS_DP_OBTAIN_BADGE         DP_SEQ_BADGE
+#define MUS_DP_LEVEL_UP             DP_SEQ_FANFA1
+#define MUS_DP_OBTAIN_BERRY         DP_SEQ_KINOMI
+#define MUS_DP_PARTNER              DP_SEQ_GONIN
+#define MUS_DP_EVOLVED              DP_SEQ_FANFA5
+#define MUS_DP_POKETCH              DP_SEQ_POCKETCH
+#define MUS_DP_MOVE_DELETED         DP_SEQ_WASURE
+#define MUS_DP_ACCESSORY            DP_SEQ_ACCE
+#define MUS_PL_TV_END               PL_SEQ_TV_END
+#define MUS_PL_CLEAR_MINIGAME       PL_SEQ_PL_WINMINI2
+#define MUS_PL_OBTAIN_ARCADE_POINTS PL_SEQ_PL_DON2
+#define MUS_PL_OBTAIN_CASTLE_POINTS PL_SEQ_PL_FRO
+#define MUS_PL_OBTAIN_B_POINTS      PL_SEQ_PL_POINTGET3
+#define MUS_HG_OBTAIN_KEY_ITEM      HG_SEQ_ME_KEYITEM
+#define MUS_HG_LEVEL_UP             HG_SEQ_ME_LVUP
+#define MUS_HG_HEAL                 HG_SEQ_ME_ASA
+#define MUS_HG_DEX_RATING_1         HG_SEQ_ME_HYOUKA1
+#define MUS_HG_DEX_RATING_2         HG_SEQ_ME_HYOUKA2
+#define MUS_HG_DEX_RATING_3         HG_SEQ_ME_HYOUKA3
+#define MUS_HG_DEX_RATING_4         HG_SEQ_ME_HYOUKA4
+#define MUS_HG_DEX_RATING_5         HG_SEQ_ME_HYOUKA5
+#define MUS_HG_DEX_RATING_6         HG_SEQ_ME_HYOUKA6
+#define MUS_HG_RECEIVE_EGG          HG_SEQ_ME_TAMAGO_GET
+#define MUS_HG_OBTAIN_ITEM          HG_SEQ_ME_ITEM
+#define MUS_HG_EVOLVED              HG_SEQ_ME_SHINKAOME
+#define MUS_HG_OBTAIN_BADGE         HG_SEQ_ME_BADGE
+#define MUS_HG_OBTAIN_TMHM          HG_SEQ_ME_WAZA
+#define MUS_HG_VOLTORB_FLIP_1       HG_SEQ_ME_CARDGAME1
+#define MUS_HG_VOLTORB_FLIP_2       HG_SEQ_ME_CARDGAME2
+#define MUS_HG_ACCESSORY            HG_SEQ_ME_ACCE
+#define MUS_HG_REGISTER_POKEGEAR    HG_SEQ_ME_POKEGEAR_REGIST
+#define MUS_HG_OBTAIN_BERRY         HG_SEQ_ME_KINOMI
+#define MUS_HG_RECEIVE_POKEMON      HG_SEQ_ME_PT_SPECIAL
+#define MUS_HG_MOVE_DELETED         HG_SEQ_ME_WASURE
+#define MUS_HG_THIRD_PLACE          HG_SEQ_ME_MUSHITORI3
+#define MUS_HG_SECOND_PLACE         HG_SEQ_ME_MUSHITORI2
+#define MUS_HG_FIRST_PLACE          HG_SEQ_ME_MUSHITORI1
+#define MUS_HG_POKEATHLON_NEW       HG_SEQ_ME_PT_NEW
+#define MUS_HG_WINNING_POKEATHLON   HG_SEQ_ME_PT_RESULTG
+#define MUS_HG_OBTAIN_B_POINTS      HG_SEQ_ME_BPGET
+#define MUS_HG_OBTAIN_ARCADE_POINTS HG_SEQ_ME_ROULETTE
+#define MUS_HG_OBTAIN_CASTLE_POINTS HG_SEQ_ME_CASTLE
+#define MUS_HG_CLEAR_MINIGAME       HG_SEQ_ME_MINIGAME
+#define MUS_HG_PARTNER              HG_SEQ_ME_GONIN
+
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
 #define MUS_NONE                    0xFFFF
