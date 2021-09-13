@@ -373,6 +373,6 @@ extern const u8 BattleScript_BattlerShookOffTaunt[];
 extern const u8 BattleScript_BattlerGotOverItsInfatuation[];
 extern const u8 BattleScript_Pickpocket[];
 extern const u8 BattleScript_StickyBarbTransfer[];
-
+extern const u8 BattleScript_NeutralizingGasActivates[];
 
 #endif // GUARD_BATTLE_SCRIPTS_H

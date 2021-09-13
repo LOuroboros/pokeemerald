@@ -699,9 +699,11 @@ static const u8 sText_PkmnGotOverItsInfatuation[] = _("{B_SCR_ACTIVE_NAME_WITH_P
 static const u8 sText_ItemCannotBeRemoved[] = _("{B_ATK_NAME_WITH_PREFIX}'s item cannot be removed!");
 static const u8 sText_StickyBarbTransfer[] = _("The {B_LAST_ITEM} attached itself to\n{B_ATK_NAME_WITH_PREFIX}!");
 static const u8 sText_PkmnBurnHealed[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nburn was healed.");
+static const u8 sText_NeutralizingGasFilledTheArea[] = _("Neutralizing gas filled the area!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_NEUTRALIZINGGASFILLEDTHEAREA - 12] = sText_NeutralizingGasFilledTheArea,
     [STRINGID_PKMNBURNHEALED - 12] = sText_PkmnBurnHealed,
     [STRINGID_STICKYBARBTRANSFER - 12] = sText_StickyBarbTransfer,
     [STRINGID_ITEMCANNOTBEREMOVED - 12] = sText_ItemCannotBeRemoved,

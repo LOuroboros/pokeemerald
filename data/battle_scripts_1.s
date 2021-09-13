@@ -5237,6 +5237,11 @@ BattleScript_DoSwitchOut::
 	waitstate
 	returnatktoball
 	waitstate
+	restorebattlersabilities @ Restore abilities zeroed out by Neutralizing Gas
+	jumpifbattletype BATTLE_TYPE_DOUBLE, BattleScript_DoSwitchOutSwitchInAbilities
+BattleScript_DoSwitchInSwitchOutStrings::
+@	insert ability switch out strings here
+@	force trigger opponents item effects here
 	drawpartystatussummary BS_ATTACKER
 	switchhandleorder BS_ATTACKER, 1
 	getswitchedmondata BS_ATTACKER
@@ -5250,6 +5255,9 @@ BattleScript_DoSwitchOut::
 	moveendcase MOVEEND_STATUS_IMMUNITY_ABILITIES
 	moveendcase MOVEEND_MIRROR_MOVE
 	end2
+BattleScript_DoSwitchOutSwitchInAbilities:
+	switchinabilities BS_TARGET
+	goto BattleScript_DoSwitchInSwitchOutStrings
 
 BattleScript_PursuitDmgOnSwitchOut::
 	pause B_WAIT_TIME_SHORT
@@ -7159,6 +7167,12 @@ BattleScript_BattlerAbilityStatRaiseOnSwitchIn::
 	playanimation BS_ATTACKER, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
 	waitanimation
 	printstring STRINGID_BATTLERABILITYRAISEDSTAT
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
+BattleScript_NeutralizingGasActivates::
+	call BattleScript_AbilityPopUp
+	printstring STRINGID_NEUTRALIZINGGASFILLEDTHEAREA
 	waitmessage B_WAIT_TIME_LONG
 	end3
 

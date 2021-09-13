@@ -174,6 +174,7 @@
 #define VARIOUS_TOTEM_BOOST                     103
 #define VARIOUS_TRY_ACTIVATE_GRIM_NEIGH         104
 #define VARIOUS_MOVEEND_ITEM_EFFECTS            105
+#define VARIOUS_RESTORE_BATTLERS_ABILITIES      106
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

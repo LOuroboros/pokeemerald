@@ -4233,6 +4233,23 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 effect++;
             }
             break;
+        case ABILITY_NEUTRALIZING_GAS:
+            if (!gSpecialStatuses[battler].switchInAbilityDone)
+            {
+                gSpecialStatuses[battler].switchInAbilityDone = 1;
+                for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+                {
+                    if (GetBattlerAbility(i) != ABILITY_NEUTRALIZING_GAS
+                     && !IsGastroAcidBannedAbility(gBattleMons[i].ability))
+                    {
+                        RecordAbilityBattle(i, gBattleMons[i].ability);
+                        gBattleMons[i].ability = ABILITY_NONE;
+                    }
+                }
+                BattleScriptPushCursorAndCallback(BattleScript_NeutralizingGasActivates);
+                effect++;
+            }
+            break;
         }
         break;
     case ABILITYEFFECT_ENDTURN: // 1

@@ -508,6 +508,11 @@ void ClearBattlerAbilityHistory(u8 battlerId)
     BATTLE_HISTORY->abilities[battlerId] = ABILITY_NONE;
 }
 
+void RestoreBattlerAbility(u8 battlerId)
+{
+    gBattleMons[battlerId].ability = BATTLE_HISTORY->abilities[battlerId];
+}
+
 void RecordItemEffectBattle(u8 battlerId, u8 itemEffect)
 {
     BATTLE_HISTORY->itemEffects[battlerId] = itemEffect;

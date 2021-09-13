@@ -8498,6 +8498,10 @@ static void Cmd_various(void)
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
         break;
+    case VARIOUS_RESTORE_BATTLERS_ABILITIES:
+        for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+            RestoreBattlerAbility(i);
+        break;
     }
 
     gBattlescriptCurrInstr += 3;

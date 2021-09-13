@@ -573,8 +573,9 @@
 #define STRINGID_ITEMCANNOTBEREMOVED             569
 #define STRINGID_STICKYBARBTRANSFER              570
 #define STRINGID_PKMNBURNHEALED                  571
+#define STRINGID_NEUTRALIZINGGASFILLEDTHEAREA    572
 
-#define BATTLESTRINGS_COUNT                      572
+#define BATTLESTRINGS_COUNT                      573
 
 // The below IDs are all indexes into battle message tables,
 // used to determine which of a set of messages to print.
