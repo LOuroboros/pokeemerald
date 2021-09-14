@@ -115,7 +115,7 @@
 #define FLAG_UNUSED_0x65                                    0x65 // Originally a leftover from the RS version of Mossdeep City's Gym.
 #define FLAG_UNUSED_0x66                                    0x66 // Originally a leftover from the RS version of Mossdeep City's Gym.
 #define FLAG_UNUSED_0x67                                    0x67 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x068                                   0x68  // Unused Flag
+#define FLAG_MET_ROUTE_103_NORTH_FISHERMAN                  0x68 // Unused Flag
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER                    0x69
 #define FLAG_RECEIVED_HM04                                  0x6A
 #define FLAG_RECEIVED_HM06                                  0x6B

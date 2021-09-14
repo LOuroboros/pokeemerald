@@ -28,6 +28,11 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *rockSmashMonsInfo;
     const struct WildPokemonInfo *fishingMonsInfo;
     const struct WildPokemonInfo *headbuttMonsInfo;
+    const struct WildPokemonInfo *landMonsNatInfo;
+    const struct WildPokemonInfo *waterMonsNatInfo;
+    const struct WildPokemonInfo *rockSmashMonsNatInfo;
+    const struct WildPokemonInfo *fishingMonsNatInfo;
+    const struct WildPokemonInfo *headbuttMonsNatInfo;
 };
 
 extern bool8 gIsFishingEncounter;

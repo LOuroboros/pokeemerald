@@ -816,7 +816,7 @@ u8 GetWildBattleTransition(void)
     u8 enemyLevel = GetMonData(&gEnemyParty[0], MON_DATA_LEVEL);
     u8 playerLevel = GetSumOfPlayerPartyLevel(1);
 
-    if (enemyLevel < playerLevel)
+    if (enemyLevel <= playerLevel)
     {
         if (InBattlePyramid())
             return B_TRANSITION_BLUR;
