@@ -14,8 +14,8 @@
 	.4byte \address
 	.endm
 
-	.macro object_event index:req, gfx:req, replacement:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
-	.byte \index, \replacement
+	.macro object_event index:req, in_connection:req, gfx:req, x:req, y:req, elevation:req, movement_type:req, x_radius:req, y_radius:req, trainer_type:req, sight_radius_tree_etc:req, script:req, event_flag:req
+	.byte \index, \in_connection
 	.2byte \gfx
 	.2byte \x
 	.2byte \y
