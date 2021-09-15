@@ -111,7 +111,7 @@
 #define FLAG_MET_TEAM_AQUA_HARBOR                           0x61
 #define FLAG_TV_EXPLAINED                                   0x62
 #define FLAG_MAUVILLE_GYM_BARRIERS_STATE                    0x63
-#define FLAG_UNUSED_0x64                                    0x64 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_HIDE_ROUTE_103_NORTH_FISHERMAN                 0x64 // Originally a leftover from the RS version of Mossdeep City's Gym.
 #define FLAG_UNUSED_0x65                                    0x65 // Originally a leftover from the RS version of Mossdeep City's Gym.
 #define FLAG_UNUSED_0x66                                    0x66 // Originally a leftover from the RS version of Mossdeep City's Gym.
 #define FLAG_UNUSED_0x67                                    0x67 // Originally a leftover from the RS version of Mossdeep City's Gym.

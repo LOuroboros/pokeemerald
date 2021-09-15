@@ -1467,6 +1467,8 @@ static u8 TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTem
     if (subspriteTables)
         SetSubspriteTables(&gSprites[gObjectEvents[objectEventId].spriteId], subspriteTables);
 
+    FlagClear(GetObjectEventFlagIdByObjectEventId(objectEventId));
+
     return objectEventId;
 }
 

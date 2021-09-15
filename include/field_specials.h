@@ -34,5 +34,6 @@ void SetPCBoxToSendMon(u8 boxId);
 const u8 *GetCurrentDayString(u8 dayOfWeek);
 void SwapPlayersCostume(void);
 u8 GetPlayerCostumeId(void);
+u32 GetCurrentMap(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

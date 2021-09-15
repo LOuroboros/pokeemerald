@@ -15,6 +15,7 @@
 #include "constants/layouts.h"
 #include "constants/region_map_sections.h"
 #include "constants/weather.h"
+#include "field_specials.h"
 
 // enums
 enum MapPopUp_Themes
@@ -207,7 +208,7 @@ static bool8 StartMenu_ShowMapNamePopup(void)
 
 void ShowMapNamePopup(void)
 {
-    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE)
+    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE && GetCurrentMap() != MAP_ROUTE103NORTH)
     {
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {
