@@ -2454,14 +2454,14 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         if (gMain.newKeys & DPAD_UP)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
-            if (gTasks[taskId].data[3] > 100)
-                gTasks[taskId].data[3] = 100;
+            if (gTasks[taskId].data[3] > MAX_LEVEL)
+                gTasks[taskId].data[3] = MAX_LEVEL;
         }
         if (gMain.newKeys & DPAD_DOWN)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
-            if (gTasks[taskId].data[3] < 1)
-                gTasks[taskId].data[3] = 1;
+            if (gTasks[taskId].data[3] < MIN_LEVEL)
+                gTasks[taskId].data[3] = MIN_LEVEL;
         }
         if (gMain.newKeys & DPAD_LEFT)
         {
