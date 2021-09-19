@@ -613,26 +613,29 @@ static bool8 HandleStartMenuInput(void)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void == StartMenuPokedexCallback)
-        {
-            if (GetNationalPokedexCount(FLAG_GET_SEEN) == 0)
-                return FALSE;
-        }
-
         gMenuCallback = sStartMenuItems[sCurrentStartMenuActions[sStartMenuCursorPos]].func.u8_void;
-
+        if (gMenuCallback == StartMenuPokemonCallback && CalculatePlayerPartyCount() == 0)
+        {
+            RemoveExtraStartMenuWindows();
+            HideStartMenu();
+            ScriptContext1_SetupScript(EventScript_ThereIsNoPokemon);
+            return TRUE;
+        }
     #ifdef DEBUG_MODE_ENABLED
-        if (gMenuCallback == StartMenuDebugCallback)
+        else if (gMenuCallback == StartMenuDebugCallback)
         {
             PlayerFreeze();
             sub_808BCF4();
             ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
             RemoveStartMenuWindow();
             ScriptContext2_Enable();
+            return FALSE;
         }
     #endif
-
-        return FALSE;
+        else
+        {
+            return FALSE;
+        }
     }
 
     if (JOY_NEW(START_BUTTON | B_BUTTON))
