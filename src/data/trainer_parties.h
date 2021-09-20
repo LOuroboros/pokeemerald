@@ -11337,3 +11337,39 @@ static const struct TrainerMon sParty_ChampionSteven[] = {
         .evs = {232, 60, 0, 176, 0, 40},
     }
 };
+
+static const struct TrainerMon sParty_CourtneySouthernIsland[] = {
+    {
+        .ivs = {9, 9, 9, 9, 9, 9},
+        .lvl = 39,
+        .species = SPECIES_GOLBAT,
+    },
+    {
+        .ivs = {9, 9, 9, 9, 9, 9},
+        .lvl = 40,
+        .species = SPECIES_MIGHTYENA,
+    },
+    {
+        .ivs = {9, 9, 9, 9, 9, 9},
+        .lvl = 42,
+        .species = SPECIES_CAMERUPT,
+    }
+};
+
+static const struct TrainerMon sParty_TabithaSouthernIsland[] = {
+    {
+        .ivs = {9, 9, 9, 9, 9, 9},
+        .lvl = 38,
+        .species = SPECIES_ZUBAT,
+    },
+    {
+        .ivs = {9, 9, 9, 9, 9, 9},
+        .lvl = 39,
+        .species = SPECIES_NUMEL,
+    },
+    {
+        .ivs = {9, 9, 9, 9, 9, 9},
+        .lvl = 40,
+        .species = SPECIES_MIGHTYENA,
+    }
+};

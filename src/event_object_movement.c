@@ -7569,10 +7569,12 @@ static void UpdateObjectEventOffscreen(struct ObjectEvent *objectEvent, struct S
     y2 = y;
     y2 += graphicsInfo->height;
 
-    if ((s16)x >= DISPLAY_WIDTH + 16 || (s16)x2 < -16)
+    if (((s16)x >= DISPLAY_WIDTH + 16 || (s16)x2 < -16)
+     && !FlagGet(FLAG_FORCE_LOAD_OFFSCREEN_OBJEV))
         objectEvent->offScreen = TRUE;
 
-    if ((s16)y >= DISPLAY_HEIGHT + 16 || (s16)y2 < -16)
+    if (((s16)y >= DISPLAY_HEIGHT + 16 || (s16)y2 < -16)
+     && !FlagGet(FLAG_FORCE_LOAD_OFFSCREEN_OBJEV))
         objectEvent->offScreen = TRUE;
 }
 

@@ -101,7 +101,7 @@ gStdScripts::
 	.4byte Std_ObtainDecoration        @ STD_OBTAIN_DECORATION
 	.4byte Std_RegisteredInMatchCall   @ STD_REGISTER_MATCH_CALL
 	.4byte Std_MsgboxGetPoints         @ MSGBOX_GETPOINTS
-	.4byte Std_10
+	.4byte Std_ReceiveItem             @ STD_RECEIVE_ITEM
 gStdScripts_End::
 
 	.include "data/maps/PetalburgCity/scripts.inc"
@@ -795,6 +795,25 @@ Common_EventScript_FerryDepartIsland::
 	hideobjectat OBJ_EVENT_ID_PLAYER, 0
 	call Common_EventScript_FerryDepart
 	return
+
+Ferry_EventScript_DepartIslandSouth::
+	applymovement OBJ_EVENT_ID_PLAYER, Ferry_EventScript_DepartIslandBoardSouth
+	waitmovement 0
+	return
+
+Ferry_EventScript_DepartIslandWest::
+	applymovement OBJ_EVENT_ID_PLAYER, Ferry_EventScript_DepartIslandBoardWest
+	waitmovement 0
+	return
+
+Ferry_EventScript_DepartIslandBoardSouth:
+	walk_down
+	step_end
+
+Ferry_EventScript_DepartIslandBoardWest:
+	walk_left
+	walk_in_place_fastest_down
+	step_end
 
 	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/kecleon.inc"

@@ -29,3 +29,6 @@ gText_NoRoomLeftForAnother::
 gText_TheDecorWasTransferredToThePC::
 	.string "The {STR_VAR_2} was transferred\n"
 	.string "to the PC.$"
+
+gText_PlayerReceivedTheItem::
+	.string "{PLAYER} received the {STR_VAR_2}!$"

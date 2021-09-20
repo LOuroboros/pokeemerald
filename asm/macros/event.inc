@@ -55,6 +55,7 @@
 	STD_FIND_ITEM = 1
 	STD_OBTAIN_DECORATION = 7
 	STD_REGISTER_MATCH_CALL = 8
+	STD_RECEIVE_ITEM = 10
 
 	@ Calls the standard function at index function.
 	.macro callstd function:req
@@ -2131,4 +2132,32 @@
 	checkitem \item, \amount
 	compare VAR_RESULT, TRUE
 	goto_if TRUE, \dest
+	.endm
+
+	@ Spawns a camera object and executes the specified movement script for it.
+	.macro spawnmovecamera movement:req
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, \movement
+	waitmovement 0
+	.endm
+
+	@ Removes a camera object after executing a movement script that is
+	@ supposed to walk OBJ_EVENT_ID_CAMERA back to the Player.
+	.macro despawnmovecamera movement:req
+	applymovement OBJ_EVENT_ID_CAMERA, \movement
+	waitmovement 0
+	special RemoveCameraObject
+	.endm
+
+	@ Stops playback of sound effects immediately.
+	.macro stopse
+	callnative StopSE
+	.endm
+
+	@ Copy of giveitem and finditem, meant to be used when the Player
+	@ receives an item from an NPC directly.
+	.macro receiveitem item:req, amount=1
+	setorcopyvar VAR_0x8000, \item
+	setorcopyvar VAR_0x8001, \amount
+	callstd STD_RECEIVE_ITEM
 	.endm

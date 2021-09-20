@@ -618,6 +618,13 @@ void PlaySE(u16 songNum)
     m4aSongNumStart(songNum);
 }
 
+void StopSE(void)
+{
+    m4aMPlayStop(&gMPlayInfo_SE1);
+    m4aMPlayStop(&gMPlayInfo_SE2);
+    m4aMPlayStop(&gMPlayInfo_SE3);
+}
+
 void PlaySE12WithPanning(u16 songNum, s8 pan)
 {
     m4aSongNumStart(songNum);

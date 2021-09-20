@@ -86,7 +86,7 @@
 #define VAR_DEPT_STORE_FLOOR                 0x4043
 #define VAR_TRICK_HOUSE_LEVEL                0x4044
 #define VAR_POKELOT_PRIZE_ITEM               0x4045
-#define VAR_UNUSED_0x4046                    0x4046
+#define VAR_SOUTHERN_ISLAND_STATE            0x4046
 #define VAR_SEEDOT_SIZE_RECORD               0x4047
 #define VAR_ASH_GATHER_COUNT                 0x4048
 #define VAR_BIRCH_STATE                      0x4049

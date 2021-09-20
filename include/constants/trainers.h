@@ -86,7 +86,7 @@
 #define TRAINER_PIC_SWIMMER_F             66
 #define TRAINER_PIC_TWINS                 67
 #define TRAINER_PIC_SAILOR                68
-#define TRAINER_PIC_MAGMA_ADMIN           69
+#define TRAINER_PIC_MAGMA_ADMIN_M         69
 #define TRAINER_PIC_WALLY                 70
 #define TRAINER_PIC_BRENDAN               71
 #define TRAINER_PIC_MAY                   72
@@ -112,7 +112,8 @@
 #define TRAINER_PIC_RS_MAY                92
 #define TRAINER_PIC_ADVENTURES_BRENDAN    93
 #define TRAINER_PIC_ADVENTURES_MAY        94
-#define TRAINER_PIC_COUNT                 TRAINER_PIC_ADVENTURES_MAY + 1
+#define TRAINER_PIC_MAGMA_ADMIN_F         95
+#define TRAINER_PIC_COUNT                 96
 
 #define TRAINER_BACK_PIC_BRENDAN                0
 #define TRAINER_BACK_PIC_MAY                    1

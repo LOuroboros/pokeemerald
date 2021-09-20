@@ -55,8 +55,8 @@
 #define FLAG_DEFEATED_RIVAL_POSTGAME      0x2B
 #define FLAG_DISABLE_SHINY_HUE_SHIFT      0x2C
 #define FLAG_DISABLE_MONEY_REWARD         0x2D
-#define FLAG_UNUSED_0x02E                 0x2E
-#define FLAG_UNUSED_0x02F                 0x2F
+#define FLAG_SPAWN_INVISIBLE_PLAYER       0x2E
+#define FLAG_FORCE_LOAD_OFFSCREEN_OBJEV   0x2F
 #define FLAG_UNUSED_0x030                 0x30
 #define FLAG_UNUSED_0x031                 0x31
 #define FLAG_UNUSED_0x032                 0x32
@@ -112,9 +112,9 @@
 #define FLAG_TV_EXPLAINED                                   0x62
 #define FLAG_MAUVILLE_GYM_BARRIERS_STATE                    0x63
 #define FLAG_HIDE_ROUTE_103_NORTH_FISHERMAN                 0x64 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x65                                    0x65 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x66                                    0x66 // Originally a leftover from the RS version of Mossdeep City's Gym.
-#define FLAG_UNUSED_0x67                                    0x67 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_HIDE_MEGA_EVENT_STEVEN                         0x65 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_HIDE_MEGA_EVENT_LATIAS                         0x66 // Originally a leftover from the RS version of Mossdeep City's Gym.
+#define FLAG_HIDE_MEGA_EVENT_MAGMA_GRUNTS                   0x67 // Originally a leftover from the RS version of Mossdeep City's Gym.
 #define FLAG_MET_ROUTE_103_NORTH_FISHERMAN                  0x68 // Unused Flag
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER                    0x69
 #define FLAG_RECEIVED_HM04                                  0x6A
@@ -937,8 +937,8 @@
 #define FLAG_HIDE_FALLARBOR_AZURILL                                 0x38B
 #define FLAG_HIDE_LILYCOVE_HARBOR_FERRY_ATTENDANT                   0x38C
 #define FLAG_HIDE_LILYCOVE_HARBOR_FERRY_SAILOR                      0x38D
-#define FLAG_HIDE_SOUTHERN_ISLAND_EON_STONE                         0x38E
-#define FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON              0x38F
+#define FLAG_HIDE_SOUTHERN_ISLAND_LATIOS                            0x38E
+#define FLAG_HIDE_SOUTHERN_ISLAND_LATIAS                            0x38F
 #define FLAG_HIDE_MAUVILLE_CITY_WATTSON                             0x390
 #define FLAG_HIDE_MAUVILLE_GYM_WATTSON                              0x391
 #define FLAG_HIDE_ROUTE_121_TEAM_AQUA_GRUNTS                        0x392
@@ -993,7 +993,7 @@
 #define FLAG_HIDE_MIRAGE_TOWER_ROOT_FOSSIL                          0x3C3
 #define FLAG_HIDE_MIRAGE_TOWER_CLAW_FOSSIL                          0x3C4
 #define FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT 0x3C5
-#define FLAG_HIDE_ROUTE_118_STEVEN                                  0x3C6
+#define FLAG_UNUSED_0x3C6                                           0x3C6
 #define FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_STEVEN                0x3C7
 #define FLAG_HIDE_MOSSDEEP_CITY_STEVENS_HOUSE_BELDUM_POKEBALL       0x3C8
 #define FLAG_HIDE_FORTREE_CITY_KECLEON                              0x3C9

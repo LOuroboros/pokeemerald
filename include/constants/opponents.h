@@ -839,12 +839,14 @@
 #define TRAINER_GLACIA_REMATCH              835
 #define TRAINER_DRAKE_REMATCH               836
 #define TRAINER_CHAMPION_STEVEN             837
+#define TRAINER_COURTNEY_SOUTHERN_ISLAND    838
+#define TRAINER_TABITHA_SOUTHERN_ISLAND     839
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      838
+#define TRAINERS_COUNT                      840
 #define MAX_TRAINERS_COUNT                  864
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

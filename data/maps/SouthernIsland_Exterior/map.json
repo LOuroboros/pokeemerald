@@ -12,33 +12,63 @@
   "allow_running": true,
   "show_map_name": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
-  "connections": null,
+  "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 13,
-      "y": 23,
+      "graphics_id": "OBJ_EVENT_GFX_STEVEN",
+      "in_connection": false,
+      "x": 16,
+      "y": 21,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_MEGA_EVENT_STEVEN"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_LATIAS",
+      "in_connection": false,
+      "x": 15,
+      "y": 19,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "FLAG_HIDE_MEGA_EVENT_LATIAS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_F",
+      "in_connection": false,
+      "x": 15,
+      "y": 8,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "SouthernIsland_Exterior_EventScript_Sailor",
-      "flag": "0"
+      "script": "NULL",
+      "flag": "FLAG_HIDE_MEGA_EVENT_MAGMA_GRUNTS"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_SS_TIDAL",
-      "x": 13,
-      "y": 25,
-      "elevation": 1,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
+      "in_connection": false,
+      "x": 14,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "0"
+      "script": "NULL",
+      "flag": "FLAG_HIDE_MEGA_EVENT_MAGMA_GRUNTS"
     }
   ],
   "warp_events": [
@@ -57,15 +87,45 @@
       "dest_warp_id": 1
     }
   ],
-  "coord_events": [],
-  "bg_events": [
+  "coord_events": [
     {
-      "type": "sign",
-      "x": 16,
-      "y": 7,
-      "elevation": 3,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "SouthernIsland_Exterior_EventScript_Sign"
+      "type": "trigger",
+      "x": 24,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_SOUTHERN_ISLAND_STATE",
+      "var_value": "1",
+      "script": "SouthernIsland_Exterior_EventScript_TroublesAhead"
+    },
+    {
+      "type": "trigger",
+      "x": 25,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_SOUTHERN_ISLAND_STATE",
+      "var_value": "1",
+      "script": "SouthernIsland_Exterior_EventScript_TroublesAhead"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_SOUTHERN_ISLAND_STATE",
+      "var_value": "2",
+      "script": "SouthernIsland_Exterior_EventScript_ClimaxPreparation"
+    },
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 6,
+      "elevation": 0,
+      "var": "VAR_SOUTHERN_ISLAND_STATE",
+      "var_value": "2",
+      "script": "SouthernIsland_Exterior_EventScript_ClimaxPreparation"
     }
+  ],
+  "bg_events": [
+
   ]
 }

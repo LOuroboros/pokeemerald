@@ -33,9 +33,9 @@ EventTicket_Text_AsYouLike:
 	.string "Aye, right, as you like, then.$"
 
 SouthernIsland_Interior_Text_Sign:
-	.string "“All dreams are but another reality.\n"
-	.string "Never forget…”$"
+	.string "All dreams are but another reality.\n"
+	.string "Never forget…$"
 
-SouthernIsland_Exterior_Text_Sign:
-	.string "“Those whose memories fade seek to\n"
-	.string "carve them in their hearts…”$"
+SouthernIsland_Exterior_Text_Memories:
+	.string "Those whose memories fade, seek\n"
+	.string "to carve them in their hearts…$"

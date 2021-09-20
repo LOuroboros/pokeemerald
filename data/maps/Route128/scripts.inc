@@ -82,25 +82,6 @@ Route128_EventScript_KyogreAwakenedScene::
 	releaseall
 	end
 
-Route128_Movement_Unused1:
-	walk_fast_left
-	step_end
-
-Route128_Movement_Unused2:
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
 Route128_Movement_StevenWalkUp:
 	walk_up
 	step_end

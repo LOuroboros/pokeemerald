@@ -69,7 +69,7 @@ const struct MonCoords gTrainerFrontPicCoords[] =
     [TRAINER_PIC_SWIMMER_F] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_TWINS] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_SAILOR] = {.size = 8, .y_offset = 1},
-    [TRAINER_PIC_MAGMA_ADMIN] = {.size = 8, .y_offset = 1},
+    [TRAINER_PIC_MAGMA_ADMIN_M] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_WALLY] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_BRENDAN] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_MAY] = {.size = 8, .y_offset = 1},
@@ -95,6 +95,7 @@ const struct MonCoords gTrainerFrontPicCoords[] =
     [TRAINER_PIC_RS_MAY] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_ADVENTURES_BRENDAN] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_ADVENTURES_MAY] = {.size = 8, .y_offset = 1},
+    [TRAINER_PIC_MAGMA_ADMIN_F] = {.size = 8, .y_offset = 1},
 };
 
 #define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
@@ -170,7 +171,7 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(SWIMMER_F, gTrainerFrontPic_SwimmerF, 0x800),
     TRAINER_SPRITE(TWINS, gTrainerFrontPic_Twins, 0x800),
     TRAINER_SPRITE(SAILOR, gTrainerFrontPic_Sailor, 0x800),
-    TRAINER_SPRITE(MAGMA_ADMIN, gTrainerFrontPic_MagmaAdmin, 0x800),
+    TRAINER_SPRITE(MAGMA_ADMIN_M, gTrainerFrontPic_MagmaAdminM, 0x800),
     TRAINER_SPRITE(WALLY, gTrainerFrontPic_Wally, 0x800),
     TRAINER_SPRITE(BRENDAN, gTrainerFrontPic_Brendan, 0x800),
     TRAINER_SPRITE(MAY, gTrainerFrontPic_May, 0x800),
@@ -196,6 +197,7 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(RS_MAY, gTrainerFrontPic_RubySapphireMay, 0x800),
     TRAINER_SPRITE(ADVENTURES_BRENDAN, gTrainerFrontPic_AdventuresBrendan, 0x800),
     TRAINER_SPRITE(ADVENTURES_MAY, gTrainerFrontPic_AdventuresMay, 0x800),
+    TRAINER_SPRITE(MAGMA_ADMIN_F, gTrainerFrontPic_MagmaAdminF, 0x800),
 };
 
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
@@ -271,7 +273,7 @@ const struct SpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(SWIMMER_F, gTrainerPalette_SwimmerF),
     TRAINER_PAL(TWINS, gTrainerPalette_Twins),
     TRAINER_PAL(SAILOR, gTrainerPalette_Sailor),
-    TRAINER_PAL(MAGMA_ADMIN, gTrainerPalette_MagmaAdmin),
+    TRAINER_PAL(MAGMA_ADMIN_M, gTrainerPalette_MagmaAdminM),
     TRAINER_PAL(WALLY, gTrainerPalette_Wally),
     TRAINER_PAL(BRENDAN, gTrainerPalette_Brendan),
     TRAINER_PAL(MAY, gTrainerPalette_May),
@@ -297,4 +299,5 @@ const struct SpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(RS_MAY, gTrainerPalette_RubySapphireMay),
     TRAINER_PAL(ADVENTURES_BRENDAN, gTrainerPalette_AdventuresBrendan),
     TRAINER_PAL(ADVENTURES_MAY, gTrainerPalette_AdventuresMay),
+    TRAINER_PAL(MAGMA_ADMIN_F, gTrainerPalette_MagmaAdminF),
 };
