@@ -208,7 +208,7 @@ static bool8 StartMenu_ShowMapNamePopup(void)
 
 void ShowMapNamePopup(void)
 {
-    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE && GetCurrentMap() != MAP_ROUTE103NORTH)
+    if (FlagGet(FLAG_HIDE_MAP_NAME_POPUP) != TRUE)
     {
         if (!FuncIsActiveTask(Task_MapNamePopUpWindow))
         {

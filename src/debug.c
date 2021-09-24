@@ -84,6 +84,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS,
     DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG,
     DEBUG_UTIL_MENU_ITEM_CLEAR_BAG,
+    DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY,
 };
 enum { // Flags
     DEBUG_FLAG_MENU_ITEM_FLAGS,
@@ -250,6 +251,7 @@ static void DebugAction_Util_ChangeCostume(u8 taskId);
 static void DebugAction_Util_CatchChainStatus(u8 taskId);
 static void DebugAction_Util_CreateDaycareEgg(u8 taskId);
 static void DebugAction_Util_ClearBag(u8 taskId);
+static void DebugAction_Util_ClearParty(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
@@ -392,6 +394,7 @@ static const u8 sDebugText_Util_ChangeCostume[] =           _("Change Costume");
 static const u8 sDebugText_Util_CatchChainStatus[] =        _("Catch Chain Status");
 static const u8 sDebugText_Util_CreateDaycareEgg[] =        _("Create Daycare Egg");
 static const u8 sDebugText_Util_ClearBag[] =                _("Clear Bag");
+static const u8 sDebugText_Util_ClearParty[] =              _("Clear Party");
 // Flags Menu
 static const u8 sDebugText_Flags_Flags[] =                _("Edit Flags");
 static const u8 sDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
@@ -558,6 +561,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]     = {sDebugText_Util_CatchChainStatus,    DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS},
     [DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG]     = {sDebugText_Util_CreateDaycareEgg,    DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG},
     [DEBUG_UTIL_MENU_ITEM_CLEAR_BAG]              = {sDebugText_Util_ClearBag,            DEBUG_UTIL_MENU_ITEM_CLEAR_BAG},
+    [DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY]            = {sDebugText_Util_ClearParty,          DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
@@ -673,6 +677,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]     = DebugAction_Util_CatchChainStatus,
     [DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG]     = DebugAction_Util_CreateDaycareEgg,
     [DEBUG_UTIL_MENU_ITEM_CLEAR_BAG]              = DebugAction_Util_ClearBag,
+    [DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY]            = DebugAction_Util_ClearParty,
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
@@ -1278,13 +1283,13 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
     if (gMain.newKeys & DPAD_ANY)
     {
         PlaySE(SE_SELECT);
-        if (gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP || gMain.newKeys & DPAD_RIGHT)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] > 10)
                 gTasks[taskId].data[3] = 10;
         }
-        if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN || gMain.newKeys & DPAD_LEFT)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] < 0)
@@ -1463,6 +1468,12 @@ static void DebugAction_Util_ClearBag(u8 taskId)
     ClearBag();
     for (i = 0; i < BAG_TMHM_COUNT; ++i)
         gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] = 0;
+    Debug_DestroyMenu(taskId);
+    EnableBothScriptContexts();
+}
+static void DebugAction_Util_ClearParty(u8 taskId)
+{
+    ZeroPlayerPartyMons();
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
 }
@@ -2524,13 +2535,13 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if (gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP || gMain.newKeys & DPAD_RIGHT)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] > 1)
                 gTasks[taskId].data[3] = 1;
         }
-        if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN || gMain.newKeys & DPAD_LEFT)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] < 0)
@@ -2576,13 +2587,13 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if (gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP || gMain.newKeys & DPAD_RIGHT)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] > NUM_NATURES-1)
                 gTasks[taskId].data[3] = NUM_NATURES-1;
         }
-        if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN || gMain.newKeys & DPAD_LEFT)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] < 0)
@@ -2636,13 +2647,13 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
     {
         PlaySE(SE_SELECT);
 
-        if (gMain.newKeys & DPAD_UP)
+        if (gMain.newKeys & DPAD_UP || gMain.newKeys & DPAD_RIGHT)
         {
             gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] > abilityCount)
                 gTasks[taskId].data[3] = abilityCount;
         }
-        if (gMain.newKeys & DPAD_DOWN)
+        if (gMain.newKeys & DPAD_DOWN || gMain.newKeys & DPAD_LEFT)
         {
             gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
             if (gTasks[taskId].data[3] < 0)
