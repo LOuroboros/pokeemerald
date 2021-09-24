@@ -120,10 +120,6 @@ static bool8 HandleStartMenuInput(void);
 static u8 SaveConfirmSaveCallback(void);
 static u8 SaveYesNoCallback(void);
 static u8 SaveConfirmInputCallback(void);
-static u8 SaveFileExistsCallback(void);
-static u8 SaveConfirmOverwriteDefaultNoCallback(void);
-static u8 SaveConfirmOverwriteCallback(void);
-static u8 SaveOverwriteInputCallback(void);
 static u8 SaveSavingMessageCallback(void);
 static u8 SaveDoSaveCallback(void);
 static u8 SaveSuccessCallback(void);
@@ -1042,62 +1038,10 @@ static u8 SaveConfirmInputCallback(void)
     case 0: // Yes
         switch (gSaveFileStatus)
         {
-        case SAVE_STATUS_EMPTY:
-        case SAVE_STATUS_CORRUPT:
-            if (gDifferentSaveFile == FALSE)
-            {
-                sSaveDialogCallback = SaveFileExistsCallback;
-                return SAVE_IN_PROGRESS;
-            }
-
+        default:
             sSaveDialogCallback = SaveSavingMessageCallback;
             return SAVE_IN_PROGRESS;
-        default:
-            sSaveDialogCallback = SaveFileExistsCallback;
-            return SAVE_IN_PROGRESS;
         }
-    case -1: // B Button
-    case 1: // No
-        HideSaveInfoWindow();
-        HideSaveMessageWindow();
-        return SAVE_CANCELED;
-    }
-
-    return SAVE_IN_PROGRESS;
-}
-
-// A different save file exists
-static u8 SaveFileExistsCallback(void)
-{
-    if (gDifferentSaveFile == TRUE)
-        ShowSaveMessage(gText_DifferentSaveFile, SaveConfirmOverwriteDefaultNoCallback);
-    else
-        sSaveDialogCallback = SaveSavingMessageCallback;
-
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveConfirmOverwriteDefaultNoCallback(void)
-{
-    DisplayYesNoMenuWithDefault(1); // Show Yes/No menu (No selected as default)
-    sSaveDialogCallback = SaveOverwriteInputCallback;
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveConfirmOverwriteCallback(void)
-{
-    DisplayYesNoMenuDefaultYes(); // Show Yes/No menu
-    sSaveDialogCallback = SaveOverwriteInputCallback;
-    return SAVE_IN_PROGRESS;
-}
-
-static u8 SaveOverwriteInputCallback(void)
-{
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
-    {
-    case 0: // Yes
-        sSaveDialogCallback = SaveSavingMessageCallback;
-        return SAVE_IN_PROGRESS;
     case -1: // B Button
     case 1: // No
         HideSaveInfoWindow();
