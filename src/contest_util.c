@@ -17,7 +17,6 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
 #include "overworld.h"
@@ -131,7 +130,6 @@ static void AllocContestResults(void);
 static void FreeContestResults(void);
 static void LoadAllContestMonIcons(u8, u8);
 static void CreateResultsTextWindowSprites(void);
-static void TryCreateWirelessSprites(void);
 static void Task_StartShowContestResults(u8 taskId);
 static void CB2_StartShowContestResults(void);
 static void Task_ShowContestResults(u8);
@@ -534,7 +532,6 @@ static void CB2_StartShowContestResults(void)
     memset(sContestResults->data, 0, sizeof(*sContestResults->data));
     memset(sContestResults->monResults, 0, sizeof(*sContestResults->monResults));
     CreateResultsTextWindowSprites();
-    TryCreateWirelessSprites();
     BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     gPaletteFade.bufferTransferDisabled = FALSE;
     sContestResults->data->showResultsTaskId = CreateTask(Task_ShowContestResults, 5);
@@ -543,10 +540,7 @@ static void CB2_StartShowContestResults(void)
     gBattle_WIN1V = WIN_RANGE(DISPLAY_HEIGHT - 32, DISPLAY_HEIGHT);
     CreateTask(Task_SlideContestResultsBg, 20);
     CalculateContestantsResultData();
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        gPaletteFade.bufferTransferDisabled = TRUE;
-    else
-        PlayBGM(MUS_CONTEST_RESULTS);
+    PlayBGM(MUS_CONTEST_RESULTS);
 
     SetVBlankCallback(VBlankCB_ShowContestResults);
 }
@@ -619,8 +613,7 @@ static void Task_ShowContestResults(u8 taskId)
             break;
         case 1:
             gTasks[taskId].tState++;
-            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
-                gTasks[taskId].tState = 100;
+            gTasks[taskId].tState = 100;
             break;
         case 2:
             if (IsLinkTaskFinished())
@@ -1001,9 +994,6 @@ static void Task_WaitForLinkPartnersDisconnect(u8 taskId)
 {
     if (!gReceivedRemoteLinkPlayers)
     {
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-            DestroyWirelessStatusIndicatorSprite();
-
         HideLinkResultsTextBox();
         gTasks[taskId].func = Task_TrySetContestInterviewData;
     }
@@ -1125,23 +1115,6 @@ static void LoadAllContestMonIconPalettes(void)
     {
         species = gContestMons[i].species;
         LoadPalette(gMonIconPalettes[gMonIconPaletteIndices[GetIconSpecies(species, 0)]], i * 0x10 + 0xA0, 0x20);
-    }
-}
-
-static void TryCreateWirelessSprites(void)
-{
-    u16 sheet;
-    u8 spriteId;
-
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-    {
-        LoadWirelessStatusIndicatorSpriteGfx();
-        CreateWirelessStatusIndicatorSprite(8, 8);
-        gSprites[gWirelessStatusIndicatorSpriteId].subpriority = 1;
-        sheet = LoadSpriteSheet(&sSpriteSheet_WirelessIndicatorWindow);
-        RequestDma3Fill(0xFFFFFFFF, (void *)BG_CHAR_ADDR(4) + sheet * 0x20, 0x80, 1);
-        spriteId = CreateSprite(&sSpriteTemplate_WirelessIndicatorWindow, 8, 8, 0);
-        gSprites[spriteId].oam.objMode = ST_OAM_OBJ_WINDOW;
     }
 }
 
@@ -2539,11 +2512,6 @@ bool8 GiveMonArtistRibbon(void)
     }
 }
 
-bool8 IsContestDebugActive(void)
-{
-    return FALSE; // gUnknown_0203856C in pokeruby
-}
-
 void ShowContestEntryMonPic(void)
 {
     const struct CompressedSpritePalette *palette;
@@ -2637,8 +2605,7 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
 void GetContestMultiplayerId(void)
 {
     if ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
-        && gNumLinkContestPlayers == CONTESTANT_COUNT
-        && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
+        && gNumLinkContestPlayers == CONTESTANT_COUNT)
         gSpecialVar_Result = GetMultiplayerId();
     else
         gSpecialVar_Result = MAX_LINK_PLAYERS;
@@ -2671,15 +2638,7 @@ u16 GetContestRand(void)
 
 bool8 LinkContestWaitForConnection(void)
 {
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-    {
-        CreateTask(Task_LinkContestWaitForConnection, 5);
-        return TRUE;
-    }
-    else
-    {
-        return FALSE;
-    }
+    return FALSE;
 }
 
 static void Task_LinkContestWaitForConnection(u8 taskId)
@@ -2706,27 +2665,6 @@ static void Task_LinkContestWaitForConnection(u8 taskId)
     }
 }
 
-void LinkContestTryShowWirelessIndicator(void)
-{
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-    {
-        if (gReceivedRemoteLinkPlayers)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(8, 8);
-        }
-    }
-}
-
-void LinkContestTryHideWirelessIndicator(void)
-{
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-    {
-        if (gReceivedRemoteLinkPlayers)
-            DestroyWirelessStatusIndicatorSprite();
-    }
-}
-
 bool8 IsContestWithRSPlayer(void)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_HAS_RS_PLAYER)
@@ -2738,12 +2676,4 @@ bool8 IsContestWithRSPlayer(void)
 void ClearLinkContestFlags(void)
 {
     gLinkContestFlags = 0;
-}
-
-bool8 IsWirelessContest(void)
-{
-    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        return TRUE;
-    else
-        return FALSE;
 }

@@ -160,10 +160,6 @@ CableClub_Text_CantMixWithJapaneseGame:
 	.string "Japanese Emerald and overseas Ruby\l"
 	.string "or Sapphire games at the same time.$"
 
-CableClub_Text_AdapterNotConnected:
-	.string "The Wireless Adapter is not\n"
-	.string "connected properly.$"
-
 CableClub_Text_ParticipantsStepUpToCounter:
 	.string "Participants are asked to step up\n"
 	.string "to the reception counter.$"
@@ -186,25 +182,6 @@ CableClub_Text_CanMixRecords::
 
 CableClub_Text_CancelSelectedItem::
 	.string "Cancels the selected MENU item.$"
-
-CableClub_Text_NeedBerryForBerryCrush:
-	.string "To use the BERRY CRUSH service,\n"
-	.string "you must have at least one BERRY.$"
-
-CableClub_Text_NeedTwoMonsForUnionRoom:
-	.string "To enter the UNION ROOM, you must\n"
-	.string "have at least two POKéMON.$"
-
-CableClub_Text_NoEnigmaBerryInUnionRoom:
-	.string "No POKéMON holding the {STR_VAR_1}\n"
-	.string "BERRY may enter the UNION ROOM.$"
-
-CableClub_Text_UnionRoomAdapterNotConnected:
-	.string "This is the POKéMON WIRELESS CLUB\n"
-	.string "UNION ROOM.\p"
-	.string "Unfortunately, your Wireless\n"
-	.string "Adapter is not connected properly.\p"
-	.string "Please do come again.$"
 
 CableClub_Text_PlayerIsWaiting:
 	.string "It appears as if {STR_VAR_1} is playing\n"
@@ -241,58 +218,6 @@ MossdeepCity_GameCorner_1F_Text_DodrioBerryPickingInfo:
 MossdeepCity_GameCorner_1F_Text_TalkToOldManToPlay:
 	.string "If you want to play a game,\n"
 	.string "please tell the old man beside me.$"
-
-MossdeepCity_GameCorner_1F_Text_WelcomeCanYouWait:
-	.string "Hi, welcome!\n"
-	.string "Are you here to play games using\l"
-	.string "Wireless Communication?\p"
-	.string "Can you wait just a little bit?$"
-
-MossdeepCity_GameCorner_1F_Text_ComeAgain:
-	.string "All right, come again!$"
-
-MossdeepCity_GameCorner_1F_Text_AdapterNotConnected:
-	.string "The Wireless Adapter isn't connected.\n"
-	.string "Come back when it's hooked up!$"
-
-MossdeepCity_GameCorner_1F_Text_PlayWhichGame:
-	.string "All right, which game did you want\n"
-	.string "to play?$"
-
-MossdeepCity_GameCorner_1F_Text_EnterWhichPokemon:
-	.string "Which POKéMON would you like to\n"
-	.string "enter?$"
-
-MossdeepCity_GameCorner_1F_Text_AllGoodToGo:
-	.string "Okay, you're all good to go.\n"
-	.string "Don't let the others beat you!$"
-
-MossdeepCity_GameCorner_1F_Text_ExplainRequiredMon:
-	.string "It doesn't look like you have any\n"
-	.string "POKéMON that you can enter…\p"
-	.string "Would you like me to explain what\n"
-	.string "kinds of POKéMON can enter?$"
-
-MossdeepCity_GameCorner_1F_Text_ShortJumpingPokemonAllowed:
-	.string "“POKéMON JUMP” is open to POKéMON\n"
-	.string "around 28 inches or less.\p"
-	.string "What you can't enter are those\n"
-	.string "POKéMON that can't jump.\p"
-	.string "You know, like POKéMON that only\n"
-	.string "swim, burrow, or fly.\p"
-	.string "That's all you need to know.$"
-
-MossdeepCity_GameCorner_1F_Text_OnlyDodrioAllowed:
-	.string "DODRIO BERRY-PICKING is a game that \n"
-	.string "only DODRIO may enter.$"
-
-CableClub_Text_WelcomeWhichDirectCornerRoom:
-	.string "Welcome to the POKéMON WIRELESS\n"
-	.string "CLUB DIRECT CORNER.\p"
-	.string "You may interact directly with\n"
-	.string "your friends here.\p"
-	.string "Which room would you like to\n"
-	.string "enter?$"
 
 CableClub_Text_TradePokemon:
 	.string "Would you like to trade POKéMON?$"
@@ -342,44 +267,16 @@ CableClub_Text_ChooseGroupLeader:
 	.string "The other players must then choose\n"
 	.string "“JOIN GROUP.”$"
 
-CableClub_Text_WelcomeUnionRoomEnter:
-	.string "Welcome to the POKéMON WIRELESS\n"
-	.string "CLUB UNION ROOM.\p"
-	.string "You may interact directly with\n"
-	.string "other TRAINERS here, some of\l"
-	.string "whom you may not even know.\p"
-	.string "Would you like to enter the ROOM?$"
-
-CableClub_Text_UnionRoomInfo:
-	.string "The TRAINERS in the UNION ROOM\n"
-	.string "will be those players around you\l"
-	.string "who have also entered the ROOM.\p"
-	.string "You may do all sorts of things\n"
-	.string "here, such as exchanging greetings.\p"
-	.string "You may enter two POKéMON up to\n"
-	.string "Lv. 30 for a one-on-one battle.\p"
-	.string "You may take part in a chat with\n"
-	.string "two to five people.\p"
-	.string "Or, you may register a POKéMON for\n"
-	.string "trade.\p"
-	.string "Would you like to enter the ROOM?$"
-
-CableClub_Text_EnjoyUnionRoom:
-	.string "I hope you enjoy your time in\n"
-	.string "the UNION ROOM.$"
-
 CableClub_Text_FirstTimeRightThisWay:
 	.string "Hello!\n"
 	.string "My name is TEALA.\p"
 	.string "This must be your first time\n"
 	.string "up here.\p"
-	.string "I'll show you how the Wireless\n"
-	.string "Communication System works.\p"
-	.string "First, I need to show you this\n"
+	.string "Allow me to show you this\n"
 	.string "floor of our POKéMON CENTER.\p"
 	.string "Right this way, please.$"
 
-CableClub_Text_ExplainWirelessClubFirstTime:
+CableClub_Text_ExplainCableClubFirstTime:
 	.string "On the top floor, there are two\n"
 	.string "rooms.\p"
 	.string "First, the desk on the left.\n"
@@ -390,14 +287,11 @@ CableClub_Text_ExplainWirelessClubFirstTime:
 	.string "Second, the room on the right is\n"
 	.string "the DIRECT CORNER.\p"
 	.string "You may trade or battle POKéMON\n"
-	.string "with your friends in this room.\p"
-	.string "If the Wireless Adapter isn't\n"
-	.string "connected, you may still link up\l"
+	.string "with your friends in this room\l"
 	.string "using a GBA Game Link cable.\p"
 	.string "If that is the case, you must go\n"
 	.string "to the DIRECT CORNER.\p"
-	.string "I hope you enjoy the Wireless \n"
-	.string "Communication System.$"
+	.string "I hope you enjoy our services.$"
 
 CableClub_Text_AskAboutLinking:
 	.string "Hello, {PLAYER}!\p"
@@ -405,36 +299,3 @@ CableClub_Text_AskAboutLinking:
 	.string "CENTER 2F attendant.\p"
 	.string "Is there something you needed to\n"
 	.string "ask me about linking?$"
-
-CableClub_Text_ExplainWirelessClub:
-	.string "Let me explain how the POKéMON\n"
-	.string "WIRELESS CLUB works.\p"
-	.string "On this, the top floor, there are\n"
-	.string "two rooms.\p"
-	.string "First, the room on the left.\n"
-	.string "It's the UNION ROOM.\p"
-	.string "You may link up with TRAINERS\n"
-	.string "around you who have also entered\l"
-	.string "the UNION ROOM.\p"
-	.string "With them, you may do things like\n"
-	.string "chat, battle, and trade.\p"
-	.string "Second, the room on the right is\n"
-	.string "the DIRECT CORNER.\p"
-	.string "You may trade or battle POKéMON\n"
-	.string "with your friends in this room.\p"
-	.string "Sometimes, you may not be able to\n"
-	.string "find your friends in the UNION ROOM\l"
-	.string "or the DIRECT CORNER.\p"
-	.string "In that case, please move closer\n"
-	.string "to your friends.\p"
-	.string "If the Wireless Adapter isn't\n"
-	.string "connected, you may still link up\l"
-	.string "using a GBA Game Link cable.\p"
-	.string "If that is the case, you must go\n"
-	.string "to the DIRECT CORNER.\p"
-	.string "I hope you enjoy the Wireless \n"
-	.string "Communication System.$"
-
-CableClub_Text_HopeYouEnjoyWirelessSystem:
-	.string "I hope you enjoy the Wireless\n"
-	.string "Communication System.$"

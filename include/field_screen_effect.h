@@ -12,7 +12,6 @@ void FieldCB_ContinueScriptHandleMusic(void);
 void FieldCB_ContinueScript(void);
 void Task_ReturnToFieldRecordMixing(u8 taskId);
 void FieldCB_ReturnToFieldCableLink(void);
-void FieldCB_ReturnToFieldWirelessLink(void);
 void FieldCB_DefaultWarpExit(void);
 void FieldCB_WarpExitFadeFromBlack(void);
 void FieldCB_WarpExitFadeFromWhite(void);

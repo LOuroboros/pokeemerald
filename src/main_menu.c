@@ -629,8 +629,6 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
         SetGpuReg(REG_OFFSET_BLDALPHA, 0);
         SetGpuReg(REG_OFFSET_BLDY, 7);
 
-        if (IsWirelessAdapterConnected())
-            tWirelessAdapterConnected = TRUE;
         switch (gSaveFileStatus)
         {
             case SAVE_STATUS_OK:
@@ -803,7 +801,6 @@ static bool8 HandleMainMenuInput(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        IsWirelessAdapterConnected();   // why bother calling this here? debug? Task_HandleMainMenuAPressed will check too
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
         gTasks[taskId].func = Task_HandleMainMenuAPressed;
     }
@@ -851,7 +848,6 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
         ClearStdWindowAndFrame(5, TRUE);
         ClearStdWindowAndFrame(6, TRUE);
         ClearStdWindowAndFrame(7, TRUE);
-        wirelessAdapterConnected = IsWirelessAdapterConnected();
         switch (gTasks[taskId].tMenuType)
         {
         case HAS_NO_SAVED_GAME:

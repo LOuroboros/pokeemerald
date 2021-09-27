@@ -435,9 +435,6 @@ BattleFrontier_BattleTowerLobby_EventScript_SaveBeforeLinkMultisChallenge::
 	compare VAR_RESULT, 0
 	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_CancelChallengeSaveFailed
 	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
-	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare VAR_RESULT, TRUE
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink
 	goto BattleFrontier_BattleTowerLobby_EventScript_TryCableLink
 	end
 
@@ -871,61 +868,6 @@ BattleFrontier_BattleTowerLobby_EventScript_ExplainLinkMultisChallenge::
 	goto BattleFrontier_BattleTowerLobby_EventScript_AskEnterLinkMultisChallenge
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_TryWirelessLink::
-	setvar VAR_0x8004, LINK_GROUP_BATTLE_TOWER
-	goto BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader::
-	message CableClub_Text_ChooseGroupLeaderOfTwo
-	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
-	switch VAR_RESULT
-	case 0, BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup
-	case 1, BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader
-	case 2, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
-	case MULTI_B_PRESSED, BattleFrontier_BattleTowerLobby_EventScript_CancelChallenge
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader::
-	call CableClub_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, LINKUP_SUCCESS
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
-	compare VAR_RESULT, LINKUP_FAILED
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader
-	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_TryBecomeLeader
-	compare VAR_RESULT, LINKUP_FAILED_BATTLE_TOWER
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLink
-	release
-	return
-
-BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup::
-	call CableClub_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, LINKUP_SUCCESS
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful
-	compare VAR_RESULT, LINKUP_FAILED
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_ChooseLeader
-	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_TryJoinGroup
-	compare VAR_RESULT, LINKUP_FAILED_BATTLE_TOWER
-	goto_if_eq BattleFrontier_BattleTowerLobby_EventScript_AbortLink
-	release
-	return
-
-BattleFrontier_BattleTowerLobby_EventScript_WirelessLinkSuccessful::
-	incrementgamestat GAME_STAT_ENTERED_BATTLE_TOWER
-	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, FALSE
-	message BattleFrontier_BattleTowerLobby_Text_SaveGameBeforeShowingIn
-	waitmessage
-	tower_save CHALLENGE_STATUS_SAVING
-	special SaveForBattleTowerLink
-	waitstate
-	playse SE_SAVE
-	waitse
-	goto BattleFrontier_BattleTowerLobby_EventScript_EnterElevator
-	end
-
 BattleFrontier_BattleTowerLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattleTowerLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -1319,8 +1261,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainLinkMultisChallenge:
 	.string "ROOMS are facilities for conducting\l"
 	.string "MULTI BATTLES with a friend.\p"
 	.string "You must link with your friend using\n"
-	.string "Wireless Adapters or a Game Boy\l"
-	.string "Advance Game Link cable.\p"
+	.string "a GBA Game Link cable.\p"
 	.string "You must partner with your friend and\n"
 	.string "enter two different kinds of POKéMON.\p"
 	.string "There are many MULTI BATTLE ROOMS\n"
@@ -1437,8 +1378,7 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMultiLinkRules:
 	.string "The LINK MULTI BATTLE Mode is for two\n"
 	.string "friends to mount a challenge together.\p"
 	.string "You and your friend must be linked with\n"
-	.string "Wireless Adapters or a GBA Game Link\l"
-	.string "cable.\p"
+	.string "a GBA Game Link cable.\p"
 	.string "You must choose two POKéMON at\n"
 	.string "the registration counter.\p"
 	.string "These POKéMON must be different\n"

@@ -35,4 +35,10 @@ porymap.project.cfg
 .fuse_hidden*
 *.sna
 *.dump
-berry_fix/
+berry_fix
+log.txt
+graphics/berry_crush
+graphics/pokemon_jump
+graphics/union_room_chat
+graphics/unused
+data/tilesets/secondary/union_room

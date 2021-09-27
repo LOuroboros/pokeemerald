@@ -2535,7 +2535,6 @@ extern const u8 gText_HallOfFameDebut[];
 extern const u8 gText_WinsLosses[];
 extern const u8 gText_PokemonTrades[];
 extern const u8 gText_BerryCrush[];
-extern const u8 gText_UnionTradesAndBattles[];
 extern const u8 gText_NumPokeblocks[];
 extern const u8 gText_PokeblocksWithFriends[];
 extern const u8 gText_WonContestsWFriends[];
@@ -2695,36 +2694,6 @@ extern const u8 gText_NamingScreenKeyboard_01234[];
 extern const u8 gText_NamingScreenKeyboard_56789[];
 extern const u8 gText_NamingScreenKeyboard_Symbols1[];
 extern const u8 gText_NamingScreenKeyboard_Symbols2[];
-extern const u8 gText_UnionRoomChatKeyboard_ABCDE[];
-extern const u8 gText_UnionRoomChatKeyboard_FGHIJ[];
-extern const u8 gText_UnionRoomChatKeyboard_KLMNO[];
-extern const u8 gText_UnionRoomChatKeyboard_PQRST[];
-extern const u8 gText_UnionRoomChatKeyboard_UVWXY[];
-extern const u8 gText_UnionRoomChatKeyboard_Z[];
-extern const u8 gText_UnionRoomChatKeyboard_01234Upper[];
-extern const u8 gText_UnionRoomChatKeyboard_56789Upper[];
-extern const u8 gText_UnionRoomChatKeyboard_PunctuationUpper[];
-extern const u8 gText_UnionRoomChatKeyboard_SymbolsUpper[];
-extern const u8 gText_UnionRoomChatKeyboard_abcde[];
-extern const u8 gText_UnionRoomChatKeyboard_fghij[];
-extern const u8 gText_UnionRoomChatKeyboard_klmno[];
-extern const u8 gText_UnionRoomChatKeyboard_pqrst[];
-extern const u8 gText_UnionRoomChatKeyboard_uvwxy[];
-extern const u8 gText_UnionRoomChatKeyboard_z[];
-extern const u8 gText_UnionRoomChatKeyboard_01234Lower[];
-extern const u8 gText_UnionRoomChatKeyboard_56789Lower[];
-extern const u8 gText_UnionRoomChatKeyboard_PunctuationLower[];
-extern const u8 gText_UnionRoomChatKeyboard_SymbolsLower[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji1[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji2[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji3[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji4[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji5[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji6[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji7[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji8[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji9[];
-extern const u8 gText_UnionRoomChatKeyboard_Emoji10[];
 
 // E-Reader
 extern const u8 gJPText_ReceiveMysteryGiftWithEReader[];
@@ -2743,20 +2712,6 @@ extern const u8 gJPText_WriteErrorUnableToSaveData[];
 
 // Berry Powder Menu
 extern const u8 gText_Powder[];
-
-// Union Room Chat
-extern const u8 gText_F700JoinedChat[];
-extern const u8 gText_F700LeftChat[];
-extern const u8 gText_Hello[];
-extern const u8 gText_Pokemon2[];
-extern const u8 gText_Trade[];
-extern const u8 gText_Battle[];
-extern const u8 gText_Lets[];
-extern const u8 gText_Ok[];
-extern const u8 gText_Sorry[];
-extern const u8 gText_YaySmileEmoji[];
-extern const u8 gText_ThankYou[];
-extern const u8 gText_ByeBye[];
 
 // Mystery Gift
 extern const u8 gText_MysteryGift[];
@@ -2826,7 +2781,6 @@ extern const u8 gText_SendingWonderNews[];
 extern const u8 gText_WirelessCommStatus[];
 extern const u8 gText_PeopleTrading[];
 extern const u8 gText_PeopleBattling[];
-extern const u8 gText_PeopleInUnionRoom[];
 extern const u8 gText_PeopleCommunicating[];
 extern const u8 gText_CommStandbyAwaitingOtherPlayer[];
 extern const u8 gText_RefusedBattle[];

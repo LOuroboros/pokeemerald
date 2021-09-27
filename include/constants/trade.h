@@ -20,7 +20,7 @@
 #define READY_FINISH_TRADE  1
 #define FINISH_TRADE        2
 
-// Return values for CanTradeSelectedMon and CanSpinTradeMon
+// Return values for CanTradeSelectedMon
 #define CAN_TRADE_MON           0
 #define CANT_TRADE_LAST_MON     1
 #define CANT_TRADE_NATIONAL     2
@@ -106,11 +106,5 @@
 #define UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON      7
 #define UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1    8
 #define UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2    9
-
-// Return values for CanRegisterMonForTradingBoard
-#define CAN_REGISTER_MON   0
-#define CANT_REGISTER_MON  1
-#define CANT_REGISTER_EGG  2
-
 
 #endif //GUARD_CONSTANTS_TRADE_H

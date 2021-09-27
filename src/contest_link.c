@@ -81,8 +81,6 @@ static void Task_LinkContest_InitFlags(u8 taskId)
     gContestPlayerMonIndex = GetMultiplayerId();
     gNumLinkContestPlayers = GetLinkPlayerCount();
     gLinkContestFlags = LINK_CONTEST_FLAG_IS_LINK;
-    if (gWirelessCommType == 1)
-        gLinkContestFlags = LINK_CONTEST_FLAG_IS_LINK | LINK_CONTEST_FLAG_IS_WIRELESS;
 
     // Get number of players using Emerald/FRLG
     for (i = 0; i < gNumLinkContestPlayers && (u32)(gLinkPlayers[i].version & 0xFF) - 1 > VERSION_RUBY - 1; i++)

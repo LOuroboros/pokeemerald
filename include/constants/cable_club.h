@@ -13,7 +13,6 @@
 #define USING_BATTLE_TOWER   9
 
 // Return states for the group of specials that use CreateLinkupTask
-// A few also used by TryBecomeLinkLeader and TryJoinLinkGroup
 #define LINKUP_ONGOING              0
 #define LINKUP_SUCCESS              1
 #define LINKUP_SOMEONE_NOT_READY    2

@@ -459,8 +459,6 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
         return EventScript_ShopShelf;
     if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
         return EventScript_Blueprint;
-    if (MetatileBehavior_IsPlayerFacingWirelessBoxResults(metatileBehavior, direction) == TRUE)
-        return EventScript_WirelessBoxResults;
     if (MetatileBehavior_IsCableBoxResults2(metatileBehavior, direction) == TRUE)
         return EventScript_CableBoxResults;
     if (MetatileBehavior_IsQuestionnaire(metatileBehavior) == TRUE)
@@ -596,11 +594,6 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 
 static bool8 TryStartStepCountScript(u16 metatileBehavior)
 {
-    if (InUnionRoom() == TRUE)
-    {
-        return FALSE;
-    }
-
     IncrementRematchStepCounter();
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();

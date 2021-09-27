@@ -533,11 +533,3 @@ gMetatiles_MysteryEventsHouse::
 	.align 1
 gMetatileAttributes_MysteryEventsHouse::
 	.incbin "data/tilesets/secondary/mystery_events_house/metatile_attributes.bin"
-
-	.align 1
-gMetatiles_UnionRoom::
-	.incbin "data/tilesets/secondary/union_room/metatiles.bin"
-
-	.align 1
-gMetatileAttributes_UnionRoom::
-	.incbin "data/tilesets/secondary/union_room/metatile_attributes.bin"

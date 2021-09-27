@@ -10,7 +10,6 @@
 #include "pokemon.h"
 #include "cable_club.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "tv.h"
 #include "battle_tower.h"
 #include "window.h"
@@ -53,7 +52,6 @@ struct PlayerRecordsRS
     struct RecordMixingDaycareMail daycareMail;
     struct RSBattleTowerRecord battleTowerRecord;
     u16 giftItem;
-    u16 filler11C8[0x32];
 };
 
 struct PlayerRecordsEmerald
@@ -69,7 +67,6 @@ struct PlayerRecordsEmerald
     /* 0x1214 */ LilycoveLady lilycoveLady;
     /* 0x1254 */ struct Apprentice apprentices[2];
     /* 0x12dc */ struct PlayerHallRecords hallRecords;
-    /* 0x1434 */ u8 field_1434[0x10];
 }; // 0x1444
 
 union PlayerRecords
@@ -337,8 +334,7 @@ static void Task_RecordMixing_Main(u8 taskId)
         if (!gTasks[data[10]].isActive)
         {
             tState = 4;
-            if (gWirelessCommType == 0)
-                data[10] = CreateTask_ReestablishCableClubLink();
+            data[10] = CreateTask_ReestablishCableClubLink();
 
             PrintTextOnRecordMixing(gText_RecordMixingComplete);
             data[8] = 0;
@@ -354,10 +350,6 @@ static void Task_RecordMixing_Main(u8 taskId)
             free(sReceivedRecords);
             free(sSentRecord);
             SetLinkWaitingForScript();
-            if (gWirelessCommType != 0)
-            {
-                CreateTask(Task_ReturnToFieldRecordMixing, 10);
-            }
             ClearDialogWindowAndFrame(0, 1);
             DestroyTask(taskId);
             EnableBothScriptContexts();
@@ -971,25 +963,12 @@ static void Task_DoRecordMixing(u8 taskId)
 
     // Mixing Emerald records.
     case 6:
-        if (!sub_801048C(FALSE))
-        {
-            CreateTask(Task_LinkSave, 5);
-            task->data[0]++;
-        }
+        CreateTask(Task_LinkSave, 5);
+        task->data[0]++;
         break;
     case 7: // wait for Task_LinkSave to finish.
         if (!FuncIsActiveTask(Task_LinkSave))
-        {
-            if (gWirelessCommType)
-            {
-                sub_801048C(TRUE);
-                task->data[0] = 8;
-            }
-            else
-            {
-                task->data[0] = 4;
-            }
-        }
+            task->data[0] = 4;
         break;
     case 8:
         SetLinkStandbyCallback();

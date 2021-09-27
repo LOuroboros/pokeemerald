@@ -7,7 +7,6 @@
 #include "battle_setup.h"
 #include "cable_club.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "recorded_battle.h"
@@ -31,8 +30,6 @@ void HandleLinkBattleSetup(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_LINK)
     {
-        if (gWirelessCommType)
-            SetWirelessCommType1();
         if (!gReceivedRemoteLinkPlayers)
             OpenLink();
         CreateTask(Task_WaitForLinkPlayerConnection, 0);
@@ -759,28 +756,21 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
             gTasks[taskId].data[11]++;
         break;
     case 2:
-        if (gWirelessCommType)
-        {
-            gTasks[taskId].data[11]++;
-        }
+        if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
+            var = 2;
         else
-        {
-            if (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER)
-                var = 2;
-            else
-                var = (gBattleTypeFlags & BATTLE_TYPE_MULTI) ? 4 : 2;
+            var = (gBattleTypeFlags & BATTLE_TYPE_MULTI) ? 4 : 2;
 
-            if (GetLinkPlayerCount_2() >= var)
+        if (GetLinkPlayerCount_2() >= var)
+        {
+            if (IsLinkMaster())
             {
-                if (IsLinkMaster())
-                {
-                    CheckShouldAdvanceLinkState();
-                    gTasks[taskId].data[11]++;
-                }
-                else
-                {
-                    gTasks[taskId].data[11]++;
-                }
+                CheckShouldAdvanceLinkState();
+                gTasks[taskId].data[11]++;
+            }
+            else
+            {
+                gTasks[taskId].data[11]++;
             }
         }
         break;
@@ -834,7 +824,6 @@ void TryReceiveLinkBattleData(void)
 
     if (gReceivedRemoteLinkPlayers != 0 && (gBattleTypeFlags & BATTLE_TYPE_LINK_IN_BATTLE))
     {
-        DestroyTask_RfuIdle();
         for (i = 0; i < GetLinkPlayerCount(); i++)
         {
             if (GetBlockReceivedStatus() & gBitTable[i])

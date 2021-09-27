@@ -1204,11 +1204,6 @@ void CB2_StartContest(void)
         SetVBlankCallback(VBlankCB_Contest);
         eContest.mainTaskId = CreateTask(Task_StartContestWaitFade, 10);
         SetMainCallback2(CB2_ContestMain);
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(8, 8);
-        }
         break;
     }
 }
@@ -1228,34 +1223,9 @@ static void Task_TryStartLinkContest(u8 taskId)
 {
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
-        if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS)
-        {
-            switch (gTasks[taskId].data[0])
-            {
-            case 0:
-                ContestPrintLinkStandby();
-                gTasks[taskId].data[0]++;
-                // fallthrough
-            case 1:
-                if (IsLinkTaskFinished())
-                {
-                    SetLinkStandbyCallback();
-                    gTasks[taskId].data[0]++;
-                }
-                return;
-            case 2:
-                if (IsLinkTaskFinished() != TRUE)
-                    return;
-                gTasks[taskId].data[0]++;
-                break;
-            }
-        }
-
         if (!gPaletteFade.active)
         {
             gPaletteFade.bufferTransferDisabled = FALSE;
-            if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_WIRELESS))
-                ContestPrintLinkStandby();
             CreateTask(Task_CommunicateMonIdxs, 0);
             gTasks[taskId].data[0] = 0;
             gTasks[taskId].func = TaskDummy1;

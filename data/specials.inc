@@ -43,8 +43,6 @@ gSpecials::
 	def_special CloseLink
 	def_special ColosseumPlayerSpotTriggered
 	def_special PlayerEnteredTradeSeat
-	def_special nullsub_37
-	def_special CableClubSaveGame
 	def_special TryBerryBlenderLinkup
 	def_special GetLinkPartnerNames
 	def_special SpawnLinkPartnerObjectEvent
@@ -100,7 +98,6 @@ gSpecials::
 	def_special GetContestMonCondition
 	def_special HasMonWonThisContestBefore
 	def_special GiveMonContestRibbon
-	def_special IsContestDebugActive
 	def_special GiveMonArtistRibbon
 	def_special TryContestGModeLinkup
 	def_special SaveGame
@@ -421,25 +418,12 @@ gSpecials::
 	def_special SetMirageTowerVisibility
 	def_special StartPlayerDescendMirageTower
 	def_special BufferTMHMMoveName
-	def_special IsWirelessAdapterConnected
-	def_special TryBecomeLinkLeader
-	def_special TryJoinLinkGroup
-	def_special RunUnionRoom
-	def_special ShowWirelessCommunicationScreen
-	def_special InitUnionRoom
-	def_special BufferUnionRoomPlayerName
-	def_special ChooseMonForWirelessMinigame
-	def_special Script_ResetUnionRoomTrade
 	def_special IsBadEggInParty
 	def_special HasAtLeastOneBerry
 	def_special OffsetCameraForBattle
 	def_special GetDeptStoreDefaultFloorChoice
 	def_special BufferVarsForIVRater
 	def_special LinkContestWaitForConnection
-	def_special GetWirelessCommType
-	def_special LinkContestTryShowWirelessIndicator
-	def_special LinkContestTryHideWirelessIndicator
-	def_special IsWirelessContest
 	def_special ShowRankingHallRecordsWindow
 	def_special ScrollRankingHallRecordsWindow
 	def_special ShowFrontierManiacMessage
@@ -509,7 +493,6 @@ gSpecials::
 	def_special CallTrainerHillFunction
 	def_special LoopWingFlapSE
 	def_special DestroyMewEmergingGrassSprite
-	def_special ShowBerryCrushRankings
 	def_special TryBufferWaldaPhrase
 	def_special DoWaldaNamingScreen
 	def_special TryGetWallpaperWithWaldaPhrase

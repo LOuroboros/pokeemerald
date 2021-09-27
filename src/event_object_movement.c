@@ -28,7 +28,6 @@
 #include "constants/items.h"
 #include "constants/mauville_old_man.h"
 #include "constants/trainer_types.h"
-#include "constants/union_room.h"
 #include "sound.h"
 #include "constants/songs.h"
 
@@ -8868,52 +8867,10 @@ void SetObjectEventSpriteAnim(u8 objectEventId, u8 animNum)
     }
 }
 
-static void MoveUnionRoomObjectUp(struct Sprite *sprite)
-{
-    switch(sprite->sAnimState)
-    {
-        case 0:
-            sprite->pos2.y = 0;
-            sprite->sAnimState++;
-        case 1:
-            sprite->pos2.y -= 8;
-            if (sprite->pos2.y == -DISPLAY_HEIGHT)
-            {
-                sprite->pos2.y = 0;
-                sprite->sInvisible = TRUE;
-                sprite->sAnimNum = 0;
-                sprite->sAnimState = 0;
-            }
-    }
-}
-
-static void MoveUnionRoomObjectDown(struct Sprite *sprite)
-{
-    switch(sprite->sAnimState)
-    {
-        case 0:
-            sprite->pos2.y = -DISPLAY_HEIGHT;
-            sprite->sAnimState++;
-        case 1:
-            sprite->pos2.y += 8;
-            if(sprite->pos2.y == 0)
-            {
-                sprite->sAnimNum = 0;
-                sprite->sAnimState = 0;
-            }
-    }
-}
-
 static void UpdateObjectEventSpritePosition(struct Sprite *sprite)
 {
     switch(sprite->sAnimNum)
     {
-        case UNION_ROOM_SPAWN_IN:
-            MoveUnionRoomObjectDown(sprite);
-            break;
-        case UNION_ROOM_SPAWN_OUT:
-            MoveUnionRoomObjectUp(sprite);
-            break;
         case 0:
             break;
         default:

@@ -602,9 +602,6 @@ BerryBlender_EventScript_TryDoLinkBlender:
 	call Common_EventScript_SaveGame
 	compare VAR_RESULT, FALSE
 	goto_if_eq BerryBlender_EventScript_CancelLinkBlender
-	specialvar VAR_RESULT, IsWirelessAdapterConnected
-	compare VAR_RESULT, TRUE
-	goto_if_eq BerryBlender_EventScript_StartDecideLinkLeader
 	message BerryBlender_Text_SearchingForFriends
 	waitmessage
 	special TryBerryBlenderLinkup
@@ -701,56 +698,4 @@ BerryBlender_EventScript_LinkPlayersArrived:
 	case 2, BerryBlender_EventScript_TwoPlayerLink
 	case 3, BerryBlender_EventScript_ThreePlayerLink
 	case 4, BerryBlender_EventScript_FourPlayerLink
-	end
-
-BerryBlender_EventScript_StartDecideLinkLeader:
-	setvar VAR_0x8004, LINK_GROUP_BERRY_BLENDER
-	goto BerryBlender_EventScript_DecideLinkLeader
-	end
-
-BerryBlender_EventScript_DecideLinkLeader:
-	message LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader
-	waitmessage
-	multichoice 16, 6, MULTI_LINK_LEADER, FALSE
-	switch VAR_RESULT
-	case 0, BerryBlender_EventScript_TryJoinGroup
-	case 1, BerryBlender_EventScript_TryLeadGroup
-	case 2, BerryBlender_EventScript_CloseLink
-	case MULTI_B_PRESSED, BerryBlender_EventScript_CloseLink
-	end
-
-BerryBlender_EventScript_TryLeadGroup:
-	call BerryBlender_EventScript_TryBecomeLinkLeader
-	compare VAR_RESULT, LINKUP_SUCCESS
-	goto_if_eq BerryBlender_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, LINKUP_FAILED
-	goto_if_eq BerryBlender_EventScript_DecideLinkLeader
-	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
-	goto_if_eq BerryBlender_EventScript_TryLeadGroup
-	release
-	end
-
-BerryBlender_EventScript_TryJoinGroup:
-	call BerryBlender_EventScript_TryJoinLinkGroup
-	compare VAR_RESULT, LINKUP_SUCCESS
-	goto_if_eq BerryBlender_EventScript_LinkLeaderDecided
-	compare VAR_RESULT, LINKUP_FAILED
-	goto_if_eq BerryBlender_EventScript_DecideLinkLeader
-	compare VAR_RESULT, LINKUP_RETRY_ROLE_ASSIGN
-	goto_if_eq BerryBlender_EventScript_TryJoinGroup
-	release
-	end
-
-BerryBlender_EventScript_TryBecomeLinkLeader:
-	special TryBecomeLinkLeader
-	waitstate
-	return
-
-BerryBlender_EventScript_TryJoinLinkGroup:
-	special TryJoinLinkGroup
-	waitstate
-	return
-
-BerryBlender_EventScript_LinkLeaderDecided:
-	goto BerryBlender_EventScript_SpawnLinkPartners
 	end

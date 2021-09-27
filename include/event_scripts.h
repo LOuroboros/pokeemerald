@@ -534,7 +534,6 @@ extern const u8 EventScript_Vase[];
 extern const u8 EventScript_EmptyTrashCan[];
 extern const u8 EventScript_ShopShelf[];
 extern const u8 EventScript_Blueprint[];
-extern const u8 EventScript_WirelessBoxResults[];
 extern const u8 EventScript_CableBoxResults[];
 extern const u8 EventScript_Questionnaire[];
 extern const u8 EventScript_TrainerHillTimer[];

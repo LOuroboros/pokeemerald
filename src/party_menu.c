@@ -32,7 +32,6 @@
 #include "item_menu.h"
 #include "item_use.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
@@ -60,7 +59,6 @@
 #include "text.h"
 #include "text_window.h"
 #include "trade.h"
-#include "union_room.h"
 #include "window.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
@@ -389,8 +387,6 @@ static void CursorCb_SendMon(u8);
 static void CursorCb_Enter(u8);
 static void CursorCb_NoEntry(u8);
 static void CursorCb_Store(u8);
-static void CursorCb_Register(u8);
-static void CursorCb_Trade1(u8);
 static void CursorCb_Trade2(u8);
 static void CursorCb_Toss(u8);
 static void CursorCb_FieldMove(u8);
@@ -1966,16 +1962,8 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
         FillWindowPixelBuffer(cancelWindowId, PIXEL_FILL(0));
 
         // Branches are functionally identical. Second branch is never reached, Spin Trade wasnt fully implemented
-        if (gPartyMenu.menuType != PARTY_MENU_TYPE_SPIN_TRADE)
-        {
-            mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel, 48);
-            AddTextPrinterParameterized3(cancelWindowId, 0, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel);
-        }
-        else
-        {
-            mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel2, 48);
-            AddTextPrinterParameterized3(cancelWindowId, 0, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel2);
-        }
+        mainOffset = GetStringCenterAlignXOffset(0, gText_Cancel, 48);
+        AddTextPrinterParameterized3(cancelWindowId, 0, mainOffset + offset, 1, sFontColorTable[0], -1, gText_Cancel);
         PutWindowTilemap(cancelWindowId);
         CopyWindowToVram(cancelWindowId, 2);
         ScheduleBgCopyTilemapToVram(0);
@@ -2509,15 +2497,6 @@ static u8 GetPartyMenuActionsType(struct Pokemon *mon)
         break;
     case PARTY_MENU_TYPE_DAYCARE:
         actionType = (GetMonData(mon, MON_DATA_IS_EGG)) ? ACTIONS_SUMMARY_ONLY : ACTIONS_STORE;
-        break;
-    case PARTY_MENU_TYPE_UNION_ROOM_REGISTER:
-        actionType = ACTIONS_REGISTER;
-        break;
-    case PARTY_MENU_TYPE_UNION_ROOM_TRADE:
-        actionType = ACTIONS_TRADE;
-        break;
-    case PARTY_MENU_TYPE_SPIN_TRADE:
-        actionType = ACTIONS_SPIN_TRADE;
         break;
     case PARTY_MENU_TYPE_STORE_PYRAMID_HELD_ITEMS:
         actionType = ACTIONS_TAKEITEM_TOSS;
@@ -3442,115 +3421,6 @@ static void CursorCb_Store(u8 taskId)
     Task_ClosePartyMenu(taskId);
 }
 
-// Register mon for the Trading Board in Union Room
-static void CursorCb_Register(u8 taskId)
-{
-    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
-    u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
-    u8 isEventLegal = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_EVENT_LEGAL);
-
-    switch (CanRegisterMonForTradingBoard(*(struct GFtgtGnameSub *)GetHostRFUtgtGname(), species2, species, isEventLegal))
-    {
-    case CANT_REGISTER_MON:
-        StringExpandPlaceholders(gStringVar7, gText_PkmnCantBeTradedNow);
-        break;
-    case CANT_REGISTER_EGG:
-        StringExpandPlaceholders(gStringVar7, gText_EggCantBeTradedNow);
-        break;
-    default:
-        PlaySE(SE_SELECT);
-        Task_ClosePartyMenu(taskId);
-        return;
-    }
-    PlaySE(SE_FAILURE);
-    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
-    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
-    StringAppend(gStringVar7, gText_PauseUntilPress);
-    DisplayPartyMenuMessage(gStringVar7, TRUE);
-    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-}
-
-static void CursorCb_Trade1(u8 taskId)
-{
-    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
-    u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
-    u8 isEventLegal = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_EVENT_LEGAL);
-    u32 stringId = GetUnionRoomTradeMessageId(*(struct GFtgtGnameSub *)GetHostRFUtgtGname(), gPartnerTgtGnameSub, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, isEventLegal);
-
-    if (stringId != UR_TRADE_MSG_NONE)
-    {
-        StringExpandPlaceholders(gStringVar7, sUnionRoomTradeMessages[stringId - 1]);
-        PlaySE(SE_FAILURE);
-        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
-        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
-        StringAppend(gStringVar7, gText_PauseUntilPress);
-        DisplayPartyMenuMessage(gStringVar7, TRUE);
-        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-    }
-    else
-    {
-        PlaySE(SE_SELECT);
-        Task_ClosePartyMenu(taskId);
-    }
-}
-
-// Spin Trade (based on the translation of the Japanese trade prompt)
-// Not fully implemented, and normally unreachable because PARTY_MENU_TYPE_SPIN_TRADE is never used
-static void CursorCb_Trade2(u8 taskId)
-{
-    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
-    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
-    switch (CanSpinTradeMon(gPlayerParty, gPartyMenu.slotId))
-    {
-    case CANT_TRADE_LAST_MON:
-        StringExpandPlaceholders(gStringVar7, gText_OnlyPkmnForBattle);
-        break;
-    case CANT_TRADE_NATIONAL:
-        StringExpandPlaceholders(gStringVar7, gText_PkmnCantBeTradedNow);
-        break;
-    case CANT_TRADE_EGG_YET:
-        StringExpandPlaceholders(gStringVar7, gText_EggCantBeTradedNow);
-        break;
-    default: // CAN_TRADE_MON
-        PlaySE(SE_SELECT);
-        GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
-        StringExpandPlaceholders(gStringVar7, gJPText_AreYouSureYouWantToSpinTradeMon);
-        DisplayPartyMenuMessage(gStringVar7, TRUE);
-        gTasks[taskId].func = Task_SpinTradeYesNo;
-        return;
-    }
-    PlaySE(SE_FAILURE);
-    StringAppend(gStringVar7, gText_PauseUntilPress);
-    DisplayPartyMenuMessage(gStringVar7, TRUE);
-    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
-}
-
-static void Task_SpinTradeYesNo(u8 taskId)
-{
-    if (IsPartyMenuTextPrinterActive() != TRUE)
-    {
-        PartyMenuDisplayYesNoMenu();
-        gTasks[taskId].func = Task_HandleSpinTradeYesNoInput;
-    }
-}
-
-// See comment on CursorCb_Trade2. Because no callback is set, selecting YES (0) to spin trade just closes the party menu
-static void Task_HandleSpinTradeYesNoInput(u8 taskId)
-{
-    switch (Menu_ProcessInputNoWrapClearOnChoose())
-    {
-    case 0:
-        Task_ClosePartyMenu(taskId);
-        break;
-    case MENU_B_PRESSED:
-        PlaySE(SE_SELECT);
-        // fallthrough
-    case 1:
-        Task_ReturnToChooseMonAfterText(taskId);
-        break;
-    }
-}
-
 static void CursorCb_FieldMove(u8 taskId)
 {
     u8 fieldMove = sPartyMenuInternal->actions[Menu_GetCursorPos()] - MENU_FIELD_MOVES;
@@ -3562,7 +3432,7 @@ static void CursorCb_FieldMove(u8 taskId)
 
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
-    if (MenuHelpers_LinkSomething() == TRUE || InUnionRoom() == TRUE)
+    if (MenuHelpers_LinkSomething() == TRUE)
     {
         if (fieldMove == FIELD_MOVE_MILK_DRINK || fieldMove == FIELD_MOVE_SOFT_BOILED)
             DisplayPartyMenuStdMessage(PARTY_MSG_CANT_USE_HERE);
@@ -5531,8 +5401,6 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
         if (GetMonData(mon, MON_DATA_HP) != 0)
             return TRUE;
         return FALSE;
-    case FACILITY_UNION_ROOM:
-        return TRUE;
     default: // Battle Frontier
         species = GetMonData(mon, MON_DATA_SPECIES);
         for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
@@ -5562,7 +5430,7 @@ static u8 CheckBattleEntriesAndGetMessage(void)
     }
 
     facility = VarGet(VAR_FRONTIER_FACILITY);
-    if (facility == FACILITY_UNION_ROOM || facility == FACILITY_MULTI_OR_EREADER)
+    if (facility == FACILITY_MULTI_OR_EREADER)
         return 0xFF;
 
     maxBattlers = GetMaxBattleEntries();
@@ -5627,8 +5495,6 @@ static u8 GetMaxBattleEntries(void)
     {
     case FACILITY_MULTI_OR_EREADER:
         return MULTI_PARTY_SIZE;
-    case FACILITY_UNION_ROOM:
-        return UNION_ROOM_PARTY_SIZE;
     default: // Battle Frontier
         return gSpecialVar_0x8005;
     }
@@ -5640,8 +5506,6 @@ static u8 GetMinBattleEntries(void)
     {
     case FACILITY_MULTI_OR_EREADER:
         return 1;
-    case FACILITY_UNION_ROOM:
-        return UNION_ROOM_PARTY_SIZE;
     default: // Battle Frontier
         return gSpecialVar_0x8005;
     }
@@ -5653,8 +5517,6 @@ static u8 GetBattleEntryLevelCap(void)
     {
     case FACILITY_MULTI_OR_EREADER:
         return MAX_LEVEL;
-    case FACILITY_UNION_ROOM:
-        return 30;
     default: // Battle Frontier
         if (gSpecialVar_0x8004 == FRONTIER_LVL_50)
             return 50;
@@ -5666,7 +5528,7 @@ static const u8* GetFacilityCancelString(void)
 {
     u8 facilityNum = VarGet(VAR_FRONTIER_FACILITY);
 
-    if (!(facilityNum != FACILITY_UNION_ROOM && facilityNum != FACILITY_MULTI_OR_EREADER))
+    if (!(facilityNum != FACILITY_MULTI_OR_EREADER))
         return gText_CancelBattle;
     else if (facilityNum == FRONTIER_FACILITY_DOME && gSpecialVar_0x8005 == 2)
         return gText_ReturnToWaitingRoom;
@@ -5682,11 +5544,6 @@ void ChooseMonForTradingBoard(u8 menuType, MainCallback callback)
 void ChooseMonForMoveTutor(void)
 {
     InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_MOVE_TUTOR, FALSE, PARTY_MSG_TEACH_WHICH_MON, Task_HandleChooseMonInput, CB2_ReturnToFieldContinueScriptPlayMapMusic);
-}
-
-void ChooseMonForWirelessMinigame(void)
-{
-    InitPartyMenu(PARTY_MENU_TYPE_MINIGAME, PARTY_LAYOUT_SINGLE, PARTY_ACTION_MINIGAME, FALSE, PARTY_MSG_CHOOSE_MON_OR_CANCEL, Task_HandleChooseMonInput, CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 static u8 GetPartyLayoutFromBattleType(void)

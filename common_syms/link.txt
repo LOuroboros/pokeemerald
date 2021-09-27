@@ -16,7 +16,6 @@ gReadyToExitStandby
 gReadyToCloseLink
 gReadyCloseLinkType
 gSuppressLinkErrorMessage
-gWirelessCommType
 gSavedLinkPlayerCount
 gSendCmd
 gSavedMultiplayerId

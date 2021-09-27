@@ -43,7 +43,6 @@
 #include "trainer_card.h"
 #include "window.h"
 #include "constants/songs.h"
-#include "union_room.h"
 #include "constants/rgb.h"
 #include "debug.h"
 #include "rtc.h"
@@ -271,10 +270,6 @@ static void BuildStartMenuActions(void)
     if (IsUpdateLinkStateCBActive() == TRUE)
     {
         BuildLinkModeStartMenu();
-    }
-    else if (InUnionRoom() == TRUE)
-    {
-        BuildUnionRoomStartMenu();
     }
     else if (GetSafariZoneFlag() == TRUE)
     {
@@ -566,9 +561,6 @@ void Task_ShowStartMenu(u8 taskId)
     switch(task->data[0])
     {
     case 0:
-        if (InUnionRoom() == TRUE)
-            SetUsingUnionRoomStartMenu();
-
         gMenuCallback = HandleStartMenuInput;
         task->data[0]++;
         break;
@@ -726,7 +718,7 @@ static bool8 StartMenuPlayerNameCallback(void)
         RemoveExtraStartMenuWindows();
         CleanupOverworldWindowsAndTilemaps();
 
-        if (IsUpdateLinkStateCBActive() || InUnionRoom())
+        if (IsUpdateLinkStateCBActive())
             ShowPlayerTrainerCard(CB2_ReturnToFieldWithOpenMenu); // Display trainer card
         else if (FlagGet(FLAG_SYS_FRONTIER_PASS))
             ShowFrontierPass(CB2_ReturnToFieldWithOpenMenu); // Display frontier pass
@@ -1251,22 +1243,8 @@ static void Task_SaveAfterLinkBattle(u8 taskId)
             CopyWindowToVram(0, 3);
             BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
 
-            if (gWirelessCommType != 0 && InUnionRoom())
-            {
-                if (Link_AnyPartnersPlayingFRLG_JP())
-                {
-                    *state = 1;
-                }
-                else
-                {
-                    *state = 5;
-                }
-            }
-            else
-            {
-                gSoftResetDisabled = 1;
-                *state = 1;
-            }
+            gSoftResetDisabled = 1;
+            *state = 1;
             break;
         case 1:
             SetContinueGameWarpStatusToDynamicWarp();

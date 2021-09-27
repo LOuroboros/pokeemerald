@@ -196,29 +196,6 @@ struct Pokedex
     /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
 };
 
-struct PokemonJumpRecords
-{
-    u16 jumpsInRow;
-    u16 excellentsInRow;
-    u16 gamesWithMaxPlayers;
-    u32 bestJumpScore;
-};
-
-struct BerryPickingResults
-{
-    u32 bestScore;
-    u16 berriesPicked;
-    u16 berriesPickedInRow;
-    u8 field_8;
-    u8 field_9;
-    u8 field_A;
-    u8 field_B;
-    u8 field_C;
-    u8 field_D;
-    u8 field_E;
-    u8 field_F;
-};
-
 // two arrays for lvl50 and open level
 struct PyramidBag
 {
@@ -837,7 +814,6 @@ struct SaveBlock1
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x???*/ u16 berryBlenderRecords[3];
-    /*0x???*/ u8 field_9C2[6];
     /*0x???*/ u16 trainerRematchStepCounter;
     /*0x???*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0x???*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];

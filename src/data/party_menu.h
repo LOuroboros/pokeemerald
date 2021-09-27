@@ -663,9 +663,6 @@ enum
     MENU_ENTER,
     MENU_NO_ENTRY,
     MENU_STORE,
-    MENU_REGISTER,
-    MENU_TRADE1,
-    MENU_TRADE2,
     MENU_TOSS,
     MENU_FIELD_MOVES,
 };
@@ -715,9 +712,6 @@ struct
     [MENU_ENTER] = {gText_Enter, CursorCb_Enter},
     [MENU_NO_ENTRY] = {gText_NoEntry, CursorCb_NoEntry},
     [MENU_STORE] = {gText_Store, CursorCb_Store},
-    [MENU_REGISTER] = {gText_Register, CursorCb_Register},
-    [MENU_TRADE1] = {gText_Trade4, CursorCb_Trade1},
-    [MENU_TRADE2] = {gText_Trade4, CursorCb_Trade2},
     [MENU_TOSS] = {gMenuText_Toss, CursorCb_Toss},
     [MENU_FIELD_MOVES + FIELD_MOVE_CUT] = {gMoveNames[MOVE_CUT], CursorCb_FieldMove},
     [MENU_FIELD_MOVES + FIELD_MOVE_FLASH] = {gMoveNames[MOVE_FLASH], CursorCb_FieldMove},
@@ -745,9 +739,6 @@ static const u8 sPartyMenuAction_NoEntrySummaryCancel[] = {MENU_NO_ENTRY, MENU_S
 static const u8 sPartyMenuAction_StoreSummaryCancel[] = {MENU_STORE, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_GiveTakeItemCancel[] = {MENU_GIVE, MENU_TAKE_ITEM, MENU_MOVE_ITEM, MENU_CANCEL2};
 static const u8 sPartyMenuAction_ReadTakeMailCancel[] = {MENU_READ, MENU_TAKE_MAIL, MENU_CANCEL2};
-static const u8 sPartyMenuAction_RegisterSummaryCancel[] = {MENU_REGISTER, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TradeSummaryCancel1[] = {MENU_TRADE1, MENU_SUMMARY, MENU_CANCEL1};
-static const u8 sPartyMenuAction_TradeSummaryCancel2[] = {MENU_TRADE2, MENU_SUMMARY, MENU_CANCEL1};
 static const u8 sPartyMenuAction_TakeItemTossCancel[] = {MENU_TAKE_ITEM, MENU_TOSS, MENU_CANCEL1};
 
 // IDs for the action lists that appear when a party mon is selected
@@ -763,9 +754,6 @@ enum
     ACTIONS_SUMMARY_ONLY,
     ACTIONS_ITEM,
     ACTIONS_MAIL,
-    ACTIONS_REGISTER,
-    ACTIONS_TRADE,
-    ACTIONS_SPIN_TRADE,
     ACTIONS_TAKEITEM_TOSS
 };
 
@@ -781,9 +769,6 @@ static const u8 *const sPartyMenuActions[] =
     [ACTIONS_SUMMARY_ONLY]  = sPartyMenuAction_SummaryCancel,
     [ACTIONS_ITEM]          = sPartyMenuAction_GiveTakeItemCancel,
     [ACTIONS_MAIL]          = sPartyMenuAction_ReadTakeMailCancel,
-    [ACTIONS_REGISTER]      = sPartyMenuAction_RegisterSummaryCancel,
-    [ACTIONS_TRADE]         = sPartyMenuAction_TradeSummaryCancel1,
-    [ACTIONS_SPIN_TRADE]    = sPartyMenuAction_TradeSummaryCancel2,
     [ACTIONS_TAKEITEM_TOSS] = sPartyMenuAction_TakeItemTossCancel,
 };
 
@@ -799,9 +784,6 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_SUMMARY_ONLY]  = ARRAY_COUNT(sPartyMenuAction_SummaryCancel),
     [ACTIONS_ITEM]          = ARRAY_COUNT(sPartyMenuAction_GiveTakeItemCancel),
     [ACTIONS_MAIL]          = ARRAY_COUNT(sPartyMenuAction_ReadTakeMailCancel),
-    [ACTIONS_REGISTER]      = ARRAY_COUNT(sPartyMenuAction_RegisterSummaryCancel),
-    [ACTIONS_TRADE]         = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel1),
-    [ACTIONS_SPIN_TRADE]    = ARRAY_COUNT(sPartyMenuAction_TradeSummaryCancel2),
     [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel)
 };
 
@@ -832,19 +814,6 @@ struct
     [FIELD_MOVE_SOFT_BOILED]  = {SetUpFieldMove_SoftBoiled,  PARTY_MSG_NOT_ENOUGH_HP},
     [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
     [FIELD_MOVE_HEADBUTT]     = {SetUpFieldMove_Headbutt,    PARTY_MSG_CANT_USE_HERE},
-};
-
-static const u8 *const sUnionRoomTradeMessages[] =
-{
-    [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
-    [UR_TRADE_MSG_NOT_EGG - 1]                     = gText_ThatIsntAnEgg,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_1 - 1]        = gText_PkmnCantBeTradedNow,
-    [UR_TRADE_MSG_MON_CANT_BE_TRADED_2 - 1]        = gText_PkmnCantBeTradedNow,
-    [UR_TRADE_MSG_PARTNERS_MON_CANT_BE_TRADED - 1] = gText_OtherTrainersPkmnCantBeTraded,
-    [UR_TRADE_MSG_EGG_CANT_BE_TRADED -1]           = gText_EggCantBeTradedNow,
-    [UR_TRADE_MSG_PARTNER_CANT_ACCEPT_MON - 1]     = gText_OtherTrainerCantAcceptPkmn,
-    [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1 - 1]   = gText_CantTradeWithTrainer,
-    [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/interface/hold_icons.4bpp");

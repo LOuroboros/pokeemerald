@@ -25,7 +25,6 @@
 #include "heal_location.h"
 #include "io_reg.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "load_save.h"
 #include "main.h"
 #include "malloc.h"
@@ -1609,7 +1608,7 @@ void CB2_ReturnToFieldContestHall(void)
 void CB2_ReturnToFieldCableClub(void)
 {
     FieldClearVBlankHBlankCallbacks();
-    gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
+    gFieldCallback = FieldCB_ReturnToFieldCableLink;
     SetMainCallback2(CB2_LoadMapOnReturnToFieldCableClub);
 }
 
@@ -1659,10 +1658,7 @@ void CB2_ReturnToFieldFromMultiplayer(void)
     SetMainCallback1(CB1_UpdateLinkState);
     ResetAllMultiplayerState();
 
-    if (gWirelessCommType != 0)
-        gFieldCallback = FieldCB_ReturnToFieldWirelessLink;
-    else
-        gFieldCallback = FieldCB_ReturnToFieldCableLink;
+    gFieldCallback = FieldCB_ReturnToFieldCableLink;
 
     ScriptContext1_Init();
     ScriptContext2_Disable();
@@ -1757,22 +1753,15 @@ void CB2_ContinueSavedGame(void)
 
 static void FieldClearVBlankHBlankCallbacks(void)
 {
+    u16 savedIme = REG_IME;
+
     if (UsedPokemonCenterWarp() == TRUE)
         CloseLink();
 
-    if (gWirelessCommType != 0)
-    {
-        EnableInterrupts(INTR_FLAG_VBLANK | INTR_FLAG_VCOUNT | INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
-        DisableInterrupts(INTR_FLAG_HBLANK);
-    }
-    else
-    {
-        u16 savedIme = REG_IME;
-        REG_IME = 0;
-        REG_IE &= ~INTR_FLAG_HBLANK;
-        REG_IE |= INTR_FLAG_VBLANK;
-        REG_IME = savedIme;
-    }
+    REG_IME = 0;
+    REG_IE &= ~INTR_FLAG_HBLANK;
+    REG_IE |= INTR_FLAG_VBLANK;
+    REG_IME = savedIme;
 
     SetVBlankCallback(NULL);
     SetHBlankCallback(NULL);
@@ -1870,11 +1859,6 @@ static bool32 LoadMapInStepsLink(u8 *state)
         (*state)++;
         break;
     case 11:
-        if (gWirelessCommType != 0)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
-        }
         (*state)++;
         break;
     case 12:
@@ -2042,11 +2026,6 @@ static bool32 ReturnToFieldLink(u8 *state)
         (*state)++;
         break;
     case 11:
-        if (gWirelessCommType != 0)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
-        }
         (*state)++;
         break;
     case 12:
@@ -2240,25 +2219,22 @@ static void CreateLinkPlayerSprites(void)
 
 static void CB1_UpdateLinkState(void)
 {
-    if (gWirelessCommType == 0 || !IsRfuRecvQueueEmpty() || !IsSendingKeysToLink())
-    {
-        u8 selfId = gLocalLinkPlayerId;
-        UpdateAllLinkPlayers(gLinkPartnersHeldKeys, selfId);
+    u8 selfId = gLocalLinkPlayerId;
+    UpdateAllLinkPlayers(gLinkPartnersHeldKeys, selfId);
 
-        // Note: Because guestId is between 0 and 4, while the smallest key code is
-        // LINK_KEY_CODE_EMPTY, this is functionally equivalent to `sPlayerKeyInterceptCallback(0)`.
-        // It is expecting the callback to be KeyInterCB_SelfIdle, and that will
-        // completely ignore any input parameters.
-        //
-        // UpdateHeldKeyCode performs a sanity check on its input; if
-        // sPlayerKeyInterceptCallback echoes back the argument, which is selfId, then
-        // it'll use LINK_KEY_CODE_EMPTY instead.
-        //
-        // Note 2: There are some key intercept callbacks that treat the key as a player
-        // ID. It's so hacky.
-        UpdateHeldKeyCode(sPlayerKeyInterceptCallback(selfId));
-        ClearAllPlayerKeys();
-    }
+    // Note: Because guestId is between 0 and 4, while the smallest key code is
+    // LINK_KEY_CODE_EMPTY, this is functionally equivalent to `sPlayerKeyInterceptCallback(0)`.
+    // It is expecting the callback to be KeyInterCB_SelfIdle, and that will
+    // completely ignore any input parameters.
+    //
+    // UpdateHeldKeyCode performs a sanity check on its input; if
+    // sPlayerKeyInterceptCallback echoes back the argument, which is selfId, then
+    // it'll use LINK_KEY_CODE_EMPTY instead.
+    //
+    // Note 2: There are some key intercept callbacks that treat the key as a player
+    // ID. It's so hacky.
+    UpdateHeldKeyCode(sPlayerKeyInterceptCallback(selfId));
+    ClearAllPlayerKeys();
 }
 
 void ResetAllMultiplayerState(void)
@@ -2284,8 +2260,6 @@ static void SetKeyInterceptCallback(u16 (*func)(u32))
 // still undocumented.
 static void CheckRfuKeepAliveTimer(void)
 {
-    if (gWirelessCommType != 0 && ++sRfuKeepAliveTimer > 60)
-        LinkRfu_FatalError();
 }
 
 static void ResetAllPlayerLinkStates(void)
@@ -2451,25 +2425,6 @@ static void UpdateHeldKeyCode(u16 key)
         gHeldKeyCodeToSend = key;
     else
         gHeldKeyCodeToSend = LINK_KEY_CODE_EMPTY;
-
-    if (gWirelessCommType != 0
-        && GetLinkSendQueueLength() > 1
-        && IsUpdateLinkStateCBActive() == TRUE
-        && IsSendingKeysToLink() == TRUE)
-    {
-        switch (key)
-        {
-        case LINK_KEY_CODE_EMPTY:
-        case LINK_KEY_CODE_DPAD_DOWN:
-        case LINK_KEY_CODE_DPAD_UP:
-        case LINK_KEY_CODE_DPAD_LEFT:
-        case LINK_KEY_CODE_DPAD_RIGHT:
-        case LINK_KEY_CODE_START_BUTTON:
-        case LINK_KEY_CODE_A_BUTTON:
-            gHeldKeyCodeToSend = LINK_KEY_CODE_NULL;
-            break;
-        }
-    }
 }
 
 static u16 KeyInterCB_ReadButtons(u32 key)
@@ -2899,20 +2854,14 @@ bool32 Overworld_SendKeysToLinkIsRunning(void)
 
 bool32 IsSendingKeysOverCable(void)
 {
-    if (gWirelessCommType != 0)
+    if (!IsSendingKeysToLink())
         return FALSE;
-    else if (!IsSendingKeysToLink())
-        return FALSE;
-    else
-        return TRUE;
+    return TRUE;
 }
 
 static u32 GetLinkSendQueueLength(void)
 {
-    if (gWirelessCommType != 0)
-        return Rfu.sendQueue.count;
-    else
-        return gLink.sendQueue.count;
+    return gLink.sendQueue.count;
 }
 
 static void ZeroLinkPlayerObjectEvent(struct LinkPlayerObjectEvent *linkPlayerObjEvent)

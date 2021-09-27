@@ -50,7 +50,6 @@
 #include "constants/trainer_hill.h"
 #include "constants/trainers.h"
 #include "constants/tv.h"
-#include "constants/union_room.h"
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/battle_transition.h"
@@ -462,7 +461,6 @@ gStdScripts_End::
 	.include "data/maps/SSTidalLowerDeck/scripts.inc"
 	.include "data/maps/SSTidalRooms/scripts.inc"
 	.include "data/maps/BattlePyramidSquare01/scripts.inc"
-	.include "data/maps/UnionRoom/scripts.inc"
 	.include "data/maps/SafariZone_Northwest/scripts.inc"
 	.include "data/maps/SafariZone_North/scripts.inc"
 	.include "data/maps/SafariZone_Southwest/scripts.inc"
@@ -905,9 +903,9 @@ gText_DoorOpenedFarAway::
 gText_BigHoleInTheWall::
 	.string "There is a big hole in the wall.$"
 
-gText_SorryWirelessClubAdjustments::
+gText_SorryCableClubAdjustments::
 	.string "I'm terribly sorry.\n"
-	.string "The POKéMON WIRELESS CLUB is\l"
+	.string "The POKéMON CABLE CLUB is\l"
 	.string "undergoing adjustments now.$"
 
 gText_UndergoingAdjustments::
@@ -952,7 +950,7 @@ EventScript_CableClub_SetVarResult0::
 
 EventScript_WonderTradeManager::
 	lock
-	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_WirelessClubAdjustements
+	goto_if_unset FLAG_SYS_POKEDEX_GET, CableClub_EventScript_CableClubAdjustements
 	goto_if_unset FLAG_BADGE02_GET, EventScript_WonderTradeManager_Adjustements
 	goto_if_set FLAG_WONDER_TRADE_EXPLAINED, EventScript_WonderTradeManager_MovingOnPreamble
 	msgbox EventScript_WonderTradeManager_Text_1, MSGBOX_YESNO
@@ -1001,7 +999,7 @@ EventScript_WonderTradeManager_Text_Adjustments:
 	.string "I am terribly sorry, but the WONDER\nCORNER is currently unavailable.\pPlease come back later.$"
 
 EventScript_WonderTradeManager_Text_1:
-	.string "Welcome to the POKéMON WIRELESS\nCLUB's WONDER CORNER.\pHere you can partake in\na WONDER TRADE.\pDo you want me to explain\nmore about it?$"
+	.string "Welcome to the POKéMON CABLE\nCLUB's WONDER CORNER.\pHere you can partake in\na WONDER TRADE.\pDo you want me to explain\nmore about it?$"
 
 EventScript_WonderTradeManager_Text_2:
 	.string "Oh, I see.\nAlright then.$"
@@ -1024,8 +1022,8 @@ EventScript_WonderTradeManager_Text_7:
 EventScript_DoWonderTrade_Text_WannaPerformAnotherWonderTrade:
 	.string "Do you want to perform\nanother WONDER TRADE?$"
 
-Common_EventScript_WirelessClubAttendant::
-	call CableClub_EventScript_WirelessClubAttendant
+Common_EventScript_CableClubAttendant::
+	call CableClub_EventScript_CableClubAttendant
 	end
 
 Common_EventScript_DirectCornerAttendant::

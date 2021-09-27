@@ -463,7 +463,6 @@
 #define MAP_BATTLE_PYRAMID_SQUARE14  (57 | (25 << 8))
 #define MAP_BATTLE_PYRAMID_SQUARE15  (58 | (25 << 8))
 #define MAP_BATTLE_PYRAMID_SQUARE16  (59 | (25 << 8))
-#define MAP_UNION_ROOM               (60 | (25 << 8))
 
 // gMapGroup_SpecialArea
 #define MAP_SAFARI_ZONE_NORTHWEST                           (0 | (26 << 8))

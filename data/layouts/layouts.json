@@ -3922,16 +3922,6 @@
       "blockdata_filepath": "data/layouts/Route111_NoMirageTower/map.bin"
     },
     {
-      "id": "LAYOUT_UNION_ROOM",
-      "name": "UnionRoom_Layout",
-      "width": 15,
-      "height": 12,
-      "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_UnionRoom",
-      "border_filepath": "data/layouts/UnionRoom/border.bin",
-      "blockdata_filepath": "data/layouts/UnionRoom/map.bin"
-    },
-    {
       "id": "LAYOUT_SAFARI_ZONE_NORTHEAST",
       "name": "SafariZone_Northeast_Layout",
       "width": 40,

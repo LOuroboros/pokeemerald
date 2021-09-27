@@ -243,8 +243,6 @@ extern u32 gBerryBlenderKeySendAttempts;
 extern bool8 gLinkVSyncDisabled;
 extern u32 gLinkStatus;
 
-
-bool8 IsWirelessAdapterConnected(void);
 void Task_DestroySelf(u8 taskId);
 void OpenLink(void);
 void CloseLink(void);
@@ -278,10 +276,7 @@ u32 LinkMain1(u8 *shouldAdvanceLinkState, u16 *sendCmd, u16 (*recvCmds)[CMD_LENG
 void LinkVSync(void);
 void Timer3Intr(void);
 void SerialCB(void);
-bool32 InUnionRoom(void);
-void LoadWirelessStatusIndicatorSpriteGfx(void);
 bool8 IsLinkTaskFinished(void);
-void CreateWirelessStatusIndicatorSprite(u8, u8);
 void SetLinkStandbyCallback(void);
 void SetWirelessCommType1(void);
 void CheckShouldAdvanceLinkState(void);
@@ -318,7 +313,6 @@ extern bool8 gReadyToExitStandby[MAX_LINK_PLAYERS];
 extern bool8 gReadyToCloseLink[MAX_LINK_PLAYERS];
 extern u16 gReadyCloseLinkType;
 extern u8 gSuppressLinkErrorMessage;
-extern u8 gWirelessCommType;
 extern bool8 gSavedLinkPlayerCount;
 extern u8 gSavedMultiplayerId;
 extern struct LinkTestBGInfo gLinkTestBGInfo;

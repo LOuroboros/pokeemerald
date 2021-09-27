@@ -1095,7 +1095,6 @@ static u8 SetUpCopyrightScreen(void)
 
         gMain.state++;
         break;
-
     case 1:
         RhhIntro_InitCopyrightBgs();
         BeginNormalPaletteFade(0xFFFFFFFF, 0, 0x10, 0, RGB_WHITEALPHA);
@@ -1105,27 +1104,23 @@ static u8 SetUpCopyrightScreen(void)
         UpdatePaletteFade();
         gMain.state++;
         break;
-
     case 30:
         RhhIntro_LoadCopyrightBgGraphics();
         BeginNormalPaletteFade(0x00000001, 0, 0x10, 0, RGB_BLACK);
         UpdatePaletteFade();
         gMain.state++;
         break;
-
     case 31:
         RhhIntro_LoadCopyrightSpriteGraphics();
         RhhIntro_CreateCopyRightSprites();
         UpdatePaletteFade();
         gMain.state++;
         break;
-
     case 45:
         RhhIntro_ShowRhhCredits();
         UpdatePaletteFade();
         gMain.state++;
         break;
-
     case 253:
         BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
         gMain.state++;
@@ -1136,7 +1131,6 @@ static u8 SetUpCopyrightScreen(void)
         RhhIntro_DestroyRhhCreditSprites();
         gMain.state++;
         break;
-
     case 255:
         CreateTask(Task_Scene1_Load, 0);
         SetMainCallback2(MainCB2_Intro);

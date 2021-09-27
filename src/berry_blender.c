@@ -17,7 +17,6 @@
 #include "event_data.h"
 #include "main.h"
 #include "link.h"
-#include "link_rfu.h"
 #include "item_menu_icons.h"
 #include "berry.h"
 #include "item.h"
@@ -137,7 +136,6 @@ struct BerryBlender
 {
     u8 mainState;
     u8 loadGfxState;
-    u8 unused0[66];
     u16 unk0; // never read
     u8 scoreIconIds[NUM_SCORE_TYPES];
     u16 arrowPos;
@@ -145,7 +143,6 @@ struct BerryBlender
     u16 maxRPM;
     u8 playerArrowSpriteIds[BLENDER_MAX_PLAYERS];
     u8 playerArrowSpriteIds2[BLENDER_MAX_PLAYERS];
-    u8 unused1[11];
     u8 gameEndState;
     u16 playerContinueResponses[BLENDER_MAX_PLAYERS];
     u16 canceledPlayerCmd;
@@ -154,15 +151,12 @@ struct BerryBlender
     u8 slowdownTimer;
     u16 chosenItemId[BLENDER_MAX_PLAYERS];
     u8 numPlayers;
-    u8 unused2[16];
     u16 arrowIdToPlayerId[BLENDER_MAX_PLAYERS];
     u16 playerIdToArrowId[BLENDER_MAX_PLAYERS];
     u8 yesNoAnswer;
     u8 stringVar[100];
     u32 gameFrameTime;
     s32 framesToWait;
-    u32 unk1; // never read
-    u8 unused3[4];
     u8 playerToThrowBerry;
     u16 progressBarValue;
     u16 maxProgressBarValue;
@@ -244,8 +238,6 @@ u8 gInGameOpponentsNo;
 static const u16 sBlenderCenter_Pal[] = INCBIN_U16("graphics/berry_blender/center.gbapal");
 static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
 static const u16 sBlenderOuter_Pal[] = INCBIN_U16("graphics/berry_blender/outer.gbapal");
-
-static const u16 sEmpty_Pal[16 * 14] = {0};
 
 static const u8 sText_BerryBlenderStart[] = _("Starting up the BERRY BLENDER.\pPlease select a BERRY from your BAG\nto put in the BERRY BLENDER.\p");
 static const u8 sText_NewParagraph[] = _("\p");
@@ -682,48 +674,9 @@ static const union AnimCmd sAnim_SparkleCrossToX[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sAnim_SparkleXToCross[] =
-{
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(4, 5),
-    ANIMCMD_FRAME(2, 4),
-    ANIMCMD_FRAME(0, 3),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_SparkleFull[] =
-{
-    ANIMCMD_FRAME(0, 2),
-    ANIMCMD_FRAME(1, 2),
-    ANIMCMD_FRAME(2, 2),
-    ANIMCMD_FRAME(4, 4),
-    ANIMCMD_FRAME(3, 3),
-    ANIMCMD_FRAME(2, 2),
-    ANIMCMD_FRAME(1, 2),
-    ANIMCMD_FRAME(0, 2),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_GreenArrow[] =
-{
-    ANIMCMD_FRAME(5, 5, 1, 1),
-    ANIMCMD_END
-};
-
-static const union AnimCmd sAnim_GreenDot[] =
-{
-    ANIMCMD_FRAME(6, 5, 1, 1),
-    ANIMCMD_END
-};
-
 static const union AnimCmd *const sAnims_Particles[] =
 {
-    sAnim_SparkleCrossToX, // Only this effect is ever used, rest go unused
-    sAnim_SparkleXToCross,
-    sAnim_SparkleFull,
-    sAnim_GreenArrow,
-    sAnim_GreenDot,
+    sAnim_SparkleCrossToX,
 };
 
 static const struct SpriteSheet sSpriteSheet_Particles =
@@ -1069,11 +1022,6 @@ static void CB2_LoadBerryBlender(void)
                 sBerryBlender->playerArrowSpriteIds[i] = CreateSprite(&sSpriteTemplate_PlayerArrow, sPlayerArrowPos[i][0], sPlayerArrowPos[i][1], 1);
                 StartSpriteAnim(&gSprites[sBerryBlender->playerArrowSpriteIds[i]], i + 8);
             }
-            if (gReceivedRemoteLinkPlayers && gWirelessCommType)
-            {
-                LoadWirelessStatusIndicatorSpriteGfx();
-                CreateWirelessStatusIndicatorSprite(0, 0);
-            }
             SetVBlankCallback(VBlankCB_BerryBlender);
             sBerryBlender->mainState++;
         }
@@ -1251,7 +1199,6 @@ static void StartBlender(void)
         sBerryBlender = AllocZeroed(sizeof(*sBerryBlender));
 
     sBerryBlender->mainState = 0;
-    sBerryBlender->unk1 = 0;
 
     for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         sBerryBlender->chosenItemId[i] = ITEM_NONE;
@@ -1299,11 +1246,6 @@ static void CB2_StartBlenderLink(void)
         {
             sBerryBlender->playerArrowSpriteIds2[i] = CreateSprite(&sSpriteTemplate_PlayerArrow, sPlayerArrowPos[i][0], sPlayerArrowPos[i][1], 1);
             StartSpriteAnim(&gSprites[sBerryBlender->playerArrowSpriteIds2[i]], i + 8);
-        }
-        if (gReceivedRemoteLinkPlayers && gWirelessCommType)
-        {
-            LoadWirelessStatusIndicatorSpriteGfx();
-            CreateWirelessStatusIndicatorSprite(0, 0);
         }
         sBerryBlender->mainState++;
         break;
@@ -1610,7 +1552,6 @@ static void CB2_StartBlenderLocal(void)
     switch (sBerryBlender->mainState)
     {
     case 0:
-        SetWirelessCommType0();
         InitBlenderBgs();
         SetPlayerBerryData(0, gSpecialVar_ItemId);
         ConvertItemToBlenderBerry(&sBerryBlender->blendedBerries[0], gSpecialVar_ItemId);
@@ -2047,20 +1988,9 @@ static void UpdateSpeedFromHit(u16 cmd)
 }
 
 // Return TRUE if the received command matches the corresponding Link or RFU command
-static bool32 CheckRecvCmdMatches(u16 recvCmd, u16 linkCmd, u16 rfuCmd)
+static bool32 CheckRecvCmdMatches(u16 recvCmd, u16 linkCmd)
 {
-    if (gReceivedRemoteLinkPlayers && gWirelessCommType)
-    {
-        if ((recvCmd & 0xFF00) == rfuCmd)
-            return TRUE;
-    }
-    else
-    {
-        if (recvCmd == linkCmd)
-            return TRUE;
-    }
-
-    return FALSE;
+    return (recvCmd == linkCmd);
 }
 
 static void UpdateOpponentScores(void)
@@ -2087,7 +2017,7 @@ static void UpdateOpponentScores(void)
     }
     for (i = 0; i < sBerryBlender->numPlayers; i++)
     {
-        if (CheckRecvCmdMatches(gRecvCmds[i][BLENDER_COMM_INPUT_STATE], LINKCMD_BLENDER_SEND_KEYS, RFUCMD_BLENDER_SEND_KEYS))
+        if (CheckRecvCmdMatches(gRecvCmds[i][BLENDER_COMM_INPUT_STATE], LINKCMD_BLENDER_SEND_KEYS))
         {
             u32 arrowId = sBerryBlender->playerIdToArrowId[i];
             if (gRecvCmds[i][BLENDER_COMM_SCORE] == LINKCMD_BLENDER_SCORE_BEST)
@@ -2351,12 +2281,6 @@ static void Debug_SetMaxRPMStage(s16 value)
     sDebug_MaxRPMStage = value;
 }
 
-// Unused
-static s16 Debug_GetMaxRPMStage(void)
-{
-    return sDebug_MaxRPMStage;
-}
-
 static void Debug_SetGameTimeStage(s16 value)
 {
     sDebug_GameTimeStage = value;
@@ -2475,12 +2399,6 @@ static void CalculatePokeblock(struct BlenderBerry *berries, struct Pokeblock *p
         flavors[i] = sPokeblockFlavors[i];
 }
 
-// Unused
-static void Debug_CalculatePokeblock(struct BlenderBerry* berries, struct Pokeblock* pokeblock, u8 numPlayers, u8* flavors, u16 maxRPM)
-{
-    CalculatePokeblock(berries, pokeblock, numPlayers, flavors, maxRPM);
-}
-
 static void Debug_SetStageVars(void)
 {
     u32 frames = (u16)(sBerryBlender->gameFrameTime);
@@ -2530,10 +2448,7 @@ static void Debug_SetStageVars(void)
 
 static void SendContinuePromptResponse(u16 *cmd)
 {
-    if (gReceivedRemoteLinkPlayers && gWirelessCommType)
-        *cmd = RFUCMD_SEND_PACKET;
-    else
-        *cmd = LINKCMD_SEND_PACKET;
+    *cmd = LINKCMD_SEND_PACKET;
 }
 
 static void CB2_EndBlenderGame(void)
@@ -2542,8 +2457,6 @@ static void CB2_EndBlenderGame(void)
 
     if (sBerryBlender->gameEndState < 3)
         UpdateBlenderCenter();
-
-    GetMultiplayerId(); // unused return value
 
     switch (sBerryBlender->gameEndState)
     {
@@ -2579,55 +2492,22 @@ static void CB2_EndBlenderGame(void)
         }
         else if (IsLinkTaskFinished())
         {
-            if (gReceivedRemoteLinkPlayers && gWirelessCommType)
-            {
-                sBerryBlender->gameBlock.timeRPM.time = sBerryBlender->gameFrameTime;
-                sBerryBlender->gameBlock.timeRPM.maxRPM = sBerryBlender->maxRPM;
-
-                for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
-                {
-                    for (j = 0; j < NUM_SCORE_TYPES; j++)
-                        sBerryBlender->gameBlock.scores[i][j] = sBerryBlender->scores[i][j];
-                }
-
-                if (SendBlock(0, &sBerryBlender->gameBlock, sizeof(sBerryBlender->gameBlock)))
-                    sBerryBlender->gameEndState++;
-            }
-            else
-            {
-                sBerryBlender->smallBlock.time = sBerryBlender->gameFrameTime;
-                sBerryBlender->smallBlock.maxRPM = sBerryBlender->maxRPM;
-                if (SendBlock(0, &sBerryBlender->smallBlock, sizeof(sBerryBlender->smallBlock) + 32))
-                    sBerryBlender->gameEndState++;
-            }
+            sBerryBlender->smallBlock.time = sBerryBlender->gameFrameTime;
+            sBerryBlender->smallBlock.maxRPM = sBerryBlender->maxRPM;
+            if (SendBlock(0, &sBerryBlender->smallBlock, sizeof(sBerryBlender->smallBlock) + 32))
+                sBerryBlender->gameEndState++;
         }
         break;
     case 4:
         if (GetBlockReceivedStatus())
         {
+            struct TimeAndRPM *receivedBlock = (struct TimeAndRPM*)(&gBlockRecvBuffer);
+
             ResetBlockReceivedFlags();
             sBerryBlender->gameEndState++;
 
-            if (gReceivedRemoteLinkPlayers && gWirelessCommType)
-            {
-                struct BlenderGameBlock *receivedBlock = (struct BlenderGameBlock*)(&gBlockRecvBuffer);
-
-                sBerryBlender->maxRPM = receivedBlock->timeRPM.maxRPM;
-                sBerryBlender->gameFrameTime = receivedBlock->timeRPM.time;
-
-                for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
-                {
-                    for (j = 0; j < NUM_SCORE_TYPES; j++)
-                        sBerryBlender->scores[i][j] = receivedBlock->scores[i][j];
-                }
-            }
-            else
-            {
-                struct TimeAndRPM *receivedBlock = (struct TimeAndRPM*)(&gBlockRecvBuffer);
-
-                sBerryBlender->maxRPM = receivedBlock->maxRPM;
-                sBerryBlender->gameFrameTime = receivedBlock->time;
-            }
+            sBerryBlender->maxRPM = receivedBlock->maxRPM;
+            sBerryBlender->gameFrameTime = receivedBlock->time;
         }
         break;
     case 5:
@@ -2831,16 +2711,16 @@ static void CB2_CheckPlayAgainLink(void)
         break;
     case 1:
         sBerryBlender->gameEndState = 3;
-        StringCopy(gStringVar7, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
-        StringAppend(gStringVar7, sText_ApostropheSPokeblockCaseIsFull);
+        StringCopy(gStringVar4, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
+        StringAppend(gStringVar4, sText_ApostropheSPokeblockCaseIsFull);
         break;
     case 2:
         sBerryBlender->gameEndState++;
-        StringCopy(gStringVar7, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
-        StringAppend(gStringVar7, sText_HasNoBerriesToPut);
+        StringCopy(gStringVar4, gLinkPlayers[sBerryBlender->canceledPlayerId].name);
+        StringAppend(gStringVar4, sText_HasNoBerriesToPut);
         break;
     case 3:
-        if (Blender_PrintText(&sBerryBlender->textState, gStringVar7, GetPlayerTextSpeedDelay()))
+        if (Blender_PrintText(&sBerryBlender->textState, gStringVar4, GetPlayerTextSpeedDelay()))
         {
             sBerryBlender->framesToWait = 0;
             sBerryBlender->gameEndState++;
@@ -2939,15 +2819,15 @@ static void CB2_CheckPlayAgainLocal(void)
     case 1:
         sBerryBlender->gameEndState = 3;
         sBerryBlender->textState = 0;
-        StringCopy(gStringVar7, sText_YourPokeblockCaseIsFull);
+        StringCopy(gStringVar4, sText_YourPokeblockCaseIsFull);
         break;
     case 2:
         sBerryBlender->gameEndState++;
         sBerryBlender->textState = 0;
-        StringCopy(gStringVar7, sText_RunOutOfBerriesForBlending);
+        StringCopy(gStringVar4, sText_RunOutOfBerriesForBlending);
         break;
     case 3:
-        if (Blender_PrintText(&sBerryBlender->textState, gStringVar7, GetPlayerTextSpeedDelay()))
+        if (Blender_PrintText(&sBerryBlender->textState, gStringVar4, GetPlayerTextSpeedDelay()))
             sBerryBlender->gameEndState = 9;
         break;
     case 9:
@@ -2983,7 +2863,7 @@ static void ProcessLinkPlayerCmds(void)
 {
     if (gReceivedRemoteLinkPlayers)
     {
-        if (CheckRecvCmdMatches(gRecvCmds[0][BLENDER_COMM_INPUT_STATE], LINKCMD_SEND_PACKET, RFUCMD_SEND_PACKET))
+        if (CheckRecvCmdMatches(gRecvCmds[0][BLENDER_COMM_INPUT_STATE], LINKCMD_SEND_PACKET))
         {
             if (gRecvCmds[0][BLENDER_COMM_RESP] == LINKCMD_BLENDER_STOP)
             {
@@ -3023,7 +2903,7 @@ static void ProcessLinkPlayerCmds(void)
             // Try to gather responses
             for (i = 0; i < GetLinkPlayerCount(); i++)
             {
-                if (CheckRecvCmdMatches(gRecvCmds[i][BLENDER_COMM_INPUT_STATE], LINKCMD_SEND_PACKET, RFUCMD_SEND_PACKET))
+                if (CheckRecvCmdMatches(gRecvCmds[i][BLENDER_COMM_INPUT_STATE], LINKCMD_SEND_PACKET))
                 {
                     switch (gRecvCmds[i][BLENDER_COMM_RESP])
                     {
@@ -3106,30 +2986,8 @@ static void UpdateBlenderCenter(void)
     if (gReceivedRemoteLinkPlayers)
         playerId = GetMultiplayerId();
 
-    if (gWirelessCommType && gReceivedRemoteLinkPlayers)
-    {
-        if (playerId == 0)
-        {
-            sBerryBlender->arrowPos += sBerryBlender->speed;
-            gSendCmd[BLENDER_COMM_PROGRESS_BAR] = sBerryBlender->progressBarValue;
-            gSendCmd[BLENDER_COMM_ARROW_POS] = sBerryBlender->arrowPos;
-            DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
-        }
-        else
-        {
-            if ((gRecvCmds[0][BLENDER_COMM_INPUT_STATE] & 0xFF00) == RFUCMD_BLENDER_SEND_KEYS)
-            {
-                sBerryBlender->progressBarValue = gRecvCmds[0][BLENDER_COMM_PROGRESS_BAR];
-                sBerryBlender->arrowPos = gRecvCmds[0][BLENDER_COMM_ARROW_POS];
-                DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
-            }
-        }
-    }
-    else
-    {
-        sBerryBlender->arrowPos += sBerryBlender->speed;
-        DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
-    }
+    sBerryBlender->arrowPos += sBerryBlender->speed;
+    DrawBlenderCenter(&sBerryBlender->bgAffineSrc);
 }
 
 static void SetBgPos(void)
@@ -3445,7 +3303,6 @@ static bool8 PrintBlendingResults(void)
     struct Pokeblock pokeblock;
     u8 flavors[FLAVOR_COUNT + 1];
     u8 text[40];
-    u16 berryIds[4]; // unused
 
     switch (sBerryBlender->mainState)
     {
@@ -3539,8 +3396,6 @@ static bool8 PrintBlendingResults(void)
 
         for (i = 0; i < BLENDER_MAX_PLAYERS; i++)
         {
-            if (sBerryBlender->chosenItemId[i] != 0)
-                berryIds[i] = sBerryBlender->chosenItemId[i] - FIRST_BERRY_INDEX;
             if (sBerryBlender->arrowIdToPlayerId[i] != NO_PLAYER)
             {
                 PutWindowTilemap(i);

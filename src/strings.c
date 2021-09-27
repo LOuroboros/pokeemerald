@@ -1538,7 +1538,6 @@ const u8 gText_SavingTime[] = _("TIME");
 const u8 gText_WirelessCommStatus[] = _("Wireless Communication Status");
 const u8 gText_PeopleTrading[] = _("People trading:");
 const u8 gText_PeopleBattling[] = _("People battling:");
-const u8 gText_PeopleInUnionRoom[] = _("People in the UNION ROOM:");
 const u8 gText_PeopleCommunicating[] = _("People communicating:");
 const u8 gText_F700Players[] = _("{DYNAMIC 0} players");
 const u8 gText_F701Players[] = _("{DYNAMIC 1} players");
