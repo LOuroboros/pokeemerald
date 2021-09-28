@@ -58,7 +58,7 @@
 #define VAR_CYCLING_ROAD_RECORD_TIME_H       0x4029
 #define VAR_FRIENDSHIP_STEP_COUNTER          0x402A
 #define VAR_POISON_STEP_COUNTER              0x402B
-#define VAR_UNUSED_0x402C                    0x402C
+#define VAR_DEVON_RESEARCHER_GIFT_COUNT      0x402C
 #define VAR_ENIGMA_BERRY_AVAILABLE           0x402D
 #define VAR_UNUSED_0x402E                    0x402E
 

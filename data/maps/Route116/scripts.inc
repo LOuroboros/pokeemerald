@@ -56,10 +56,19 @@ Route116_EventScript_DevonEmployee::
 	faceplayer
 	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_TryGiveRepeatBallAgain
 	msgbox Route116_Text_ThankYouTokenOfAppreciation, MSGBOX_DEFAULT
+	addvar VAR_DEVON_RESEARCHER_GIFT_COUNT, 1
+	call_if_mon_caught SPECIES_SHROOMISH, Route116_EventScript_HappyDevonEmployee
 	goto Route116_EventScript_GiveRepeatBall
 	end
 
+Route116_EventScript_HappyDevonEmployee:
+	addvar VAR_DEVON_RESEARCHER_GIFT_COUNT, 2
+	msgbox Route116_Text_HappyDevonEmployee, MSGBOX_DEFAULT
+	closemessage
+	return
+
 Route116_EventScript_GiveRepeatBall::
+	receiveitem ITEM_REPEAT_BALL, VAR_DEVON_RESEARCHER_GIFT_COUNT
 	giveitem ITEM_REPEAT_BALL
 	compare VAR_RESULT, FALSE
 	goto_if_eq Route116_EventScript_NoRoomForRepeatBall
@@ -421,6 +430,22 @@ Route116_Text_ThankYouTokenOfAppreciation:
 	.string "new kinds of POKé BALL.\p"
 	.string "As a token of our appreciation, this\n"
 	.string "is our gift to our wonderful TRAINER!$"
+
+Route116_Text_HappyDevonEmployee:
+	.string "… … …\p"
+	.string "Wait a second, is that the data of\n"
+	.string "SHROOMISH I see in your Pokédex?\p"
+	.string "So you did catch one! Hahaha!\n"
+	.string "SHROOMISH is cute!\p"
+	.string "Its lovely… beady… eyes are funny…\n"
+	.string "Its body shape… makes you want to…\l"
+	.string "wear it like a hat…\p"
+	.string "It's so smart that as soon as it\n"
+	.string "thinks there's danger nearby it\l"
+	.string "scatters spores to protect itself…\p"
+	.string "Oh… look at the time!\n"
+	.string "I need to go back to DEVON!\p"
+	.string "But first, please take these.$"
 
 Route116_Text_NewBallAvailableAtMart:
 	.string "Our new POKé BALLS will be available\n"

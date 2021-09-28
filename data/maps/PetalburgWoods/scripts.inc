@@ -11,6 +11,7 @@ PetalburgWoods_EventScript_DevonResearcherLeft::
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HaveYouSeenShroomish, MSGBOX_DEFAULT
 	closemessage
+	call_if_mon_seen SPECIES_SHROOMISH, PetalburgWoods_EventScript_HappyDevonResearcher
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaEntrance
 	waitmovement 0
@@ -48,6 +49,7 @@ PetalburgWoods_EventScript_DevonResearcherRight::
 	waitmovement 0
 	msgbox PetalburgWoods_Text_HaveYouSeenShroomish, MSGBOX_DEFAULT
 	closemessage
+	call_if_mon_seen SPECIES_SHROOMISH, PetalburgWoods_EventScript_HappyDevonResearcher
 	playbgm MUS_ENCOUNTER_AQUA, FALSE
 	applymovement LOCALID_GRUNT, PetalburgWoods_Movement_AquaEntrance
 	waitmovement 0
@@ -79,6 +81,12 @@ PetalburgWoods_EventScript_DevonResearcherIntro::
 	applymovement LOCALID_DEVON_EMPLOYEE, PetalburgWoods_Movement_DevonResearcherLookAround
 	waitmovement 0
 	msgbox PetalburgWoods_Text_NotAOneToBeFound, MSGBOX_DEFAULT
+	closemessage
+	return
+
+PetalburgWoods_EventScript_HappyDevonResearcher:
+	addvar VAR_DEVON_RESEARCHER_GIFT_COUNT, 2
+	msgbox PetalburgWoods_Text_HappyDevonResearcher, MSGBOX_DEFAULT
 	closemessage
 	return
 
@@ -330,6 +338,11 @@ PetalburgWoods_Text_HaveYouSeenShroomish:
 	.string "Hello, have you seen any POKéMON\n"
 	.string "called SHROOMISH around here?\p"
 	.string "I really love that POKéMON.$"
+
+PetalburgWoods_Text_HappyDevonResearcher:
+	.string "Ohh! Is that a POKéDEX?\p"
+	.string "Have you recorded the data\n"
+	.string "of a SHROOMISH, by chance?$"
 
 PetalburgWoods_Text_IWasGoingToAmbushYou:
 	.string "I was going to ambush you, but you\n"

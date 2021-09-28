@@ -2161,3 +2161,43 @@
 	setorcopyvar VAR_0x8001, \amount
 	callstd STD_RECEIVE_ITEM
 	.endm
+
+	@ Calls a script if the Player's Pokedex has seen the specified Pokemon.
+	.macro call_if_mon_seen species:req, script:req
+	setvar VAR_TEMP_1, \species
+	specialvar VAR_RESULT, GetSeenMon
+	call_if_var_eq VAR_RESULT, TRUE, \script
+	.endm
+
+	@ Calls a script if the Player's Pokedex has recorded the data of the specified Pokemon.
+	.macro call_if_mon_caught species:req, script:req
+	setvar VAR_TEMP_1, \species
+	specialvar VAR_RESULT, GetCaughtMon
+	call_if_var_eq VAR_RESULT, TRUE, \script
+	.endm
+
+	@ Jumps to a script if the Player's Pokedex has seen the specified Pokemon.
+	.macro goto_if_mon_seen species:req, script:req
+	setvar VAR_TEMP_1, \species
+	specialvar VAR_RESULT, GetSeenMon
+	goto_if_var_eq VAR_RESULT, TRUE, \script
+	.endm
+
+	@ Jumps to a script if the Player's Pokedex has recorded the data of the specified Pokemon.
+	.macro goto_if_mon_caught species:req, script:req
+	setvar VAR_TEMP_1, \species
+	specialvar VAR_RESULT, GetCaughtMon
+	goto_if_var_eq VAR_RESULT, TRUE, \script
+	.endm
+
+	@ Sets the Pokédex Seen flag of the specified Pokemon
+	.macro setseenmon species:req
+	setvar VAR_TEMP_1, \species
+	special SetSeenMon
+	.endm
+
+	@ Sets the Pokédex Caught flag of the specified Pokemon
+	.macro setcaughtmon species:req
+	setvar VAR_TEMP_1, \species
+	special SetCaughtMon
+	.endm
