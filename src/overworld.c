@@ -1632,6 +1632,7 @@ void CB2_ReturnToField(void)
     else
     {
         FieldClearVBlankHBlankCallbacks();
+        FlagClear(FLAG_DISABLE_SHINY_HUE_SHIFT);
         SetMainCallback2(CB2_ReturnToFieldLocal);
     }
 }

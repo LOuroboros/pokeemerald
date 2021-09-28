@@ -61,6 +61,7 @@ struct SpeciesItem
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static bool8 ShouldSkipFriendshipChange(void);
+static void ShuffleStatArray(u8* statArray);
 
 // EWRAM vars
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
@@ -3189,6 +3190,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 personality;
     u32 value;
     u32 shinyValue;
+    u8 maxIV = MAX_IV_MASK;
+    u8 statIDs[] = {0, 1, 2, 3, 4, 5};
 
     ZeroBoxMonData(boxMon);
 
@@ -3293,7 +3296,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
     else
     {
-        u32 iv;
+        u32 iv, i;
         value = Random();
 
         iv = value & MAX_IV_MASK;
@@ -3311,6 +3314,17 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
         iv = (value & (MAX_IV_MASK << 10)) >> 10;
         SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
+
+        // Set three random IVs to 31 for every generated species in the Undiscovered egg group, just like in XY.
+        if (gBaseStats[species].eggGroup1 == EGG_GROUP_UNDISCOVERED
+         || gBaseStats[species].eggGroup2 == EGG_GROUP_UNDISCOVERED)
+        {
+            ShuffleStatArray(statIDs);
+            for (i = 0; i < 3; i++)
+            {
+                SetBoxMonData(boxMon, MON_DATA_HP_IV + statIDs[i], &maxIV);
+            }
+        }
     }
 
     if (gBaseStats[species].abilities[1])
@@ -7948,4 +7962,18 @@ void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nat
     } while (nature != GetNatureFromPersonality(personality));
 
     CreateMon(mon, species, level, 32, 1, personality, OT_ID_PRESET, otid);
+}
+
+static void ShuffleStatArray(u8* statArray)
+{
+    int i;
+
+    // Shuffle the stats array
+    for (i = 0; i < NUM_STATS; i++)
+    {
+        u8 temp;
+        u8 rand1 = Random() % NUM_STATS;
+        u8 rand2 = Random() % NUM_STATS;
+        SWAP(statArray[rand1], statArray[rand2], temp);
+    }
 }
