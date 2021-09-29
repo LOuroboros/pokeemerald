@@ -335,13 +335,13 @@ Route103_Text_BrendanTimeToHeadBack:
 	.string "We should head back to the LAB.$"
 
 Route103_Text_MayRoute103Postgame:
-	.string "{RIVAL}: How strange… this POKéMON\n"
+	.string "{RIVAL}: How strange… that POKéMON\n"
 	.string "shouldn't normally appear here…$"
 
 Route103_Text_MayLetsBattlePostgame:
 	.string "Oh, {PLAYER}, you're here!\p"
 	.string "I'm sorry. I was distracted,\n"
-	.string "looking at this KRICKETOT.\p"
+	.string "looking at that KRICKETOT.\p"
 	.string "It is strange to see one here\n"
 	.string "in the HOENN Region, isn't it?\p"
 	.string "Nevermind that. I told you there\n"
@@ -379,7 +379,7 @@ Route103_Text_MayTimeToHeadBackForGood:
 	.string "appreciate it too!$"
 
 Route103_Text_BrendanRoute103Postgame:
-	.string "{RIVAL}: Huh? That's weird… this one\n"
+	.string "{RIVAL}: Huh? That's weird… that one\n"
 	.string "shouldn't appear here, right…?$"
 
 Route103_Text_BrendanLetsBattlePostgame:

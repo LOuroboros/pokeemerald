@@ -4369,6 +4369,7 @@ const struct Trainer gTrainers[] = {
 
     [TRAINER_WALLACE] =
     {
+        .hasCustomTransition = TRUE,
         .trainerClass = TRAINER_CLASS_CHAMPION,
         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE,
         .trainerPic = TRAINER_PIC_CHAMPION_WALLACE,
