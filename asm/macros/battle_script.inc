@@ -1770,7 +1770,8 @@
 	.endm
 
 	.macro jumpifset, flag:req, ptr:req
-	various \flag, VARIOUS_JUMP_IF_SET
+	various BS_TARGET, VARIOUS_JUMP_IF_SET
+	.2byte \flag
 	.4byte \ptr
 	.endm
 
