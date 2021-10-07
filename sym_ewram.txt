@@ -134,3 +134,4 @@
 	.include "src/infobox.o"
 	.include "src/rhh_copyright.o"
 	.include "src/registered_items_menu.o"
+	.include "src/title_screen.o"
