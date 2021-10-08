@@ -162,7 +162,7 @@ enum { // Preset Warps
 
 // *******************************
 // Constants
-#define DEBUG_MAIN_MENU_WIDTH 14
+#define DEBUG_MAIN_MENU_WIDTH 16
 #define DEBUG_MAIN_MENU_HEIGHT 8
 
 #define DEBUG_NUMBER_DISPLAY_WIDTH 10

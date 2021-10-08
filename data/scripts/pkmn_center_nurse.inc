@@ -1,109 +1,115 @@
 Common_EventScript_PkmnCenterNurse::
-    lock
-    faceplayer
-    specialvar VAR_RESULT, CountPlayerTrainerStars
-    compare VAR_RESULT, 4
-    goto_if_eq EventScript_PkmnCenterNurse_GoldCard
-    goto Common_EventScript_PkmnCenterNurse2
+	lock
+	faceplayer
+	specialvar VAR_RESULT, CountPlayerTrainerStars
+	compare VAR_RESULT, 4
+	goto_if_eq EventScript_PkmnCenterNurse_GoldCard
+	goto Common_EventScript_PkmnCenterNurse2
 
 Common_EventScript_PkmnCenterNurse2:
-    getgamestat GAME_STAT_USED_POKECENTER
-    compare VAR_RESULT, 1
-    goto_if_ge EventScript_PkmnCenterNurse_HealPkmn
-    msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
-    compare VAR_RESULT, YES
-    goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
-    compare VAR_RESULT, NO
-    goto_if_eq EventScript_PkmnCenterNurse_Goodbye
+	getgamestat GAME_STAT_USED_POKECENTER
+	compare VAR_RESULT, 1
+	goto_if_ge EventScript_PkmnCenterNurse_HealPkmn
+	msgbox gText_WouldYouLikeToRestYourPkmn, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
+	compare VAR_RESULT, NO
+	goto_if_eq EventScript_PkmnCenterNurse_Goodbye
 
 EventScript_PkmnCenterNurse_GoldCard::
-    goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_AskForUsual
-    msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT
-    playse SE_PIN
-    applymovement VAR_0x800B, Common_Movement_ExclamationMark
-    waitmovement 0
-    applymovement VAR_0x800B, Common_Movement_Delay48
-    waitmovement 0
-    setflag FLAG_NURSE_MENTIONS_GOLD_CARD
-    msgbox gText_NoticesGoldCard, MSGBOX_YESNO
-    compare VAR_RESULT, YES
-    goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
-    msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
-    release
-    end
+	goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_AskForUsual
+	msgbox gText_WelcomeCutShort, MSGBOX_DEFAULT
+	playse SE_PIN
+	applymovement VAR_LAST_TALKED, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
+	waitmovement 0
+	setflag FLAG_NURSE_MENTIONS_GOLD_CARD
+	msgbox gText_NoticesGoldCard, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
+	msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
+	release
+	end
 
 EventScript_PkmnCenterNurse_AskForUsual::
-    msgbox gText_YouWantTheUsual, MSGBOX_YESNO
-    compare VAR_RESULT, YES
-    goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
-    msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
-    release
-    end
+	msgbox gText_YouWantTheUsual, MSGBOX_YESNO
+	compare VAR_RESULT, YES
+	goto_if_eq EventScript_PkmnCenterNurse_HealPkmn
+	msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
+	release
+	end
 
 EventScript_PkmnCenterNurse_Goodbye::
-    msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
-    release
-    end
+	msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
+	release
+	end
 
 EventScript_PkmnCenterNurse_HealPkmn::
-    getgamestat GAME_STAT_USED_POKECENTER
-    compare VAR_RESULT, 1
-    call_if_ge EventScript_PkmnCenterNurse_HealPkmnAgain
-    compare VAR_RESULT, 0
-    call_if_eq EventScript_PkmnCenterNurse_HealPkmnForTheFirstTime
-    call EventScript_PkmnCenterNurse_TakeAndHealPkmn
-    call_if_unset FLAG_POKERUS_EXPLAINED, EventScript_PkmnCenterNurse_CheckPokerus
-    release
-    end
+	getgamestat GAME_STAT_USED_POKECENTER
+	compare VAR_RESULT, 1
+	call_if_ge EventScript_PkmnCenterNurse_HealPkmnAgain
+	compare VAR_RESULT, 0
+	call_if_eq EventScript_PkmnCenterNurse_HealPkmnForTheFirstTime
+	call EventScript_PkmnCenterNurse_TakeAndHealPkmn
+	call_if_unset FLAG_POKERUS_EXPLAINED, EventScript_PkmnCenterNurse_CheckPokerus
+	goto EventScript_PkmnCenterNurse_ReturnPkmn
+	release
+	end
 
 EventScript_PkmnCenterNurse_HealPkmnAgain:
-    msgbox gText_SecondAndSubsequentMeetingsWithNurseJoy, MSGBOX_DEFAULT
-    incrementgamestat GAME_STAT_USED_POKECENTER
-    message gText_IllTakeYourPkmn2
-    waitmessage
-    return
+	msgbox gText_SecondAndSubsequentMeetingsWithNurseJoy, MSGBOX_DEFAULT
+	incrementgamestat GAME_STAT_USED_POKECENTER
+	message gText_IllTakeYourPkmn2
+	waitmessage
+	return
 
 EventScript_PkmnCenterNurse_HealPkmnForTheFirstTime:
-    incrementgamestat GAME_STAT_USED_POKECENTER
-    message gText_IllTakeYourPkmn
-    waitmessage
-    return
+	incrementgamestat GAME_STAT_USED_POKECENTER
+	message gText_IllTakeYourPkmn
+	waitmessage
+	return
 
 EventScript_PkmnCenterNurse_TakeAndHealPkmn::
-    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestLeft
-    waitmovement 0
-    dofieldeffect FLDEFF_POKECENTER_HEAL
-    waitfieldeffect FLDEFF_POKECENTER_HEAL
-    applymovement VAR_0x800B, Common_Movement_WalkInPlaceFastestDown
-    waitmovement 0
-    special HealPlayerParty
-    return
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestLeft
+	waitmovement 0
+	dofieldeffect FLDEFF_POKECENTER_HEAL
+	waitfieldeffect FLDEFF_POKECENTER_HEAL
+	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFastestDown
+	waitmovement 0
+	special HealPlayerParty
+	return
 
 EventScript_PkmnCenterNurse_CheckPokerus::
-    message gText_PokerusExplanation
-    setflag FLAG_POKERUS_EXPLAINED
-    return
+    specialvar VAR_RESULT, IsPokerusInParty
+	call_if_var_eq VAR_RESULT, TRUE, EventScript_PkmnCenterNurse_ExplainPokerus
+	return
+
+EventScript_PkmnCenterNurse_ExplainPokerus::
+	message gText_PokerusExplanation
+	setflag FLAG_POKERUS_EXPLAINED
+	return
 
 EventScript_PkmnCenterNurse_ReturnPkmn::
-    goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_ReturnPkmn2
-    message gText_RestoredPkmnToFullHealth
-    waitmessage
-    applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
-    waitmovement 0
-    msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
-    release
-    end
+	goto_if_set FLAG_NURSE_MENTIONS_GOLD_CARD, EventScript_PkmnCenterNurse_ReturnPkmn2
+	message gText_RestoredPkmnToFullHealth
+	waitmessage
+	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Bow
+	waitmovement 0
+	msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
+	release
+	end
 
 EventScript_PkmnCenterNurse_ReturnPkmn2::
-    message gText_ThankYouForWaiting
-    waitmessage
-    applymovement VAR_0x800B, Movement_PkmnCenterNurse_Bow
-    waitmovement 0
-    msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
-    release
-    end
+	message gText_ThankYouForWaiting
+	waitmessage
+	applymovement VAR_LAST_TALKED, Movement_PkmnCenterNurse_Bow
+	waitmovement 0
+	msgbox gText_WeHopeToSeeYouAgain, MSGBOX_DEFAULT
+	release
+	end
 
 Movement_PkmnCenterNurse_Bow:
-    nurse_joy_bow
-    delay_16
-    step_end
+	nurse_joy_bow
+	delay_16
+	step_end
