@@ -2147,6 +2147,9 @@ static void Cmd_healthbarupdate(void)
 static void Cmd_datahpupdate(void)
 {
     u32 moveType;
+    u16 targetHealth = 0;
+    u16 currentDmg = 0;
+    targetHealth = (gBattleMons[gActiveBattler].hp);
 
     if (gBattleControllerExecFlags)
         return;
@@ -2261,6 +2264,11 @@ static void Cmd_datahpupdate(void)
                         gSpecialStatuses[gActiveBattler].specialBattlerId = gBattlerTarget;
                     }
                 }
+
+                currentDmg = (gBattleMoveDamage - gHpDealt);
+                ConvertIntToDecimalStringN(gStringVar3, gHpDealt, STR_CONV_MODE_LEFT_ALIGN, 5);
+                ConvertIntToDecimalStringN(gStringVar2, currentDmg, STR_CONV_MODE_LEFT_ALIGN, 5);
+                ConvertIntToDecimalStringN(gStringVar1, targetHealth, STR_CONV_MODE_LEFT_ALIGN, 3);
             }
             gHitMarker &= ~(HITMARKER_x100000);
             BtlController_EmitSetMonData(0, REQUEST_HP_BATTLE, 0, 2, &gBattleMons[gActiveBattler].hp);
@@ -2357,10 +2365,12 @@ static void Cmd_resultmessage(void)
         switch (gMoveResultFlags & (~MOVE_RESULT_MISSED))
         {
         case MOVE_RESULT_SUPER_EFFECTIVE:
-            stringId = STRINGID_SUPEREFFECTIVE;
+            if (!gIsCriticalHit)
+                stringId = STRINGID_SUPEREFFECTIVE;
             break;
         case MOVE_RESULT_NOT_VERY_EFFECTIVE:
-            stringId = STRINGID_NOTVERYEFFECTIVE;
+            if (!gIsCriticalHit)
+                stringId = STRINGID_NOTVERYEFFECTIVE;
             break;
         case MOVE_RESULT_ONE_HIT_KO:
             stringId = STRINGID_ONEHITKO;
@@ -2425,7 +2435,13 @@ static void Cmd_resultmessage(void)
             }
             else
             {
-                gBattleCommunication[MSG_DISPLAY] = 0;
+                if (!gIsCriticalHit)
+                {
+                    if (!gBattleMoveDamage == 0)
+                        stringId = STRINGID_DEALTDAMAGE;
+                    else
+                        stringId = STRINGID_PKMNAVOIDEDATTACK;
+                }
             }
         }
     }
