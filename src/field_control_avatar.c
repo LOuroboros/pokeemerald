@@ -89,7 +89,6 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->pressedRButton = FALSE;
     input->dpadDirection = 0;
     input->pressedLButton = FALSE;
-    input->pressedListButton = FALSE;
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -112,9 +111,6 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedBButton = TRUE;
             if (newKeys & L_BUTTON)
                 input->pressedLButton = TRUE;
-            //tx_registered_items_menu
-            if (newKeys & R_BUTTON && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_ON_FOOT))
-                input->pressedListButton = TRUE;
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -214,21 +210,12 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     }
 
-    if (input->pressedListButton)
-    {
-        if (gSaveBlock1Ptr->registeredItemListCount)
-            TxRegItemsMenu_OpenMenu();
-        else
-            ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem2);
-        return TRUE;
-    }
-
     if (input->pressedLButton && EnableAutoRun())
     {
         return TRUE;
     }
 
-    if (input->pressedRButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+    if (input->pressedLButton && TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
     {
         ObjectEventClearHeldMovementIfActive(&gObjectEvents[gPlayerAvatar.objectEventId]);
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
@@ -245,6 +232,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
             SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
             PlaySE(SE_BIKE_BELL);
         }
+    }
+
+    if (input->pressedRButton)
+    {
+        if (!(TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+         && gSaveBlock1Ptr->registeredItemListCount > 0)
+            TxRegItemsMenu_OpenMenu();
+        else
+            ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem2);
+        return TRUE;
     }
 
     return FALSE;
