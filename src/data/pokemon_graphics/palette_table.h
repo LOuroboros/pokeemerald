@@ -1278,6 +1278,13 @@ const struct CompressedSpritePalette gMonPaletteTable[] =
 const struct CompressedSpritePalette gMonPaletteTableFemale[] =
 {
     SPECIES_PAL(EEVEE, gMonPalette_Eevee),
+    SPECIES_PAL(COMBEE, gMonPalette_Combee),
+    SPECIES_PAL(HIPPOPOTAS, gMonPalette_HippopotasF),
+    SPECIES_PAL(HIPPOWDON, gMonPalette_HippowdonF),
+    SPECIES_PAL(UNFEZANT, gMonPalette_UnfezantF),
+    SPECIES_PAL(FRILLISH, gMonPalette_FrillishF),
+    SPECIES_PAL(JELLICENT, gMonPalette_JellicentF),
+    SPECIES_PAL(PYROAR, gMonPalette_PyroarF),
 };
 
 const struct CompressedSpritePalette gEgg1PaletteTable[] =

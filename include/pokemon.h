@@ -231,6 +231,13 @@ struct Evolution
     u16 targetSpecies;
 };
 
+struct FormChange {
+    u16 method;
+    u16 targetSpecies;
+    u16 param1;
+    u16 param2;
+};
+
 #define NUM_UNOWN_FORMS 28
 
 #define GET_UNOWN_LETTER(personality) ((   \
@@ -423,5 +430,5 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nature);
 u16 GetTrainerFrontSpriteBasedOnPlayerCostumeAndGender(u8 costumeId, u8 playerGender);
 void SetCustomWildMon(u16 species, u8 level, u16 item, u8 nature, u8 abilityNum, u8* evs, u8* ivs, u16* moves, bool8 isShiny);
-
+u16 GetFormChangeTargetSpecies(struct Pokemon *mon, u16 method, u32 arg);
 #endif // GUARD_POKEMON_H
