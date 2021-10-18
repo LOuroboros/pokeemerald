@@ -8647,6 +8647,7 @@ static void Cmd_various(void)
             gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 5);
         else
             gBattlescriptCurrInstr += 9;
+        return;
     case VARIOUS_MOVEEND_ITEM_EFFECTS:
         if (ItemBattleEffects(1, gActiveBattler, FALSE))
             return;
