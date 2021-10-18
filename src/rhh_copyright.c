@@ -245,10 +245,10 @@ void RhhIntro_LoadCopyrightSpriteGraphics()
 void RhhIntro_CreateCopyRightSprites()
 {
     sDizzyId = CreateSprite(&sSpriteTemplate_DizzyEgg, 0, DIZZY_POS_Y, 0);
-    gSprites[sDizzyId].pos2.x = DIZZY_POS_X;
+    gSprites[sDizzyId].x2 = DIZZY_POS_X;
 
     sPoryId = CreateSprite(&sSpriteTemplate_Porygon, 0, PORY_POS_Y, 0);
-    gSprites[sPoryId].pos2.x = PORY_POS_X;
+    gSprites[sPoryId].x2 = PORY_POS_X;
 }
 
 void RhhIntro_ShowRhhCredits()
@@ -273,9 +273,9 @@ static void Task_ShowRhhCredits(u8 taskId)
 #define sTimer data[0]
 static void SpriteCallbacK_DizzyWalking(struct Sprite* sprite)
 {
-    sprite->pos2.x--;
+    sprite->x2--;
 
-    if (sprite->pos2.x <= DIZZY_COLLISION_POS_X)
+    if (sprite->x2 <= DIZZY_COLLISION_POS_X)
     {
         StartSpriteAnim(sprite, ANIM_DIZZY_DIZZY);
         sprite->callback = SpriteCallbackDummy;
@@ -290,8 +290,8 @@ static void SpriteCallbacK_DizzyWalking(struct Sprite* sprite)
 
 static void SpriteCallback_PorygonHit(struct Sprite* sprite)
 {
-    sprite->pos2.x-=2;
-    sprite ->pos2.y = Sin2(180 + sprite->sTimer * 4) / 128;
+    sprite->x2-=2;
+    sprite ->y2 = Sin2(180 + sprite->sTimer * 4) / 128;
 
     if (sprite->sTimer >= 48)
     {
@@ -315,14 +315,14 @@ static void SpriteCallback_PorygonFlying(struct Sprite* sprite)
 {
     if (sprite->sTimer >= PORYGON_WAIT_TIME)
     {
-        sprite->pos2.x += 6;
+        sprite->x2 += 6;
 
         if (sprite->sTimer % 32 >= 16)
-            sprite->pos2.y--;
+            sprite->y2--;
         else
-            sprite->pos2.y++;
+            sprite->y2++;
 
-        if (sprite->pos2.x >= PORYGON_COLLISION_POS_X)
+        if (sprite->x2 >= PORYGON_COLLISION_POS_X)
         {
             StartSpriteAnim(sprite, ANIM_PORY_HIT);
             sprite->callback = SpriteCallback_PorygonHit;

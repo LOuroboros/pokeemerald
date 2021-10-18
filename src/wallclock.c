@@ -1023,8 +1023,8 @@ static void SpriteCB_MinuteHand(struct Sprite *sprite)
     if (y > 128)
         y |= 0xff00;
 
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
 }
 
 static void SpriteCB_HourHand(struct Sprite *sprite)
@@ -1043,8 +1043,8 @@ static void SpriteCB_HourHand(struct Sprite *sprite)
     if (y > 128)
         y |= 0xff00;
 
-    sprite->pos2.x = x;
-    sprite->pos2.y = y;
+    sprite->x2 = x;
+    sprite->y2 = y;
 }
 
 static void SpriteCB_PMIndicator(struct Sprite *sprite)
@@ -1071,8 +1071,8 @@ static void SpriteCB_PMIndicator(struct Sprite *sprite)
             sprite->data[1]--;
         }
     }
-    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->data[1]) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->data[1]) * 30 / 0x1000;
 }
 
 static void SpriteCB_AMIndicator(struct Sprite *sprite)
@@ -1099,6 +1099,6 @@ static void SpriteCB_AMIndicator(struct Sprite *sprite)
             sprite->data[1]--;
         }
     }
-    sprite->pos2.x = Cos2(sprite->data[1]) * 30 / 0x1000;
-    sprite->pos2.y = Sin2(sprite->data[1]) * 30 / 0x1000;
+    sprite->x2 = Cos2(sprite->data[1]) * 30 / 0x1000;
+    sprite->y2 = Sin2(sprite->data[1]) * 30 / 0x1000;
 }

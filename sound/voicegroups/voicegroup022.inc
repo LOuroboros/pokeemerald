@@ -65,4 +65,3 @@ voicegroup022::
 	voice_directsound 60, 67, DirectSoundWaveData_sc88pro_mute_high_conga, 255, 0, 255, 0 
 	voice_square_1 60, 0, 0, 2, 0, 0, 15, 0 
 	voice_directsound 60, 61, DirectSoundWaveData_sc88pro_open_low_conga, 255, 0, 255, 0 
-

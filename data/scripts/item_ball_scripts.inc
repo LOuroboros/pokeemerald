@@ -630,7 +630,7 @@ MagmaHideout_1F_EventScript_ItemRareCandy::
 	finditem ITEM_RARE_CANDY
 	end
 
-MagmaHideout_2F_2R_EventScript_MaxElixir::
+MagmaHideout_2F_2R_EventScript_ItemMaxElixir::
 	finditem ITEM_MAX_ELIXIR
 	end
 
@@ -646,7 +646,7 @@ MagmaHideout_3F_2R_EventScript_ItemPPMax::
 	finditem ITEM_PP_MAX
 	end
 
-MagmaHideout_4F_EventScript_MaxRevive::
+MagmaHideout_4F_EventScript_ItemMaxRevive::
 	finditem ITEM_MAX_REVIVE
 	end
 

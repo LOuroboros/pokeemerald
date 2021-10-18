@@ -2,8 +2,9 @@
 .set LOCALID_VICTORIA, 2
 .set LOCALID_VIVI, 3
 .set LOCALID_VICKY, 4
-.set LOCALID_PLAYER_FALLING, 45
 .set LOCALID_ROCK_SMASH_MAN, 46
+
+@ Note: LOCALID_ROUTE111_PLAYER_FALLING is a local id for this map used elsewhere. It's defined in event_objects.h
 
 Route111_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Route111_OnLoad
@@ -127,11 +128,11 @@ Route111_EventScript_MirageTowerDisappear::
 	waitstate
 	delay 24
 	playse SE_FALL
-	addobject LOCALID_PLAYER_FALLING
+	addobject LOCALID_ROUTE111_PLAYER_FALLING
 	special StartPlayerDescendMirageTower
 	waitstate
 	showobjectat OBJ_EVENT_ID_PLAYER, MAP_LITTLEROOT_TOWN
-	removeobject LOCALID_PLAYER_FALLING
+	removeobject LOCALID_ROUTE111_PLAYER_FALLING
 	delay 16
 	turnobject OBJ_EVENT_ID_PLAYER, DIR_NORTH
 	delay 16
@@ -150,17 +151,6 @@ Route111_EventScript_RootFossilDisappeared::
 	msgbox Route111_Text_RootFossilDisappeared, MSGBOX_DEFAULT
 	releaseall
 	end
-
-@ Unused
-Route111_Movement_PlayerFall::
-	store_lock_anim
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	step_end
 
 Route111_EventScript_Girl::
 	lock
@@ -182,13 +172,6 @@ Route111_EventScript_ReceivedBerry::
 	release
 	end
 
-@ Unused
-Route111_EventScript_ViciousSandstormTriggerUp::
-	lockall
-	setvar VAR_0x8004, 0
-	goto Route111_EventScript_ViciousSandstormTrigger
-	end
-
 Route111_EventScript_ViciousSandstormTriggerDown::
 	lockall
 	setvar VAR_0x8004, 1
@@ -198,13 +181,6 @@ Route111_EventScript_ViciousSandstormTriggerDown::
 Route111_EventScript_ViciousSandstormTriggerLeft::
 	lockall
 	setvar VAR_0x8004, 2
-	goto Route111_EventScript_ViciousSandstormTrigger
-	end
-
-@ Unused
-Route111_EventScript_ViciousSandstormTriggerRight::
-	lockall
-	setvar VAR_0x8004, 3
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 

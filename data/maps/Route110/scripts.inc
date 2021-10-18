@@ -292,9 +292,6 @@ Route110_EventScript_Timmy::
 	msgbox Route110_Text_TimmyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route110_EventScript_Unused::
-	end
-
 Route110_EventScript_Kaleb::
 	trainerbattle_single TRAINER_KALEB, Route110_Text_KalebIntro, Route110_Text_KalebDefeated
 	msgbox Route110_Text_KalebPostBattle, MSGBOX_AUTOCLOSE

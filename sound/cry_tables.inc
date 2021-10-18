@@ -1,4 +1,3 @@
-
 	.align 2
 gCryTable::
 	cry Cry_Bulbasaur
