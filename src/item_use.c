@@ -202,7 +202,7 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
         if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
             DisplayItemMessageOnField(taskId, gText_ExpShareOn, Task_CloseCantUseKeyItemMessage);
         else
-            DisplayItemMessage(taskId, 1, gText_ExpShareOn, BagMenu_InitListsMenu);
+            DisplayItemMessage(taskId, 1, gText_ExpShareOn, CloseItemMessage);
     }
     else
     {
@@ -210,7 +210,7 @@ void ItemUseOutOfBattle_ExpShare(u8 taskId)
         if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
             DisplayItemMessageOnField(taskId, gText_ExpShareOff, Task_CloseCantUseKeyItemMessage);
         else
-            DisplayItemMessage(taskId, 1, gText_ExpShareOff, BagMenu_InitListsMenu);
+            DisplayItemMessage(taskId, 1, gText_ExpShareOff, CloseItemMessage);
     }
     gSaveBlock2Ptr->expShare = !gSaveBlock2Ptr->expShare;
 }
@@ -969,8 +969,7 @@ u32 CanThrowBall(void)
 {
     if (FlagGet(FLAG_DISABLE_BALL_THROWS))
     {
-        static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
-        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, BagMenu_InitListsMenu);
+        return 4;
     }
     else if (IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT))
         && IsBattlerAlive(GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT))) 
@@ -993,6 +992,7 @@ u32 CanThrowBall(void)
 
 static const u8 sText_CantThrowPokeBall_TwoMons[] = _("Cannot throw a ball!\nThere are two Pokémon out there!\p");
 static const u8 sText_CantThrowPokeBall_SemiInvulnerable[] = _("Cannot throw a ball!\nThere's no Pokémon in sight!\p");
+static const u8 sText_BallsCannotBeUsed[] = _("Poké Balls cannot be used\nright now!\p");
 void ItemUseInBattle_PokeBall(u8 taskId)
 {
     switch (CanThrowBall())
@@ -1025,6 +1025,9 @@ void ItemUseInBattle_PokeBall(u8 taskId)
             DisplayItemMessageInBattlePyramid(taskId, sText_CantThrowPokeBall_SemiInvulnerable, Task_CloseBattlePyramidBagMessage);
         break;
     #endif
+    case 4: // Can't throw ball
+        DisplayItemMessage(taskId, 1, sText_BallsCannotBeUsed, CloseItemMessage);
+        break;
     }
 }
 

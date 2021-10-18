@@ -216,7 +216,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (input->pressedListButton)
     {
-        if (TxRegItemsMenu_CountUsedRegisteredItemSlots() > 0)
+        if (gSaveBlock1Ptr->registeredItemListCount)
             TxRegItemsMenu_OpenMenu();
         else
             ScriptContext1_SetupScript(EventScript_SelectWithoutRegisteredItem2);

@@ -838,7 +838,7 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     ResetFieldTasksArgs();
     RunOnResumeMapScript();
 
-    if (SHOW_MAP_NAME_ENABLED && gMapHeader.regionMapSectionId != sLastMapSectionId)
+    if (gMapHeader.showMapName == TRUE && gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
 }
 

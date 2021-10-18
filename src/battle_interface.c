@@ -28,6 +28,10 @@
 #include "data.h"
 #include "pokemon_summary_screen.h"
 #include "strings.h"
+#include "item_icon.h"
+#include "item_use.h"
+#include "item.h"
+#include "constants/items.h"
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c

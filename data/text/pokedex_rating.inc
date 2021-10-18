@@ -3,6 +3,18 @@ gBirchDexRatingText_AreYouCurious::
 	.string "Are you curious about how your\n"
 	.string "POKéDEX is coming along?$"
 
+gBirchDexRatingText_AreYouCurious2::
+	.string "PROF. BIRCH: So, {PLAYER}!\p"
+	.string "Are you curious about how your\n"
+	.string "POKéDEX is coming along?$"
+
+gBirchDexRatingText_AreYouCuriousAlt::
+	.string "PROF. BIRCH: Ah, {PLAYER}!\p"
+	.string "That was an impressive battle,\n"
+	.string "congratulations on your victory!\p"
+	.string "So, are you curious about how your\n"
+	.string "POKéDEX is coming along?$"
+
 gBirchDexRatingText_Cancel:
 	.string "Hm? Oh, you haven't caught enough\n"
 	.string "POKéMON to make it worthwhile.$"

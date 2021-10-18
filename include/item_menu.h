@@ -106,7 +106,6 @@ void BagMenu_YesNo(u8 taskId, u8 windowType, const struct YesNoFuncTable* funcTa
 void UpdatePocketItemList(u8 pocketId);
 void DisplayItemMessage(u8 taskId, u8 fontId, const u8 *str, void ( *callback)(u8 taskId));
 void DisplayItemMessageOnField(u8 taskId, const u8 *src, TaskFunc callback);
-void ShowRegisteredItemsMenu(void);
 void CloseItemMessage(u8 taskId);
 
 #endif //GUARD_ITEM_MENU_H

@@ -35,6 +35,23 @@
 #include "menu_specialized.h"
 #include "registered_items_menu.h"
 
+// local task defines
+#define NUM_ITEMS data[1]
+
+// special item description handlers
+enum
+{
+    ITEMPC_SWITCH_WHICH_ITEM = 0xFFF7,
+    ITEMPC_OKAY_TO_THROW_AWAY,
+    ITEMPC_TOO_IMPORTANT,
+    ITEMPC_NO_MORE_ROOM,
+    ITEMPC_THREW_AWAY_ITEM,
+    ITEMPC_HOW_MANY_TO_TOSS,
+    ITEMPC_WITHDREW_THING,
+    ITEMPC_HOW_MANY_TO_WITHDRAW,
+    ITEMPC_GO_BACK_TO_PREV
+};
+
 struct TxRegItemsMenu_Struct
 {
     struct ListMenuItem unk0[51];
@@ -60,7 +77,7 @@ static void TxRegItemsMenu_AllocateStruct(void);
 static u8 TxRegItemsMenu_InitWindow(void);
 static void TxRegItemsMenu_RefreshListMenu(void);
 static void TxRegItemsMenu_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu);
-static void TxRegItemsMenu_PrintFunc(u8 windowId, s32 id, u8 yOffset);
+static void TxRegItemsMenu_PrintFunc(u8 windowId, u32 id, u8 yOffset);
 static void TxRegItemsMenu_PrintItemIcon(u16 itemId);
 static void TxRegItemsMenu_DoItemSwap(u8 taskId, bool8 a);
 static void TxRegItemsMenu_StartScrollIndicator(void);
@@ -122,7 +139,7 @@ static EWRAM_DATA struct TxRegItemsMenu_ItemPageStruct TxRegItemsMenuItemPageInf
 void TxRegItemsMenu_OpenMenu(void)
 {
     u8 taskId = CreateTask(TaskDummy, 0);
-    ScriptFreezeObjectEvents();
+    FreezeObjects_WaitForPlayer();
     PlaySE(SE_WIN_OPEN);
     gTasks[taskId].func = TxRegItemsMenu_InitMenuFunctions;
 }
@@ -328,7 +345,7 @@ static void TxRegItemsMenu_CalculateUsedSlots(void) //calculate used slots
 
 static void TxRegItemsMenu_CalcCursorPos(void) //calc cursor pos
 {
-    sub_812225C(&(TxRegItemsMenuItemPageInfo.itemsAbove), &(TxRegItemsMenuItemPageInfo.cursorPos), TxRegItemsMenuItemPageInfo.pageItems, TxRegItemsMenuItemPageInfo.count); //fine
+    SetCursorWithinListBounds(&(TxRegItemsMenuItemPageInfo.itemsAbove), &(TxRegItemsMenuItemPageInfo.cursorPos), TxRegItemsMenuItemPageInfo.pageItems, TxRegItemsMenuItemPageInfo.count); //fine
 }
 
 static void TxRegItemsMenu_RefreshListMenu(void)
@@ -368,7 +385,7 @@ static void TxRegItemsMenu_MoveCursor(s32 id, bool8 b, struct ListMenu *thisMenu
     }
 }
 
-static void TxRegItemsMenu_PrintFunc(u8 windowId, s32 id, u8 yOffset)
+static void TxRegItemsMenu_PrintFunc(u8 windowId, u32 id, u8 yOffset)
 {
     if (id != -2)
     {
@@ -396,8 +413,8 @@ static void TxRegItemsMenu_PrintItemIcon(u16 itemId)
         {
             *spriteIdLoc = spriteId;
             gSprites[spriteId].oam.priority = 0;
-            gSprites[spriteId].pos2.x = 32;
-            gSprites[spriteId].pos2.y = 132;
+            gSprites[spriteId].x2 = 32;
+            gSprites[spriteId].y2 = 132;
         }
     }
 }

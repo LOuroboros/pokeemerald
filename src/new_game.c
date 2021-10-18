@@ -179,7 +179,6 @@ void NewGameInitData(void)
     ResetPokemonStorageSystem();
     ClearRoamerData();
     ClearRoamerLocationData();
-    gSaveBlock1Ptr->registeredItemSelect = 0;
     ClearBag();
     NewGameInitPCItems();
     TxRegItemsMenu_RegisteredItemsMenuNewGame();

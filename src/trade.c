@@ -773,7 +773,6 @@ static void SetLinkTradeCallbacks(void)
 {
     gMain.savedCallback = CB2_StartCreateTradeMenu;
 
-    // Cable Link Trade
     if (!gReceivedRemoteLinkPlayers)
     {
         Free(sMenuTextAllocBuffer);
@@ -1577,7 +1576,6 @@ static void CancelTrade_1(void)
     if (!gPaletteFade.active)
     {
         SetCloseLinkCallbackAndType(12);
-
         sTradeMenuData->tradeMenuFunc = TRADEMENUFUNC_CANCEL_TRADE_2;
     }
 }
@@ -2595,7 +2593,9 @@ void CB2_LinkTrade(void)
         break;
     case 12:
         if (!gPaletteFade.active)
+        {
             SetMainCallback2(CB2_UpdateLinkTrade);
+        }
         break;
     }
     RunTasks();
@@ -2837,7 +2837,6 @@ static void SetTradeSequenceBgGpuRegs(u8 state)
                                      BGCNT_16COLOR |
                                      BGCNT_SCREENBASE(18) |
                                      BGCNT_TXT256x512);
-
         DmaCopy16Defvars(3, sGbaCable_Tilemap, (void *) BG_SCREEN_ADDR(5), 0x1000);
         DmaCopyLarge16(3, gTradeGba_Gfx, (void *) BG_CHAR_ADDR(0), 0x1420, 0x1000);
         SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_MODE_0 |
@@ -3073,8 +3072,8 @@ static bool8 AnimateTradeSequenceCable(void)
         }
         break;
     case TS_STATE_SEND_MSG:
-        StringExpandPlaceholders(gStringVar4, gText_XWillBeSentToY);
-        DrawTextOnTradeWindow(0, gStringVar4, 0);
+        StringExpandPlaceholders(gStringVar7, gText_XWillBeSentToY);
+        DrawTextOnTradeWindow(0, gStringVar7, 0);
 
         if (sTradeData->monSpecies[TRADE_PLAYER] != SPECIES_EGG)
             PlayCry1(sTradeData->monSpecies[TRADE_PLAYER], 0);
@@ -3087,8 +3086,8 @@ static bool8 AnimateTradeSequenceCable(void)
         {
             sTradeData->releasePokeballSpriteId = CreateTradePokeballSprite(sTradeData->monSpriteIds[0], gSprites[sTradeData->monSpriteIds[0]].oam.paletteNum, 120, 32, 2, 1, 0x14, 0xfffff);
             sTradeData->state++;
-            StringExpandPlaceholders(gStringVar4, gText_ByeByeVar1);
-            DrawTextOnTradeWindow(0, gStringVar4, 0);
+            StringExpandPlaceholders(gStringVar7, gText_ByeByeVar1);
+            DrawTextOnTradeWindow(0, gStringVar7, 0);
         }
         break;
     case TS_STATE_POKEBALL_DEPART:
@@ -3414,7 +3413,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case TS_STATE_POKEBALL_ARRIVE_WAIT:
         if (gSprites[sTradeData->bouncingPokeballSpriteId].callback == SpriteCallbackDummy)
         {
-            HandleLoadSpecialPokePic_2(&gMonFrontPicTable[sTradeData->monSpecies[TRADE_PARTNER]], gMonSpritesGfxPtr->sprites.ptr[B_POSITION_OPPONENT_RIGHT], sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monPersonalities[TRADE_PARTNER]);
+            HandleLoadSpecialPokePic(&gMonFrontPicTable[sTradeData->monSpecies[TRADE_PARTNER]], gMonSpritesGfxPtr->sprites.ptr[3], sTradeData->monSpecies[TRADE_PARTNER], sTradeData->monPersonalities[TRADE_PARTNER]);
             sTradeData->state++;
         }
         break;
@@ -3435,8 +3434,8 @@ static bool8 AnimateTradeSequenceCable(void)
                                       DISPCNT_BG0_ON |
                                       DISPCNT_BG2_ON |
                                       DISPCNT_OBJ_ON);
-        StringExpandPlaceholders(gStringVar4, gText_XSentOverY);
-        DrawTextOnTradeWindow(0, gStringVar4, 0);
+        StringExpandPlaceholders(gStringVar7, gText_XSentOverY);
+        DrawTextOnTradeWindow(0, gStringVar7, 0);
         sTradeData->state = TS_STATE_DELAY_FOR_MON_ANIM;
         sTradeData->timer = 0;
         break;
@@ -3458,8 +3457,8 @@ static bool8 AnimateTradeSequenceCable(void)
         if (sTradeData->timer == 250)
         {
             sTradeData->state++;
-            StringExpandPlaceholders(gStringVar4, gText_TakeGoodCareOfX);
-            DrawTextOnTradeWindow(0, gStringVar4, 0);
+            StringExpandPlaceholders(gStringVar7, gText_TakeGoodCareOfX);
+            DrawTextOnTradeWindow(0, gStringVar7, 0);
             sTradeData->timer = 0;
         }
         break;
@@ -3484,7 +3483,7 @@ static bool8 AnimateTradeSequenceCable(void)
     case TS_STATE_TRY_EVOLUTION: // Only if in-game trade, link trades use CB2_TryLinkTradeEvolution
         TradeMons(gSpecialVar_0x8005, 0);
         gCB2_AfterEvolution = CB2_UpdateInGameTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
         if (evoTarget != SPECIES_NONE)
         {
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
@@ -3529,7 +3528,7 @@ static void CB2_TryLinkTradeEvolution(void)
         break;
     case 4:
         gCB2_AfterEvolution = CB2_SaveAndEndTrade;
-        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE);
+        evoTarget = GetEvolutionTargetSpecies(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], EVO_MODE_TRADE, ITEM_NONE, GetMonData(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PARTNER]], MON_DATA_SPECIES));
         if (evoTarget != SPECIES_NONE)
             TradeEvolutionScene(&gPlayerParty[gSelectedTradeMonPositions[TRADE_PLAYER]], evoTarget, sTradeData->monSpriteIds[TRADE_PARTNER], gSelectedTradeMonPositions[TRADE_PLAYER]);
         else
@@ -3900,31 +3899,13 @@ static void CB2_SaveAndEndTrade(void)
     case 8:
         if (IsBGMStopped() == TRUE)
         {
-            if (gMain.savedCallback == CB2_StartCreateTradeMenu)
-            {
-                SetTradeLinkStandbyCallback(3);
-            }
-            else
-            {
-                SetCloseLinkCallback();
-            }
+            SetCloseLinkCallback();
             gMain.state++;
         }
         break;
     case 9:
-        if (gMain.savedCallback == CB2_StartCreateTradeMenu)
-        {
-            if (_IsLinkTaskFinished())
-            {
-                gSoftResetDisabled = FALSE;
-                SetMainCallback2(CB2_FreeTradeData);
-            }
-        }
-        else if (!gReceivedRemoteLinkPlayers)
-        {
-            gSoftResetDisabled = FALSE;
-            SetMainCallback2(CB2_FreeTradeData);
-        }
+        gSoftResetDisabled = FALSE;
+        SetMainCallback2(CB2_FreeTradeData);
         break;
     }
     if (!HasLinkErrorOccurred())

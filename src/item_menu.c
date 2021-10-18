@@ -1709,11 +1709,11 @@ static void OpenContextMenu(u8 taskId)
                     gBagMenu->contextMenuItemsBuffer[0] = ACTION_CHECK;
                 break;
             case KEYITEMS_POCKET:
+                gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
                 if (sRegisterSubMenu == FALSE)
                 {
                     gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_KeyItemsPocket);
                     memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_KeyItemsPocket, sizeof(sContextMenuItems_KeyItemsPocket));
-
                     // check replacing USE with WALK
                     if (gSpecialVar_ItemId == ITEM_MACH_BIKE || gSpecialVar_ItemId == ITEM_ACRO_BIKE)
                     {

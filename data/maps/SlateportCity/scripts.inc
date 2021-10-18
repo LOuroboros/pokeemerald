@@ -959,10 +959,6 @@ SlateportCity_Movement_ScottExitAfterBattleTent:
 	step_end
 
 SlateportCity_EventScript_BerryCrushRankingsSign::
-	lockall
-	special ShowBerryCrushRankings
-	waitstate
-	releaseall
 	end
 
 SlateportCity_Text_EnergyGuruSellWhatYouNeed:
