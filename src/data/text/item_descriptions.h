@@ -1041,10 +1041,17 @@ static const u8 sSootheBellDesc[] = _(
     "calms spirits and\n"
     "fosters friendship.");
 
+#if defined(BATTLE_ENGINE) && B_MENTAL_HERB >= GEN_5
+static const u8 sMentalHerbDesc[] = _(
+    "Snaps Pokémon out\n"
+    "of move-binding\n"
+    "effects.");
+#else
 static const u8 sMentalHerbDesc[] = _(
     "A hold item that\n"
     "snaps Pokémon out\n"
     "of infatuation.");
+#endif
 
 static const u8 sChoiceBandDesc[] = _(
     "Raises a move's\n"
