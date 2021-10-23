@@ -1100,12 +1100,6 @@ static u16 GetNPCRoomGraphicsId(void)
     return sNPCTable[sNpcId].graphicsId;
 }
 
-// Unused
-static u8 GetInWildMonRoom(void)
-{
-    return sInWildMonRoom;
-}
-
 bool32 TryGenerateBattlePikeWildMon(bool8 checkKeenEyeIntimidate)
 {
     s32 i;
@@ -1327,8 +1321,7 @@ bool8 InBattlePike(void)
 {
     return gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM
         || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL
-        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS
-        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_UNUSED;
+        || gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS;
 }
 
 static void SetHintedRoom(void)
