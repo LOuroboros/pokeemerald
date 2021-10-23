@@ -7,7 +7,7 @@ DewfordTown_Gym_OnTransition:
 	end
 
 DewfordTown_Gym_EventScript_SetFlashRadius::
-	goto_if_defeated TRAINER_BRAWLY_1, DewfordTown_Gym_EventScript_SetLightsOn
+	goto_if_set FLAG_HAS_INTERACTED_WITH_BRAWLY, DewfordTown_Gym_EventScript_SetLightsOn
 	call DewfordTown_Gym_EventScript_CountTrainersDefeated
 	copyvar VAR_0x8001, VAR_0x8000
 	compare VAR_0x8000, 0
@@ -144,6 +144,10 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Brawly::
+	msgbox DewfordTown_Gym_Text_PreIntro, MSGBOX_DEFAULT
+	closemessage
+	setflag FLAG_HAS_INTERACTED_WITH_BRAWLY
+	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
@@ -393,6 +397,10 @@ DewfordTown_Gym_Text_CristianDefeat:
 DewfordTown_Gym_Text_CristianPostBattle:
 	.string "You win!\n"
 	.string "Go after that BADGE!$"
+
+DewfordTown_Gym_Text_PreIntro:
+	.string "Oh, a challenger!\n"
+	.string "I guess the gig is up.$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
 	.string "I'm BRAWLY!\n"
