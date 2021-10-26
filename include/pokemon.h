@@ -85,15 +85,17 @@ struct BoxPokemon
     u32 victoryRibbon:1;
     u32 artistRibbon:1;
     u32 effortRibbon:1;
-    u32 marineRibbon:1; // never distributed
-    u32 landRibbon:1; // never distributed
-    u32 skyRibbon:1; // never distributed
     u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
     u32 nationalRibbon:1;
     u32 earthRibbon:1;
     u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
     u32 eventLegal:1;
     u32 markings:4;
+
+    // Word 17: Date Met
+    u32 dayMet:5;
+    u32 monthMet:4;
+    u32 yearMet:7;
 };
 
 struct Pokemon

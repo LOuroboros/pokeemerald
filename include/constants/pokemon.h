@@ -128,7 +128,7 @@
 #define MON_DATA_OT_NAME            7
 #define MON_DATA_MARKINGS           8
 #define MON_DATA_CHECKSUM           9
-#define MON_DATA_ENCRYPT_SEPARATOR 10
+#define MON_DATA_YEAR_MET          10
 #define MON_DATA_SPECIES           11
 #define MON_DATA_HELD_ITEM         12
 #define MON_DATA_MOVE1             13
@@ -190,22 +190,21 @@
 #define MON_DATA_VICTORY_RIBBON    69
 #define MON_DATA_ARTIST_RIBBON     70
 #define MON_DATA_EFFORT_RIBBON     71
-#define MON_DATA_MARINE_RIBBON     72
-#define MON_DATA_LAND_RIBBON       73
-#define MON_DATA_SKY_RIBBON        74
-#define MON_DATA_COUNTRY_RIBBON    75
-#define MON_DATA_NATIONAL_RIBBON   76
-#define MON_DATA_EARTH_RIBBON      77
-#define MON_DATA_WORLD_RIBBON      78
-#define MON_DATA_EVENT_LEGAL       79
-#define MON_DATA_KNOWN_MOVES       80
-#define MON_DATA_RIBBON_COUNT      81
-#define MON_DATA_RIBBONS           82
-#define MON_DATA_ATK2              83
-#define MON_DATA_DEF2              84
-#define MON_DATA_SPEED2            85
-#define MON_DATA_SPATK2            86
-#define MON_DATA_SPDEF2            87
+#define MON_DATA_COUNTRY_RIBBON    72
+#define MON_DATA_NATIONAL_RIBBON   73
+#define MON_DATA_EARTH_RIBBON      74
+#define MON_DATA_WORLD_RIBBON      75
+#define MON_DATA_EVENT_LEGAL       76
+#define MON_DATA_KNOWN_MOVES       77
+#define MON_DATA_RIBBON_COUNT      78
+#define MON_DATA_RIBBONS           79
+#define MON_DATA_ATK2              80
+#define MON_DATA_DEF2              81
+#define MON_DATA_SPEED2            82
+#define MON_DATA_SPATK2            83
+#define MON_DATA_SPDEF2            84
+#define MON_DATA_DAY_MET           85
+#define MON_DATA_MONTH_MET         86
 
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0
@@ -233,19 +232,16 @@
 #define VICTORY_RIBBON       22
 #define ARTIST_RIBBON        23
 #define EFFORT_RIBBON        24
-#define MARINE_RIBBON        25
-#define LAND_RIBBON          26
-#define SKY_RIBBON           27
-#define COUNTRY_RIBBON       28
-#define NATIONAL_RIBBON      29
-#define EARTH_RIBBON         30
-#define WORLD_RIBBON         31
+#define COUNTRY_RIBBON       25
+#define NATIONAL_RIBBON      26
+#define EARTH_RIBBON         27
+#define WORLD_RIBBON         28
 
-#define FIRST_GIFT_RIBBON MARINE_RIBBON
+#define FIRST_GIFT_RIBBON COUNTRY_RIBBON
 #define LAST_GIFT_RIBBON  WORLD_RIBBON
 #define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
 
-// The above gift ribbons (Marine - World) are
+// The above gift ribbons (Country - World) are
 // special distribution ribbons that correspond to
 // 1 bit each in the Pokémon struct. Gen 4 hard-codes
 // each of these to the given name. In Gen 3 they're

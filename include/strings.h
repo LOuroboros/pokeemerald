@@ -978,6 +978,7 @@ extern const u8 gText_PeculiarEggTrade[];
 extern const u8 gText_EggFromTraveler[];
 extern const u8 gText_EggFromHotSprings[];
 extern const u8 gText_OddEggFoundByCouple[];
+extern const u8 gText_EggFoundIn[];
 extern const u8 gText_None[];
 extern const u8 gText_RibbonsVar1[];
 extern const u8 gText_OneDash[];
@@ -3065,5 +3066,19 @@ extern const u8 gText_Nickname[];
 
 // Last save date when saving the game
 extern const u8 gText_SavingDate[];
+
+// Date Met
+extern const u8 gText_Month_January[];
+extern const u8 gText_Month_February[];
+extern const u8 gText_Month_March[];
+extern const u8 gText_Month_April[];
+extern const u8 gText_Month_May[];
+extern const u8 gText_Month_June[];
+extern const u8 gText_Month_July[];
+extern const u8 gText_Month_August[];
+extern const u8 gText_Month_September[];
+extern const u8 gText_Month_October[];
+extern const u8 gText_Month_November[];
+extern const u8 gText_Month_December[];
 
 #endif // GUARD_STRINGS_H

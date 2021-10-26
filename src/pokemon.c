@@ -3196,6 +3196,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u32 shinyValue;
     u8 maxIV = MAX_IV_MASK;
     u8 statIDs[] = {0, 1, 2, 3, 4, 5};
+    struct SiiRtcInfo rtc;
 
     ZeroBoxMonData(boxMon);
 
@@ -3336,6 +3337,15 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         value = personality & 1;
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
+
+    // Date Met
+    RtcGetDateTime(&rtc);
+    value = ConvertBcdToBinary(rtc.day);
+    SetBoxMonData(boxMon, MON_DATA_DAY_MET, &value);
+    value = ConvertBcdToBinary(rtc.month);
+    SetBoxMonData(boxMon, MON_DATA_MONTH_MET, &value);
+    value = ConvertBcdToBinary(rtc.year);
+    SetBoxMonData(boxMon, MON_DATA_YEAR_MET, &value);
 
     GiveBoxMonInitialMoveset(boxMon);
 }
@@ -4355,6 +4365,15 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_MARKINGS:
         retVal = boxMon->markings;
         break;
+    case MON_DATA_YEAR_MET:
+        retVal = boxMon->yearMet;
+        break;
+    case MON_DATA_DAY_MET:
+        retVal = boxMon->dayMet;
+        break;
+    case MON_DATA_MONTH_MET:
+        retVal = boxMon->monthMet;
+        break;
     case MON_DATA_SPECIES:
         retVal = boxMon->species;
         break;
@@ -4490,15 +4509,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_EFFORT_RIBBON:
         retVal = boxMon->effortRibbon;
         break;
-    case MON_DATA_MARINE_RIBBON:
-        retVal = boxMon->marineRibbon;
-        break;
-    case MON_DATA_LAND_RIBBON:
-        retVal = boxMon->landRibbon;
-        break;
-    case MON_DATA_SKY_RIBBON:
-        retVal = boxMon->skyRibbon;
-        break;
     case MON_DATA_COUNTRY_RIBBON:
         retVal = boxMon->countryRibbon;
         break;
@@ -4554,9 +4564,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal += boxMon->victoryRibbon;
             retVal += boxMon->artistRibbon;
             retVal += boxMon->effortRibbon;
-            retVal += boxMon->marineRibbon;
-            retVal += boxMon->landRibbon;
-            retVal += boxMon->skyRibbon;
             retVal += boxMon->countryRibbon;
             retVal += boxMon->nationalRibbon;
             retVal += boxMon->earthRibbon;
@@ -4577,9 +4584,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (boxMon->victoryRibbon << 17)
                 | (boxMon->artistRibbon << 18)
                 | (boxMon->effortRibbon << 19)
-                | (boxMon->marineRibbon << 20)
-                | (boxMon->landRibbon << 21)
-                | (boxMon->skyRibbon << 22)
                 | (boxMon->countryRibbon << 23)
                 | (boxMon->nationalRibbon << 24)
                 | (boxMon->earthRibbon << 25)
@@ -4680,6 +4684,15 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     }
     case MON_DATA_MARKINGS:
         SET8(boxMon->markings);
+        break;
+    case MON_DATA_YEAR_MET:
+        SET32(boxMon->yearMet);
+        break;
+    case MON_DATA_MONTH_MET:
+        SET32(boxMon->monthMet);
+        break;
+    case MON_DATA_DAY_MET:
+        SET32(boxMon->dayMet);
         break;
     case MON_DATA_SPECIES:
     {
@@ -4823,15 +4836,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_EFFORT_RIBBON:
         SET8(boxMon->effortRibbon);
-        break;
-    case MON_DATA_MARINE_RIBBON:
-        SET8(boxMon->marineRibbon);
-        break;
-    case MON_DATA_LAND_RIBBON:
-        SET8(boxMon->landRibbon);
-        break;
-    case MON_DATA_SKY_RIBBON:
-        SET8(boxMon->skyRibbon);
         break;
     case MON_DATA_COUNTRY_RIBBON:
         SET8(boxMon->countryRibbon);

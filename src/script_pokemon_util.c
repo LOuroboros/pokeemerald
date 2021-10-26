@@ -88,7 +88,10 @@ u8 ScriptGiveEgg(u16 species)
     struct Pokemon mon;
     u8 isEgg;
 
-    CreateEgg(&mon, species, TRUE);
+    if (GetCurrentRegionMapSectionId() == MAPSEC_LAVARIDGE_TOWN)
+        CreateEgg(&mon, species, TRUE);
+    else
+        CreateEgg(&mon, species, FALSE);
     isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 

@@ -2275,9 +2275,6 @@ u8 GetRibbonCount(struct Pokemon *pokemon)
     nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_MARINE_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_LAND_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_SKY_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_COUNTRY_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_NATIONAL_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_EARTH_RIBBON);
@@ -2297,9 +2294,6 @@ static u8 MonDataIdxToRibbon(u8 monDataIdx)
     if (monDataIdx == MON_DATA_VICTORY_RIBBON)  return VICTORY_RIBBON;
     if (monDataIdx == MON_DATA_ARTIST_RIBBON)   return ARTIST_RIBBON;
     if (monDataIdx == MON_DATA_EFFORT_RIBBON)   return EFFORT_RIBBON;
-    if (monDataIdx == MON_DATA_MARINE_RIBBON)   return MARINE_RIBBON;
-    if (monDataIdx == MON_DATA_LAND_RIBBON)     return LAND_RIBBON;
-    if (monDataIdx == MON_DATA_SKY_RIBBON)      return SKY_RIBBON;
     if (monDataIdx == MON_DATA_COUNTRY_RIBBON)  return COUNTRY_RIBBON;
     if (monDataIdx == MON_DATA_NATIONAL_RIBBON) return NATIONAL_RIBBON;
     if (monDataIdx == MON_DATA_EARTH_RIBBON)    return EARTH_RIBBON;

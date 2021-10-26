@@ -2162,7 +2162,7 @@ static void RenderPlayerParty(void)
     LoadMonIconPalettes();
     for (i = 0; i < gPlayerPartyCount; i++)
     {
-        species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES);
+        species = GetMonData(gPlayerParty + i, MON_DATA_SPECIES2);
 
         id = CreateMonIconNoPersonality(species, SpriteCallbackDummy, 32 * i + 40, 64, 0);
         iconsIDs[i] = id;
