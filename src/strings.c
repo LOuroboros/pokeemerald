@@ -1806,3 +1806,8 @@ const u8 gText_Month_September[] = _("Sep.");
 const u8 gText_Month_October[] = _("Oct.");
 const u8 gText_Month_November[] = _("Nov.");
 const u8 gText_Month_December[] = _("Dec.");
+
+// New Options for the Options Menu
+const u8 gText_BattleTypeEffectiveness[] = _("BATTLE TYPE EFF.");
+const u8 gText_OptionMenuHide[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}HIDE");
+const u8 gText_OptionMenuShow[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SHOW");

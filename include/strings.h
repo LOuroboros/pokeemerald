@@ -2974,7 +2974,7 @@ extern const u8 gText_Cancel3[];
 
 // Custom text strings start here
 
-// Gen. 6 Exp Share
+// Gen. 6 Exp. Share
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
@@ -3080,5 +3080,10 @@ extern const u8 gText_Month_September[];
 extern const u8 gText_Month_October[];
 extern const u8 gText_Month_November[];
 extern const u8 gText_Month_December[];
+
+// New Options for the Options Menu
+extern const u8 gText_BattleTypeEffectiveness[];
+extern const u8 gText_OptionMenuHide[];
+extern const u8 gText_OptionMenuShow[];
 
 #endif // GUARD_STRINGS_H
