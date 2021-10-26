@@ -2881,11 +2881,6 @@ MatchCall_Text_RegisteredBirch:
 	.string "Registered PROF. BIRCH\n"
 	.string "in the POKéNAV.$"
 
-MatchCall_Text_UnusedProfBirch:
-	.string "PROF. BIRCH: When one has both\n"
-	.string "the POKéDEX and POKéNAV, studying\l"
-	.string "POKéMON becomes more fun, eh?$"
-
 MatchCall_Text_MrStone1::
 	.string "MR. STONE: Oh? {PLAYER}!\p"
 	.string "Since you called me, the POKéNAV\n"

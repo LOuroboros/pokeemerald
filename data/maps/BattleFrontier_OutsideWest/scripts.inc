@@ -97,16 +97,6 @@ BattleFrontier_OutsideWest_EventScript_BattlePikeSign::
 	msgbox BattleFrontier_OutsideWest_Text_BattlePikeSign, MSGBOX_SIGN
 	end
 
-@ Unused. Of note, Battle Tower is in the East section in the final release
-BattleFrontier_OutsideWest_EventScript_UnusedNPC1::
-	msgbox BattleFrontier_OutsideWest_Text_ThisIsBattleTower, MSGBOX_NPC
-	end
-
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC2::
-	msgbox BattleFrontier_OutsideWest_Text_CantFindBattleTower, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Boy1::
 	msgbox BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends, MSGBOX_NPC
 	end
@@ -256,11 +246,6 @@ BattleFrontier_OutsideWest_EventScript_Fisherman1::
 	msgbox BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling, MSGBOX_NPC
 	end
 
-@ Unused
-BattleFrontier_OutsideWest_EventScript_UnusedNPC3::
-	msgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Gentleman::
 	msgbox BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome, MSGBOX_NPC
 	end
@@ -331,11 +316,6 @@ BattleFrontier_OutsideWest_Text_BattlePikeSign:
 	.string "This is the BATTLE PIKE!\n"
 	.string "Choose one of three paths!$"
 
-BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
-	.string "This is the BATTLE TOWER.\p"
-	.string "TRAINERS bring their best-raised\n"
-	.string "POKéMON for elimination-style matches.$"
-
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your TICKET?$"
@@ -371,12 +351,6 @@ BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends:
 	.string "I'm the best out of all my friends.\n"
 	.string "But here…\l"
 	.string "I've been useless!$"
-
-BattleFrontier_OutsideWest_Text_CantFindBattleTower:
-	.string "I want to go to the BATTLE TOWER,\n"
-	.string "but I can't find it even though I have\l"
-	.string "a map of the BATTLE FRONTIER.\p"
-	.string "This place is just too big!$"
 
 BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere:
 	.string "I wanted to take a challenge as soon\n"
@@ -450,11 +424,6 @@ BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome:
 	.string "I'll wish you the best of luck.\n"
 	.string "Let us both win our way up and meet\l"
 	.string "in challenges.$"
-
-BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
-	.string "Grandpa, over here!\n"
-	.string "The BATTLE DOME is here!\l"
-	.string "Go get 'em, Grandpa!$"
 
 BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe:
 	.string "Ah, so this here is the BATTLE DOME?\n"

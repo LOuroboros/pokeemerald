@@ -462,11 +462,6 @@ BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceDown:
 	walk_in_place_fastest_down
 	step_end
 
-@ Unused, redundant
-BattleFrontier_BattleArenaBattleRoom_Movement_WalkInPlaceRight2:
-	walk_in_place_fastest_right
-	step_end
-
 BattleFrontier_BattleArenaBattleRoom_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattleArenaBattleRoom_EventScript_SetUpRoomObjects
 	.2byte 0

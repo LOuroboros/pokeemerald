@@ -117,14 +117,6 @@ SlateportCity_Harbor_Movement_AquaBoardSub:
 	set_invisible
 	step_end
 
-@ Unused, Archie instead shares above identical movement script with Grunt
-SlateportCity_Harbor_Movement_ArchieBoardSub:
-	delay_16
-	delay_16
-	jump_up
-	set_invisible
-	step_end
-
 SlateportCity_Harbor_Movement_SubmarineExit:
 	delay_16
 	delay_16
@@ -197,12 +189,6 @@ SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier::
 	case 1, SlateportCity_Harbor_EventScript_BattleFrontier
 	case 2, SlateportCity_Harbor_EventScript_CancelDestinationSelect
 	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect
-	end
-
-@ Unused. Should be impossible for player to reach Ferry without having received SS Tidal ticket
-SlateportCity_Harbor_EventScript_NoTicket::
-	msgbox SlateportCity_Harbor_Text_YouMustHaveTicket, MSGBOX_DEFAULT
-	release
 	end
 
 SlateportCity_Harbor_EventScript_Lilycove::

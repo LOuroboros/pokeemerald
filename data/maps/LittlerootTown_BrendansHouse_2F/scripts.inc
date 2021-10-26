@@ -260,13 +260,6 @@ LittlerootTown_BrendansHouse_2F_Movement_BrendanWalkToPCEast:
 	walk_in_place_fastest_up
 	step_end
 
-@ Unused, the player is already facing this direction so its unneeded
-LittlerootTown_BrendansHouse_2F_Movement_PlayerWatchBrendanEast:
-	delay_16
-	delay_16
-	walk_in_place_fastest_left
-	step_end
-
 LittlerootTown_BrendansHouse_2F_EventScript_PC::
 	lockall
 	checkplayergender

@@ -33,15 +33,6 @@ MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50::
 	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
 	end
 
-@ Unused
-MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault500::
-	multichoicedefault 15, 0, MULTI_GAME_CORNER_COINS, 1, FALSE
-	switch VAR_RESULT
-	case 0, MauvilleCity_GameCorner_EventScript_Buy50Coins
-	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
-	goto MauvilleCity_GameCorner_EventScript_CancelBuyCoins
-	end
-
 MauvilleCity_GameCorner_EventScript_Buy50Coins::
 	checkcoins VAR_TEMP_1
 	compare VAR_TEMP_1, (MAX_COINS + 1 - 50)
@@ -718,11 +709,6 @@ MauvilleCity_GameCorner_Text_SendToYourHomePC:
 MauvilleCity_GameCorner_Text_NotEnoughCoins:
 	.string "You don't have enough COINS.$"
 
-@ Unused
-MauvilleCity_GameCorner_Text_NoRoomForPlacingDecor:
-	.string "There isn't any room available for\n"
-	.string "placing {STR_VAR_1}.$"
-
 MauvilleCity_GameCorner_Text_OhIsThatSo:
 	.string "Oh, is that so? \n"
 	.string "You need to save some COINS before\l"
@@ -733,10 +719,6 @@ MauvilleCity_GameCorner_Text_SoYourChoiceIsX:
 
 MauvilleCity_GameCorner_Text_HereYouGo:
 	.string "Here you go!$"
-
-@ Unused
-MauvilleCity_GameCorner_Text_CantCarryAnyMore:
-	.string "Oh, you can't carry any more than that.$"
 
 MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne:
 	.string "I made a mistake and got two of\n"

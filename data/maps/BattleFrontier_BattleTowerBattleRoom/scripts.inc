@@ -457,11 +457,6 @@ BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth:
 	.string "We will restore your POKéMON to\n"
 	.string "full health.$"
 
-@ Unused
-BattleFrontier_BattleTowerBattleRoom_Text_ReadyForOpponent:
-	.string "You will be facing opponent no. {STR_VAR_1}.\n"
-	.string "Are you ready?$"
-
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor2ndOpponent:
 	.string "You will be facing opponent no. 2.\n"
 	.string "Are you ready?$"

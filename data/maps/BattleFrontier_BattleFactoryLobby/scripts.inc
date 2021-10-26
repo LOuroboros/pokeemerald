@@ -373,11 +373,6 @@ BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge:
 	.string "Before you begin your challenge,\n"
 	.string "I need to save the game. Is that okay?$"
 
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping:
-	.string "Okay, I will hold your POKéMON for\n"
-	.string "safekeeping while you compete.$"
-
 BattleFrontier_BattleFactoryLobby_Text_StepThisWay:
 	.string "Please step this way.$"
 
@@ -388,26 +383,9 @@ BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults:
 	.string "I must also save the event results.\n"
 	.string "Please wait.$"
 
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_ReturnMons:
-	.string "I will return your POKéMON in exchange\n"
-	.string "for our rental POKéMON.$"
-
 BattleFrontier_BattleFactoryLobby_Text_CongratsSevenWins:
 	.string "Congratulations! You've won seven\n"
 	.string "straight Battle Swap matches!$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_AwardBattlePointsForStreak:
-	.string "In recognition of your 7-win streak,\n"
-	.string "we award you these Battle Point(s).$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_MaxBattlePoints:
-	.string "Oh, oh, oh!\p"
-	.string "Your Battle Points are maxed.\p"
-	.string "Please come back after using\n"
-	.string "some Battle Points.$"
 
 BattleFrontier_BattleFactoryLobby_Text_WaitingForYouToResume:
 	.string "We've been waiting for you!\p"
@@ -419,15 +397,6 @@ BattleFrontier_BattleFactoryLobby_Text_DidntSaveBeforeQuitting:
 	.string "save before you quit playing last time.\p"
 	.string "As a result, you have been disqualified\n"
 	.string "from your challenge.$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_WellReturnMons:
-	.string "We'll return your personal POKéMON.$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_ReceivedPrizeItem:
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
 
 BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle:
 	.string "Where the intelligence of TRAINERS\n"
@@ -508,15 +477,6 @@ BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints:
 	.string "a few hints about your next opponent?\p"
 	.string "Well, I'm a full-grown man, but I have\n"
 	.string "trouble figuring out their hints.$"
-
-@ Unused
-BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried:
-	.string "Like, I'm really tough, but I get bored\n"
-	.string "really easily, so I just kept swapping\l"
-	.string "and battling over and over.\p"
-	.string "So anyway, when I kept entering\n"
-	.string "Battle Swap events, I noticed they\l"
-	.string "varied the rental POKéMON.$"
 
 BattleFrontier_BattleFactoryLobby_Text_RulesAreListed:
 	.string "The Battle Swap rules are listed.$"

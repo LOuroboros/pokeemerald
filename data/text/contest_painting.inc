@@ -2,10 +2,6 @@ gContestHallPaintingCaption::
 	.string "{STR_VAR_1}\n"
 	.string "{STR_VAR_2}'s {STR_VAR_3}$"
 
-@ Unused
-gContestPaintingContest::
-	.string "CONTEST$"
-
 gContestRankNormal::
 	.string "NORMAL RANK$"
 

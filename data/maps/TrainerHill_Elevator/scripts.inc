@@ -41,17 +41,6 @@ TrainerHill_Elevator_EventScript_EnterElevator::
 	waitstate
 	end
 
-@ Unused
-TrainerHill_Elevator_EventScript_ExitFloorSelect::
-	goto TrainerHill_Elevator_EventScript_CloseFloorSelect
-	end
-
-@ Functionally unused
-TrainerHill_Elevator_EventScript_CloseFloorSelect::
-	special CloseDeptStoreElevatorWindow
-	releaseall
-	end
-
 TrainerHill_Elevator_EventScript_MoveElevator::
 	waitse
 	special MoveElevator

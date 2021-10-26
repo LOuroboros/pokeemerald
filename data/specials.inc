@@ -145,7 +145,6 @@ gSpecials::
 	def_special SaveMuseumContestPainting
 	def_special DoesContestCategoryHaveMuseumPainting
 	def_special CountPlayerMuseumPaintings
-	def_special ShowContestPainting  @ Unused, redundant with showcontestpainting command
 	def_special MauvilleGymSetDefaultBarriers
 	def_special MauvilleGymPressSwitch
 	def_special ShowFieldMessageStringVar4
@@ -479,7 +478,6 @@ gSpecials::
 	def_special GetAbnormalWeatherMapNameAndType
 	def_special GetMartEmployeeObjectEventId
 	def_special SaveForBattleTowerLink
-	def_special Unused_SetWeatherSunny
 	def_special SetUnlockedPokedexFlags
 	def_special IsTrainerRegistered
 	def_special ShouldDoBrailleRegicePuzzle

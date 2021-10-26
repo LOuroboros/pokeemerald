@@ -673,47 +673,6 @@ SootopolisCity_Movement_PlayerApproachLegendaries:
 	walk_up
 	step_end
 
-@ Unused
-SootopolisCity_Movement_PlayerApproachLegendariesDown:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	step_end
-
-@ Unused
-SootopolisCity_Movement_UnusedPanUp:
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_slow_diag_northeast
-	walk_right
-	walk_right
-	walk_right
-	walk_right
-	step_end
-
-@ Unused
-SootopolisCity_Movement_UnusedPanBack:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_slow_diag_southwest
-	walk_slow_diag_southwest
-	step_end
-
 SootopolisCity_EventScript_CaveOfOriginExpert::
 	lock
 	faceplayer
@@ -1461,16 +1420,6 @@ SootopolisCity_EventScript_MaxieArchieLeave::
 	waitstate
 	releaseall
 	end
-
-@ Unused
-SootopolisCity_Movement_Levitate::
-	levitate
-	step_end
-
-@ Unused
-SootopolisCity_Movement_DestroyTask::
-	destroy_extra_task
-	step_end
 
 SootopolisCity_Text_GymSign:
 	.string "SOOTOPOLIS CITY POKéMON GYM\n"

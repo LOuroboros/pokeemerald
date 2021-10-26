@@ -357,13 +357,6 @@ PetalburgCity_EventScript_LeadPlayerToGym3::
 	waitmovement 0
 	return
 
-@ Unused
-PetalburgCity_Movement_Delay48::
-	delay_16
-	delay_16
-	delay_16
-	step_end
-
 PetalburgCity_Movement_BoyApproachPlayer0:
 	walk_right
 	walk_right

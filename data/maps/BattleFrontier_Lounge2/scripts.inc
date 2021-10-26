@@ -136,12 +136,6 @@ BattleFrontier_Lounge2_Text_SwingByForTheLatestWord::
 	.string "Howdy! Did you swing by to grill me\n"
 	.string "about the latest word? Oh, all right!$"
 
-@ Unused
-BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
-	.string "Well? Well? Well?\p"
-	.string "I'm sure my information's been\n"
-	.string "seriously useful to you, right?$"
-
 BattleFrontier_Lounge2_Text_FacilityIsHottest::
 	.string "Let's see now…\p"
 	.string "It sounds like the {STR_VAR_1}\n"

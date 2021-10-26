@@ -125,9 +125,6 @@ Route101_Movement_ZigzagoonChase1:
 	walk_fast_up
 	step_end
 
-@ Leftover data? This command is unused.
-	step_end
-
 Route101_Movement_ZigzagoonFaceBirch:
 	walk_in_place_fast_left
 	walk_in_place_fast_left
@@ -185,25 +182,11 @@ Route101_Movement_BirchRunAway1:
 	walk_fast_up
 	step_end
 
-@ Leftover data? This command is unused.
-	step_end
-
 Route101_Movement_BirchFaceZigzagoon:
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_in_place_fast_right
 	walk_in_place_fast_right
-	step_end
-
-Route101_Movement_Unused1:
-	walk_up
-	walk_up
-	step_end
-
-Route101_Movement_Unused2:
-	walk_up
-	walk_left
-	walk_up
 	step_end
 
 Route101_EventScript_Youngster::

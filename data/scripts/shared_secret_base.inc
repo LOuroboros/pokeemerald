@@ -156,26 +156,6 @@ SecretBase_EventScript_PCTurnOff::
     releaseall
     end
 
-@ Unused
-SecretBase_EventScript_Poster::
-    special CheckInteractedWithFriendsPosterDecor
-    end
-
-@ Unused
-SecretBase_EventScript_FurnitureBottom::
-    special CheckInteractedWithFriendsFurnitureBottom
-    end
-
-@ Unused
-SecretBase_EventScript_FurnitureMiddle::
-    special CheckInteractedWithFriendsFurnitureMiddle
-    end
-
-@ Unused
-SecretBase_EventScript_FurnitureTop::
-    special CheckInteractedWithFriendsFurnitureTop
-    end
-
 SecretBase_EventScript_SandOrnament::
     special CheckInteractedWithFriendsSandOrnament
     dofieldeffect FLDEFF_SAND_PILLAR

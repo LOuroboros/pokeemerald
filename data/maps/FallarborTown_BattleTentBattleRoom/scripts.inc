@@ -187,11 +187,6 @@ FallarborTown_BattleTentBattleRoom_Movement_OpponentEnter:
 	walk_in_place_fastest_left
 	step_end
 
-@ Unused
-FallarborTown_BattleTentBattleRoom_Movement_OpponentStepForward:
-	walk_left
-	step_end
-
 FallarborTown_BattleTentBattleRoom_Movement_OpponentExit:
 	walk_up
 	walk_up

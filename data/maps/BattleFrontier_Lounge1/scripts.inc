@@ -246,12 +246,6 @@ BattleFrontier_Lounge1_Text_NoTimeForMyAdvice:
 	.string "You should always be eager to learn\n"
 	.string "from the experiences of your elders!$"
 
-@ Unused
-BattleFrontier_Lounge1_Text_HaveBusinessNeedsTending:
-	.string "Yes, what is it now?\p"
-	.string "I have business that needs tending!\n"
-	.string "Save it for next time!$"
-
 BattleFrontier_Lounge1_Text_LetsLookAtYourPokemon:
 	.string "Ah, youngster! Do your POKéMON's\n"
 	.string "abilities intrigue you?\p"

@@ -190,25 +190,6 @@ RusturfTunnel_Movement_PlayerWatchWandaExit:
 	walk_in_place_fastest_right
 	step_end
 
-RusturfTunnel_Movement_Unused1:
-	walk_left
-	walk_in_place_fastest_right
-	step_end
-
-RusturfTunnel_Movement_Unused2:
-	walk_down
-	walk_in_place_fastest_up
-	delay_8
-	walk_in_place_fastest_right
-	step_end
-
-RusturfTunnel_Movement_Unused3:
-	walk_up
-	walk_in_place_fastest_down
-	delay_8
-	walk_in_place_fastest_right
-	step_end
-
 RusturfTunnel_Movement_PlayerWatchBoyfriend1:
 	walk_left
 	walk_in_place_fastest_right

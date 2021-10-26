@@ -387,25 +387,6 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_FaceDown:
 	face_down
 	step_end
 
-BattleFrontier_BattlePalaceBattleRoom_Movement_UnusedOpponentEnter1:
-	set_visible
-	walk_slow_down
-	walk_slow_down
-	face_left
-	step_end
-
-BattleFrontier_BattlePalaceBattleRoom_Movement_UnusedOpponentEnter2:
-	set_visible
-	walk_slow_down
-	step_end
-
-BattleFrontier_BattlePalaceBattleRoom_Movement_UnusedOpponentEnter3:
-	walk_slow_down
-	walk_slow_down
-	walk_slow_down
-	face_left
-	step_end
-
 BattleFrontier_BattlePalaceBattleRoom_EventScript_WarpToLobby::
 	copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
 	compare VAR_RESULT, FRONTIER_MODE_DOUBLES

@@ -342,16 +342,3 @@ BattleFrontier_BattleTowerLobby_EventScript_ShowOrHideReporter::
 BattleFrontier_BattleTowerLobby_EventScript_HideReporter::
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
 	return
-
-@ Unused
-EventScript_ContestLiveInterview::
-	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
-	special InterviewBefore
-	compare VAR_RESULT, TRUE
-	goto_if_eq EventScript_ContestLiveInterviewEnd
-	setvar VAR_0x8005, TVSHOW_CONTEST_LIVE_UPDATES
-	special InterviewAfter
-	return
-
-EventScript_ContestLiveInterviewEnd::
-	return

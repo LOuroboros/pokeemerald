@@ -81,12 +81,6 @@ BattleFrontier_ReceptionGate_Movement_PlayerFaceScott:
 	walk_in_place_fastest_right
 	step_end
 
-@ Unused
-BattleFrontier_ReceptionGate_Movement_WalkDown:
-	walk_down
-	walk_down
-	step_end
-
 BattleFrontier_ReceptionGate_Movement_ScottEnter:
 	walk_down
 	walk_down

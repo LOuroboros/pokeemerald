@@ -487,11 +487,6 @@ BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded:
 	.string "Your feat will be recorded.\n"
 	.string "I must ask you to briefly wait.$"
 
-@ Unused
-BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak:
-    .string "For the feat of your 7-win streak,\n"
-    .string "we present you with Battle Point(s).$"
-
 BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize:
 	.string "You seem to have no space for\n"
 	.string "our prize.\p"
@@ -511,11 +506,6 @@ BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge:
 	.string "your challenge the last time.\p"
 	.string "As a result, your challenge has been\n"
 	.string "disqualified. It is most unfortunate.$"
-
-@ Unused
-BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize:
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
 
 BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
 	.string "For a hardy fellow like me,\n"

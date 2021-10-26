@@ -144,47 +144,6 @@ gText_AppealBestMoreCrowdExcited::
 gText_TemporarilyStopCrowdExcited::
 	.string "Temporarily stops the\ncrowd from growing excited.$"
 
-@ Unused move names
-
-gText_RainDance::
-	.string "RAIN DANCE$"
-
-gText_Rage::
-	.string "RAGE$"
-
-gText_FocusEnergy::
-	.string "FOCUS ENERGY$"
-
-gText_Hypnosis::
-	.string "HYPNOSIS$"
-
-gText_Softboiled::
-	.string "SOFTBOILED$"
-
-gText_HornAttack::
-	.string "HORN ATTACK$"
-
-gText_SwordsDance::
-	.string "SWORDS DANCE$"
-
-gText_Conversion::
-	.string "CONVERSION$"
-
-gText_SunnyDay::
-	.string "SUNNY DAY$"
-
-gText_Rest2::
-	.string "REST$"
-
-gText_Vicegrip::
-	.string "VICEGRIP$"
-
-gText_DefenseCurl::
-	.string "DEFENSE CURL$"
-
-gText_LockOn::
-	.string "LOCK-ON$"
-
 @ Contest type names
 
 gContestMoveTypeCoolText::
@@ -222,54 +181,6 @@ gText_AllOutOfAppealTime::
 	.string "We're all out of\n"
 	.string "Appeal Time!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}$"
 
-@ Unused appeal result texts
-
-gText_ButAppealWasJammed::
-	.string "But the appeal was\n"
-	.string "jammed.$"
-
-gText_FollowedAnotherMonsLead::
-	.string "It followed another\n"
-	.string "POKéMON's lead.$"
-
-gText_ButItMessedUp::
-	.string "But it messed up.$"
-
-gText_WentBetterThanUsual::
-	.string "It went better than\n"
-	.string "usual.$"
-
-gText_JudgeLookedAwayForSomeReason::
-	.string "The JUDGE looked away\n"
-	.string "for some reason.$"
-
-gText_WorkedHardToBuildOnPastMistakes::
-	.string "It worked hard to build on\n"
-	.string "past mistakes.$"
-
-gText_CantMakeAnyMoreMoves::
-	.string "It can't make any more\n"
-	.string "moves.$"
-
-gText_WorkedFrighteninglyWell::
-	.string "It worked frighteningly\n"
-	.string "well.$"
-
-gText_WorkedHardAsStandoutMon::
-	.string "It worked as hard as the\n"
-	.string "standout POKéMON.$"
-
-gText_JudgedLookedOnExpectantly::
-	.string "The JUDGE looked on\n"
-	.string "expectantly.$"
-
-gText_WorkedRatherWell::
-	.string "It worked rather well.$"
-
-gText_WorkedLittleBetterThanUsual::
-	.string "It worked a little better\n"
-	.string "than usual.$"
-
 @ Round result texts
 
 gText_MonFailedToStandOutAtAll::
@@ -296,101 +207,8 @@ gText_MonHasntMadeItsAppeal::
 	.string "{STR_VAR_1} hasn't made\n"
 	.string "its appeal.{PAUSE_UNTIL_PRESS}$"
 
-@ Unused
-gText_AnticipationSwelledForMonsAppealNext2::
-	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}'s appeal next.$"
-
 gText_EmptyContestString::
 	.string "$"
-
-gText_JudgesViewsOnMonHeldFirm::
-	.string "The JUDGE 's views on\n"
-	.string "{STR_VAR_1} held firm.$"
-
-gText_MonsXChangedPerceptions::
-	.string "{STR_VAR_1}'s {STR_VAR_3}\n"
-	.string "changed perceptions.$"
-
-gText_MonsAppealEffectWoreOff::
-	.string "{STR_VAR_1}'s appeal\n"
-	.string "effect wore off.$"
-
-gText_SpecialAppealsEffectWoreOff::
-	.string "The special appeal's\n"
-	.string "effect wore off.$"
-
-gText_EveryonesAppealsMadeToLookSame::
-	.string "Everyone's appeals were\n"
-	.string "made to look the same.$"
-
-gText_CheapenedMonsAppeal::
-	.string "It cheapened\n"
-	.string "{STR_VAR_2}'s appeal.$"
-
-gText_CheapenedAppealOfThoseAhead::
-	.string "It cheapened the appeal\n"
-	.string "of those ahead.$"
-
-gText_StoleAttentionAwayFromMon::
-	.string "It stole attention away\n"
-	.string "from {STR_VAR_2}.$"
-
-gText_CheapenedMonsAppeal2::
-	.string "It cheapened\n"
-	.string "{STR_VAR_2}'s appeal.$"
-
-gText_SeverelyCheapenedOtherAppeals::
-	.string "It severely cheapened\n"
-	.string "other appeals.$"
-
-gText_AnticipationSwelledForMonsAppealNext::
-	.string "Anticipation swelled for\n"
-	.string "{STR_VAR_1}'s appeal next.$"
-
-gText_CheapenedAppealOfThoseAhead2::
-	.string "It cheapened the appeal\n"
-	.string "of those ahead.$"
-
-gText_CheapenedJudgesFavoriteAppeal::
-	.string "It cheapened the JUDGE's\n"
-	.string "favorite appeal.$"
-
-gText_AppealsOfOthersCheapenedByHalf::
-	.string "The appeals of others\n"
-	.string "were cheapened by half.$"
-
-gText_StoodOutToMakeUpForBeingJammed::
-	.string "It stood out to make up\n"
-	.string "for being jammed.$"
-
-gText_CantParticipateInAppealsAnyMore::
-	.string "It can't participate in\n"
-	.string "appeals any more.$"
-
-gText_TouchedJudgeForFantasticAppeal::
-	.string "It touched the JUDGE for\n"
-	.string "a fantastic appeal.$"
-
-gText_AnticipationRoseForUpcomingAppeals::
-	.string "Anticipation rose for\n"
-	.string "upcoming appeals.$"
-
-gText_StoodOutAsMuchAsSpecialAppeals::
-	.string "It stood out as much as\n"
-	.string "special appeals.$"
-
-gText_StoodOutAsMuchAsMon::
-	.string "It stood out as much as\n"
-	.string "{STR_VAR_1}.$"
-
-gText_JammedAppealsMadeEvenLessNoticeable::
-	.string "Jammed appeals were made\n"
-	.string "even less noticeable.$"
-
-gText_EveryonesAppealsMadeSame::
-	.string "Everyone's appeals were\n"
-	.string "made the same.$"
 
 @ Appeal result texts
 
@@ -701,10 +519,6 @@ gText_Contest_Smartness::
 
 gText_Contest_Toughness::
 	.string "toughness$"
-
-@ Unused
-gText_Tension::
-	.string "TENSION$"
 
 gText_CoolMove::
 	.string "COOL Move$"

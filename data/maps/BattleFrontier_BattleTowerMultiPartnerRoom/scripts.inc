@@ -119,36 +119,8 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevator::
 	waitmovement 0
 	return
 
-@ Unused
-BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorEast:
-	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorEast
-	waitmovement 0
-	return
-
-@ Unused
-BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_MoveToElevatorWest:
-	applymovement LOCALID_ATTENDANT, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_AttendantEnterElevator
-	applymovement OBJ_EVENT_ID_PLAYER, BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEneterElevatorWest
-	waitmovement 0
-	return
-
 BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevator:
 	walk_up
-	walk_up
-	set_invisible
-	step_end
-
-@ Functionally unused
-BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEnterElevatorEast:
-	walk_right
-	walk_up
-	set_invisible
-	step_end
-
-@ Functionally unused
-BattleFrontier_BattleTowerMultiPartnerRoom_Movement_PlayerEneterElevatorWest:
-	walk_left
 	walk_up
 	set_invisible
 	step_end
@@ -299,46 +271,6 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner::
 	.string "Thank you for choosing a partner.\p"
 	.string "I will now show you to your\n"
 	.string "MULTI BATTLE ROOM.$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Intro::
-	.string "I'm {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
-	.string "You can call me {STR_VAR_3}!$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Mon1::
-	.string "On {STR_VAR_1}'s advice, I brought\n"
-	.string "one {STR_VAR_3} with {STR_VAR_2} and$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Mon2Ask::
-	.string "one {STR_VAR_2} with {STR_VAR_1}.\p"
-	.string "Please, let me join you as a tag team.$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Accept::
-	.string "Thank you!\n"
-	.string "I'll go register right now.$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Reject::
-	.string "I really wanted to form a tag team\n"
-	.string "with you, {PLAYER}…$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Intro::
-	.string "I am {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
-	.string "My name is {STR_VAR_3}.$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Mon1::
-	.string "I got advice from {STR_VAR_1} and chose\n"
-	.string "one {STR_VAR_3} with {STR_VAR_2} and$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Mon2Ask::
-	.string "one {STR_VAR_2} with {STR_VAR_1}.\p"
-	.string "Please, let's form a tag team!$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Accept::
-	.string "Thank you very much!\n"
-	.string "I'll be done with registration quickly!$"
-
-BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice2Reject::
-	.string "{PLAYER}, I was hoping that I could\n"
-	.string "partner up with you…$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Intro::
 	.string "Um, my name's {STR_VAR_3}, and I'm\n"

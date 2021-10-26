@@ -232,10 +232,6 @@ Route110_TrickHouseEntrance_EventScript_BeginChallenge::
 	releaseall
 	end
 
-Route110_TrickHouseEntrance_EventScript_UnusedRelease::
-	releaseall
-	end
-
 Route110_TrickHouseEntrance_EventScript_TrickMaster::
 	lockall
 	switch VAR_TRICK_HOUSE_ENTRANCE_STATE

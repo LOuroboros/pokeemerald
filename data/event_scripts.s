@@ -645,7 +645,6 @@ EventScript_SetBrineyLocation_Route109::
 
 	.include "data/scripts/pkmn_center_nurse.inc"
 	.include "data/scripts/obtain_item.inc"
-	.include "data/scripts/record_mix.inc"
 	.include "data/scripts/pc.inc"
 
 @ scripts/notices.inc? signs.inc? See comment about text/notices.inc
@@ -806,7 +805,6 @@ Ferry_EventScript_DepartIslandBoardWest:
 	walk_in_place_fastest_down
 	step_end
 
-	.include "data/scripts/cave_of_origin.inc"
 	.include "data/scripts/kecleon.inc"
 
 Common_EventScript_NameReceivedPartyMon::
@@ -827,7 +825,6 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/scripts/elite_four.inc"
 	.include "data/scripts/movement.inc"
 	.include "data/scripts/check_furniture.inc"
-	.include "data/text/record_mix.inc"
 	.include "data/text/pc.inc"
 	.include "data/text/pkmn_center_nurse.inc"
 	.include "data/text/mart_clerk.inc"

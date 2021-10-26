@@ -134,22 +134,6 @@ SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest:
 	walk_in_place_fastest_left
 	step_end
 
-SlateportCity_OceanicMuseum_2F_Movement_Unused:
-	walk_up
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	walk_left
-	walk_left
-	walk_up
-	walk_up
-	delay_8
-	step_end
-
 SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer:
 	walk_right
 	step_end

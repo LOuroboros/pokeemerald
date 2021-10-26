@@ -1218,19 +1218,9 @@ LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable:
 	.string "you decide.\p"
 	.string "They're all invaluable POKéMON.$"
 
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_PickedFinePokemon:
-	.string "PROF. BIRCH: I see!\n"
-	.string "You picked a fine POKéMON!$"
-
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter:
 	.string "{PLAYER} received the {STR_VAR_1}\n"
 	.string "from PROF. BIRCH!$"
-
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_NicknameJohtoStarter:
-	.string "Want to give a nickname to\n"
-	.string "the {STR_VAR_1} you received?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting:
 	.string "PROF. BIRCH: Listen, {PLAYER}.\n"
@@ -1244,11 +1234,6 @@ LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting:
 LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone:
 	.string "You received the promised POKéMON.\n"
 	.string "Better leave the others alone.$"
-
-@ Unused
-LittlerootTown_ProfessorBirchsLab_Text_DontHaveAnyRoomForPokemon:
-	.string "Oh, you don't have any room for\n"
-	.string "this POKéMON.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere:
 	.string "{RIVAL}: {PLAYER}, after this…\n"

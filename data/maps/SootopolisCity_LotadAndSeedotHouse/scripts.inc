@@ -133,10 +133,6 @@ SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad:
 	.string "Thanks for showing me.\n"
 	.string "This is my thanks!$"
 
-@ Unused
-SootopolisCity_LotadAndSeedotHouse_Text_ReceivedPotion1:
-	.string "{PLAYER} received a POTION.$"
-
 SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1:
 	.string "Hunh?\n"
 	.string "Your BAG is crammed full.$"
@@ -180,10 +176,6 @@ SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot:
 	.string "SEEDOT my big brother saw.\p"
 	.string "Thanks for showing me!\n"
 	.string "This is my thanks!$"
-
-@ Unused
-SootopolisCity_LotadAndSeedotHouse_Text_ReceivedPotion2:
-	.string "{PLAYER} received a POTION.$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2:
 	.string "Hunh?\n"
