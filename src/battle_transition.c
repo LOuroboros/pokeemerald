@@ -253,7 +253,6 @@ static bool8 TrainerPicCb_Nothing(struct Sprite *sprite);
 static bool8 TrainerPicCb_SetSlideOffsets(struct Sprite *sprite);
 static bool8 TrainerPicCb_Slide1(struct Sprite *sprite);
 static bool8 TrainerPicCb_Slide2(struct Sprite *sprite);
-static bool8 TrainerPicCb_Slide3(struct Sprite *sprite);
 
 // iwram bss vars
 static u8 sTestingTransitionId;
@@ -530,7 +529,6 @@ static const TransitionSpriteCallback sTrainerPicSpriteCbs[] =
     TrainerPicCb_Slide1,
     TrainerPicCb_Slide2,
     TrainerPicCb_Nothing,
-    TrainerPicCb_Slide3,
     TrainerPicCb_Nothing
 };
 
@@ -2253,6 +2251,7 @@ static bool8 Phase2_Mugshot_Func9(struct Task *task)
 static bool8 Phase2_Mugshot_Func10(struct Task *task)
 {
     DmaStop(0);
+    SetVBlankCallback(VBlankCB_Battle); // Needed to display Brawly's battle transition correctly
     FadeScreenBlack();
     DestroyTask(FindTaskIdByFunc(task->func));
     return FALSE;
@@ -2378,16 +2377,6 @@ static bool8 TrainerPicCb_Slide2(struct Sprite *sprite)
         sprite->sOffsetX2 = -sprite->sOffsetX2;
         sprite->sDone = TRUE;
     }
-    return FALSE;
-}
-
-// Has no practical effect
-static bool8 TrainerPicCb_Slide3(struct Sprite *sprite)
-{
-    sprite->sOffsetX += sprite->sOffsetX2;
-    sprite->x += sprite->sOffsetX;
-    if (sprite->x < -31 || sprite->x > 271)
-        sprite->sState++;
     return FALSE;
 }
 

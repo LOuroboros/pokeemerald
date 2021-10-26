@@ -144,11 +144,13 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Brawly::
+	goto_if_set FLAG_BADGE02_GET, DewfordTown_Gym_EventScript_Brawly2
 	msgbox DewfordTown_Gym_Text_PreIntro, MSGBOX_DEFAULT
 	closemessage
 	setflag FLAG_HAS_INTERACTED_WITH_BRAWLY
 	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
+DewfordTown_Gym_EventScript_Brawly2:
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	compare VAR_RESULT, TRUE
 	goto_if_eq DewfordTown_Gym_EventScript_BrawlyRematch
@@ -158,7 +160,6 @@ DewfordTown_Gym_EventScript_Brawly::
 	end
 
 DewfordTown_Gym_EventScript_BrawlyDefeated::
-	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
 	message DewfordTown_Gym_Text_ReceivedKnuckleBadge
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
