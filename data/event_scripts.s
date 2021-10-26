@@ -1033,7 +1033,19 @@ EventScript_DoWonderTrade_Text_WannaPerformAnotherWonderTrade:
 	.string "Do you want to perform\nanother WONDER TRADE?$"
 
 Common_EventScript_CableClubAttendant::
-	call CableClub_EventScript_CableClubAttendant
+	lock
+	faceplayer
+	goto_if_var_lt VAR_CABLE_CLUB_TUTORIAL_STATE, 2, CableClub_EventScript_CableClubAdjustements
+	msgbox CableClub_Text_AskAboutLinking, MSGBOX_YESNO
+	compare VAR_RESULT, NO
+	goto_if_eq CableClub_EventScript_DontAskAboutLinking
+	msgbox CableClub_Text_ExplainCableClubFirstTime, MSGBOX_DEFAULT
+	release
+	end
+
+CableClub_EventScript_DontAskAboutLinking::
+	msgbox CableClub_Text_HopeYouEnjoyCableClub, MSGBOX_DEFAULT
+	release
 	end
 
 Common_EventScript_DirectCornerAttendant::

@@ -277,8 +277,10 @@ CableClub_Text_FirstTimeRightThisWay:
 	.string "Right this way, please.$"
 
 CableClub_Text_ExplainCableClubFirstTime:
-	.string "On the top floor, there are two\n"
-	.string "rooms.\p"
+	.string "Let me explain how the POKéMON\n"
+	.string "CABLE CLUB works.\p"
+	.string "On this, the top floor, there are\n"
+	.string "two rooms.\p"
 	.string "First, the desk on the left.\n"
 	.string "That's the WONDER CORNER.\p"
 	.string "You may link up with TRAINERS\n"
@@ -299,3 +301,6 @@ CableClub_Text_AskAboutLinking:
 	.string "CENTER 2F attendant.\p"
 	.string "Is there something you needed to\n"
 	.string "ask me about linking?$"
+
+CableClub_Text_HopeYouEnjoyCableClub:
+	.string "I hope you enjoy the CABLE CLUB.$"
