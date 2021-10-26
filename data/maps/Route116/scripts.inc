@@ -54,7 +54,6 @@ Route116_EventScript_BoyfriendGruntInTunnel::
 Route116_EventScript_DevonEmployee::
 	lock
 	faceplayer
-	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, Route116_EventScript_TryGiveRepeatBallAgain
 	msgbox Route116_Text_ThankYouTokenOfAppreciation, MSGBOX_DEFAULT
 	addvar VAR_DEVON_RESEARCHER_GIFT_COUNT, 1
 	call_if_mon_caught SPECIES_SHROOMISH, Route116_EventScript_HappyDevonEmployee
@@ -69,9 +68,6 @@ Route116_EventScript_HappyDevonEmployee:
 
 Route116_EventScript_GiveRepeatBall::
 	receiveitem ITEM_REPEAT_BALL, VAR_DEVON_RESEARCHER_GIFT_COUNT
-	giveitem ITEM_REPEAT_BALL
-	compare VAR_RESULT, FALSE
-	goto_if_eq Route116_EventScript_NoRoomForRepeatBall
 	msgbox Route116_Text_NewBallAvailableAtMart, MSGBOX_DEFAULT
 	closemessage
 	compare VAR_FACING, DIR_NORTH
@@ -98,11 +94,6 @@ Route116_EventScript_DevonEmployeeExitEast::
 	applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExitEast
 	waitmovement 0
 	return
-
-Route116_EventScript_TryGiveRepeatBallAgain::
-	msgbox Route116_Text_TokenOfAppreciation, MSGBOX_DEFAULT
-	goto Route116_EventScript_GiveRepeatBall
-	end
 
 Route116_EventScript_NoRoomForRepeatBall::
 	msgbox Route116_Text_BagIsJamPacked, MSGBOX_DEFAULT
