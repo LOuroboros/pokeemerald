@@ -495,6 +495,8 @@
 #define BG_HYPER_BEAM                           75
 #define BG_DYNAMAX_CANNON                       76
 #define BG_AURA_SPHERE                          77
+#define BG_STEEL_BEAM_OPPONENT                  78
+#define BG_STEEL_BEAM_PLAYER                    79
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0

@@ -13942,16 +13942,25 @@ Move_ETERNA_BEAM::
 Move_STEEL_BEAM::
 	loadspritegfx ANIM_TAG_ELECTRIC_ORBS
 	loadspritegfx ANIM_TAG_GUST
-	loadspritegfx ANIM_TAG_SPIKES
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x0 0x0 0x10 0x6B59   @To gray
-	launchtask AnimTask_ElectricChargingParticles 0x2 0x4 0x0 0x14 0x0 0x2
+	loadspritegfx ANIM_TAG_GRAY_ORB
+	loadspritegfx ANIM_TAG_ORBS
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_ORBS, 0, 16, 16, RGB2GBA(224, 160, 192)
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_GRAY_ORB, 0, 16, 16, RGB2GBA(192, 200, 248)
+	createvisualtask AnimTask_ElectricChargingParticles, 2, 0, 20, 0, 2
 	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
-	delay 0x14
-	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 0x9, 15
-	launchtask AnimTask_ShakeMon 0x2 0x5 ANIM_ATTACKER 0x0 0x4 72 0x1
+	waitforvisualfinish
+	waitsound
+	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 28, 2
+	createvisualtask AnimTask_MetallicShine, 5, 0, 0, 0
+	waitforvisualfinish
+	waitsound
+	delay 20
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_ATTACKER, 0, 4, 72, 1
+	call SetSteelBeamBg
+	loopsewithpan SE_M_HYPER_BEAM2, SOUND_PAN_ATTACKER, 9, 12
 	call SteelBeamShards
 	call SteelBeamShards
-	launchtemplate gSlideMonToOffsetSpriteTemplate 0x2 0x5 ANIM_TARGET, -30, 0x0 TRUE 145
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, -30, 0, TRUE, 145
 	call SteelBeamShards
 	call SteelBeamShards
 	call SteelBeamShards
@@ -13969,18 +13978,38 @@ Move_STEEL_BEAM::
 	call SteelBeamShards
 	call SteelBeamShards
 	waitforvisualfinish
-	launchtemplate gSlideMonToOriginalPosSpriteTemplate 0x2 0x3 ANIM_TARGET 0x0 0x6
-	launchtask AnimTask_BlendBattleAnimPal 0xa 0x5 ANIM_PAL_BG 0x1 0xE 0x0 0x6B59    @From gray
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0, 6
+	call UnsetSteelBeamBg
 	waitforvisualfinish
 	end
 SteelBeamShards:
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0x0 0x0
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xa 0x5
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xfff6 0xfffb
-	delay 0x2
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0x14 0xa
-	launchtemplate gSteelBeamSpikeShardTemplate 0x80, 0x5 0xf 0xf 0x14 0xffec 0xfff6
-	delay 0x2
+	createsprite gHyperBeamOrbSpriteTemplate, ANIM_TARGET, 2
+	createsprite gHyperBeamOrbSpriteTemplate2, ANIM_TARGET, 2
+	delay 1
+	createsprite gHyperBeamOrbSpriteTemplate, ANIM_TARGET, 2
+	createsprite gHyperBeamOrbSpriteTemplate2, ANIM_TARGET, 2
+	delay 1
+	return
+
+SetSteelBeamBg:
+	createvisualtask AnimTask_GetAttackerSide, 2
+	jumprettrue SetSteelBeamBgPlayer
+	fadetobg BG_STEEL_BEAM_OPPONENT
+	goto SetSteelBeamBgFade
+SetSteelBeamBgPlayer:
+	fadetobg BG_STEEL_BEAM_PLAYER
+SetSteelBeamBgFade:
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 0, 1, -1
+	waitbgfadein
+	return
+
+UnsetSteelBeamBg:
+	restorebg
+	waitbgfadeout
+	setarg 7, -1
+	waitbgfadein
+	return
 
 Move_EXPANDING_FORCE::
 	end @to do:

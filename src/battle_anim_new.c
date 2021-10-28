@@ -4085,18 +4085,6 @@ const struct SpriteTemplate gGrowingSuperpowerTemplate =    //used in breakneck 
     .callback = SpriteCB_GrowingSuperpower
 };
 
-//steel beam
-const struct SpriteTemplate gSteelBeamSpikeShardTemplate =
-{
-    .tileTag = ANIM_TAG_SPIKES,
-    .paletteTag = ANIM_TAG_SPIKES,
-    .oam = &gOamData_AffineNormal_ObjNormal_16x16,
-    .anims = gDummySpriteAnimTable,
-    .images = NULL,
-    .affineAnims = gAffineAnims_ShadowBall,
-    .callback = AnimDirtScatter
-};
-
 //// functions
 //general
 static u8 LoadBattleAnimTarget(u8 arg)
