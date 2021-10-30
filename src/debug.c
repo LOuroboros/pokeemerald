@@ -773,7 +773,7 @@ static const struct WindowTemplate sDebugMenuWindowTemplate =
 static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
 {
     .bg = 0,
-    .tilemapLeft = 5 + DEBUG_MAIN_MENU_WIDTH,
+    .tilemapLeft = 3 + DEBUG_MAIN_MENU_WIDTH,
     .tilemapTop = 1,
     .width = DEBUG_NUMBER_DISPLAY_WIDTH,
     .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
