@@ -26,6 +26,7 @@
 #include "constants/weather.h"
 #include "constants/metatile_behaviors.h"
 #include "rtc.h"
+#include "battle.h"
 
 extern const u8 EventScript_RepelWoreOff[];
 
@@ -478,6 +479,8 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
 
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
+
+    gBattleTypeFlags |= BATTLE_TYPE_WILD_BATTLE;
 
     headerId = GetCurrentMapWildMonHeaderId();
     if (headerId == 0xFFFF)

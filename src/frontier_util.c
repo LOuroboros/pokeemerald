@@ -64,7 +64,6 @@ static void GetFacilitySymbolCount(void);
 static void GiveFacilitySymbol(void);
 static void CheckBattleTypeFlag(void);
 static void CheckPartyIneligibility(void);
-static void ValidateVisitingTrainer(void);
 static void IncrementWinStreak(void);
 static void RestoreHeldItems(void);
 static void SaveRecordBattle(void);
@@ -621,7 +620,6 @@ static void (* const sFrontierUtilFuncs[])(void) =
     [FRONTIER_UTIL_FUNC_GIVE_FACILITY_SYMBOL]  = GiveFacilitySymbol,
     [FRONTIER_UTIL_FUNC_CHECK_BATTLE_TYPE]     = CheckBattleTypeFlag,
     [FRONTIER_UTIL_FUNC_CHECK_INELIGIBLE]      = CheckPartyIneligibility,
-    [FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER]   = ValidateVisitingTrainer,
     [FRONTIER_UTIL_FUNC_INCREMENT_STREAK]      = IncrementWinStreak,
     [FRONTIER_UTIL_FUNC_RESTORE_HELD_ITEMS]    = RestoreHeldItems,
     [FRONTIER_UTIL_FUNC_SAVE_BATTLE]           = SaveRecordBattle,
@@ -2090,11 +2088,6 @@ static void CheckPartyIneligibility(void)
         gSaveBlock2Ptr->frontier.lvlMode = gSpecialVar_Result;
     }
     #undef numEligibleMons
-}
-
-static void ValidateVisitingTrainer(void)
-{
-    ValidateEReaderTrainer();
 }
 
 static void IncrementWinStreak(void)

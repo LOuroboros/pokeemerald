@@ -368,6 +368,13 @@ static void HandleInputChooseAction(void)
             BtlController_EmitTwoReturnValues(1, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
         }
+        else if (JOY_NEW(B_BUTTON) && (gBattleTypeFlags & BATTLE_TYPE_WILD_BATTLE))
+        {
+            PlaySE(SE_SELECT);
+            TryHideLastUsedBall();
+            BtlController_EmitTwoReturnValues(1, B_ACTION_RUN, 0);
+            PlayerBufferExecCompleted();
+        }
     }
     else if (JOY_NEW(START_BUTTON))
     {

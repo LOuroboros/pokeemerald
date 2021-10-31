@@ -241,7 +241,6 @@ gSpecials::
 	def_special CallBattleTowerFunc
 	def_special CallBattleDomeFunction
 	def_special CallBattlePalaceFunction
-	def_special CopyEReaderTrainerGreeting
 	def_special DoSpecialTrainerBattle
 	def_special CallBattleArenaFunction
 	def_special CallBattleFactoryFunction
@@ -252,7 +251,6 @@ gSpecials::
 	def_special CallFallarborTentFunction
 	def_special CallSlateportTentFunction
 	def_special ChoosePartyForBattleFrontier
-	def_special ValidateEReaderTrainer
 	def_special GetBestBattleTowerStreak
 	def_special ReducePlayerPartyToSelectedMons
 	def_special BedroomPC
@@ -290,7 +288,6 @@ gSpecials::
 	def_special DoOrbEffect
 	def_special FadeOutOrbEffect
 	def_special WaitWeather
-	def_special BufferEReaderTrainerName
 	def_special GetSlotMachineId
 	def_special GetPlayerFacingDirection
 	def_special FoundAbandonedShipRoom1Key
@@ -327,7 +324,6 @@ gSpecials::
 	def_special DoFallWarp
 	def_special ShowContestEntryMonPic
 	def_special HideContestEntryMonPic
-	def_special SetEReaderTrainerGfxId
 	def_special BattleSetup_StartLatiBattle
 	def_special SetRoute119Weather
 	def_special SetRoute123Weather

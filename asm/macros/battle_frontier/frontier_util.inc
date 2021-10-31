@@ -109,12 +109,6 @@
 	special CallFrontierUtilFunc
 	.endm
 
-	@ Validates the visiting E-Reader trainer. 0 if valid, 1 if not
-	.macro frontier_checkvisittrainer
-	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_CHECK_VISIT_TRAINER
-	special CallFrontierUtilFunc
-	.endm
-
 	@ Increments the current win streak by 1
 	.macro frontier_incrementstreak
 	setvar VAR_0x8004, FRONTIER_UTIL_FUNC_INCREMENT_STREAK

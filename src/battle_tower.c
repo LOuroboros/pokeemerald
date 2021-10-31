@@ -65,7 +65,6 @@ static void ValidateBattleTowerRecordChecksums(void);
 static void SaveCurrentWinStreak(void);
 static void ValidateApprenticesChecksums(void);
 static void SetNextBattleTentOpponent(void);
-static void CopyEReaderTrainerFarewellMessage(void);
 static void ClearBattleTowerRecord(struct EmeraldBattleTowerRecord *record);
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
 static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
@@ -73,7 +72,6 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId);
 static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId);
 static u8 GetFrontierTrainerFixedIvs(u16 trainerId);
 static void FillPartnerParty(u16 trainerId);
-static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static u8 SetTentPtrsGetLevel(void);
 
 // Const rom data.
@@ -1203,11 +1201,6 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     }
 }
 
-void SetEReaderTrainerGfxId(void)
-{
-    SetBattleFacilityTrainerGfxId(TRAINER_EREADER, 0);
-}
-
 u8 GetBattleFacilityTrainerGfxId(u16 trainerId)
 {
     u32 i;
@@ -1889,7 +1882,6 @@ static void HandleSpecialTrainerBattleEnd(void)
         }
         break;
     case SPECIAL_BATTLE_EREADER:
-        CopyEReaderTrainerFarewellMessage();
         break;
     case SPECIAL_BATTLE_MULTI:
         for (i = 0; i < 3; i++)
@@ -2735,48 +2727,6 @@ static void AwardBattleTowerRibbons(void)
             TryPutSpotTheCutiesOnAir(&gSaveBlock1Ptr->playerParty[ribbons[0].partyIndex], ribbonType);
         }
     }
-}
-
-// This is a leftover debugging function that is used to populate the E-Reader
-// trainer with the player's current data.
-static void FillEReaderTrainerWithPlayerData(void)
-{
-}
-
-u8 GetEreaderTrainerFrontSpriteId(void)
-{
-    return 0;
-}
-
-u8 GetEreaderTrainerClassId(void)
-{
-    return 0;
-}
-
-void GetEreaderTrainerName(u8 *dst)
-{
-}
-
-// Checks if the saved E-Reader trainer is valid.
-void ValidateEReaderTrainer(void)
-{
-    gSpecialVar_Result = FALSE;
-}
-
-static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer)
-{
-}
-
-void ClearEReaderTrainer(struct BattleTowerEReaderTrainer *ereaderTrainer)
-{
-}
-
-void CopyEReaderTrainerGreeting(void)
-{
-}
-
-static void CopyEReaderTrainerFarewellMessage(void)
-{
 }
 
 void TryHideBattleTowerReporter(void)

@@ -1281,10 +1281,6 @@ static void OpponentHandleDrawTrainerPic(void)
             trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_A);
         }
     }
-    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-    {
-        trainerPicId = GetEreaderTrainerFrontSpriteId();
-    }
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
         if (gActiveBattler != 1)
@@ -1364,10 +1360,6 @@ static void OpponentHandleTrainerSlide(void)
         {
             trainerPicId = GetFrontierTrainerFrontSpriteId(gTrainerBattleOpponent_A);
         }
-    }
-    else if (gBattleTypeFlags & BATTLE_TYPE_EREADER_TRAINER)
-    {
-        trainerPicId = GetEreaderTrainerFrontSpriteId();
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
     {
