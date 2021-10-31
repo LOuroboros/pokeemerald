@@ -52,12 +52,6 @@
 	special CallTrainerHillFunction
 	.endm
 
-	@ Unknown, dummied. E-Reader association is assumed. Only side effect is setting VAR_RESULT to 0.
-	.macro trainerhill_getusingereader
-	setvar VAR_0x8004, TRAINER_HILL_FUNC_GET_IN_EREADER_MODE
-	special CallTrainerHillFunction
-	.endm
-
 	@ TRUE if currently in a Trainer Hill challenge
 	.macro trainerhill_inchallenge
 	setvar VAR_0x8004, TRAINER_HILL_FUNC_IN_CHALLENGE

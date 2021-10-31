@@ -278,19 +278,6 @@ struct BattleTowerInterview
     u8 opponentLanguage;
 };
 
-struct BattleTowerEReaderTrainer
-{
-    /*0x01*/ u8 facilityClass;
-    /*0x02*/ u16 winStreak;
-    /*0x04*/ u8 name[PLAYER_NAME_LENGTH + 1];
-    /*0x0C*/ u8 trainerId[TRAINER_ID_LENGTH];
-    /*0x10*/ u16 greeting[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x1C*/ u16 farewellPlayerLost[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x28*/ u16 farewellPlayerWon[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x34*/ struct BattleTowerPokemon party[FRONTIER_PARTY_SIZE];
-    /*0xB8*/ u32 checksum;
-};
-
 // For displaying party information on the player's Battle Dome tourney page
 struct DomeMonData
 {
