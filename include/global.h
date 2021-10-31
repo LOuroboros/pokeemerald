@@ -788,8 +788,7 @@ struct SaveBlock1
     /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
     /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    /*0x690*/ //struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
-              u8 bagPocket_TMHMOwnedFlags[14]; //allow for a total of 112 TMs/HMs
+    /*0x690*/ u8 bagPocket_TMHMOwnedFlags[14]; //allow for a total of 112 TMs/HMs
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x???*/ u16 berryBlenderRecords[3];
@@ -839,7 +838,6 @@ struct SaveBlock1
     /*0x????*/ u8 dexCaught[DEX_FLAGS_NO];
     /*0x????*/ u32 trainerHillTimes[4];
     /*0x????*/ LilycoveLady lilycoveLady;
-    /*0x????*/ struct TrainerNameRecord trainerNameRecords[20];
     /*0x????*/ struct SaveTrainerHill trainerHill;
     /*0x????*/ struct WaldaPhrase waldaPhrase;
     /*0x????*/ u8 registeredItemLastSelected:4; // max 16 items

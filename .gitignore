@@ -42,3 +42,4 @@ graphics/pokemon_jump
 graphics/union_room_chat
 graphics/unused
 data/tilesets/secondary/union_room
+*.sym
