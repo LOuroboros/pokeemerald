@@ -128,18 +128,12 @@ static const struct WindowTemplate sBerryPowderWindowTemplates[] =
 
 static u32 DecryptBerryPowder(u32 *powder)
 {
-    return *powder ^ gSaveBlock2Ptr->encryptionKey;
+    return *powder;
 }
 
 void SetBerryPowder(u32 *powder, u32 amount)
 {
-    *powder = amount ^ gSaveBlock2Ptr->encryptionKey;
-}
-
-void ApplyNewEncryptionKeyToBerryPowder(u32 encryptionKey)
-{
-    u32 *powder = &gSaveBlock2Ptr->berryCrush.berryPowderAmount;
-    ApplyNewEncryptionKeyToWord(powder, encryptionKey);
+    *powder = amount;
 }
 
 static bool8 HasEnoughBerryPowder_(u32 cost)
