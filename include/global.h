@@ -440,7 +440,6 @@ struct SaveBlock2
     /*0x18*/ struct Pokedex pokedex;
     /*0x??*/ struct Time localTimeOffset;
     /*0x??*/ struct Time lastBerryTreeUpdate;
-    /*0x??*/ u32 gcnLinkFlags; // Read by Pokemon Colosseum/XD
     /*0x??*/ u32 encryptionKey;
     /*0x??*/ struct PlayersApprentice playerApprentice;
     /*0x??*/ struct Apprentice apprentices[APPRENTICE_COUNT];

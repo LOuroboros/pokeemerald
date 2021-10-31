@@ -118,20 +118,6 @@ void TrySetMapSaveWarpStatus(void)
     sub_81AFD5C();
 }
 
-// In FRLG, only 0x1, 0x10, and 0x20 are set when the pokedex is received
-// 0x2, 0x4, 0x8, and 0x8000 are instead set by SetPostgameFlags
-// These flags are read by Pokemon Colosseum/XD for linking. XD Additionally requires FLAG_SYS_GAME_CLEAR
-void SetUnlockedPokedexFlags(void)
-{
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x8000;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x1;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x2;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x4;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x10;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x20;
-    gSaveBlock2Ptr->gcnLinkFlags |= 0x8;
-}
-
 void SetChampionSaveWarp(void)
 {
     gSaveBlock2Ptr->specialSaveWarpFlags |= CHAMPION_SAVEWARP;
