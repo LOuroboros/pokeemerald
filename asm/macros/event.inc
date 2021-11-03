@@ -1511,6 +1511,7 @@
 	.endm
 
 	@ Sets the Pokemon in the specified slot of the player party's eventLegal bit.
+	@ No longer used, can be removed/replaced.
 	.macro setmoneventlegal slot:req
 	.byte 0xcd
 	.2byte \slot
@@ -1518,6 +1519,7 @@
 
 	@ Checks if the Pokemon in the specified slot of the player's party has its eventLegal bit set. If it isn't set,
 	@ VAR_RESULT is TRUE. If the bit is set (or if the specified slot is empty or invalid), VAR_RESULT is FALSE.
+	@ No longer used, can be removed/replaced.
 	.macro checkmoneventlegal slot:req
 	.byte 0xce
 	.2byte \slot

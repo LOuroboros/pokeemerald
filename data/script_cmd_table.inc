@@ -205,8 +205,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_nop1                      @ 0xca
 	.4byte ScrCmd_nop1                      @ 0xcb
 	.4byte ScrCmd_nop1                      @ 0xcc
-	.4byte ScrCmd_setmoneventlegal          @ 0xcd
-	.4byte ScrCmd_checkmoneventlegal        @ 0xce
+	.4byte ScrCmd_nop1                      @ 0xcd
+	.4byte ScrCmd_nop1                      @ 0xce
 	.4byte ScrCmd_nop1                      @ 0xcf
 	.4byte ScrCmd_nop1                      @ 0xd0
 	.4byte ScrCmd_nop1                      @ 0xd1

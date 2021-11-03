@@ -53,7 +53,6 @@
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
-EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA u32 sAddressOffset = 0; // For relative addressing in vgoto etc., used by saved scripts (e.g. Mystery Event)
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
@@ -2212,24 +2211,6 @@ bool8 ScrCmd_lockfortrainer(struct ScriptContext *ctx)
         }
         return TRUE;
     }
-}
-
-// This command will set a Pokémon's eventLegal bit; there is no similar command to clear it.
-bool8 ScrCmd_setmoneventlegal(struct ScriptContext *ctx)
-{
-    bool8 isEventLegal = TRUE;
-    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    SetMonData(&gPlayerParty[partyIndex], MON_DATA_EVENT_LEGAL, &isEventLegal);
-    return FALSE;
-}
-
-bool8 ScrCmd_checkmoneventlegal(struct ScriptContext *ctx)
-{
-    u16 partyIndex = VarGet(ScriptReadHalfword(ctx));
-
-    gSpecialVar_Result = GetMonData(&gPlayerParty[partyIndex], MON_DATA_EVENT_LEGAL, NULL);
-    return FALSE;
 }
 
 bool8 ScrCmd_setmonmetlocation(struct ScriptContext *ctx)

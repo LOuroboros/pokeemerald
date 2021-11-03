@@ -131,7 +131,6 @@ static void UpdateSelection(bool8);
 static void CloseUsePokeblockMenu(void);
 static void AskUsePokeblock(void);
 static s8 HandleAskUsePokeblockInput(void);
-static bool8 IsSheenMaxed(void);
 static void PrintWontEatAnymore(void);
 static void FeedPokeblockToMon(void);
 static void EraseMenuWindow(void);
@@ -665,15 +664,7 @@ static void UsePokeblockMenu(void)
             sInfo->mainState = STATE_HANDLE_INPUT;
             break;
         case 0: // YES
-            if (IsSheenMaxed())
-            {
-                PrintWontEatAnymore();
-                sInfo->mainState = STATE_WAIT_MSG;
-            }
-            else
-            {
-                SetUsePokeblockCallback(FeedPokeblockToMon);
-            }
+            SetUsePokeblockCallback(FeedPokeblockToMon);
             break;
         }
         break;
@@ -1002,27 +993,17 @@ static void AddPokeblockToConditions(struct Pokeblock *pokeblock, struct Pokemon
     s16 cstat;
     u8 data;
 
-    if (GetMonData(mon, MON_DATA_SHEEN) != 255)
+    CalculatePokeblockEffectiveness(pokeblock, mon);
+    for (i = 0; i < FLAVOR_COUNT; i++)
     {
-        CalculatePokeblockEffectiveness(pokeblock, mon);
-        for (i = 0; i < FLAVOR_COUNT; i++)
-        {
-            data = GetMonData(mon, sMonDataConditions[i]);
-            cstat = data +  sInfo->pokeblockStatBoosts[i];
-            if (cstat < 0)
-                cstat = 0;
-            if (cstat > 255)
-                cstat = 255;
-            data = cstat;
-            SetMonData(mon, sMonDataConditions[i], &data);
-        }
-
-        cstat = (u8)(GetMonData(mon, MON_DATA_SHEEN)) + pokeblock->feel;
+        data = GetMonData(mon, sMonDataConditions[i]);
+        cstat = data +  sInfo->pokeblockStatBoosts[i];
+        if (cstat < 0)
+            cstat = 0;
         if (cstat > 255)
             cstat = 255;
-
         data = cstat;
-        SetMonData(mon, MON_DATA_SHEEN, &data);
+        SetMonData(mon, sMonDataConditions[i], &data);
     }
 }
 
@@ -1068,17 +1049,6 @@ static void CalculatePokeblockEffectiveness(struct Pokeblock *pokeblock, struct 
         if (taste == direction)
             sInfo->pokeblockStatBoosts[i] += boost * taste;
     }
-}
-
-static bool8 IsSheenMaxed(void)
-{
-    if (GetBoxOrPartyMonData(sMenu->party[sMenu->info.curSelection].boxId,
-                             sMenu->party[sMenu->info.curSelection].monId,
-                             MON_DATA_SHEEN,
-                             NULL) == 255)
-        return TRUE;
-    else
-        return FALSE;
 }
 
 static u8 GetPartyIdFromSelectionId(u8 selectionId)
@@ -1204,7 +1174,7 @@ static void LoadMonInfo(s16 partyId, u8 loadId)
     bool8 excludesCancel = FALSE; // whether or not numSelections excludes Cancel from the count
 
     GetConditionMenuMonNameAndLocString(sMenu->locationStrings[loadId], sMenu->monNameStrings[loadId], boxId, monId, partyId, numSelections, excludesCancel);
-    GetConditionMenuMonConditions(&sMenu->graph, sMenu->numSparkles, boxId, monId, partyId, loadId, numSelections, excludesCancel);
+    GetConditionMenuMonConditions(&sMenu->graph, boxId, monId, partyId, loadId, numSelections, excludesCancel);
     GetConditionMenuMonGfx(sMenu->partySheets[loadId], sMenu->partyPalettes[loadId], boxId, monId, partyId, numSelections, excludesCancel);
 }
 
@@ -1598,11 +1568,7 @@ static void SpriteCB_SelectionIconCancel(struct Sprite *sprite)
 // is the total number of sparkles that appear
 static void CalculateNumAdditionalSparkles(u8 monIndex)
 {
-    u8 sheen = GetMonData(&gPlayerParty[monIndex], MON_DATA_SHEEN);
-
-    sMenu->numSparkles[sMenu->curLoadId] = (sheen != 255)
-        ? sheen / (255 / (MAX_CONDITION_SPARKLES - 1) + 1)
-        : MAX_CONDITION_SPARKLES - 1;
+    sMenu->numSparkles[sMenu->curLoadId] = (255 / (MAX_CONDITION_SPARKLES - 1) + 1);
 }
 
 static void LoadConditionGfx(void)

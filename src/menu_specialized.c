@@ -1010,7 +1010,7 @@ void GetConditionMenuMonNameAndLocString(u8 *locationDst, u8 *nameDst, u16 boxId
     }
 }
 
-void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
+void GetConditionMenuMonConditions(struct ConditionGraph *graph, u16 boxId, u16 monId, u16 partyId, u16 id, u16 numMons, bool8 excludesCancel)
 {
     u16 i;
 
@@ -1024,10 +1024,6 @@ void GetConditionMenuMonConditions(struct ConditionGraph *graph, u8 *sheen, u16 
         graph->stat[id][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
         graph->stat[id][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
         graph->stat[id][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
-
-        sheen[id] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 0xFF)
-                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
-                 : 9;
 
         sub_81D2754(graph->stat[id], graph->unk14[id]);
     }

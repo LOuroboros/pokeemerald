@@ -25,7 +25,6 @@ struct PokenavSub11
     u8 searchLocBuffer[3][24];
     u8 nameBuffer[3][64];
     struct ConditionGraph conditionData;
-    u8 sheen[3];
     u8 monMarks[3];
     s8 mark;
     s8 unk6787;
@@ -497,9 +496,6 @@ void GetMonConditionGraphData(s16 id, u8 arg1)
         structPtr->conditionData.stat[arg1][2] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_SMART, NULL);
         structPtr->conditionData.stat[arg1][3] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_CUTE, NULL);
         structPtr->conditionData.stat[arg1][4] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_BEAUTY, NULL);
-        structPtr->sheen[arg1] = (GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) != 255)
-                                 ? GetBoxOrPartyMonData(boxId, monId, MON_DATA_SHEEN, NULL) / 29u
-                                 : 9;
         structPtr->monMarks[arg1] = GetBoxOrPartyMonData(boxId, monId, MON_DATA_MARKINGS, NULL);
         sub_81D2754(structPtr->conditionData.stat[arg1], structPtr->conditionData.unk14[arg1]);
     }
@@ -615,10 +611,4 @@ u8 TryGetMonMarkId(void)
         return structPtr->monMarks[structPtr->mark];
     else
         return 0;
-}
-
-u8 GetMonSheen(void)
-{
-    struct PokenavSub11 *structPtr = GetSubstructPtr(POKENAV_SUBSTRUCT_CONDITION_GRAPH);
-    return structPtr->sheen[structPtr->mark];
 }

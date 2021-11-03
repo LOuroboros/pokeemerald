@@ -144,7 +144,6 @@ typedef union // size = 0x24
     struct {
         /*0x00*/ u8 kind;
         /*0x01*/ bool8 active;
-        /*0x02*/ u8 sheen;
         /*0x03*/ u8 flavor:3;
         /*0x03*/ u8 color:2;
         /*0x04*/ u8 worstBlenderName[PLAYER_NAME_LENGTH + 1];

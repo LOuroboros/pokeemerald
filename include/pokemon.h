@@ -34,23 +34,18 @@ struct BoxPokemon
     u32 pokerus:4;
     u32 ppBonuses:8;
 
-    // Words 9 - 11: EV's + contest stats
+    // Words 9 - 11: EVs and contest stats
     u8 hpEV;
     u8 attackEV;
     u8 defenseEV;
     u8 speedEV;
-
     u8 spAttackEV;
     u8 spDefenseEV;
-
-    // Contest garbage (6 bytes)
     u8 cool;
     u8 beauty;
-
     u8 cute;
     u8 smart;
     u8 tough;
-    u8 sheen;
 
     // Word 12: miscellaneous data; item, formId, Egg and origin data
     u32 heldItem:10;
@@ -85,17 +80,14 @@ struct BoxPokemon
     u32 victoryRibbon:1;
     u32 artistRibbon:1;
     u32 effortRibbon:1;
-    u32 countryRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
-    u32 nationalRibbon:1;
-    u32 earthRibbon:1;
-    u32 worldRibbon:1; // distributed during Pokémon Festa '04 and '05 to tournament winners
-    u32 eventLegal:1;
     u32 markings:4;
 
     // Word 17: Date Met
     u32 dayMet:5;
     u32 monthMet:4;
     u32 yearMet:7;
+
+    // Unused space: 8 bits in Words 9-11, 8 bits in Word 16, 16 bits in Word 17.
 };
 
 struct Pokemon
@@ -287,11 +279,9 @@ void CreateBattleTowerMon2(struct Pokemon *mon, struct BattleTowerPokemon *src, 
 void CreateApprenticeMon(struct Pokemon *mon, const struct Apprentice *src, u8 monId);
 void CreateMonWithEVSpreadNatureOTID(struct Pokemon *mon, u16 species, u8 level, u8 nature, u8 fixedIV, u8 evSpread, u32 otId);
 void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerPokemon *dest);
-void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId);
 u16 GetUnionRoomTrainerPic(void);
 u16 GetUnionRoomTrainerClass(void);
-void CreateEventLegalEnemyMon(void);
 void CalculateMonStats(struct Pokemon *mon);
 void BoxMonToMon(const struct BoxPokemon *src, struct Pokemon *dest);
 u8 GetLevelFromMonExp(struct Pokemon *mon);

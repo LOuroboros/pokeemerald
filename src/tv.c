@@ -1304,7 +1304,7 @@ void PutBattleUpdateOnTheAir(u8 opponentLinkPlayerId, u16 move, u16 speciesPlaye
     }
 }
 
-bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 color, u8 sheen, u8 language)
+bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 language)
 {
     TVShow *show;
     u8 name[32];
@@ -1325,8 +1325,6 @@ bool8 Put3CheersForPokeblocksOnTheAir(const u8 *partnersName, u8 flavor, u8 colo
     StripExtCtrlCodes(name);
     StringCopy(show->threeCheers.worstBlenderName, name);
     show->threeCheers.flavor = flavor;
-    show->threeCheers.color = color;
-    show->threeCheers.sheen = sheen;
     StorePlayerIdInNormalShow(show);
     show->threeCheers.language = gGameLanguage;
     if (show->threeCheers.language == LANGUAGE_JAPANESE || language == LANGUAGE_JAPANESE)
@@ -2275,10 +2273,6 @@ u8 GetRibbonCount(struct Pokemon *pokemon)
     nRibbons += GetMonData(pokemon, MON_DATA_VICTORY_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_ARTIST_RIBBON);
     nRibbons += GetMonData(pokemon, MON_DATA_EFFORT_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_COUNTRY_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_NATIONAL_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_EARTH_RIBBON);
-    nRibbons += GetMonData(pokemon, MON_DATA_WORLD_RIBBON);
     return nRibbons;
 }
 
@@ -2294,10 +2288,6 @@ static u8 MonDataIdxToRibbon(u8 monDataIdx)
     if (monDataIdx == MON_DATA_VICTORY_RIBBON)  return VICTORY_RIBBON;
     if (monDataIdx == MON_DATA_ARTIST_RIBBON)   return ARTIST_RIBBON;
     if (monDataIdx == MON_DATA_EFFORT_RIBBON)   return EFFORT_RIBBON;
-    if (monDataIdx == MON_DATA_COUNTRY_RIBBON)  return COUNTRY_RIBBON;
-    if (monDataIdx == MON_DATA_NATIONAL_RIBBON) return NATIONAL_RIBBON;
-    if (monDataIdx == MON_DATA_EARTH_RIBBON)    return EARTH_RIBBON;
-    if (monDataIdx == MON_DATA_WORLD_RIBBON)    return WORLD_RIBBON;
     return CHAMPION_RIBBON;
 }
 
@@ -5227,10 +5217,7 @@ static void DoTVShow3CheersForPokeblocks(void)
     {
     case 0:
         TVShowConvertInternationalString(gStringVar1, show->threeCheers.playerName, show->threeCheers.language);
-        if (show->threeCheers.sheen > 20)
-            sTVShowState = 1;
-        else
-            sTVShowState = 3;
+        sTVShowState = 3;
         break;
     case 1:
         switch (show->threeCheers.flavor)
@@ -5251,17 +5238,7 @@ static void DoTVShow3CheersForPokeblocks(void)
             StringCopy(gStringVar1, gText_Sour2);
             break;
         }
-        if (show->threeCheers.sheen > 24)
-        {
-            StringCopy(gStringVar2, gText_Excellent);
-        } else if (show->threeCheers.sheen > 22)
-        {
-            StringCopy(gStringVar2, gText_VeryGood);
-        }
-        else
-        {
-            StringCopy(gStringVar2, gText_Good);
-        }
+        StringCopy(gStringVar2, gText_Good);
         TVShowConvertInternationalString(gStringVar3, show->threeCheers.playerName, show->threeCheers.language);
         sTVShowState = 2;
         break;
@@ -5288,13 +5265,7 @@ static void DoTVShow3CheersForPokeblocks(void)
             StringCopy(gStringVar1, gText_Sour2);
             break;
         }
-
-        if (show->threeCheers.sheen > 16)
-            StringCopy(gStringVar2, gText_SoSo);
-        else if (show->threeCheers.sheen > 13)
-            StringCopy(gStringVar2, gText_Bad);
-        else
-            StringCopy(gStringVar2, gText_TheWorst);
+        StringCopy(gStringVar2, gText_TheWorst);
 
         TVShowConvertInternationalString(gStringVar3, show->threeCheers.playerName, show->threeCheers.language);
         sTVShowState = 4;

@@ -432,7 +432,6 @@ bool32 IsConditionMenuSearchMode(void);
 struct ConditionGraph *GetConditionGraphDataPtr(void);
 u16 GetConditionGraphCurrentMonIndex(void);
 u16 GetMonListCount(void);
-u8 GetMonSheen(void);
 bool32 SetConditionGraphData(u8 arg0);
 u8 TryGetMonMarkId(void);
 u8 *GetConditionMonNameBuffer(u8 id);

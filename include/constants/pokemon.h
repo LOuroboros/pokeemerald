@@ -191,20 +191,11 @@
 #define MON_DATA_ARTIST_RIBBON     70
 #define MON_DATA_EFFORT_RIBBON     71
 #define MON_DATA_COUNTRY_RIBBON    72
-#define MON_DATA_NATIONAL_RIBBON   73
-#define MON_DATA_EARTH_RIBBON      74
-#define MON_DATA_WORLD_RIBBON      75
-#define MON_DATA_EVENT_LEGAL       76
-#define MON_DATA_KNOWN_MOVES       77
-#define MON_DATA_RIBBON_COUNT      78
-#define MON_DATA_RIBBONS           79
-#define MON_DATA_ATK2              80
-#define MON_DATA_DEF2              81
-#define MON_DATA_SPEED2            82
-#define MON_DATA_SPATK2            83
-#define MON_DATA_SPDEF2            84
-#define MON_DATA_DAY_MET           85
-#define MON_DATA_MONTH_MET         86
+#define MON_DATA_KNOWN_MOVES       73
+#define MON_DATA_RIBBON_COUNT      74
+#define MON_DATA_RIBBONS           75
+#define MON_DATA_DAY_MET           76
+#define MON_DATA_MONTH_MET         77
 
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0
@@ -232,14 +223,10 @@
 #define VICTORY_RIBBON       22
 #define ARTIST_RIBBON        23
 #define EFFORT_RIBBON        24
-#define COUNTRY_RIBBON       25
-#define NATIONAL_RIBBON      26
-#define EARTH_RIBBON         27
-#define WORLD_RIBBON         28
 
-#define FIRST_GIFT_RIBBON COUNTRY_RIBBON
-#define LAST_GIFT_RIBBON  WORLD_RIBBON
-#define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
+#define FIRST_GIFT_RIBBON    EFFORT_RIBBON + 1
+#define LAST_GIFT_RIBBON     EFFORT_RIBBON + 1
+#define NUM_GIFT_RIBBONS     0
 
 // The above gift ribbons (Country - World) are
 // special distribution ribbons that correspond to

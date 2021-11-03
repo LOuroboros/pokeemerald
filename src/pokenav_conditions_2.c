@@ -327,7 +327,7 @@ u32 LoopedTask_OpenPartyConditionGraph(s32 state)
         {
             ResetConditionSparkleSprites(structPtr->conditionSparkleSprites);
             if (IsConditionMenuSearchMode() == TRUE || GetConditionGraphCurrentMonIndex() != GetMonListCount())
-                CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, GetMonSheen());
+                CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, 0);
 
             return LT_FINISH;
         }
@@ -418,7 +418,7 @@ u32 LoopedTask_TransitionMons(s32 state)
             if (IsConditionMenuSearchMode() != TRUE && GetConditionGraphCurrentMonIndex() == GetMonListCount())
                 return LT_INC_AND_CONTINUE;
 
-            CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, GetMonSheen());
+            CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, 0);
             return LT_INC_AND_CONTINUE;
         }
         return LT_PAUSE;
@@ -462,7 +462,7 @@ u32 LoopedTask_MoveCursorNoTransition(s32 state)
         if (!TryUpdateConditionMonTransitionOn(GetConditionGraphDataPtr(), &structPtr->monTransitionX))
         {
             ResetConditionSparkleSprites(structPtr->conditionSparkleSprites);
-            CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, GetMonSheen());
+            CreateConditionSparkleSprites(structPtr->conditionSparkleSprites, structPtr->monPicSpriteId, 0);
             return LT_INC_AND_CONTINUE;
         }
         return LT_PAUSE;

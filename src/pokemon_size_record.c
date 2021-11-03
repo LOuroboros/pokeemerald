@@ -36,12 +36,6 @@ static const struct UnknownStruct sBigMonSizeTable[] =
     { 1700,   1,   -26 },
 };
 
-static const u8 sGiftRibbonsMonDataIds[GIFT_RIBBONS_COUNT] =
-{
-    MON_DATA_COUNTRY_RIBBON, MON_DATA_NATIONAL_RIBBON, MON_DATA_EARTH_RIBBON,
-    MON_DATA_WORLD_RIBBON
-};
-
 extern const u8 gText_DecimalPoint[];
 extern const u8 gText_Marco[];
 
@@ -189,30 +183,4 @@ void CompareLotadSize(void)
     u16 *sizeRecord = GetVarPointer(VAR_LOTAD_SIZE_RECORD);
 
     gSpecialVar_Result = CompareMonSize(SPECIES_LOTAD, sizeRecord);
-}
-
-void GiveGiftRibbonToParty(u8 index, u8 ribbonId)
-{
-    s32 i;
-    bool32 gotRibbon = FALSE;
-    u8 data = 1;
-    u8 array[ARRAY_COUNT(sGiftRibbonsMonDataIds)];
-    memcpy(array, sGiftRibbonsMonDataIds, sizeof(sGiftRibbonsMonDataIds));
-
-    if (index < GIFT_RIBBONS_COUNT && ribbonId <= MAX_GIFT_RIBBON)
-    {
-        gSaveBlock1Ptr->giftRibbons[index] = ribbonId;
-        for (i = 0; i < PARTY_SIZE; i++)
-        {
-            struct Pokemon *mon = &gPlayerParty[i];
-
-            if (GetMonData(mon, MON_DATA_SPECIES) != 0 && GetMonData(mon, MON_DATA_SANITY_IS_EGG) == 0)
-            {
-                SetMonData(mon, array[index], &data);
-                gotRibbon = TRUE;
-            }
-        }
-        if (gotRibbon)
-            FlagSet(FLAG_SYS_RIBBON_GET);
-    }
 }

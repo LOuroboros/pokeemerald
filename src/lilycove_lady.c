@@ -638,7 +638,6 @@ static void ResetContestLadyContestData(void)
     sContestLadyPtr->playerName[0] = EOS;
     sContestLadyPtr->numGoodPokeblocksGiven = 0;
     sContestLadyPtr->numOtherPokeblocksGiven = 0;
-    sContestLadyPtr->maxSheen = 0;
     sContestLadyPtr->category = Random() % CONTEST_CATEGORIES_COUNT;
 }
 
@@ -663,21 +662,8 @@ static void ResetContestLadyForRecordMix(void)
     }
 }
 
-static void ContestLadySavePlayerNameIfHighSheen(u8 sheen)
-{
-    sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
-    if (sContestLadyPtr->maxSheen <= sheen)
-    {
-        sContestLadyPtr->maxSheen = sheen;
-        memset(sContestLadyPtr->playerName, EOS, sizeof(sContestLadyPtr->playerName));
-        memcpy(sContestLadyPtr->playerName, gSaveBlock2Ptr->playerName, sizeof(sContestLadyPtr->playerName));
-        sContestLadyPtr->language = gGameLanguage;
-    }
-}
-
 bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
 {
-    u8 sheen = 0;
     bool8 correctFlavor = FALSE;
 
     sContestLadyPtr = &gSaveBlock1Ptr->lilycoveLady.contest;
@@ -685,49 +671,26 @@ bool8 GivePokeblockToContestLady(struct Pokeblock *pokeblock)
     {
         case CONTEST_CATEGORY_COOL:
             if (pokeblock->spicy != 0)
-            {
-                sheen = pokeblock->spicy;
                 correctFlavor = TRUE;
-            }
             break;
         case CONTEST_CATEGORY_BEAUTY:
             if (pokeblock->dry != 0)
-            {
-                sheen = pokeblock->dry;
                 correctFlavor = TRUE;
-            }
             break;
         case CONTEST_CATEGORY_CUTE:
             if (pokeblock->sweet != 0)
-            {
-                sheen = pokeblock->sweet;
                 correctFlavor = TRUE;
-            }
             break;
         case CONTEST_CATEGORY_SMART:
             if (pokeblock->bitter != 0)
-            {
-                sheen = pokeblock->bitter;
                 correctFlavor = TRUE;
-            }
             break;
         case CONTEST_CATEGORY_TOUGH:
             if (pokeblock->sour != 0)
-            {
-                sheen = pokeblock->sour;
                 correctFlavor = TRUE;
-            }
             break;
     }
-    if (correctFlavor == TRUE)
-    {
-        ContestLadySavePlayerNameIfHighSheen(sheen);
-        sContestLadyPtr->numGoodPokeblocksGiven++;
-    }
-    else
-    {
-        sContestLadyPtr->numOtherPokeblocksGiven++;
-    }
+    sContestLadyPtr->numOtherPokeblocksGiven++;
     return correctFlavor;
 }
 

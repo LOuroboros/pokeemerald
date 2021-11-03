@@ -129,7 +129,6 @@ struct TvBlenderStruct
     u8 name[11];
     u8 pokeblockFlavor;
     u8 pokeblockColor;
-    u8 pokeblockSheen;
 };
 
 struct BerryBlender
@@ -3645,39 +3644,29 @@ static void Task_PlayPokeblockFanfare(u8 taskId)
 static bool32 TryAddContestLinkTvShow(struct Pokeblock *pokeblock, struct TvBlenderStruct *tvBlender)
 {
     u8 flavorLevel = GetHighestPokeblocksFlavorLevel(pokeblock);
-    u16 sheen = (flavorLevel * 10) / GetPokeblocksFeel(pokeblock);
 
-    tvBlender->pokeblockSheen = sheen;
     tvBlender->pokeblockColor = pokeblock->color;
     tvBlender->name[0] = EOS;
 
     if (gReceivedRemoteLinkPlayers)
     {
-        if (sBerryBlender->ownRanking == 0 && sheen > 20)
+        if (sBerryBlender->ownRanking == 0)
         {
             // Player came first, try to put on air
             StringCopy(tvBlender->name, gLinkPlayers[sBerryBlender->playerPlaces[sBerryBlender->numPlayers - 1]].name);
             tvBlender->pokeblockFlavor = GetPokeblocksFlavor(pokeblock);
-            if (Put3CheersForPokeblocksOnTheAir(tvBlender->name, tvBlender->pokeblockFlavor,
-                                            tvBlender->pokeblockColor, tvBlender->pokeblockSheen,
-                                            gLinkPlayers[sBerryBlender->playerPlaces[sBerryBlender->numPlayers - 1]].language))
-            {
+            if (Put3CheersForPokeblocksOnTheAir(tvBlender->name, tvBlender->pokeblockFlavor, gLinkPlayers[sBerryBlender->playerPlaces[sBerryBlender->numPlayers - 1]].language))
                 return TRUE;
-            }
 
             return FALSE;
         }
-        else if (sBerryBlender->ownRanking == sBerryBlender->numPlayers - 1 && sheen <= 20)
+        else if (sBerryBlender->ownRanking == sBerryBlender->numPlayers - 1)
         {
             // Player came last, try to put on air
             StringCopy(tvBlender->name, gLinkPlayers[sBerryBlender->playerPlaces[0]].name);
             tvBlender->pokeblockFlavor = GetPokeblocksFlavor(pokeblock);
-            if (Put3CheersForPokeblocksOnTheAir(tvBlender->name, tvBlender->pokeblockFlavor,
-                                            tvBlender->pokeblockColor, tvBlender->pokeblockSheen,
-                                            gLinkPlayers[sBerryBlender->playerPlaces[0]].language))
-            {
+            if (Put3CheersForPokeblocksOnTheAir(tvBlender->name, tvBlender->pokeblockFlavor, gLinkPlayers[sBerryBlender->playerPlaces[0]].language))
                 return TRUE;
-            }
 
             return FALSE;
         }

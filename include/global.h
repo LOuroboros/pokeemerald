@@ -534,21 +534,6 @@ struct Roamer
     /*0x13*/ bool8 active;
 };
 
-struct RamScriptData
-{
-    u8 magic;
-    u8 mapGroup;
-    u8 mapNum;
-    u8 objectId;
-    u8 script[995];
-};
-
-struct RamScript
-{
-    u32 checksum;
-    struct RamScriptData data;
-};
-
 // See dewford_trend.c
 struct DewfordTrend
 {

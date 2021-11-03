@@ -45,7 +45,6 @@ Questionnaire_EventScript_PichuEgg::
 	specialvar VAR_RESULT, CalculatePlayerPartyCount
 	goto_if_var_eq VAR_RESULT, PARTY_SIZE, Questionnaire_EventScript_FullParty
 	giveegg SPECIES_PICHU
-	setmoneventlegal VAR_RESULT
 	setmonmetlocation VAR_RESULT, METLOC_FATEFUL_ENCOUNTER
 	call_if_var_eq VAR_RESULT, 1, Questionnaire_EventScript_PichuEgg_Slot2
 	call_if_var_eq VAR_RESULT, 2, Questionnaire_EventScript_PichuEgg_Slot3

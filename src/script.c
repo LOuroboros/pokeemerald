@@ -12,8 +12,6 @@ enum {
     SCRIPT_MODE_NATIVE,
 };
 
-extern const u8* gRamScriptRetAddr;
-
 static u8 sScriptContext1Status;
 static struct ScriptContext sScriptContext1;
 static struct ScriptContext sScriptContext2;

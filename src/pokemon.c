@@ -3682,14 +3682,6 @@ void ConvertPokemonToBattleTowerPokemon(struct Pokemon *mon, struct BattleTowerP
     GetMonData(mon, MON_DATA_NICKNAME, dest->nickname);
 }
 
-void CreateEventLegalMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId)
-{
-    bool32 isEventLegal = TRUE;
-
-    CreateMon(mon, species, level, fixedIV, hasFixedPersonality, fixedPersonality, otIdType, fixedOtId);
-    SetMonData(mon, MON_DATA_EVENT_LEGAL, &isEventLegal);
-}
-
 // If FALSE, should load this game's Deoxys form. If TRUE, should load normal Deoxys form
 bool8 ShouldIgnoreDeoxysForm(u8 caseId, u8 battlerId)
 {
@@ -3775,23 +3767,6 @@ u16 GetUnionRoomTrainerClass(void)
     arrId = gLinkPlayers[linkId].trainerId & 7;
     arrId |= gLinkPlayers[linkId].gender << 3;
     return gFacilityClassToTrainerClass[gLinkPlayerFacilityClasses[arrId]];
-}
-
-void CreateEventLegalEnemyMon(void)
-{
-    s32 species = gSpecialVar_0x8004;
-    s32 level = gSpecialVar_0x8005;
-    s32 itemId = gSpecialVar_0x8006;
-
-    ZeroEnemyPartyMons();
-    CreateEventLegalMon(&gEnemyParty[0], species, level, USE_RANDOM_IVS, 0, 0, 0, 0);
-    if (itemId)
-    {
-        u8 heldItem[2];
-        heldItem[0] = itemId;
-        heldItem[1] = itemId >> 8;
-        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, heldItem);
-    }
 }
 
 #define CALC_STAT(base, iv, ev, statIndex, field)               \
@@ -4276,21 +4251,6 @@ u32 GetMonData(struct Pokemon *mon, s32 field, u8* data)
     case MON_DATA_SPDEF:
         ret = mon->spDefense;
         break;
-    case MON_DATA_ATK2:
-        ret = mon->attack;
-        break;
-    case MON_DATA_DEF2:
-        ret = mon->defense;
-        break;
-    case MON_DATA_SPEED2:
-        ret = mon->speed;
-        break;
-    case MON_DATA_SPATK2:
-        ret = mon->spAttack;
-        break;
-    case MON_DATA_SPDEF2:
-        ret = mon->spDefense;
-        break;
     case MON_DATA_MAIL:
         ret = mon->mail;
         break;
@@ -4434,9 +4394,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_TOUGH:
         retVal = boxMon->tough;
         break;
-    case MON_DATA_SHEEN:
-        retVal = boxMon->sheen;
-        break;
     case MON_DATA_POKERUS:
         retVal = boxMon->pokerus;
         break;
@@ -4509,21 +4466,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_EFFORT_RIBBON:
         retVal = boxMon->effortRibbon;
         break;
-    case MON_DATA_COUNTRY_RIBBON:
-        retVal = boxMon->countryRibbon;
-        break;
-    case MON_DATA_NATIONAL_RIBBON:
-        retVal = boxMon->nationalRibbon;
-        break;
-    case MON_DATA_EARTH_RIBBON:
-        retVal = boxMon->earthRibbon;
-        break;
-    case MON_DATA_WORLD_RIBBON:
-        retVal = boxMon->worldRibbon;
-        break;
-    case MON_DATA_EVENT_LEGAL:
-        retVal = boxMon->eventLegal;
-        break;
     case MON_DATA_SPECIES2:
         retVal = boxMon->species;
         if (boxMon->species && boxMon->isEgg)
@@ -4564,10 +4506,6 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal += boxMon->victoryRibbon;
             retVal += boxMon->artistRibbon;
             retVal += boxMon->effortRibbon;
-            retVal += boxMon->countryRibbon;
-            retVal += boxMon->nationalRibbon;
-            retVal += boxMon->earthRibbon;
-            retVal += boxMon->worldRibbon;
         }
         break;
     case MON_DATA_RIBBONS:
@@ -4583,11 +4521,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (boxMon->winningRibbon << 16)
                 | (boxMon->victoryRibbon << 17)
                 | (boxMon->artistRibbon << 18)
-                | (boxMon->effortRibbon << 19)
-                | (boxMon->countryRibbon << 23)
-                | (boxMon->nationalRibbon << 24)
-                | (boxMon->earthRibbon << 25)
-                | (boxMon->worldRibbon << 26);
+                | (boxMon->effortRibbon << 19);
         }
         break;
     default:
@@ -4756,9 +4690,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_TOUGH:
         SET8(boxMon->tough);
         break;
-    case MON_DATA_SHEEN:
-        SET8(boxMon->sheen);
-        break;
     case MON_DATA_POKERUS:
         SET8(boxMon->pokerus);
         break;
@@ -4836,21 +4767,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_EFFORT_RIBBON:
         SET8(boxMon->effortRibbon);
-        break;
-    case MON_DATA_COUNTRY_RIBBON:
-        SET8(boxMon->countryRibbon);
-        break;
-    case MON_DATA_NATIONAL_RIBBON:
-        SET8(boxMon->nationalRibbon);
-        break;
-    case MON_DATA_EARTH_RIBBON:
-        SET8(boxMon->earthRibbon);
-        break;
-    case MON_DATA_WORLD_RIBBON:
-        SET8(boxMon->worldRibbon);
-        break;
-    case MON_DATA_EVENT_LEGAL:
-        SET8(boxMon->eventLegal);
         break;
     case MON_DATA_IVS:
     {

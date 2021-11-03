@@ -48,7 +48,7 @@ struct PokenavSub13
     u16 numNormalRibbons;
     u16 numGiftRibbons;
     u32 ribbonIds[FIRST_GIFT_RIBBON];
-    u32 giftRibbonIds[NUM_GIFT_RIBBONS];
+    u32 giftRibbonIds[0];
     u32 unused2;
     u32 (*callback)(struct PokenavSub13 *);
 };
@@ -131,10 +131,6 @@ struct
     {1, 1, VICTORY_RIBBON,       FALSE},
     {1, 1, ARTIST_RIBBON,        FALSE},
     {1, 1, EFFORT_RIBBON,        FALSE},
-    {1, 1, COUNTRY_RIBBON,       TRUE},
-    {1, 1, NATIONAL_RIBBON,      TRUE},
-    {1, 1, EARTH_RIBBON,         TRUE},
-    {1, 1, WORLD_RIBBON,         TRUE}
 };
 
 #include "data/text/ribbon_descriptions.h"
@@ -1109,10 +1105,6 @@ struct
     [VICTORY_RIBBON]       = { RIBBONGFX_VICTORY,        TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_1)},
     [ARTIST_RIBBON]        = { RIBBONGFX_ARTIST,         TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_2)},
     [EFFORT_RIBBON]        = { RIBBONGFX_EFFORT,         TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_3)},
-    [COUNTRY_RIBBON]       = { RIBBONGFX_GIFT_2,         TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_4)},
-    [NATIONAL_RIBBON]      = { RIBBONGFX_GIFT_2,         TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_5)},
-    [EARTH_RIBBON]         = { RIBBONGFX_GIFT_3,         TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_1)},
-    [WORLD_RIBBON]         = { RIBBONGFX_GIFT_3,         TO_PAL_OFFSET(PALTAG_RIBBON_ICONS_2)},
 };
 
 #undef TO_PAL_OFFSET
