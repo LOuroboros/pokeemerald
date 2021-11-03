@@ -520,6 +520,8 @@ static const s16 sMugshotsOpponentCoords[TRAINER_PIC_COUNT][2] =
     [TRAINER_PIC_LEADER_WINONA]        = {-32, 0},
     [TRAINER_PIC_LEADER_TATE_AND_LIZA] = {-32, 0},
     [TRAINER_PIC_LEADER_JUAN]          = { 0,  0},
+    [TRAINER_PIC_WALLY_2]              = { 0,  0},
+    [TRAINER_PIC_WALLY_3]              = { 0,  0},
 };
 
 static const TransitionSpriteCallback sTrainerPicSpriteCbs[] =
@@ -788,6 +790,8 @@ static const u16 *const sOpponentMugshotsPals[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_LEADER_WINONA]        = sMugshotPal_Winona,
     [TRAINER_PIC_LEADER_TATE_AND_LIZA] = sMugshotPal_TateAndLiza,
     [TRAINER_PIC_LEADER_JUAN]          = sMugshotPal_Juan,
+    [TRAINER_PIC_WALLY_2]              = sMugshotPal_Wally,
+    [TRAINER_PIC_WALLY_3]              = sMugshotPal_Wally,
 };
 
 static const u16 *const sPlayerMugshotsPals[GENDER_COUNT] =

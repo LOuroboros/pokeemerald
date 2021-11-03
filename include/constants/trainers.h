@@ -113,7 +113,9 @@
 #define TRAINER_PIC_ADVENTURES_BRENDAN    93
 #define TRAINER_PIC_ADVENTURES_MAY        94
 #define TRAINER_PIC_MAGMA_ADMIN_F         95
-#define TRAINER_PIC_COUNT                 96
+#define TRAINER_PIC_WALLY_2               96
+#define TRAINER_PIC_WALLY_3               97
+#define TRAINER_PIC_COUNT                 98
 
 #define TRAINER_BACK_PIC_BRENDAN                0
 #define TRAINER_BACK_PIC_MAY                    1

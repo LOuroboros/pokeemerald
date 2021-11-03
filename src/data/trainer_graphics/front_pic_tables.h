@@ -96,6 +96,8 @@ const struct MonCoords gTrainerFrontPicCoords[] =
     [TRAINER_PIC_ADVENTURES_BRENDAN] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_ADVENTURES_MAY] = {.size = 8, .y_offset = 1},
     [TRAINER_PIC_MAGMA_ADMIN_F] = {.size = 8, .y_offset = 1},
+    [TRAINER_PIC_WALLY_2] = {.size = 8, .y_offset = 1},
+    [TRAINER_PIC_WALLY_3] = {.size = 8, .y_offset = 1},
 };
 
 #define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
@@ -198,6 +200,8 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(ADVENTURES_BRENDAN, gTrainerFrontPic_AdventuresBrendan, 0x800),
     TRAINER_SPRITE(ADVENTURES_MAY, gTrainerFrontPic_AdventuresMay, 0x800),
     TRAINER_SPRITE(MAGMA_ADMIN_F, gTrainerFrontPic_MagmaAdminF, 0x800),
+    TRAINER_SPRITE(WALLY_2, gTrainerFrontPic_Wally2, 0x800),
+    TRAINER_SPRITE(WALLY_3, gTrainerFrontPic_Wally3, 0x800),
 };
 
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
@@ -300,4 +304,6 @@ const struct SpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(ADVENTURES_BRENDAN, gTrainerPalette_AdventuresBrendan),
     TRAINER_PAL(ADVENTURES_MAY, gTrainerPalette_AdventuresMay),
     TRAINER_PAL(MAGMA_ADMIN_F, gTrainerPalette_MagmaAdminF),
+    TRAINER_PAL(WALLY_2, gTrainerPalette_Wally2),
+    TRAINER_PAL(WALLY_3, gTrainerPalette_Wally3),
 };

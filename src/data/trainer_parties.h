@@ -8265,6 +8265,7 @@ static const struct TrainerMon sParty_WallyVR2[] = {
         .ivs = {30, 30, 30, 30, 30, 30},
         .lvl = 48,
         .species = SPECIES_GARDEVOIR,
+        .heldItem = ITEM_GARDEVOIRITE,
         .moves = {MOVE_DOUBLE_TEAM, MOVE_CALM_MIND, MOVE_PSYCHIC, MOVE_FUTURE_SIGHT}
     }
 };

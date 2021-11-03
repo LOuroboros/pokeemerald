@@ -6671,6 +6671,8 @@ extern const u32 gTrainerFrontPic_RubySapphireMay[];
 extern const u32 gTrainerFrontPic_AdventuresBrendan[];
 extern const u32 gTrainerFrontPic_AdventuresMay[];
 extern const u32 gTrainerFrontPic_MagmaAdminF[];
+extern const u32 gTrainerFrontPic_Wally2[];
+extern const u32 gTrainerFrontPic_Wally3[];
 
 extern const u16 gTrainerPalette_Hiker[];
 extern const u16 gTrainerPalette_AquaGruntM[];
@@ -6768,6 +6770,8 @@ extern const u16 gTrainerPalette_RubySapphireMay[];
 extern const u16 gTrainerPalette_AdventuresBrendan[];
 extern const u16 gTrainerPalette_AdventuresMay[];
 extern const u16 gTrainerPalette_MagmaAdminF[];
+extern const u16 gTrainerPalette_Wally2[];
+extern const u16 gTrainerPalette_Wally3[];
 
 extern const u8 gTrainerBackPic_Brendan[];
 extern const u8 gTrainerBackPic_May[];
