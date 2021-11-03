@@ -84,12 +84,10 @@ SouthernIsland_Interior_MegaEventClimax:
 	getplayerxy VAR_TEMP_1, VAR_TEMP_2
 	call_if_var_eq VAR_TEMP_1, 13, SouthernIsland_Interior_EventScript_PlayerWalksToSteven1
 	call_if_var_eq VAR_TEMP_1, 14, SouthernIsland_Interior_EventScript_PlayerWalksToSteven2
-	special SavePlayerParty
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
-	compare VAR_RESULT, 0
-	goto_if_ne SouthernIsland_Interior_EventScript_DoStevenMultiBattle
+	goto_if_var_ne VAR_RESULT, 0, SouthernIsland_Interior_EventScript_DoStevenMultiBattle
 SouthernIsland_Interior_EventScript_NoTurningBack:
 	special LoadPlayerParty
 	applymovement LOCALID_STEVEN, Common_Movement_FaceRight
@@ -103,8 +101,7 @@ SouthernIsland_Interior_EventScript_NoTurningBack:
 	fadescreen FADE_TO_BLACK
 	special ChooseHalfPartyForBattle
 	waitstate
-	compare VAR_RESULT, 0
-	goto_if_ne SouthernIsland_Interior_EventScript_DoStevenMultiBattle
+	goto_if_var_ne VAR_RESULT, 0, SouthernIsland_Interior_EventScript_DoStevenMultiBattle
 	goto SouthernIsland_Interior_EventScript_NoTurningBack
 
 SouthernIsland_Interior_EventScript_DoStevenMultiBattle:
