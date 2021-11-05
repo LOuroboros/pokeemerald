@@ -55,6 +55,7 @@
 #include "constants/battle_transition.h"
 #include "constants/infobox.h"
 #include "constants/region_map_sections.h"
+#include "constants/rgb.h"
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -1064,6 +1065,21 @@ Common_EventScript_LegendaryFlewAway::
 	msgbox gText_LegendaryFlewAway, MSGBOX_DEFAULT
 	release
 	end
+
+Script_SetGrayscaleTint::
+	writebytetoaddr GLOBAL_FIELD_TINT_GRAYSCALE, gGlobalFieldTintMode
+	callnative InitMapView
+	return
+
+Script_SetSepiaTint::
+	writebytetoaddr GLOBAL_FIELD_TINT_SEPIA, gGlobalFieldTintMode
+	callnative InitMapView
+	return
+
+Script_RemoveTint::
+	writebytetoaddr GLOBAL_FIELD_TINT_NONE, gGlobalFieldTintMode
+	callnative InitMapView
+	return
 
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/abnormal_weather.inc"

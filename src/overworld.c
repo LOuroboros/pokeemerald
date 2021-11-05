@@ -66,6 +66,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "constants/rgb.h"
 
 struct CableClubPlayer
 {
@@ -535,9 +536,13 @@ void Overworld_SetObjEventTemplateMovementType(u8 localId, u8 movementType)
     }
 }
 
-static void InitMapView(void)
+void InitMapView(void)
 {
+    s32 paletteIndex;
+
     ResetFieldCamera();
+    for (paletteIndex = 0; paletteIndex < 15; paletteIndex++)
+        ApplyGlobalFieldPaletteTint(paletteIndex);
     CopyMapTilesetsToVram(gMapHeader.mapLayout);
     LoadMapTilesetPalettes(gMapHeader.mapLayout);
     DrawWholeMapView();

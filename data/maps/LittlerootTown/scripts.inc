@@ -385,6 +385,11 @@ LittlerootTown_EventScript_GoSaveBirchTrigger::
 	end
 
 LittlerootTown_EventScript_TownSign::
+	call Script_SetGrayscaleTint
+	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
+	call Script_SetSepiaTint
+	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
+	call Script_RemoveTint
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
 	end
 
