@@ -1,5 +1,6 @@
 TOOLCHAIN := $(DEVKITARM)
 COMPARE ?= 0
+SCRIPT := tools/poryscript/poryscript$(EXE)
 
 ifeq (compare,$(MAKECMDGOALS))
   COMPARE := 1
