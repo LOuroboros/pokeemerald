@@ -4410,6 +4410,46 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_TWINLEAF_TOWN",
+      "name": "TwinleafTown_Layout",
+      "width": 24,
+      "height": 28,
+      "primary_tileset": "gTileset_General_Shinnoh",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/TwinleafTown/border.bin",
+      "blockdata_filepath": "data/layouts/TwinleafTown/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE201",
+      "name": "Route201_Layout",
+      "width": 60,
+      "height": 20,
+      "primary_tileset": "gTileset_General_Shinnoh",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route201/border.bin",
+      "blockdata_filepath": "data/layouts/Route201/map.bin"
+    },
+    {
+      "id": "LAYOUT_SANDGEM_TOWN",
+      "name": "SandgemTown_Layout",
+      "width": 30,
+      "height": 32,
+      "primary_tileset": "gTileset_General_Shinnoh",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/SandgemTown/border.bin",
+      "blockdata_filepath": "data/layouts/SandgemTown/map.bin"
+    },
+    {
+      "id": "LAYOUT_ROUTE202",
+      "name": "Route202_Layout",
+      "width": 34,
+      "height": 30,
+      "primary_tileset": "gTileset_General_Shinnoh",
+      "secondary_tileset": "gTileset_Petalburg",
+      "border_filepath": "data/layouts/Route202/border.bin",
+      "blockdata_filepath": "data/layouts/Route202/map.bin"
     }
   ]
 }

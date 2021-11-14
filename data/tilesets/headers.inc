@@ -830,3 +830,14 @@ gTileset_UnionRoom::
 	.4byte gMetatiles_UnionRoom
 	.4byte gMetatileAttributes_UnionRoom
 	.4byte NULL @ animation callback
+
+	.align 2
+gTileset_General_Shinnoh::
+	.byte TRUE @ is compressed
+	.byte FALSE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_General_Shinnoh
+	.4byte gTilesetPalettes_General_Shinnoh
+	.4byte gMetatiles_General_Shinnoh
+	.4byte gMetatileAttributes_General_Shinnoh
+	.4byte NULL
