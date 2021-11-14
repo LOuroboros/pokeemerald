@@ -273,7 +273,7 @@ static void CloseSaveFile()
 #define KEY_A_BUTTON      SDLK_z
 #define KEY_B_BUTTON      SDLK_x
 #define KEY_START_BUTTON  SDLK_RETURN
-#define KEY_SELECT_BUTTON SDLK_BACKSLASH
+#define KEY_SELECT_BUTTON SDLK_BACKSPACE
 #define KEY_L_BUTTON      SDLK_a
 #define KEY_R_BUTTON      SDLK_s
 #define KEY_DPAD_UP       SDLK_UP
@@ -313,7 +313,7 @@ void ProcessEvents(void)
             HANDLE_KEYUP(DPAD_DOWN)
             HANDLE_KEYUP(DPAD_LEFT)
             HANDLE_KEYUP(DPAD_RIGHT)
-            case SDLK_SPACE:
+            case SDLK_c:
                 if (speedUp)
                 {
                     speedUp = false;
@@ -349,7 +349,7 @@ void ProcessEvents(void)
                     paused = !paused;
                 }
                 break;
-            case SDLK_SPACE:
+            case SDLK_c:
                 if (!speedUp)
                 {
                     speedUp = true;
