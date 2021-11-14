@@ -17,6 +17,7 @@
 #include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "field_message_box.h"
+#include "field_name_box.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_specials.h"
@@ -2336,4 +2337,19 @@ bool8 ScrCmd_warpsootopolislegend(struct ScriptContext *ctx)
     DoSootopolisLegendWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
+}
+
+bool8 ScrCmd_namebox(struct ScriptContext *ctx) {
+    const u8 *name = (const u8 *)ScriptReadWord(ctx);
+
+    if (name == NULL)
+        name = (const u8 *)ctx->data[0];
+    ShowFieldName(name);
+    return FALSE;
+}
+
+void ScrCmd_closenamebox(void) {
+    if(IsNameboxDisplayed())
+        ClearNamebox();
+    return;
 }

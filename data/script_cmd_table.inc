@@ -227,6 +227,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_warpsootopolislegend      @ 0xe0
 	.4byte ScrCmd_buffercontesttype         @ 0xe1
 	.4byte ScrCmd_bufferitemnameplural      @ 0xe2
+	.4byte ScrCmd_namebox					@ 0xe3
+	.4byte ScrCmd_closenamebox				@ 0xe4
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

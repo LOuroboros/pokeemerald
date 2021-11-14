@@ -13,7 +13,9 @@ TwinleafTown_EventScript_Woman::
 
 
 TwinleafTown_EventScript_Man::
-	msgbox TwinleafTown_EventScript_Man_Text_0, MSGBOX_NPC
+	namebox TwinleafTown_EventScript_Man_Text_0
+	msgbox TwinleafTown_EventScript_Man_Text_1, MSGBOX_NPC
+	closeboth
 	return
 
 
@@ -48,6 +50,9 @@ TwinleafTown_EventScript_Woman_Text_0:
 	.string "friends with them!$"
 
 TwinleafTown_EventScript_Man_Text_0:
+	.string "Testing$"
+
+TwinleafTown_EventScript_Man_Text_1:
 	.string "Hiya, {PLAYER}.\n"
 	.string "Pearl was looking for you.\p"
 	.string "I think he's home now.\n"
