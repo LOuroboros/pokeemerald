@@ -45,6 +45,7 @@
 #include "constants/songs.h"
 #include "union_room.h"
 #include "constants/rgb.h"
+#include "debug.h"
 
 // Menu actions
 enum
@@ -56,6 +57,7 @@ enum
     MENU_ACTION_PLAYER,
     MENU_ACTION_SAVE,
     MENU_ACTION_OPTION,
+    MENU_ACTION_DEBUG,
     MENU_ACTION_EXIT,
     MENU_ACTION_RETIRE_SAFARI,
     MENU_ACTION_PLAYER_LINK,
@@ -97,6 +99,7 @@ static bool8 StartMenuPokeNavCallback(void);
 static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
+static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
@@ -162,6 +165,7 @@ static const struct MenuAction sStartMenuItems[] =
     {gText_MenuPlayer, {.u8_void = StartMenuPlayerNameCallback}},
     {gText_MenuSave, {.u8_void = StartMenuSaveCallback}},
     {gText_MenuOption, {.u8_void = StartMenuOptionCallback}},
+    {gText_MenuDebug, {.u8_void = StartMenuDebugCallback}},
     {gText_MenuExit, {.u8_void = StartMenuExitCallback}},
     {gText_MenuRetire, {.u8_void = StartMenuSafariZoneRetireCallback}},
     {gText_MenuPlayer, {.u8_void = StartMenuLinkModePlayerNameCallback}},
@@ -307,6 +311,10 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
+
+    if (FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU) == TRUE)
+        AddStartMenuAction(MENU_ACTION_DEBUG);
+
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
@@ -594,7 +602,18 @@ static bool8 HandleStartMenuInput(void)
             && gMenuCallback != StartMenuSafariZoneRetireCallback
             && gMenuCallback != StartMenuBattlePyramidRetireCallback)
         {
-           FadeScreen(FADE_TO_BLACK, 0);
+            if (gMenuCallback == StartMenuDebugCallback)
+            {
+                PlayerFreeze();
+                sub_808BCF4();
+                ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
+                RemoveStartMenuWindow();
+                ScriptContext2_Enable();
+            }
+            else
+            {
+                FadeScreen(FADE_TO_BLACK, 0);
+            }
         }
 
         return FALSE;
@@ -716,6 +735,14 @@ static bool8 StartMenuOptionCallback(void)
     }
 
     return FALSE;
+}
+
+static bool8 StartMenuDebugCallback(void)
+{
+    PlaySE(SE_WIN_OPEN);
+    Debug_ShowMainMenu();
+
+    return TRUE;
 }
 
 static bool8 StartMenuExitCallback(void)

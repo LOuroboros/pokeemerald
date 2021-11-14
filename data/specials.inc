@@ -535,3 +535,8 @@ gSpecials:: /* 81DBA64*/
 	def_special RemoveRecordsWindow
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
+	def_special CheckSavefileSize
+	def_special CheckMonOffensiveEVs
+	def_special CheckMonDefensiveEVs
+	def_special CheckMonOffensiveIVs
+	def_special CheckMonDefensiveIVs
