@@ -17,6 +17,7 @@
 #include "rtc.h"
 #include "gba/defines.h"
 #include "gba/m4a_internal.h"
+#include "cgb_audio.h"
 
 extern void (*const gIntrTable[])(void);
 
@@ -145,6 +146,8 @@ int main(int argc, char **argv)
     want.format = AUDIO_F32;
     want.channels = 2;
     want.samples = 1024;
+    cgb_audio_init(want.freq);
+
 
     if (SDL_OpenAudio(&want, 0) < 0)
         SDL_Log("Failed to open audio: %s", SDL_GetError());

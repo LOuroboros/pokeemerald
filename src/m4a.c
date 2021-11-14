@@ -1,6 +1,9 @@
 #include <string.h>
 #include "gba/m4a_internal.h"
-#include "CGB_sound.h"
+
+#ifdef PORTABLE
+    #include "cgb_audio.h"
+#endif
 
 extern const u8 gCgb3Vol[];
 
@@ -10,7 +13,6 @@ extern const u8 gCgb3Vol[];
 BSS_CODE ALIGNED(4) char SoundMainRAM_Buffer[0x800] = {0};
 #endif
 
-extern struct AudioCGB gb;
 struct SoundInfo gSoundInfo;
 struct PokemonCrySong gPokemonCrySongs[MAX_POKEMON_CRIES];
 struct MusicPlayerInfo gPokemonCryMusicPlayers[MAX_POKEMON_CRIES];
@@ -108,23 +110,6 @@ void m4aSoundInit(void)
         struct MusicPlayerTrack *track = &gPokemonCryTracks[i * 2];
         MPlayOpen(mplayInfo, track, 2);
         track->chan = 0;
-    }
-
-    gb.ch1Freq = 0;
-    gb.ch1SweepCounter = 0;
-    gb.ch1SweepCounterI = 0;
-    gb.ch1SweepDir = 0;
-    gb.ch1SweepShift = 0;
-    for (i = 0; i < 4; i++){
-        gb.Vol[i] = 0;
-        gb.VolI[i] = 0;
-        gb.Len[i] = 0;
-        gb.LenI[i] = 0;
-        gb.LenOn[i] = 0;
-        gb.EnvCounter[i] = 0;
-        gb.EnvCounterI[i] = 0;
-        gb.EnvDir[i] = 0;
-        gb.DAC[i] = 0;
     }
 }
 
@@ -307,6 +292,12 @@ void MPlayExtender(struct CgbChannel *cgbChans)
     REG_NR30 = 0;
     REG_NR50 = 0x77;
 
+    #ifdef PORTABLE
+    for(u8 i = 0; i < 4; i++){
+        cgb_set_envelope(i, 8);
+        cgb_trigger_note(i);
+    }
+    #endif
     soundInfo = SOUND_INFO_PTR;
 
     ident = soundInfo->ident;
@@ -890,6 +881,10 @@ void CgbOscOff(u8 chanNum)
         REG_NR42 = 8;
         REG_NR44 = 0x80;
     }
+    #ifdef PORTABLE
+        cgb_set_envelope(chanNum - 1, 8);
+        cgb_trigger_note(chanNum - 1);
+    #endif
 }
 
 static inline int CgbPan(struct CgbChannel *chan)
@@ -1018,9 +1013,9 @@ void CgbSound(void)
                 {
                 case 1:
                     *nrx0ptr = channels->sweep;
-                    gb.ch1SweepDir = (channels->sweep & 0x08) >> 3;
-                    gb.ch1SweepCounter = gb.ch1SweepCounterI = (channels->sweep & 0x70) >> 4;
-                    gb.ch1SweepShift = (channels->sweep & 0x07);
+                    #ifdef PORTABLE
+                        cgb_set_sweep(channels->sweep);
+                    #endif
                     // fallthrough
                 case 2:
                     *nrx1ptr = ((u32)channels->wavePointer << 6) + channels->length;
@@ -1034,10 +1029,9 @@ void CgbSound(void)
                         REG_WAVE_RAM2 = channels->wavePointer[2];
                         REG_WAVE_RAM3 = channels->wavePointer[3];
                         channels->currentPointer = channels->wavePointer;
-                        for(u8 wavi = 0; wavi < 0x10; wavi++){
-                            gb.WAVRAM[(wavi << 1)] = -15 + (((*(REG_ADDR_WAVE_RAM0 + wavi)) & 0xF0) >> 3);
-                            gb.WAVRAM[(wavi << 1) + 1] = -15 + (((*(REG_ADDR_WAVE_RAM0 + wavi)) & 0x0F) << 1);
-                        }
+                        #ifdef PORTABLE
+                            cgb_set_wavram();
+                        #endif
                     }
                     *nrx0ptr = 0;
                     *nrx1ptr = channels->length;
@@ -1057,7 +1051,9 @@ void CgbSound(void)
                         channels->n4 = 0x00;
                     break;
                 }
-                gb.Len[ch - 1] = gb.LenI[ch - 1] = channels->length;
+                #ifdef PORTABLE
+                    cgb_set_length(ch - 1, channels->length);
+                #endif
                 channels->envelopeCounter = channels->attack;
                 if ((s8)(channels->attack & mask))
                 {
@@ -1245,20 +1241,6 @@ void CgbSound(void)
                     *nrx4ptr = channels->n4;
                     channels->n4 &= 0x7f;
                 }
-                switch((gCgb3Vol[channels->envelopeVolume] & 0x60)){
-                    case 0x00://mute
-                        gb.Vol[2] = gb.VolI[2] = 8;
-                    break;
-                    case 0x20://full
-                        gb.Vol[2] = gb.VolI[2] = 0;
-                    break;
-                    case 0x40://half
-                        gb.Vol[2] = gb.VolI[2] = 2;
-                    break;
-                    case 0x60://quarter
-                        gb.Vol[2] = gb.VolI[2] = 3;
-                    break;
-                }
             }
             else
             {
@@ -1267,20 +1249,15 @@ void CgbSound(void)
                 *nrx4ptr = channels->n4 | 0x80;
                 if (ch == 1 && !(*nrx0ptr & 0x08))
                     *nrx4ptr = channels->n4 | 0x80;
-                gb.DAC[ch - 1] = (*nrx2ptr & 0xF8) > 0;
-                gb.Vol[ch - 1] = gb.VolI[ch - 1] = channels->envelopeVolume;
-                gb.EnvDir[ch - 1] = (envelopeStepTimeAndDir & 0x08) >> 3;
-                gb.EnvCounter[ch - 1] = gb.EnvCounterI[ch - 1] = (envelopeStepTimeAndDir & 0x07);
             }
+            #ifdef PORTABLE
+                cgb_set_envelope(ch - 1, *nrx2ptr);
+            #endif
         }
-        gb.Vol[ch - 1] = gb.VolI[ch - 1];
-        if(ch != 3) gb.EnvCounter[ch - 1] = gb.EnvCounterI[ch - 1];
-        gb.Len[ch - 1] = gb.LenI[ch - 1];
-        if(*nrx4ptr & 0x40){
-            gb.LenOn[ch - 1] = 1;
-        }else{
-            gb.LenOn[ch - 1] = 0;
-        }
+        #ifdef PORTABLE
+            cgb_toggle_length(ch - 1, (*nrx4ptr & 0x40));
+            cgb_trigger_note(ch - 1);
+        #endif
 
     channel_complete:
         channels->modify = 0;
