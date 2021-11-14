@@ -944,12 +944,12 @@ static void Task_HofPC_DrawSpritesPrintText(u8 taskId)
     BlendPalettes(PALETTES_OBJECTS, 0xC, RGB(16, 29, 24));
 
     ConvertIntToDecimalStringN(gStringVar1, gTasks[taskId].tCurrPageNo, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar4, gText_HOFNumber);
+    StringExpandPlaceholders(gStringVar7, gText_HOFNumber);
 
     if (gTasks[taskId].tCurrTeamNo <= 0)
-        sub_8198204(gStringVar4, gText_PickCancel, 0, 0, TRUE);
+        sub_8198204(gStringVar7, gText_PickCancel, 0, 0, TRUE);
     else
-        sub_8198204(gStringVar4, gText_PickNextCancel, 0, 0, TRUE);
+        sub_8198204(gStringVar7, gText_PickNextCancel, 0, 0, TRUE);
 
     gTasks[taskId].func = Task_HofPC_PrintMonInfo;
 }

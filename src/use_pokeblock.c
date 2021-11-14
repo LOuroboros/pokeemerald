@@ -873,10 +873,10 @@ static void AskUsePokeblock(void)
     GetMonData(&gPlayerParty[GetPartyIdFromSelectionId(sMenu->info.curSelection)], MON_DATA_NICKNAME, stringBuffer);
     StringGetEnd10(stringBuffer);
     StringAppend(stringBuffer, gText_GetsAPokeBlockQuestion);
-    StringCopy(gStringVar4, stringBuffer);
+    StringCopy(gStringVar7, stringBuffer);
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar7, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, 3);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
@@ -913,11 +913,11 @@ static void PrintFirstEnhancement(void)
     }
 
     if (sInfo->statId < FLAVOR_COUNT)
-        BufferEnhancedStatText(gStringVar4, sInfo->statId, sInfo->enhancements[sInfo->statId]);
+        BufferEnhancedStatText(gStringVar7, sInfo->statId, sInfo->enhancements[sInfo->statId]);
     else
-        BufferEnhancedStatText(gStringVar4, sInfo->statId, 0);
+        BufferEnhancedStatText(gStringVar7, sInfo->statId, 0);
 
-    PrintMenuWindowText(gStringVar4);
+    PrintMenuWindowText(gStringVar7);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, 3);
 }
@@ -941,8 +941,8 @@ static bool8 TryPrintNextEnhancement(void)
         }
     }
 
-    BufferEnhancedStatText(gStringVar4, sInfo->statId, sInfo->enhancements[sInfo->statId]);
-    PrintMenuWindowText(gStringVar4);
+    BufferEnhancedStatText(gStringVar7, sInfo->statId, sInfo->enhancements[sInfo->statId]);
+    PrintMenuWindowText(gStringVar7);
     CopyWindowToVram(WIN_TEXT, 2);
 
     return TRUE;
@@ -966,7 +966,7 @@ static void EraseMenuWindow(void)
 
 static void PrintMenuWindowText(const u8 *message)
 {
-    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar4, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, 1, gStringVar7, 0, 1, 0, NULL);
 }
 
 static void BufferEnhancedStatText(u8 *dest, u8 statId, s16 enhancement)

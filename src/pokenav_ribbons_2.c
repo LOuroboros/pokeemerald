@@ -807,9 +807,9 @@ static void PrintCurrentMonRibbonCount(struct PokenavSub14 *structPtr)
     ConvertIntToDecimalStringN(gStringVar1, GetCurrMonRibbonCount(), STR_CONV_MODE_LEFT_ALIGN, 2);
     DynamicPlaceholderTextUtil_Reset();
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_RibbonsF700);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar7, gText_RibbonsF700);
     FillWindowPixelBuffer(structPtr->ribbonCountWindowId, PIXEL_FILL(4));
-    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, 1, color, -1, gStringVar4);
+    AddTextPrinterParameterized3(structPtr->ribbonCountWindowId, 1, 0, 1, color, -1, gStringVar7);
     CopyWindowToVram(structPtr->ribbonCountWindowId, 2);
 }
 

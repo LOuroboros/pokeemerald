@@ -4847,8 +4847,8 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
     textPrinter.fgColor = TEXT_DYNAMIC_COLOR_5;
     textPrinter.bgColor = TEXT_COLOR_TRANSPARENT;
     textPrinter.shadowColor = TEXT_DYNAMIC_COLOR_4;
-    StringExpandPlaceholders(gStringVar4, sBattleDomeWinTexts[winStringId]);
-    textPrinter.currentChar = gStringVar4;
+    StringExpandPlaceholders(gStringVar7, sBattleDomeWinTexts[winStringId]);
+    textPrinter.currentChar = gStringVar7;
     textPrinter.windowId = windowId + 8;
     textPrinter.fontId = 1;
     PutWindowTilemap(windowId + 8);

@@ -55,7 +55,7 @@ SlateportCity_BattleTentBattleRoom_EventScript_EnterRoom:: /* 82099BE*/
 	waitmovement 0
 	battletent_getopponentintro
 	lockall
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVar7, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	special HealPlayerParty

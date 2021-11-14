@@ -633,9 +633,9 @@ static void PrintItemQuantity(u8 windowId, s32 itemIndex, u8 y)
                                gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode][itemIndex],
                                STR_CONV_MODE_RIGHT_ALIGN,
                                2);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    xAlign = GetStringRightAlignXOffset(7, gStringVar4, 0x77);
-    PrintOnWindow_Font7(windowId, gStringVar4, xAlign, y, 0, 0, TEXT_SPEED_FF, 0);
+    StringExpandPlaceholders(gStringVar7, gText_xVar1);
+    xAlign = GetStringRightAlignXOffset(7, gStringVar7, 0x77);
+    PrintOnWindow_Font7(windowId, gStringVar7, xAlign, y, 0, 0, TEXT_SPEED_FF, 0);
 }
 
 static void PrintItemDescription(s32 listMenuId)
@@ -648,8 +648,8 @@ static void PrintItemDescription(s32 listMenuId)
     else
     {
         StringCopy(gStringVar1, gReturnToXStringsTable2[gPyramidBagCursorData.unk4]);
-        StringExpandPlaceholders(gStringVar4, gText_ReturnToVar1);
-        desc = gStringVar4;
+        StringExpandPlaceholders(gStringVar7, gText_ReturnToVar1);
+        desc = gStringVar7;
     }
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
     PrintOnWindow_Font1(1, desc, 3, 0, 0, 1, 0, 0);
@@ -910,9 +910,9 @@ static void sub_81C5D20(u8 taskId)
     }
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gText_Var1IsSelected);
+    StringExpandPlaceholders(gStringVar7, gText_Var1IsSelected);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
+    PrintOnWindow_Font1(1, gStringVar7, 3, 0, 0, 1, 0, 0);
     if (gPyramidBagResources->menuActionsCount == 1)
         sub_81C5EAC(sub_81C6D24(0));
     else if (gPyramidBagResources->menuActionsCount == 2)
@@ -1085,9 +1085,9 @@ static void BagAction_Toss(u8 taskId)
     else
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_TossHowManyVar1s);
+        StringExpandPlaceholders(gStringVar7, gText_TossHowManyVar1s);
         FillWindowPixelBuffer(1, PIXEL_FILL(0));
-        PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
+        PrintOnWindow_Font1(1, gStringVar7, 3, 0, 0, 1, 0, 0);
         sub_81C6404();
         gTasks[taskId].func = sub_81C64B4;
     }
@@ -1099,9 +1099,9 @@ static void sub_81C6350(u8 taskId)
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gText_ConfirmTossItems);
+    StringExpandPlaceholders(gStringVar7, gText_ConfirmTossItems);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
+    PrintOnWindow_Font1(1, gStringVar7, 3, 0, 0, 1, 0, 0);
     sub_81C6DAC(taskId, &sYesNoTossFuncions);
 }
 
@@ -1119,10 +1119,10 @@ static void sub_81C6404(void)
     s32 x;
 
     ConvertIntToDecimalStringN(gStringVar1, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
+    StringExpandPlaceholders(gStringVar7, gText_xVar1);
     sub_81C6CEC(3);
-    x = GetStringCenterAlignXOffset(1, gStringVar4, 0x28);
-    AddTextPrinterParameterized(3, 1, gStringVar4, x, 2, 0, NULL);
+    x = GetStringCenterAlignXOffset(1, gStringVar7, 0x28);
+    AddTextPrinterParameterized(3, 1, gStringVar7, x, 2, 0, NULL);
 }
 
 static void sub_81C645C(s16 value)
@@ -1130,9 +1130,9 @@ static void sub_81C645C(s16 value)
     s32 x;
 
     ConvertIntToDecimalStringN(gStringVar1, value, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    x = GetStringCenterAlignXOffset(1, gStringVar4, 0x28);
-    AddTextPrinterParameterized(3, 1, gStringVar4, x, 2, 0, NULL);
+    StringExpandPlaceholders(gStringVar7, gText_xVar1);
+    x = GetStringCenterAlignXOffset(1, gStringVar7, 0x28);
+    AddTextPrinterParameterized(3, 1, gStringVar7, x, 2, 0, NULL);
 }
 
 static void sub_81C64B4(u8 taskId)
@@ -1167,9 +1167,9 @@ static void TossItem(u8 taskId)
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, data[8], STR_CONV_MODE_LEFT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar4, gText_ThrewAwayVar2Var1s);
+    StringExpandPlaceholders(gStringVar7, gText_ThrewAwayVar2Var1s);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
+    PrintOnWindow_Font1(1, gStringVar7, 3, 0, 0, 1, 0, 0);
     gTasks[taskId].func = sub_81C65CC;
 }
 
@@ -1214,8 +1214,8 @@ static void BagAction_Give(u8 taskId)
 static void sub_81C66AC(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gText_Var1CantBeHeld);
-    DisplayItemMessageInBattlePyramid(taskId, gStringVar4, sub_81C66EC);
+    StringExpandPlaceholders(gStringVar7, gText_Var1CantBeHeld);
+    DisplayItemMessageInBattlePyramid(taskId, gStringVar7, sub_81C66EC);
 }
 
 static void sub_81C66EC(u8 taskId)
@@ -1264,9 +1264,9 @@ static void Task_BeginItemSwap(u8 taskId)
     gPyramidBagResources->unk814 = data[1];
     ListMenuSetUnkIndicatorsStructField(data[0], 0x10, 1);
     CopyItemName(gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode][data[1]], gStringVar1);
-    StringExpandPlaceholders(gStringVar4, gText_MoveVar1Where);
+    StringExpandPlaceholders(gStringVar7, gText_MoveVar1Where);
     FillWindowPixelBuffer(1, PIXEL_FILL(0));
-    PrintOnWindow_Font1(1, gStringVar4, 3, 0, 0, 1, 0, 0);
+    PrintOnWindow_Font1(1, gStringVar7, 3, 0, 0, 1, 0, 0);
     sub_81C5A98(data[0], 1);
     sub_81C704C(data[1]);
     gTasks[taskId].func = Task_ItemSwapHandleInput;

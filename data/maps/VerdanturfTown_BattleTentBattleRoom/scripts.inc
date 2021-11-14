@@ -51,7 +51,7 @@ VerdanturfTown_BattleTentBattleRoom_EventScript_NextOpponentEnter:: /* 820236F*/
 	applymovement LOCALID_OPPONENT, VerdanturfTown_BattleTentBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	battletent_getopponentintro
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVar7, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattlePalaceBattleRoom_EventScript_DoPalaceBattle
 	switch VAR_RESULT

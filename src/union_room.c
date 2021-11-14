@@ -319,8 +319,8 @@ static void StringExpandPlaceholders_AwaitingCommFromAnother(u8 *dst, u8 caseId)
     case ACTIVITY_CONTEST_CUTE:
     case ACTIVITY_CONTEST_SMART:
     case ACTIVITY_CONTEST_TOUGH:
-        // UB: argument *dst isn't used, instead it always prints to gStringVar4
-        StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
+        // UB: argument *dst isn't used, instead it always prints to gStringVar7
+        StringExpandPlaceholders(gStringVar7, sText_AwaitingCommunication);
         break;
     }
 }
@@ -426,20 +426,20 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         if (GROUP_MIN(sPlayerActivityGroupSize) != 0)
         {
             if (data->playerCount > GROUP_MIN(sPlayerActivityGroupSize) - 1 && GROUP_MAX(sPlayerActivityGroupSize) != 0)
-                StringExpandPlaceholders(gStringVar4, sText_AwaitingLinkPressStart);
+                StringExpandPlaceholders(gStringVar7, sText_AwaitingLinkPressStart);
             else
-                StringExpandPlaceholders(gStringVar4, sText_AwaitingCommunication);
+                StringExpandPlaceholders(gStringVar7, sText_AwaitingCommunication);
         }
         else
         {
-            StringExpandPlaceholders_AwaitingCommFromAnother(gStringVar4, gPlayerCurrActivity);
+            StringExpandPlaceholders_AwaitingCommFromAnother(gStringVar7, gPlayerCurrActivity);
         }
 
         PrintNumPlayersWaitingForMsg(data->nPlayerModeWindowId, sPlayerActivityGroupSize, data->playerCount);
         data->state = LL_STATE_PRINT_AWAITING_PLAYERS;
         break;
     case LL_STATE_PRINT_AWAITING_PLAYERS:
-        if (PrintOnTextbox(&data->textState, gStringVar4))
+        if (PrintOnTextbox(&data->textState, gStringVar7))
             data->state = LL_STATE_AWAIT_PLAYERS;
         break;
     case LL_STATE_AWAIT_PLAYERS:
@@ -498,7 +498,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         break;
     case LL_STATE_ACCEPT_NEW_MEMBER_PROMPT:
-        if (PrintOnTextbox(&data->textState, gStringVar4))
+        if (PrintOnTextbox(&data->textState, gStringVar7))
         {
             data->state = LL_STATE_ACCEPT_NEW_MEMBER_PROMPT_HANDLE_INPUT;
         }
@@ -542,7 +542,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
                     else
                     {
                         IntlConvPartnerUname7(gStringVar1, &data->field_0->arr[data->playerCount - 1]);
-                        StringExpandPlaceholders(gStringVar4, sText_AnOKWasSentToPlayer);
+                        StringExpandPlaceholders(gStringVar7, sText_AnOKWasSentToPlayer);
                         data->state = LL_STATE_ACCEPTED_FINAL_MEMBER;
                     }
 
@@ -572,7 +572,7 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         }
         break;
     case LL_STATE_ACCEPTED_FINAL_MEMBER:
-        if (PrintOnTextbox(&data->textState, gStringVar4))
+        if (PrintOnTextbox(&data->textState, gStringVar7))
             data->state = LL_STATE_WAIT_AND_CONFIRM_MEMBERS;
         break;
     case LL_STATE_WAIT_AND_CONFIRM_MEMBERS:
@@ -817,7 +817,7 @@ static bool8 Leader_SetStateIfMemberListChanged(struct WirelessLink_Leader *data
         PlaySE(SE_PC_LOGIN);
         RedrawListMenu(data->listTaskId);
         IntlConvPartnerUname7(gStringVar2, &data->field_0->arr[data->playerCount]);
-        Leader_GetAcceptNewMemberPrompt(gStringVar4, gPlayerCurrActivity);
+        Leader_GetAcceptNewMemberPrompt(gStringVar7, gPlayerCurrActivity);
         data->state = joinedState;
         break;
     case UNION_ROOM_SPAWN_OUT:
@@ -1025,7 +1025,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
                     }
                     else
                     {
-                        StringCopy(gStringVar4, sCantTransmitToTrainerTexts[readyStatus - 1]);
+                        StringCopy(gStringVar7, sCantTransmitToTrainerTexts[readyStatus - 1]);
                         data->state = LG_STATE_TRADE_NOT_READY;
                         PlaySE(SE_POKENAV_ON);
                     }
@@ -1046,8 +1046,8 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         }
         break;
     case LG_STATE_ASK_JOIN_GROUP:
-        GetYouAskedToJoinGroupPleaseWaitMessage(gStringVar4, gPlayerCurrActivity);
-        if (PrintOnTextbox(&data->textState, gStringVar4))
+        GetYouAskedToJoinGroupPleaseWaitMessage(gStringVar7, gPlayerCurrActivity);
+        if (PrintOnTextbox(&data->textState, gStringVar7))
         {
             IntlConvPartnerUname7(gStringVar1, &data->field_0->arr[data->leaderId]);
             data->state = LG_STATE_MAIN;
@@ -1096,8 +1096,8 @@ static void Task_TryJoinLinkGroup(u8 taskId)
             data->state = LG_STATE_DISCONNECTED;
             break;
         case RFU_STATUS_JOIN_GROUP_OK:
-            GetGroupLeaderSentAnOKMessage(gStringVar4, gPlayerCurrActivity);
-            if (PrintOnTextbox(&data->textState, gStringVar4))
+            GetGroupLeaderSentAnOKMessage(gStringVar7, gPlayerCurrActivity);
+            if (PrintOnTextbox(&data->textState, gStringVar7))
             {
                 if (gPlayerCurrActivity == ACTIVITY_BATTLE_TOWER || gPlayerCurrActivity == ACTIVITY_BATTLE_TOWER_OPEN)
                 {
@@ -1107,14 +1107,14 @@ static void Task_TryJoinLinkGroup(u8 taskId)
                 {
                     RfuSetStatus(RFU_STATUS_WAIT_ACK_JOIN_GROUP, 0);
                     StringCopy(gStringVar1, sLinkGroupActivityNameTexts[gPlayerCurrActivity]);
-                    StringExpandPlaceholders(gStringVar4, sText_AwaitingOtherMembers);
+                    StringExpandPlaceholders(gStringVar7, sText_AwaitingOtherMembers);
                 }
             }
             break;
         case RFU_STATUS_WAIT_ACK_JOIN_GROUP:
             if (data->delayBeforePrint > 240)
             {
-                if (PrintOnTextbox(&data->textState, gStringVar4))
+                if (PrintOnTextbox(&data->textState, gStringVar7))
                 {
                     RfuSetStatus(RFU_STATUS_ACK_JOIN_GROUP, 0);
                     data->delayBeforePrint = 0;
@@ -1212,7 +1212,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         }
         break;
     case LG_STATE_TRADE_NOT_READY_RETRY:
-        if (PrintOnTextbox(&data->textState, gStringVar4))
+        if (PrintOnTextbox(&data->textState, gStringVar7))
         {
             gSpecialVar_Result = LINKUP_RETRY_ROLE_ASSIGN;
             data->state = LG_STATE_SHUTDOWN;
@@ -1887,11 +1887,11 @@ static void Task_MEvent_Leader(u8 taskId)
         break;
     case 2:
         StringCopy(gStringVar1, sLinkGroupActivityNameTexts[gPlayerCurrActivity]);
-        StringExpandPlaceholders_AwaitingCommFromAnother(gStringVar4, gPlayerCurrActivity);
+        StringExpandPlaceholders_AwaitingCommFromAnother(gStringVar7, gPlayerCurrActivity);
         data->state = 3;
         break;
     case 3:
-        AddTextPrinterToWindow1(gStringVar4);
+        AddTextPrinterToWindow1(gStringVar7);
         data->state = 4;
         break;
     case 4:
@@ -1914,7 +1914,7 @@ static void Task_MEvent_Leader(u8 taskId)
         data->state = 7;
         break;
     case 7:
-        switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->field_14, 0, gStringVar4))
+        switch (mevent_message_print_and_prompt_yes_no(&data->textState, &data->field_14, 0, gStringVar7))
         {
         case 0:
             LoadWirelessStatusIndicatorSpriteGfx();
@@ -1943,7 +1943,7 @@ static void Task_MEvent_Leader(u8 taskId)
                 RedrawListMenu(data->listTaskId);
                 data->playerCount++;
                 IntlConvPartnerUname7(gStringVar1, &data->field_0->arr[data->playerCount - 1]);
-                StringExpandPlaceholders(gStringVar4, sText_AnOKWasSentToPlayer);
+                StringExpandPlaceholders(gStringVar7, sText_AnOKWasSentToPlayer);
                 data->state = 9;
                 LinkRfu_StopManagerAndFinalizeSlots();
             }
@@ -1965,7 +1965,7 @@ static void Task_MEvent_Leader(u8 taskId)
         }
         break;
     case 9:
-        AddTextPrinterToWindow1(gStringVar4);
+        AddTextPrinterToWindow1(gStringVar7);
         data->state = 10;
         break;
     case 10:
@@ -2417,8 +2417,8 @@ static void ScheduleFieldMessageWithFollowupState(u32 nextState, const u8 *src)
 
     uroom->state = UR_STATE_PRINT_MSG;
     uroom->stateAfterPrint = nextState;
-    if (src != gStringVar4)
-        StringExpandPlaceholders(gStringVar4, src);
+    if (src != gStringVar7)
+        StringExpandPlaceholders(gStringVar7, src);
 }
 
 static void ScheduleFieldMessageAndExit(const u8 *src)
@@ -2426,8 +2426,8 @@ static void ScheduleFieldMessageAndExit(const u8 *src)
     struct WirelessLink_URoom *uroom = sWirelessLinkMain.uRoom;
 
     uroom->state = UR_STATE_PRINT_AND_EXIT;
-    if (src != gStringVar4)
-        StringExpandPlaceholders(gStringVar4, src);
+    if (src != gStringVar7)
+        StringExpandPlaceholders(gStringVar7, src);
 }
 
 static void sub_80156B0(struct WirelessLink_URoom *uroom)
@@ -2613,7 +2613,7 @@ static void Task_RunUnionRoom(u8 taskId)
             uroom->state = UR_STATE_TRY_COMMUNICATING;
             break;
         case 2: // Ask to join chat
-            ScheduleFieldMessageWithFollowupState(UR_STATE_RECV_JOIN_CHAT_REQUEST, gStringVar4);
+            ScheduleFieldMessageWithFollowupState(UR_STATE_RECV_JOIN_CHAT_REQUEST, gStringVar7);
             break;
         }
         break;
@@ -2685,7 +2685,7 @@ static void Task_RunUnionRoom(u8 taskId)
                 {
                     uroom->playerSendBuffer[0] = IN_UNION_ROOM;
                     Rfu_SendPacket(uroom->playerSendBuffer);
-                    StringCopy(gStringVar4, sIfYouWantToDoSomethingTexts[gLinkPlayers[0].gender]);
+                    StringCopy(gStringVar7, sIfYouWantToDoSomethingTexts[gLinkPlayers[0].gender]);
                     uroom->state = UR_STATE_REQUEST_DECLINED;
                 }
                 else
@@ -2707,7 +2707,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_TRAINER_APPEARS_BUSY:
-        StringCopy(gStringVar4, sText_TrainerBattleBusy);
+        StringCopy(gStringVar7, sText_TrainerBattleBusy);
         uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
         break;
     case UR_STATE_SEND_ACTIVITY_REQUEST:
@@ -2734,7 +2734,7 @@ static void Task_RunUnionRoom(u8 taskId)
     case UR_STATE_WAIT_FOR_RESPONSE_TO_REQUEST:
         if (!gReceivedRemoteLinkPlayers)
         {
-            StringCopy(gStringVar4, sText_TrainerBattleBusy); // Redundant, will be copied again in next state
+            StringCopy(gStringVar7, sText_TrainerBattleBusy); // Redundant, will be copied again in next state
             uroom->state = UR_STATE_TRAINER_APPEARS_BUSY;
         }
         else
@@ -2744,7 +2744,7 @@ static void Task_RunUnionRoom(u8 taskId)
             {
                 if (gPlayerCurrActivity == ACTIVITY_CARD)
                 {
-                    ViewURoomPartnerTrainerCard(gStringVar4, uroom, FALSE);
+                    ViewURoomPartnerTrainerCard(gStringVar7, uroom, FALSE);
                     uroom->state = UR_STATE_PRINT_CARD_INFO;
                 }
                 else
@@ -2755,7 +2755,7 @@ static void Task_RunUnionRoom(u8 taskId)
             else if (uroom->partnerYesNoResponse == (ACTIVITY_DECLINE | IN_UNION_ROOM))
             {
                 uroom->state = UR_STATE_REQUEST_DECLINED;
-                GetURoomActivityRejectMsg(gStringVar4, gPlayerCurrActivity | IN_UNION_ROOM, gLinkPlayers[0].gender);
+                GetURoomActivityRejectMsg(gStringVar7, gPlayerCurrActivity | IN_UNION_ROOM, gLinkPlayers[0].gender);
                 gPlayerCurrActivity = ACTIVITY_NONE;
             }
         }
@@ -2767,7 +2767,7 @@ static void Task_RunUnionRoom(u8 taskId)
         ScheduleFieldMessageWithFollowupState(UR_STATE_HANDLE_DO_SOMETHING_PROMPT_INPUT, sHiDoSomethingTexts[id][playerGender]);
         break;
     case UR_STATE_PRINT_CARD_INFO:
-        if (PrintOnTextbox(&uroom->textState, gStringVar4))
+        if (PrintOnTextbox(&uroom->textState, gStringVar7))
         {
             uroom->state = UR_STATE_WAIT_FINISH_READING_CARD;
             SetLinkStandbyCallback();
@@ -2782,7 +2782,7 @@ static void Task_RunUnionRoom(u8 taskId)
             {
                 StringCopy(gStringVar1, gLinkPlayers[GetMultiplayerId() ^ 1].name);
                 id = PlayerHasMetTrainerBefore(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
-                StringExpandPlaceholders(gStringVar4, sAwaitingResponseTexts[id]);
+                StringExpandPlaceholders(gStringVar7, sAwaitingResponseTexts[id]);
                 uroom->state = UR_STATE_PRINT_CONTACT_MSG;
             }
             else
@@ -2878,12 +2878,12 @@ static void Task_RunUnionRoom(u8 taskId)
             uroom->state = UR_STATE_PRINT_CONTACT_MSG;
             StringCopy(gStringVar1, gLinkPlayers[1].name);
             id = PlayerHasMetTrainerBefore(gLinkPlayers[1].trainerId, gLinkPlayers[1].name);
-            StringExpandPlaceholders(gStringVar4, sPlayerContactedYouTexts[id]);
+            StringExpandPlaceholders(gStringVar7, sPlayerContactedYouTexts[id]);
         }
         break;
     case UR_STATE_PRINT_CONTACT_MSG:
         ReceiveUnionRoomActivityPacket(uroom);
-        if (PrintOnTextbox(&uroom->textState, gStringVar4))
+        if (PrintOnTextbox(&uroom->textState, gStringVar7))
             uroom->state = UR_STATE_HANDLE_CONTACT_DATA;
         break;
     case UR_STATE_HANDLE_CONTACT_DATA:
@@ -2891,12 +2891,12 @@ static void Task_RunUnionRoom(u8 taskId)
         if (UnionRoom_HandleContactFromOtherPlayer(uroom) && JOY_NEW(B_BUTTON))
         {
             sub_8011DE0(1);
-            StringCopy(gStringVar4, sText_ChatEnded);
+            StringCopy(gStringVar7, sText_ChatEnded);
             uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
         }
         break;
     case UR_STATE_RECV_ACTIVITY_REQUEST:
-        ScheduleFieldMessageWithFollowupState(UR_STATE_HANDLE_ACTIVITY_REQUEST, gStringVar4);
+        ScheduleFieldMessageWithFollowupState(UR_STATE_HANDLE_ACTIVITY_REQUEST, gStringVar7);
         break;
     case UR_STATE_HANDLE_ACTIVITY_REQUEST:
         switch (UnionRoomHandleYesNo(&uroom->textState, FALSE))
@@ -2917,7 +2917,7 @@ static void Task_RunUnionRoom(u8 taskId)
                     uroom->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
                     Rfu_SendPacket(uroom->playerSendBuffer);
                     uroom->state = UR_STATE_DECLINE_ACTIVITY_REQUEST;
-                    StringCopy(gStringVar4, sText_NeedTwoMonsOfLevel30OrLower2);
+                    StringCopy(gStringVar7, sText_NeedTwoMonsOfLevel30OrLower2);
                 }
                 else
                 {
@@ -2928,7 +2928,7 @@ static void Task_RunUnionRoom(u8 taskId)
             else if (gPlayerCurrActivity == (ACTIVITY_CARD | IN_UNION_ROOM))
             {
                 Rfu_SendPacket(uroom->playerSendBuffer);
-                ViewURoomPartnerTrainerCard(gStringVar4, uroom, TRUE);
+                ViewURoomPartnerTrainerCard(gStringVar7, uroom, TRUE);
                 uroom->state = UR_STATE_PRINT_CARD_INFO;
             }
             else
@@ -2942,7 +2942,7 @@ static void Task_RunUnionRoom(u8 taskId)
             uroom->playerSendBuffer[0] = ACTIVITY_DECLINE | IN_UNION_ROOM;
             Rfu_SendPacket(uroom->playerSendBuffer);
             uroom->state = UR_STATE_DECLINE_ACTIVITY_REQUEST;
-            GetYouDeclinedTheOfferMessage(gStringVar4, gPlayerCurrActivity);
+            GetYouDeclinedTheOfferMessage(gStringVar7, gPlayerCurrActivity);
             break;
         }
         break;
@@ -2954,7 +2954,7 @@ static void Task_RunUnionRoom(u8 taskId)
         if (!gReceivedRemoteLinkPlayers)
         {
             gPlayerCurrActivity = IN_UNION_ROOM;
-            ScheduleFieldMessageWithFollowupState(UR_STATE_CANCEL_REQUEST_RESTART_LINK, gStringVar4);
+            ScheduleFieldMessageWithFollowupState(UR_STATE_CANCEL_REQUEST_RESTART_LINK, gStringVar7);
             memset(uroom->playerSendBuffer, 0, sizeof(uroom->playerSendBuffer));
             uroom->recvActivityRequest[0] = 0;
             uroom->partnerYesNoResponse = 0;
@@ -2965,8 +2965,8 @@ static void Task_RunUnionRoom(u8 taskId)
         HandleCancelActivity(FALSE);
         break;
     case UR_STATE_PRINT_START_ACTIVITY_MSG:
-        GetURoomActivityStartMsg(gStringVar4, gPlayerCurrActivity | IN_UNION_ROOM);
-        ScheduleFieldMessageWithFollowupState(UR_STATE_START_ACTIVITY_LINK, gStringVar4);
+        GetURoomActivityStartMsg(gStringVar7, gPlayerCurrActivity | IN_UNION_ROOM);
+        ScheduleFieldMessageWithFollowupState(UR_STATE_START_ACTIVITY_LINK, gStringVar7);
         break;
     case UR_STATE_START_ACTIVITY_LINK:
         SetLinkStandbyCallback();
@@ -3007,15 +3007,15 @@ static void Task_RunUnionRoom(u8 taskId)
         {
             if (GetHostRFUtgtGname()->species == SPECIES_EGG)
             {
-                StringCopy(gStringVar4, sText_CancelRegistrationOfEgg);
+                StringCopy(gStringVar7, sText_CancelRegistrationOfEgg);
             }
             else
             {
                 StringCopy(gStringVar1, gSpeciesNames[GetHostRFUtgtGname()->species]);
                 ConvertIntToDecimalStringN(gStringVar2, GetHostRFUtgtGname()->level, STR_CONV_MODE_LEFT_ALIGN, 3);
-                StringExpandPlaceholders(gStringVar4, sText_CancelRegistrationOfMon);
+                StringExpandPlaceholders(gStringVar7, sText_CancelRegistrationOfMon);
             }
-            ScheduleFieldMessageWithFollowupState(UR_STATE_CANCEL_REGISTRATION_PROMPT, gStringVar4);
+            ScheduleFieldMessageWithFollowupState(UR_STATE_CANCEL_REGISTRATION_PROMPT, gStringVar7);
         }
         break;
     case UR_STATE_REGISTER_PROMPT:
@@ -3187,7 +3187,7 @@ static void Task_RunUnionRoom(u8 taskId)
         uroom->state = UR_STATE_TRY_COMMUNICATING;
         break;
     case UR_STATE_PRINT_AND_EXIT:
-        if (PrintOnTextbox(&uroom->textState, gStringVar4))
+        if (PrintOnTextbox(&uroom->textState, gStringVar7))
         {
             HandleCancelActivity(TRUE);
             UpdateUnionRoomMemberFacing(taskData[0], taskData[1], uroom->field_0);
@@ -3195,7 +3195,7 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         break;
     case UR_STATE_PRINT_MSG:
-        if (PrintOnTextbox(&uroom->textState, gStringVar4))
+        if (PrintOnTextbox(&uroom->textState, gStringVar7))
             uroom->state = uroom->stateAfterPrint;
         break;
     }
@@ -3224,7 +3224,7 @@ static bool32 UnionRoom_HandleContactFromOtherPlayer(struct WirelessLink_URoom *
 {
     if (uroom->recvActivityRequest[0] != 0)
     {
-        s32 id = GetChatLeaderActionRequestMessage(gStringVar4, gLinkPlayers[1].gender, &uroom->recvActivityRequest[0], uroom);
+        s32 id = GetChatLeaderActionRequestMessage(gStringVar7, gLinkPlayers[1].gender, &uroom->recvActivityRequest[0], uroom);
         if (id == 0) // Error
         {
             return TRUE;
@@ -3553,7 +3553,7 @@ static bool32 UR_PrintFieldMessage(const u8 *src)
 {
     LoadMessageBoxAndBorderGfx();
     DrawDialogueFrame(0, 1);
-    StringExpandPlaceholders(gStringVar4, src);
+    StringExpandPlaceholders(gStringVar7, src);
     AddTextPrinterWithCustomSpeedForMessage(FALSE, 1);
     return FALSE;
 }
@@ -3573,7 +3573,7 @@ static bool8 PrintOnTextbox(u8 *textState, const u8 *str)
     case 0:
         LoadMessageBoxAndBorderGfx();
         DrawDialogueFrame(0, 1);
-        StringExpandPlaceholders(gStringVar4, str);
+        StringExpandPlaceholders(gStringVar7, str);
         AddTextPrinterForMessage_2(TRUE);
         (*textState)++;
         break;
@@ -3950,19 +3950,19 @@ static void PrintUnionRoomGroupOnWindow(u8 windowId, u8 x, u8 y, struct UnkStruc
     u8 activity;
     u8 trainerId[6];
 
-    ConvertIntToDecimalStringN(gStringVar4, id + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
-    StringAppend(gStringVar4, sText_Colon);
-    UR_AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, 0);
+    ConvertIntToDecimalStringN(gStringVar7, id + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringAppend(gStringVar7, sText_Colon);
+    UR_AddTextPrinterParameterized(windowId, 1, gStringVar7, x, y, 0);
     x += 18;
     activity = group->gname_uname.gname.activity;
     if (group->groupScheduledAnim == UNION_ROOM_SPAWN_IN && !(activity & IN_UNION_ROOM))
     {
-        IntlConvPartnerUname7(gStringVar4, group);
-        UR_AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, colorIdx);
+        IntlConvPartnerUname7(gStringVar7, group);
+        UR_AddTextPrinterParameterized(windowId, 1, gStringVar7, x, y, colorIdx);
         ConvertIntToDecimalStringN(trainerId, group->gname_uname.gname.unk_00.playerTrainerId[0] | (group->gname_uname.gname.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
-        StringCopy(gStringVar4, sText_ID);
-        StringAppend(gStringVar4, trainerId);
-        UR_AddTextPrinterParameterized(windowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x88), y, colorIdx);
+        StringCopy(gStringVar7, sText_ID);
+        StringAppend(gStringVar7, trainerId);
+        UR_AddTextPrinterParameterized(windowId, 1, gStringVar7, GetStringRightAlignXOffset(1, gStringVar7, 0x88), y, colorIdx);
     }
 }
 
@@ -3972,12 +3972,12 @@ static void PrintGroupMemberCandidateOnWindowWithColor(u8 windowId, u8 x, u8 y, 
 
     if (group->groupScheduledAnim == UNION_ROOM_SPAWN_IN)
     {
-        IntlConvPartnerUname7(gStringVar4, group);
-        UR_AddTextPrinterParameterized(windowId, 1, gStringVar4, x, y, colorIdx);
+        IntlConvPartnerUname7(gStringVar7, group);
+        UR_AddTextPrinterParameterized(windowId, 1, gStringVar7, x, y, colorIdx);
         ConvertIntToDecimalStringN(trainerId, group->gname_uname.gname.unk_00.playerTrainerId[0] | (group->gname_uname.gname.unk_00.playerTrainerId[1] << 8), STR_CONV_MODE_LEADING_ZEROS, 5);
-        StringCopy(gStringVar4, sText_ID);
-        StringAppend(gStringVar4, trainerId);
-        UR_AddTextPrinterParameterized(windowId, 1, gStringVar4, GetStringRightAlignXOffset(1, gStringVar4, 0x68), y, colorIdx);
+        StringCopy(gStringVar7, sText_ID);
+        StringAppend(gStringVar7, trainerId);
+        UR_AddTextPrinterParameterized(windowId, 1, gStringVar7, GetStringRightAlignXOffset(1, gStringVar7, 0x68), y, colorIdx);
     }
 }
 
@@ -4033,7 +4033,7 @@ static s32 UnionRoomGetPlayerInteractionResponse(struct UnkStruct_Main0 *main0, 
         metBefore = PlayerHasMetTrainerBefore(ReadAsU16(r5->gname_uname.gname.unk_00.playerTrainerId), gStringVar1);
         if (r5->gname_uname.gname.activity == (ACTIVITY_CHAT | IN_UNION_ROOM))
         {
-            StringExpandPlaceholders(gStringVar4, sJoinChatTexts[metBefore][playerGender]);
+            StringExpandPlaceholders(gStringVar7, sJoinChatTexts[metBefore][playerGender]);
             return 2;
         }
         else
@@ -4052,19 +4052,19 @@ static s32 UnionRoomGetPlayerInteractionResponse(struct UnkStruct_Main0 *main0, 
         switch (r5->gname_uname.gname.activity & 0x3F)
         {
         case ACTIVITY_BATTLE_SINGLE:
-            StringExpandPlaceholders(gStringVar4, sBattleReactionTexts[playerGender][Random() % ARRAY_COUNT(sBattleReactionTexts[0])]);
+            StringExpandPlaceholders(gStringVar7, sBattleReactionTexts[playerGender][Random() % ARRAY_COUNT(sBattleReactionTexts[0])]);
             break;
         case ACTIVITY_TRADE:
-            StringExpandPlaceholders(gStringVar4, sTradeReactionTexts[playerGender][Random() % 2]);
+            StringExpandPlaceholders(gStringVar7, sTradeReactionTexts[playerGender][Random() % 2]);
             break;
         case ACTIVITY_CHAT:
-            StringExpandPlaceholders(gStringVar4, sChatReactionTexts[playerGender][Random() % ARRAY_COUNT(sChatReactionTexts[0])]);
+            StringExpandPlaceholders(gStringVar7, sChatReactionTexts[playerGender][Random() % ARRAY_COUNT(sChatReactionTexts[0])]);
             break;
         case ACTIVITY_CARD:
-            StringExpandPlaceholders(gStringVar4, sTrainerCardReactionTexts[playerGender][Random() % ARRAY_COUNT(sTrainerCardReactionTexts[0])]);
+            StringExpandPlaceholders(gStringVar7, sTrainerCardReactionTexts[playerGender][Random() % ARRAY_COUNT(sTrainerCardReactionTexts[0])]);
             break;
         default:
-            StringExpandPlaceholders(gStringVar4, sText_TrainerAppearsBusy);
+            StringExpandPlaceholders(gStringVar7, sText_TrainerAppearsBusy);
             break;
         }
         return 0;
@@ -4463,7 +4463,7 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom *d
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, data->trainerCardStrBuffer[4]);
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(data->trainerCardMsgStrBuffer, sText_TrainerCardInfoPage1);
-    StringCopy(gStringVar4, data->trainerCardMsgStrBuffer);
+    StringCopy(gStringVar7, data->trainerCardMsgStrBuffer);
 
     n = trainerCard->linkBattleWins;
     if (n > 9999)
@@ -4491,17 +4491,17 @@ static void ViewURoomPartnerTrainerCard(u8 *unused, struct WirelessLink_URoom *d
     }
 
     DynamicPlaceholderTextUtil_ExpandPlaceholders(data->trainerCardMsgStrBuffer, sText_TrainerCardInfoPage2);
-    StringAppend(gStringVar4, data->trainerCardMsgStrBuffer);
+    StringAppend(gStringVar7, data->trainerCardMsgStrBuffer);
 
     if (isParent == TRUE)
     {
         DynamicPlaceholderTextUtil_ExpandPlaceholders(data->trainerCardMsgStrBuffer, sText_FinishedCheckingPlayersTrainerCard);
-        StringAppend(gStringVar4, data->trainerCardMsgStrBuffer);
+        StringAppend(gStringVar7, data->trainerCardMsgStrBuffer);
     }
     else if (isParent == FALSE)
     {
         DynamicPlaceholderTextUtil_ExpandPlaceholders(data->trainerCardMsgStrBuffer, sGladToMeetYouTexts[trainerCard->gender]);
-        StringAppend(gStringVar4, data->trainerCardMsgStrBuffer);
+        StringAppend(gStringVar7, data->trainerCardMsgStrBuffer);
     }
 }
 

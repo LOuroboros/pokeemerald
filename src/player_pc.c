@@ -667,8 +667,8 @@ static void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
 {
     StringCopy(gStringVar1, gSaveBlock1Ptr->mail[playerPCItemPageInfo.itemsAbove + PARTY_SIZE + playerPCItemPageInfo.cursorPos].playerName);
     ConvertInternationalPlayerNameStripChar(gStringVar1, CHAR_SPACE);
-    StringExpandPlaceholders(gStringVar4, gText_WhatToDoWithVar1sMail);
-    DisplayItemMessageOnField(taskId, gStringVar4, Mailbox_PrintMailOptions);
+    StringExpandPlaceholders(gStringVar7, gText_WhatToDoWithVar1sMail);
+    DisplayItemMessageOnField(taskId, gStringVar7, Mailbox_PrintMailOptions);
 }
 
 static void Mailbox_ReturnToPlayerPC(u8 taskId)
@@ -963,8 +963,8 @@ static void fish4_goto_x5_or_x6(u8 windowId, s32 id, u8 yOffset)
                 sub_816BFE0(yOffset, 0xFF, 0xFF);
         }
         ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pcItems[id].quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar4, gText_xVar1);
-        AddTextPrinterParameterized(windowId, 7, gStringVar4, GetStringRightAlignXOffset(7, gStringVar4, 104), yOffset, 0xFF, NULL);
+        StringExpandPlaceholders(gStringVar7, gText_xVar1);
+        AddTextPrinterParameterized(windowId, 7, gStringVar7, GetStringRightAlignXOffset(7, gStringVar7, 104), yOffset, 0xFF, NULL);
     }
 }
 
@@ -1123,8 +1123,8 @@ static void ItemStorage_PrintItemPcResponse(const u8 *string)
 {
     u8 windowId = gUnknown_0203BCC4->windowIds[1];
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    StringExpandPlaceholders(gStringVar4, string);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, 0, 1, 0, NULL);
+    StringExpandPlaceholders(gStringVar7, string);
+    AddTextPrinterParameterized(windowId, 1, gStringVar7, 0, 1, 0, NULL);
 }
 
 static void ItemStorage_ProcessInput(u8 taskId)
@@ -1283,8 +1283,8 @@ static void sub_816C690(u8 a)
 static void sub_816C6BC(u8 windowId, u16 value, u32 mode, u8 x, u8 y, u8 n)
 {
     ConvertIntToDecimalStringN(gStringVar1, value, mode, n);
-    StringExpandPlaceholders(gStringVar4, gText_xVar1);
-    AddTextPrinterParameterized(windowId, 1, gStringVar4, GetStringCenterAlignXOffset(1, gStringVar4, 48), y, 0, NULL);
+    StringExpandPlaceholders(gStringVar7, gText_xVar1);
+    AddTextPrinterParameterized(windowId, 1, gStringVar7, GetStringCenterAlignXOffset(1, gStringVar7, 48), y, 0, NULL);
 }
 
 static void ItemStorage_DoItemAction(u8 taskId)

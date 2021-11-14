@@ -635,8 +635,8 @@ static void CB2_EggHatch_1(void)
         break;
     case 5:
         GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_HatchedFromEgg);
-        EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 3, 0xFF);
+        StringExpandPlaceholders(gStringVar7, gText_HatchedFromEgg);
+        EggHatchPrintMessage(sEggHatchData->windowId, gStringVar7, 0, 3, 0xFF);
         PlayFanfare(MUS_EVOLVED);
         sEggHatchData->CB2_state++;
         PutWindowTilemap(sEggHatchData->windowId);
@@ -652,8 +652,8 @@ static void CB2_EggHatch_1(void)
         break;
     case 8:
         GetMonNickname2(&gPlayerParty[sEggHatchData->eggPartyID], gStringVar1);
-        StringExpandPlaceholders(gStringVar4, gText_NicknameHatchPrompt);
-        EggHatchPrintMessage(sEggHatchData->windowId, gStringVar4, 0, 2, 1);
+        StringExpandPlaceholders(gStringVar7, gText_NicknameHatchPrompt);
+        EggHatchPrintMessage(sEggHatchData->windowId, gStringVar7, 0, 2, 1);
         sEggHatchData->CB2_state++;
         break;
     case 9:

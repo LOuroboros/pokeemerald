@@ -736,10 +736,10 @@ static void DisplaySentToPCMessage(void)
     if (FlagGet(FLAG_SYS_PC_LANETTE))
         stringToDisplay++;
 
-    StringExpandPlaceholders(gStringVar4, sTransferredToPCMessages[stringToDisplay]);
+    StringExpandPlaceholders(gStringVar7, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, 0);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, 1, gStringVar4, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
+    AddTextPrinterParameterized2(0, 1, gStringVar7, GetPlayerTextSpeedDelay(), 0, 2, 1, 3);
     CopyWindowToVram(0, 3);
 }
 

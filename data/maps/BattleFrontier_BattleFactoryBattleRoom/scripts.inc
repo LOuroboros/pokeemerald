@@ -88,7 +88,7 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleOpponent:: /* 825AEA7*/
 	goto_if_ne BattleFrontier_BattleFactoryBattleRoom_EventScript_BattleNoland
 	palace_getopponentintro
 	lockall
-	msgbox gStringVar4, MSGBOX_DEFAULT
+	msgbox gStringVar7, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	frontier_set FRONTIER_DATA_RECORD_DISABLED, FALSE

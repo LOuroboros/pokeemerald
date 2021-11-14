@@ -175,12 +175,12 @@ void ScrSpecial_SaveBardSongLyrics(void)
     bard->hasChangedSong = TRUE;
 }
 
-// Copies lyrics into gStringVar4
+// Copies lyrics into gStringVar7
 static void PrepareSongText(void)
 {
     struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
     u16 * lyrics = gSpecialVar_0x8004 == 0 ? bard->songLyrics : bard->temporaryLyrics;
-    u8 * wordEnd = gStringVar4;
+    u8 * wordEnd = gStringVar7;
     u8 * str = wordEnd;
     u16 lineNum;
 
@@ -289,14 +289,14 @@ void ScrSpecial_GenerateGiddyLine(void)
         u32 adjective = Random();
 
         adjective %= 8;
-        stringPtr = CopyEasyChatWord(gStringVar4, giddy->randomWords[giddy->taleCounter]);
+        stringPtr = CopyEasyChatWord(gStringVar7, giddy->randomWords[giddy->taleCounter]);
         stringPtr = StringCopy(stringPtr, gOtherText_Is);
         stringPtr = StringCopy(stringPtr, sGiddyAdjectives[adjective]);
         StringCopy(stringPtr, gOtherText_DontYouAgree);
     }
     else
     {
-        StringCopy(gStringVar4, sGiddyQuestions[giddy->questionList[giddy->questionNum++]]);
+        StringCopy(gStringVar7, sGiddyQuestions[giddy->questionList[giddy->questionNum++]]);
     }
 
     if (!(Random() % 10))
@@ -555,7 +555,7 @@ static void Task_BardSong(u8 taskId)
     {
         case 0:  // Initialize song
             PrepareSongText();
-            sub_8120708(gStringVar4);
+            sub_8120708(gStringVar7);
             task->data[1] = 0;
             task->data[2] = 0;
             task->tCharIndex = 0;
@@ -570,7 +570,7 @@ static void Task_BardSong(u8 taskId)
         case 2:  // Initialize word
         {
             struct MauvilleManBard *bard = &gSaveBlock1Ptr->oldMan.bard;
-            u8 *str = gStringVar4 + task->tCharIndex;
+            u8 *str = gStringVar7 + task->tCharIndex;
             u16 wordLen = 0;
 
             while (*str != CHAR_SPACE
@@ -610,14 +610,14 @@ static void Task_BardSong(u8 taskId)
                 task->data[2]--;
             break;
         case 3:
-            if (gStringVar4[task->tCharIndex] == EOS)
+            if (gStringVar7[task->tCharIndex] == EOS)
             {
                 FadeInBGM(6);
                 m4aMPlayFadeOutTemporarily(&gMPlayInfo_SE2, 2);
                 EnableBothScriptContexts();
                 DestroyTask(taskId);
             }
-            else if (gStringVar4[task->tCharIndex] == CHAR_SPACE)
+            else if (gStringVar7[task->tCharIndex] == CHAR_SPACE)
             {
 
                 EnableTextPrinters();
@@ -625,21 +625,21 @@ static void Task_BardSong(u8 taskId)
                 task->tState = 2;
                 task->data[2] = 0;
             }
-            else if (gStringVar4[task->tCharIndex] == CHAR_NEWLINE)
+            else if (gStringVar7[task->tCharIndex] == CHAR_NEWLINE)
             {
                 task->tCharIndex++;
                 task->tState = 2;
                 task->data[2] = 0;
             }
-            else if (gStringVar4[task->tCharIndex] == EXT_CTRL_CODE_BEGIN)
+            else if (gStringVar7[task->tCharIndex] == EXT_CTRL_CODE_BEGIN)
             {
                 task->tCharIndex += 2;  // skip over control codes
                 task->tState = 2;
                 task->data[2] = 8;
             }
-            else if (gStringVar4[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
+            else if (gStringVar7[task->tCharIndex] == CHAR_SONG_WORD_SEPARATOR)
             {
-                gStringVar4[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
+                gStringVar7[task->tCharIndex] = CHAR_SPACE;  // restore it back to a space
                 EnableTextPrinters();
                 task->tCharIndex++;
                 task->data[2] = 0;

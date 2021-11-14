@@ -196,8 +196,8 @@ static void CB2_MysteryEventMenu(void)
         }
         else
         {
-            GetEventLoadMessage(gStringVar4, 1);
-            PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
+            GetEventLoadMessage(gStringVar7, 1);
+            PrintMysteryMenuText(0, gStringVar7, 1, 2, 1);
             gMain.state = 13;
         }
         break;
@@ -209,8 +209,8 @@ static void CB2_MysteryEventMenu(void)
                 if (GetLinkPlayerDataExchangeStatusTimed(2, 2) == EXCHANGE_DIFF_SELECTIONS)
                 {
                     SetCloseLinkCallback();
-                    GetEventLoadMessage(gStringVar4, 1);
-                    PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
+                    GetEventLoadMessage(gStringVar7, 1);
+                    PrintMysteryMenuText(0, gStringVar7, 1, 2, 1);
                     gMain.state = 13;
                 }
                 else if (CheckLanguageMatch())
@@ -221,8 +221,8 @@ static void CB2_MysteryEventMenu(void)
                 else
                 {
                     CloseLink();
-                    GetEventLoadMessage(gStringVar4, 1);
-                    PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
+                    GetEventLoadMessage(gStringVar7, 1);
+                    PrintMysteryMenuText(0, gStringVar7, 1, 2, 1);
                     gMain.state = 13;
                 }
             }
@@ -257,13 +257,13 @@ static void CB2_MysteryEventMenu(void)
         {
             u16 unkVal = RunMysteryEventScript(gDecompressionBuffer);
             CpuFill32(0, gDecompressionBuffer, 0x7D4);
-            if (!GetEventLoadMessage(gStringVar4, unkVal))
+            if (!GetEventLoadMessage(gStringVar7, unkVal))
                 TrySavingData(SAVE_NORMAL);
             gMain.state++;
         }
         break;
     case 12:
-        PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
+        PrintMysteryMenuText(0, gStringVar7, 1, 2, 1);
         gMain.state++;
         break;
     case 13:
@@ -293,8 +293,8 @@ static void CB2_MysteryEventMenu(void)
     if (gLinkStatus & 0x40 && !IsLinkMaster())
     {
         CloseLink();
-        GetEventLoadMessage(gStringVar4, 1);
-        PrintMysteryMenuText(0, gStringVar4, 1, 2, 1);
+        GetEventLoadMessage(gStringVar7, 1);
+        PrintMysteryMenuText(0, gStringVar7, 1, 2, 1);
         gMain.state = 13;
     }
 

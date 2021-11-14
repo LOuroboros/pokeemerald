@@ -1315,8 +1315,8 @@ static bool32 MatchCall_PrintIntro(u8 taskId)
         
         // Ready the message
         if (!sMatchCallState.triggeredFromScript)
-            SelectMatchCallMessage(sMatchCallState.trainerId, gStringVar4);
-        InitMatchCallTextPrinter(tWindowId, gStringVar4);
+            SelectMatchCallMessage(sMatchCallState.trainerId, gStringVar7);
+        InitMatchCallTextPrinter(tWindowId, gStringVar7);
         return TRUE;
     }
 
@@ -2065,7 +2065,7 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
     u8 *str;
     u8 dexRatingLevel;
 
-    u8 *buffer = Alloc(sizeof(gStringVar4));
+    u8 *buffer = Alloc(sizeof(gStringVar7));
     if (!buffer)
     {
         destStr[0] = EOS;

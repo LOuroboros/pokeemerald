@@ -6031,9 +6031,9 @@ static void PutLevelAndGenderOnLvlUpBox(void)
 
     monLevel = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_LEVEL);
     monGender = GetMonGender(&gPlayerParty[gBattleStruct->expGetterMonId]);
-    GetMonNickname(&gPlayerParty[gBattleStruct->expGetterMonId], gStringVar4);
+    GetMonNickname(&gPlayerParty[gBattleStruct->expGetterMonId], gStringVar7);
 
-    printerTemplate.currentChar = gStringVar4;
+    printerTemplate.currentChar = gStringVar7;
     printerTemplate.windowId = 14;
     printerTemplate.fontId = 0;
     printerTemplate.x = 32;
@@ -6049,7 +6049,7 @@ static void PutLevelAndGenderOnLvlUpBox(void)
 
     AddTextPrinter(&printerTemplate, 0xFF, NULL);
 
-    txtPtr = gStringVar4;
+    txtPtr = gStringVar7;
     *(txtPtr)++ = CHAR_EXTRA_SYMBOL;
     *(txtPtr)++ = CHAR_LV_2;
 

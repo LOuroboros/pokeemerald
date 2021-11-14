@@ -4788,14 +4788,14 @@ static void ShowResults(void)
                 u16 berriesPicked = Min(GetBerryResult(i, j), MAX_BERRIES);
                 u16 maxBerriesPicked = Min(GetHighestBerryResult(j), MAX_BERRIES);
 
-                ConvertIntToDecimalStringN(gStringVar4, berriesPicked, STR_CONV_MODE_LEFT_ALIGN, 4);
-                width = GetStringWidth(1, gStringVar4, -1);
+                ConvertIntToDecimalStringN(gStringVar7, berriesPicked, STR_CONV_MODE_LEFT_ALIGN, 4);
+                width = GetStringWidth(1, gStringVar7, -1);
                 
                 // If player got the most of a berry type, highlight their number in red 
                 if (maxBerriesPicked == berriesPicked && maxBerriesPicked != 0)
-                    AddTextPrinterParameterized3(sGfx->windowIds[1], 1, sResultsXCoords[j] - width, sResultsYCoords[i], sTextColorTable[COLORID_RED], -1, gStringVar4);
+                    AddTextPrinterParameterized3(sGfx->windowIds[1], 1, sResultsXCoords[j] - width, sResultsYCoords[i], sTextColorTable[COLORID_RED], -1, gStringVar7);
                 else
-                    AddTextPrinterParameterized(sGfx->windowIds[1], 1, gStringVar4, sResultsXCoords[j] - width, sResultsYCoords[i], -1, NULL);
+                    AddTextPrinterParameterized(sGfx->windowIds[1], 1, gStringVar7, sResultsXCoords[j] - width, sResultsYCoords[i], -1, NULL);
             }
         }
         CopyWindowToVram(sGfx->windowIds[0], 2);
@@ -4876,8 +4876,8 @@ static void ShowResults(void)
         DynamicPlaceholderTextUtil_Reset();
         CopyItemName(GetPrizeItemId(), gStringVar1);
         DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
-        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_FirstPlacePrize);
-        AddTextPrinterParameterized(sGfx->windowIds[1], 1, gStringVar4, 0, 1, -1, NULL);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar7, gText_FirstPlacePrize);
+        AddTextPrinterParameterized(sGfx->windowIds[1], 1, gStringVar7, 0, 1, -1, NULL);
         prizeState = TryGivePrize();
         if (prizeState != PRIZE_RECEIVED && prizeState != NO_PRIZE)
         {
@@ -4885,10 +4885,10 @@ static void ShowResults(void)
             CopyItemName(GetPrizeItemId(), gStringVar1);
             DynamicPlaceholderTextUtil_SetPlaceholderPtr(0, gStringVar1);
             if (prizeState == PRIZE_NO_ROOM)
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_CantHoldAnyMore);
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar7, gText_CantHoldAnyMore);
             else if (prizeState == PRIZE_FILLED_BAG)
-                DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, gText_FilledStorageSpace);
-            AddTextPrinterParameterized(sGfx->windowIds[1], 1, gStringVar4, 0, 41, -1, NULL);
+                DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar7, gText_FilledStorageSpace);
+            AddTextPrinterParameterized(sGfx->windowIds[1], 1, gStringVar7, 0, 41, -1, NULL);
         }
         CopyWindowToVram(sGfx->windowIds[0], 2);
         CopyWindowToVram(sGfx->windowIds[1], 2);

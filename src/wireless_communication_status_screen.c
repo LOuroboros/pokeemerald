@@ -278,11 +278,11 @@ static void Task_WirelessCommunicationScreen(u8 taskId)
             FillWindowPixelBuffer(2, PIXEL_FILL(0));
             for (i = 0; i < NUM_GROUPTYPES; i++)
             {
-                ConvertIntToDecimalStringN(gStringVar4, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
+                ConvertIntToDecimalStringN(gStringVar7, sStatusScreen->groupCounts[i], STR_CONV_MODE_RIGHT_ALIGN, 2);
                 if (i != GROUPTYPE_TOTAL)
-                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
+                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar7, 12, 30 * i + 8, COLORMODE_WHITE_LGRAY);
                 else
-                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar4, 12, 98, COLORMODE_RED);
+                    WCSS_AddTextPrinterParameterized(2, 1, gStringVar7, 12, 98, COLORMODE_RED);
             }
             PutWindowTilemap(2);
             CopyWindowToVram(2, 3);
