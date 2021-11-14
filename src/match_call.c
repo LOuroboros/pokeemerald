@@ -2065,7 +2065,7 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
     u8 *str;
     u8 dexRatingLevel;
 
-    u8 *buffer = Alloc(sizeof(gStringVar7));
+    u8 *buffer = Alloc(0x3E8); // 0x3E8 is the size of gStringVar7, see gflib/string_util.c
     if (!buffer)
     {
         destStr[0] = EOS;

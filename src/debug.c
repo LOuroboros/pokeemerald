@@ -1370,7 +1370,7 @@ static void DebugAction_Util_Trainer_Name(u8 taskId)
 }
 static void DebugAction_Util_Rival_Name(u8 taskId)
 {
-    DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock2Ptr->rivalName, 0, 0, 0, CB2_ReturnToFieldContinueScript);
+    //DoNamingScreen(NAMING_SCREEN_RIVAL, gSaveBlock2Ptr->rivalName, 0, 0, 0, CB2_ReturnToFieldContinueScript);
 }
 static void DebugAction_Util_Trainer_Gender(u8 taskId)
 {
@@ -1439,7 +1439,7 @@ static void DebugTask_ChangeCostume_Execute(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SwapPlayersCostume();
+        //SwapPlayersCostume();
         gTasks[taskId].func = DebugTask_ChangeCostume_End;
     }
 }
@@ -1454,9 +1454,11 @@ static void DebugTask_ChangeCostume_End(u8 taskId)
 }
 static void DebugAction_Util_CatchChainStatus(u8 taskId)
 {
+/*
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
     ScriptContext1_SetupScript(Script_CatchingStreak);
+*/
 }
 static void DebugAction_Util_CreateDaycareEgg(u8 taskId)
 {
@@ -1470,8 +1472,6 @@ static void DebugAction_Util_ClearBag(u8 taskId)
     int i;
 
     ClearBag();
-    for (i = 0; i < BAG_TMHM_COUNT; ++i)
-        gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] = 0;
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
 }
@@ -1788,6 +1788,7 @@ static void DebugAction_Flags_ExperienceOnOff(u8 taskId)
 }
 static void DebugAction_Flags_ShinyHueShiftOnOff(u8 taskId)
 {
+/*
     if (FlagGet(FLAG_DISABLE_SHINY_HUE_SHIFT))
     {
         FlagClear(FLAG_DISABLE_SHINY_HUE_SHIFT);
@@ -1798,6 +1799,7 @@ static void DebugAction_Flags_ShinyHueShiftOnOff(u8 taskId)
         FlagSet(FLAG_DISABLE_SHINY_HUE_SHIFT);
         PlaySE(SE_PC_LOGIN);
     }
+*/
 }
 // *******************************
 // Actions Variables
@@ -2010,8 +2012,8 @@ static void DebugAction_Give_Item(u8 taskId)
     gTasks[taskId].data[4] = 0;                         //Digit Selected
     gTasks[taskId].data[5] = gTasks[taskId].data[3];    //Last song played (for stopping)
     gTasks[taskId].data[6] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].data[3]);
-    gSprites[gTasks[taskId].data[6]].x2 = DEBUG_NUMBER_ICON_X+10;
-    gSprites[gTasks[taskId].data[6]].y2 = DEBUG_NUMBER_ICON_Y+10;
+    gSprites[gTasks[taskId].data[6]].pos2.x = DEBUG_NUMBER_ICON_X+10;
+    gSprites[gTasks[taskId].data[6]].pos2.y = DEBUG_NUMBER_ICON_Y+10;
     gSprites[gTasks[taskId].data[6]].oam.priority = 0;
 }
 static void DebugAction_Give_Item_SelectId(u8 taskId)
@@ -2055,8 +2057,8 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         FreeSpriteOamMatrix(&gSprites[gTasks[taskId].data[6]]); //Destroy item icon
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
         gTasks[taskId].data[6] = AddItemIconSprite(ITEM_TAG, ITEM_TAG, gTasks[taskId].data[3]);
-        gSprites[gTasks[taskId].data[6]].x2 = DEBUG_NUMBER_ICON_X+10;
-        gSprites[gTasks[taskId].data[6]].y2 = DEBUG_NUMBER_ICON_Y+10;
+        gSprites[gTasks[taskId].data[6]].pos2.x = DEBUG_NUMBER_ICON_X+10;
+        gSprites[gTasks[taskId].data[6]].pos2.y = DEBUG_NUMBER_ICON_Y+10;
         gSprites[gTasks[taskId].data[6]].oam.priority = 0;
     }
 

@@ -2240,7 +2240,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
               | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
     }
 
-    if (FlagGet(FLAG_FORCE_SHINY_ENCOUNTERS))
+    if (FlagGet(FLAG_FORCE_SHINIES))
     {
         do
         {
