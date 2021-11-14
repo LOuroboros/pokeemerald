@@ -565,3 +565,10 @@ gMetatiles_General_Shinnoh::
 	.align 1
 gMetatileAttributes_General_Shinnoh::
 	.incbin "data/tilesets/primary/general_shinnoh/metatile_attributes.bin"
+	.align 1
+gMetatiles_TwinleafTown::
+	.incbin "data/tilesets/secondary/twinleaftown/metatiles.bin"
+
+	.align 1
+gMetatileAttributes_TwinleafTown::
+	.incbin "data/tilesets/secondary/twinleaftown/metatile_attributes.bin"

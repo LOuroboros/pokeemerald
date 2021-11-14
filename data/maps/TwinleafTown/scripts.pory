@@ -18,9 +18,7 @@ script TwinleafTown_EventScript_Woman {
 
 script TwinleafTown_EventScript_Man {
     // Todo: Replace Pearl with Rivals name
-    namebox("Testing")
     msgbox(format("Hiya, {PLAYER}.\nPearl was looking for you.\pI think he's home now.\nWhy don't you go check it out?"), MSGBOX_NPC)
-    closeboth
 }
 
 ///////////

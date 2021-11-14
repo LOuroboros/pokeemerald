@@ -4417,7 +4417,7 @@
       "width": 24,
       "height": 28,
       "primary_tileset": "gTileset_General_Shinnoh",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_TwinleafTown",
       "border_filepath": "data/layouts/TwinleafTown/border.bin",
       "blockdata_filepath": "data/layouts/TwinleafTown/map.bin"
     },

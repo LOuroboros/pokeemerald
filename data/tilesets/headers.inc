@@ -919,3 +919,15 @@ gTileset_General_Shinnoh::
 	.4byte gMetatileAttributes_General_Shinnoh
 	.4byte NULL @ animation callback
 	.4byte gTilesetPalOverrides_General_Shinnoh
+
+	.align 2
+gTileset_TwinleafTown::
+	.byte TRUE @ is compressed
+	.byte TRUE @ is secondary
+	.2byte 0
+	.4byte gTilesetTiles_TwinleafTown
+	.4byte gTilesetPalettes_TwinleafTown
+	.4byte gMetatiles_TwinleafTown
+	.4byte gMetatileAttributes_TwinleafTown
+	.4byte NULL
+	.4byte NULL @ palette overrides

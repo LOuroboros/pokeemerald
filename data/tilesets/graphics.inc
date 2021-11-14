@@ -1753,3 +1753,23 @@ gTilesetTiles_General_Shinnoh::
 	.align 2
 gTilesetPalOverride_General_Shinnoh_01::
 	.incbin "data/tilesets/primary/general_shinnoh/palettes/01_over.gbapal"
+
+	.align 2
+gTilesetPalettes_TwinleafTown::
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/00.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/01.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/02.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/03.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/04.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/05.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/06.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/07.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/08.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/09.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/10.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/11.gbapal"
+	.incbin "data/tilesets/secondary/twinleaftown/palettes/12.gbapal"
+
+	.align 2
+gTilesetTiles_TwinleafTown::
+	.incbin "data/tilesets/secondary/twinleaftown/tiles.4bpp.lz"
