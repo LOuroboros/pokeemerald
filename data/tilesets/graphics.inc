@@ -1749,3 +1749,7 @@ gTilesetPalettes_General_Shinnoh::
 	.align 2
 gTilesetTiles_General_Shinnoh::
 	.incbin "data/tilesets/primary/general_shinnoh/tiles.4bpp.lz"
+
+	.align 2
+gTilesetPalOverride_General_Shinnoh_01::
+	.incbin "data/tilesets/primary/general_shinnoh/palettes/01_over.gbapal"
