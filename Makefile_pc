@@ -3,7 +3,7 @@ OBJCOPY := $(PREFIX)objcopy
 CC := $(PREFIX)gcc
 AS := $(PREFIX)as
 
-SDL_DIR := /mnt/c/Users/Lunos/Home/emerald_pc/tools/SDL2-2.0.14/i686-w64-mingw32
+SDL_DIR := /home/lunos/pokeemerald_pc/SDL2-2.0.16/i686-w64-mingw32
 ASM_PSEUDO_OP_CONV := sed -e 's/\.4byte/\.int/g;s/\.2byte/\.short/g'
 
 export CPP := $(PREFIX)cpp
