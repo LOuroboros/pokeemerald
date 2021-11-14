@@ -142,7 +142,7 @@ int main(int argc, char **argv)
 
     SDL_memset(&want, 0, sizeof(want)); /* or SDL_zero(want) */
     want.freq = 42048;
-    want.format = AUDIO_S32;
+    want.format = AUDIO_F32;
     want.channels = 2;
     want.samples = 1024;
 
@@ -150,8 +150,8 @@ int main(int argc, char **argv)
         SDL_Log("Failed to open audio: %s", SDL_GetError());
     else
     {
-        if (want.format != AUDIO_S32) /* we let this one thing change. */
-            SDL_Log("We didn't get Signed32 audio format.");
+        if (want.format != AUDIO_F32) /* we let this one thing change. */
+            SDL_Log("We didn't get Float32 audio format.");
         SDL_PauseAudio(0);
     }
     
@@ -1714,13 +1714,11 @@ static void DrawFrame(uint16_t *pixels)
     for (i = 0; i < DISPLAY_HEIGHT; i++)
     {
         REG_VCOUNT = i;
-        if(REG_DISPSTAT & DISPSTAT_VCOUNT_INTR)
+        if(((REG_DISPSTAT >> 8) & 0xFF) == REG_VCOUNT)
         {
-            if(((REG_DISPSTAT >> 8) & 0xFF) == REG_VCOUNT)
-            {
-                REG_DISPSTAT |= INTR_FLAG_VCOUNT;
-                gIntrTable[0]();
-            }
+            REG_DISPSTAT |= INTR_FLAG_VCOUNT;
+            if(REG_DISPSTAT & DISPSTAT_VCOUNT_INTR)
+                    gIntrTable[0]();
         }
 
         DrawScanline(scanlines[i], i);
@@ -1733,6 +1731,7 @@ static void DrawFrame(uint16_t *pixels)
             gIntrTable[3]();
 
         REG_DISPSTAT &= ~INTR_FLAG_HBLANK;
+        REG_DISPSTAT &= ~INTR_FLAG_VCOUNT;
     }
 
     // Copy to screen

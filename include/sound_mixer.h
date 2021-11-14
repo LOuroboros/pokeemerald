@@ -50,7 +50,7 @@ struct MixerSource {
         };
     };
     union {
-        s32 fw;
+        float fw;
         struct {
             u8 panMask;
             u8 cgbStatus;
@@ -94,7 +94,7 @@ struct SoundMixerState {
     u8 padding3;
     s32 samplesPerFrame;
     s32 sampleRate;
-    s32 sampleRateReciprocal; // 9.23 fixed width decimal
+    float sampleRateReciprocal;
     struct MixerSource *cgbChans;
     void (*firstPlayerFunc)(void *player);
     void *firstPlayer;
@@ -109,7 +109,7 @@ struct SoundMixerState {
     void *reversed4;
     void *reserved5;
     struct MixerSource chans[MAX_SAMPLE_CHANNELS];
-    __attribute__((aligned(4))) s32 outBuffer[MIXED_AUDIO_BUFFER_SIZE * 2];
+    __attribute__((aligned(4))) float outBuffer[MIXED_AUDIO_BUFFER_SIZE * 2];
     //s8 outBuffer[MIXED_AUDIO_BUFFER_SIZE * 2];
 };
 
