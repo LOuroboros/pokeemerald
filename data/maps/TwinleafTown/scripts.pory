@@ -1,1 +1,45 @@
+const LOCALID_FATMAN = 1
+const LOCALID_WOMAN = 2
+const LOCALID_MAN = 3
+
 mapscripts TwinleafTown_MapScripts {}
+
+//////////
+// NPCS //
+/////////
+
+script TwinleafTown_EventScript_FatMan {
+    msgbox(format("Technology just blows me away!\pI mean, now you can play with people around the world… wirelessly!"), MSGBOX_NPC)
+}
+
+script TwinleafTown_EventScript_Woman {
+    msgbox(format("It's true that wild Pokémon do attack people sometimes…\pHowever, Pokémon also let you become friends with them!"), MSGBOX_NPC)
+}
+
+script TwinleafTown_EventScript_Man {
+    // Todo: Replace Pearl with Rivals name
+    msgbox(format("Hiya, {PLAYER}.\nPearl was looking for you.\pI think he's home now.\nWhy don't you go check it out?"), MSGBOX_NPC)
+}
+
+///////////
+// Signs //
+//////////
+script TwinleafTown_EventScript_Sign_Rival {
+    // Todo: Add Rivals name
+    msgbox("Rival's House", MSGBOX_SIGN)
+}
+
+script TwinleafTown_EventScript_Sign_Player {
+    msgbox("{PLAYER}'s House", MSGBOX_SIGN)
+}
+
+script TwinleafTown_EventScript_Sign {
+    msgbox("Twinleaf Town\nFresh and Free!", MSGBOX_SIGN)
+}
+
+// //////////
+// Scripts //
+// /////////
+script TwinleafTown_EventScript_RivalWaitingForYou {
+    // To do
+}
