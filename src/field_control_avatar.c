@@ -37,8 +37,6 @@
 #include "constants/trainer_hill.h"
 #include "debug.h"
 
-#define OPEN_DEBUG_MENU (L_BUTTON | R_BUTTON)
-
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
 
@@ -191,13 +189,6 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
-
-    if (JOY_HELD(OPEN_DEBUG_MENU) == OPEN_DEBUG_MENU)
-    {
-        PlaySE(SE_WIN_OPEN);
-        Debug_ShowMainMenu();
-        return TRUE;
-    }
 
     return FALSE;
 }
