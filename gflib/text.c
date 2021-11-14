@@ -50,7 +50,7 @@ const u8 gDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_RS.4bpp");
 const u8 gUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 const u8 gUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
 const u8 gDownArrowYCoords[] = { 0x0, 0x1, 0x2, 0x1 };
-const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x8, 0x0 };
+const u8 gWindowVerticalScrollSpeeds[] = { 0x1, 0x2, 0x4, 0x4 };
 
 const struct GlyphWidthFunc gGlyphWidthFuncs[] =
 {
@@ -211,15 +211,17 @@ bool16 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
 void RunTextPrinters(void)
 {
     int i;
-    bool8 isInstant = GetPlayerTextSpeed() == OPTIONS_TEXT_SPEED_INSTANT;
+    u16 temp;
+    bool32 isInstantText = (gSaveBlock2Ptr->optionsTextSpeed == OPTIONS_TEXT_SPEED_INSTANT); // Force correct result. This is dumb, Revo knows.
 
-    if (gDisableTextPrinters == 0)
+    do
     {
-        for (i = 0; i < NUM_TEXT_PRINTERS; ++i)
+    	int numEmpty = 0;
+        if (gDisableTextPrinters == 0)
         {
-            do {
-                bool8 isActive = gTextPrinters[i].active;
-                if (isActive)
+            for (i = 0; i < 0x20; ++i)
+            {
+                if (gTextPrinters[i].active)
                 {
                     u16 temp = RenderFont(&gTextPrinters[i]);
                     switch (temp)
@@ -232,20 +234,23 @@ void RunTextPrinters(void)
                     case 3:
                         if (gTextPrinters[i].callback != 0)
                             gTextPrinters[i].callback(&gTextPrinters[i].printerTemplate, temp);
-                        isActive = 0;
+                        isInstantText = FALSE;
                         break;
                     case 1:
                         gTextPrinters[i].active = 0;
-                        isActive = 0;
-                        break;
+                        return;
                     }
                 }
-                if (!isActive) {
-                    break;
+                else
+                {
+                    numEmpty++;
                 }
-            } while (isInstant);
+            }
+
+            if (numEmpty == 0x20)
+                return;
         }
-    }
+    } while (isInstantText);
 }
 
 bool16 IsTextPrinterActive(u8 id)
