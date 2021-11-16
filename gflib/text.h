@@ -367,6 +367,8 @@ struct TextGlyph
 {
     u32 gfxBufferTop[16];
     u32 gfxBufferBottom[16];
+    u32 gfxBufferBottom2[16];
+    u32 gfxBufferBottom3[16];
     u8 width;
     u8 height;
 };
@@ -430,6 +432,8 @@ void DecompressGlyphFont2(u16 glyphId, bool32 isJapanese);
 u32 GetGlyphWidthFont2(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont1(u16 glyphId, bool32 isJapanese);
 u32 GetGlyphWidthFont1(u16 glyphId, bool32 isJapanese);
+void DecompressGlyphFont3(u16 glyphId, bool32 isJapanese);
+u32 GetGlyphWidthFont3(u16 glyphId, bool32 isJapanese);
 void DecompressGlyphFont9(u16 glyphId);
 
 // unk_text_util_2.c

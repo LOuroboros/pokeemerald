@@ -240,6 +240,9 @@ $(FONTGFXDIR)/font1.latfont: $(FONTGFXDIR)/font1_latin.png
 $(FONTGFXDIR)/font2.latfont: $(FONTGFXDIR)/font2_latin.png
 	$(GFX) $< $@
 
+$(FONTGFXDIR)/font3.latfont: $(FONTGFXDIR)/font3_latin.png ## font1 but tall
+	$(GFX) $< $@
+
 $(FONTGFXDIR)/font7.latfont: $(FONTGFXDIR)/font7_latin.png
 	$(GFX) $< $@
 

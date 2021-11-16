@@ -20,7 +20,7 @@ gDisableTextPrinters:
     .space 1
     .align 4
 gCurGlyph:
-    .space 132
+    .space 260
     .align 2
 gTextFlags:
     .space 4
