@@ -84,6 +84,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS,
     DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG,
     DEBUG_UTIL_MENU_ITEM_CLEAR_BAG,
+    DEBUG_UTIL_MENU_ITEM_DELETE_POKEMON,
     DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY,
 };
 enum { // Flags
@@ -122,7 +123,7 @@ enum { // Give
     DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET,
     DEBUG_GIVE_MENU_FILL_BERRIES_POCKET,
     DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET,
-    DEBUG_GIVE_MENU_ITEM_CHEAT,
+    DEBUG_GIVE_MENU_GIVE_DEBUG_PACK,
 };
 enum { //Sound
     DEBUG_SOUND_MENU_ITEM_SE,
@@ -251,6 +252,7 @@ static void DebugAction_Util_ChangeCostume(u8 taskId);
 static void DebugAction_Util_CatchChainStatus(u8 taskId);
 static void DebugAction_Util_CreateDaycareEgg(u8 taskId);
 static void DebugAction_Util_ClearBag(u8 taskId);
+static void DebugAction_Util_DeletePokemon(u8 taskId);
 static void DebugAction_Util_ClearParty(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
@@ -301,7 +303,7 @@ static void DebugAction_Give_FillItemsPocket(u8 taskId);
 static void DebugAction_Give_FillPokeBallsPocket(u8 taskId);
 static void DebugAction_Give_FillBerriesPocket(u8 taskId);
 static void DebugAction_Give_FillKeyItemsPocket(u8 taskId);
-static void DebugAction_Give_CHEAT(u8 taskId);
+static void DebugAction_Give_DebugPack(u8 taskId);
 
 static void DebugAction_Sound_SE(u8 taskId);
 static void DebugAction_Sound_SE_SelectId(u8 taskId);
@@ -341,16 +343,17 @@ static void DebugAction_PresetWarp_BattleTower(u8 taskId);
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
-extern u8 EventScript_CheckSavefileSize[];
-extern u8 EventScript_DebugPack[];
+extern u8 DebugScript_CheckSavefileSize[];
+extern u8 DebugScript_DebugPack[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
 //extern u8 EventScript_GetCurrentDay[];
-extern u8 EventScript_CheckEVs[];
-extern u8 EventScript_CheckIVs[];
-extern u8 EventScript_ForceEggHatch[];
-extern u8 EventScript_DoWonderTrade[];
-extern u8 Script_CatchingStreak[];
+extern u8 DebugScript_CheckEVs[];
+extern u8 DebugScript_CheckIVs[];
+extern u8 DebugScript_ForceEggHatch[];
+extern u8 DebugScript_DoWonderTrade[];
+extern u8 DebugScript_CatchingStreak[];
+extern u8 DebugScript_DeleteMon[];
 
 #define ABILITY_NAME_LENGTH 12
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
@@ -394,6 +397,7 @@ static const u8 sDebugText_Util_ChangeCostume[] =           _("Change Costume");
 static const u8 sDebugText_Util_CatchChainStatus[] =        _("Catch Chain Status");
 static const u8 sDebugText_Util_CreateDaycareEgg[] =        _("Create Daycare Egg");
 static const u8 sDebugText_Util_ClearBag[] =                _("Clear Bag");
+static const u8 sDebugText_Util_DeletePokemon[] =           _("Delete Pokémon");
 static const u8 sDebugText_Util_ClearParty[] =              _("Clear Party");
 // Flags Menu
 static const u8 sDebugText_Flags_Flags[] =                _("Edit Flags");
@@ -454,7 +458,7 @@ static const u8 sDebugText_Give_FillPokeBallsPocket[] = _("Fill Poké Balls Pock
 static const u8 sDebugText_Give_FillBerriesPocket[] =   _("Fill Berries Pocket");
 static const u8 sDebugText_Give_FillKeyItemsPocket[] =  _("Fill Key Items Pocket");
 static const u8 sDebugText_Give_MaxCoins[] =            _("Give Max. Coins");
-static const u8 sDebugText_Give_GiveCHEAT[] =           _("CHEAT start");
+static const u8 sDebugText_Give_GiveDebugPack[] =       _("Debug Pack");
 // Sound Mneu
 static const u8 sDebugText_Sound_SE[] =                 _("Effects");
 static const u8 sDebugText_Sound_SE_ID[] =              _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
@@ -561,6 +565,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]     = {sDebugText_Util_CatchChainStatus,    DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS},
     [DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG]     = {sDebugText_Util_CreateDaycareEgg,    DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG},
     [DEBUG_UTIL_MENU_ITEM_CLEAR_BAG]              = {sDebugText_Util_ClearBag,            DEBUG_UTIL_MENU_ITEM_CLEAR_BAG},
+    [DEBUG_UTIL_MENU_ITEM_DELETE_POKEMON]         = {sDebugText_Util_DeletePokemon,       DEBUG_UTIL_MENU_ITEM_DELETE_POKEMON},
     [DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY]            = {sDebugText_Util_ClearParty,          DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
@@ -602,7 +607,7 @@ static const struct ListMenuItem sDebugMenu_Items_Give[] =
     [DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET] = {sDebugText_Give_FillPokeBallsPocket, DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET},
     [DEBUG_GIVE_MENU_FILL_BERRIES_POCKET]    = {sDebugText_Give_FillBerriesPocket,   DEBUG_GIVE_MENU_FILL_BERRIES_POCKET},
     [DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET]  = {sDebugText_Give_FillKeyItemsPocket,  DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET},
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = {sDebugText_Give_GiveCHEAT,           DEBUG_GIVE_MENU_ITEM_CHEAT},
+    [DEBUG_GIVE_MENU_GIVE_DEBUG_PACK]        = {sDebugText_Give_GiveDebugPack,       DEBUG_GIVE_MENU_GIVE_DEBUG_PACK},
 };
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
@@ -677,6 +682,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_CATCH_CHAIN_STATUS]     = DebugAction_Util_CatchChainStatus,
     [DEBUG_UTIL_MENU_ITEM_CREATE_DAYCARE_EGG]     = DebugAction_Util_CreateDaycareEgg,
     [DEBUG_UTIL_MENU_ITEM_CLEAR_BAG]              = DebugAction_Util_ClearBag,
+    [DEBUG_UTIL_MENU_ITEM_DELETE_POKEMON]         = DebugAction_Util_DeletePokemon,
     [DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY]            = DebugAction_Util_ClearParty,
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
@@ -718,7 +724,7 @@ static void (*const sDebugMenu_Actions_Give[])(u8) =
     [DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET] = DebugAction_Give_FillPokeBallsPocket,
     [DEBUG_GIVE_MENU_FILL_BERRIES_POCKET]    = DebugAction_Give_FillBerriesPocket,
     [DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET]  = DebugAction_Give_FillKeyItemsPocket,
-    [DEBUG_GIVE_MENU_ITEM_CHEAT]             = DebugAction_Give_CHEAT,
+    [DEBUG_GIVE_MENU_GIVE_DEBUG_PACK]        = DebugAction_Give_DebugPack,
 };
 static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
@@ -1335,7 +1341,7 @@ static void DebugAction_Util_CheckSaveSpace(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar6, maxPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_CheckSavefileSize);
+    ScriptContext1_SetupScript(DebugScript_CheckSavefileSize);
 }
 static void DebugAction_Util_CheckWallClock(u8 taskId)
 {
@@ -1393,19 +1399,19 @@ static void DebugAction_Util_CheckEVs(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_CheckEVs);
+    ScriptContext1_SetupScript(DebugScript_CheckEVs);
 }
 static void DebugAction_Util_CheckIVs(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_CheckIVs);
+    ScriptContext1_SetupScript(DebugScript_CheckIVs);
 }
 static void DebugAction_Util_ForceEggHatch(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_ForceEggHatch);
+    ScriptContext1_SetupScript(DebugScript_ForceEggHatch);
 }
 static void DebugAction_Util_OpenPC(u8 taskId)
 {
@@ -1417,7 +1423,7 @@ static void DebugAction_Util_DoWonderTrade(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_DoWonderTrade);
+    ScriptContext1_SetupScript(DebugScript_DoWonderTrade);
 }
 static void DebugAction_Util_ChangeCostume(u8 taskId)
 {
@@ -1452,7 +1458,7 @@ static void DebugAction_Util_CatchChainStatus(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(Script_CatchingStreak);
+    ScriptContext1_SetupScript(DebugScript_CatchingStreak);
 }
 static void DebugAction_Util_CreateDaycareEgg(u8 taskId)
 {
@@ -1470,6 +1476,12 @@ static void DebugAction_Util_ClearBag(u8 taskId)
         gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] = 0;
     Debug_DestroyMenu(taskId);
     EnableBothScriptContexts();
+}
+static void DebugAction_Util_DeletePokemon(u8 taskId)
+{
+    Debug_DestroyMenu(taskId);
+    ScriptContext2_Enable();
+    ScriptContext1_SetupScript(DebugScript_DeleteMon);
 }
 static void DebugAction_Util_ClearParty(u8 taskId)
 {
@@ -3222,11 +3234,11 @@ static void DebugAction_Give_FillKeyItemsPocket(u8 taskId)
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
-static void DebugAction_Give_CHEAT(u8 taskId)
+static void DebugAction_Give_DebugPack(u8 taskId)
 {
     Debug_DestroyMenu(taskId);
     ScriptContext2_Enable();
-    ScriptContext1_SetupScript(EventScript_DebugPack);
+    ScriptContext1_SetupScript(DebugScript_DebugPack);
 }
 
 // *******************************

@@ -14,20 +14,20 @@ EventScript_EnableAutoRun::
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_CheckFishingStreak::
+DebugScript_CheckFishingStreak::
 	lockall
 	specialvar VAR_RESULT, CheckChainFishingStreak
 	buffernumberstring 0, VAR_RESULT
-	msgbox EventScript_CheckFishingStreak_Text_CurrentFishingStreak, MSGBOX_DEFAULT
+	msgbox DebugScript_CheckFishingStreak_Text_CurrentFishingStreak, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CheckFishingStreak_Text_CurrentFishingStreak::
+DebugScript_CheckFishingStreak_Text_CurrentFishingStreak::
 	.string "Current chain fishing streak: {STR_VAR_1}.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DebugPack::
+DebugScript_DebugPack::
 	lockall
 	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_SYS_POKEDEX_GET
@@ -119,17 +119,17 @@ EventScript_DebugPack::
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_CheckSavefileSize::
-	msgbox EventScript_Text_CheckSavefileSize
+DebugScript_CheckSavefileSize::
+	msgbox DebugScript_Text_CheckSavefileSize
 	release
 	end
 
-EventScript_Text_CheckSavefileSize:
+DebugScript_Text_CheckSavefileSize:
 	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_4} bytes.\nSaveBlock2 size: {STR_VAR_2}/{STR_VAR_5} bytes.\p{PKMN}Storage size: {STR_VAR_3}/{STR_VAR_6} bytes.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_CheckEVs::
+DebugScript_CheckEVs::
 	lockall
 	faceplayer
 	getpartysize
@@ -138,43 +138,43 @@ EventScript_CheckEVs::
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_Cancel
+	goto_if_ge DebugScript_Cancel
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq EventScript_CheckEVs_Egg
+	goto_if_eq DebugScript_CheckEVs_Egg
 	special CheckMonEVs
-	msgbox EventScript_CheckEVs_Text_Evaluation
-	msgbox EventScript_Text_ComeBackAnytime
+	msgbox DebugScript_CheckEVs_Text_Evaluation
+	msgbox DebugScript_Text_ComeBackAnytime
 	releaseall
 	end
 
-EventScript_Cancel:
+DebugScript_Cancel:
 	end
 
-EventScript_CheckEVs_Egg:
+DebugScript_CheckEVs_Egg:
 	lockall
 	faceplayer
-	msgbox EventScript_CheckEVs_Text_Egg
+	msgbox DebugScript_CheckEVs_Text_Egg
 	releaseall
 	end
 
-EventScript_CheckEVs_Text_Evaluation:
+DebugScript_CheckEVs_Text_Evaluation:
 	.string "Your POKéMON has: {STR_VAR_1} HP EVs,\n"
 	.string "{STR_VAR_2} ATK EVs and {STR_VAR_3} DEF EVs.\p"
 	.string "Let's see what else…\p"
 	.string "It also has: {STR_VAR_4} SPD EVs,\n"
 	.string "{STR_VAR_5} SP. ATK EVs and {STR_VAR_6} SP. DEF EVs.$"
 
-EventScript_CheckEVs_Text_Egg:
+DebugScript_CheckEVs_Text_Egg:
 	.string "Sorry, Pokémon Eggs don't\n"
 	.string "have EVs.$"
 
-EventScript_Text_ComeBackAnytime:
+DebugScript_Text_ComeBackAnytime:
 	.string "Come back anytime.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_CheckIVs::
+DebugScript_CheckIVs::
 	lockall
 	faceplayer
 	getpartysize
@@ -183,31 +183,31 @@ EventScript_CheckIVs::
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_Cancel
+	goto_if_ge DebugScript_Cancel
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq EventScript_CheckIVs_Egg
+	goto_if_eq DebugScript_CheckIVs_Egg
 	special CheckMonIVs
-	msgbox EventScript_CheckIVs_Text_Evaluation
-	msgbox EventScript_Text_ComeBackAnytime
+	msgbox DebugScript_CheckIVs_Text_Evaluation
+	msgbox DebugScript_Text_ComeBackAnytime
 	releaseall
 	end
 
-EventScript_CheckIVs_Egg:
+DebugScript_CheckIVs_Egg:
 	lockall
 	faceplayer
-	msgbox EventScript_CheckIVs_Text_Egg
+	msgbox DebugScript_CheckIVs_Text_Egg
 	releaseall
 	end
 
-EventScript_CheckIVs_Text_Evaluation:
+DebugScript_CheckIVs_Text_Evaluation:
 	.string "Your POKéMON has: {STR_VAR_1} HP IVs,\n"
 	.string "{STR_VAR_2} ATK IVs and {STR_VAR_3} DEF IVs.\p"
 	.string "Let's see what else…\p"
 	.string "It also has: {STR_VAR_4} SPD IVs,\n"
 	.string "{STR_VAR_5} SP. ATK IVs and {STR_VAR_6} SP. DEF IVs.$"
 
-EventScript_CheckIVs_Text_Egg:
+DebugScript_CheckIVs_Text_Egg:
 	.string "Sorry, Pokémon Eggs don't\n"
 	.string "have IVs.$"
 
@@ -220,7 +220,7 @@ EventScript_ThereIsNoPokemon::
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_ForceEggHatch::
+DebugScript_ForceEggHatch::
 	lockall
 	faceplayer
 	getpartysize
@@ -229,193 +229,178 @@ EventScript_ForceEggHatch::
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_eq EventScript_Cancel
+	goto_if_eq DebugScript_Cancel
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_ne EventScript_ForceEggHatch_CantForceHatch
+	goto_if_ne DebugScript_ForceEggHatch_CantForceHatch
 	special EggHatch
 	waitstate
 	releaseall
 	end
-EventScript_ForceEggHatch_CantForceHatch:
+DebugScript_ForceEggHatch_CantForceHatch:
 	lock
-	msgbox EventScript_ForcedEggHatch_Text_NotAnEgg
+	msgbox DebugScript_ForcedEggHatch_Text_NotAnEgg
 	release
 	end
 
-EventScript_ForcedEggHatch_Text_NotAnEgg:
+DebugScript_ForcedEggHatch_Text_NotAnEgg:
 	.string "That's not a Pokémon Egg.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DisableTrainerEncounters::
+DebugScript_DisableTrainerEncounters::
 	lockall
-	goto_if_set FLAG_DISABLE_TRAINER_ENCOUNTERS, EventScript_DisableTrainerEncountersReEnable
+	goto_if_set FLAG_DISABLE_TRAINER_ENCOUNTERS, DebugScript_DisableTrainerEncountersReEnable
 	setflag FLAG_DISABLE_TRAINER_ENCOUNTERS
-	msgbox EventScript_DisableTrainerEncounters_Text_Done
-EventScript_DisableTrainerEncountersEnd:
+	msgbox DebugScript_DisableTrainerEncounters_Text_Done
+DebugScript_DisableTrainerEncountersEnd:
 	releaseall
 	end
 
-EventScript_DisableTrainerEncountersReEnable:
+DebugScript_DisableTrainerEncountersReEnable:
 	clearflag FLAG_DISABLE_TRAINER_ENCOUNTERS
-	msgbox EventScript_DisableTrainerEncounters_Text_Done2
-	goto EventScript_DisableTrainerEncountersEnd
+	msgbox DebugScript_DisableTrainerEncounters_Text_Done2
+	goto DebugScript_DisableTrainerEncountersEnd
 
-EventScript_DisableTrainerEncounters_Text_Done:
+DebugScript_DisableTrainerEncounters_Text_Done:
 	.string "Other trainers will no longer\nbe able to see you.$"
 
-EventScript_DisableTrainerEncounters_Text_Done2:
+DebugScript_DisableTrainerEncounters_Text_Done2:
 	.string "Other trainers will be able\nto see you again.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DisableBallThrows::
+DebugScript_DisableBallThrows::
 	lockall
-	goto_if_set FLAG_DISABLE_BALL_THROWS, EventScript_DisableBallThrowsReEnable
+	goto_if_set FLAG_DISABLE_BALL_THROWS, DebugScript_DisableBallThrowsReEnable
 	setflag FLAG_DISABLE_BALL_THROWS
-	msgbox EventScript_DisableBallThrows_Text_Done
-EventScript_DisableBallThrowsEnd:
+	msgbox DebugScript_DisableBallThrows_Text_Done
+DebugScript_DisableBallThrowsEnd:
 	releaseall
 	end
 
-EventScript_DisableBallThrowsReEnable:
+DebugScript_DisableBallThrowsReEnable:
 	clearflag FLAG_DISABLE_BALL_THROWS
-	msgbox EventScript_DisableBallThrows_Text_Done2
-	goto EventScript_DisableBallThrowsEnd
+	msgbox DebugScript_DisableBallThrows_Text_Done2
+	goto DebugScript_DisableBallThrowsEnd
 
-EventScript_DisableBallThrows_Text_Done:
+DebugScript_DisableBallThrows_Text_Done:
 	.string "You won't be able to catch\nPokémon anymore.$"
 
-EventScript_DisableBallThrows_Text_Done2:
+DebugScript_DisableBallThrows_Text_Done2:
 	.string "You'll be able to catch\nPokémon again.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_WalkThroughWalls::
+DebugScript_WalkThroughWalls::
 	lockall
-	goto_if_set FLAG_DISABLE_COLLISIONS, EventScript_WalkThroughWallsReEnable
+	goto_if_set FLAG_DISABLE_COLLISIONS, DebugScript_WalkThroughWallsReEnable
 	setflag FLAG_DISABLE_COLLISIONS
-	msgbox EventScript_WalkThroughWalls_Text_Done
-EventScript_WalkThroughWallsEnd:
+	msgbox DebugScript_WalkThroughWalls_Text_Done
+DebugScript_WalkThroughWallsEnd:
 	releaseall
 	end
 
-EventScript_WalkThroughWallsReEnable:
+DebugScript_WalkThroughWallsReEnable:
 	clearflag FLAG_DISABLE_COLLISIONS
-	msgbox EventScript_WalkThroughWalls_Text_Done2
-	goto EventScript_WalkThroughWallsEnd
+	msgbox DebugScript_WalkThroughWalls_Text_Done2
+	goto DebugScript_WalkThroughWallsEnd
 
-EventScript_WalkThroughWalls_Text_Done:
+DebugScript_WalkThroughWalls_Text_Done:
 	.string "Walk Through Walls enabled.$"
 
-EventScript_WalkThroughWalls_Text_Done2:
+DebugScript_WalkThroughWalls_Text_Done2:
 	.string "Walk Through Walls disabled.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DisableBattleBagAccess::
+DebugScript_DisableBattleBagAccess::
 	lockall
-	goto_if_set FLAG_DISABLE_BATTLE_BAG_ACCESS, EventScript_DisableBattleBagAccessReEnable
+	goto_if_set FLAG_DISABLE_BATTLE_BAG_ACCESS, DebugScript_DisableBattleBagAccessReEnable
 	setflag FLAG_DISABLE_BATTLE_BAG_ACCESS
-	msgbox EventScript_DisableBattleBagAccess_Text_Done
-EventScript_DisableBattleBagAccessEnd:
+	msgbox DebugScript_DisableBattleBagAccess_Text_Done
+DebugScript_DisableBattleBagAccessEnd:
 	releaseall
 	end
 
-EventScript_DisableBattleBagAccessReEnable:
+DebugScript_DisableBattleBagAccessReEnable:
 	clearflag FLAG_DISABLE_BATTLE_BAG_ACCESS
-	msgbox EventScript_DisableBattleBagAccess_Text_Done2
-	goto EventScript_DisableBattleBagAccessEnd
+	msgbox DebugScript_DisableBattleBagAccess_Text_Done2
+	goto DebugScript_DisableBattleBagAccessEnd
 
-EventScript_DisableBattleBagAccess_Text_Done:
+DebugScript_DisableBattleBagAccess_Text_Done:
 	.string "You can't use items\nin battle anymore.$"
 
-EventScript_DisableBattleBagAccess_Text_Done2:
+DebugScript_DisableBattleBagAccess_Text_Done2:
 	.string "You can use items\nin battle again.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DisableWildEncounters::
+DebugScript_DisableWildEncounters::
 	lockall
-	goto_if_set FLAG_DISABLE_WILD_ENCOUNTERS, EventScript_DisableWildEncountersReEnable
+	goto_if_set FLAG_DISABLE_WILD_ENCOUNTERS, DebugScript_DisableWildEncountersReEnable
 	setflag FLAG_DISABLE_WILD_ENCOUNTERS
-	msgbox EventScript_DisableWildEncounters_Text_Done
-EventScript_DisableWildEncountersEnd:
+	msgbox DebugScript_DisableWildEncounters_Text_Done
+DebugScript_DisableWildEncountersEnd:
 	releaseall
 	end
 
-EventScript_DisableWildEncountersReEnable:
+DebugScript_DisableWildEncountersReEnable:
 	clearflag FLAG_DISABLE_WILD_ENCOUNTERS
-	msgbox EventScript_DisableWildEncounters_Text_Done2
-	goto EventScript_DisableWildEncountersEnd
+	msgbox DebugScript_DisableWildEncounters_Text_Done2
+	goto DebugScript_DisableWildEncountersEnd
 
-EventScript_DisableWildEncounters_Text_Done:
+DebugScript_DisableWildEncounters_Text_Done:
 	.string "Pokéwhat?$"
 
-EventScript_DisableWildEncounters_Text_Done2:
+DebugScript_DisableWildEncounters_Text_Done2:
 	.string "P. O. K. é. M. ON!\nPOKéMON!$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_CheckTime::
-	lockall
-	gettime
-	buffernumberstring 0, VAR_0x8000
-	buffernumberstring 1, VAR_0x8001
-	buffernumberstring 2, VAR_0x8002
-	msgbox EventScript_CheckTime_Text_CurrentTime, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_CheckTime_Text_CurrentTime:
-	.string "The current time is {STR_VAR_1}:{STR_VAR_2}:{STR_VAR_3}.$"
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-EventScript_CheckDate::
+DebugScript_CheckDate::
 	lockall
 	getdate
 	buffernumberstring 0, VAR_0x8000
 	buffernumberstring 1, VAR_0x8001
 	buffernumberstring 2, VAR_0x8002
-	msgbox EventScript_CheckTime_Text_CurrentDate, MSGBOX_DEFAULT
+	msgbox DebugScript_CheckTime_Text_CurrentDate, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_CheckTime_Text_CurrentDate:
+DebugScript_CheckTime_Text_CurrentDate:
 	.string "Today is {STR_VAR_1}/{STR_VAR_2}/{STR_VAR_3}.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DeleteMon::
+DebugScript_DeleteMon::
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_DeleteMonEnd
+	goto_if_ge DebugScript_DeleteMonEnd
 	bufferpartymonnick 0, VAR_0x8004
 	special DeleteChosenPartyMon
-	msgbox EventScript_DeleteMon_Text_Poof, MSGBOX_SIGN
-EventScript_DeleteMonEnd:
+	msgbox DebugScript_DeleteMon_Text_Poof, MSGBOX_SIGN
+DebugScript_DeleteMonEnd:
 	end
 
-EventScript_DeleteMon_Text_Poof:
+DebugScript_DeleteMon_Text_Poof:
 	.string "Your {STR_VAR_1} has been deleted.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_GetCurrentDay::
+DebugScript_GetCurrentDay::
 	getcurrentday 0
-	msgbox EventScript_GetCurrentDay_Text_TodayIs
+	msgbox DebugScript_GetCurrentDay_Text_TodayIs
 	closemessage
 	end
 
-EventScript_GetCurrentDay_Text_TodayIs:
+DebugScript_GetCurrentDay_Text_TodayIs:
 	.string "Today is {STR_VAR_1}.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-EventScript_DoWonderTrade::
+DebugScript_DoWonderTrade::
 	lockall
 	getpartysize
 	compare VAR_RESULT, 0
@@ -423,48 +408,48 @@ EventScript_DoWonderTrade::
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_Cancel
+	goto_if_ge DebugScript_Cancel
 	copyvar VAR_0x8005, VAR_0x8004
 	special CreateWonderTradePokemon
 	special DoInGameTradeScene
 	waitstate
-	msgbox EventScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade, MSGBOX_YESNO
+	msgbox DebugScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade, MSGBOX_YESNO
 	compare VAR_RESULT, YES
-	goto_if_eq EventScript_DoWonderTrade
-	msgbox EventScript_DoWonderTrade_Text_Done, MSGBOX_DEFAULT
+	goto_if_eq DebugScript_DoWonderTrade
+	msgbox DebugScript_DoWonderTrade_Text_Done, MSGBOX_DEFAULT
 	releaseall
 	end
 
-EventScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade:
+DebugScript_DoWonderTrade_Text_WannaDoAnotherWonderTrade:
 	.string "Do you want to do\nanother Wonder Trade?$"
 
-EventScript_DoWonderTrade_Text_Done:
+DebugScript_DoWonderTrade_Text_Done:
 	.string "Enjoy your new Pokémon.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-PokemonDataInfoBox::
+Script_PokemonDataInfoBox::
 	special ChoosePartyMon
 	waitstate
 	compare VAR_0x8004, PARTY_SIZE
-	goto_if_ge EventScript_Cancel
+	goto_if_ge DebugScript_Cancel
 	specialvar VAR_RESULT, ScriptGetPartyMonSpecies
 	compare VAR_RESULT, SPECIES_EGG
-	goto_if_eq EventScript_Cancel
+	goto_if_eq DebugScript_Cancel
 	special BufferChosenMonStats
 	drawinfobox INFOBOX_POKEMON_DATA
 	bufferpartymonnick 0, VAR_0x8004
-	msgbox EventScript_PokemonDataInfoBox_Text_ChosenMonStats
+	msgbox PokemonDataInfoBox_Text_ChosenMonStats
 	removeinfobox
 	release
 	end
 
-EventScript_PokemonDataInfoBox_Text_ChosenMonStats:
+PokemonDataInfoBox_Text_ChosenMonStats:
 	.string "Stats of {STR_VAR_1}$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-Script_CatchingStreak::
+DebugScript_CatchingStreak::
 	compare VAR_WILD_POKEMON_CHAIN_COUNT, 0
 	goto_if_eq Script_NoStreak
 	buffernumberstring 4, VAR_WILD_POKEMON_CHAIN_COUNT
