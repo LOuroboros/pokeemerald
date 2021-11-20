@@ -117,7 +117,6 @@ static u8 GetObjectEventIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableObjectEventId(u16, u8, u8, u8 *);
 static void SetObjectEventDynamicGraphicsId(struct ObjectEvent *);
 static void RemoveObjectEventInternal(struct ObjectEvent *);
-static u16 GetObjectEventFlagIdByObjectEventId(u8);
 static void UpdateObjectEventVisibility(struct ObjectEvent *, struct Sprite *);
 static void MakeObjectTemplateFromObjectEventTemplate(struct ObjectEventTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 static void GetObjectEventMovingCameraOffset(s16 *, s16 *);
@@ -1581,8 +1580,6 @@ static u8 TrySpawnObjectEventTemplate(struct ObjectEventTemplate *objectEventTem
     if (subspriteTables)
         SetSubspriteTables(&gSprites[gObjectEvents[objectEventId].spriteId], subspriteTables);
 
-    FlagClear(GetObjectEventFlagIdByObjectEventId(objectEventId));
-
     return objectEventId;
 }
 
@@ -2501,7 +2498,7 @@ static u16 GetObjectEventFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGrou
     return obj->flagId;
 }
 
-static u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
+u16 GetObjectEventFlagIdByObjectEventId(u8 objectEventId)
 {
     return GetObjectEventFlagIdByLocalIdAndMap(gObjectEvents[objectEventId].localId, gObjectEvents[objectEventId].mapNum, gObjectEvents[objectEventId].mapGroup);
 }

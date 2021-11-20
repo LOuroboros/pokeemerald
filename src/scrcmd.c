@@ -1059,7 +1059,9 @@ bool8 ScrCmd_addobject(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
 
-    TrySpawnObjectEvent(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    u16 objectEventId = TrySpawnObjectEvent(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    if (objectEventId != OBJECT_EVENTS_COUNT)
+        FlagClear(GetObjectEventFlagIdByObjectEventId(objectEventId));
     return FALSE;
 }
 
@@ -1069,7 +1071,9 @@ bool8 ScrCmd_addobject_at(struct ScriptContext *ctx)
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
 
-    TrySpawnObjectEvent(objectId, mapNum, mapGroup);
+    u16 objectEventId = TrySpawnObjectEvent(objectId, mapNum, mapGroup);
+    if (objectEventId != OBJECT_EVENTS_COUNT)
+        FlagClear(GetObjectEventFlagIdByObjectEventId(objectEventId));
     return FALSE;
 }
 
