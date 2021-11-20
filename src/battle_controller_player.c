@@ -38,6 +38,8 @@
 #include "constants/rgb.h"
 #include "constants/battle_move_effects.h"
 #include "event_data.h"
+#include "battle_script_commands.h"
+#include "pokemon_animation.h"
 
 extern struct MusicPlayerInfo gMPlayInfo_BGM;
 
@@ -127,6 +129,7 @@ static void DoSwitchOutAnimation(void);
 static void PlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8 taskId);
 static void EndDrawPartyStatusSummary(void);
+static void Task_CreateLevelUpVerticalStripes(u8 taskId);
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -1518,6 +1521,104 @@ static void DestroyExpTaskAndCompleteOnInactiveTextPrinter(u8 taskId)
     battlerId = gTasks[taskId].tExpTask_battler;
     gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
     DestroyTask(taskId);
+}
+
+void AnimTask_CreateLevelUpVerticalStripes(u8 taskId)
+{
+    u8 monIndex;
+    s32 battlerId = gTasks[taskId].tExpTask_battler;
+
+    if (IsBattlerSpriteVisible((u8)battlerId) == TRUE)
+    {
+        gTasks[taskId].func = Task_CreateLevelUpVerticalStripes;
+        gTasks[taskId].data[15] = 0;
+    }
+    else
+    {
+        gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+        DestroyTask(taskId);
+    }
+}
+
+static void Task_CreateLevelUpVerticalStripes(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+    u8 battlerId = tExpTask_battler;
+    u16 bgPriorityRank = GetBattlerSpriteBGPriorityRank(battlerId);
+    bool32 isOnBg2 = ((bgPriorityRank ^ 1)) != 0;
+    struct Sprite *sprite = &gSprites[gBattlerSpriteIds[battlerId]];
+
+    switch (data[15])
+    {
+    case 0:
+        if (!IsTextPrinterActive(0))
+        {
+            if (!isOnBg2)
+            {
+                data[14] = gBattle_BG1_X;
+                data[13] = gBattle_BG1_Y;
+                gBattle_BG1_X = -(sprite->x + sprite->x2) + 32;
+                gBattle_BG1_Y = -(sprite->y + sprite->y2) + 32;
+            }
+            else
+            {
+                data[14] = gBattle_BG2_X;
+                data[13] = gBattle_BG2_Y;
+                gBattle_BG2_X = -(sprite->x + sprite->x2) + 32;
+                gBattle_BG2_Y = -(sprite->y + sprite->y2) + 32;
+            }
+            ++data[15];
+        }
+        break;
+    case 1:
+        {
+            u32 battlerIdAlt = battlerId;
+            bool32 v6Alt = isOnBg2;
+
+            MoveBattlerSpriteToBG(battlerIdAlt, v6Alt, FALSE); // Don't make sprite invisible
+        }
+        ++data[15];
+        break;
+    case 2:
+        PlaySE(SE_SHOP);
+        if (IsMonGettingExpSentOut())
+            CreateLevelUpVerticalSpritesTask(sprite->x + sprite->x2,
+                        sprite->y + sprite->y2,
+                        10000,
+                        10000,
+                        1,
+                        0);
+        ++data[15];
+        break;
+    case 3:
+        if (!LevelUpVerticalSpritesTaskIsRunning())
+        {
+            sprite->invisible = FALSE;
+            ++data[15];
+        }
+        break;
+    case 5:
+        ResetBattleAnimBg(isOnBg2);
+        ++data[15];
+        break;
+    case 4:
+        ++data[15];
+        break;
+    case 6:
+        if (!isOnBg2)
+        {
+            gBattle_BG1_X = data[14];
+            gBattle_BG1_Y = data[13];
+        }
+        else
+        {
+            gBattle_BG2_X = data[14];
+            gBattle_BG2_Y = data[13];
+        }
+        gBattlerControllerFuncs[battlerId] = CompleteOnInactiveTextPrinter;
+        DestroyTask(taskId);
+        break;
+    }
 }
 
 static void FreeMonSpriteAfterFaintAnim(void)

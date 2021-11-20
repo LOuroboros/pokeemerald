@@ -6,6 +6,8 @@ void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, u8 frontAnimId);
 void StartMonSummaryAnimation(struct Sprite *sprite, u8 frontAnimId);
 void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet);
 void SetSpriteCB_MonAnimDummy(struct Sprite *sprite);
+void CreateLevelUpVerticalSpritesTask(u16 x, u16 y, u16 tileTag, u16 paletteTag, u16 priority, u16 subpriority);
+bool8 LevelUpVerticalSpritesTaskIsRunning(void);
 
 // Pokémon back animation sets
 #define BACK_ANIM_NONE                         0

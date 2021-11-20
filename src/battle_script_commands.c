@@ -288,7 +288,6 @@ static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
 static u8 AttacksThisTurn(u8 battlerId, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
 static u32 ChangeStatBuffs(s8 statValue, u32 statId, u32 flags, const u8 *BS_ptr);
-static bool32 IsMonGettingExpSentOut(void);
 static void sub_804F17C(void);
 static bool8 sub_804F1CC(void);
 static void DrawLevelUpWindow1(void);
@@ -7064,7 +7063,7 @@ static void SpriteCB_MonIconOnLvlUpBox(struct Sprite* sprite)
 #undef sDestroy
 #undef sSavedLvlUpBoxXPosition
 
-static bool32 IsMonGettingExpSentOut(void)
+bool32 IsMonGettingExpSentOut(void)
 {
     if (gBattlerPartyIndexes[0] == gBattleStruct->expGetterMonId)
         return TRUE;
