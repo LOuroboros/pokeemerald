@@ -630,7 +630,7 @@ const struct WindowTemplate * const gBattleWindowTemplates[] =
     gBattleArenaWindowTemplates,
 };
 
-static const struct BattleBackground gBattleTerrainTable[][3] =
+static const struct BattleBackground gBattleTerrainTable[][4] =
 {
     [BATTLE_TERRAIN_GRASS] =
     {
@@ -649,6 +649,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTileset = gBattleTerrainAnimTiles_TallGrass,
             .entryTilemap = gBattleTerrainAnimTilemap_TallGrass,
             .palette = gBattleTerrainPalette_TallGrass,
+        },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_TallGrass,
+            .tilemap = gBattleTerrainTilemap_TallGrass,
+            .entryTileset = gBattleTerrainAnimTiles_TallGrass,
+            .entryTilemap = gBattleTerrainAnimTilemap_TallGrass,
+            .palette = gBattleTerrainPalette_TallGrassDusk,
         },
         [TIME_NIGHT]
         {
@@ -678,6 +686,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
             .palette = gBattleTerrainPalette_LongGrass,
         },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_LongGrass,
+            .tilemap = gBattleTerrainTilemap_LongGrass,
+            .entryTileset = gBattleTerrainAnimTiles_LongGrass,
+            .entryTilemap = gBattleTerrainAnimTilemap_LongGrass,
+            .palette = gBattleTerrainPalette_LongGrass, // To do
+        },
         [TIME_NIGHT]
         {
             .tileset = gBattleTerrainTiles_LongGrass,
@@ -705,6 +721,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTileset = gBattleTerrainAnimTiles_Sand,
             .entryTilemap = gBattleTerrainAnimTilemap_Sand,
             .palette = gBattleTerrainPalette_Sand,
+        },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Sand,
+            .tilemap = gBattleTerrainTilemap_Sand,
+            .entryTileset = gBattleTerrainAnimTiles_Sand,
+            .entryTilemap = gBattleTerrainAnimTilemap_Sand,
+            .palette = gBattleTerrainPalette_Sand, // To do
         },
         [TIME_NIGHT]
         {
@@ -734,6 +758,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTilemap = gBattleTerrainAnimTilemap_Underwater,
             .palette = gBattleTerrainPalette_Underwater,
         },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Underwater,
+            .tilemap = gBattleTerrainTilemap_Underwater,
+            .entryTileset = gBattleTerrainAnimTiles_Underwater,
+            .entryTilemap = gBattleTerrainAnimTilemap_Underwater,
+            .palette = gBattleTerrainPalette_Underwater, // To do
+        },
         [TIME_NIGHT]
         {
             .tileset = gBattleTerrainTiles_Underwater,
@@ -761,6 +793,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTileset = gBattleTerrainAnimTiles_Water,
             .entryTilemap = gBattleTerrainAnimTilemap_Water,
             .palette = gBattleTerrainPalette_Water,
+        },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Water,
+            .tilemap = gBattleTerrainTilemap_Water,
+            .entryTileset = gBattleTerrainAnimTiles_Water,
+            .entryTilemap = gBattleTerrainAnimTilemap_Water,
+            .palette = gBattleTerrainPalette_Water, // To do
         },
         [TIME_NIGHT]
         {
@@ -790,6 +830,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTilemap = gBattleTerrainAnimTilemap_PondWater,
             .palette = gBattleTerrainPalette_PondWater,
         },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_PondWater,
+            .tilemap = gBattleTerrainTilemap_PondWater,
+            .entryTileset = gBattleTerrainAnimTiles_PondWater,
+            .entryTilemap = gBattleTerrainAnimTilemap_PondWater,
+            .palette = gBattleTerrainPalette_PondWater, // To do
+        },
         [TIME_NIGHT]
         {
             .tileset = gBattleTerrainTiles_PondWater,
@@ -817,6 +865,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTileset = gBattleTerrainAnimTiles_Rock,
             .entryTilemap = gBattleTerrainAnimTilemap_Rock,
             .palette = gBattleTerrainPalette_Rock,
+        },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Rock,
+            .tilemap = gBattleTerrainTilemap_Rock,
+            .entryTileset = gBattleTerrainAnimTiles_Rock,
+            .entryTilemap = gBattleTerrainAnimTilemap_Rock,
+            .palette = gBattleTerrainPalette_Rock, // To do
         },
         [TIME_NIGHT]
         {
@@ -846,6 +902,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTilemap = gBattleTerrainAnimTilemap_Cave,
             .palette = gBattleTerrainPalette_Cave,
         },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Cave,
+            .tilemap = gBattleTerrainTilemap_Cave,
+            .entryTileset = gBattleTerrainAnimTiles_Cave,
+            .entryTilemap = gBattleTerrainAnimTilemap_Cave,
+            .palette = gBattleTerrainPalette_Cave, // To do
+        },
         [TIME_NIGHT]
         {
             .tileset = gBattleTerrainTiles_Cave,
@@ -874,6 +938,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTilemap = gBattleTerrainAnimTilemap_Building,
             .palette = gBattleTerrainPalette_Building,
         },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Building,
+            .tilemap = gBattleTerrainTilemap_Building,
+            .entryTileset = gBattleTerrainAnimTiles_Building,
+            .entryTilemap = gBattleTerrainAnimTilemap_Building,
+            .palette = gBattleTerrainPalette_Building, // To do
+        },
         [TIME_NIGHT]
         {
             .tileset = gBattleTerrainTiles_Building,
@@ -901,6 +973,14 @@ static const struct BattleBackground gBattleTerrainTable[][3] =
             .entryTileset = gBattleTerrainAnimTiles_Building,
             .entryTilemap = gBattleTerrainAnimTilemap_Building,
             .palette = gBattleTerrainPalette_Plain,
+        },
+        [TIME_DUSK]
+        {
+            .tileset = gBattleTerrainTiles_Building,
+            .tilemap = gBattleTerrainTilemap_Building,
+            .entryTileset = gBattleTerrainAnimTiles_Building,
+            .entryTilemap = gBattleTerrainAnimTilemap_Building,
+            .palette = gBattleTerrainPalette_Plain, // To do
         },
         [TIME_NIGHT]
         {
