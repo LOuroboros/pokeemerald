@@ -89,13 +89,13 @@ enum { // Util
 };
 enum { // Flags
     DEBUG_FLAG_MENU_ITEM_FLAGS,
+    DEBUG_FLAG_MENU_ITEM_BADGES,
     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS,
     DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF,
     DEBUG_FLAG_MENU_ITEM_NATDEXONOFF,
     DEBUG_FLAG_MENU_ITEM_POKEMONONOFF,
     DEBUG_FLAG_MENU_ITEM_POKENAVONOFF,
     DEBUG_FLAG_MENU_ITEM_FLYANYWHERE,
-    DEBUG_FLAG_MENU_ITEM_GETALLBADGES,
     DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF,
     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF,
     DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF,
@@ -160,6 +160,17 @@ enum { // Preset Warps
     DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID,
     DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER,
 };
+enum { // Badges
+    DEBUG_UTILITIES_BADGES_ALLBADGES,
+    DEBUG_UTILITIES_BADGES_FIRST,
+    DEBUG_UTILITIES_BADGES_SECOND,
+    DEBUG_UTILITIES_BADGES_THIRD,
+    DEBUG_UTILITIES_BADGES_FOURTH,
+    DEBUG_UTILITIES_BADGES_FIFTH,
+    DEBUG_UTILITIES_BADGES_SIXTH,
+    DEBUG_UTILITIES_BADGES_SEVENTH,
+    DEBUG_UTILITIES_BADGES_EIGHTH,
+};
 
 // *******************************
 // Constants
@@ -223,6 +234,7 @@ static void DebugTask_HandleMenuInput_Vars(u8);
 static void DebugTask_HandleMenuInput_Give(u8);
 static void DebugTask_HandleMenuInput_Sound(u8);
 static void DebugTask_HandleMenuInput_PresetWarp(u8);
+static void DebugTask_HandleMenuInput_Badges(u8);
 
 static void DebugTask_ChangeCostume_Execute(u8 taskId);
 static void DebugTask_ChangeCostume_End(u8 taskId);
@@ -259,12 +271,12 @@ static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
 
 static void DebugAction_Flags_SetPokedexFlags(u8);
+static void DebugAction_Flags_Badges(u8 taskId);
 static void DebugAction_Flags_SwitchDex(u8);
 static void DebugAction_Flags_SwitchNatDex(u8);
 static void DebugAction_Flags_SwitchPokemon(u8);
 static void DebugAction_Flags_SwitchPokeNav(u8);
 static void DebugAction_Flags_ToggleFlyFlags(u8);
-static void DebugAction_Flags_ToggleBadgeFlags(u8);
 static void DebugAction_Flags_CollisionOnOff(u8);
 static void DebugAction_Flags_EncounterOnOff(u8);
 static void DebugAction_Flags_TrainerSeeOnOff(u8);
@@ -340,6 +352,16 @@ static void DebugAction_PresetWarp_BattlePalace(u8 taskId);
 static void DebugAction_PresetWarp_BattlePyramid(u8 taskId);
 static void DebugAction_PresetWarp_BattleTower(u8 taskId);
 
+static void DebugAction_Badges_AllBadges(u8);
+static void DebugAction_Badges_First(u8 taskId);
+static void DebugAction_Badges_Second(u8 taskId);
+static void DebugAction_Badges_Third(u8 taskId);
+static void DebugAction_Badges_Fourth(u8 taskId);
+static void DebugAction_Badges_Fifth(u8 taskId);
+static void DebugAction_Badges_Sixth(u8 taskId);
+static void DebugAction_Badges_Seventh(u8 taskId);
+static void DebugAction_Badges_Eighth(u8 taskId);
+
 static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
@@ -401,13 +423,13 @@ static const u8 sDebugText_Util_DeletePokemon[] =           _("Delete Pokémon")
 static const u8 sDebugText_Util_ClearParty[] =              _("Clear Party");
 // Flags Menu
 static const u8 sDebugText_Flags_Flags[] =                _("Edit Flags");
+static const u8 sDebugText_Flags_Badges[] =               _("Toggle Badges");
 static const u8 sDebugText_Flags_SetPokedexFlags[] =      _("All Pokédex Flags");
 static const u8 sDebugText_Flags_SwitchDex[] =            _("Pokédex ON/OFF");
 static const u8 sDebugText_Flags_SwitchNationalDex[] =    _("NatDex ON/OFF");
 static const u8 sDebugText_Flags_SwitchPokemon[] =        _("Pokémon ON/OFF");
 static const u8 sDebugText_Flags_SwitchPokeNav[] =        _("PokéNav ON/OFF");
 static const u8 sDebugText_Flags_ToggleFlyFlags[] =       _("Fly Flags ON/OFF");
-static const u8 sDebugText_Flags_ToggleAllBadges[] =      _("All badges ON/OFF");
 static const u8 sDebugText_Flags_SwitchCollision[] =      _("Collision ON/OFF");
 static const u8 sDebugText_Flags_SwitchEncounter[] =      _("Encounter ON/OFF");
 static const u8 sDebugText_Flags_SwitchTrainerSee[] =     _("TrainerSee ON/OFF");
@@ -495,6 +517,16 @@ static const u8 sDebugText_Map_BattlePike[]          = _("Battle Pike");
 static const u8 sDebugText_Map_BattlePalace[]        = _("Battle Palace");
 static const u8 sDebugText_Map_BattlePyramid[]       = _("Battle Pyramid");
 static const u8 sDebugText_Map_BattleTower[]         = _("Battle Tower");
+// Badges
+static const u8 sDebugText_Flags_AllBadges[]       = _("All badges ON/OFF");
+static const u8 sDebugText_Flags_FirstBadge[]      = _("First (Rustboro City)");
+static const u8 sDebugText_Flags_SecondBadge[]     = _("Second (Dewford Town)");
+static const u8 sDebugText_Flags_ThirdBadge[]      = _("Third (Mauville City)");
+static const u8 sDebugText_Flags_FourthBadge[]     = _("Fourth (Lavaridge Town)");
+static const u8 sDebugText_Flags_FifthBadge[]      = _("Fifth (Petalburg City)");
+static const u8 sDebugText_Flags_SixthBadge[]      = _("Sixth (Fortree City)");
+static const u8 sDebugText_Flags_SeventhBadge[]    = _("Seventh (Mossdeep City)");
+static const u8 sDebugText_Flags_EighthBadge[]     = _("Eighth (Sootopolis City)");
 
 static const u8 digitInidicator_1[] =               _("{LEFT_ARROW}+1{RIGHT_ARROW}        ");
 static const u8 digitInidicator_10[] =              _("{LEFT_ARROW}+10{RIGHT_ARROW}       ");
@@ -571,13 +603,13 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
     [DEBUG_FLAG_MENU_ITEM_FLAGS]                 = {sDebugText_Flags_Flags,               DEBUG_FLAG_MENU_ITEM_FLAGS},
+    [DEBUG_FLAG_MENU_ITEM_BADGES]                = {sDebugText_Flags_Badges,              DEBUG_FLAG_MENU_ITEM_BADGES},
     [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]          = {sDebugText_Flags_SetPokedexFlags,     DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS},
     [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]          = {sDebugText_Flags_SwitchDex,           DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF},
     [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]           = {sDebugText_Flags_SwitchNationalDex,   DEBUG_FLAG_MENU_ITEM_NATDEXONOFF},
     [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]          = {sDebugText_Flags_SwitchPokemon,       DEBUG_FLAG_MENU_ITEM_POKEMONONOFF},
     [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]          = {sDebugText_Flags_SwitchPokeNav,       DEBUG_FLAG_MENU_ITEM_POKENAVONOFF},
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]           = {sDebugText_Flags_ToggleFlyFlags,      DEBUG_FLAG_MENU_ITEM_FLYANYWHERE},
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]          = {sDebugText_Flags_ToggleAllBadges,     DEBUG_FLAG_MENU_ITEM_GETALLBADGES},
     [DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF]       = {sDebugText_Flags_SwitchCollision,     DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]       = {sDebugText_Flags_SwitchEncounter,     DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF},
     [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]     = {sDebugText_Flags_SwitchTrainerSee,    DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF},
@@ -646,6 +678,18 @@ static const struct ListMenuItem sDebugMenu_Items_Utillities_PresetWarp[] =
     [DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID]       = {sDebugText_Map_BattlePyramid,       DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID},
     [DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER]         = {sDebugText_Map_BattleTower,         DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER},
 };
+static const struct ListMenuItem sDebugMenu_Items_Flags_Badges[] =
+{
+    [DEBUG_UTILITIES_BADGES_ALLBADGES] = {sDebugText_Flags_AllBadges,    DEBUG_UTILITIES_BADGES_ALLBADGES},
+    [DEBUG_UTILITIES_BADGES_FIRST]     = {sDebugText_Flags_FirstBadge,   DEBUG_UTILITIES_BADGES_FIRST},
+    [DEBUG_UTILITIES_BADGES_SECOND]    = {sDebugText_Flags_SecondBadge,  DEBUG_UTILITIES_BADGES_SECOND},
+    [DEBUG_UTILITIES_BADGES_THIRD]     = {sDebugText_Flags_ThirdBadge,   DEBUG_UTILITIES_BADGES_THIRD},
+    [DEBUG_UTILITIES_BADGES_FOURTH]    = {sDebugText_Flags_FourthBadge,  DEBUG_UTILITIES_BADGES_FOURTH},
+    [DEBUG_UTILITIES_BADGES_FIFTH]     = {sDebugText_Flags_FifthBadge,   DEBUG_UTILITIES_BADGES_FIFTH},
+    [DEBUG_UTILITIES_BADGES_SIXTH]     = {sDebugText_Flags_SixthBadge,   DEBUG_UTILITIES_BADGES_SIXTH},
+    [DEBUG_UTILITIES_BADGES_SEVENTH]   = {sDebugText_Flags_SeventhBadge, DEBUG_UTILITIES_BADGES_SEVENTH},
+    [DEBUG_UTILITIES_BADGES_EIGHTH]    = {sDebugText_Flags_EighthBadge,  DEBUG_UTILITIES_BADGES_EIGHTH},
+};
 
 // *******************************
 // Menu Actions
@@ -688,13 +732,13 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
     [DEBUG_FLAG_MENU_ITEM_FLAGS]                 = DebugAction_Flags_Flags,
+    [DEBUG_FLAG_MENU_ITEM_BADGES]                = DebugAction_Flags_Badges,
     [DEBUG_FLAG_MENU_ITEM_POKEDEXFLAGS]          = DebugAction_Flags_SetPokedexFlags,
     [DEBUG_FLAG_MENU_ITEM_POKEDEXONOFF]          = DebugAction_Flags_SwitchDex,
     [DEBUG_FLAG_MENU_ITEM_NATDEXONOFF]           = DebugAction_Flags_SwitchNatDex,
     [DEBUG_FLAG_MENU_ITEM_POKEMONONOFF]          = DebugAction_Flags_SwitchPokemon,
     [DEBUG_FLAG_MENU_ITEM_POKENAVONOFF]          = DebugAction_Flags_SwitchPokeNav,
     [DEBUG_FLAG_MENU_ITEM_FLYANYWHERE]           = DebugAction_Flags_ToggleFlyFlags,
-    [DEBUG_FLAG_MENU_ITEM_GETALLBADGES]          = DebugAction_Flags_ToggleBadgeFlags,
     [DEBUG_FLAG_MENU_ITEM_COLLISION_ONOFF]       = DebugAction_Flags_CollisionOnOff,
     [DEBUG_FLAG_MENU_ITEM_ENCOUNTER_ONOFF]       = DebugAction_Flags_EncounterOnOff,
     [DEBUG_FLAG_MENU_ITEM_TRAINER_SEE_ONOFF]     = DebugAction_Flags_TrainerSeeOnOff,
@@ -762,6 +806,18 @@ static void (*const sDebugMenu_Actions_PresetWarp[])(u8) =
     [DEBUG_UTILITIES_PRESETWARP_BATTLE_PALACE]        = DebugAction_PresetWarp_BattlePalace,
     [DEBUG_UTILITIES_PRESETWARP_BATTLE_PYRAMID]       = DebugAction_PresetWarp_BattlePyramid,
     [DEBUG_UTILITIES_PRESETWARP_BATTLE_TOWER]         = DebugAction_PresetWarp_BattleTower,
+};
+static void (*const sDebugMenu_Actions_Badges[])(u8) =
+{
+    [DEBUG_UTILITIES_BADGES_ALLBADGES] = DebugAction_Badges_AllBadges,
+    [DEBUG_UTILITIES_BADGES_FIRST]     = DebugAction_Badges_First,
+    [DEBUG_UTILITIES_BADGES_SECOND]    = DebugAction_Badges_Second,
+    [DEBUG_UTILITIES_BADGES_THIRD]     = DebugAction_Badges_Third,
+    [DEBUG_UTILITIES_BADGES_FOURTH]    = DebugAction_Badges_Fourth,
+    [DEBUG_UTILITIES_BADGES_FIFTH]     = DebugAction_Badges_Fifth,
+    [DEBUG_UTILITIES_BADGES_SIXTH]     = DebugAction_Badges_Sixth,
+    [DEBUG_UTILITIES_BADGES_SEVENTH]   = DebugAction_Badges_Seventh,
+    [DEBUG_UTILITIES_BADGES_EIGHTH]    = DebugAction_Badges_Eighth,
 };
 
 // *******************************
@@ -850,6 +906,12 @@ static const struct ListMenuTemplate sDebugMenu_ListTemplate_PresetWarp =
     .items = sDebugMenu_Items_Utillities_PresetWarp,
     .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
     .totalItems = ARRAY_COUNT(sDebugMenu_Items_Utillities_PresetWarp),
+};
+static const struct ListMenuTemplate sDebugMenu_ListTemplate_Badges =
+{
+    .items = sDebugMenu_Items_Flags_Badges,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .totalItems = ARRAY_COUNT(sDebugMenu_Items_Flags_Badges),
 };
 
 // *******************************
@@ -1585,6 +1647,66 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
     }
 }
 
+static void DebugAction_Flags_Badges(u8 taskId)
+{
+    struct ListMenuTemplate menuTemplate;
+    u8 windowId;
+    u8 menuTaskId;
+    u8 inputTaskId;
+
+    // erase existing window
+    Debug_DestroyMenu(taskId);
+
+    // create window
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sPresetWarpWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    // create list menu
+    menuTemplate = sDebugMenu_ListTemplate_Badges;
+    menuTemplate.maxShowed = DEBUG_MAIN_MENU_HEIGHT;
+    menuTemplate.windowId = windowId;
+    menuTemplate.header_X = 0;
+    menuTemplate.item_X = 8;
+    menuTemplate.cursor_X = 0;
+    menuTemplate.upText_Y = 1;
+    menuTemplate.cursorPal = 2;
+    menuTemplate.fillValue = 1;
+    menuTemplate.cursorShadowPal = 3;
+    menuTemplate.lettersSpacing = 1;
+    menuTemplate.itemVerticalPadding = 0;
+    menuTemplate.scrollMultiple = LIST_NO_MULTIPLE_SCROLL;
+    menuTemplate.fontId = 1;
+    menuTemplate.cursorKind = 0;
+    menuTaskId = ListMenuInit(&menuTemplate, 0, 0);
+
+    // draw everything
+    CopyWindowToVram(windowId, 3);
+
+    // create input handler task
+    inputTaskId = CreateTask(DebugTask_HandleMenuInput_Badges, 3);
+    gTasks[inputTaskId].data[0] = menuTaskId;
+    gTasks[inputTaskId].data[1] = windowId;
+}
+
+static void DebugTask_HandleMenuInput_Badges(u8 taskId)
+{
+    void (*func)(u8);
+    u32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if ((func = sDebugMenu_Actions_Badges[input]) != NULL)
+            func(taskId);
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        Debug_DestroyMenu(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Flags, sDebugMenu_ListTemplate_Flags);
+    }
+}
+
 static void DebugAction_Flags_SetPokedexFlags(u8 taskId)
 {
     u16 i;
@@ -1673,22 +1795,6 @@ static void DebugAction_Flags_ToggleFlyFlags(u8 taskId)
     FlagToggle(FLAG_VISITED_EVER_GRANDE_CITY);
     FlagToggle(FLAG_LANDMARK_POKEMON_LEAGUE);
     FlagToggle(FLAG_LANDMARK_BATTLE_FRONTIER);
-}
-static void DebugAction_Flags_ToggleBadgeFlags(u8 taskId)
-{
-    // Sound effect
-    if (FlagGet(FLAG_BADGE08_GET))
-        PlaySE(SE_PC_OFF);
-    else
-        PlaySE(SE_PC_LOGIN);
-    FlagToggle(FLAG_BADGE01_GET);
-    FlagToggle(FLAG_BADGE02_GET);
-    FlagToggle(FLAG_BADGE03_GET);
-    FlagToggle(FLAG_BADGE04_GET);
-    FlagToggle(FLAG_BADGE05_GET);
-    FlagToggle(FLAG_BADGE06_GET);
-    FlagToggle(FLAG_BADGE07_GET);
-    FlagToggle(FLAG_BADGE08_GET);
 }
 static void DebugAction_Flags_CollisionOnOff(u8 taskId)
 {
@@ -4487,5 +4593,126 @@ static void DebugAction_PresetWarp_BattleTower(u8 taskId)
     Debug_DestroyMenu(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 16, 15);
     DoWarp();
+}
+
+static void DebugAction_Badges_AllBadges(u8 taskId)
+{
+    // Sound effect
+    if (FlagGet(FLAG_BADGE08_GET))
+        PlaySE(SE_PC_OFF);
+    else
+        PlaySE(MUS_LEVEL_UP);
+    FlagToggle(FLAG_BADGE01_GET);
+    FlagToggle(FLAG_BADGE02_GET);
+    FlagToggle(FLAG_BADGE03_GET);
+    FlagToggle(FLAG_BADGE04_GET);
+    FlagToggle(FLAG_BADGE05_GET);
+    FlagToggle(FLAG_BADGE06_GET);
+    FlagToggle(FLAG_BADGE07_GET);
+    FlagToggle(FLAG_BADGE08_GET);
+}
+static void DebugAction_Badges_First(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE01_GET))
+    {
+        FlagClear(FLAG_BADGE01_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE01_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Second(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE02_GET))
+    {
+        FlagClear(FLAG_BADGE02_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE02_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Third(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE03_GET))
+    {
+        FlagClear(FLAG_BADGE03_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE03_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Fourth(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE04_GET))
+    {
+        FlagClear(FLAG_BADGE04_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE04_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Fifth(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE05_GET))
+    {
+        FlagClear(FLAG_BADGE05_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE05_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Sixth(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE06_GET))
+    {
+        FlagClear(FLAG_BADGE06_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE06_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Seventh(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE07_GET))
+    {
+        FlagClear(FLAG_BADGE07_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE07_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
+}
+static void DebugAction_Badges_Eighth(u8 taskId)
+{
+    if (FlagGet(FLAG_BADGE08_GET))
+    {
+        FlagClear(FLAG_BADGE08_GET);
+        PlaySE(SE_PC_OFF);
+    }
+    else
+    {
+        FlagSet(FLAG_BADGE08_GET);
+        PlaySE(MUS_LEVEL_UP);
+    }
 }
 #endif
