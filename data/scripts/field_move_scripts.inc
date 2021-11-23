@@ -2,7 +2,7 @@
 EventScript_CutTree::
 	lockall
 	goto_if_unset FLAG_BADGE01_GET, EventScript_CheckTreeCantCut
-	checkpartymove MOVE_CUT
+	checkpartyforhmmove MOVE_CUT
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CheckTreeCantCut
 	setfieldeffectargument 0, VAR_RESULT
@@ -63,7 +63,7 @@ Text_CantCut:
 EventScript_RockSmash::
 	lockall
 	goto_if_unset FLAG_BADGE03_GET, EventScript_CantSmashRock
-	checkpartymove MOVE_ROCK_SMASH
+	checkpartyforhmmove MOVE_ROCK_SMASH
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantSmashRock
 	setfieldeffectargument 0, VAR_RESULT
@@ -131,7 +131,7 @@ EventScript_StrengthBoulder::
 	lockall
 	goto_if_unset FLAG_BADGE04_GET, EventScript_CantStrength
 	goto_if_set FLAG_SYS_USE_STRENGTH, EventScript_CheckActivatedBoulder
-	checkpartymove MOVE_STRENGTH
+	checkpartyforhmmove MOVE_STRENGTH
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantStrength
 	setfieldeffectargument 0, VAR_RESULT
@@ -192,7 +192,7 @@ Text_StrengthActivated:
 
 EventScript_UseWaterfall::
 	lockall
-	checkpartymove MOVE_WATERFALL
+	checkpartyforhmmove MOVE_WATERFALL
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantWaterfall
 	bufferpartymonnick 0, VAR_RESULT
@@ -227,7 +227,7 @@ Text_MonUsedWaterfall:
 
 EventScript_UseDive::
 	lockall
-	checkpartymove MOVE_DIVE
+	checkpartyforhmmove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantDive
 	bufferpartymonnick 0, VAR_RESULT
@@ -252,7 +252,7 @@ EventScript_EndDive::
 
 EventScript_UseDiveUnderwater::
 	lockall
-	checkpartymove MOVE_DIVE
+	checkpartyforhmmove MOVE_DIVE
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantSurface
 	bufferpartymonnick 0, VAR_RESULT
@@ -279,7 +279,7 @@ EventScript_EndSurface::
 @ Interact with a tree a Pokémon can use headbutt on
 EventScript_Headbutt::
 	lockall
-	checkpartymove MOVE_HEADBUTT
+	checkpartyforhmmove MOVE_HEADBUTT
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EventScript_CantHeadbuttTree
 	setfieldeffectargument 0, VAR_RESULT

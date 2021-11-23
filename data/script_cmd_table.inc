@@ -12,7 +12,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_callstd                   @ 0x09
 	.4byte ScrCmd_gotostd_if                @ 0x0a
 	.4byte ScrCmd_callstd_if                @ 0x0b
-	.4byte ScrCmd_nop1                      @ 0x0c
+	.4byte ScrCmd_checkpartyforhmmove       @ 0x0c
 	.4byte ScrCmd_killscript                @ 0x0d
 	.4byte ScrCmd_nop1                      @ 0x0e
 	.4byte ScrCmd_loadword                  @ 0x0f

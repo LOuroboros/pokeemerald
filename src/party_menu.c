@@ -2434,7 +2434,7 @@ static void SetPartyMonSelectionActions(struct Pokemon *mons, u8 slotId, u8 acti
 
 static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 {
-    u8 i, j;
+    int i, j, e;
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
@@ -2451,14 +2451,17 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
 
     // Add field moves to action list
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (j = 0; j <= FIELD_MOVE_WATERFALL; ++j)
     {
-        for (j = 0; sFieldMoves[j] != FIELD_MOVE_TERMINATOR; j++)
+        for (e = 0; e < NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES; e++)
         {
-            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == sFieldMoves[j])
+            if (sFieldMoves[j] == ItemIdToBattleMoveId(ITEM_TM01 + e)
+             && CanMonLearnTMHM(&mons[slotId], e)
+             && CanSpeciesLearnMove(GetMonData(&mons[slotId], MON_DATA_SPECIES), ItemIdToBattleMoveId(ITEM_TM01 + e))
+             && FlagGet(FLAG_BADGE01_GET + j))
             {
                 AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
-                break;
+                    break;
             }
         }
     }
@@ -6461,4 +6464,32 @@ void CursorCb_MoveItem(u8 taskId)
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = Task_UpdateHeldItemSprite;
     }
+}
+
+u32 CanSpeciesLearnMove(u16 species, u16 move)
+{
+    int i;
+
+    // Check level up learnset
+    for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+    {
+        if (gLevelUpLearnsets[species][i].move == LEVEL_UP_END)
+            break;
+        if (move == gLevelUpLearnsets[species][i].move)
+            return move;
+    }
+    // Check TM/HM learnset
+    for (i = 0; i < (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES); i++)
+    {
+        if (move == ItemIdToBattleMoveId(ITEM_TM01 + i))
+            return move;
+    }
+    // Check tutor learnset
+    for (i = 0; i < NELEMS(gTutorMoves); i++)
+    {
+        if (move == gTutorMoves[i])
+            return move;
+    }
+
+    return FALSE;
 }
