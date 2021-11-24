@@ -8004,6 +8004,9 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
     u8 atkStage;
     u32 atkStat;
     u16 modifier;
+    u16 atkBaseSpeciesId;
+
+    atkBaseSpeciesId = GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species);
 
     if (gBattleMoves[move].effect == EFFECT_FOUL_PLAY)
     {
@@ -8150,9 +8153,7 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
     switch (GetBattlerHoldEffect(battlerAtk, TRUE))
     {
     case HOLD_EFFECT_THICK_CLUB:
-        if ((GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_CUBONE
-         || GET_BASE_SPECIES_ID(gBattleMons[battlerAtk].species) == SPECIES_MAROWAK)
-         && IS_MOVE_PHYSICAL(move))
+        if ((atkBaseSpeciesId == SPECIES_CUBONE || atkBaseSpeciesId == SPECIES_MAROWAK) && IS_MOVE_PHYSICAL(move))
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case HOLD_EFFECT_DEEP_SEA_TOOTH:
@@ -8160,8 +8161,9 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
             MulModifier(&modifier, UQ_4_12(2.0));
         break;
     case HOLD_EFFECT_LIGHT_BALL:
-        if (gBattleMons[battlerAtk].species == SPECIES_PIKACHU)
-            MulModifier(&modifier, UQ_4_12(2.0));
+        if ((atkBaseSpeciesId == SPECIES_PICHU || atkBaseSpeciesId == SPECIES_PIKACHU || atkBaseSpeciesId == SPECIES_RAICHU)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_ELECTRIC))
+            MulModifier(&modifier, UQ_4_12(1.5));
         break;
     case HOLD_EFFECT_CHOICE_BAND:
         if (IS_MOVE_PHYSICAL(move))
@@ -8169,6 +8171,36 @@ static u32 CalcAttackStat(u16 move, u8 battlerAtk, u8 battlerDef, u8 moveType, b
         break;
     case HOLD_EFFECT_CHOICE_SPECS:
         if (IS_MOVE_SPECIAL(move))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_ELECTIRIZER:
+        if ((gBattleMons[battlerAtk].species == SPECIES_ELEKID || gBattleMons[battlerAtk].species == SPECIES_ELECTABUZZ || gBattleMons[battlerAtk].species == SPECIES_ELECTIVIRE)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_ELECTRIC))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_MAGMARIZER:
+        if ((gBattleMons[battlerAtk].species == SPECIES_MAGBY || gBattleMons[battlerAtk].species == SPECIES_MAGMAR || gBattleMons[battlerAtk].species == SPECIES_MAGMORTAR)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_FIRE))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_PROTECTOR:
+        if ((gBattleMons[battlerAtk].species == SPECIES_RHYHORN || gBattleMons[battlerAtk].species == SPECIES_RHYDON || gBattleMons[battlerAtk].species == SPECIES_RHYPERIOR)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_GROUND))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_DUBIOUS_DISC:
+        if ((gBattleMons[battlerAtk].species == SPECIES_PORYGON || gBattleMons[battlerAtk].species == SPECIES_PORYGON2 || gBattleMons[battlerAtk].species == SPECIES_PORYGON_Z)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_NORMAL))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_REAPER_CLOTH:
+        if ((gBattleMons[battlerAtk].species == SPECIES_DUSKULL || gBattleMons[battlerAtk].species == SPECIES_DUSCLOPS || gBattleMons[battlerAtk].species == SPECIES_DUSKNOIR)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_GHOST))
+            MulModifier(&modifier, UQ_4_12(1.5));
+        break;
+    case HOLD_EFFECT_TWISTED_SPOON:
+        if ((gBattleMons[battlerAtk].species == SPECIES_ABRA || gBattleMons[battlerAtk].species == SPECIES_KADABRA || gBattleMons[battlerAtk].species == SPECIES_ALAKAZAM)
+         && IS_BATTLER_OF_TYPE(battlerAtk, TYPE_PSYCHIC))
             MulModifier(&modifier, UQ_4_12(1.5));
         break;
     }

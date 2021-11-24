@@ -154,6 +154,12 @@
 
 // Custom hold effects
 #define HOLD_EFFECT_ODD_KEYSTONE        175
+#define HOLD_EFFECT_PROTECTOR           176
+#define HOLD_EFFECT_ELECTIRIZER         177
+#define HOLD_EFFECT_MAGMARIZER          178
+#define HOLD_EFFECT_DUBIOUS_DISC        179
+#define HOLD_EFFECT_REAPER_CLOTH        180
+#define HOLD_EFFECT_TWISTED_SPOON       181
 
 #define HOLD_EFFECT_CHOICE(holdEffect)((holdEffect == HOLD_EFFECT_CHOICE_BAND || holdEffect == HOLD_EFFECT_CHOICE_SCARF || holdEffect == HOLD_EFFECT_CHOICE_SPECS))
 

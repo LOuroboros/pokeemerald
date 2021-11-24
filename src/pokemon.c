@@ -3191,6 +3191,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u8 maxIV = MAX_IV_MASK;
     u8 statIDs[] = {0, 1, 2, 3, 4, 5};
     struct SiiRtcInfo rtc;
+    int i;
 
     ZeroBoxMonData(boxMon);
 
@@ -3230,20 +3231,30 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             shinyRolls += I_SHINY_CHARM_REROLLS;
 
         if (gIsFishingEncounter)
-            shinyRolls += 1 + 2 * gChainFishingStreak; // 1 + 2 rolls per streak count. max 41
+        {
+            if (gChainFishingStreak >= 20 && gChainFishingStreak <= 39)
+                shinyRolls += 1;
+            else if (gChainFishingStreak >= 40 && gChainFishingStreak <= 59)
+                shinyRolls += 2;
+            else if (gChainFishingStreak >= 60)
+                shinyRolls += 3;
+        }
 
-        if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 10 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 19)
+        if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 20 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 39)
             shinyRolls += 1;
-        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 20 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 29)
+        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 40 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 59)
             shinyRolls += 2;
-        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 30 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 39)
-            shinyRolls += 3;
-        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 40 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 49)
-            shinyRolls += 4;
-        else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 50 && VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) <= 59)
-            shinyRolls += 5;
         else if (VarGet(VAR_WILD_POKEMON_CHAIN_COUNT) >= 60)
-            shinyRolls += 6;
+            shinyRolls += 3;
+
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            if (GetMonAbility(&gPlayerParty[i]) == ABILITY_SUPER_LUCK)
+            {
+                shinyRolls += 1;
+                break;
+            }
+        }
 
         if (shinyRolls)
         {
@@ -7285,17 +7296,20 @@ void SetWildMonHeldItem(void)
         return;
 
     count = (WILD_DOUBLE_BATTLE) ? 2 : 1;
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG, 0)
-        && (GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES
-            || GetMonAbility(&gPlayerParty[0]) == ABILITY_SUPER_LUCK))
+
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        var1 = 20;
-        var2 = 80;
-    }
-    else
-    {
-        var1 = 45;
-        var2 = 95;
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_SANITY_IS_EGG, 0)
+         && (GetMonAbility(&gPlayerParty[i]) == ABILITY_COMPOUND_EYES || GetMonAbility(&gPlayerParty[i]) == ABILITY_SUPER_LUCK))
+        {
+            var1 = 20;
+            var2 = 80;
+        }
+        else
+        {
+            var1 = 45;
+            var2 = 95;
+        }
     }
 
     for (i = 0; i < count; i++)
