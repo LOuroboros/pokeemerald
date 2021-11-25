@@ -8954,3 +8954,9 @@ u8 MovementAction_Fly_Finish(struct ObjectEvent *objectEvent, struct Sprite *spr
 {
     return TRUE;
 }
+
+u8 Script_GetObjectFacingDirection(void)
+{
+    u8 objId = GetObjectEventIdByLocalId(VarGet(VAR_TEMP_1));
+    return gObjectEvents[objId].facingDirection;
+}
