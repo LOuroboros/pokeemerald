@@ -6923,7 +6923,7 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
 u16 SpeciesToPokedexNum(u16 species)
 {
-    if (IsNationalPokedexEnabled())
+    if (FlagGet(FLAG_SYS_NATIONAL_DEX))
     {
         return SpeciesToNationalPokedexNum(species);
     }

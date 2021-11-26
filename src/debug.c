@@ -1733,14 +1733,14 @@ static void DebugAction_Flags_SwitchDex(u8 taskId)
 }
 static void DebugAction_Flags_SwitchNatDex(u8 taskId)
 {
-    if (IsNationalPokedexEnabled())
+    if (FlagGet(FLAG_SYS_NATIONAL_DEX))
     {
-        DisableNationalPokedex();
+        FlagClear(FLAG_SYS_NATIONAL_DEX);
         PlaySE(SE_PC_OFF);
     }
     else
     {
-        EnableNationalPokedex();
+        FlagSet(FLAG_SYS_NATIONAL_DEX);
         PlaySE(SE_PC_LOGIN);
     }
 }

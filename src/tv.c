@@ -1847,7 +1847,7 @@ void TryPutTodaysRivalTrainerOnAir(void)
                 nBadges++;
         }
         show->rivalTrainer.badgeCount = nBadges;
-        if (IsNationalPokedexEnabled())
+        if (FlagGet(FLAG_SYS_NATIONAL_DEX))
             show->rivalTrainer.dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         else
             show->rivalTrainer.dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);

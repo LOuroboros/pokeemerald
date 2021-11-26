@@ -2013,7 +2013,7 @@ static void MainMenu_FormatSavegamePokedex(void)
 
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
     {
-        if (IsNationalPokedexEnabled())
+        if (FlagGet(FLAG_SYS_NATIONAL_DEX))
             dexCount = GetNationalPokedexCount(FLAG_GET_CAUGHT);
         else
             dexCount = GetHoennPokedexCount(FLAG_GET_CAUGHT);

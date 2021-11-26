@@ -2069,7 +2069,7 @@ void BufferPokedexRatingForMatchCall(u8 *destStr)
     StringCopy(str, sBirchDexRatingTexts[dexRatingLevel]);
     str = StringExpandPlaceholders(destStr, buffer);
 
-    if (IsNationalPokedexEnabled())
+    if (FlagGet(FLAG_SYS_NATIONAL_DEX))
     {
         *(str++) = CHAR_PROMPT_CLEAR;
         numSeen = GetNationalPokedexCount(FLAG_GET_SEEN);

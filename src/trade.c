@@ -1410,7 +1410,7 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
 
     // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
-    if (!IsNationalPokedexEnabled())
+    if (!FlagGet(FLAG_SYS_NATIONAL_DEX))
     {
         if (sTradeMenuData->isEgg[TRADE_PARTNER][partnerMonIdx] || !IsSpeciesInHoennDex(partnerSpecies))
             return PARTNER_MON_INVALID;
@@ -2213,7 +2213,7 @@ static u32 CanTradeSelectedMon(struct Pokemon *playerParty, int partyCount, int 
     }
 
     // Cant trade Eggs or non-Hoenn mons if player doesn't have National Dex
-    if (!IsNationalPokedexEnabled())
+    if (!FlagGet(FLAG_SYS_NATIONAL_DEX))
     {
         if (species2[monIdx] == SPECIES_EGG)
             return CANT_TRADE_EGG_YET;
@@ -2713,15 +2713,6 @@ static void UpdatePokedexForReceivedMon(u8 partyIdx)
     }
 }
 
-// Functionally nop after commented code
-static void TryEnableNationalDexFromLinkPartner(void)
-{
-    u8 mpId = GetMultiplayerId();
-    // Originally in Ruby but commented out
-    /*if (gLinkPlayers[mpId ^ 1].lp_field_2 == 0x8000)
-        EnableNationalPokedex();*/
-}
-
 static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
 {
     u8 friendship;
@@ -2747,8 +2738,6 @@ static void TradeMons(u8 playerPartyIdx, u8 partnerPartyIdx)
         GiveMailToMon2(playerMon, &gTradeMail[partnerMail]);
 
     UpdatePokedexForReceivedMon(playerPartyIdx);
-    if (gReceivedRemoteLinkPlayers)
-        TryEnableNationalDexFromLinkPartner();
 }
 
 static void TrySendTradeFinishData(void)

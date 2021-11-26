@@ -17,7 +17,7 @@ bool16 ScriptGetPokedexInfo(void)
         gSpecialVar_0x8006 = GetNationalPokedexCount(FLAG_GET_CAUGHT);
     }
 
-    return IsNationalPokedexEnabled();
+    return FlagGet(FLAG_SYS_NATIONAL_DEX);
 }
 
 // This shows your Hoenn Pokedex rating and not your National Dex.

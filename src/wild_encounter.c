@@ -543,7 +543,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
                     return TRUE;
                 }
 
-                if (IsNationalPokedexEnabled()
+                if (FlagGet(FLAG_SYS_NATIONAL_DEX)
                  && TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNatInfo, WILD_AREA_LAND, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE
                  && gWildMonHeaders[headerId].landMonsNatInfo != NULL)
                 {
@@ -604,7 +604,7 @@ bool8 StandardWildEncounter(u16 currMetaTileBehavior, u16 previousMetaTileBehavi
             }
             else // try a regular surfing encounter
             {
-                if (IsNationalPokedexEnabled()
+                if (FlagGet(FLAG_SYS_NATIONAL_DEX)
                  && TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsNatInfo, WILD_AREA_WATER, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE
                  && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
                 {
@@ -654,7 +654,7 @@ void RockSmashWildEncounter(void)
     if (headerId != 0xFFFF)
     {
         const struct WildPokemonInfo *wildPokemonInfo;
-        if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].rockSmashMonsNatInfo != NULL)
+        if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].rockSmashMonsNatInfo != NULL)
             wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsNatInfo;
         else
             wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
@@ -725,7 +725,7 @@ bool8 SweetScentWildEncounter(void)
 
             if (DoMassOutbreakEncounterTest() == TRUE)
                 SetUpMassOutbreakEncounter(0);
-            else if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].landMonsNatInfo != NULL)
+            else if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].landMonsNatInfo != NULL)
                 TryGenerateWildMon(gWildMonHeaders[headerId].landMonsNatInfo, WILD_AREA_LAND, 0);
             else
                 TryGenerateWildMon(gWildMonHeaders[headerId].landMonsInfo, WILD_AREA_LAND, 0);
@@ -746,7 +746,7 @@ bool8 SweetScentWildEncounter(void)
                 return TRUE;
             }
             
-            if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
+            if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
                 TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsNatInfo, WILD_AREA_WATER, 0);
             else
                 TryGenerateWildMon(gWildMonHeaders[headerId].waterMonsInfo, WILD_AREA_WATER, 0);
@@ -782,7 +782,7 @@ void FishingWildEncounter(u8 rod)
     }
     else
     {
-        if (IsNationalPokedexEnabled() && gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsNatInfo != NULL)
+        if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsNatInfo != NULL)
             species = GenerateFishingWildMon(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsNatInfo, rod);
         else
             species = GenerateFishingWildMon(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
@@ -819,12 +819,12 @@ u16 GetLocalWildMon(bool8 *isWaterMon)
     if (headerId == 0xFFFF)
         return SPECIES_NONE;
     // Land Pokemon
-    if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].landMonsNatInfo != NULL)
+    if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].landMonsNatInfo != NULL)
         landMonsInfo = gWildMonHeaders[headerId].landMonsNatInfo;
     else
         landMonsInfo = gWildMonHeaders[headerId].landMonsInfo;
     // Water Pokemon
-    if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
+    if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
         waterMonsInfo = gWildMonHeaders[headerId].waterMonsNatInfo;
     else
         waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
@@ -859,7 +859,7 @@ u16 GetLocalWaterMon(void)
     if (headerId != 0xFFFF)
     {
         const struct WildPokemonInfo *waterMonsInfo;
-        if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
+        if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].waterMonsNatInfo != NULL)
             waterMonsInfo = gWildMonHeaders[headerId].waterMonsNatInfo;
         else
             waterMonsInfo = gWildMonHeaders[headerId].waterMonsInfo;
@@ -1000,7 +1000,7 @@ void HeadbuttWildEncounter(void)
     if (headerId != 0xFFFF)
     {
         const struct WildPokemonInfo *wildPokemonInfo;
-        if (IsNationalPokedexEnabled() && gWildMonHeaders[headerId].headbuttMonsNatInfo != NULL)
+        if (FlagGet(FLAG_SYS_NATIONAL_DEX) && gWildMonHeaders[headerId].headbuttMonsNatInfo != NULL)
             wildPokemonInfo = gWildMonHeaders[headerId].headbuttMonsNatInfo;
         else
             wildPokemonInfo = gWildMonHeaders[headerId].headbuttMonsInfo;
