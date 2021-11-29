@@ -46,6 +46,7 @@
 #include "constants/maps.h"
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
+#include "constants/weather.h"
 
 enum
 {
@@ -695,54 +696,34 @@ u8 BattleSetup_GetTerrainId(void)
     PlayerGetDestCoords(&x, &y);
     tileBehavior = MapGridGetMetatileBehaviorAt(x, y);
 
-    if (MetatileBehavior_IsTallGrass(tileBehavior))
-        return BATTLE_TERRAIN_GRASS;
-    if (MetatileBehavior_IsLongGrass(tileBehavior))
-        return BATTLE_TERRAIN_LONG_GRASS;
-    if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
-        return BATTLE_TERRAIN_SAND;
-
     switch (gMapHeader.mapType)
     {
-    case MAP_TYPE_TOWN:
-    case MAP_TYPE_CITY:
-    case MAP_TYPE_ROUTE:
-        break;
     case MAP_TYPE_UNDERGROUND:
-        if (MetatileBehavior_IsIndoorEncounter(tileBehavior))
-            return BATTLE_TERRAIN_BUILDING;
         if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
             return BATTLE_TERRAIN_POND;
-        return BATTLE_TERRAIN_CAVE;
+        else
+            return BATTLE_TERRAIN_CAVE;
+    case MAP_TYPE_UNDERWATER:
+        return BATTLE_TERRAIN_UNDERWATER;
     case MAP_TYPE_INDOOR:
     case MAP_TYPE_SECRET_BASE:
         return BATTLE_TERRAIN_BUILDING;
-    case MAP_TYPE_UNDERWATER:
-        return BATTLE_TERRAIN_UNDERWATER;
-    case MAP_TYPE_OCEAN_ROUTE:
-        if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
+    default:
+        if (MetatileBehavior_IsMountain(tileBehavior))
+            return BATTLE_TERRAIN_MOUNTAIN;
+        else if (MetatileBehavior_IsTallGrass(tileBehavior))
+            return BATTLE_TERRAIN_GRASS;
+        else if (MetatileBehavior_IsLongGrass(tileBehavior))
+            return BATTLE_TERRAIN_LONG_GRASS;
+        else if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior)
+            || MetatileBehavior_IsDeepOrOceanWater(tileBehavior)
+            || TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
             return BATTLE_TERRAIN_WATER;
-        return BATTLE_TERRAIN_PLAIN;
+        else if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
+            return BATTLE_TERRAIN_SAND;
+        else
+            return BATTLE_TERRAIN_PLAIN;
     }
-    if (MetatileBehavior_IsDeepOrOceanWater(tileBehavior))
-        return BATTLE_TERRAIN_WATER;
-    if (MetatileBehavior_IsSurfableWaterOrUnderwater(tileBehavior))
-        return BATTLE_TERRAIN_POND;
-    if (MetatileBehavior_IsMountain(tileBehavior))
-        return BATTLE_TERRAIN_MOUNTAIN;
-    if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
-    {
-        if (MetatileBehavior_GetBridgeType(tileBehavior))
-            return BATTLE_TERRAIN_POND;
-        if (MetatileBehavior_IsBridge(tileBehavior) == TRUE)
-            return BATTLE_TERRAIN_WATER;
-    }
-    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ROUTE113) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ROUTE113))
-        return BATTLE_TERRAIN_SAND;
-    if (GetSav1Weather() == 8)
-        return BATTLE_TERRAIN_SAND;
-
-    return BATTLE_TERRAIN_PLAIN;
 }
 
 static u8 GetBattleTransitionTypeByMap(void)
