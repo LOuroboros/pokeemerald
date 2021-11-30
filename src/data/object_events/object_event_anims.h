@@ -345,37 +345,37 @@ static const union AnimCmd sAnim_GoFastestEast[] =
 
 static const union AnimCmd sAnim_RunSouth[] =
 {
+    ANIMCMD_FRAME(9, 3),
     ANIMCMD_FRAME(12, 5),
     ANIMCMD_FRAME(9, 3),
     ANIMCMD_FRAME(13, 5),
-    ANIMCMD_FRAME(9, 3),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_RunNorth[] =
 {
-    ANIMCMD_FRAME(14, 5),
-    ANIMCMD_FRAME(10, 3),
-    ANIMCMD_FRAME(15, 5),
-    ANIMCMD_FRAME(10, 3),
+    ANIMCMD_FRAME(10, 2),
+    ANIMCMD_FRAME(14, 6),
+    ANIMCMD_FRAME(10, 2),
+    ANIMCMD_FRAME(15, 6),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_RunWest[] =
 {
+    ANIMCMD_FRAME(11, 3),
     ANIMCMD_FRAME(16, 5),
     ANIMCMD_FRAME(11, 3),
     ANIMCMD_FRAME(17, 5),
-    ANIMCMD_FRAME(11, 3),
     ANIMCMD_JUMP(0),
 };
 
 static const union AnimCmd sAnim_RunEast[] =
 {
+    ANIMCMD_FRAME(11, 3, .hFlip = TRUE),
     ANIMCMD_FRAME(16, 5, .hFlip = TRUE),
     ANIMCMD_FRAME(11, 3, .hFlip = TRUE),
     ANIMCMD_FRAME(17, 5, .hFlip = TRUE),
-    ANIMCMD_FRAME(11, 3, .hFlip = TRUE),
     ANIMCMD_JUMP(0),
 };
 
