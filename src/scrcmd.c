@@ -311,6 +311,24 @@ bool8 ScrCmd_killscript(struct ScriptContext *ctx)
     return TRUE;
 }
 
+bool32 ScrCmd_bufferdynamicmulti(struct ScriptContext *ctx)
+{
+    const u8 *ptr1 = (const u8 *)ScriptReadWord(ctx);
+    const u8 *ptr2 = (const u8 *)ScriptReadWord(ctx);
+    const u8 *ptr3 = (const u8 *)ScriptReadWord(ctx);
+    const u8 *ptr4 = (const u8 *)ScriptReadWord(ctx);
+    const u8 *ptr5 = (const u8 *)ScriptReadWord(ctx);
+    const u8 *ptr6 = (const u8 *)ScriptReadWord(ctx);
+
+    StringCopy(gStringVar1, ptr1);
+    StringCopy(gStringVar2, ptr2);
+    StringCopy(gStringVar3, ptr3);
+    StringCopy(gStringVar4, ptr4);
+    StringCopy(gStringVar5, ptr5);
+    StringCopy(gStringVar6, ptr6);
+    return FALSE;
+}
+
 bool8 ScrCmd_loadword(struct ScriptContext *ctx)
 {
     u8 index = ScriptReadByte(ctx);

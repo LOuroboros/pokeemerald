@@ -90,6 +90,19 @@
 	.byte 0x0d
 	.endm
 
+	@ Buffers up to 6 strings for use with MULTI_DYNAMIC_X
+	@ This lets you make custom menus at runtime using only stuff you can edit within the same script.
+	@ Prevents having to create entirely new menus in other files.
+	.macro bufferdynamicmulti, ptr1=0, ptr2=0, ptr3=0, ptr4=0, ptr5=0, ptr6=0
+	.byte 0x0e
+	.4byte \ptr1
+	.4byte \ptr2
+	.4byte \ptr3
+	.4byte \ptr4
+	.4byte \ptr5
+	.4byte \ptr6
+	.endm
+
 	@ Sets the specified script bank to value.
 	.macro loadword destination:req, value:req
 	.byte 0x0f
