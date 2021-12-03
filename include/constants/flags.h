@@ -278,7 +278,7 @@
 #define FLAG_RECEIVED_TM10                                  0x108
 #define FLAG_RECEIVED_TM41                                  0x109
 #define FLAG_RECEIVED_LAVARIDGE_EGG                         0x10A
-#define FLAG_RECEIVED_REVIVED_FOSSIL_MON                    0x10B
+#define FLAG_UNUSED_0x10B                                   0x10B
 #define FLAG_SECRET_BASE_REGISTRY_ENABLED                   0x10C
 #define FLAG_RECEIVED_TM46                                  0x10D
 #define FLAG_CONTEST_SKETCH_CREATED                         0x10E  // Set but never read

@@ -4616,3 +4616,36 @@ void ChooseItemFromBag(void)
         break;
     }
 }
+
+static const u8 sFossilMonsList[] =
+{
+    [SPECIES_KABUTO] = 1,
+    [SPECIES_OMANYTE] = 1,
+    [SPECIES_AERODACTYL] = 1,
+    [SPECIES_ANORITH] = 1,
+    [SPECIES_LILEEP] = 1,
+    [SPECIES_CRANIDOS] = 1,
+    [SPECIES_SHIELDON] = 1,
+};
+
+bool32 HasCaughtFossilMon(void)
+{
+    u32 i;
+    u16 species;
+    struct Pokemon *pokemon;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        pokemon = &gPlayerParty[i];
+        if (GetMonData(pokemon, MON_DATA_SANITY_HAS_SPECIES) && !GetMonData(pokemon, MON_DATA_IS_EGG))
+        {
+            species = GetMonData(pokemon, MON_DATA_SPECIES);
+            if (sFossilMonsList[species])
+            {
+                return TRUE;
+            }
+        }
+    }
+
+    return FALSE;
+}

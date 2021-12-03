@@ -521,3 +521,6 @@ gSpecials::
 	def_special SetSeenMon
 	def_special SetCaughtMon
 	def_special ChooseItemFromBag
+	def_special Script_CreateFossilsMultichoice
+	def_special CountNumberUniqueFossils
+	def_special HasCaughtFossilMon
