@@ -437,6 +437,7 @@ struct SaveBlock2
              u16 regionMapZoom:1; // whether the map is zoomed in
              u16 expShare:1;
              u16 optionsBattleTypeEffectiveness:1; // OPTIONS_TYPE_EFFECTIVENESS_[HIDE/SHOW]
+             u16 optionsBattleAnimSpeed:2; // OPTIONS_BATTLE_ANIM_SPEED[NORMAL/FAST/INSTANT]
     /*0x18*/ struct Pokedex pokedex;
     /*0x??*/ struct Time localTimeOffset;
     /*0x??*/ struct Time lastBerryTreeUpdate;

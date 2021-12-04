@@ -2985,9 +2985,6 @@ extern const u8 gText_PkmnFainted3[];
 extern const u8 gText_MachBikeMode[];
 extern const u8 gText_AcroBikeMode[];
 
-// Instant text speed
-extern const u8 gText_TextSpeedInstant[];
-
 // One time purchasable TMs/HMs
 extern const u8 gText_SoldOut[];
 extern const u8 gText_SoldOut2[];
@@ -3082,8 +3079,12 @@ extern const u8 gText_Month_November[];
 extern const u8 gText_Month_December[];
 
 // New Options for the Options Menu
+extern const u8 gText_OptionMenuInstant[];
 extern const u8 gText_BattleTypeEffectiveness[];
 extern const u8 gText_OptionMenuHide[];
 extern const u8 gText_OptionMenuShow[];
+extern const u8 gText_BattleAnimSpeed[];
+extern const u8 gText_OptionMenuNormal[];
+extern const u8 gText_OptionMenuFast[];
 
 #endif // GUARD_STRINGS_H

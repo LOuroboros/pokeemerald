@@ -182,7 +182,10 @@ static void BattleIntroSlide1(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
             gTasks[taskId].tState++;
-            gTasks[taskId].data[2] = 240;
+            if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+                gTasks[taskId].data[2] = 0;
+            else
+                gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gIntroSlideFlags &= ~1;
         }
@@ -219,15 +222,31 @@ static void BattleIntroSlide1(u8 taskId)
         for (; i < 160; i++)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
 
-        if (!gTasks[taskId].data[2])
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
         {
-            gScanlineEffect.state = 3;
-            gTasks[taskId].tState++;
-            CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
-            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
-            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
-            SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
-            SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            if (gTasks[taskId].data[3] == 0) // wait for black bars to be done splitting
+            {
+                gScanlineEffect.state = 3;
+                ++gTasks[taskId].data[0];
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0); // intro particles on this bg
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
+        }
+        else
+        {
+            if (!gTasks[taskId].data[2])
+            {
+                gScanlineEffect.state = 3;
+                gTasks[taskId].tState++;
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
         }
         break;
     case 4:
@@ -290,7 +309,10 @@ static void BattleIntroSlide2(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
             gTasks[taskId].tState++;
-            gTasks[taskId].data[2] = 240;
+            if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+                gTasks[taskId].data[2] = 0;
+            else
+                gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gTasks[taskId].data[5] = 1;
             gIntroSlideFlags &= ~1;
@@ -328,15 +350,32 @@ static void BattleIntroSlide2(u8 taskId)
         for (; i < 160; i++)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
 
-        if (!gTasks[taskId].data[2])
+        
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
         {
-            gScanlineEffect.state = 3;
-            gTasks[taskId].tState++;
-            CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
-            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
-            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
-            SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
-            SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            if (gTasks[taskId].data[3] == 0) // wait for black bars to be done splitting
+            {
+                gScanlineEffect.state = 3;
+                ++gTasks[taskId].data[0];
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0); // intro particles on this bg
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
+        }
+        else
+        {
+            if (!gTasks[taskId].data[2])
+            {
+                gScanlineEffect.state = 3;
+                gTasks[taskId].tState++;
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
         }
         break;
     case 4:
@@ -383,7 +422,10 @@ static void BattleIntroSlide3(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
             gTasks[taskId].tState++;
-            gTasks[taskId].data[2] = 240;
+            if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+                gTasks[taskId].data[2] = 0;
+            else
+                gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gTasks[taskId].data[5] = 1;
             gIntroSlideFlags &= ~1;
@@ -416,15 +458,31 @@ static void BattleIntroSlide3(u8 taskId)
         for (; i < 160; i++)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
 
-        if (!gTasks[taskId].data[2])
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
         {
-            gScanlineEffect.state = 3;
-            gTasks[taskId].tState++;
-            CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
-            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
-            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
-            SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
-            SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            if (gTasks[taskId].data[3] == 0) // wait for black bars to be done splitting
+            {
+                gScanlineEffect.state = 3;
+                ++gTasks[taskId].data[0];
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0); // intro particles on this bg
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
+        }
+        else
+        {
+            if (!gTasks[taskId].data[2])
+            {
+                gScanlineEffect.state = 3;
+                gTasks[taskId].tState++;
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
         }
         break;
     case 4:
@@ -479,7 +537,10 @@ static void BattleIntroSlideLink(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) == 0x3000)
         {
             gTasks[taskId].tState++;
-            gTasks[taskId].data[2] = 240;
+            if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+                gTasks[taskId].data[2] = 0;
+            else
+                gTasks[taskId].data[2] = 240;
             gTasks[taskId].data[3] = 32;
             gIntroSlideFlags &= ~1;
         }
@@ -498,14 +559,30 @@ static void BattleIntroSlideLink(u8 taskId)
         for (; i < 160; i++)
             gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
 
-        if (!gTasks[taskId].data[2])
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
         {
-            gScanlineEffect.state = 3;
-            gTasks[taskId].tState++;
-            SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
-            SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
-            SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
-            SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            if (gTasks[taskId].data[3] == 0) // wait for black bars to be done splitting
+            {
+                gScanlineEffect.state = 3;
+                ++gTasks[taskId].data[0];
+                CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0); // intro particles on this bg
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
+        }
+        else
+        {
+            if (!gTasks[taskId].data[2])
+            {
+                gScanlineEffect.state = 3;
+                gTasks[taskId].tState++;
+                SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 0);
+                SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 0);
+                SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(28) | BGCNT_TXT256x512);
+                SetGpuReg(REG_OFFSET_BG2CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_16COLOR | BGCNT_SCREENBASE(30) | BGCNT_TXT512x256);
+            }
         }
         break;
     case 4:
@@ -544,7 +621,10 @@ static void BattleIntroSlidePartner(u8 taskId)
         if ((gBattle_WIN0V & 0xFF00) == 0x2000)
         {
             gTasks[taskId].tState++;
-            gTasks[taskId].data[2] = 240;
+            if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+                gTasks[taskId].data[2] = 0;
+            else
+                gTasks[taskId].data[2] = 240;
             gIntroSlideFlags &= ~1;
         }
         break;
@@ -557,6 +637,12 @@ static void BattleIntroSlidePartner(u8 taskId)
 
         gBattle_BG1_X = gTasks[taskId].data[2];
         gBattle_BG2_X = -gTasks[taskId].data[2];
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+        {
+            CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+            CpuFill32(0, (void *)BG_SCREEN_ADDR(30), BG_SCREEN_SIZE);
+            gTasks[taskId].data[4] = 1;
+        }
         if (!gTasks[taskId].data[2])
             gTasks[taskId].tState++;
         break;

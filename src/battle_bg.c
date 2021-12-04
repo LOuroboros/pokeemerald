@@ -1215,7 +1215,7 @@ void DrawBattleEntryBackground(void)
         LZDecompressVram(gBattleTerrainAnimTiles_Rayquaza, (void*)(BG_CHAR_ADDR(1)));
         LZDecompressVram(gBattleTerrainAnimTilemap_Rayquaza, (void*)(BG_SCREEN_ADDR(28)));
     }
-    else
+    else if (!gSaveBlock2Ptr->optionsBattleAnimSpeed)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
         {

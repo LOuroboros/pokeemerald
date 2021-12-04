@@ -1711,9 +1711,6 @@ const u8 gText_PkmnFainted3[] = _("{STR_VAR_1} survived the poisoning.\nThe pois
 const u8 gText_MachBikeMode[] = _("MACH BIKE MODE");
 const u8 gText_AcroBikeMode[] = _("ACRO BIKE MODE");
 
-// Instant text speed
-const u8 gText_TextSpeedInstant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INST");
-
 // One time purchasable TMs/HMs
 const u8 gText_SoldOut[] = _("I'm sorry, but that item is sold out.\p");
 const u8 gText_SoldOut2[] = _("SOLD OUT");
@@ -1808,6 +1805,10 @@ const u8 gText_Month_November[] = _("Nov.");
 const u8 gText_Month_December[] = _("Dec.");
 
 // New Options for the Options Menu
+const u8 gText_OptionMenuInstant[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}INST");
 const u8 gText_BattleTypeEffectiveness[] = _("BATTLE TYPE EFF.");
 const u8 gText_OptionMenuHide[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}HIDE");
 const u8 gText_OptionMenuShow[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}SHOW");
+const u8 gText_BattleAnimSpeed[] = _("BATTLE ANIM SPD.");
+const u8 gText_OptionMenuNormal[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}NORMAL");
+const u8 gText_OptionMenuFast[] = _("{COLOR GREEN}{SHADOW LIGHT_GREEN}FAST");

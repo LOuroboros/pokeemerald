@@ -1621,6 +1621,13 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
         bar_data0 = 5;
     }
 
+    // Show the decorative arrows before a Pokémon is sent out right away.
+    if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+    {
+        bar_pos2_X = 0;
+        bar_data0 = 0;
+    }
+
     LoadCompressedSpriteSheetUsingHeap(&sStatusSummaryBarSpriteSheet);
     LoadSpriteSheet(&sStatusSummaryBallsSpriteSheet);
     LoadSpritePalette(&sStatusSummaryBarSpritePal);
@@ -1667,6 +1674,13 @@ u8 CreatePartyStatusSummarySprites(u8 battlerId, struct HpAndStatus *partyInfo, 
             gSprites[ballIconSpritesIds[i]].x -= 10 * (5 - i) + 24;
             gSprites[ballIconSpritesIds[i]].data[1] = (6 - i) * 7 + 10;
             gSprites[ballIconSpritesIds[i]].x2 = -120;
+        }
+
+        // Show all the ball icons right away.
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed)
+        {
+            gSprites[ballIconSpritesIds[i]].x2 = 0;
+            gSprites[ballIconSpritesIds[i]].y2 = 0;
         }
 
         gSprites[ballIconSpritesIds[i]].data[2] = isOpponent;
@@ -2373,26 +2387,56 @@ s32 MoveBattleBar(u8 battlerId, u8 healthboxSpriteId, u8 whichBar, u8 unused)
 
     if (whichBar == HEALTH_BAR) // health bar
     {
-        currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
-                    gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
-                    gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
-                    &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
-                    B_HEALTHBAR_PIXELS / 8, gBattleSpritesDataPtr->battleBars[battlerId].maxValue / 32);
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed == OPTIONS_BATTLE_ANIM_SPEED_NORMAL)
+        {
+            currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
+                                            &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
+                                            B_HEALTHBAR_PIXELS / 8, 1 + (u16) (gBattleMons[battlerId].maxHP / 32));
+        }
+        else if (gSaveBlock2Ptr->optionsBattleAnimSpeed == OPTIONS_BATTLE_ANIM_SPEED_FAST)
+        {
+            currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
+                                            &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
+                                            B_HEALTHBAR_PIXELS / 8, 1 + (u16) (gBattleMons[battlerId].maxHP / 16));
+        }
+        else
+        {
+            currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
+                                            &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
+                                            B_HEALTHBAR_PIXELS / 8, 1 + gBattleMons[battlerId].maxHP);
+        }
     }
     else // exp bar
     {
-        u16 expFraction = GetScaledExpFraction(gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
-                    gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
-                    gBattleSpritesDataPtr->battleBars[battlerId].maxValue, 8);
-        if (expFraction == 0)
-            expFraction = 1;
-        expFraction = abs(gBattleSpritesDataPtr->battleBars[battlerId].receivedValue / expFraction);
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed != OPTIONS_BATTLE_ANIM_SPEED_INSTANT)
+        {
+            u16 expFraction = GetScaledExpFraction(gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+                                                gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
+                                                gBattleSpritesDataPtr->battleBars[battlerId].maxValue, 8);
+            if (expFraction == 0)
+                expFraction = 1;
+            expFraction = abs(gBattleSpritesDataPtr->battleBars[battlerId].receivedValue / expFraction);
 
-        currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
-                    gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
-                    gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
-                    &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
-                    B_EXPBAR_PIXELS / 8, expFraction);
+            currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
+                                            &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
+                                            B_EXPBAR_PIXELS / 8, expFraction);
+        }
+        else
+        {
+            currentBarValue = CalcNewBarValue(gBattleSpritesDataPtr->battleBars[battlerId].maxValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].oldValue,
+                                            gBattleSpritesDataPtr->battleBars[battlerId].receivedValue,
+                                            &gBattleSpritesDataPtr->battleBars[battlerId].currValue,
+                                            B_EXPBAR_PIXELS / 8, 65535); //largest possible value to move in one tick
+        }
     }
 
     if (whichBar == EXP_BAR || (whichBar == HEALTH_BAR && !gBattleSpritesDataPtr->battlerData[battlerId].hpNumbersNoBars))
@@ -2496,6 +2540,14 @@ static s32 CalcNewBarValue(s32 maxValue, s32 oldValue, s32 receivedValue, s32 *c
     if (maxValue < scale) // handle cases of max var having less pixels than the whole bar
     {
         s32 toAdd = Q_24_8(maxValue) / scale;
+
+        if (gSaveBlock2Ptr->optionsBattleAnimSpeed == OPTIONS_BATTLE_ANIM_SPEED_INSTANT)
+        {
+            if (*currValue - receivedValue <= 0)
+                toAdd = *currValue;
+            else
+                toAdd = *currValue - receivedValue;
+        }
 
         if (receivedValue < 0) // fill bar right
         {
