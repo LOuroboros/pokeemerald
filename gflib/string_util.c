@@ -2,6 +2,7 @@
 #include "string_util.h"
 #include "text.h"
 #include "strings.h"
+#include "event_data.h"
 
 EWRAM_DATA u8 gStringVar1[0x100] = {0};
 EWRAM_DATA u8 gStringVar2[0x100] = {0};
@@ -496,26 +497,35 @@ static const u8 *ExpandPlaceholder_Groudon(void)
     return gText_ExpandedPlaceholder_Groudon;
 }
 
+static const u8 *ExpandPlaceholder_ChosenMonNickname(void)
+{
+    u8 *dest;
+
+    GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_NICKNAME, dest);
+    return dest;
+}
+
 const u8 *GetExpandedPlaceholder(u32 id)
 {
     typedef const u8 *(*ExpandPlaceholderFunc)(void);
 
     static const ExpandPlaceholderFunc funcs[] =
     {
-        [PLACEHOLDER_ID_UNKNOWN]      = ExpandPlaceholder_UnknownStringVar,
-        [PLACEHOLDER_ID_PLAYER]       = ExpandPlaceholder_PlayerName,
-        [PLACEHOLDER_ID_STRING_VAR_1] = ExpandPlaceholder_StringVar1,
-        [PLACEHOLDER_ID_STRING_VAR_2] = ExpandPlaceholder_StringVar2,
-        [PLACEHOLDER_ID_STRING_VAR_3] = ExpandPlaceholder_StringVar3,
-        [PLACEHOLDER_ID_KUN]          = ExpandPlaceholder_KunChan,
-        [PLACEHOLDER_ID_RIVAL]        = ExpandPlaceholder_RivalName,
-        [PLACEHOLDER_ID_VERSION]      = ExpandPlaceholder_Version,
-        [PLACEHOLDER_ID_AQUA]         = ExpandPlaceholder_Aqua,
-        [PLACEHOLDER_ID_MAGMA]        = ExpandPlaceholder_Magma,
-        [PLACEHOLDER_ID_ARCHIE]       = ExpandPlaceholder_Archie,
-        [PLACEHOLDER_ID_MAXIE]        = ExpandPlaceholder_Maxie,
-        [PLACEHOLDER_ID_KYOGRE]       = ExpandPlaceholder_Kyogre,
-        [PLACEHOLDER_ID_GROUDON]      = ExpandPlaceholder_Groudon,
+        [PLACEHOLDER_ID_UNKNOWN]             = ExpandPlaceholder_UnknownStringVar,
+        [PLACEHOLDER_ID_PLAYER]              = ExpandPlaceholder_PlayerName,
+        [PLACEHOLDER_ID_STRING_VAR_1]        = ExpandPlaceholder_StringVar1,
+        [PLACEHOLDER_ID_STRING_VAR_2]        = ExpandPlaceholder_StringVar2,
+        [PLACEHOLDER_ID_STRING_VAR_3]        = ExpandPlaceholder_StringVar3,
+        [PLACEHOLDER_ID_KUN]                 = ExpandPlaceholder_KunChan,
+        [PLACEHOLDER_ID_RIVAL]               = ExpandPlaceholder_RivalName,
+        [PLACEHOLDER_ID_VERSION]             = ExpandPlaceholder_Version,
+        [PLACEHOLDER_ID_AQUA]                = ExpandPlaceholder_Aqua,
+        [PLACEHOLDER_ID_MAGMA]               = ExpandPlaceholder_Magma,
+        [PLACEHOLDER_ID_ARCHIE]              = ExpandPlaceholder_Archie,
+        [PLACEHOLDER_ID_MAXIE]               = ExpandPlaceholder_Maxie,
+        [PLACEHOLDER_ID_KYOGRE]              = ExpandPlaceholder_Kyogre,
+        [PLACEHOLDER_ID_GROUDON]             = ExpandPlaceholder_Groudon,
+        [PLACEHOLDER_ID_CHOSEN_MON_NICKNAME] = ExpandPlaceholder_ChosenMonNickname,
     };
 
     if (id >= ARRAY_COUNT(funcs))
