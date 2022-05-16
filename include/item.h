@@ -21,7 +21,7 @@ struct Item
     ItemUseFunc fieldUseFunc;
     u8 battleUsage;
     ItemUseFunc battleUseFunc;
-    u8 secondaryId;
+    u16 secondaryId;
     u8 flingPower;
 };
 

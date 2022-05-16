@@ -6544,3 +6544,53 @@ void IsLastMonThatKnowsSurf(void)
             gSpecialVar_Result = TRUE;
     }
 }
+
+void ItemUseCB_ExpCandy(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    struct PartyMenuInternal *ptr = sPartyMenuInternal;
+    s16 *arrayPtr = ptr->data;
+    u16 *itemPtr = &gSpecialVar_ItemId;
+    u8 currLevel = GetMonData(mon, MON_DATA_LEVEL);
+    u32 currExp = GetMonData(mon, MON_DATA_EXP);
+    u32 species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 nextLvlExp = gExperienceTables[gBaseStats[species].growthRate][currLevel + 1];
+    s32 gainedExp = ItemId_GetSecondaryId(gSpecialVar_ItemId);
+
+    if (GetMonData(mon, MON_DATA_LEVEL) == MAX_LEVEL)
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+    else
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        BufferMonStatsToTaskData(mon, arrayPtr);
+        BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
+        PlaySE(SE_USE_ITEM);
+        if (currExp + gainedExp >= nextLvlExp)
+        {
+            SetMonData(mon, MON_DATA_EXP, &nextLvlExp);
+            CalculateMonStats(mon);
+            UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+            GetMonNickname(mon, gStringVar1);
+            ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
+            gTasks[taskId].func = Task_DisplayLevelUpStatsPg1;
+        }
+        else
+        {
+            gainedExp += currExp;
+            SetMonData(mon, MON_DATA_EXP, &gainedExp);
+            GetMonNickname(mon, gStringVar1);
+            ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+            StringExpandPlaceholders(gStringVar4, gText_PkmnGainedExpPoints);
+            gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        }
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        RemoveBagItem(gSpecialVar_ItemId, 1);
+    }
+}
