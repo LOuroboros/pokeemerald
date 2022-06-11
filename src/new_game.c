@@ -203,7 +203,7 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
-    gSaveBlock2Ptr->costumeId = 0;
+    gSaveBlock2Ptr->playerCostume = 0;
 }
 
 static void ResetMiniGamesRecords(void)
