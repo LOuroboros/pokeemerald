@@ -116,6 +116,8 @@ extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
 extern const struct MonCoords gTrainerBackPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerBackPicTable[]; // functionally unused
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+extern const u8 gCostumeBackPics[COSTUME_COUNT][GENDER_COUNT];
+extern const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT];
 
 extern const u8 gEnemyMonElevation[NUM_SPECIES];
 
