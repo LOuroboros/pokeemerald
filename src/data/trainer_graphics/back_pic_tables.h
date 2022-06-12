@@ -40,9 +40,3 @@ const struct CompressedSpritePalette gTrainerBackPicPaletteTable[] =
     TRAINER_BACK_PAL(WALLY, gTrainerPalette_Wally),
     TRAINER_BACK_PAL(STEVEN, gTrainerPalette_Steven),
 };
-
-const u8 gCostumeBackPics[COSTUME_COUNT][GENDER_COUNT] = 
-{
-    [DEFAULT_COSTUME] = {TRAINER_BACK_PIC_BRENDAN, TRAINER_BACK_PIC_MAY},
-    [COSTUME_1] = {TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN, TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY},
-};

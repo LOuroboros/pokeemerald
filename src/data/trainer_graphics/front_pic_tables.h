@@ -292,9 +292,3 @@ const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(RS_BRENDAN, gTrainerPalette_RubySapphireBrendan),
     TRAINER_PAL(RS_MAY, gTrainerPalette_RubySapphireMay),
 };
-
-const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT] = 
-{
-    [DEFAULT_COSTUME] = {TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY},
-    [COSTUME_1] = {TRAINER_PIC_RS_BRENDAN, TRAINER_PIC_RS_MAY},
-};
