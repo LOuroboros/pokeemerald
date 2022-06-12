@@ -117,11 +117,6 @@ extern const struct MonCoords gTrainerBackPicCoords[];
 extern const struct CompressedSpriteSheet gTrainerBackPicTable[]; // functionally unused
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 
-extern const u8 gCostumeBackPics[COSTUME_COUNT][GENDER_COUNT];
-extern const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT];
-extern const u8 gPlayerAvatarGfxIds[COSTUME_COUNT][PLAYER_AVATAR_STATE_COUNT][GENDER_COUNT];
-extern const u8 gPlayerAvatarGfxToStateFlag[COSTUME_COUNT][2][5][2];
-
 extern const u8 gEnemyMonElevation[NUM_SPECIES];
 
 extern const union AnimCmd *const *const gMonFrontAnimsPtrTable[];
@@ -131,5 +126,20 @@ extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
 extern const u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];
+
+extern const u8 gCostumeBackPics[COSTUME_COUNT][GENDER_COUNT];
+extern const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT];
+extern const u8 gPlayerAvatarGfxIds[COSTUME_COUNT][PLAYER_AVATAR_STATE_COUNT][GENDER_COUNT];
+extern const u8 gPlayerAvatarGfxToStateFlag[COSTUME_COUNT][2][5][2];
+
+struct RegionMapIcon
+{
+    u32 playerCostume;
+    u32 playerGender;
+    const u8 *sheet;
+    const u16 *palette;
+};
+
+extern const struct RegionMapIcon gPlayerRegionMapIcon[COSTUME_COUNT * GENDER_COUNT];
 
 #endif // GUARD_DATA_H

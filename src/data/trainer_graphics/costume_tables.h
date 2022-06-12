@@ -1,4 +1,5 @@
 #include "constants/event_objects.h"
+#include "constants/global.h"
 
 const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT] = 
 {
@@ -78,4 +79,24 @@ const u8 gPlayerAvatarGfxToStateFlag[COSTUME_COUNT][2][5][2] =
             {OBJ_EVENT_GFX_MAY_UNDERWATER,     PLAYER_AVATAR_FLAG_UNDERWATER},
         },
     },
+};
+
+static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/brendan_icon.gbapal");
+
+static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("graphics/pokenav/region_map/may_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("graphics/pokenav/region_map/may_icon.gbapal");
+
+static const u8 sRegionMapPlayerIcon_RSBrendanGfx[] = INCBIN_U8("graphics/pokenav/region_map/rs_brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_RSBrendanPal[] = INCBIN_U16("graphics/pokenav/region_map/rs_brendan_icon.gbapal");
+
+static const u8 sRegionMapPlayerIcon_RSMayGfx[] = INCBIN_U8("graphics/pokenav/region_map/rs_may_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_RSMayPal[] = INCBIN_U16("graphics/pokenav/region_map/rs_may_icon.gbapal");
+
+const struct RegionMapIcon gPlayerRegionMapIcon[COSTUME_COUNT * GENDER_COUNT] =
+{
+    {DEFAULT_COSTUME, MALE, sRegionMapPlayerIcon_BrendanGfx, sRegionMapPlayerIcon_BrendanPal},
+    {DEFAULT_COSTUME, FEMALE, sRegionMapPlayerIcon_MayGfx, sRegionMapPlayerIcon_MayPal},
+    {COSTUME_1, MALE, sRegionMapPlayerIcon_RSBrendanGfx, sRegionMapPlayerIcon_RSBrendanPal},
+    {COSTUME_1, FEMALE, sRegionMapPlayerIcon_RSMayGfx, sRegionMapPlayerIcon_RSMayPal},
 };

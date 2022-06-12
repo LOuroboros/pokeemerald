@@ -27,6 +27,7 @@
 #include "constants/map_types.h"
 #include "constants/rgb.h"
 #include "constants/weather.h"
+#include "data.h"
 
 /*
  *  This file handles region maps generally, and the map used when selecting a fly destination.
@@ -1457,30 +1458,17 @@ void CreateRegionMapPlayerIcon(u16 tileTag, u16 paletteTag)
     struct SpriteSheet sheet = {sRegionMapPlayerIcon_BrendanGfx, 0x80, tileTag};
     struct SpritePalette palette = {sRegionMapPlayerIcon_BrendanPal, paletteTag};
     struct SpriteTemplate template = {tileTag, paletteTag, &sRegionMapPlayerIconOam, sRegionMapPlayerIconAnimTable, NULL, gDummySpriteAffineAnimTable, SpriteCallbackDummy};
+    int i;
 
-    switch (gSaveBlock2Ptr->playerCostume)
+    for (i = 0; i < ARRAY_COUNT(gPlayerRegionMapIcon); i++)
     {
-    case DEFAULT_COSTUME:
-        if (gSaveBlock2Ptr->playerGender == FEMALE)
+        const struct RegionMapIcon *mapIcon = &gPlayerRegionMapIcon[i];
+        if (gSaveBlock2Ptr->playerCostume == mapIcon->playerCostume && gSaveBlock2Ptr->playerGender == mapIcon->playerGender)
         {
-            sheet.data = sRegionMapPlayerIcon_MayGfx;
-            palette.data = sRegionMapPlayerIcon_MayPal;
+            sheet.data = mapIcon->sheet;
+            palette.data = mapIcon->palette;
         }
-        break;
-    case COSTUME_1:
-        if (gSaveBlock2Ptr->playerGender == FEMALE)
-        {
-            sheet.data = sRegionMapPlayerIcon_MayGfx;
-            palette.data = sRegionMapPlayerIcon_MayPal;
-        }
-        else
-        {
-            sheet.data = sRegionMapPlayerIcon_BrendanGfx;
-            palette.data = sRegionMapPlayerIcon_BrendanPal;
-        }
-        break;
     }
-
     if (IsEventIslandMapSecId(gMapHeader.regionMapSectionId))
     {
         sRegionMap->playerIconSprite = NULL;
