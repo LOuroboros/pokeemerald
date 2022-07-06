@@ -408,7 +408,7 @@ static const u8 sPickupItemSlots[][2] =
 
 static const u8 sPickupItemOffsets[FRONTIER_STAGES_PER_CHALLENGE] = {0, 9, 18, 27, 36, 45, 54};
 
-static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54] =
+static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[TRAINER_CLASS_COUNT] =
 {
     {TRAINER_CLASS_TEAM_AQUA, TRAINER_ENCOUNTER_MUSIC_AQUA},
     {TRAINER_CLASS_AQUA_ADMIN, TRAINER_ENCOUNTER_MUSIC_AQUA},
@@ -464,9 +464,10 @@ static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54]
     {TRAINER_CLASS_HIKER, TRAINER_ENCOUNTER_MUSIC_HIKER},
     {TRAINER_CLASS_LEADER, TRAINER_ENCOUNTER_MUSIC_FEMALE},
     {TRAINER_CLASS_SCHOOL_KID, TRAINER_ENCOUNTER_MUSIC_MALE},
+    {TRAINER_CLASS_EXISTING_NPC, TRAINER_ENCOUNTER_MUSIC_MALE},
 };
 
-static const u8 sTrainerTextGroups[50][2] =
+static const u8 sTrainerTextGroups[TRAINER_CLASS_COUNT][2] =
 {
     {FACILITY_CLASS_AROMA_LADY, 3},
     {FACILITY_CLASS_RUIN_MANIAC, 4},
@@ -518,6 +519,7 @@ static const u8 sTrainerTextGroups[50][2] =
     {FACILITY_CLASS_LASS, 3},
     {FACILITY_CLASS_BUG_CATCHER, 0},
     {FACILITY_CLASS_HIKER, 4},
+    {FACILITY_CLASS_EXISTING_NPC, 0},
 };
 
 static const u8 *const sExitDirectionHintTexts1[] =
