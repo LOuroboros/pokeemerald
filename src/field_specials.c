@@ -72,6 +72,7 @@
 #include "constants/daycare.h"
 #include "item.h"
 #include "item_menu.h"
+#include "battle_setup.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -4518,4 +4519,73 @@ bool32 HasCaughtFossilMon(void)
     }
 
     return FALSE;
+}
+
+static const u16 sGymTrainerList[] =
+{
+    TRAINER_JOSH,     // Rustboro City Gym Trainer
+    TRAINER_TOMMY,    // Rustboro City Gym Trainer
+    TRAINER_MARC,     // Rustboro City Gym Trainer
+    TRAINER_TAKAO,    // Dewford Town Gym Trainer
+    TRAINER_JOCELYN,  // Dewford Town Gym Trainer
+    TRAINER_LAURA,    // Dewford Town Gym Trainer
+    TRAINER_BRENDEN,  // Dewford Town Gym Trainer
+    TRAINER_CRISTIAN, // Dewford Town Gym Trainer
+    TRAINER_LILITH,   // Dewford Town Gym Trainer
+    TRAINER_KIRK,     // Mauville City Gym Trainer
+    TRAINER_SHAWN,    // Mauville City Gym Trainer
+    TRAINER_BEN,      // Mauville City Gym Trainer
+    TRAINER_VIVIAN,   // Mauville City Gym Trainer
+    TRAINER_ANGELO,   // Mauville City Gym Trainer
+    TRAINER_COLE,     // Lavaridge Town Gym Trainer
+    TRAINER_GERALD,   // Lavaridge Town Gym Trainer
+    TRAINER_AXLE,     // Lavaridge Town Gym Trainer
+    TRAINER_DANIELLE, // Lavaridge Town Gym Trainer
+    TRAINER_KEEGAN,   // Lavaridge Town Gym Trainer
+    TRAINER_JACE,     // Lavaridge Town Gym Trainer
+    TRAINER_JEFF,     // Lavaridge Town Gym Trainer
+    TRAINER_ELI,      // Lavaridge Town Gym Trainer
+    TRAINER_RANDALL,  // Petalburg City Gym Trainer
+    TRAINER_MARY,     // Petalburg City Gym Trainer
+    TRAINER_PARKER,   // Petalburg City Gym Trainer
+    TRAINER_ALEXIA,   // Petalburg City Gym Trainer
+    TRAINER_GEORGE,   // Petalburg City Gym Trainer
+    TRAINER_JODY,     // Petalburg City Gym Trainer
+    TRAINER_BERKE,    // Petalburg City Gym Trainer
+    TRAINER_JARED,    // Fortree City Gym Trainer
+    TRAINER_EDWARDO,  // Fortree City Gym Trainer
+    TRAINER_FLINT,    // Fortree City Gym Trainer
+    TRAINER_ASHLEY,   // Fortree City Gym Trainer
+    TRAINER_HUMBERTO, // Fortree City Gym Trainer
+    TRAINER_DARIUS,   // Fortree City Gym Trainer
+    TRAINER_PRESTON,  // Mossdeep City Gym Trainer
+    TRAINER_VIRGIL,   // Mossdeep City Gym Trainer
+    TRAINER_BLAKE,    // Mossdeep City Gym Trainer
+    TRAINER_HANNAH,   // Mossdeep City Gym Trainer
+    TRAINER_SAMANTHA, // Mossdeep City Gym Trainer
+    TRAINER_MAURA,    // Mossdeep City Gym Trainer
+    TRAINER_SYLVIA,   // Mossdeep City Gym Trainer
+    TRAINER_NATE,     // Mossdeep City Gym Trainer
+    TRAINER_MACEY,    // Mossdeep City Gym Trainer
+    TRAINER_CLIFFORD, // Mossdeep City Gym Trainer
+    TRAINER_NICHOLAS, // Mossdeep City Gym Trainer
+    TRAINER_KATHLEEN, // Mossdeep City Gym Trainer
+    TRAINER_ANDREA,   // Sootopolis City Gym Trainer
+    TRAINER_CRISSY,   // Sootopolis City Gym Trainer
+    TRAINER_BRIANNA,  // Sootopolis City Gym Trainer
+    TRAINER_CONNIE,   // Sootopolis City Gym Trainer
+    TRAINER_BRIDGET,  // Sootopolis City Gym Trainer
+    TRAINER_OLIVIA,   // Sootopolis City Gym Trainer
+    TRAINER_TIFFANY,  // Sootopolis City Gym Trainer
+    TRAINER_BETHANY,  // Sootopolis City Gym Trainer
+    TRAINER_ANNIKA,   // Sootopolis City Gym Trainer
+    TRAINER_DAPHNE,   // Sootopolis City Gym Trainer
+};
+
+void ClearGymTrainerFlags(void)
+{
+    int i;
+
+    for (i = 0; i < NELEMS(sGymTrainerList); i++)
+        ClearTrainerFlag(sGymTrainerList[i]);
 }

@@ -553,3 +553,4 @@ gSpecials::
 	def_special Script_CreateFossilsMultichoice
 	def_special CountNumberUniqueFossils
 	def_special HasCaughtFossilMon
+	def_special ClearGymTrainerFlags
