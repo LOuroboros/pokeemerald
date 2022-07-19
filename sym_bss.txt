@@ -56,6 +56,7 @@
 	.include "data/sound_data.o"
 	.include "src/agb_flash.o"
 	.include "src/siirtc.o"
+    .include "src/quests.o"
 	.include "*libgcc.a:dp-bit.o"
 	.include "*libgcc.a:fp-bit.o"
 	.include "*libc.a:syscalls.o"

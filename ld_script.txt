@@ -333,6 +333,7 @@ SECTIONS {
         src/rhh_copyright.o(.text);
         src/fossils.o(.text);
         src/pokemon_debug.o(.text);
+        src/quests.o(.text);
     } =0
 
     script_data :
@@ -695,6 +696,7 @@ SECTIONS {
         data/sound_data.o(.rodata);
         src/rhh_copyright.o(.rodata);
         src/pokemon_debug.o(.rodata);
+        src/quests.o(.rodata);
     } =0
 
     song_data :

@@ -1608,16 +1608,18 @@
 	.4byte \ptr6
 	.endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro loadhelp text:req
-	.byte 0xc8
-	.4byte \text
-	.endm
+    .macro questmenu case:req, questId:req
+    .byte 0xc8
+    .byte \case
+    .byte \questId
+    .endm
 
-	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
-	.macro unloadhelp
-	.byte 0xc9
-	.endm
+    .macro subquestmenu case:req, parentId:req, childId:req
+    .byte 0xc9
+    .byte \case
+    .2byte \parentId
+    .2byte \childId
+    .endm
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro signmsg

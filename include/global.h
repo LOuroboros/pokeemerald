@@ -15,6 +15,7 @@
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/expansion_branches.h"
+#include "constants/quests.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
@@ -138,6 +139,10 @@
 #define NUM_DEX_FLAG_BYTES ROUND_BITS_TO_BYTES(POKEMON_SLOTS_NUMBER)
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
+
+#define QUEST_FLAGS_COUNT ROUND_BITS_TO_BYTES(QUEST_COUNT)
+#define SUB_FLAGS_COUNT ROUND_BITS_TO_BYTES(SUB_QUEST_COUNT)
+#define QUEST_STATES 5 // Number of different quest states tracked in the saveblock
 
 struct Coords8
 {
@@ -432,27 +437,29 @@ struct SaveBlock2
     /*0x12*/ u8 playTimeVBlanks;
     /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
     /*0x14*/ u16 optionsTextSpeed:4; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
-             u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
-             u16 optionsSound:2; // OPTIONS_SOUND_[MONO/STEREO/OFF]
-             u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
-             u16 optionsBattleSceneOff:1; // whether battle animations are disabled
-             u16 regionMapZoom:1; // whether the map is zoomed in
-             u16 optionsBattleType:1; // OPTIONS_BATTLE_TYPE_EFFECTIVENESS_[HIDE/SHOW]
-             u16 optionsQuickLoadOff:1; // OPTIONS_QUICK_LOAD[ON/OFF]
-    /*0x18*/ struct Pokedex pokedex;
-    /*0x98*/ struct Time localTimeOffset;
-    /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xB0*/ struct PlayersApprentice playerApprentice;
-    /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
-    /*0x1EC*/ struct BerryCrush berryCrush;
-    /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
-    /*0x64C*/ struct BattleFrontier frontier;
-              bool8 autoRun;
-              u8 playerCostume;
-              u8 rivalName[PLAYER_NAME_LENGTH + 1];
-              u8 savedDay;
-              u8 savedMonth;
-              u16 savedYear;
+    /*0x??*/ u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
+    /*0x??*/ u16 optionsSound:2; // OPTIONS_SOUND_[MONO/STEREO/OFF]
+    /*0x??*/ u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
+    /*0x??*/ u16 optionsBattleSceneOff:1; // whether battle animations are disabled
+    /*0x??*/ u16 regionMapZoom:1; // whether the map is zoomed in
+    /*0x??*/ u16 optionsBattleType:1; // OPTIONS_BATTLE_TYPE_EFFECTIVENESS_[HIDE/SHOW]
+    /*0x??*/ u16 optionsQuickLoadOff:1; // OPTIONS_QUICK_LOAD[ON/OFF]
+    /*0x??*/ struct Pokedex pokedex;
+    /*0x??*/ struct Time localTimeOffset;
+    /*0x??*/ struct Time lastBerryTreeUpdate;
+    /*0x??*/ struct PlayersApprentice playerApprentice;
+    /*0x??*/ struct Apprentice apprentices[APPRENTICE_COUNT];
+    /*0x??*/ struct BerryCrush berryCrush;
+    /*0x??*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
+    /*0x??*/ struct BattleFrontier frontier;
+    /*0x??*/ bool8 autoRun;
+    /*0x??*/ u8 playerCostume;
+    /*0x??*/ u8 rivalName[PLAYER_NAME_LENGTH + 1];
+    /*0x??*/ u8 savedDay;
+    /*0x??*/ u8 savedMonth;
+    /*0x??*/ u16 savedYear;
+    /*0x??*/ u8 questData[QUEST_FLAGS_COUNT * QUEST_STATES];
+    /*0x??*/ u8 subQuests[SUB_FLAGS_COUNT];
 }; // sizeof=0x???/0xFF4
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
