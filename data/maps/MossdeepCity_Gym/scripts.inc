@@ -17,6 +17,7 @@ MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
 	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_BADGE07_GET
+	completesubquest QUEST_2, QUEST_2_SUB_QUEST_7
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	setvar VAR_0x8008, 7

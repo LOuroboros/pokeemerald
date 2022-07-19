@@ -618,6 +618,11 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
             ScriptContext1_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall);
             return TRUE;
         }
+        if (ShouldDoNormanQuestCall() == TRUE)
+        {
+            ScriptContext1_SetupScript(PetalburgCity_Gym_EventScript_CompleteQuest2);
+            return TRUE;
+        }
     }
 
     if (SafariZoneTakeStep() == TRUE)

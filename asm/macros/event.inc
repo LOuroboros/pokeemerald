@@ -2329,3 +2329,49 @@
 	special ChooseItemFromBag
 	waitstate
 	.endm
+
+	@ Starts the specified quest.
+	.macro startquest quest:req
+	closemessage
+	delay 30
+	playfanfare MUS_HG_PARTNER
+	questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
+	questmenu QUEST_MENU_SET_ACTIVE, \quest
+	msgbox gText_QuestStatus, MSGBOX_DEFAULT
+	waitfanfare
+	.endm
+
+	.macro completequest quest:req
+	closemessage
+	delay 30
+	playfanfare MUS_HG_PARTNER
+	questmenu QUEST_MENU_BUFFER_QUEST_NAME \quest
+	questmenu QUEST_MENU_COMPLETE_QUEST, \quest
+	msgbox gText_QuestStatus, MSGBOX_DEFAULT
+	waitfanfare
+	.endm
+
+	.macro goto_if_quest_complete quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_COMPLETE \quest
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm
+
+	.macro goto_if_quest_incomplete quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_COMPLETE \quest
+	goto_if_eq VAR_RESULT, FALSE, \dest
+	.endm
+
+	.macro call_if_quest_complete quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_COMPLETE \quest
+	call_if_eq VAR_RESULT, TRUE, \dest
+	.endm
+
+	.macro call_if_quest_incomplete quest:req, dest:req
+	questmenu QUEST_MENU_CHECK_COMPLETE \quest
+	call_if_eq VAR_RESULT, FALSE, \dest
+	.endm
+
+	.macro completesubquest quest:req, subquest:req
+	closemessage
+	subquestmenu QUEST_MENU_COMPLETE_QUEST, \quest, \subquest
+	.endm

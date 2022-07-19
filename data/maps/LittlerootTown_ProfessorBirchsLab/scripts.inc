@@ -145,6 +145,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
 	clearflag FLAG_HIDE_ROUTE_101_BOY
 	setvar VAR_BIRCH_LAB_STATE, 3
+	startquest QUEST_1
 	releaseall
 	end
 
@@ -620,6 +621,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	waitfanfare
 	setflag FLAG_SYS_POKEDEX_GET
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
+	completequest QUEST_1
 	setvar VAR_CABLE_CLUB_TUTORIAL_STATE, 1
 	return
 

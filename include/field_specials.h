@@ -35,5 +35,6 @@ const u8 *GetCurrentDayString(u8 dayOfWeek);
 void SwapPlayersCostume(void);
 u16 GetPlayerCostumeId(void);
 u32 GetCurrentMap(void);
+bool32 ShouldDoNormanQuestCall(void);
 
 #endif // GUARD_FIELD_SPECIALS_H

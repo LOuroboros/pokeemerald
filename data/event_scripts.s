@@ -1063,6 +1063,9 @@ Common_EventScript_LegendaryFlewAway::
 gText_EmptyTextString:: @ So the dynamic multichoice won't go Out of Bounds
 	.string "$"
 
+gText_QuestStatus::
+	.string "The quest “{STR_VAR_1}”\nhas been {STR_VAR_2}!$"
+
 	.include "data/scripts/pc_transfer.inc"
 	.include "data/scripts/questionnaire.inc"
 	.include "data/scripts/abnormal_weather.inc"

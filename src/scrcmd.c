@@ -1729,6 +1729,7 @@ bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
     case QUEST_MENU_SET_ACTIVE:
         QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
         QuestMenu_GetSetQuestState(questId, FLAG_SET_ACTIVE);
+        StringCopy(gStringVar2, TEXT_STRING("accepted"));
         break;
     case QUEST_MENU_SET_REWARD:
         QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
@@ -1739,6 +1740,7 @@ bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
         QuestMenu_GetSetQuestState(questId, FLAG_SET_UNLOCKED);
         QuestMenu_GetSetQuestState(questId, FLAG_SET_COMPLETED);
         QuestMenu_GetSetQuestState(questId, FLAG_REMOVE_REWARD);
+        StringCopy(gStringVar2, TEXT_STRING("completed"));
         break;
     case QUEST_MENU_CHECK_UNLOCKED:
         if (QuestMenu_GetSetQuestState(questId, FLAG_GET_UNLOCKED))
@@ -1768,6 +1770,9 @@ bool8 ScrCmd_questmenu(struct ScriptContext *ctx)
             QuestMenu_CopyQuestName(gStringVar1, questId);
         break;
     }
+
+    if (CountUnlockedQuests() >= 1)
+        FlagSet(FLAG_SYS_QUEST_MENU_GET);
 
     return TRUE;
 }

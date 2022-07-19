@@ -554,3 +554,4 @@ gSpecials::
 	def_special CountNumberUniqueFossils
 	def_special HasCaughtFossilMon
 	def_special ClearGymTrainerFlags
+	def_special ShouldDoNormanQuestCall

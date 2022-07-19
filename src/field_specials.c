@@ -4589,3 +4589,22 @@ void ClearGymTrainerFlags(void)
     for (i = 0; i < NELEMS(sGymTrainerList); i++)
         ClearTrainerFlag(sGymTrainerList[i]);
 }
+
+bool32 ShouldDoNormanQuestCall(void)
+{
+    if (FlagGet(FLAG_ENABLE_NORMAN_QUEST_POKENAV_CALL))
+    {
+        switch (gMapHeader.mapType)
+        {
+        case MAP_TYPE_TOWN:
+        case MAP_TYPE_CITY:
+        case MAP_TYPE_ROUTE:
+        case MAP_TYPE_OCEAN_ROUTE:
+            if (++(*GetVarPointer(VAR_WALLY_CALL_STEP_COUNTER)) > 150 && GetNumOwnedBadges() == 8)
+                return TRUE;
+            break;
+        }
+    }
+
+    return FALSE;
+}

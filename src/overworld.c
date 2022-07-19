@@ -66,6 +66,8 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "quests.h"
+#include "constants/quests.h"
 
 struct CableClubPlayer
 {
@@ -1627,6 +1629,11 @@ void CB2_ReturnToField(void)
     {
         FieldClearVBlankHBlankCallbacks();
         FlagClear(FLAG_DISABLE_SHINY_HUE_SHIFT);
+        if (GetNumOwnedBadges() == 8 && IsQuestActiveState(QUEST_2) && !IsQuestCompletedState(QUEST_2))
+        {
+            FlagSet(FLAG_ENABLE_NORMAN_QUEST_POKENAV_CALL);
+            VarSet(VAR_WALLY_CALL_STEP_COUNTER, 0);
+        }
         SetMainCallback2(CB2_ReturnToFieldLocal);
     }
 }

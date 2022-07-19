@@ -46,9 +46,8 @@ struct SideQuest
 	const u8 numSubquests;
 };
 
-extern const struct SubQuest gSubQuests1[QUEST_1_SUB_COUNT];
-extern const struct SubQuest gSubQuests2[QUEST_2_SUB_COUNT];
-extern const struct SideQuest gSideQuests[QUEST_COUNT];
+extern const struct SubQuest sSubQuests2[QUEST_2_SUB_QUEST_COUNT];
+extern const struct SideQuest sSideQuests[QUEST_COUNT];
 
 enum QuestCases
 {
@@ -86,6 +85,9 @@ void Task_QuestMenu_OpenFromStartMenu(u8);
 void QuestMenu_CopyQuestName(u8 *dst, u8 questId);
 void QuestMenu_CopySubquestName(u8 *dst, u8 parentId, u8 childId);
 void QuestMenu_ResetMenuSaveData(void);
+u8 CountUnlockedQuests(void);
+bool8 IsQuestCompletedState(s32 questId);
+bool8 IsQuestActiveState(s32 questId);
 
 #endif // GUARD_QUESTS_H
 

@@ -93,6 +93,7 @@ PetalburgCity_Gym_EventScript_ReturnFromWallyTutorial::
 	waitmovement 0
 	msgbox PetalburgCity_Gym_Text_DadGoCollectBadges, MSGBOX_DEFAULT
 	setvar VAR_PETALBURG_GYM_STATE, 2
+	startquest QUEST_2
 	releaseall
 	end
 
@@ -121,6 +122,16 @@ PetalburgCity_Gym_EventScript_Norman::
 	case DIR_NORTH, PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth
 	case DIR_WEST, PetalburgCity_Gym_EventScript_BeginWallyTutorialWest
 	case DIR_EAST, PetalburgCity_Gym_EventScript_BeginWallyTutorialEast
+	end
+
+PetalburgCity_Gym_EventScript_CompleteQuest2::
+	lockall
+	pokenavcall PetalburgCity_Gym_Text_DadCongratulatesYou
+	waitmessage
+	closemessage
+	completequest QUEST_2
+	clearflag FLAG_ENABLE_NORMAN_QUEST_POKENAV_CALL
+	releaseall
 	end
 
 PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth::
@@ -388,6 +399,7 @@ PetalburgCity_Gym_EventScript_NormanBattle::
 	setflag FLAG_DEFEATED_PETALBURG_GYM
 	setvar VAR_PETALBURG_GYM_STATE, 7
 	setflag FLAG_BADGE05_GET
+	completesubquest QUEST_2, QUEST_2_SUB_QUEST_5
 	special ResetHealLocationFromDewford
 	call EventScript_HideMrBriney
 	setflag FLAG_HIDE_MAUVILLE_GYM_WATTSON
@@ -1136,6 +1148,26 @@ PetalburgCity_Gym_EventScript_GymStatue::
 	msgbox PetalburgCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
 	releaseall
 	end
+
+PetalburgCity_Gym_Text_DadCongratulatesYou:
+	.string "… … … … … …\n"
+	.string "… … … … … Beep!\p"
+	.string "DAD: Hello, {PLAYER}?\n"
+	.string "It's me, DAD.\p"
+	.string "I heard that you obtained your\n"
+	.string "last GYM BADGE, son!\l"
+	.string "Congratulations, I'm so proud!\p"
+	.string "I'm sure MOM won't believe it\n"
+	.string "when she hears it, hahaha.\p"
+	.string "Now that you've got every BADGE\n"
+	.string "nothing's stopping you from taking\l"
+	.string "on the POKéMON LEAGUE, {PLAYER}.\p"
+	.string "No matter what you decide to do,\n"
+	.string "I'll be rooting for you.\p"
+	.string "Let's meet up soon.\n"
+	.string "I'm itching to battle you.\p"
+	.string "… … … … … …\n"
+	.string "… … … … … Click!$"
 
 PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon:
 	.string "DAD: Hm?\p"
