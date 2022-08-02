@@ -60,6 +60,8 @@
 #include "constants/trainers.h"
 #include "battle_util.h"
 
+#include "data/pickup_tables.h"
+
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
 extern const u8* const gBattleScriptsForMoveEffects[];
@@ -1162,48 +1164,6 @@ static const u16 sNaturePowerMoves[BATTLE_TERRAIN_COUNT] =
     [BATTLE_TERRAIN_DISTORTION_WORLD] = MOVE_TRI_ATTACK,
     [BATTLE_TERRAIN_SPACE]            = MOVE_DRACO_METEOR,
     [BATTLE_TERRAIN_ULTRA_SPACE]      = MOVE_PSYSHOCK,
-};
-
-static const u16 sPickupItems[] =
-{
-    ITEM_POTION,
-    ITEM_ANTIDOTE,
-    ITEM_SUPER_POTION,
-    ITEM_GREAT_BALL,
-    ITEM_REPEL,
-    ITEM_ESCAPE_ROPE,
-    ITEM_X_ATTACK,
-    ITEM_FULL_HEAL,
-    ITEM_ULTRA_BALL,
-    ITEM_HYPER_POTION,
-    ITEM_RARE_CANDY,
-    ITEM_PROTEIN,
-    ITEM_REVIVE,
-    ITEM_HP_UP,
-    ITEM_FULL_RESTORE,
-    ITEM_MAX_REVIVE,
-    ITEM_PP_UP,
-    ITEM_MAX_ELIXIR,
-};
-
-static const u16 sRarePickupItems[] =
-{
-    ITEM_HYPER_POTION,
-    ITEM_NUGGET,
-    ITEM_KINGS_ROCK,
-    ITEM_FULL_RESTORE,
-    ITEM_ETHER,
-    ITEM_WHITE_HERB,
-    ITEM_TM44_REST,
-    ITEM_ELIXIR,
-    ITEM_TM01_FOCUS_PUNCH,
-    ITEM_LEFTOVERS,
-    ITEM_TM26_EARTHQUAKE,
-};
-
-static const u8 sPickupProbabilities[] =
-{
-    30, 40, 50, 60, 70, 80, 90, 94, 98
 };
 
 static const u8 sTerrainToType[BATTLE_TERRAIN_COUNT] =
@@ -13305,6 +13265,18 @@ static void Cmd_pickup(void)
                 s32 j;
                 s32 rand = Random() % 100;
 
+        #if B_PICKUP_TABLE == GEN_3
+                for (j = 0; j < ARRAY_COUNT(sPickupItems); j++)
+                {
+                    const struct PickupTable *pickupItems = &sPickupItems[j];
+                    // To do: figure out how to write the if statement to handle the connection between the user's level and the members of struct PickupTable appropriately.
+                    if (rand < pickupItems[j].chanceLv10)
+                    {
+                        SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, pickupItems[j].itemId);
+                        break;
+                    }
+                }
+
                 for (j = 0; j < (int)ARRAY_COUNT(sPickupProbabilities); j++)
                 {
                     if (sPickupProbabilities[j] > rand)
@@ -13318,8 +13290,10 @@ static void Cmd_pickup(void)
                         break;
                     }
                 }
+        #elif B_PICKUP_TABLE == GEN_7
+        #endif
             }
-            #if (defined ITEM_HONEY)
+        #if (defined ITEM_HONEY)
             else if (ability == ABILITY_HONEY_GATHER
                 && species != 0
                 && species != SPECIES_EGG
@@ -13331,7 +13305,7 @@ static void Cmd_pickup(void)
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &heldItem);
                 }
             }
-            #endif
+        #endif
         }
     }
 
