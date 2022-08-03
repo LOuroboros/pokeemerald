@@ -145,7 +145,9 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
   * An NPC that asks you to show them a Pokémon with X or Y nature for a reward.
 * Modify the encounters at Team Magma's Hideout. It's all steamy and close to a volcano, but the only Fire type Pokémon in here is Torkoal.
 * Bad End 3: Wally kills the wild Ralts at Route 102 accidentally.
-* Make the Move Reminder offer services for free after the Player has given 10 Heart Scales to them, just like in BDSP.
+* Repurpose the Move Reminder and the Name Rater.
+  * Having added the PLA-inspired "Relearn a move from inside the party screen" feature, a dedicated NPC for that serves no purpose.
+  * The same goes for the Name Rater.
 * Add high level encounters on the Sky Tower (second visit).
 * Allow the player to use Fly in the Abandoned Ship at Route 108, because there's no reason not to.
 * Change the held items of Chinchou, Clamperl, Corsola and Relicanth back to the Yellow, Blue, Red and Green Shards.
