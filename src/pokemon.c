@@ -6989,41 +6989,50 @@ u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
     return FALSE;
 }
 
+static void GetMoveRelearnerSpeciesMoves(u16 species, u16 *moves, u16 *knownMoves, u8 *numMoves)
+{
+    int i, j;
+
+    for (i = 1; i < NUM_SPECIES; i++)
+    {
+        for (j = 0; j < EVOS_PER_MON && gEvolutionTable[i][j].targetSpecies != species; j++)
+            ;
+
+        if (j >= EVOS_PER_MON)
+            continue;
+
+        // if this is a preevolution, collect those moves first
+        GetMoveRelearnerSpeciesMoves(i, moves, knownMoves, numMoves);
+        break;
+    }
+
+    for (i = 0; *numMoves < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][i].move != LEVEL_UP_END; i++)
+    {
+        for (j = 0; j < MAX_MON_MOVES && knownMoves[j] != gLevelUpLearnsets[species][i].move; j++)
+            ;
+
+        if (j < MAX_MON_MOVES)
+            continue;
+
+        for (j = 0; j < *numMoves && moves[j] != gLevelUpLearnsets[species][i].move; j++)
+            ;
+
+        if (j == *numMoves)
+            moves[(*numMoves)++] = gLevelUpLearnsets[species][i].move;
+    }
+}
+
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
-    u16 learnedMoves[4];
+    u16 knownMoves[MAX_MON_MOVES];
     u8 numMoves = 0;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-    int i, j, k;
+    int i;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+        knownMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
 
-    for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
-    {
-        u16 moveLevel;
-
-        if (gLevelUpLearnsets[species][i].move == LEVEL_UP_END)
-            break;
-
-        moveLevel = gLevelUpLearnsets[species][i].level;
-
-        if (moveLevel <= level)
-        {
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != gLevelUpLearnsets[species][i].move; j++)
-                ;
-
-            if (j == MAX_MON_MOVES)
-            {
-                for (k = 0; k < numMoves && moves[k] != gLevelUpLearnsets[species][i].move; k++)
-                    ;
-
-                if (k == numMoves)
-                    moves[numMoves++] = gLevelUpLearnsets[species][i].move;
-            }
-        }
-    }
+    GetMoveRelearnerSpeciesMoves(species, moves, knownMoves, &numMoves);
 
     return numMoves;
 }
