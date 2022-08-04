@@ -48,7 +48,6 @@
 #include "debug.h"
 #include "rtc.h"
 #include "constants/songs.h"
-#include "dexnav.h"
 
 // Menu actions
 enum
@@ -67,7 +66,6 @@ enum
     MENU_ACTION_REST_FRONTIER,
     MENU_ACTION_RETIRE_FRONTIER,
     MENU_ACTION_PYRAMID_BAG,
-    MENU_ACTION_DEXNAV
 };
 
 // Save status
@@ -110,7 +108,6 @@ static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
 static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
-static bool8 StartMenuDexNavCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -177,7 +174,6 @@ static const struct MenuAction sStartMenuItems[] =
     {gText_MenuRest, {.u8_void = StartMenuSaveCallback}},
     {gText_MenuRetire, {.u8_void = StartMenuBattlePyramidRetireCallback}},
     {gText_MenuBag, {.u8_void = StartMenuBattlePyramidBagCallback}},
-    {gText_MenuDexNav, {.u8_void = StartMenuDexNavCallback}}
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -320,9 +316,6 @@ static void BuildNormalStartMenu(void)
 
     if (FlagGet(FLAG_SYS_POKENAV_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKENAV);
-
-    if (FlagGet(FLAG_SYS_DEXNAV_GET))
-        AddStartMenuAction(MENU_ACTION_DEXNAV);
 
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
@@ -1450,13 +1443,4 @@ void UpdateClockDisplay(void)
     StringExpandPlaceholders(gStringVar7, gText_CurrentTime);
     AddTextPrinterParameterized(sCurrentTimeWindowId, FONT_NARROW, gStringVar7, 0, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sCurrentTimeWindowId, COPYWIN_GFX);
-}
-
-static bool8 StartMenuDexNavCallback(void)
-{
-    PlayRainStoppingSoundEffect();
-    CleanupOverworldWindowsAndTilemaps();
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
-    CreateTask(Task_OpenDexNavFromStartMenu, 0);
-    return TRUE;
 }
