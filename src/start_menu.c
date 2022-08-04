@@ -637,6 +637,8 @@ static bool8 HandleStartMenuInput(void)
     #endif
         else
         {
+            if (gMenuCallback == StartMenuPokeNavCallback)
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             return FALSE;
         }
     }
