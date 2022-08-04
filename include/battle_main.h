@@ -28,8 +28,6 @@ struct TrainerBall
     u8 ball; // make this a u16 if needed
 };
 
-#define TYPE_NAME_LENGTH 6
-
 #if B_EXPANDED_ABILITY_NAMES
 #define ABILITY_NAME_LENGTH 16
 #else

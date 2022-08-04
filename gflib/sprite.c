@@ -635,14 +635,11 @@ void DestroySprite(struct Sprite *sprite)
     }
 }
 
-void ResetOamRange(u8 a, u8 b)
+void ResetOamRange(u8 start, u8 end)
 {
     u8 i;
-
-    for (i = a; i < b; i++)
-    {
+    for (i = start; i < end; i++)
         gMain.oamBuffer[i] = *(struct OamData *)&gDummyOamData;
-    }
 }
 
 void LoadOam(void)

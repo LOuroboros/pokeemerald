@@ -137,7 +137,7 @@ EWRAM_DATA u16 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[400] = {0};
 EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
 EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
-EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT] = {0};
+EWRAM_DATA u8 gBattleTextBuff3[30] = {0};   //expanded for stupidly long z move names
 // The below array is never intentionally used. However, Juan's
 // defeat text (SootopolisCity_Gym_1F_Text_JuanDefeat) is too long
 // for gDisplayedStringBattle and overflows into this array. If it
@@ -242,7 +242,6 @@ EWRAM_DATA struct TotemBoost gTotemBoosts[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA bool8 gHasFetchedBall = FALSE;
 EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
-EWRAM_DATA bool8 gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
 
@@ -1401,8 +1400,7 @@ static void CB2_PreInitMultiBattle(void)
                 gBattleTypeFlags = *savedBattleTypeFlags;
                 gMain.savedCallback = *savedCallback;
                 SetMainCallback2(CB2_InitBattleInternal);
-                Free(sMultiPartnerPartyBuffer);
-                sMultiPartnerPartyBuffer = NULL;
+                FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
             }
         }
         else if (gReceivedRemoteLinkPlayers == 0)
@@ -1410,8 +1408,7 @@ static void CB2_PreInitMultiBattle(void)
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
             SetMainCallback2(CB2_InitBattleInternal);
-            Free(sMultiPartnerPartyBuffer);
-            sMultiPartnerPartyBuffer = NULL;
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         }
         break;
     }
@@ -1447,8 +1444,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void)
             gBattleTypeFlags = *savedBattleTypeFlags;
             gMain.savedCallback = *savedCallback;
             SetMainCallback2(CB2_InitBattleInternal);
-            Free(sMultiPartnerPartyBuffer);
-            sMultiPartnerPartyBuffer = NULL;
+            FREE_AND_SET_NULL(sMultiPartnerPartyBuffer);
         }
         break;
     }
@@ -3079,7 +3075,7 @@ static void BattleStartClearSetData(void)
         gPartyCriticalHits[i] = 0;
     }
 
-    gSwapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
+    gBattleStruct->swapDamageCategory = FALSE; // Photon Geyser, Shell Side Arm, Light That Burns the Sky
 }
 
 void SwitchInClearSetData(void)
@@ -3782,6 +3778,8 @@ static void TryDoEventsBeforeFirstTurn(void)
     gMoveResultFlags = 0;
 
     gRandomTurnNumber = Random();
+    
+    GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
 
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
@@ -3870,6 +3868,7 @@ void BattleTurnPassed(void)
 
     *(&gBattleStruct->absentBattlerFlags) = gAbsentBattlerFlags;
     BattlePutTextOnWindow(gText_EmptyString3, B_WIN_MSG);
+    GetAiLogicData(); // get assumed abilities, hold effects, etc of all battlers
     gBattleMainFunc = HandleTurnActionSelectionState;
     gRandomTurnNumber = Random();
 
@@ -3997,6 +3996,11 @@ static void HandleTurnActionSelectionState(void)
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
             RecordedBattle_CopyBattlerMoves();
             gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
+            
+            // Do AI score computations here so we can use them in AI_TrySwitchOrUseItem
+            if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart()) && IsBattlerAIControlled(gActiveBattler)) {
+                gBattleStruct->aiMoveOrAction[gActiveBattler] = ComputeBattleAiScores(gActiveBattler);
+            }
             break;
         case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
             *(gBattleStruct->monToSwitchIntoId + gActiveBattler) = PARTY_SIZE;
@@ -4066,6 +4070,7 @@ static void HandleTurnActionSelectionState(void)
                     {
                         struct ChooseMoveStruct moveInfo;
 
+                        moveInfo.zmove = gBattleStruct->zmove;
                         moveInfo.mega = gBattleStruct->mega;
                         moveInfo.species = gBattleMons[gActiveBattler].species;
                         moveInfo.monType1 = gBattleMons[gActiveBattler].type1;
@@ -4182,6 +4187,7 @@ static void HandleTurnActionSelectionState(void)
                     }
 
                     gBattleStruct->mega.toEvolve &= ~(gBitTable[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))]);
+                    gBattleStruct->zmove.toBeUsed[BATTLE_PARTNER(GetBattlerPosition(gActiveBattler))] = MOVE_NONE;
                     BtlController_EmitEndBounceEffect(BUFFER_A);
                     MarkBattlerForControllerExec(gActiveBattler);
                     return;

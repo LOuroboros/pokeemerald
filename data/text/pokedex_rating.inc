@@ -3,19 +3,7 @@ gBirchDexRatingText_AreYouCurious::
 	.string "Are you curious about how your\n"
 	.string "POKéDEX is coming along?$"
 
-gBirchDexRatingText_AreYouCurious2::
-	.string "PROF. BIRCH: So, {PLAYER}!\p"
-	.string "Are you curious about how your\n"
-	.string "POKéDEX is coming along?$"
-
-gBirchDexRatingText_AreYouCuriousAlt::
-	.string "PROF. BIRCH: Ah, {PLAYER}!\p"
-	.string "That was an impressive battle,\n"
-	.string "congratulations on your victory!\p"
-	.string "So, are you curious about how your\n"
-	.string "POKéDEX is coming along?$"
-
-gBirchDexRatingText_Cancel:
+gBirchDexRatingText_Cancel::
 	.string "Hm? Oh, you haven't caught enough\n"
 	.string "POKéMON to make it worthwhile.$"
 
@@ -125,3 +113,17 @@ gBirchDexRatingText_OnANationwideBasis::
 	.string "On a nationwide basis…\p"
 	.string "You've seen {STR_VAR_1} POKéMON,\n"
 	.string "and you've caught {STR_VAR_2} POKéMON…$"
+
+@ New text strings start here
+
+gBirchDexRatingText_AreYouCurious2::
+	.string "PROF. BIRCH: So, {PLAYER}!\p"
+	.string "Are you curious about how your\n"
+	.string "POKéDEX is coming along?$"
+
+gBirchDexRatingText_AreYouCuriousAlt::
+	.string "PROF. BIRCH: Ah, {PLAYER}!\p"
+	.string "That was an impressive battle,\n"
+	.string "congratulations on your victory!\p"
+	.string "So, are you curious about how your\n"
+	.string "POKéDEX is coming along?$"

@@ -617,8 +617,19 @@
 #define STRINGID_METEORBEAMCHARGING                   615
 #define STRINGID_HEATUPBEAK                           616
 #define STRINGID_COURTCHANGE                          617
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             618
+#define STRINGID_PLAYERPAIDPRIZEMONEY                 619
+#define STRINGID_ZPOWERSURROUNDS                      620
+#define STRINGID_ZMOVEUNLEASHED                       621
+#define STRINGID_ZMOVERESETSSTATS                     622
+#define STRINGID_ZMOVEALLSTATSUP                      623
+#define STRINGID_ZMOVEZBOOSTCRIT                      624
+#define STRINGID_ZMOVERESTOREHP                       625
+#define STRINGID_ZMOVESTATUP                          626
+#define STRINGID_ZMOVEHPTRAP                          627
+#define STRINGID_TERRAINREMOVED                       628
 
-#define BATTLESTRINGS_COUNT                           618
+#define BATTLESTRINGS_COUNT                           629
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -875,5 +886,26 @@
 #define B_MSG_TERRAINPREVENTS_MISTY     0
 #define B_MSG_TERRAINPREVENTS_ELECTRIC  1
 #define B_MSG_TERRAINPREVENTS_PSYCHIC   2
+
+// gWrappedStringIds
+#define B_MSG_WRAPPED_BIND        0
+#define B_MSG_WRAPPED_WRAP        1
+#define B_MSG_WRAPPED_FIRE_SPIN   2
+#define B_MSG_WRAPPED_CLAMP       3
+#define B_MSG_WRAPPED_WHIRLPOOL   4
+#define B_MSG_WRAPPED_SAND_TOMB   5
+#define B_MSG_WRAPPED_MAGMA_STORM 6
+#define B_MSG_WRAPPED_INFESTATION 7
+#define B_MSG_WRAPPED_SNAP_TRAP   8
+#define NUM_TRAPPING_MOVES        9
+
+// z effects
+#define B_MSG_Z_RESET_STATS   0
+#define B_MSG_Z_ALL_STATS_UP  1
+#define B_MSG_Z_BOOST_CRITS   2
+#define B_MSG_Z_FOLLOW_ME     3
+#define B_MSG_Z_RECOVER_HP    4
+#define B_MSG_Z_STAT_UP       5
+#define B_MSG_Z_HP_TRAP       6
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

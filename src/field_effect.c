@@ -482,13 +482,13 @@ static const struct Subsprite sSubsprites_HofMonitorBig[] =
 
 static const struct SubspriteTable sSubspriteTable_HofMonitorBig = subsprite_table(sSubsprites_HofMonitorBig);
 
-const union AnimCmd sAnim_Static[] =
+static const union AnimCmd sAnim_Static[] =
 {
     ANIMCMD_FRAME(.imageValue = 0, .duration = 1),
     ANIMCMD_JUMP(0)
 };
 
-const union AnimCmd sAnim_Flicker[] =
+static const union AnimCmd sAnim_Flicker[] =
 {
     ANIMCMD_FRAME(.imageValue = 0, .duration = 16),
     ANIMCMD_FRAME(.imageValue = 1, .duration = 16),
@@ -502,7 +502,7 @@ const union AnimCmd sAnim_Flicker[] =
 };
 
 // Flicker on and off, for the Pokéballs / monitors during the PokéCenter heal effect
-const union AnimCmd *const sAnims_Flicker[] =
+static const union AnimCmd *const sAnims_Flicker[] =
 {
     sAnim_Static,
     sAnim_Flicker
@@ -557,7 +557,7 @@ static const struct SpriteTemplate sSpriteTemplate_HofMonitorSmall =
     .callback = SpriteCB_HallOfFameMonitor
 };
 
-void (*const sPokecenterHealEffectFuncs[])(struct Task *) =
+static void (*const sPokecenterHealEffectFuncs[])(struct Task *) =
 {
     PokecenterHealEffect_Init,
     PokecenterHealEffect_WaitForBallPlacement,
@@ -565,7 +565,7 @@ void (*const sPokecenterHealEffectFuncs[])(struct Task *) =
     PokecenterHealEffect_WaitForSoundAndEnd
 };
 
-void (*const sHallOfFameRecordEffectFuncs[])(struct Task *) =
+static void (*const sHallOfFameRecordEffectFuncs[])(struct Task *) =
 {
     HallOfFameRecordEffect_Init,
     HallOfFameRecordEffect_WaitForBallPlacement,
@@ -573,7 +573,7 @@ void (*const sHallOfFameRecordEffectFuncs[])(struct Task *) =
     HallOfFameRecordEffect_WaitForSoundAndEnd
 };
 
-void (*const sPokeballGlowEffectFuncs[])(struct Sprite *) =
+static void (*const sPokeballGlowEffectFuncs[])(struct Sprite *) =
 {
     PokeballGlowEffect_PlaceBalls,
     PokeballGlowEffect_TryPlaySe,
@@ -599,7 +599,7 @@ static const u8 sPokeballGlowReds[]   = {16, 12, 8, 0};
 static const u8 sPokeballGlowGreens[] = {16, 12, 8, 0};
 static const u8 sPokeballGlowBlues[]  = { 0,  0, 0, 0};
 
-bool8 (*const sFallWarpFieldEffectFuncs[])(struct Task *) =
+static bool8 (*const sFallWarpFieldEffectFuncs[])(struct Task *) =
 {
     FallWarpEffect_Init,
     FallWarpEffect_WaitWeather,
@@ -610,7 +610,7 @@ bool8 (*const sFallWarpFieldEffectFuncs[])(struct Task *) =
     FallWarpEffect_End,
 };
 
-bool8 (*const sEscalatorWarpOutFieldEffectFuncs[])(struct Task *) =
+static bool8 (*const sEscalatorWarpOutFieldEffectFuncs[])(struct Task *) =
 {
     EscalatorWarpOut_Init,
     EscalatorWarpOut_WaitForPlayer,
@@ -620,7 +620,7 @@ bool8 (*const sEscalatorWarpOutFieldEffectFuncs[])(struct Task *) =
     EscalatorWarpOut_Down_End,
 };
 
-bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
+static bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
 {
     EscalatorWarpIn_Init,
     EscalatorWarpIn_Down_Init,
@@ -631,7 +631,7 @@ bool8 (*const sEscalatorWarpInFieldEffectFuncs[])(struct Task *) =
     EscalatorWarpIn_End,
 };
 
-bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *) =
+static bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *) =
 {
     WaterfallFieldEffect_Init,
     WaterfallFieldEffect_ShowMon,
@@ -640,14 +640,14 @@ bool8 (*const sWaterfallFieldEffectFuncs[])(struct Task *, struct ObjectEvent *)
     WaterfallFieldEffect_ContinueRideOrEnd,
 };
 
-bool8 (*const sDiveFieldEffectFuncs[])(struct Task *) =
+static bool8 (*const sDiveFieldEffectFuncs[])(struct Task *) =
 {
     DiveFieldEffect_Init,
     DiveFieldEffect_ShowMon,
     DiveFieldEffect_TryWarp,
 };
 
-bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
+static bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
     LavaridgeGymB1FWarpEffect_Init,
     LavaridgeGymB1FWarpEffect_CameraShake,
@@ -657,7 +657,7 @@ bool8 (*const sLavaridgeGymB1FWarpEffectFuncs[])(struct Task *, struct ObjectEve
     LavaridgeGymB1FWarpEffect_Warp,
 };
 
-bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
+static bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
     LavaridgeGymB1FWarpExitEffect_Init,
     LavaridgeGymB1FWarpExitEffect_StartPopOut,
@@ -665,7 +665,7 @@ bool8 (*const sLavaridgeGymB1FWarpExitEffectFuncs[])(struct Task *, struct Objec
     LavaridgeGymB1FWarpExitEffect_End,
 };
 
-bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
+static bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *, struct ObjectEvent *, struct Sprite *) =
 {
     LavaridgeGym1FWarpEffect_Init,
     LavaridgeGym1FWarpEffect_AshPuff,
@@ -674,7 +674,7 @@ bool8 (*const sLavaridgeGym1FWarpEffectFuncs[])(struct Task *, struct ObjectEven
     LavaridgeGym1FWarpEffect_Warp,
 };
 
-void (*const sEscapeRopeWarpOutEffectFuncs[])(struct Task *) =
+static void (*const sEscapeRopeWarpOutEffectFuncs[])(struct Task *) =
 {
     EscapeRopeWarpOutEffect_Init,
     EscapeRopeWarpOutEffect_Spin,
@@ -2278,7 +2278,7 @@ static void EscapeRopeWarpOutEffect_Spin(struct Task *task)
     }
 }
 
-void (*const sEscapeRopeWarpInEffectFuncs[])(struct Task *) = {
+static void (*const sEscapeRopeWarpInEffectFuncs[])(struct Task *) = {
     EscapeRopeWarpInEffect_Init,
     EscapeRopeWarpInEffect_Spin
 };
@@ -2449,7 +2449,7 @@ static void FieldCallback_TeleportWarpIn(void)
     CreateTask(Task_TeleportWarpIn, 0);
 }
 
-void (*const sTeleportWarpInFieldEffectFuncs[])(struct Task *) = {
+static void (*const sTeleportWarpInFieldEffectFuncs[])(struct Task *) = {
     TeleportWarpInFieldEffect_Init,
     TeleportWarpInFieldEffect_SpinEnter,
     TeleportWarpInFieldEffect_SpinGround
@@ -2583,7 +2583,7 @@ bool8 FldEff_FieldMoveShowMonInit(void)
     return FALSE;
 }
 
-void (*const sFieldMoveShowMonOutdoorsEffectFuncs[])(struct Task *) = {
+static void (*const sFieldMoveShowMonOutdoorsEffectFuncs[])(struct Task *) = {
     FieldMoveShowMonOutdoorsEffect_Init,
     FieldMoveShowMonOutdoorsEffect_LoadGfx,
     FieldMoveShowMonOutdoorsEffect_CreateBanner,
@@ -2751,7 +2751,7 @@ static void LoadFieldMoveOutdoorStreaksTilemap(u16 offs)
 #define tBgOffset    data[4]
 #define tMonSpriteId data[15]
 
-void (*const sFieldMoveShowMonIndoorsEffectFuncs[])(struct Task *) = {
+static void (*const sFieldMoveShowMonIndoorsEffectFuncs[])(struct Task *) = {
     FieldMoveShowMonIndoorsEffect_Init,
     FieldMoveShowMonIndoorsEffect_LoadGfx,
     FieldMoveShowMonIndoorsEffect_SlideBannerOn,
@@ -2979,7 +2979,7 @@ u8 FldEff_UseSurf(void)
     return FALSE;
 }
 
-void (*const sSurfFieldEffectFuncs[])(struct Task *) = {
+static void (*const sSurfFieldEffectFuncs[])(struct Task *) = {
     SurfFieldEffect_Init,
     SurfFieldEffect_FieldMovePose,
     SurfFieldEffect_ShowMon,
@@ -3155,7 +3155,7 @@ u8 FldEff_UseFly(void)
     return 0;
 }
 
-void (*const sFlyOutFieldEffectFuncs[])(struct Task *) = {
+static void (*const sFlyOutFieldEffectFuncs[])(struct Task *) = {
     FlyOutFieldEffect_FieldMovePose,
     FlyOutFieldEffect_ShowMon,
     FlyOutFieldEffect_BirdLeaveBall,
@@ -3445,7 +3445,7 @@ u8 FldEff_FlyIn(void)
     return 0;
 }
 
-void (*const sFlyInFieldEffectFuncs[])(struct Task *) = {
+static void (*const sFlyInFieldEffectFuncs[])(struct Task *) = {
     FlyInFieldEffect_BirdSwoopDown,
     FlyInFieldEffect_FlyInWithBird,
     FlyInFieldEffect_JumpOffBird,
@@ -3676,7 +3676,7 @@ static void StartEndingDeoxysRockCameraShake(u8 taskId)
 #undef tEndDelay
 #undef tEnding
 
-void (*const sDestroyDeoxysRockEffectFuncs[])(s16*, u8) = {
+static void (*const sDestroyDeoxysRockEffectFuncs[])(s16*, u8) = {
     DestroyDeoxysRockEffect_CameraShake,
     DestroyDeoxysRockEffect_RockFragments,
     DestroyDeoxysRockEffect_WaitAndEnd,

@@ -242,6 +242,7 @@
 #define VARIOUS_BATTLER_ITEM_TO_LAST_USED_ITEM      151
 #define VARIOUS_SET_BEAK_BLAST                      152
 #define VARIOUS_SWAP_SIDE_STATUSES                  153
+#define VARIOUS_SET_Z_EFFECT                        154
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0
