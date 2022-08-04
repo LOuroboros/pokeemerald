@@ -21,6 +21,8 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 ### High Priority
 #### That means things that I should do as fast as possible.
 
+* Solve the problem with the PokéNav's Party Pkmn menu which is inside the "Condition" menu.
+  * The problem is caused by 1 or more changes done all the way back in [407eda3e](https://github.com/LOuroboros/pokeemerald/commit/407eda3e).
 * Finish the dusk time palettes for the Day/Night system and merge it.
   * But before that I should try to merge Merrrp's branch which also includes a dynamic overworld palette system, overworld shadows and following Pokémon.
 * Tweak Chain Capture
