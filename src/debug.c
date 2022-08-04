@@ -1783,11 +1783,15 @@ static void DebugAction_Flags_PokeNavOnOff(u8 taskId)
     if (FlagGet(FLAG_SYS_POKENAV_GET))
     {
         FlagClear(FLAG_SYS_POKENAV_GET);
+        FlagClear(FLAG_SYS_DEXNAV_GET);
+        FlagClear(FLAG_SYS_RIBBON_GET);
         PlaySE(SE_PC_OFF);
     }
     else
     {
         FlagSet(FLAG_SYS_POKENAV_GET);
+        FlagClear(FLAG_SYS_DEXNAV_GET);
+        FlagClear(FLAG_SYS_RIBBON_GET);
         PlaySE(SE_PC_LOGIN);
     }
 }
