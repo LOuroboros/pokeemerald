@@ -1825,3 +1825,4 @@ const u8 gText_Moves_Menu[] = _("Change Moves");
 
 // Dexnav
 const u8 gText_MenuDexNav[] = _("DEXNAV");
+const u8 gText_DexNavDescription[] = _("Search for wild Pokémon.");

@@ -3149,5 +3149,6 @@ extern const u8 gText_Moves_Menu[];
 
 // Dexnav
 extern const u8 gText_MenuDexNav[];
+extern const u8 gText_DexNavDescription[];
 
 #endif // GUARD_STRINGS_H

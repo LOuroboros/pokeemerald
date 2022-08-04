@@ -58,6 +58,7 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "gba/m4a_internal.h"
+#include "pokenav.h"
 
 // Defines
 enum WindowIds
@@ -2723,4 +2724,20 @@ void IncrementDexNavChain(void)
 {
     if (gSaveBlock1Ptr->dexNavChain < DEXNAV_CHAIN_MAX)
         gSaveBlock1Ptr->dexNavChain++;
+}
+
+u32 PokeNavMenuDexNavCallback(void)
+{
+    CreateTask(Task_OpenDexNavFromPokenav, 0);
+    return TRUE;
+}
+
+void Task_OpenDexNavFromPokenav(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        DexNavGuiInit(CB2_InitPokeNav);
+        DestroyTask(taskId);
+    }
 }
