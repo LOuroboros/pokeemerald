@@ -31,6 +31,7 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 
 ### Low Priority
 #### That means things that I should do someday.
+* Make the DexNav's Overworld Info Bar use a border frame like the textbox in battles, instead of being a boring black rectangle.
 * Merge ExpoSeed's fork of the Dynamic Overworld Palettes when the 2 glaring issues it has are fixed.
 * Re-implement TheXaman's Registered Items Menu
   * Remove all the logic for L and R buttons. The menu should be opened when you press the Select key if the Player has 2 or more items registered.
