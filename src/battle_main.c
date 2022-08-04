@@ -66,6 +66,7 @@
 #include "cable_club.h"
 #include "starter_choose.h"
 #include "wonder_trade.h"
+#include "dexnav.h"
 
 extern struct Evolution gEvolutionTable[][EVOS_PER_MON];
 
@@ -5260,6 +5261,10 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
         gIsFishingEncounter = FALSE;
         gIsSurfingEncounter = FALSE;
         ResetSpriteData();
+        if (gDexnavBattle && (gBattleOutcome == B_OUTCOME_WON || gBattleOutcome == B_OUTCOME_CAUGHT))
+            IncrementDexNavChain();
+        else
+            gSaveBlock1Ptr->dexNavChain = 0;
         if (!(gBattleTypeFlags & (BATTLE_TYPE_LINK
                                   | BATTLE_TYPE_RECORDED_LINK
                                   | BATTLE_TYPE_FIRST_BATTLE

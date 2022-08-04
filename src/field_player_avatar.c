@@ -141,6 +141,7 @@ static u8 Fishing_EndNoMon(struct Task *);
 static void AlignFishingAnimationFrames(void);
 
 static u8 TrySpinPlayerForWarp(struct ObjectEvent *, s16 *);
+static void PlayerGoSlow(u8 direction);
 
 static bool8 (*const sForcedMovementTestFuncs[NUM_FORCED_MOVEMENTS])(u8) =
 {
@@ -695,12 +696,23 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
 
     if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_SURFING || gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_UNDERWATER)
     {
-        if (heldKeys & B_BUTTON && gSaveBlock2Ptr->autoRun == TRUE)
+        if (FlagGet(FLAG_SYS_DEXNAV_SEARCH) && (heldKeys & B_BUTTON))
+        {
+            gPlayerAvatar.creeping = TRUE;
+            PlayerGoSlow(direction);
+        }
+        else if (heldKeys & B_BUTTON && gSaveBlock2Ptr->autoRun == TRUE)
+        {
             PlayerWalkFast(direction); // same speed as running
+        }
         else if (heldKeys & B_BUTTON || gSaveBlock2Ptr->autoRun == TRUE)
+        {
             PlayerWalkFaster(direction); // same speed as the Mach Bike
+        }
         else
+        {
             PlayerWalkFast(direction);
+        }
         return;
     }
 
@@ -710,7 +722,12 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
      && FlagGet(FLAG_SYS_B_DASH)
      && IsRunningDisallowed(gObjectEvents[gPlayerAvatar.objectEventId].currentMetatileBehavior) == 0)
     {
-        if (heldKeys & B_BUTTON && gSaveBlock2Ptr->autoRun == TRUE)
+        if (FlagGet(FLAG_SYS_DEXNAV_SEARCH) && (heldKeys & B_BUTTON))
+        {
+            gPlayerAvatar.creeping = TRUE;
+            PlayerGoSlow(direction);
+        }
+        else if (heldKeys & B_BUTTON && gSaveBlock2Ptr->autoRun == TRUE)
         {
             PlayerWalkNormal(direction);
         }
@@ -724,6 +741,7 @@ static void PlayerNotOnBikeMoving(u8 direction, u16 heldKeys)
     else
     {
         PlayerWalkNormal(direction);
+        gPlayerAvatar.creeping = FALSE;
     }
 }
 
@@ -2303,4 +2321,10 @@ static u8 TrySpinPlayerForWarp(struct ObjectEvent *object, s16 *delayTimer)
     ObjectEventForceSetHeldMovement(object, GetFaceDirectionMovementAction(sSpinDirections[object->facingDirection]));
     *delayTimer = 0;
     return sSpinDirections[object->facingDirection];
+}
+
+// Dexnav
+static void PlayerGoSlow(u8 direction)
+{
+    PlayerSetAnimId(GetWalkSlowMovementAction(direction), COPY_MOVE_WALK);
 }

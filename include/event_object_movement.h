@@ -420,5 +420,6 @@ void SetVirtualObjectSpriteAnim(u8 virtualObjId, u8 animNum);
 bool32 IsVirtualObjectAnimating(u8 virtualObjId);
 
 u16 GetObjectEventFlagIdByObjectEventId(u8);
+bool8 IsElevationMismatchAt(u8, s16, s16);
 
 #endif //GUARD_EVENT_OBJECT_MOVEMENT_H

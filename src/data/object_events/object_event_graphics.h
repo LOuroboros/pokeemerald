@@ -411,3 +411,5 @@ const u32 gObjectEventPic_AdventuresMayFishing[] = INCBIN_U32("graphics/object_e
 const u32 gObjectEventPic_AdventuresMayWatering[] = INCBIN_U32("graphics/object_events/pics/people/adventures_may/watering.4bpp");
 const u32 gObjectEventPic_AdventuresMayDecorating[] = INCBIN_U32("graphics/object_events/pics/people/adventures_may/decorating.4bpp");
 const u32 gObjectEventPic_AdventuresMayUnderwater[] = INCBIN_U32("graphics/object_events/pics/people/adventures_may/underwater.4bpp");
+const u32 gFieldEffectObjectPic_CaveDust[] = INCBIN_U32("graphics/field_effects/pics/cave_dust.4bpp");
+const u16 gFieldEffectObjectPalette_CaveDust[] = INCBIN_U16("graphics/field_effects/palettes/cave_dust.gbapal");

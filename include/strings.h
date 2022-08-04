@@ -3147,4 +3147,7 @@ extern const u8 gText_QuickLoad[];
 // Relearning moves from the party screen
 extern const u8 gText_Moves_Menu[];
 
+// Dexnav
+extern const u8 gText_MenuDexNav[];
+
 #endif // GUARD_STRINGS_H

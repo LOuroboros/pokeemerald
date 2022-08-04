@@ -66,6 +66,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "dexnav.h"
 
 struct CableClubPlayer
 {
@@ -835,6 +836,8 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
 
     if (gMapHeader.showMapName && gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
+
+    ResetDexNavSearch();
 }
 
 static void LoadMapFromWarp(bool32 a1)
@@ -885,6 +888,8 @@ static void LoadMapFromWarp(bool32 a1)
         UpdateTVScreensOnMap(gBackupMapLayout.width, gBackupMapLayout.height);
         InitSecretBaseAppearance(TRUE);
     }
+
+    ResetDexNavSearch();
 }
 
 void ResetInitialPlayerAvatarState(void)

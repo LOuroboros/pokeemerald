@@ -150,3 +150,4 @@
 	.include "src/infobox.o"
 	.include "src/rhh_copyright.o"
 	.include "src/title_screen.o"
+	.include "src/dexnav.o"

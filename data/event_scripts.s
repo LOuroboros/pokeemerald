@@ -1118,7 +1118,8 @@ gText_EmptyTextString:: @ So the dynamic multichoice won't go Out of Bounds
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
-	.include "data/scripts/misc_scripts.inc"
 
+	.include "data/scripts/misc_scripts.inc"
 	.include "data/maps/Route103North/scripts.inc"
 	.include "data/scripts/fossils.inc"
+	.include "data/scripts/dexnav.inc"

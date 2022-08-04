@@ -855,6 +855,8 @@ struct SaveBlock1
     /*0x3???*/ struct TrainerHillSave trainerHill;
     /*0x3???*/ struct WaldaPhrase waldaPhrase;
     /*0x3???*/ u16 questionnaireWords[NUM_QUESTIONNAIRE_WORDS];
+               u8 dexNavSearchLevels[POKEMON_SLOTS_NUMBER]; // Originally used NUM_SPECIES which is a waste of space because that includes forms.
+               u8 dexNavChain;
     // sizeof: 0x3???
 };
 
