@@ -27,6 +27,7 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
   * Reduce 10% chance to find 6x31 after 60 captures to 5% instead.
   * Don't break the chain if the Player moves to another map.
 * Complete the features and credits list.
+* Re-implement Furret's dppt_hgss_music branch because pulling it is a pita.
 
 ### Low Priority
 #### That means things that I should do someday.
@@ -114,8 +115,10 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 * Try to get rid of Mails entirely.
 * Modify the gym statues' text to mention the rivals as they defeat each gym just like in other games.
 * Remove the Match Call and port the VS Seeker from Pokefirered.
-  * MAYBE implement Ghoulslash's DexNav and replace the access to the Match Call with an access to the DexNav.
-  * [This commit](https://github.com/Artrios/pokeemerald/commit/d25bfdcbafd26e1dec3058445074264c3bdbdef4) can be used as a reference point.
+* Add new functions to the PokéNav
+  * An example could be Ghoulslash's DexNav.
+    * [This commit](https://github.com/Artrios/pokeemerald/commit/d25bfdcbafd26e1dec3058445074264c3bdbdef4) can be used as a reference point.
+  * Another example could be Psf's Quest Menu
 * Throw in a random chance to find strong Pokémon in the wild.
   * You'd basically have a certain chance to find a Pokémon that is X levels higher depending on your badge count.
 * Print the party's icon sprites in the Trainer Card, kinda like in FRLG.
