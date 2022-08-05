@@ -31,7 +31,12 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 
 ### Low Priority
 #### That means things that I should do someday.
-* Make the DexNav's Overworld Info Bar use a border frame like the textbox in battles, instead of being a boring black rectangle.
+* PokéNav related tweaks
+  * Make the DexNav's Overworld Info Bar use a border frame like the textbox in battles, instead of being a boring black rectangle.
+  * Swap the representative colors of the Match Call and the DexNav *(I prefer cyan for the Match Call and red for the DexNav)*.
+  * Switch the position of the DexNav's access. Instead of putting it below the Region Map, I rather have it below the Match Call.
+  * Now that I'm using the DexNav, I should probably do some tweaks to the events in Rustboro City and Route 104.
+    * Maybe add a couple of tall grass patches over there and have the rival teach the Player about the DexNav in a similar fashion to how ORAS handles it.
 * Merge ExpoSeed's fork of the Dynamic Overworld Palettes when the 2 glaring issues it has are fixed.
 * Re-implement TheXaman's Registered Items Menu
   * Remove all the logic for L and R buttons. The menu should be opened when you press the Select key if the Player has 2 or more items registered.
