@@ -502,4 +502,6 @@ void FreeRibbonsSummaryScreen2(void);
 
 bool32 PokenavCallback_Init_MainMenuCursorOnDexNav(void);
 
+void FreePokenavResources(void);
+
 #endif // GUARD_POKENAV_H

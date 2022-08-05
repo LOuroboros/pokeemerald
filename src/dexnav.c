@@ -1883,6 +1883,7 @@ static void CB1_DexNavSearchCallback(void)
 
 static void Task_DexNavExitAndSearch(u8 taskId)
 {
+    FreePokenavResources();
     DexNavGuiFreeResources();
     DestroyTask(taskId);
     SetMainCallback1(CB1_DexNavSearchCallback);
@@ -1894,6 +1895,7 @@ static void Task_DexNavFadeAndExit(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetMainCallback2(sDexNavUiDataPtr->savedCallback);
+        FreePokenavResources();
         DexNavGuiFreeResources();
         DestroyTask(taskId);
     }

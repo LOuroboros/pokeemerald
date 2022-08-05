@@ -42,7 +42,6 @@ static bool32 SetActivePokenavMenu(u32);
 static bool32 AnyMonHasRibbon(void);
 static void InitPokenavResources(struct PokenavResources *);
 static void InitKeys_(void);
-static void FreePokenavResources(void);
 static void VBlankCB_Pokenav(void);
 static void CB2_Pokenav(void);
 static void Task_RunLoopedTask_LinkMode(u8);
@@ -135,12 +134,12 @@ const struct PokenavCallbacks PokenavMenuCallbacks[17] =
     [POKENAV_DEXNAV - POKENAV_MENU_IDS_START] =
     {
         .init = PokeNavMenuDexNavCallback,
-        .callback = GetConditionGraphMenuCallback,
-        .open = OpenConditionGraphMenu,
-        .createLoopTask = CreateConditionGraphMenuLoopedTask,
-        .isLoopTaskActive = IsConditionGraphMenuLoopedTaskActive,
-        .free1 = FreeConditionGraphMenuSubstruct1,
-        .free2 = FreeConditionGraphMenuSubstruct2,
+        .callback = GetMatchCallCallback,
+        .open = OpenMatchCall,
+        .createLoopTask = CreateMatchCallLoopedTask,
+        .isLoopTaskActive = IsMatchCallLoopedTaskActive,
+        .free1 = FreeMatchCallSubstruct1,
+        .free2 = FreeMatchCallSubstruct2,
     },
     [POKENAV_CONDITION_GRAPH_PARTY - POKENAV_MENU_IDS_START] =
     {
@@ -382,7 +381,7 @@ static void CB2_InitPokenavForTutorial(void)
     }
 }
 
-static void FreePokenavResources(void)
+void FreePokenavResources(void)
 {
     int i;
 
