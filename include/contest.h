@@ -103,6 +103,7 @@ struct ContestPokemon
     u8 cute;
     u8 smart;
     u8 tough;
+    u8 sheen;
     u8 highestRank;
     bool8 gameCleared;
     u8 unused[10];

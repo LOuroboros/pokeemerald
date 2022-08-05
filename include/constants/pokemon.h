@@ -168,34 +168,39 @@
 #define MON_DATA_IS_EGG            45
 #define MON_DATA_ABILITY_NUM       46
 #define MON_DATA_TOUGH             47
-#define MON_DATA_OT_GENDER         48
-#define MON_DATA_COOL_RIBBON       49
-#define MON_DATA_BEAUTY_RIBBON     50
-#define MON_DATA_CUTE_RIBBON       51
-#define MON_DATA_SMART_RIBBON      52
-#define MON_DATA_TOUGH_RIBBON      53
-#define MON_DATA_STATUS            54
-#define MON_DATA_LEVEL             55
-#define MON_DATA_HP                56
-#define MON_DATA_MAX_HP            57
-#define MON_DATA_ATK               58
-#define MON_DATA_DEF               59
-#define MON_DATA_SPEED             60
-#define MON_DATA_SPATK             61
-#define MON_DATA_SPDEF             62
-#define MON_DATA_MAIL              63
-#define MON_DATA_SPECIES2          64
-#define MON_DATA_IVS               65
-#define MON_DATA_CHAMPION_RIBBON   66
-#define MON_DATA_WINNING_RIBBON    67
-#define MON_DATA_VICTORY_RIBBON    68
-#define MON_DATA_ARTIST_RIBBON     69
-#define MON_DATA_EFFORT_RIBBON     70
-#define MON_DATA_KNOWN_MOVES       71
-#define MON_DATA_RIBBON_COUNT      72
-#define MON_DATA_RIBBONS           73
-#define MON_DATA_DAY_MET           74
-#define MON_DATA_MONTH_MET         75
+#define MON_DATA_SHEEN             48
+#define MON_DATA_OT_GENDER         49
+#define MON_DATA_COOL_RIBBON       50
+#define MON_DATA_BEAUTY_RIBBON     51
+#define MON_DATA_CUTE_RIBBON       52
+#define MON_DATA_SMART_RIBBON      53
+#define MON_DATA_TOUGH_RIBBON      54
+#define MON_DATA_STATUS            55
+#define MON_DATA_LEVEL             56
+#define MON_DATA_HP                57
+#define MON_DATA_MAX_HP            58
+#define MON_DATA_ATK               59
+#define MON_DATA_DEF               60
+#define MON_DATA_SPEED             61
+#define MON_DATA_SPATK             62
+#define MON_DATA_SPDEF             63
+#define MON_DATA_MAIL              64
+#define MON_DATA_SPECIES2          65
+#define MON_DATA_IVS               66
+#define MON_DATA_CHAMPION_RIBBON   67
+#define MON_DATA_WINNING_RIBBON    68
+#define MON_DATA_VICTORY_RIBBON    69
+#define MON_DATA_ARTIST_RIBBON     70
+#define MON_DATA_EFFORT_RIBBON     71
+#define MON_DATA_COUNTRY_RIBBON    72
+#define MON_DATA_NATIONAL_RIBBON   73
+#define MON_DATA_EARTH_RIBBON      74
+#define MON_DATA_WORLD_RIBBON      75
+#define MON_DATA_KNOWN_MOVES       76
+#define MON_DATA_RIBBON_COUNT      77
+#define MON_DATA_RIBBONS           78
+#define MON_DATA_DAY_MET           79
+#define MON_DATA_MONTH_MET         80
 
 // Ribbon IDs used by TV and Pokénav
 #define CHAMPION_RIBBON       0
@@ -223,10 +228,14 @@
 #define VICTORY_RIBBON       22
 #define ARTIST_RIBBON        23
 #define EFFORT_RIBBON        24
+#define COUNTRY_RIBBON       25
+#define NATIONAL_RIBBON      26
+#define EARTH_RIBBON         27
+#define WORLD_RIBBON         28
 
-#define FIRST_GIFT_RIBBON 0
-#define LAST_GIFT_RIBBON  0
-#define NUM_GIFT_RIBBONS  0
+#define FIRST_GIFT_RIBBON COUNTRY_RIBBON
+#define LAST_GIFT_RIBBON  WORLD_RIBBON
+#define NUM_GIFT_RIBBONS  (1 + LAST_GIFT_RIBBON - FIRST_GIFT_RIBBON)
 
 // The above gift ribbons (Country - World) are
 // special distribution ribbons that correspond to

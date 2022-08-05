@@ -393,6 +393,7 @@ static void CursorCb_SendMon(u8);
 static void CursorCb_Enter(u8);
 static void CursorCb_NoEntry(u8);
 static void CursorCb_Store(u8);
+static void CursorCb_Register(u8);
 static void CursorCb_Trade1(u8);
 static void CursorCb_Trade2(u8);
 static void CursorCb_Toss(u8);
@@ -3644,11 +3645,39 @@ static void CursorCb_Store(u8 taskId)
     Task_ClosePartyMenu(taskId);
 }
 
+// Register mon for the Trading Board in Union Room
+static void CursorCb_Register(u8 taskId)
+{
+    u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
+    u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
+    bool8 isEventLegal = TRUE;
+
+    switch (CanRegisterMonForTradingBoard(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), species2, species, isEventLegal))
+    {
+    case CANT_REGISTER_MON:
+        StringExpandPlaceholders(gStringVar7, gText_PkmnCantBeTradedNow);
+        break;
+    case CANT_REGISTER_EGG:
+        StringExpandPlaceholders(gStringVar7, gText_EggCantBeTradedNow);
+        break;
+    default:
+        PlaySE(SE_SELECT);
+        Task_ClosePartyMenu(taskId);
+        return;
+    }
+    PlaySE(SE_FAILURE);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    StringAppend(gStringVar7, gText_PauseUntilPress);
+    DisplayPartyMenuMessage(gStringVar7, TRUE);
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+}
+
 static void CursorCb_Trade1(u8 taskId)
 {
     u16 species2 = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES2);
     u16 species = GetMonData(&gPlayerParty[gPartyMenu.slotId], MON_DATA_SPECIES);
-    u8 isEventLegal = TRUE;
+    bool8 isEventLegal = TRUE;
     u32 stringId = GetUnionRoomTradeMessageId(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), gRfuPartnerCompatibilityData, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, isEventLegal);
 
     if (stringId != UR_TRADE_MSG_NONE)

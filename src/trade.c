@@ -88,6 +88,7 @@ struct InGameTrade {
     /*0x2A*/ u8 mailNum;
     /*0x2B*/ u8 otName[11];
     /*0x36*/ u8 otGender;
+    /*0x37*/ u8 sheen;
     /*0x38*/ u16 requestedSpecies;
 };
 
@@ -1497,9 +1498,12 @@ static u8 CheckValidityOfTradeMons(u8 *aliveMons, u8 playerPartyCount, u8 player
     partnerMonIdx %= PARTY_SIZE;
     partnerSpecies = GetMonData(&gEnemyParty[partnerMonIdx], MON_DATA_SPECIES);
 
-    // Partner cant trade Egg
-    if (sTradeMenuData->isEgg[TRADE_PARTNER][partnerMonIdx])
-        return PARTNER_MON_INVALID;
+    // Partner cant trade Egg or non-Hoenn mon if player doesn't have National Dex
+    if (!IsNationalPokedexEnabled())
+    {
+        if (sTradeMenuData->isEgg[TRADE_PARTNER][partnerMonIdx] || !IsSpeciesInHoennDex(partnerSpecies))
+            return PARTNER_MON_INVALID;
+    }
 
     if (hasLiveMon)
         hasLiveMon = BOTH_MONS_VALID;
@@ -2404,7 +2408,6 @@ s32 GetGameProgressForLinkTrade(void)
     }
     return TRADE_BOTH_PLAYERS_READY;
 }
-
 
 int GetUnionRoomTradeMessageId(struct RfuGameCompatibilityData player, struct RfuGameCompatibilityData partner, u16 playerSpecies2, u16 partnerSpecies, u8 requestedType, u16 playerSpecies, bool8 isEventLegal)
 {
@@ -4472,6 +4475,7 @@ static void _CreateInGameTradePokemon(u8 whichPlayerMon, u8 whichInGameTrade)
     SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->conditions[0]);
     SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->conditions[3]);
     SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->conditions[4]);
+    SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
     SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
 
     isMail = FALSE;
@@ -4785,7 +4789,7 @@ static void CheckPartnersMonForRibbons(void)
 {
     u8 i;
     u8 numRibbons = 0;
-    for (i = 0; i < (MON_DATA_EFFORT_RIBBON - MON_DATA_CHAMPION_RIBBON); i ++)
+    for (i = 0; i < (MON_DATA_WORLD_RIBBON - MON_DATA_CHAMPION_RIBBON); i ++)
     {
         numRibbons += GetMonData(&gEnemyParty[gSelectedTradeMonPositions[TRADE_PARTNER] % PARTY_SIZE], MON_DATA_CHAMPION_RIBBON + i);
     }

@@ -726,6 +726,10 @@ static u32 CopyWallyMonData(u8 monId, u8 *dst)
         dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_TOUGH);
         size = 1;
         break;
+    case REQUEST_SHEEN_BATTLE:
+        dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_SHEEN);
+        size = 1;
+        break;
     case REQUEST_COOL_RIBBON_BATTLE:
         dst[0] = GetMonData(&gPlayerParty[monId], MON_DATA_COOL_RIBBON);
         size = 1;
@@ -972,6 +976,9 @@ static void SetWallyMonData(u8 monId)
         break;
     case REQUEST_TOUGH_BATTLE:
         SetMonData(&gPlayerParty[monId], MON_DATA_TOUGH, &gBattleResources->bufferA[gActiveBattler][3]);
+        break;
+    case REQUEST_SHEEN_BATTLE:
+        SetMonData(&gPlayerParty[monId], MON_DATA_SHEEN, &gBattleResources->bufferA[gActiveBattler][3]);
         break;
     case REQUEST_COOL_RIBBON_BATTLE:
         SetMonData(&gPlayerParty[monId], MON_DATA_COOL_RIBBON, &gBattleResources->bufferA[gActiveBattler][3]);

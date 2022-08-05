@@ -4394,6 +4394,9 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_TOUGH:
         retVal = boxMon->tough;
         break;
+    case MON_DATA_SHEEN:
+        retVal = boxMon->sheen;
+        break;
     case MON_DATA_POKERUS:
         retVal = boxMon->pokerus;
         break;
@@ -4466,6 +4469,18 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
     case MON_DATA_EFFORT_RIBBON:
         retVal = boxMon->effortRibbon;
         break;
+    case MON_DATA_COUNTRY_RIBBON:
+        retVal = boxMon->countryRibbon;
+        break;
+    case MON_DATA_NATIONAL_RIBBON:
+        retVal = boxMon->nationalRibbon;
+        break;
+    case MON_DATA_EARTH_RIBBON:
+        retVal = boxMon->earthRibbon;
+        break;
+    case MON_DATA_WORLD_RIBBON:
+        retVal = boxMon->worldRibbon;
+        break;
     case MON_DATA_SPECIES2:
         retVal = boxMon->species;
         if (boxMon->species && boxMon->isEgg)
@@ -4506,6 +4521,10 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal += boxMon->victoryRibbon;
             retVal += boxMon->artistRibbon;
             retVal += boxMon->effortRibbon;
+            retVal += boxMon->countryRibbon;
+            retVal += boxMon->nationalRibbon;
+            retVal += boxMon->earthRibbon;
+            retVal += boxMon->worldRibbon;
         }
         break;
     case MON_DATA_RIBBONS:
@@ -4521,7 +4540,11 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 | (boxMon->winningRibbon << 16)
                 | (boxMon->victoryRibbon << 17)
                 | (boxMon->artistRibbon << 18)
-                | (boxMon->effortRibbon << 19);
+                | (boxMon->effortRibbon << 19)
+                | (boxMon->countryRibbon << 23)
+                | (boxMon->nationalRibbon << 24)
+                | (boxMon->earthRibbon << 25)
+                | (boxMon->worldRibbon << 26);
         }
         break;
     default:
@@ -4691,6 +4714,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
     case MON_DATA_TOUGH:
         SET8(boxMon->tough);
         break;
+    case MON_DATA_SHEEN:
+        SET8(boxMon->sheen);
+        break;
     case MON_DATA_POKERUS:
         SET8(boxMon->pokerus);
         break;
@@ -4768,6 +4794,18 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         break;
     case MON_DATA_EFFORT_RIBBON:
         SET8(boxMon->effortRibbon);
+        break;
+    case MON_DATA_COUNTRY_RIBBON:
+        SET8(boxMon->countryRibbon);
+        break;
+    case MON_DATA_NATIONAL_RIBBON:
+        SET8(boxMon->nationalRibbon);
+        break;
+    case MON_DATA_EARTH_RIBBON:
+        SET8(boxMon->earthRibbon);
+        break;
+    case MON_DATA_WORLD_RIBBON:
+        SET8(boxMon->worldRibbon);
         break;
     case MON_DATA_IVS:
     {

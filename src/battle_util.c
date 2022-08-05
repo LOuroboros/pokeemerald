@@ -7615,7 +7615,6 @@ u8 IsMonDisobedient(void)
         return 0;
 
     obedienceLevel = 10;
-
     if (FlagGet(FLAG_BADGE02_GET))
         obedienceLevel = 30;
     if (FlagGet(FLAG_BADGE04_GET))

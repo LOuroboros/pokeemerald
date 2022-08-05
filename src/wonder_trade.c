@@ -35,6 +35,7 @@ struct InGameTrade {
     /*0x2A*/ u8 mailNum;
     /*0x2B*/ u8 otName[11];
     /*0x36*/ u8 otGender;
+    /*0x37*/ u8 sheen;
     /*0x38*/ u16 playerSpecies;
 };
 
@@ -103,7 +104,8 @@ void CreateWonderTradePokemon(void)
             0, 0, 0, 0, 0,
             personality,
             heldItem, -1,
-            _("ERROR"), FEMALE, playerSpecies
+            _("ERROR"), FEMALE, 0,
+            playerSpecies
         }
     };
     struct SiiRtcInfo rtc;
@@ -178,6 +180,7 @@ void CreateWonderTradePokemon(void)
     SetMonData(pokemon, MON_DATA_COOL, &inGameTrade->stats[0]);
     SetMonData(pokemon, MON_DATA_SMART, &inGameTrade->stats[3]);
     SetMonData(pokemon, MON_DATA_TOUGH, &inGameTrade->stats[4]);
+    SetMonData(pokemon, MON_DATA_SHEEN, &inGameTrade->sheen);
     SetMonData(pokemon, MON_DATA_MET_LOCATION, &metLocation);
     SetMonData(pokemon, MON_DATA_OT_GENDER, &genderOT);
 
