@@ -20,7 +20,7 @@ struct __attribute__((__packed__)) BoxPokemon
 
     // Word 6: Species + Experience points (used to derive level)
     u32 species:11;
-    u32 experience:23;
+    u32 experience:24;
 
     // Words 7 & 8: moves, language, gender, friendship, Pokérus, ppBonuses
     u32 move1:10;
