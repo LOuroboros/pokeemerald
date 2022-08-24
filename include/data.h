@@ -44,6 +44,11 @@ struct TrainerMon
     u16 cantEvolve:1;
 };
 
+#define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
+#define NO_ITEM_CUSTOM_MOVES(party) { .NoItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET
+#define ITEM_DEFAULT_MOVES(party) { .ItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_HELD_ITEM
+#define ITEM_CUSTOM_MOVES(party) { .ItemCustomMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM
+
 union TrainerMonPtr
 {
     const struct TrainerMon *TrainerMon;
@@ -52,7 +57,6 @@ union TrainerMonPtr
 
 struct Trainer
 {
-    u8 partyFlags; // Unread
     u8 trainerClass;
     u8 encounterMusic_gender; // last bit is gender
     u8 trainerPic;
@@ -62,7 +66,7 @@ struct Trainer
     u32 aiFlags;
     u8 partySize;
     u8 hasCustomTransition:1;
-    /*0x28*/ union TrainerMonPtr party;
+    union TrainerMonPtr party;
 };
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))

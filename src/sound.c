@@ -225,7 +225,8 @@ void FadeOutAndFadeInNewMapMusic(u16 songNum, u8 fadeOutSpeed, u8 fadeInSpeed)
     }
 }
 
-void FadeInNewMapMusic(u16 songNum, u8 speed)
+// Unused
+static void FadeInNewMapMusic(u16 songNum, u8 speed)
 {
     if (!FlagGet(FLAG_DONT_TRANSITION_MUSIC))
     {

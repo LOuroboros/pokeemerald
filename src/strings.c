@@ -1706,7 +1706,7 @@ const u8 gText_ExpShareOn[] = _("Turned on the Exp. Share.\pParty will now gain 
 const u8 gText_ExpShareOff[] = _("Turned off the Exp. Share.\pParty will no longer gain a portion\nof any Experience Points.{PAUSE_UNTIL_PRESS}");
 
 // 1HP overworld poison survival
-const u8 gText_PkmnFainted3[] = _("{STR_VAR_1} survived the poisoning.\nThe poison faded away!\p");
+const u8 gText_PkmnFainted_FldPsn[] = _("{STR_VAR_1} survived the poisoning.\nThe poison faded away!\p");
 
 // New Ryder's Bike event in Mauville City
 const u8 gText_MachBikeMode[] = _("MACH BIKE MODE");

@@ -3023,6 +3023,13 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
+// Naming Screen
+extern const u8 gText_MoveOkBack[];
+extern const u8 gText_YourName[];
+extern const u8 gText_BoxName[];
+extern const u8 gText_PkmnsNickname[];
+extern const u8 gText_TellHimTheWords[];
+
 // Custom text strings start here
 
 // Gen. 6 Exp. Share
@@ -3030,7 +3037,7 @@ extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
 // 1HP overworld poison survival
-extern const u8 gText_PkmnFainted3[];
+extern const u8 gText_PkmnFainted_FldPsn[];
 
 // New Ryder's Bike event in Mauville City
 extern const u8 gText_MachBikeMode[];
