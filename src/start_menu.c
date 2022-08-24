@@ -621,7 +621,7 @@ static bool8 HandleStartMenuInput(void)
         {
             RemoveExtraStartMenuWindows();
             HideStartMenu();
-            ScriptContext1_SetupScript(EventScript_ThereIsNoPokemon);
+            ScriptContext_SetupScript(EventScript_ThereIsNoPokemon);
             return TRUE;
         }
     #ifdef DEBUG_MODE_ENABLED
@@ -631,7 +631,7 @@ static bool8 HandleStartMenuInput(void)
             StopPlayerAvatar();
             ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
             RemoveStartMenuWindow();
-            ScriptContext2_Enable();
+            LockPlayerFieldControls();
             return FALSE;
         }
     #endif

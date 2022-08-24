@@ -102,6 +102,7 @@ enum {
 //    MON_DATA_SPDEF2,
     MON_DATA_DAY_MET,
     MON_DATA_MONTH_MET,
+    MON_DATA_YEAR_MET,
 };
 
 struct __attribute__((__packed__)) BoxPokemon

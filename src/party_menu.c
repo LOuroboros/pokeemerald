@@ -94,6 +94,9 @@ enum {
     MENU_TRADE1,
     MENU_TRADE2,
     MENU_TOSS,
+    MENU_MOVE_ITEM,
+    MENU_NICKNAME,
+    MENU_MOVES,
     MENU_FIELD_MOVES
 };
 
@@ -139,6 +142,7 @@ enum {
 enum {
     PARTY_BOX_LEFT_COLUMN,
     PARTY_BOX_RIGHT_COLUMN,
+    PARTY_BOX_EQUAL_COLUMN // Custom party menu
 };
 
 enum {

@@ -1333,7 +1333,7 @@ static void FieldMove_Headbutt(void)
 {
     PlaySE(SE_NOT_EFFECTIVE);
     FieldEffectActiveListRemove(FLDEFF_USE_HEADBUTT);
-    EnableBothScriptContexts();
+    ScriptContext_Enable();
 }
 
 bool8 FldEff_UseHeadbutt(void)
@@ -1366,5 +1366,5 @@ bool8 SetUpFieldMove_Headbutt(void)
 static void FieldCallback_Headbutt(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext1_SetupScript(EventScript_UseHeadbutt);
+    ScriptContext_SetupScript(EventScript_UseHeadbutt);
 }

@@ -1374,7 +1374,6 @@ static void Task_NewGameBirchSpeech_WaitForSpriteFadeInWelcome(u8 taskId)
             NewGameBirchSpeech_ClearWindow(0);
             StringExpandPlaceholders(gStringVar7, gText_Birch_Welcome);
             AddTextPrinterForMessage(TRUE);
->>>>>>> 21fe205f0f2a73fef7646a1efce6bed3e6b75d52
             gTasks[taskId].func = Task_NewGameBirchSpeech_ThisIsAPokemon;
         }
     }

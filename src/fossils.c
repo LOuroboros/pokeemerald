@@ -116,7 +116,7 @@ static void Task_CreateFossilsMultichoice(u8 taskId)
             ClearStdWindowAndFrameToTransparent(gTasks[taskId].tWindowId, TRUE);
             RemoveWindow(gTasks[taskId].tWindowId);
             DestroyTask(taskId);
-            EnableBothScriptContexts();
+            ScriptContext_Enable();
         }
         break;
     }
