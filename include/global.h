@@ -15,6 +15,7 @@
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
+#include "mgba_printf/mgba.h" // global access to mGBA's printf
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
