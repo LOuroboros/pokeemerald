@@ -39,4 +39,6 @@ porymap.project.cfg
 *.sym
 berry_fix/
 log.txt
+diff.diff
+docs/original_branch_log.txt
 *.js
