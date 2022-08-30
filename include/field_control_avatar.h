@@ -14,6 +14,7 @@ struct FieldInput
     bool8 pressedRButton:1;
     u8 dpadDirection;
     bool8 pressedLButton:1;
+    bool8 pressedDebugCombo:1;
 };
 
 void FieldClearPlayerInput(struct FieldInput *pStruct);

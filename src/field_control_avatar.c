@@ -35,6 +35,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "dexnav.h"
+#include "debug.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPreviousPlayerMetatileBehavior = 0;
@@ -88,6 +89,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->pressedRButton = FALSE;
     input->dpadDirection = 0;
     input->pressedLButton = FALSE;
+    input->pressedDebugCombo = FALSE;
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -112,6 +114,10 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedLButton = TRUE;
             if (newKeys & R_BUTTON)
                 input->pressedRButton = TRUE;
+        #ifdef DEBUG_MENU_ENABLED
+            if (heldKeys & R_BUTTON && newKeys & SELECT_BUTTON)
+                input->pressedDebugCombo = TRUE;
+        #endif
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -151,6 +157,15 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
+
+#ifdef DEBUG_MENU_ENABLED
+    if (input->pressedDebugCombo)
+    {
+        PlaySE(SE_WIN_OPEN);
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+#endif
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;

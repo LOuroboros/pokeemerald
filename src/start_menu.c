@@ -45,7 +45,6 @@
 #include "union_room.h"
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
-#include "debug.h"
 #include "rtc.h"
 #include "constants/songs.h"
 
@@ -59,7 +58,6 @@ enum
     MENU_ACTION_PLAYER,
     MENU_ACTION_SAVE,
     MENU_ACTION_OPTION,
-    MENU_ACTION_DEBUG,
     MENU_ACTION_EXIT,
     MENU_ACTION_RETIRE_SAFARI,
     MENU_ACTION_PLAYER_LINK,
@@ -102,7 +100,6 @@ static bool8 StartMenuPokeNavCallback(void);
 static bool8 StartMenuPlayerNameCallback(void);
 static bool8 StartMenuSaveCallback(void);
 static bool8 StartMenuOptionCallback(void);
-static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuExitCallback(void);
 static bool8 StartMenuSafariZoneRetireCallback(void);
 static bool8 StartMenuLinkModePlayerNameCallback(void);
@@ -165,9 +162,6 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PLAYER]          = {gText_MenuPlayer,  {.u8_void = StartMenuPlayerNameCallback}},
     [MENU_ACTION_SAVE]            = {gText_MenuSave,    {.u8_void = StartMenuSaveCallback}},
     [MENU_ACTION_OPTION]          = {gText_MenuOption,  {.u8_void = StartMenuOptionCallback}},
-#ifdef DEBUG_MODE_ENABLED
-    [MENU_ACTION_DEBUG]           = {gText_MenuDebug,  {.u8_void = StartMenuDebugCallback}},
-#endif
     [MENU_ACTION_EXIT]            = {gText_MenuExit,    {.u8_void = StartMenuExitCallback}},
     [MENU_ACTION_RETIRE_SAFARI]   = {gText_MenuRetire,  {.u8_void = StartMenuSafariZoneRetireCallback}},
     [MENU_ACTION_PLAYER_LINK]     = {gText_MenuPlayer,  {.u8_void = StartMenuLinkModePlayerNameCallback}},
@@ -320,12 +314,6 @@ static void BuildNormalStartMenu(void)
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
-
-#ifdef DEBUG_MODE_ENABLED
-    if (FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU) == TRUE)
-        AddStartMenuAction(MENU_ACTION_DEBUG);
-#endif
-
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
 
@@ -338,10 +326,6 @@ static void BuildSafariZoneStartMenu(void)
     if (FlagGet(FLAG_SYS_POKENAV_GET))
         AddStartMenuAction(MENU_ACTION_POKENAV);
     AddStartMenuAction(MENU_ACTION_PLAYER);
-#ifdef DEBUG_MODE_ENABLED
-    if (FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU))
-        AddStartMenuAction(MENU_ACTION_DEBUG);
-#endif
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);
 }
@@ -624,17 +608,6 @@ static bool8 HandleStartMenuInput(void)
             ScriptContext_SetupScript(EventScript_ThereIsNoPokemon);
             return TRUE;
         }
-    #ifdef DEBUG_MODE_ENABLED
-        else if (gMenuCallback == StartMenuDebugCallback)
-        {
-            PlayerFreeze();
-            StopPlayerAvatar();
-            ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
-            RemoveStartMenuWindow();
-            LockPlayerFieldControls();
-            return FALSE;
-        }
-    #endif
         else
         {
             if (gMenuCallback == StartMenuPokeNavCallback)
@@ -649,19 +622,6 @@ static bool8 HandleStartMenuInput(void)
         HideStartMenu();
         return TRUE;
     }
-
-#ifdef DEBUG_MODE_ENABLED
-    if (JOY_NEW(UNLOCK_DEBUG_MENU_COMBO) == UNLOCK_DEBUG_MENU_COMBO)
-    {
-        if (!FlagGet(FLAG_SYS_ENABLE_DEBUG_MENU))
-            FlagSet(FLAG_SYS_ENABLE_DEBUG_MENU);
-        else
-            FlagClear(FLAG_SYS_ENABLE_DEBUG_MENU);
-        ClearStdWindowAndFrame(GetStartMenuWindowId(), TRUE);
-        RemoveStartMenuWindow();
-        InitStartMenu();
-    }
-#endif
 
     return FALSE;
 }
@@ -772,16 +732,6 @@ static bool8 StartMenuOptionCallback(void)
     }
 
     return FALSE;
-}
-
-static bool8 StartMenuDebugCallback(void)
-{
-#ifdef DEBUG_MODE_ENABLED
-    PlaySE(SE_WIN_OPEN);
-    Debug_ShowMainMenu();
-
-    return TRUE;
-#endif
 }
 
 static bool8 StartMenuExitCallback(void)

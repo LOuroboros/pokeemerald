@@ -2,12 +2,9 @@
 #define GUARD_DEBUG_H
 
 // Un/comment to enable/disable the debug mode
-#define DEBUG_MODE_ENABLED
+#define DEBUG_MENU_ENABLED
 
-// Combo of keys that open the debug menu
-#define UNLOCK_DEBUG_MENU_COMBO (L_BUTTON | R_BUTTON)
-
-#ifdef DEBUG_MODE_ENABLED
+#ifdef DEBUG_MENU_ENABLED
 void Debug_ShowMainMenu(void);
 #endif
 

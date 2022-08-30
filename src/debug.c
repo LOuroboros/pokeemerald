@@ -50,7 +50,7 @@
 #include "debug.h"
 #include "rtc.h"
 
-#ifdef DEBUG_MODE_ENABLED
+#ifdef DEBUG_MENU_ENABLED
 
 // *******************************
 // Enums
