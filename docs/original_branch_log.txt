@@ -770,7 +770,7 @@ Author: LOuroboros <lunosouroboros@gmail.com>
 Date:   Mon Aug 30 15:21:30 2021 -0300
 
     Costume tweaks
-    -Made the playerCostume be defined by the value of `VAR_TEMP_1` at the moment when `SwapPlayersCostume` is called.
+    -Made the costumeId be defined by the value of `VAR_TEMP_1` at the moment when `SwapPlayersCostume` is called.
     -The optional battle facilities do weird things with the Player's OW sprites and some of the OBJ_GFX_ID vars, so I had to do some script changes to deal with it.
     -Tweaked PlayerHandleDrawTrainerPic so the right sprite appears at the Battle Tower.
 
