@@ -3969,7 +3969,7 @@ static void LoadDisplayMonGfx(u16 species, u32 pid)
     {
         pal1 = &gEgg1PaletteTable[sStorage->filler2[0]];
         pal2 = &gEgg2PaletteTable[sStorage->filler2[1]];
-        LoadSpecialPokePic(&gMonFrontPicTable[species], sStorage->tileBuffer, species, pid, TRUE);
+        LoadSpecialPokePic(sStorage->tileBuffer, species, pid, TRUE);
         LZ77UnCompWram(pal1->data, sStorage->displayMonPalBuffer);
         LZ77UnCompWram(pal2->data, gDecompressionBuffer);
         CpuCopy32(sStorage->tileBuffer, sStorage->displayMonTilePtr, MON_PIC_SIZE);

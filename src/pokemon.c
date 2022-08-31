@@ -1882,6 +1882,9 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/teachable_learnsets.h"
 #if P_NEW_POKEMON == TRUE
 #include "data/pokemon/evolution.h"
+#else
+#include "data/pokemon/evolution_old.h"
+#endif
 #include "data/pokemon/level_up_learnset_pointers.h"
 #include "data/pokemon/teachable_learnset_pointers.h"
 #include "data/pokemon/form_species_tables.h"
