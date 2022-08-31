@@ -609,27 +609,33 @@
 #define STRINGID_NEUTRALIZINGGASOVER                  607
 #define STRINGID_TARGETTOOHEAVY                       608
 #define STRINGID_PKMNTOOKTARGETHIGH                   609
-#define STRINGID_TRAINER1PKMNCOMEBACK                 610
-#define STRINGID_PLAYERWHITEOUT3                      611
-#define STRINGID_PICKUP                               612
-#define STRINGID_PICKUPSOLO                           613
-#define STRINGID_PKMNINSNAPTRAP                       614
-#define STRINGID_METEORBEAMCHARGING                   615
-#define STRINGID_HEATUPBEAK                           616
-#define STRINGID_COURTCHANGE                          617
-#define STRINGID_PLAYERLOSTTOENEMYTRAINER             618
-#define STRINGID_PLAYERPAIDPRIZEMONEY                 619
-#define STRINGID_ZPOWERSURROUNDS                      620
-#define STRINGID_ZMOVEUNLEASHED                       621
-#define STRINGID_ZMOVERESETSSTATS                     622
-#define STRINGID_ZMOVEALLSTATSUP                      623
-#define STRINGID_ZMOVEZBOOSTCRIT                      624
-#define STRINGID_ZMOVERESTOREHP                       625
-#define STRINGID_ZMOVESTATUP                          626
-#define STRINGID_ZMOVEHPTRAP                          627
-#define STRINGID_TERRAINREMOVED                       628
+#define STRINGID_PKMNINSNAPTRAP                       610
+#define STRINGID_METEORBEAMCHARGING                   611
+#define STRINGID_HEATUPBEAK                           612
+#define STRINGID_COURTCHANGE                          613
+#define STRINGID_PLAYERLOSTTOENEMYTRAINER             614
+#define STRINGID_PLAYERPAIDPRIZEMONEY                 615
+#define STRINGID_ZPOWERSURROUNDS                      616
+#define STRINGID_ZMOVEUNLEASHED                       617
+#define STRINGID_ZMOVERESETSSTATS                     618
+#define STRINGID_ZMOVEALLSTATSUP                      619
+#define STRINGID_ZMOVEZBOOSTCRIT                      620
+#define STRINGID_ZMOVERESTOREHP                       621
+#define STRINGID_ZMOVESTATUP                          622
+#define STRINGID_ZMOVEHPTRAP                          623
+#define STRINGID_TERRAINREMOVED                       624
+#define STRINGID_ATTACKEREXPELLEDTHEPOISON            625
+#define STRINGID_ATTACKERSHOOKITSELFAWAKE             626
+#define STRINGID_ATTACKERBROKETHROUGHPARALYSIS        627
+#define STRINGID_ATTACKERHEALEDITSBURN                628
+#define STRINGID_ATTACKERMELTEDTHEICE                 629
+#define STRINGID_TARGETTOUGHEDITOUT                   630
+#define STRINGID_TRAINER1PKMNCOMEBACK                 631
+#define STRINGID_PLAYERWHITEOUT3                      632
+#define STRINGID_PICKUP                               633
+#define STRINGID_PICKUPSOLO                           634
 
-#define BATTLESTRINGS_COUNT                           629
+#define BATTLESTRINGS_COUNT                           635
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
