@@ -757,10 +757,10 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
     u16 *quantities = gSaveBlock2Ptr->frontier.pyramidBag.quantity[gSaveBlock2Ptr->frontier.lvlMode];
 
     u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-    u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+    u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
 
     memcpy(newItems, items, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-    memcpy(newQuantities, quantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+    memcpy(newQuantities, quantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
 
     for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
     {
@@ -809,7 +809,7 @@ bool8 AddPyramidBagItem(u16 itemId, u16 count)
     if (count == 0)
     {
         memcpy(items, newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-        memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+        memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
         Free(newItems);
         Free(newQuantities);
         return TRUE;
@@ -840,10 +840,10 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
     else
     {
         u16 *newItems = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-        u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+        u16 *newQuantities = Alloc(PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
 
         memcpy(newItems, items, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-        memcpy(newQuantities, quantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+        memcpy(newQuantities, quantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
 
         for (i = 0; i < PYRAMID_BAG_ITEMS_COUNT; i++)
         {
@@ -871,7 +871,7 @@ bool8 RemovePyramidBagItem(u16 itemId, u16 count)
         if (count == 0)
         {
             memcpy(items, newItems, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
-            memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u8));
+            memcpy(quantities, newQuantities, PYRAMID_BAG_ITEMS_COUNT * sizeof(u16));
             Free(newItems);
             Free(newQuantities);
             return TRUE;
