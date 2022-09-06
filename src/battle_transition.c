@@ -2470,8 +2470,9 @@ static void HBlankCB_Mugshots(void)
 static void Mugshots_CreateTrainerPics(struct Task *task)
 {
     struct Sprite *opponentSprite, *playerSprite;
-
     s16 mugshotId = task->tMugshotId;
+
+    gReservedSpritePaletteCount = 10;
     task->tOpponentSpriteId = CreateTrainerSprite(gTrainers[gTrainerBattleOpponent_A].trainerPic,
                                                      sMugshotsOpponentCoords[gTrainers[gTrainerBattleOpponent_A].trainerPic][0] - 32,
                                                      sMugshotsOpponentCoords[gTrainers[gTrainerBattleOpponent_A].trainerPic][1] + 42,
@@ -2480,6 +2481,7 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
                                                      DISPLAY_WIDTH + 32,
                                                      106,
                                                      0, gDecompressionBuffer);
+    gReservedSpritePaletteCount = 12;
 
     opponentSprite = &gSprites[task->tOpponentSpriteId];
     playerSprite = &gSprites[task->tPlayerSpriteId];
