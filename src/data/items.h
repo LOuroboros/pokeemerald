@@ -1107,9 +1107,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sLonelyMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_LONELY,
     },
 
     [ITEM_ADAMANT_MINT] =
@@ -1119,9 +1120,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sAdamantMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_ADAMANT,
     },
 
     [ITEM_NAUGHTY_MINT] =
@@ -1131,9 +1133,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sNaughtyMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_NAUGHTY,
     },
 
     [ITEM_BRAVE_MINT] =
@@ -1143,9 +1146,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sBraveMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_BRAVE,
     },
 
     [ITEM_BOLD_MINT] =
@@ -1155,9 +1159,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sBoldMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_BOLD,
     },
 
     [ITEM_IMPISH_MINT] =
@@ -1167,9 +1172,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sImpishMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_IMPISH,
     },
 
     [ITEM_LAX_MINT] =
@@ -1179,9 +1185,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sLaxMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_LAX,
     },
 
     [ITEM_RELAXED_MINT] =
@@ -1191,9 +1198,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sRelaxedMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_RELAXED,
     },
 
     [ITEM_MODEST_MINT] =
@@ -1203,9 +1211,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sModestMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_MODEST,
     },
 
     [ITEM_MILD_MINT] =
@@ -1215,9 +1224,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sMildMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_MILD,
     },
 
     [ITEM_RASH_MINT] =
@@ -1227,9 +1237,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sRashMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_BASHFUL,
     },
 
     [ITEM_QUIET_MINT] =
@@ -1239,9 +1250,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sQuietMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_QUIET,
     },
 
     [ITEM_CALM_MINT] =
@@ -1251,9 +1263,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sCalmMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_CALM,
     },
 
     [ITEM_GENTLE_MINT] =
@@ -1263,9 +1276,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sGentleMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_GENTLE,
     },
 
     [ITEM_CAREFUL_MINT] =
@@ -1275,9 +1289,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sCarefulMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_CAREFUL,
     },
 
     [ITEM_SASSY_MINT] =
@@ -1287,9 +1302,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sSassyMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_SASSY,
     },
 
     [ITEM_TIMID_MINT] =
@@ -1299,9 +1315,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sTimidMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_TIMID,
     },
 
     [ITEM_HASTY_MINT] =
@@ -1311,9 +1328,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sHastyMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_HASTY,
     },
 
     [ITEM_JOLLY_MINT] =
@@ -1323,9 +1341,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sJollyMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_JOLLY,
     },
 
     [ITEM_NAIVE_MINT] =
@@ -1335,9 +1354,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sNaiveMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_NAIVE,
     },
 
     [ITEM_SERIOUS_MINT] =
@@ -1347,9 +1367,10 @@ const struct Item gItems[] =
         .price = 20,
         .description = sSeriousMintDesc,
         .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // Todo
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Mints,
         .flingPower = 10,
+        .secondaryId = NATURE_SERIOUS,
     },
 
 // Candy
