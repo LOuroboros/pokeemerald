@@ -539,5 +539,6 @@ u16 IsOpponentJohtoSpecies(void);
 u16 IsOpponentHoennSpecies(void);
 u16 IsOpponentSinnohSpecies(void);
 void SetCustomWildMon(u16 species, u8 level, u16 item, u8 nature, u8 abilityNum, u8* evs, u8* ivs, u16* moves, bool8 isShiny);
+bool8 CanMonLearnMove(struct Pokemon *mon, u16 move);
 
 #endif // GUARD_POKEMON_H

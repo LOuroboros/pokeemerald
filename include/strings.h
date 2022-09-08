@@ -3159,4 +3159,7 @@ extern const u8 gText_Moves_Menu[];
 extern const u8 gText_MenuDexNav[];
 extern const u8 gText_DexNavDescription[];
 
+// Field Moves party action option
+extern const u8 gText_LearnableFieldMoves_Menu[];
+
 #endif // GUARD_STRINGS_H

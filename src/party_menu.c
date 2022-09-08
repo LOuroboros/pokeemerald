@@ -97,6 +97,7 @@ enum {
     MENU_MOVE_ITEM,
     MENU_NICKNAME,
     MENU_MOVES,
+    MENU_LEARNABLE_FIELD_MOVES,
     MENU_FIELD_MOVES
 };
 
@@ -195,7 +196,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[9];
+    u8 actions[15];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -485,6 +486,7 @@ void TryItemHoldFormChange(struct Pokemon *mon);
 
 // New code
 static void CursorCb_Moves(u8);
+static void CursorCb_LearnableFieldMoves(u8);
 
 // static const data
 #include "data/party_menu.h"
@@ -2711,16 +2713,11 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
         AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
 
     // Add field moves to action list
-    for (i = 0; i < MAX_MON_MOVES; i++)
+    for (j = 0; j < NELEMS(sFieldMoves); j++)
     {
-        for (j = 0; sFieldMoves[j] != FIELD_MOVES_COUNT; j++)
-        {
-            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == sFieldMoves[j])
-            {
-                AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
-                break;
-            }
-        }
+        if (CanMonLearnMove(&mons[slotId], sFieldMoves[j]))
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_LEARNABLE_FIELD_MOVES);
+        break;
     }
 
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CANCEL1);
@@ -7046,4 +7043,48 @@ static void CursorCb_Moves(u8 taskId)
     TeachMoveRelearnerMove();
     sPartyMenuInternal->exitCallback = TeachMoveRelearnerMove;
     Task_ClosePartyMenu(taskId);
+}
+
+static void CursorCb_LearnableFieldMoves(u8 taskId)
+{
+    struct WindowTemplate window;
+    u8 cursorDimension;
+    u8 letterSpacing;
+    int i, j;
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    sPartyMenuInternal->numActions = 0;
+    for (i = 0; i < NELEMS(sFieldMoves); i++)
+    {
+        if (i <= FIELD_MOVE_WATERFALL && CanMonLearnMove(&gPlayerParty[gPartyMenu.slotId], sFieldMoves[i]))
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, i + MENU_FIELD_MOVES);
+        else if (i > FIELD_MOVE_WATERFALL && MonKnowsMove(&gPlayerParty[gPartyMenu.slotId], sFieldMoves[i]))
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, i + MENU_FIELD_MOVES);
+    }
+    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_CANCEL2);
+    // Start of DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    SetWindowTemplateFields(&window, 2, 19, 19 - (sPartyMenuInternal->numActions * 2), 10, sPartyMenuInternal->numActions * 2, 14, 0x2E9);
+    sPartyMenuInternal->windowId[0] = AddWindow(&window);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
+    cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
+    letterSpacing = GetFontAttribute(FONT_NORMAL, FONTATTR_LETTER_SPACING);
+
+    for (i = 0; i < sPartyMenuInternal->numActions; i++)
+    {
+        u8 fontColorsId = (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0],
+                                     FONT_NORMAL,
+                                     cursorDimension,
+                                     (i * 16) + 1,
+                                     letterSpacing,
+                                     0,
+                                     sFontColorTable[fontColorsId],
+                                     0,
+                                     sCursorOptions[sPartyMenuInternal->actions[i]].text);
+    }
+    InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    // End of DisplaySelectionWindow(SELECTWINDOW_ACTIONS);
+    DisplayPartyMenuStdMessage(PARTY_MSG_DO_WHAT_WITH_MON);
 }

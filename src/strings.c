@@ -1827,3 +1827,6 @@ const u8 gText_Moves_Menu[] = _("Change Moves");
 // Dexnav
 const u8 gText_MenuDexNav[] = _("DEXNAV");
 const u8 gText_DexNavDescription[] = _("Search for wild Pokémon.");
+
+// Field Moves party action option
+const u8 gText_LearnableFieldMoves_Menu[] = _("Field Moves");

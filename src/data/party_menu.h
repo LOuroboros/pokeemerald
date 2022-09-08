@@ -829,6 +829,7 @@ struct
     [MENU_MOVE_ITEM] = {gMenuText_Move, CursorCb_MoveItem},
     [MENU_NICKNAME] = {gText_Nickname, CursorCb_Nickname},
     [MENU_MOVES] = {gText_Moves_Menu, CursorCb_Moves},
+    [MENU_LEARNABLE_FIELD_MOVES] = {gText_LearnableFieldMoves_Menu, CursorCb_LearnableFieldMoves},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
@@ -898,9 +899,6 @@ static const u16 sFieldMoves[FIELD_MOVES_COUNT + 1] =
     [FIELD_MOVE_SOFT_BOILED]  = MOVE_SOFT_BOILED,
     [FIELD_MOVE_SWEET_SCENT]  = MOVE_SWEET_SCENT,
     [FIELD_MOVE_HEADBUTT]     = MOVE_HEADBUTT,
-    // NOTE: This value is used as the terminal value for the table. There's no reason to do this, as the size of the table is known.
-    //       Whichever move shares this value (MOVE_SWORDS_DANCE by default) if present will be treated as the end of the array rather than a field move.
-    [FIELD_MOVES_COUNT]       = FIELD_MOVES_COUNT
 };
 
 struct

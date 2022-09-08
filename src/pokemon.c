@@ -53,6 +53,8 @@
 #include "constants/weather.h"
 #include "constants/battle_config.h"
 #include "dexnav.h"
+#include "daycare.h"
+#include "constants/daycare.h"
 
 struct SpeciesItem
 {
@@ -8291,4 +8293,30 @@ void TrySpecialOverworldEvo(void)
 bool32 ShouldShowFemaleDifferences(u16 species, u32 personality)
 {
     return (gBaseStats[species].flags & FLAG_GENDER_DIFFERENCE) && GetGenderFromSpeciesAndPersonality(species, personality) == MON_FEMALE;
+}
+
+bool8 CanMonLearnMove(struct Pokemon *mon, u16 move)
+{
+    u32 i;
+    u32 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+    u16 eggMoves[EGG_MOVES_ARRAY_COUNT];
+    u32 numEggMoves = GetEggMoves(mon, eggMoves);
+
+    // Check level up learnset
+    for (i = 0; gLevelUpLearnsets[species][i].move != LEVEL_UP_END; i++)
+    {
+        if (gLevelUpLearnsets[species][i].move == move)
+            return TRUE;
+    }
+    // Check teachable learnset (TMs, HMs, Tutors)
+    if (CanLearnTeachableMove(species, move))
+        return TRUE;
+    // Check egg move learnset
+    for (i = 0; i < numEggMoves; i++)
+    {
+        if (eggMoves[i] == move)
+            return TRUE;
+    }
+
+    return FALSE;
 }
