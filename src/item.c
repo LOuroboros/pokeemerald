@@ -294,13 +294,13 @@ bool8 AddBagItem(u16 itemId, u16 count)
         switch(pocket)
         {
             case BERRIES_POCKET:
-                slotCapacity = 999;
+                slotCapacity = MAX_BERRY_CAPACITY;
             break;
             case TMHM_POCKET:
                 slotCapacity = 1;
             break;
             default:
-                slotCapacity = 99;
+                slotCapacity = MAX_BAG_ITEM_CAPACITY;
             break;
         }
 
