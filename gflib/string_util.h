@@ -7,6 +7,10 @@ extern u8 gStringVar3[0x100];
 extern u8 gStringVar4[0x100];
 extern u8 gStringVar5[0x100];
 extern u8 gStringVar6[0x100];
+extern u8 gStringVar7[0x100];
+extern u8 gStringVar8[0x100];
+extern u8 gStringVar9[0x100];
+extern u8 gStringVar10[0x100];
 extern u8 gStringVar11[0x3E8];
 
 enum StringConvertMode
