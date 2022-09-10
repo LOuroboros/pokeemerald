@@ -125,7 +125,9 @@ DebugScript_CheckSavefileSize::
 	end
 
 DebugScript_Text_CheckSavefileSize:
-	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_4} bytes.\nSaveBlock2 size: {STR_VAR_2}/{STR_VAR_5} bytes.\p{PKMN}Storage size: {STR_VAR_3}/{STR_VAR_6} bytes.$"
+	.string "SaveBlock1 size: {STR_VAR_1}/{STR_VAR_4} bytes.\n"
+	.string "SaveBlock2 size: {STR_VAR_2}/{STR_VAR_5} bytes.\p"
+	.string "{PKMN}Storage size: {STR_VAR_3}/{STR_VAR_6} bytes.$"
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
