@@ -399,8 +399,8 @@ static void CreatePCMultichoice(void)
     else
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SomeonesPC, y, 1, TEXT_SKIP_DRAW, NULL);
 
-    StringExpandPlaceholders(gStringVar7, gText_PlayersPC);
-    PrintPlayerNameOnWindow(windowId, gStringVar7, y, 17);
+    StringExpandPlaceholders(gStringVar11, gText_PlayersPC);
+    PrintPlayerNameOnWindow(windowId, gStringVar11, y, 17);
     InitMenuInUpperLeftCornerNormal(windowId, numChoices, 0);
     CopyWindowToVram(windowId, COPYWIN_FULL);
     InitMultichoiceCheckWrap(FALSE, numChoices, windowId, MULTI_PC);

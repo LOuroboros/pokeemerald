@@ -359,11 +359,11 @@ const u8 *GetMatchCallMessageText(int index, bool8 *newRematchRequest)
         return gText_CallCantBeMadeHere;
 
     if (!state->matchCallEntries[index].isSpecialTrainer)
-        *newRematchRequest = SelectMatchCallMessage(GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId), gStringVar7);
+        *newRematchRequest = SelectMatchCallMessage(GetTrainerIdxByRematchIdx(state->matchCallEntries[index].headerId), gStringVar11);
     else
-        MatchCall_GetMessage(state->matchCallEntries[index].headerId, gStringVar7);
+        MatchCall_GetMessage(state->matchCallEntries[index].headerId, gStringVar11);
 
-    return gStringVar7;
+    return gStringVar11;
 }
 
 const u8 *GetMatchCallFlavorText(int index, int checkPageEntry)

@@ -277,10 +277,10 @@ static void PrintLinkBattleWinsLossesDraws(struct LinkBattleRecord *records)
     ConvertIntToDecimalStringN(gStringVar1, GetGameStat(GAME_STAT_LINK_BATTLE_WINS), STR_CONV_MODE_LEFT_ALIGN, 4);
     ConvertIntToDecimalStringN(gStringVar2, GetGameStat(GAME_STAT_LINK_BATTLE_LOSSES), STR_CONV_MODE_LEFT_ALIGN, 4);
     ConvertIntToDecimalStringN(gStringVar3, GetGameStat(GAME_STAT_LINK_BATTLE_DRAWS), STR_CONV_MODE_LEFT_ALIGN, 4);
-    StringExpandPlaceholders(gStringVar7, gText_TotalRecordWLD);
+    StringExpandPlaceholders(gStringVar11, gText_TotalRecordWLD);
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar7, 0xD0);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar7, x, 0x11, 0, NULL);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar11, 0xD0);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar11, x, 0x11, 0, NULL);
 }
 
 static void PrintLinkBattleRecord(struct LinkBattleRecord *record, u8 y, s32 language)
@@ -319,14 +319,14 @@ void ShowLinkBattleRecords(void)
     gRecordsWindowId = AddWindow(&sLinkBattleRecordsWindow);
     DrawStdWindowFrame(gRecordsWindowId, FALSE);
     FillWindowPixelBuffer(gRecordsWindowId, PIXEL_FILL(1));
-    StringExpandPlaceholders(gStringVar7, gText_PlayersBattleResults);
+    StringExpandPlaceholders(gStringVar11, gText_PlayersBattleResults);
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar7, 208);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar7, x, 1, 0, NULL);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar11, 208);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar11, x, 1, 0, NULL);
     PrintLinkBattleWinsLossesDraws(gSaveBlock1Ptr->linkBattleRecords.entries);
 
-    StringExpandPlaceholders(gStringVar7, gText_WinLoseDraw);
-    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar7, 0, 41, 0, NULL);
+    StringExpandPlaceholders(gStringVar11, gText_WinLoseDraw);
+    AddTextPrinterParameterized(gRecordsWindowId, FONT_NORMAL, gStringVar11, 0, 41, 0, NULL);
 
     for (i = 0; i < LINK_B_RECORDS_COUNT; i++)
     {

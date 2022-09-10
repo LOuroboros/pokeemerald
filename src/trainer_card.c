@@ -1040,18 +1040,18 @@ static void PrintMoneyOnCard(void)
         AddTextPrinterParameterized3(1, FONT_NORMAL, 16, 57, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardMoney);
 
     ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.money, STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar7, gText_PokedollarVar1);
+    StringExpandPlaceholders(gStringVar11, gText_PokedollarVar1);
     if (!sData->isHoenn)
     {
-        xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, 144);
+        xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, 144);
         top = 56;
     }
     else
     {
-        xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, 128);
+        xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, 128);
         top = 57;
     }
-    AddTextPrinterParameterized3(1, FONT_NORMAL, xOffset, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar7);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, xOffset, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar11);
 }
 
 static u16 GetCaughtMonsCount(void)
@@ -1072,18 +1072,18 @@ static void PrintPokedexOnCard(void)
             AddTextPrinterParameterized3(1, FONT_NORMAL, 20, 72, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
         else
             AddTextPrinterParameterized3(1, FONT_NORMAL, 16, 73, sTrainerCardTextColors, TEXT_SKIP_DRAW, gText_TrainerCardPokedex);
-        StringCopy(ConvertIntToDecimalStringN(gStringVar7, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString6);
+        StringCopy(ConvertIntToDecimalStringN(gStringVar11, sData->trainerCard.caughtMonsCount, STR_CONV_MODE_LEFT_ALIGN, 3), gText_EmptyString6);
         if (!sData->isHoenn)
         {
-            xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, 144);
+            xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, 144);
             top = 72;
         }
         else
         {
-            xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, 128);
+            xOffset = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, 128);
             top = 73;
         }
-        AddTextPrinterParameterized3(1, FONT_NORMAL, xOffset, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar7);
+        AddTextPrinterParameterized3(1, FONT_NORMAL, xOffset, top, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar11);
     }
 }
 
@@ -1132,13 +1132,13 @@ static void PrintTimeOnCard(void)
     x -= totalWidth;
 
     FillWindowPixelRect(1, PIXEL_FILL(0), x, y, totalWidth, 15);
-    ConvertIntToDecimalStringN(gStringVar7, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar7);
+    ConvertIntToDecimalStringN(gStringVar11, hours, STR_CONV_MODE_RIGHT_ALIGN, 3);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar11);
     x += 18;
     AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, sTimeColonTextColors[sData->timeColonInvisible], TEXT_SKIP_DRAW, gText_Colon2);
     x += width;
-    ConvertIntToDecimalStringN(gStringVar7, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
-    AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar7);
+    ConvertIntToDecimalStringN(gStringVar11, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+    AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, sTrainerCardTextColors, TEXT_SKIP_DRAW, gStringVar11);
 }
 
 static void PrintProfilePhraseOnCard(void)
@@ -1225,8 +1225,8 @@ static void PrintLinkBattleResultsOnCard(void)
     {
         StringCopy(gStringVar1, sData->textLinkBattleWins);
         StringCopy(gStringVar2, sData->textLinkBattleLosses);
-        StringExpandPlaceholders(gStringVar7, gText_WinsLosses);
-        PrintStatOnBackOfCard(1, sData->textLinkBattleType, gStringVar7, sTrainerCardTextColors);
+        StringExpandPlaceholders(gStringVar11, gText_WinsLosses);
+        PrintStatOnBackOfCard(1, sData->textLinkBattleType, gStringVar11, sTrainerCardTextColors);
     }
 }
 

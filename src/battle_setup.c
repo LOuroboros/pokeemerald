@@ -1557,20 +1557,20 @@ const u8 *GetTrainerALoseText(void)
     else
         string = sTrainerADefeatSpeech;
 
-    StringExpandPlaceholders(gStringVar7, ReturnEmptyStringIfNull(string));
-    return gStringVar7;
+    StringExpandPlaceholders(gStringVar11, ReturnEmptyStringIfNull(string));
+    return gStringVar11;
 }
 
 const u8 *GetTrainerBLoseText(void)
 {
-    StringExpandPlaceholders(gStringVar7, ReturnEmptyStringIfNull(sTrainerBDefeatSpeech));
-    return gStringVar7;
+    StringExpandPlaceholders(gStringVar11, ReturnEmptyStringIfNull(sTrainerBDefeatSpeech));
+    return gStringVar11;
 }
 
 const u8 *GetTrainerWonSpeech(void)
 {
-    StringExpandPlaceholders(gStringVar7, ReturnEmptyStringIfNull(sTrainerVictorySpeech));
-    return gStringVar7;
+    StringExpandPlaceholders(gStringVar11, ReturnEmptyStringIfNull(sTrainerVictorySpeech));
+    return gStringVar11;
 }
 
 static const u8 *GetTrainerCantBattleSpeech(void)

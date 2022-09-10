@@ -574,9 +574,9 @@ void PrintOnTrainerHillRecordsWindow(void)
         ConvertIntToDecimalStringN(gStringVar2, secondsWhole, STR_CONV_MODE_RIGHT_ALIGN, 2);
         secondsFraction = (total * 168) / 100;
         ConvertIntToDecimalStringN(gStringVar3, secondsFraction, STR_CONV_MODE_LEADING_ZEROS, 2);
-        StringExpandPlaceholders(StringCopy(gStringVar7, gText_TimeCleared), gText_XMinYDotZSec);
-        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, 0xD0);
-        AddTextPrinterParameterized3(0, FONT_NORMAL, x, y, sRecordWinColors, TEXT_SKIP_DRAW, gStringVar7);
+        StringExpandPlaceholders(StringCopy(gStringVar11, gText_TimeCleared), gText_XMinYDotZSec);
+        x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, 0xD0);
+        AddTextPrinterParameterized3(0, FONT_NORMAL, x, y, sRecordWinColors, TEXT_SKIP_DRAW, gStringVar11);
         y += 17;
     }
 

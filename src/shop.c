@@ -576,11 +576,11 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
         }
 
         if (ItemId_GetPocket(itemId) == POCKET_TM_HM && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
-            StringCopy(gStringVar7, gText_SoldOut2);
+            StringCopy(gStringVar11, gText_SoldOut2);
         else
-            StringExpandPlaceholders(gStringVar7, gText_PokedollarVar1);
-        x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar7, 0x78);
-        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[1], TEXT_SKIP_DRAW, gStringVar7);
+            StringExpandPlaceholders(gStringVar11, gText_PokedollarVar1);
+        x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar11, 0x78);
+        AddTextPrinterParameterized4(windowId, FONT_NARROW, x, y, 0, 0, sShopBuyMenuTextColors[1], TEXT_SKIP_DRAW, gStringVar11);
     }
 }
 
@@ -958,10 +958,10 @@ static void Task_BuyMenu(u8 taskId)
                     if (ItemId_GetPocket(itemId) == POCKET_TM_HM)
                     {
                         ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
-                        StringExpandPlaceholders(gStringVar7, gText_YouWantedVar1ThatllBeVar2);
+                        StringExpandPlaceholders(gStringVar11, gText_YouWantedVar1ThatllBeVar2);
                         tItemCount = 1;
                         sShopData->totalCost = (ItemId_GetPrice(tItemId) >> IsPokeNewsActive(POKENEWS_SLATEPORT)) * tItemCount;
-                        BuyMenuDisplayMessage(taskId, gStringVar7, BuyMenuConfirmPurchase);
+                        BuyMenuDisplayMessage(taskId, gStringVar11, BuyMenuConfirmPurchase);
                     }
                     else
                     {
@@ -974,11 +974,11 @@ static void Task_BuyMenu(u8 taskId)
                     ConvertIntToDecimalStringN(gStringVar2, sShopData->totalCost, STR_CONV_MODE_LEFT_ALIGN, 6);
 
                     if (sMartInfo.martType == MART_TYPE_DECOR)
-                        StringExpandPlaceholders(gStringVar7, gText_Var1IsItThatllBeVar2);
+                        StringExpandPlaceholders(gStringVar11, gText_Var1IsItThatllBeVar2);
                     else // MART_TYPE_DECOR2
-                        StringExpandPlaceholders(gStringVar7, gText_YouWantedVar1ThatllBeVar2);
+                        StringExpandPlaceholders(gStringVar11, gText_YouWantedVar1ThatllBeVar2);
 
-                    BuyMenuDisplayMessage(taskId, gStringVar7, BuyMenuConfirmPurchase);
+                    BuyMenuDisplayMessage(taskId, gStringVar11, BuyMenuConfirmPurchase);
                 }
             }
             break;
@@ -995,8 +995,8 @@ static void Task_BuyHowManyDialogueInit(u8 taskId)
 
     DrawStdFrameWithCustomTileAndPalette(3, FALSE, 1, 13);
     ConvertIntToDecimalStringN(gStringVar1, quantityInBag, STR_CONV_MODE_RIGHT_ALIGN, MAX_ITEM_DIGITS + 1);
-    StringExpandPlaceholders(gStringVar7, gText_InBagVar1);
-    BuyMenuPrint(3, gStringVar7, 0, 1, 0, 0);
+    StringExpandPlaceholders(gStringVar11, gText_InBagVar1);
+    BuyMenuPrint(3, gStringVar11, 0, 1, 0, 0);
     tItemCount = 1;
     DrawStdFrameWithCustomTileAndPalette(4, FALSE, 1, 13);
     BuyMenuPrintItemQuantityAndPrice(taskId);
@@ -1161,8 +1161,8 @@ static void BuyMenuPrintItemQuantityAndPrice(u8 taskId)
     FillWindowPixelBuffer(4, PIXEL_FILL(1));
     PrintMoneyAmount(4, 38, 1, sShopData->totalCost, TEXT_SKIP_DRAW);
     ConvertIntToDecimalStringN(gStringVar1, tItemCount, STR_CONV_MODE_LEADING_ZEROS, BAG_ITEM_CAPACITY_DIGITS);
-    StringExpandPlaceholders(gStringVar7, gText_xVar1);
-    BuyMenuPrint(4, gStringVar7, 0, 1, 0, 0);
+    StringExpandPlaceholders(gStringVar11, gText_xVar1);
+    BuyMenuPrint(4, gStringVar11, 0, 1, 0, 0);
 }
 
 static void ExitBuyMenu(u8 taskId)

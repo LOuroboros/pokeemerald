@@ -1837,18 +1837,18 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
 void FrontierSpeechToString(const u16 *words)
 {
-    ConvertEasyChatWordsToString(gStringVar7, words, 3, 2);
-    if (GetStringWidth(FONT_NORMAL, gStringVar7, -1) > 204u)
+    ConvertEasyChatWordsToString(gStringVar11, words, 3, 2);
+    if (GetStringWidth(FONT_NORMAL, gStringVar11, -1) > 204u)
     {
         s32 i = 0;
 
-        ConvertEasyChatWordsToString(gStringVar7, words, 2, 3);
-        while (gStringVar7[i++] != CHAR_NEWLINE)
+        ConvertEasyChatWordsToString(gStringVar11, words, 2, 3);
+        while (gStringVar11[i++] != CHAR_NEWLINE)
             ;
-        while (gStringVar7[i] != CHAR_NEWLINE)
+        while (gStringVar11[i] != CHAR_NEWLINE)
             i++;
 
-        gStringVar7[i] = CHAR_PROMPT_SCROLL;
+        gStringVar11[i] = CHAR_PROMPT_SCROLL;
     }
 }
 

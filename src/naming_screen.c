@@ -727,10 +727,10 @@ static void DisplaySentToPCMessage(void)
     if (FlagGet(FLAG_SYS_PC_LANETTE))
         stringToDisplay++;
 
-    StringExpandPlaceholders(gStringVar7, sTransferredToPCMessages[stringToDisplay]);
+    StringExpandPlaceholders(gStringVar11, sTransferredToPCMessages[stringToDisplay]);
     DrawDialogueFrame(0, FALSE);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar7, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar11, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
     CopyWindowToVram(0, COPYWIN_FULL);
 }
 

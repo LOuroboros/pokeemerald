@@ -1156,9 +1156,9 @@ static void ShowAndPrintWindows(void)
     AddTextPrinterParameterized3(WINDOW_BATTLE_RECORD, FONT_NORMAL, x, 5, sTextColors[0], 0, gText_BattleRecord);
 
     AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, 5, 4, sTextColors[0], 0, gText_BattlePoints);
-    ConvertIntToDecimalStringN(gStringVar7, sPassData->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
-    x = GetStringRightAlignXOffset(FONT_SMALL_NARROW, gStringVar7, 91);
-    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, x, 16, sTextColors[0], 0, gStringVar7);
+    ConvertIntToDecimalStringN(gStringVar11, sPassData->battlePoints, STR_CONV_MODE_LEFT_ALIGN, 5);
+    x = GetStringRightAlignXOffset(FONT_SMALL_NARROW, gStringVar11, 91);
+    AddTextPrinterParameterized3(WINDOW_BATTLE_POINTS, FONT_SMALL_NARROW, x, 16, sTextColors[0], 0, gStringVar11);
 
     sPassData->cursorArea = GetCursorAreaFromCoords(sPassData->cursorX - 5, sPassData->cursorY + 5);
     sPassData->previousCursorArea = CURSOR_AREA_NOTHING;

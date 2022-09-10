@@ -75,7 +75,7 @@ BattleFrontier_BattleArenaBattleRoom_EventScript_AnnounceTrainers::
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleArenaBattleRoom_Movement_OpponentStepForward
 	waitmovement 0
 	palace_getopponentintro
-	msgbox gStringVar7, MSGBOX_DEFAULT
+	msgbox gStringVar11, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattleArenaBattleRoom_EventScript_DoArenaBattle
 	switch VAR_RESULT

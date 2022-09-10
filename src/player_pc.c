@@ -733,8 +733,8 @@ static void Mailbox_PrintWhatToDoWithPlayerMailText(u8 taskId)
 {
     StringCopy(gStringVar1, gSaveBlock1Ptr->mail[gPlayerPCItemPageInfo.itemsAbove + PARTY_SIZE + gPlayerPCItemPageInfo.cursorPos].playerName);
     ConvertInternationalPlayerNameStripChar(gStringVar1, CHAR_SPACE);
-    StringExpandPlaceholders(gStringVar7, gText_WhatToDoWithVar1sMail);
-    DisplayItemMessageOnField(taskId, gStringVar7, Mailbox_PrintMailOptions);
+    StringExpandPlaceholders(gStringVar11, gText_WhatToDoWithVar1sMail);
+    DisplayItemMessageOnField(taskId, gStringVar11, Mailbox_PrintMailOptions);
 }
 
 static void Mailbox_ReturnToPlayerPC(u8 taskId)
@@ -1032,8 +1032,8 @@ static void ItemStorage_PrintMenuItem(u8 windowId, u32 id, u8 yOffset)
                 ItemStorage_DrawSwapArrow(yOffset, 0xFF, TEXT_SKIP_DRAW);
         }
         ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->pcItems[id].quantity, STR_CONV_MODE_RIGHT_ALIGN, 3);
-        StringExpandPlaceholders(gStringVar7, gText_xVar1);
-        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar7, GetStringRightAlignXOffset(FONT_NARROW, gStringVar7, 104), yOffset, TEXT_SKIP_DRAW, NULL);
+        StringExpandPlaceholders(gStringVar11, gText_xVar1);
+        AddTextPrinterParameterized(windowId, FONT_NARROW, gStringVar11, GetStringRightAlignXOffset(FONT_NARROW, gStringVar11, 104), yOffset, TEXT_SKIP_DRAW, NULL);
     }
 }
 
@@ -1198,8 +1198,8 @@ static void ItemStorage_PrintMessage(const u8 *string)
 {
     u8 windowId = sItemStorageMenu->windowIds[ITEMPC_WIN_MESSAGE];
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
-    StringExpandPlaceholders(gStringVar7, string);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar7, 0, 1, 0, NULL);
+    StringExpandPlaceholders(gStringVar11, string);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar11, 0, 1, 0, NULL);
 }
 
 // Process input while on the item storage's item list
@@ -1337,8 +1337,8 @@ static void ItemStorage_UpdateSwapLinePos(u8 y)
 static void ItemStorage_PrintItemQuantity(u8 windowId, u16 value, u32 mode, u8 x, u8 y, u8 n)
 {
     ConvertIntToDecimalStringN(gStringVar1, value, mode, n);
-    StringExpandPlaceholders(gStringVar7, gText_xVar1);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar7, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar7, 48), y, 0, NULL);
+    StringExpandPlaceholders(gStringVar11, gText_xVar1);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar11, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar11, 48), y, 0, NULL);
 }
 
 // Start an item Withdraw/Toss

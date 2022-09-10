@@ -58,8 +58,8 @@ void PrintInfoTable(u8 windowId, u8 itemCount, const struct InfoBox *strs)
 
     for (i = 0; i < itemCount; i++)
     {
-        StringExpandPlaceholders(gStringVar7, strs[i].text);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar7, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar7, 224), (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
+        StringExpandPlaceholders(gStringVar11, strs[i].text);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar11, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar11, 224), (i * 16) + 1, TEXT_SKIP_DRAW, NULL);
     }
 
     CopyWindowToVram(windowId, 2);

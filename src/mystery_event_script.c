@@ -51,7 +51,7 @@ static bool32 CheckCompatibility(u16 unk0, u32 unk1, u16 unk2, u32 version)
 
 static void SetIncompatible(void)
 {
-    StringExpandPlaceholders(gStringVar7, gText_MysteryEventCantBeUsed);
+    StringExpandPlaceholders(gStringVar11, gText_MysteryEventCantBeUsed);
     SetMysteryEventScriptStatus(MEVENT_STATUS_FAILURE);
 }
 
@@ -167,7 +167,7 @@ bool8 MEScrCmd_setmsg(struct ScriptContext *ctx)
     u8 status = ScriptReadByte(ctx);
     u8 *str = (u8 *)(ScriptReadWord(ctx) - ctx->mOffset + ctx->mScriptBase);
     if (status == MEVENT_STATUS_FF || status == ctx->mStatus)
-        StringExpandPlaceholders(gStringVar7, str);
+        StringExpandPlaceholders(gStringVar11, str);
     return FALSE;
 }
 
@@ -188,7 +188,7 @@ bool8 MEScrCmd_giveribbon(struct ScriptContext *ctx)
     u8 index = ScriptReadByte(ctx);
     u8 ribbonId = ScriptReadByte(ctx);
     GiveGiftRibbonToParty(index, ribbonId);
-    StringExpandPlaceholders(gStringVar7, gText_MysteryEventSpecialRibbon);
+    StringExpandPlaceholders(gStringVar11, gText_MysteryEventSpecialRibbon);
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
@@ -207,7 +207,7 @@ bool8 MEScrCmd_initramscript(struct ScriptContext *ctx)
 bool8 MEScrCmd_givenationaldex(struct ScriptContext *ctx)
 {
     EnableNationalPokedex();
-    StringExpandPlaceholders(gStringVar7, gText_MysteryEventNationalDex);
+    StringExpandPlaceholders(gStringVar11, gText_MysteryEventNationalDex);
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
@@ -215,7 +215,7 @@ bool8 MEScrCmd_givenationaldex(struct ScriptContext *ctx)
 bool8 MEScrCmd_addrareword(struct ScriptContext *ctx)
 {
     UnlockAdditionalPhrase(ScriptReadByte(ctx));
-    StringExpandPlaceholders(gStringVar7, gText_MysteryEventRareWord);
+    StringExpandPlaceholders(gStringVar11, gText_MysteryEventRareWord);
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }
@@ -245,7 +245,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
 
     if (gPlayerPartyCount == PARTY_SIZE)
     {
-        StringExpandPlaceholders(gStringVar7, gText_MysteryEventFullParty);
+        StringExpandPlaceholders(gStringVar11, gText_MysteryEventFullParty);
         ctx->mStatus = MEVENT_STATUS_FAILURE;
     }
     else
@@ -265,7 +265,7 @@ bool8 MEScrCmd_givepokemon(struct ScriptContext *ctx)
             GiveMailToMon(&gPlayerParty[PARTY_SIZE - 1], &mail);
         CompactPartySlots();
         CalculatePlayerPartyCount();
-        StringExpandPlaceholders(gStringVar7, gText_MysteryEventSentOver);
+        StringExpandPlaceholders(gStringVar11, gText_MysteryEventSentOver);
         ctx->mStatus = MEVENT_STATUS_SUCCESS;
     }
 
@@ -280,7 +280,7 @@ bool8 MEScrCmd_addtrainer(struct ScriptContext *ctx)
 bool8 MEScrCmd_enableresetrtc(struct ScriptContext *ctx)
 {
     EnableResetRTC();
-    StringExpandPlaceholders(gStringVar7, gText_InGameClockUsable);
+    StringExpandPlaceholders(gStringVar11, gText_InGameClockUsable);
     ctx->mStatus = MEVENT_STATUS_SUCCESS;
     return FALSE;
 }

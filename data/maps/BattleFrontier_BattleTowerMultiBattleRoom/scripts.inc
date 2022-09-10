@@ -69,12 +69,12 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_OpponentsEnter::
 	delay 15
 	applymovement LOCALID_OPPONENT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft
 	waitmovement 0
-	msgbox gStringVar7, MSGBOX_DEFAULT
+	msgbox gStringVar11, MSGBOX_DEFAULT
 	waitmessage
 	tower_getopponentintro 1
 	applymovement LOCALID_OPPONENT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft
 	waitmovement 0
-	msgbox gStringVar7, MSGBOX_DEFAULT
+	msgbox gStringVar11, MSGBOX_DEFAULT
 	waitmessage
 	goto BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoTowerBattle
 
@@ -83,13 +83,13 @@ BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoOpponentIntrosLink::
 	delay 15
 	applymovement LOCALID_OPPONENT_1, BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft
 	waitmovement 0
-	messageautoscroll gStringVar7
+	messageautoscroll gStringVar11
 	waitmessage
 	delay 48
 	tower_getopponentintro 1
 	applymovement LOCALID_OPPONENT_2, BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft
 	waitmovement 0
-	messageautoscroll gStringVar7
+	messageautoscroll gStringVar11
 	waitmessage
 	delay 48
 BattleFrontier_BattleTowerMultiBattleRoom_EventScript_DoTowerBattle::

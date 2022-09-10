@@ -1005,9 +1005,9 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         {
             // Print berry quantity
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, BERRY_CAPACITY_DIGITS);
-            StringExpandPlaceholders(gStringVar7, gText_xVar1);
-            offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar7, 119);
-            BagMenu_Print(windowId, FONT_NARROW, gStringVar7, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
+            StringExpandPlaceholders(gStringVar11, gText_xVar1);
+            offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar11, 119);
+            BagMenu_Print(windowId, FONT_NARROW, gStringVar11, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
         }
         else if (gBagPosition.pocket != KEYITEMS_POCKET
               && gBagPosition.pocket != TMHM_POCKET
@@ -1015,9 +1015,9 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         {
             // Print item quantity
             ConvertIntToDecimalStringN(gStringVar1, itemQuantity, STR_CONV_MODE_RIGHT_ALIGN, BAG_ITEM_CAPACITY_DIGITS);
-            StringExpandPlaceholders(gStringVar7, gText_xVar1);
-            offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar7, 119);
-            BagMenu_Print(windowId, FONT_NARROW, gStringVar7, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
+            StringExpandPlaceholders(gStringVar11, gText_xVar1);
+            offset = GetStringRightAlignXOffset(FONT_NARROW, gStringVar11, 119);
+            BagMenu_Print(windowId, FONT_NARROW, gStringVar11, offset, y, 0, 0, TEXT_SKIP_DRAW, COLORID_NORMAL);
         }
         else
         {
@@ -1039,8 +1039,8 @@ static void PrintItemDescription(int itemIndex)
     {
         // Print 'Cancel' description
         StringCopy(gStringVar1, gBagMenu_ReturnToStrings[gBagPosition.location]);
-        StringExpandPlaceholders(gStringVar7, gText_ReturnToVar1);
-        str = gStringVar7;
+        StringExpandPlaceholders(gStringVar11, gText_ReturnToVar1);
+        str = gStringVar11;
     }
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
     BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, str, 3, 1, 0, 0, 0, COLORID_NORMAL);
@@ -1229,8 +1229,8 @@ static void PrintItemQuantity(u8 windowId, s16 quantity)
 {
     u8 numDigits = (gBagPosition.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, quantity, STR_CONV_MODE_LEADING_ZEROS, numDigits);
-    StringExpandPlaceholders(gStringVar7, gText_xVar1);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar7, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar7, 0x28), 2, 0, 0);
+    StringExpandPlaceholders(gStringVar11, gText_xVar1);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar11, GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar11, 0x28), 2, 0, 0);
 }
 
 // Prints the quantity of items to be sold and the amount that would be earned
@@ -1238,8 +1238,8 @@ static void PrintItemSoldAmount(int windowId, int numSold, int moneyEarned)
 {
     u8 numDigits = (gBagPosition.pocket == BERRIES_POCKET) ? BERRY_CAPACITY_DIGITS : BAG_ITEM_CAPACITY_DIGITS;
     ConvertIntToDecimalStringN(gStringVar1, numSold, STR_CONV_MODE_LEADING_ZEROS, numDigits);
-    StringExpandPlaceholders(gStringVar7, gText_xVar1);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar7, 0, 1, TEXT_SKIP_DRAW, 0);
+    StringExpandPlaceholders(gStringVar11, gText_xVar1);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar11, 0, 1, TEXT_SKIP_DRAW, 0);
     PrintMoneyAmount(windowId, 38, 1, moneyEarned, 0);
 }
 
@@ -1493,9 +1493,9 @@ static void StartItemSwap(u8 taskId)
     tListPosition = gBagPosition.scrollPosition[gBagPosition.pocket] + gBagPosition.cursorPosition[gBagPosition.pocket];
     gBagMenu->toSwapPos = tListPosition;
     CopyItemName(BagGetItemIdByPocketPosition(gBagPosition.pocket + 1, tListPosition), gStringVar1);
-    StringExpandPlaceholders(gStringVar7, gText_MoveVar1Where);
+    StringExpandPlaceholders(gStringVar11, gText_MoveVar1Where);
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-    BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+    BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
     UpdateItemMenuSwapLinePos(tListPosition);
     DestroyPocketSwitchArrowPair();
     BagMenu_PrintCursor(tListTaskId, COLORID_GRAY_CURSOR);
@@ -1723,9 +1723,9 @@ static void OpenContextMenu(u8 unused)
     else
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar7, gText_Var1IsSelected);
+        StringExpandPlaceholders(gStringVar11, gText_Var1IsSelected);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
     }
     if (gBagMenu->contextMenuNumItems == 1)
         PrintContextMenuItems(BagMenu_AddWindow(ITEMWIN_1x1));
@@ -1889,9 +1889,9 @@ static void ItemMenu_Toss(u8 taskId)
     else
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar7, gText_TossHowManyVar1s);
+        StringExpandPlaceholders(gStringVar11, gText_TossHowManyVar1s);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
         AddItemQuantityWindow(ITEMWIN_QUANTITY);
         gTasks[taskId].func = Task_ChooseHowManyToToss;
     }
@@ -1903,9 +1903,9 @@ static void AskTossItems(u8 taskId)
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-    StringExpandPlaceholders(gStringVar7, gText_ConfirmTossItems);
+    StringExpandPlaceholders(gStringVar11, gText_ConfirmTossItems);
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-    BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+    BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
     BagMenu_YesNo(taskId, ITEMWIN_YESNO_LOW, &sYesNoTossFunctions);
 }
 
@@ -1946,9 +1946,9 @@ static void ConfirmToss(u8 taskId)
 
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
     ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-    StringExpandPlaceholders(gStringVar7, gText_ThrewAwayVar2Var1s);
+    StringExpandPlaceholders(gStringVar11, gText_ThrewAwayVar2Var1s);
     FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-    BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+    BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
     gTasks[taskId].func = Task_RemoveItemFromBag;
 }
 
@@ -2025,8 +2025,8 @@ static void PrintThereIsNoPokemon(u8 taskId)
 static void PrintItemCantBeHeld(u8 taskId)
 {
     CopyItemName(gSpecialVar_ItemId, gStringVar1);
-    StringExpandPlaceholders(gStringVar7, gText_Var1CantBeHeld);
-    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar7, HandleErrorMessage);
+    StringExpandPlaceholders(gStringVar11, gText_Var1CantBeHeld);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar11, HandleErrorMessage);
 }
 
 static void HandleErrorMessage(u8 taskId)
@@ -2079,8 +2079,8 @@ static void Task_ItemContext_GiveToParty(u8 taskId)
     else if (!IsHoldingItemAllowed(gSpecialVar_ItemId))
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar7, gText_Var1CantBeHeldHere);
-        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar7, HandleErrorMessage);
+        StringExpandPlaceholders(gStringVar11, gText_Var1CantBeHeldHere);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar11, HandleErrorMessage);
     }
     else if (gBagPosition.pocket != KEYITEMS_POCKET && !ItemId_GetImportance(gSpecialVar_ItemId))
     {
@@ -2144,8 +2144,8 @@ static void Task_ItemContext_Sell(u8 taskId)
     if (ItemId_GetPrice(gSpecialVar_ItemId) == 0 || ItemId_GetPocket(gSpecialVar_ItemId) == POCKET_TM_HM)
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar2);
-        StringExpandPlaceholders(gStringVar7, gText_CantBuyKeyItem);
-        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar7, CloseItemMessage);
+        StringExpandPlaceholders(gStringVar11, gText_CantBuyKeyItem);
+        DisplayItemMessage(taskId, FONT_NORMAL, gStringVar11, CloseItemMessage);
     }
     else
     {
@@ -2158,8 +2158,8 @@ static void Task_ItemContext_Sell(u8 taskId)
         else
         {
             CopyItemName(gSpecialVar_ItemId, gStringVar2);
-            StringExpandPlaceholders(gStringVar7, gText_HowManyToSell);
-            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar7, InitSellHowManyInput);
+            StringExpandPlaceholders(gStringVar11, gText_HowManyToSell);
+            DisplayItemMessage(taskId, FONT_NORMAL, gStringVar11, InitSellHowManyInput);
         }
     }
 }
@@ -2169,8 +2169,8 @@ static void DisplaySellItemPriceAndConfirm(u8 taskId)
     s16 *data = gTasks[taskId].data;
 
     ConvertIntToDecimalStringN(gStringVar1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar7, gText_ICanPayVar1);
-    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar7, AskSellItems);
+    StringExpandPlaceholders(gStringVar11, gText_ICanPayVar1);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar11, AskSellItems);
 }
 
 static void AskSellItems(u8 taskId)
@@ -2229,8 +2229,8 @@ static void ConfirmSell(u8 taskId)
 
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     ConvertIntToDecimalStringN(gStringVar1, (ItemId_GetPrice(gSpecialVar_ItemId) / 2) * tItemCount, STR_CONV_MODE_LEFT_ALIGN, 6);
-    StringExpandPlaceholders(gStringVar7, gText_TurnedOverVar1ForVar2);
-    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar7, SellItem);
+    StringExpandPlaceholders(gStringVar11, gText_TurnedOverVar1ForVar2);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar11, SellItem);
 }
 
 static void SellItem(u8 taskId)
@@ -2274,9 +2274,9 @@ static void Task_ItemContext_Deposit(u8 taskId)
     else
     {
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
-        StringExpandPlaceholders(gStringVar7, gText_DepositHowManyVar1);
+        StringExpandPlaceholders(gStringVar11, gText_DepositHowManyVar1);
         FillWindowPixelBuffer(WIN_DESCRIPTION, PIXEL_FILL(0));
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
         AddItemQuantityWindow(ITEMWIN_QUANTITY);
         gTasks[taskId].func = Task_ChooseHowManyToDeposit;
     }
@@ -2322,8 +2322,8 @@ static void TryDepositItem(u8 taskId)
         // Successfully deposited
         CopyItemName(gSpecialVar_ItemId, gStringVar1);
         ConvertIntToDecimalStringN(gStringVar2, tItemCount, STR_CONV_MODE_LEFT_ALIGN, MAX_ITEM_DIGITS);
-        StringExpandPlaceholders(gStringVar7, gText_DepositedVar2Var1s);
-        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar7, 3, 1, 0, 0, 0, COLORID_NORMAL);
+        StringExpandPlaceholders(gStringVar11, gText_DepositedVar2Var1s);
+        BagMenu_Print(WIN_DESCRIPTION, FONT_NORMAL, gStringVar11, 3, 1, 0, 0, 0, COLORID_NORMAL);
         gTasks[taskId].func = Task_RemoveItemFromBag;
     }
     else

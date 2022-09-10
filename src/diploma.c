@@ -137,8 +137,8 @@ static void DisplayDiplomaText(void)
         SetGpuReg(REG_OFFSET_BG1HOFS, 0);
         StringCopy(gStringVar1, gText_DexHoenn);
     }
-    StringExpandPlaceholders(gStringVar7, gText_PokedexDiploma);
-    PrintDiplomaText(gStringVar7, 0, 1);
+    StringExpandPlaceholders(gStringVar11, gText_PokedexDiploma);
+    PrintDiplomaText(gStringVar11, 0, 1);
     PutWindowTilemap(0);
     CopyWindowToVram(0, COPYWIN_FULL);
 }

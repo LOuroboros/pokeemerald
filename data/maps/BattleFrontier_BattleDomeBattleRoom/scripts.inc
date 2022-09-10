@@ -60,7 +60,7 @@ BattleFrontier_BattleDomeBattleRoom_EventScript_BattleOpponent::
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleDomeBattleRoom_Movement_OpponentStepForward
 	waitmovement 0
 	tower_getopponentintro 0
-	msgbox gStringVar7, MSGBOX_DEFAULT
+	msgbox gStringVar11, MSGBOX_DEFAULT
 	closemessage
 	dome_initopponentparty
 	call BattleFrontier_BattleDomeBattleRoom_EventScript_DoDomeBattle

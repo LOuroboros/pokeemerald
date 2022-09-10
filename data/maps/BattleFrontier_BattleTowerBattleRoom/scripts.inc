@@ -40,7 +40,7 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_OpponentEnter::
 	applymovement LOCALID_OPPONENT, BattleFrontier_BattleTowerBattleRoom_Movement_OpponentEnter
 	waitmovement 0
 	tower_getopponentintro 0
-	msgbox gStringVar7, MSGBOX_DEFAULT
+	msgbox gStringVar11, MSGBOX_DEFAULT
 	waitmessage
 	call BattleFrontier_BattleTowerBattleRoom_EventScript_DoTowerBattle
 	switch VAR_RESULT

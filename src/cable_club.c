@@ -98,9 +98,9 @@ static void PrintNumPlayersInLink(u16 windowId, u32 numPlayers)
 
     ConvertIntToDecimalStringN(gStringVar1, numPlayers, STR_CONV_MODE_LEFT_ALIGN, 1);
     SetStandardWindowBorderStyle(windowId, FALSE);
-    StringExpandPlaceholders(gStringVar7, gText_NumPlayerLink);
-    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar7, 88);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar7, xPos, 1, TEXT_SKIP_DRAW, NULL);
+    StringExpandPlaceholders(gStringVar11, gText_NumPlayerLink);
+    xPos = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar11, 88);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar11, xPos, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_FULL);
 }
 

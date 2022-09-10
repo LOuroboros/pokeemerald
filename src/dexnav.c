@@ -490,8 +490,8 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
     //species name - always present
     if (hidden)
     {
-        StringCopy(gStringVar7, sText_ThreeQmarks);
-        AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, WINDOW_COL_0, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar7);
+        StringCopy(gStringVar11, sText_ThreeQmarks);
+        AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, WINDOW_COL_0, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar11);
         return;
     }
     else
@@ -502,8 +502,8 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
 
     //level - always present
     ConvertIntToDecimalStringN(gStringVar1, sDexNavSearchDataPtr->monLevel, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar7, sText_MonLevel);
-    AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, WINDOW_COL_1, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar7);
+    StringExpandPlaceholders(gStringVar11, sText_MonLevel);
+    AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, WINDOW_COL_1, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar11);
 
     if (proximity <= SNEAKING_PROXIMITY)
     {
@@ -512,8 +512,8 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
         if (searchLevel > 1 && sDexNavSearchDataPtr->moves[0])
         {
             StringCopy(gStringVar1, gMoveNames[sDexNavSearchDataPtr->moves[0]]);
-            StringExpandPlaceholders(gStringVar7, sText_EggMove);
-            AddTextPrinterParameterized3(windowId, 0, WINDOW_MOVE_NAME_X, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar7);
+            StringExpandPlaceholders(gStringVar11, sText_EggMove);
+            AddTextPrinterParameterized3(windowId, 0, WINDOW_MOVE_NAME_X, 0, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar11);
         }
 
         if (searchLevel > 2)
@@ -526,8 +526,8 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
             if (sDexNavSearchDataPtr->heldItem)
             {
                 CopyItemName(sDexNavSearchDataPtr->heldItem, gStringVar1);
-                StringExpandPlaceholders(gStringVar7, sText_HeldItem);
-                AddTextPrinterParameterized3(windowId, 0, WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar7);
+                StringExpandPlaceholders(gStringVar11, sText_HeldItem);
+                AddTextPrinterParameterized3(windowId, 0, WINDOW_COL_0, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar11);
             }
         }
     }
@@ -535,10 +535,10 @@ static void AddSearchWindowText(u16 species, u8 proximity, u8 searchLevel, bool8
     //chain level - always present
     ConvertIntToDecimalStringN(gStringVar1, gSaveBlock1Ptr->dexNavChain, STR_CONV_MODE_LEFT_ALIGN, 3);
     if (gSaveBlock1Ptr->dexNavChain > 99)
-        StringExpandPlaceholders(gStringVar7, sText_DexNavChainLong);
+        StringExpandPlaceholders(gStringVar11, sText_DexNavChainLong);
     else
-        StringExpandPlaceholders(gStringVar7, sText_DexNavChain);
-    AddTextPrinterParameterized3(windowId, 0, SEARCH_ARROW_X - 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar7);
+        StringExpandPlaceholders(gStringVar11, sText_DexNavChain);
+    AddTextPrinterParameterized3(windowId, 0, SEARCH_ARROW_X - 16, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar11);
 
     CopyWindowToVram(sDexNavSearchDataPtr->windowId, 2);
 }
@@ -2163,8 +2163,8 @@ static void PrintCurrentSpeciesInfo(void)
     }
     else
     {
-        ConvertIntToDecimalStringN(gStringVar7, gSaveBlock1Ptr->dexNavSearchLevels[dexNum], 0, 4);
-        AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, gStringVar7);
+        ConvertIntToDecimalStringN(gStringVar11, gSaveBlock1Ptr->dexNavSearchLevels[dexNum], 0, 4);
+        AddTextPrinterParameterized3(WINDOW_INFO, 0, 0, SEARCH_LEVEL_Y, sFontColor_Black, 0, gStringVar11);
     }
 
     //hidden ability
@@ -2216,8 +2216,8 @@ static void PrintSearchableSpecies(u16 species)
     else
     {
         StringCopy(gStringVar1, gSpeciesNames[species]);
-        StringExpandPlaceholders(gStringVar7, sText_DexNav_SearchForRegisteredSpecies);
-        AddTextPrinterParameterized3(WINDOW_REGISTERED, 1, 0, 0, sFontColor_White, TEXT_SKIP_DRAW, gStringVar7);
+        StringExpandPlaceholders(gStringVar11, sText_DexNav_SearchForRegisteredSpecies);
+        AddTextPrinterParameterized3(WINDOW_REGISTERED, 1, 0, 0, sFontColor_White, TEXT_SKIP_DRAW, gStringVar11);
     }
 
     PrintMapName();
@@ -2644,8 +2644,8 @@ static void DrawHiddenSearchWindow(u8 width)
     AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, SPECIES_ICON_X + 4, 0, sSearchFontColor, TEXT_SKIP_DRAW, sText_ThreeQmarks);
 
     ConvertIntToDecimalStringN(gStringVar1, sDexNavSearchDataPtr->searchLevel, STR_CONV_MODE_LEFT_ALIGN, 2);
-    StringExpandPlaceholders(gStringVar7, sText_SearchLevel);
-    AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, SPECIES_ICON_X + 4, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar7);
+    StringExpandPlaceholders(gStringVar11, sText_SearchLevel);
+    AddTextPrinterParameterized3(sDexNavSearchDataPtr->windowId, 0, SPECIES_ICON_X + 4, 12, sSearchFontColor, TEXT_SKIP_DRAW, gStringVar11);
     CopyWindowToVram(sDexNavSearchDataPtr->windowId, 2);
 }
 

@@ -900,7 +900,7 @@ void PetalburgGymUnlockRoomDoors(void)
 
 void ShowFieldMessageStringVar4(void)
 {
-    ShowFieldMessage(gStringVar7);
+    ShowFieldMessage(gStringVar11);
 }
 
 void StorePlayerCoordsInVars(void)

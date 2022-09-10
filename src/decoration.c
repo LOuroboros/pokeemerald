@@ -622,8 +622,8 @@ static void DecorationMenuAction_Decorate(u8 taskId)
 {
     if (GetNumOwnedDecorations() == 0)
     {
-        StringExpandPlaceholders(gStringVar7, gText_NoDecorations);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationActionsAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_NoDecorations);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationActionsAfterInvalidSelection);
     }
     else
     {
@@ -637,8 +637,8 @@ static void DecorationMenuAction_PutAway(u8 taskId)
 {
     if (!HasDecorationsInUse(taskId))
     {
-        StringExpandPlaceholders(gStringVar7, gText_NoDecorationsInUse);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationActionsAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_NoDecorationsInUse);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationActionsAfterInvalidSelection);
     }
     else
     {
@@ -654,8 +654,8 @@ static void DecorationMenuAction_Toss(u8 taskId)
 {
     if (GetNumOwnedDecorations() == 0)
     {
-        StringExpandPlaceholders(gStringVar7, gText_NoDecorations);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationActionsAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_NoDecorations);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationActionsAfterInvalidSelection);
     }
     else
     {
@@ -739,15 +739,15 @@ static void PrintDecorationCategoryMenuItem(u8 winid, u8 category, u8 x, u8 y, b
 
     width = x == 8 ? 104 : 96;
     y++;
-    ColorMenuItemString(gStringVar7, disabled);
-    str = StringLength(gStringVar7) + gStringVar7;
+    ColorMenuItemString(gStringVar11, disabled);
+    str = StringLength(gStringVar11) + gStringVar11;
     StringCopy(str, sDecorationCategoryNames[category]);
-    AddTextPrinterParameterized(winid, FONT_NORMAL, gStringVar7, x, y, speed, NULL);
+    AddTextPrinterParameterized(winid, FONT_NORMAL, gStringVar11, x, y, speed, NULL);
     str = ConvertIntToDecimalStringN(str, GetNumOwnedDecorationsInCategory(category), STR_CONV_MODE_RIGHT_ALIGN, 2);
     *(str++) = CHAR_SLASH;
     ConvertIntToDecimalStringN(str, gDecorationInventories[category].size, STR_CONV_MODE_RIGHT_ALIGN, 2);
-    x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, width);
-    AddTextPrinterParameterized(winid, FONT_NORMAL, gStringVar7, x, y, speed, NULL);
+    x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, width);
+    AddTextPrinterParameterized(winid, FONT_NORMAL, gStringVar11, x, y, speed, NULL);
 }
 
 static void ColorMenuItemString(u8 *str, bool8 disabled)
@@ -803,8 +803,8 @@ static void SelectDecorationCategory(u8 taskId)
     else
     {
         RemoveDecorationWindow(WINDOW_DECORATION_CATEGORIES);
-        StringExpandPlaceholders(gStringVar7, gText_NoDecorations);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationCategoriesAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_NoDecorations);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationCategoriesAfterInvalidSelection);
     }
 }
 
@@ -1316,8 +1316,8 @@ static void DecorationItemsMenuAction_AttemptPlace(u8 taskId)
 {
     if (sDecorationContext.isPlayerRoom == TRUE && sCurDecorationCategory != DECORCAT_DOLL && sCurDecorationCategory != DECORCAT_CUSHION)
     {
-        StringExpandPlaceholders(gStringVar7, gText_CantPlaceInRoom);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationItemsAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_CantPlaceInRoom);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationItemsAfterInvalidSelection);
     }
     else if (IsSelectedDecorInThePC() == TRUE)
     {
@@ -1331,19 +1331,19 @@ static void DecorationItemsMenuAction_AttemptPlace(u8 taskId)
         {
             ConvertIntToDecimalStringN(gStringVar1, sDecorationContext.size, STR_CONV_MODE_RIGHT_ALIGN, 2);
             if (sDecorationContext.isPlayerRoom == FALSE) {
-                StringExpandPlaceholders(gStringVar7, gText_NoMoreDecorations);
+                StringExpandPlaceholders(gStringVar11, gText_NoMoreDecorations);
             }
             else
             {
-                StringExpandPlaceholders(gStringVar7, gText_NoMoreDecorations2);
+                StringExpandPlaceholders(gStringVar11, gText_NoMoreDecorations2);
             }
-            DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationItemsAfterInvalidSelection);
+            DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationItemsAfterInvalidSelection);
         }
     }
     else
     {
-        StringExpandPlaceholders(gStringVar7, gText_InUseAlready);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationItemsAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_InUseAlready);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationItemsAfterInvalidSelection);
     }
 }
 
@@ -1468,8 +1468,8 @@ static void AttemptCancelPlaceDecoration(u8 taskId)
     gSprites[sDecor_CameraSpriteObjectIdx1].data[7] = 1;
     gSprites[sDecor_CameraSpriteObjectIdx2].data[7] = 1;
     ResetCursorMovement();
-    StringExpandPlaceholders(gStringVar7, gText_CancelDecorating);
-    DisplayItemMessageOnField(taskId, gStringVar7, CancelDecoratingPrompt);
+    StringExpandPlaceholders(gStringVar11, gText_CancelDecorating);
+    DisplayItemMessageOnField(taskId, gStringVar11, CancelDecoratingPrompt);
 }
 
 static bool8 IsSecretBaseTrainerSpot(u8 behaviorAt, u16 layerType)
@@ -1621,14 +1621,14 @@ static void AttemptPlaceDecoration_(u8 taskId)
 {
     if (CanPlaceDecoration(taskId, &gDecorations[gCurDecorationItems[gCurDecorationIndex]]) == TRUE)
     {
-        StringExpandPlaceholders(gStringVar7, gText_PlaceItHere);
-        DisplayItemMessageOnField(taskId, gStringVar7, PlaceDecorationPrompt);
+        StringExpandPlaceholders(gStringVar11, gText_PlaceItHere);
+        DisplayItemMessageOnField(taskId, gStringVar11, PlaceDecorationPrompt);
     }
     else
     {
         PlaySE(SE_FAILURE);
-        StringExpandPlaceholders(gStringVar7, gText_CantBePlacedHere);
-        DisplayItemMessageOnField(taskId, gStringVar7, CantPlaceDecorationPrompt);
+        StringExpandPlaceholders(gStringVar11, gText_CantBePlacedHere);
+        DisplayItemMessageOnField(taskId, gStringVar11, CantPlaceDecorationPrompt);
     }
 }
 
@@ -2260,8 +2260,8 @@ static void Task_PutAwayDecoration(u8 taskId)
     case 3:
         if (IsWeatherNotFadingIn() == TRUE)
         {
-            StringExpandPlaceholders(gStringVar7, gText_DecorationReturnedToPC);
-            DisplayItemMessageOnField(taskId, gStringVar7, ContinuePuttingAwayDecorationsPrompt);
+            StringExpandPlaceholders(gStringVar11, gText_DecorationReturnedToPC);
+            DisplayItemMessageOnField(taskId, gStringVar11, ContinuePuttingAwayDecorationsPrompt);
             if (gMapHeader.regionMapSectionId == MAPSEC_SECRET_BASE)
                 TryPutSecretBaseVisitOnAir();
         }
@@ -2354,8 +2354,8 @@ static void AttemptCancelPutAwayDecoration(u8 taskId)
     ResetCursorMovement();
     gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx1].callback = SpriteCallbackDummy;
-    StringExpandPlaceholders(gStringVar7, gText_StopPuttingAwayDecorations);
-    DisplayItemMessageOnField(taskId, gStringVar7, StopPuttingAwayDecorationsPrompt);
+    StringExpandPlaceholders(gStringVar11, gText_StopPuttingAwayDecorations);
+    DisplayItemMessageOnField(taskId, gStringVar11, StopPuttingAwayDecorationsPrompt);
 }
 
 static void AttemptPutAwayDecoration_(u8 taskId)
@@ -2366,8 +2366,8 @@ static void AttemptPutAwayDecoration_(u8 taskId)
     AttemptMarkDecorUnderCursorForRemoval(taskId);
     if (sCurDecorSelectedInRearrangement != 0)
     {
-        StringExpandPlaceholders(gStringVar7, gText_ReturnDecorationToPC);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnDecorationPrompt);
+        StringExpandPlaceholders(gStringVar11, gText_ReturnDecorationToPC);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnDecorationPrompt);
     }
     else
     {
@@ -2377,13 +2377,13 @@ static void AttemptPutAwayDecoration_(u8 taskId)
         {
             gSprites[sDecor_CameraSpriteObjectIdx1].invisible = FALSE;
             gSprites[sDecor_CameraSpriteObjectIdx1].callback = SpriteCallbackDummy;
-            StringExpandPlaceholders(gStringVar7, gText_StopPuttingAwayDecorations);
-            DisplayItemMessageOnField(taskId, gStringVar7, StopPuttingAwayDecorationsPrompt);
+            StringExpandPlaceholders(gStringVar11, gText_StopPuttingAwayDecorations);
+            DisplayItemMessageOnField(taskId, gStringVar11, StopPuttingAwayDecorationsPrompt);
         }
         else
         {
-            StringExpandPlaceholders(gStringVar7, gText_NoDecorationHere);
-            DisplayItemMessageOnField(taskId, gStringVar7, ContinuePuttingAwayDecorationsPrompt);
+            StringExpandPlaceholders(gStringVar11, gText_NoDecorationHere);
+            DisplayItemMessageOnField(taskId, gStringVar11, ContinuePuttingAwayDecorationsPrompt);
         }
     }
 }
@@ -2698,13 +2698,13 @@ static void DecorationItemsMenuAction_AttemptToss(u8 taskId)
     if (IsSelectedDecorInThePC() == TRUE)
     {
         StringCopy(gStringVar1, gDecorations[gCurDecorationItems[gCurDecorationIndex]].name);
-        StringExpandPlaceholders(gStringVar7, gText_DecorationWillBeDiscarded);
-        DisplayItemMessageOnField(taskId, gStringVar7, TossDecorationPrompt);
+        StringExpandPlaceholders(gStringVar11, gText_DecorationWillBeDiscarded);
+        DisplayItemMessageOnField(taskId, gStringVar11, TossDecorationPrompt);
     }
     else
     {
-        StringExpandPlaceholders(gStringVar7, gText_CantThrowAwayInUse);
-        DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationItemsAfterInvalidSelection);
+        StringExpandPlaceholders(gStringVar11, gText_CantThrowAwayInUse);
+        DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationItemsAfterInvalidSelection);
     }
 }
 
@@ -2720,6 +2720,6 @@ static void TossDecoration(u8 taskId)
     sNumOwnedDecorationsInCurCategory = GetNumOwnedDecorationsInCategory(sCurDecorationCategory);
     CondenseDecorationsInCategory(sCurDecorationCategory);
     IdentifyOwnedDecorationsCurrentlyInUseInternal(taskId);
-    StringExpandPlaceholders(gStringVar7, gText_DecorationThrownAway);
-    DisplayItemMessageOnField(taskId, gStringVar7, ReturnToDecorationItemsAfterInvalidSelection);
+    StringExpandPlaceholders(gStringVar11, gText_DecorationThrownAway);
+    DisplayItemMessageOnField(taskId, gStringVar11, ReturnToDecorationItemsAfterInvalidSelection);
 }

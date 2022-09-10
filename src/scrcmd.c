@@ -1503,16 +1503,16 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     // + 6 for the 6 bytes at the start of a braille message (brailleformat macro)
     // In RS these bytes are used to position the text and window, but
     // in Emerald they are unused and position is calculated below instead
-    StringExpandPlaceholders(gStringVar7, ptr + 6);
+    StringExpandPlaceholders(gStringVar11, ptr + 6);
 
-    width = GetStringWidth(FONT_BRAILLE, gStringVar7, -1) / 8u;
+    width = GetStringWidth(FONT_BRAILLE, gStringVar11, -1) / 8u;
 
     if (width > 28)
         width = 28;
 
-    for (i = 0, height = 4; gStringVar7[i] != EOS;)
+    for (i = 0, height = 4; gStringVar11[i] != EOS;)
     {
-        if (gStringVar7[i++] == CHAR_NEWLINE)
+        if (gStringVar11[i++] == CHAR_NEWLINE)
             height += 3;
     }
 
@@ -1540,7 +1540,7 @@ bool8 ScrCmd_braillemessage(struct ScriptContext *ctx)
     DrawStdWindowFrame(sBrailleWindowId, FALSE);
     PutWindowTilemap(sBrailleWindowId);
     FillWindowPixelBuffer(sBrailleWindowId, PIXEL_FILL(1));
-    AddTextPrinterParameterized(sBrailleWindowId, FONT_BRAILLE, gStringVar7, xText, yText, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sBrailleWindowId, FONT_BRAILLE, gStringVar11, xText, yText, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(sBrailleWindowId, COPYWIN_FULL);
     return FALSE;
 }
@@ -1667,7 +1667,7 @@ bool8 ScrCmd_vbuffermessage(struct ScriptContext *ctx)
 {
     const u8 *ptr = (u8 *)(ScriptReadWord(ctx) - sAddressOffset);
 
-    StringExpandPlaceholders(gStringVar7, ptr);
+    StringExpandPlaceholders(gStringVar11, ptr);
     return FALSE;
 }
 

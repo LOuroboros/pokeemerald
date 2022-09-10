@@ -4693,13 +4693,13 @@ static void DoTVShowPokemonFanClubLetter(void)
         TVShowDone();
         break;
     case 50:
-        ConvertEasyChatWordsToString(gStringVar7, show->fanclubLetter.words, 2, 2);
-        ShowFieldMessage(gStringVar7);
+        ConvertEasyChatWordsToString(gStringVar11, show->fanclubLetter.words, 2, 2);
+        ShowFieldMessage(gStringVar11);
         sTVShowState = 1;
         return;
     case 51:
-        ConvertEasyChatWordsToString(gStringVar7, show->fanclubLetter.words, 2, 2);
-        ShowFieldMessage(gStringVar7);
+        ConvertEasyChatWordsToString(gStringVar11, show->fanclubLetter.words, 2, 2);
+        ShowFieldMessage(gStringVar11);
         sTVShowState = 3;
         return;
     }
@@ -4733,8 +4733,8 @@ static void DoTVShowRecentHappenings(void)
         TVShowDone();
         break;
     case 50:
-        ConvertEasyChatWordsToString(gStringVar7, show->recentHappenings.words, 2, 2);
-        ShowFieldMessage(gStringVar7);
+        ConvertEasyChatWordsToString(gStringVar11, show->recentHappenings.words, 2, 2);
+        ShowFieldMessage(gStringVar11);
         sTVShowState = 1;
         return;
     }

@@ -870,10 +870,10 @@ static void AskUsePokeblock(void)
     GetMonData(&gPlayerParty[GetPartyIdFromSelectionId(sMenu->info.curSelection)], MON_DATA_NICKNAME, stringBuffer);
     StringGet_Nickname(stringBuffer);
     StringAppend(stringBuffer, gText_GetsAPokeBlockQuestion);
-    StringCopy(gStringVar7, stringBuffer);
+    StringCopy(gStringVar11, stringBuffer);
     FillWindowPixelBuffer(WIN_TEXT, 17);
     DrawTextBorderOuter(WIN_TEXT, 151, 14);
-    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar7, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar11, 0, 1, 0, NULL);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
     CreateYesNoMenu(&sUsePokeblockYesNoWinTemplate, 151, 14, 0);
@@ -910,11 +910,11 @@ static void PrintFirstEnhancement(void)
     }
 
     if (sInfo->condition < CONDITION_COUNT)
-        BufferEnhancedText(gStringVar7, sInfo->condition, sInfo->enhancements[sInfo->condition]);
+        BufferEnhancedText(gStringVar11, sInfo->condition, sInfo->enhancements[sInfo->condition]);
     else
-        BufferEnhancedText(gStringVar7, sInfo->condition, 0);
+        BufferEnhancedText(gStringVar11, sInfo->condition, 0);
 
-    PrintMenuWindowText(gStringVar7);
+    PrintMenuWindowText(gStringVar11);
     PutWindowTilemap(WIN_TEXT);
     CopyWindowToVram(WIN_TEXT, COPYWIN_FULL);
 }
@@ -938,8 +938,8 @@ static bool8 TryPrintNextEnhancement(void)
         }
     }
 
-    BufferEnhancedText(gStringVar7, sInfo->condition, sInfo->enhancements[sInfo->condition]);
-    PrintMenuWindowText(gStringVar7);
+    BufferEnhancedText(gStringVar11, sInfo->condition, sInfo->enhancements[sInfo->condition]);
+    PrintMenuWindowText(gStringVar11);
     CopyWindowToVram(WIN_TEXT, COPYWIN_GFX);
 
     return TRUE;
@@ -963,7 +963,7 @@ static void EraseMenuWindow(void)
 
 static void PrintMenuWindowText(const u8 *message)
 {
-    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar7, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_TEXT, FONT_NORMAL, gStringVar11, 0, 1, 0, NULL);
 }
 
 static void BufferEnhancedText(u8 *dest, u8 condition, s16 enhancement)

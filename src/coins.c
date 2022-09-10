@@ -15,10 +15,10 @@ void PrintCoinsString(u32 coinAmount)
     u32 xAlign;
 
     ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, MAX_COIN_DIGITS);
-    StringExpandPlaceholders(gStringVar7, gText_Coins);
+    StringExpandPlaceholders(gStringVar11, gText_Coins);
 
-    xAlign = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar7, 0x40);
-    AddTextPrinterParameterized(sCoinsWindowId, FONT_NORMAL, gStringVar7, xAlign, 1, 0, NULL);
+    xAlign = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar11, 0x40);
+    AddTextPrinterParameterized(sCoinsWindowId, FONT_NORMAL, gStringVar11, xAlign, 1, 0, NULL);
 }
 
 void ShowCoinsWindow(u32 coinAmount, u8 x, u8 y)

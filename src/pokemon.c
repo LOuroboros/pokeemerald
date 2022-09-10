@@ -7556,7 +7556,7 @@ void SetMonPreventsSwitchingString(void)
 
     PREPARE_MON_NICK_WITH_PREFIX_BUFFER(gBattleTextBuff2, gBattlerInMenuId, GetPartyIdFromBattlePartyId(gBattlerPartyIndexes[gBattlerInMenuId]))
 
-    BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar7);
+    BattleStringExpandPlaceholders(gText_PkmnsXPreventsSwitching, gStringVar11);
 }
 
 static s32 GetWildMonTableIdInAlteringCave(u16 species)

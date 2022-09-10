@@ -1203,8 +1203,8 @@ static void PokeblockAction_Toss(u8 taskId)
 
     ClearStdWindowAndFrameToTransparent(tWindowId, FALSE);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
-    StringExpandPlaceholders(gStringVar7, gText_ThrowAwayVar1);
-    DisplayMessageAndContinueTask(taskId, WIN_TOSS_MSG, 10, 13, FONT_NORMAL, GetPlayerTextSpeedDelay(), gStringVar7, CreateTossPokeblockYesNoMenu);
+    StringExpandPlaceholders(gStringVar11, gText_ThrowAwayVar1);
+    DisplayMessageAndContinueTask(taskId, WIN_TOSS_MSG, 10, 13, FONT_NORMAL, GetPlayerTextSpeedDelay(), gStringVar11, CreateTossPokeblockYesNoMenu);
 }
 
 static void CreateTossPokeblockYesNoMenu(u8 taskId)
@@ -1214,8 +1214,8 @@ static void CreateTossPokeblockYesNoMenu(u8 taskId)
 
 static void TossedPokeblockMessage(u8 taskId)
 {
-    StringExpandPlaceholders(gStringVar7, gText_Var1ThrownAway);
-    DisplayMessageAndContinueTask(taskId, WIN_TOSS_MSG, 10, 13, FONT_NORMAL, GetPlayerTextSpeedDelay(), gStringVar7, TossPokeblock);
+    StringExpandPlaceholders(gStringVar11, gText_Var1ThrownAway);
+    DisplayMessageAndContinueTask(taskId, WIN_TOSS_MSG, 10, 13, FONT_NORMAL, GetPlayerTextSpeedDelay(), gStringVar11, TossPokeblock);
 }
 
 static void TossPokeblock(u8 taskId)
