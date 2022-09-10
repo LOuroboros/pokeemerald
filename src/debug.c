@@ -1407,6 +1407,7 @@ static void DebugAction_Util_CheckSaveSpace(u8 taskId)
     u32 currSb1Size = (sizeof(struct SaveBlock1));
     u32 currSb2Size = (sizeof(struct SaveBlock2));
     u32 currPkmnStorageSize = (sizeof(struct PokemonStorage));
+    u32 currBoxPkmnSize = (sizeof(struct BoxPokemon));
     u32 maxSb1Size = (SECTOR_DATA_SIZE * 4);
     u32 maxSb2Size = SECTOR_DATA_SIZE;
     u32 maxPkmnStorageSize = (SECTOR_DATA_SIZE * 9);
@@ -1416,6 +1417,7 @@ static void DebugAction_Util_CheckSaveSpace(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar4, maxSb1Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar5, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar6, maxPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
+    ConvertIntToDecimalStringN(gStringVar7, currBoxPkmnSize, STR_CONV_MODE_LEFT_ALIGN, 6);
     Debug_DestroyMenu(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_CheckSavefileSize);
