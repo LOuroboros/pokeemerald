@@ -873,7 +873,7 @@
 #define ITEM_DYNAMAX_BAND 705
 
 // Misc. Key Items
-#define ITEM_BICYCLE 706
+#define ITEM_HIDDEN_STORAGE_KEY 706
 #define ITEM_MACH_BIKE 707
 #define ITEM_ACRO_BIKE 708
 #define ITEM_OLD_ROD 709

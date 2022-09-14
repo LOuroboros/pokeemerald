@@ -1,0 +1,87 @@
+.set LOCALID_SAILOR, 6
+
+AbandonedShip_HiddenStorageRoom_MapScripts::
+	map_script MAP_SCRIPT_ON_RESUME, AbandonedShip_HiddenStorageRoom_OnResume
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, AbandonedShip_HiddenStorageRoom_OnReturn
+	.byte 0
+
+AbandonedShip_HiddenStorageRoom_OnResume:
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AbandonedShip_HiddenStorageRoom_EventScript_TryRemoveBeedrill
+	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_TryRemoveBeedrill:
+	removeobject VAR_LAST_TALKED
+	savebgm MUS_NONE
+	return
+
+AbandonedShip_HiddenStorageRoom_OnReturn:
+	call_if_set FLAG_SYS_CTRL_OBJ_DELETE, AbandonedShip_HiddenStorageRoom_EventScript_TryShowSailor
+	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_TryShowSailor:
+	addobject LOCALID_SAILOR
+	return
+
+AbandonedShip_HiddenStorageRoom_EventScript_Beedrill::
+	lock
+	faceplayer
+	setwildbattle SPECIES_BEEDRILL, 30
+	playmoncry SPECIES_BEEDRILL, CRY_MODE_ENCOUNTER
+	waitmoncry
+	setflag FLAG_SYS_CTRL_OBJ_DELETE
+	setflag FLAG_ENABLE_SPECIAL_SOUND_EFFECTS
+	dowildbattle
+	clearflag FLAG_SYS_CTRL_OBJ_DELETE
+	specialvar VAR_RESULT GetBattleOutcome
+	goto_if_eq VAR_RESULT, B_OUTCOME_CAUGHT, AbandonedShip_HiddenStorageRoom_EventScript_Sailor
+	release
+	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_Sailor:
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, AbandonedShip_HiddenStorageRoom_Movement_CameraToSailor
+	waitmovement 0
+	special RemoveCameraObject
+	applymovement LOCALID_SAILOR, AbandonedShip_HiddenStorageRoom_Movement_Sailor
+	waitmovement 0
+	removeobject LOCALID_SAILOR
+	clearflag FLAG_ENABLE_SPECIAL_SOUND_EFFECTS
+	special SpawnCameraObject
+	applymovement OBJ_EVENT_ID_CAMERA, AbandonedShip_HiddenStorageRoom_Movement_CameraToPlayer
+	waitmovement 0
+	special RemoveCameraObject
+	playbgm MUS_ABANDONED_SHIP, TRUE
+	playse SE_PIN
+	applymovement OBJ_EVENT_ID_PLAYER, AbandonedShip_HiddenStorageRoom_Movement_Player
+	waitmovement 0
+	delay 60
+	release
+	end
+
+AbandonedShip_HiddenStorageRoom_Movement_CameraToSailor:
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+AbandonedShip_HiddenStorageRoom_Movement_Sailor:
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	walk_slow_down
+	step_end
+
+AbandonedShip_HiddenStorageRoom_Movement_CameraToPlayer:
+	walk_up
+	walk_up
+	walk_up
+	step_end
+
+AbandonedShip_HiddenStorageRoom_Movement_Player:
+	face_down
+	emote_question_mark
+	step_end

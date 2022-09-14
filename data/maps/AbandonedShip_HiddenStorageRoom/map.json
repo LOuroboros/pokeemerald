@@ -1,0 +1,125 @@
+{
+  "id": "MAP_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM",
+  "name": "AbandonedShip_HiddenStorageRoom",
+  "layout": "LAYOUT_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM",
+  "music": "MUS_ABANDONED_SHIP",
+  "region_map_section": "MAPSEC_ABANDONED_SHIP",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": true,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 1,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AbandonedShip_HiddenStorageRoom_EventScript_ItemDeepSeaTooth",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM_DEEP_SEA_TOOTH"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 0,
+      "y": 3,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AbandonedShip_HiddenStorageRoom_EventScript_ItemDeepSeaScale",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM_DEEP_SEA_SCALE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 2,
+      "y": 8,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AbandonedShip_HiddenStorageRoom_EventScript_ItemBeedrillite",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM_BEEDRILLITE"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 5,
+      "y": 2,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AbandonedShip_HiddenStorageRoom_EventScript_Beedrill",
+      "flag": "FLAG_FOUGHT_BEEDRILL_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 9,
+      "y": 9,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "AbandonedShip_HiddenStorageRoom_EventScript_ItemLeftovers",
+      "flag": "FLAG_ITEM_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM_LEFTOVERS"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SAILOR",
+      "x": 5,
+      "y": 6,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0x0",
+      "flag": "FLAG_HIDE_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM_SAILOR"
+    }
+  ],
+  "warp_events": [
+    {
+      "x": 4,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+      "dest_warp_id": 6
+    },
+    {
+      "x": 5,
+      "y": 14,
+      "elevation": 3,
+      "dest_map": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+      "dest_warp_id": 6
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+    {
+      "type": "hidden_item",
+      "x": 9,
+      "y": 2,
+      "elevation": 3,
+      "item": "ITEM_BIG_MALASADA",
+      "flag": "FLAG_HIDDEN_ITEM_ABANDONED_SHIP_STORAGE_ROOM_BIG_MALASADA"
+    }
+  ]
+}

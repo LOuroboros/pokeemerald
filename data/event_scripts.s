@@ -1123,3 +1123,5 @@ gText_EmptyTextString:: @ So the dynamic multichoice won't go Out of Bounds
 	.include "data/maps/Route103North/scripts.inc"
 	.include "data/scripts/fossils.inc"
 	.include "data/scripts/dexnav.inc"
+
+	.include "data/maps/AbandonedShip_HiddenStorageRoom/scripts.inc"

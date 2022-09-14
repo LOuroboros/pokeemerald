@@ -9328,16 +9328,15 @@ const struct Item gItems[] =
 
 // Misc. Key Items
 
-    [ITEM_BICYCLE] =
+    [ITEM_HIDDEN_STORAGE_KEY] =
     {
-        .name = _("Bicycle"),
-        .itemId = ITEM_BICYCLE,
+        .name = _("Storage Key"),
+        .itemId = ITEM_HIDDEN_STORAGE_KEY,
         .price = 0,
-        .description = sBicycleDesc,
+        .description = sHiddenStorageKeyDesc,
         .importance = 1,
-        .registrability = TRUE,
         .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
+        .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 

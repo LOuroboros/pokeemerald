@@ -12,10 +12,12 @@ AbandonedShip_HiddenFloorCorridors_OnLoad:
 	call_if_unset FLAG_USED_ROOM_2_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom2
 	call_if_unset FLAG_USED_ROOM_4_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom4
 	call_if_unset FLAG_USED_ROOM_6_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6
+	call_if_unset FLAG_USED_HIDDEN_STORAGE_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_LockHiddenStorageRoom
 	call_if_set FLAG_USED_ROOM_1_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom1
 	call_if_set FLAG_USED_ROOM_2_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom2
 	call_if_set FLAG_USED_ROOM_4_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom4
 	call_if_set FLAG_USED_ROOM_6_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom6
+	call_if_set FLAG_USED_HIDDEN_STORAGE_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_UnlockHiddenStorageRoom
 	end
 
 AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom1::
@@ -34,6 +36,10 @@ AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom6::
 	setmetatile 9, 3, METATILE_InsideShip_DoorIndent_Unlocked, FALSE
 	return
 
+AbandonedShip_HiddenFloorCorridors_EventScript_UnlockHiddenStorageRoom::
+	setmetatile 15, 8, METATILE_InsideShip_IntactDoor_Bottom_Unlocked, TRUE
+	return
+
 AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom1::
 	setmetatile 3, 8, METATILE_InsideShip_IntactDoor_Bottom_Locked, TRUE
 	return
@@ -48,6 +54,10 @@ AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom4::
 
 AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6::
 	setmetatile 9, 3, METATILE_InsideShip_DoorIndent_Locked, FALSE
+	return
+
+AbandonedShip_HiddenFloorCorridors_EventScript_LockHiddenStorageRoom::
+	setmetatile 15, 8, METATILE_InsideShip_IntactDoor_Bottom_Locked, TRUE
 	return
 
 AbandonedShip_HiddenFloorCorridors_EventScript_Room1Door::
@@ -106,6 +116,20 @@ AbandonedShip_HiddenFloorCorridors_EventScript_Room6Door::
 	releaseall
 	end
 
+AbandonedShip_HiddenFloorCorridors_EventScript_HiddenStorageRoomDoor::
+	lockall
+	goto_if_set FLAG_USED_HIDDEN_STORAGE_KEY, AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen
+	checkitem ITEM_HIDDEN_STORAGE_KEY
+	goto_if_eq VAR_RESULT, FALSE, AbandonedShip_HiddenFloorCorridors_EventScript_HiddenStorageRoomIsLocked
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_InsertedKey, MSGBOX_DEFAULT
+	playse SE_PIN
+	removeitem ITEM_HIDDEN_STORAGE_KEY
+	setflag FLAG_USED_HIDDEN_STORAGE_KEY
+	call AbandonedShip_HiddenFloorCorridors_EventScript_UnlockHiddenStorageRoom
+	special DrawWholeMapView
+	releaseall
+	end
+
 AbandonedShip_HiddenFloorCorridors_EventScript_Rm1IsLocked::
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked, MSGBOX_DEFAULT
 	releaseall
@@ -123,6 +147,11 @@ AbandonedShip_HiddenFloorCorridors_EventScript_Rm4IsLocked::
 
 AbandonedShip_HiddenFloorCorridors_EventScript_Rm6IsLocked::
 	msgbox AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked, MSGBOX_DEFAULT
+	releaseall
+	end
+
+AbandonedShip_HiddenFloorCorridors_EventScript_HiddenStorageRoomIsLocked::
+	msgbox AbandonedShip_HiddenFloorCorridors_Text_HiddenStorageRoomIsLocked, MSGBOX_DEFAULT
 	releaseall
 	end
 
@@ -146,6 +175,11 @@ AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked:
 AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked:
 	.string "The door is locked.\p"
 	.string "“RM. 6” is painted on the door.$"
+
+AbandonedShip_HiddenFloorCorridors_Text_HiddenStorageRoomIsLocked:
+	.string "The door is locked.\p"
+	.string "The plate on the door says\n"
+	.string "“ST---G- --OM”.$"
 
 AbandonedShip_HiddenFloorCorridors_Text_InsertedKey:
 	.string "{PLAYER} inserted and turned the\n"
