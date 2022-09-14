@@ -3534,10 +3534,10 @@ static const u8 sDynamaxBandDesc[] = _(
     "allows Dynamaxing.");
 
 // Misc. Key Items
-static const u8 sBicycleDesc[] = _(
-    "A folding bicycle\n"
-    "that is faster than\n"
-    "the Running Shoes.");
+static const u8 sHiddenStorageKeyDesc[] = _(
+    "The key to a\n"
+    "storage inside the\n"
+    "Abandoned Ship.");
 
 static const u8 sMachBikeDesc[] = _(
     "A folding bike for\n"

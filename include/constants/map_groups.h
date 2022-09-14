@@ -394,6 +394,7 @@
 #define MAP_TERRA_CAVE_END                        (99 | (24 << 8))
 #define MAP_ALTERING_CAVE                         (100 | (24 << 8))
 #define MAP_METEOR_FALLS_STEVENS_CAVE             (101 | (24 << 8))
+#define MAP_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM    (102 | (24 << 8))
 
 // gMapGroup_IndoorDynamic
 #define MAP_SECRET_BASE_RED_CAVE1    (0 | (25 << 8))

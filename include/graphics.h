@@ -8636,6 +8636,7 @@ extern const u32 gItemIcon_DevonScope[];
 extern const u32 gItemIconPalette_DevonScope[];
 extern const u32 gItemIcon_BasementKey[];
 extern const u32 gItemIconPalette_OldKey[];
+extern const u32 gItemIconPalette_SilverKey[];
 extern const u32 gItemIcon_Scanner[];
 extern const u32 gItemIconPalette_Scanner[];
 extern const u32 gItemIcon_StorageKey[];

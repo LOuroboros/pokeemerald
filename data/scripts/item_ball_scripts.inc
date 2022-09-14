@@ -661,3 +661,19 @@ AquaHideout_B1F_EventScript_ItemSharpedonite::
 MagmaHideout_4F_EventScript_ItemCameruptite::
 	finditem ITEM_CAMERUPTITE
 	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_ItemDeepSeaScale::
+	finditem ITEM_DEEP_SEA_SCALE
+	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_ItemDeepSeaTooth::
+	finditem ITEM_DEEP_SEA_TOOTH
+	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_ItemBeedrillite::
+	finditem ITEM_BEEDRILLITE
+	end
+
+AbandonedShip_HiddenStorageRoom_EventScript_ItemLeftovers::
+	finditem ITEM_LEFTOVERS
+	end

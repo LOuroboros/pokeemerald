@@ -2604,7 +2604,7 @@
     {
       "id": "LAYOUT_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
       "name": "AbandonedShip_HiddenFloorCorridors_Layout",
-      "width": 13,
+      "width": 18,
       "height": 11,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_InsideShip",
@@ -4080,6 +4080,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/Route103North/border.bin",
       "blockdata_filepath": "data/layouts/Route103North/map.bin"
+    },
+    {
+      "id": "LAYOUT_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM",
+      "name": "AbandonedShip_HiddenStorageRoom_Layout",
+      "width": 10,
+      "height": 15,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_InsideShip",
+      "border_filepath": "data/layouts/AbandonedShip_HiddenStorageRoom/border.bin",
+      "blockdata_filepath": "data/layouts/AbandonedShip_HiddenStorageRoom/map.bin"
     }
   ]
 }

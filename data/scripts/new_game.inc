@@ -271,4 +271,5 @@ EventScript_ResetAllMapFlags::
 	call EventScript_ResetAllBerries
 	setflag FLAG_HIDE_METEOR_FALLS_STEVEN
 	setflag FLAG_HIDE_MEGA_EVENT_LATIAS
+	setflag FLAG_HIDE_ABANDONED_SHIP_HIDDEN_STORAGE_ROOM_SAILOR
 	end

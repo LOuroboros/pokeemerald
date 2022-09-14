@@ -3419,7 +3419,8 @@ static const struct TrainerMon sParty_Juan1[] = {
         .lvl = 45,
         .species = SPECIES_KINGDRA,
         .heldItem = ITEM_CHESTO_BERRY,
-        .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST}
+        .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST},
+        .shiny = TRUE
     },
     {
         .ivs = {30, 30, 30, 30, 30, 30},
@@ -9902,7 +9903,8 @@ static const struct TrainerMon sParty_Juan2[] = {
         .lvl = 65,
         .species = SPECIES_KINGDRA,
         //.heldItem = ITEM_KINGDRATITE,
-        .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST}
+        .moves = {MOVE_WATER_PULSE, MOVE_DOUBLE_TEAM, MOVE_ICE_BEAM, MOVE_REST},
+        .shiny = TRUE
     },
     {
         .ivs = {31, 31, 31, 31, 31, 31},
