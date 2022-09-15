@@ -81,9 +81,5 @@ u8 ItemId_GetFlingPower(u16 itemId);
 
 void DeserializeTmHmItemSlots(void);
 u16 GetBagItemQuantity(u16 *quantity);
-u8 CountUsedBagItemSlots(void);
-u8 CountUsedPokeBallItemSlots(void);
-u8 CountUsedBerryItemSlots(void);
-u8 CountUsedKeyItemSlots(void);
 
 #endif // GUARD_ITEM_H

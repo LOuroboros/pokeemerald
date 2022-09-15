@@ -3304,40 +3304,30 @@ static void DebugAction_Give_FillPCBoxes(u8 taskId)
         }
     }
     Debug_DestroyMenu(taskId);
-    ScriptContext_Enable();
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
 static void DebugAction_Give_FillPCItemStorage(u8 taskId)
 {
     u16 itemId;
-    u8 usedSlots;
 
     for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
     {
-        usedSlots = CountUsedPCItemSlots();
         if (!CheckPCHasItem(itemId, MAX_PC_ITEM_CAPACITY))
             AddPCItem(itemId, MAX_PC_ITEM_CAPACITY);
-        if (usedSlots == PC_ITEMS_COUNT)
-            break;
     }
     Debug_DestroyMenu(taskId);
-    ScriptContext_Enable();
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
 static void DebugAction_Give_FillItemsPocket(u8 taskId)
 {
     u16 itemId;
-    u8 usedSlots;
 
     for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
     {
-        if (ItemId_GetPocket(itemId) != POCKET_ITEMS)
-            continue;
-        usedSlots = CountUsedBagItemSlots();
-        if (CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
+        if (ItemId_GetPocket(itemId) == POCKET_ITEMS && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
-        if (usedSlots == BAG_ITEMS_COUNT)
-            break;
     }
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
@@ -3346,17 +3336,11 @@ static void DebugAction_Give_FillItemsPocket(u8 taskId)
 static void DebugAction_Give_FillPokeBallsPocket(u8 taskId)
 {
     u16 itemId;
-    u8 usedSlots;
 
-    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    for (itemId = FIRST_BALL; itemId < LAST_BALL; itemId++)
     {
-        if (ItemId_GetPocket(itemId) != POCKET_POKE_BALLS)
-            continue;
-        usedSlots = CountUsedPokeBallItemSlots();
         if (CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
-        if (usedSlots == BAG_POKEBALLS_COUNT)
-            break;
     }
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
@@ -3365,17 +3349,11 @@ static void DebugAction_Give_FillPokeBallsPocket(u8 taskId)
 static void DebugAction_Give_FillBerriesPocket(u8 taskId)
 {
     u16 itemId;
-    u8 usedSlots;
 
-    for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
+    for (itemId = FIRST_BERRY_INDEX; itemId < LAST_BERRY_INDEX; itemId++)
     {
-        if (ItemId_GetPocket(itemId) != POCKET_BERRIES)
-            continue;
-        usedSlots = CountUsedBerryItemSlots();
         if (CheckBagHasSpace(itemId, MAX_BERRY_CAPACITY))
             AddBagItem(itemId, MAX_BERRY_CAPACITY);
-        if (usedSlots == BAG_BERRIES_COUNT)
-            break;
     }
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
@@ -3384,17 +3362,11 @@ static void DebugAction_Give_FillBerriesPocket(u8 taskId)
 static void DebugAction_Give_FillKeyItemsPocket(u8 taskId)
 {
     u16 itemId;
-    u8 usedSlots;
 
     for (itemId = 1; itemId < ITEMS_COUNT; itemId++)
     {
-        if (ItemId_GetPocket(itemId) != POCKET_KEY_ITEMS)
-            continue;
-        usedSlots = CountUsedKeyItemSlots();
-        if (CheckBagHasSpace(itemId, 1))
+        if (ItemId_GetPocket(itemId) == POCKET_KEY_ITEMS && CheckBagHasSpace(itemId, 1))
             AddBagItem(itemId, 1);
-        if (usedSlots == BAG_KEYITEMS_COUNT)
-            break;
     }
     Debug_DestroyMenu(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
