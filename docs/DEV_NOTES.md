@@ -28,9 +28,12 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
   * Don't break the chain if the Player moves to another map.
 * Complete the features and credits list.
 * Re-implement Furret's dppt_hgss_music branch because pulling it is a pita.
+* Find out what the heck is going on with the water tiles and the field moves.
+  * When you try to use Surf in front of a water tile, a Heatmor is generated in the Player's party for some reason.
 
 ### Low Priority
 #### That means things that I should do someday.
+* Swap the `SE_BALL` in `GroundEffect_WalkOnTile` for the HGSS walking sound effect *(`SE_HG_ASHIOTO_A_WALK`?)* someday.
 * PokéNav related tweaks
   * Make the DexNav's Overworld Info Bar use a border frame like the textbox in battles, instead of being a boring black rectangle.
   * Swap the representative colors of the Match Call and the DexNav *(I prefer cyan for the Match Call and red for the DexNav)*.
