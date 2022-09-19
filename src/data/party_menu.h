@@ -881,7 +881,7 @@ static const u8 sPartyMenuActionCounts[] =
     [ACTIONS_TAKEITEM_TOSS] = ARRAY_COUNT(sPartyMenuAction_TakeItemTossCancel)
 };
 
-static const u16 sFieldMoves[FIELD_MOVES_COUNT + 1] =
+static const u16 sFieldMoves[FIELD_MOVES_COUNT] =
 {
     [FIELD_MOVE_CUT]          = MOVE_CUT,
     [FIELD_MOVE_FLASH]        = MOVE_FLASH,
@@ -898,9 +898,6 @@ static const u16 sFieldMoves[FIELD_MOVES_COUNT + 1] =
     [FIELD_MOVE_SOFT_BOILED]  = MOVE_SOFT_BOILED,
     [FIELD_MOVE_SWEET_SCENT]  = MOVE_SWEET_SCENT,
     [FIELD_MOVE_HEADBUTT]     = MOVE_HEADBUTT,
-    // NOTE: This value is used as the terminal value for the table. There's no reason to do this, as the size of the table is known.
-    //       Whichever move shares this value (MOVE_SWORDS_DANCE by default) if present will be treated as the end of the array rather than a field move.
-    [FIELD_MOVES_COUNT]       = FIELD_MOVES_COUNT
 };
 
 struct
