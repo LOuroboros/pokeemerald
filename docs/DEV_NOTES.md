@@ -21,6 +21,10 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 ### High Priority
 #### That means things that I should do as fast as possible.
 
+* Fix the problem with the field moves on the party screen, and the one with Surf and the water tiles.
+  * The field moves stopped appearing in the party screen at some point after [a2391f3a](https://github.com/LOuroboros/pokeemerald/commit/a2391f3a).
+  * The issue with Surf when interacting with a water tile started to happen at some point after [faaebd32](https://github.com/LOuroboros/pokeemerald/commit/faaebd32).
+  * Neither issue is present in [2cc045a7](https://github.com/LOuroboros/pokeemerald/commit/2cc045a7).
 * Finish the dusk time palettes for the Day/Night system and merge it.
   * But before that I should try to merge Merrrp's branch which also includes a dynamic overworld palette system, overworld shadows and following Pokémon.
 * Tweak Chain Capture
