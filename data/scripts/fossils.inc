@@ -111,7 +111,8 @@ FossilScript_ReceiveFossilMonPC::
 
 FossilScript_ReceivedFossilMonFanfare::
 	bufferspeciesname 0, VAR_TEMP_1
-	playfanfare MUS_HG_EVOLVED
+@	playfanfare MUS_HG_EVOLVED
+	playfanfare MUS_EVOLVED
 	message FossilScript_Text_ReceivedFossilMon
 	waitmessage
 	waitfanfare

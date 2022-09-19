@@ -34,6 +34,7 @@ gReservedSpritePaletteCount:
 	.align 4
 	.include "link.o"
 	.include "AgbRfu_LinkManager.o"
+	.include "link_rfu_2.o"
 	.include "rtc.o"
 	.include "battle_main.o"
 	.include "random.o"

@@ -72,7 +72,8 @@ EventScript_PlayFanfareObtainedItem::
 	return
 
 EventScript_PlayFanfareObtainedKeyItem::
-	playfanfare MUS_HG_OBTAIN_KEY_ITEM
+@	playfanfare MUS_HG_OBTAIN_KEY_ITEM
+	playfanfare MUS_RG_OBTAIN_KEY_ITEM
 	return
 
 EventScript_PlayFanfareObtainedTMHM::
