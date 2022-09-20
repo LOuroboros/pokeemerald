@@ -23,13 +23,7 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 
 * Finish the dusk time palettes for the Day/Night system and merge it.
   * But before that I should try to merge Merrrp's branch which also includes a dynamic overworld palette system, overworld shadows and following Pokémon.
-* Tweak Chain Capture
-  * Reduce 10% chance to find 6x31 after 60 captures to 5% instead.
-  * Don't break the chain if the Player moves to another map.
 * Complete the features and credits list.
-* Re-implement Furret's dppt_hgss_music branch because pulling it is a pita.
-* Find out what the heck is going on with the water tiles and the field moves.
-  * When you try to use Surf in front of a water tile, a Heatmor is generated in the Player's party for some reason.
 
 ### Low Priority
 #### That means things that I should do someday.

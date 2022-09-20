@@ -72,9 +72,6 @@ struct MapHeader const *const GetMapHeaderFromConnection(struct MapConnection *c
 
 void InitMap(void)
 {
-    gChainFishingStreak = 0; // reset chain fishing on map transition
-    VarSet(VAR_CURRENTLY_CHAINED_SPECIES, 0); // reset capture chain on map transition
-    VarSet(VAR_WILD_POKEMON_CHAIN_COUNT, 0); // reset capture chain on map transition
     InitMapLayoutData(&gMapHeader);
     SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     RunOnLoadMapScript();
