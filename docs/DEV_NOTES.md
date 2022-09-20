@@ -21,9 +21,6 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 ### High Priority
 #### That means things that I should do as fast as possible.
 
-* Fix the problem with the field moves not showing up in the party screen.
-  * Field moves in the party screen stopped showing up at some point after [a2391f](https://github.com/LOuroboros/pokeemerald/commit/a2391f) and before [4015fc](https://github.com/LOuroboros/pokeemerald/commit/4015fc).
-  * The culprit must be either [144e1a](https://github.com/LOuroboros/pokeemerald/commit/144e1a) or [4015fc](https://github.com/LOuroboros/pokeemerald/commit/4015fc).
 * Finish the dusk time palettes for the Day/Night system and merge it.
   * But before that I should try to merge Merrrp's branch which also includes a dynamic overworld palette system, overworld shadows and following Pokémon.
 * Tweak Chain Capture
