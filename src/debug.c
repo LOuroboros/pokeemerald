@@ -49,6 +49,10 @@
 #include "constants/daycare.h"
 #include "debug.h"
 #include "rtc.h"
+#include "party_menu.h"
+#include "constants/weather.h"
+#include "constants/battle_frontier.h"
+#include "constants/coins.h"
 
 #ifdef DEBUG_MENU_ENABLED
 
@@ -88,6 +92,7 @@ enum { // Util
     DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY,
     DEBUG_UTIL_MENU_ITEM_GIVE_STATUS_AILMENT,
     DEBUG_UTIL_MENU_ITEM_TEST_RAYQUAZA_CUTSCENE,
+    DEBUG_UTIL_MENU_ITEM_CHANGE_WEATHER,
 };
 enum { // Flags
     DEBUG_FLAG_MENU_ITEM_FLAGS,
@@ -115,19 +120,19 @@ enum { // Vars
 };
 enum { // Give
     DEBUG_GIVE_MENU_GIVE_ITEM,
-    DEBUG_GIVE_MENU_GIVE_ALL_TMS,
     DEBUG_GIVE_MENU_GIVE_EGG,
     DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE,
     DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX,
     DEBUG_GIVE_MENU_GIVE_MAX_MONEY,
     DEBUG_GIVE_MENU_GIVE_MAX_COINS,
+    DEBUG_GIVE_MENU_GIVE_MAX_BATTLE_POINTS,
     DEBUG_GIVE_MENU_FILL_PC_BOXES,
     DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE,
     DEBUG_GIVE_MENU_FILL_ITEMS_POCKET,
     DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET,
+    DEBUG_GIVE_MENU_FILL_TM_HM_POCKET,
     DEBUG_GIVE_MENU_FILL_BERRIES_POCKET,
     DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET,
-    DEBUG_GIVE_MENU_GIVE_DEBUG_PACK,
 };
 enum { //Sound
     DEBUG_SOUND_MENU_ITEM_SE,
@@ -181,11 +186,14 @@ enum { // Badges
 #define DEBUG_MAIN_MENU_WIDTH 20
 #define DEBUG_MAIN_MENU_HEIGHT 8
 
-#define DEBUG_NUMBER_DISPLAY_WIDTH 10
+#define DEBUG_NUMBER_DISPLAY_WIDTH 20
 #define DEBUG_NUMBER_DISPLAY_HEIGHT 4
 
-#define DEBUG_NUMBER_DISPLAY_SOUND_WIDTH 20
+#define DEBUG_NUMBER_DISPLAY_SOUND_WIDTH 28
 #define DEBUG_NUMBER_DISPLAY_SOUND_HEIGHT 6
+
+#define DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH 15
+#define DEBUG_NUMBER_DISPLAY_MEDIUM_HEIGHT 3
 
 #define DEBUG_NUMBER_DIGITS_FLAGS 4
 #define DEBUG_NUMBER_DIGITS_VARIABLES 5
@@ -223,6 +231,7 @@ struct DebugMonData
 // Define functions
 static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMtemplate);
 static void Debug_DestroyMenu(u8);
+static void Debug_DestroyMenu_Full(u8);
 static void DebugAction_Cancel(u8);
 static void DebugAction_DestroyExtraWindow(u8 taskId);
 
@@ -271,6 +280,8 @@ static void DebugAction_Util_DeletePokemon(u8 taskId);
 static void DebugAction_Util_ClearParty(u8 taskId);
 static void DebugAction_Util_GiveStatusAilment(u8 taskId);
 static void DebugAction_Util_TestRayquazaCutscene(u8 taskId);
+static void DebugAction_Util_ChangeWeather(u8 taskId);
+static void DebugAction_Util_Weather_SelectId(u8 taskId);
 
 static void DebugAction_Flags_Flags(u8 taskId);
 static void DebugAction_Flags_FlagsSelect(u8 taskId);
@@ -301,7 +312,6 @@ static void DebugAction_Vars_SetValue(u8 taskId);
 static void DebugAction_Give_Item(u8 taskId);
 static void DebugAction_Give_Item_SelectId(u8 taskId);
 static void DebugAction_Give_Item_SelectQuantity(u8 taskId);
-static void DebugAction_Give_AllTMs(u8 taskId);
 static void DebugAction_Give_Egg(u8 taskId);
 static void DebugAction_Give_Egg_SelectId(u8 taskId);
 static void DebugAction_Give_PokemonSimple(u8 taskId);
@@ -316,13 +326,14 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId);
 static void DebugAction_Give_Pokemon_Move(u8 taskId);
 static void DebugAction_Give_MaxMoney(u8 taskId);
 static void DebugAction_Give_MaxCoins(u8 taskId);
+static void DebugAction_Give_MaxBattlePoints(u8 taskId);
 static void DebugAction_Give_FillPCBoxes(u8 taskId);
 static void DebugAction_Give_FillPCItemStorage(u8 taskId);
 static void DebugAction_Give_FillItemsPocket(u8 taskId);
 static void DebugAction_Give_FillPokeBallsPocket(u8 taskId);
+static void DebugAction_Give_FillTMHMPocket(u8 taskId);
 static void DebugAction_Give_FillBerriesPocket(u8 taskId);
 static void DebugAction_Give_FillKeyItemsPocket(u8 taskId);
-static void DebugAction_Give_DebugPack(u8 taskId);
 
 static void DebugAction_Sound_SE(u8 taskId);
 static void DebugAction_Sound_SE_SelectId(u8 taskId);
@@ -373,7 +384,6 @@ static void DebugTask_HandleMenuInput(u8 taskId, void (*HandleInput)(u8));
 static void DebugAction_OpenSubMenu(u8 taskId, struct ListMenuTemplate LMtemplate);
 
 extern u8 DebugScript_CheckSavefileSize[];
-extern u8 DebugScript_DebugPack[];
 extern u8 PlayersHouse_2F_EventScript_SetWallClock[];
 extern u8 PlayersHouse_2F_EventScript_CheckWallClock[];
 extern u8 Script_PokemonDataInfoBox[];
@@ -386,9 +396,7 @@ extern u8 DebugScript_GiveStatusAilment[];
 #define ABILITY_NAME_LENGTH 16
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
 
-// *******************************
-//Maps per map group COPY FROM /include/constants/map_groups.h
- static const u8 MAP_GROUP_COUNT[] = {57, 5, 5, 6, 7, 8, 9, 7, 7, 14, 8, 17, 10, 23, 13, 15, 15, 2, 2, 2, 3, 1, 1, 1, 108, 61, 89, 2, 1, 13, 1, 1, 3, 1, 0};
+#include "data/map_group_count.h"
 
 // Text
 // Main Menu
@@ -428,6 +436,8 @@ static const u8 sDebugText_Util_DeletePokemon[] =            _("Delete Pokémon"
 static const u8 sDebugText_Util_ClearParty[] =               _("Clear Party");
 static const u8 sDebugText_Util_GiveStatusAilment[] =        _("Give Status Ailment");
 static const u8 sDebugText_Util_TestRayquazaCutscene[] =     _("Test Rayquaza Cutscene");
+static const u8 sDebugText_Util_ChangeWeather[] =            _("Change Weather");
+static const u8 sDebugText_Util_Weather_ID[] =               _("Weather Id: {STR_VAR_3}\n{STR_VAR_1}\n{STR_VAR_2}");
 // Flags Menu
 static const u8 sDebugText_Flags_Flags[] =                   _("Edit Flags");
 static const u8 sDebugText_Flags_Badges[] =                  _("Toggle Badges");
@@ -461,7 +471,6 @@ static const u8 sDebugText_VariableValueSet[] = _("Var: {STR_VAR_1}             
 static const u8 sDebugText_Give_GiveItem[] =            _("Give Item");
 static const u8 sDebugText_ItemQuantity[] =             _("Quantity:       \n{STR_VAR_1}    \n\n{STR_VAR_2}");
 static const u8 sDebugText_ItemID[] =                   _("Item Id: {STR_VAR_3}\n{STR_VAR_1}    \n\n{STR_VAR_2}");
-static const u8 sDebugText_Give_AllTMs[] =              _("Give All TMs");
 static const u8 sDebugText_Give_Egg[] =                 _("Give Egg");
 static const u8 sDebugText_Give_GivePokemonSimple[] =   _("Give Pkmn (Basic)");
 static const u8 sDebugText_Give_GivePokemonComplex[] =  _("Give Pkmn (Adv.)");
@@ -482,14 +491,15 @@ static const u8 sDebugText_PokemonMove_1[] =            _("Move 1: {STR_VAR_3}  
 static const u8 sDebugText_PokemonMove_2[] =            _("Move 2: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 sDebugText_PokemonMove_3[] =            _("Move 3: {STR_VAR_3}                   \n{STR_VAR_1}           \n          \n{STR_VAR_2}");
 static const u8 sDebugText_Give_MaxMoney[] =            _("Give Max. Money");
+static const u8 sDebugText_Give_MaxCoins[] =            _("Give Max. Coins");
+static const u8 sDebugText_Give_MaxBattlePoints[] =     _("Give Max. Battle Points");
 static const u8 sDebugText_Give_FillPCBoxes[] =         _("Fill PC Boxes");
 static const u8 sDebugText_Give_FillPCItemStorage[] =   _("Fill PC Items");
 static const u8 sDebugText_Give_FillItemsPocket[] =     _("Fill Items Pocket");
 static const u8 sDebugText_Give_FillPokeBallsPocket[] = _("Fill Poké Balls Pocket");
+static const u8 sDebugText_Give_FillTMHMPocket[] =      _("Fill TM/HM Pocket");
 static const u8 sDebugText_Give_FillBerriesPocket[] =   _("Fill Berries Pocket");
 static const u8 sDebugText_Give_FillKeyItemsPocket[] =  _("Fill Key Items Pocket");
-static const u8 sDebugText_Give_MaxCoins[] =            _("Give Max. Coins");
-static const u8 sDebugText_Give_GiveDebugPack[] =       _("Debug Pack");
 // Sound Mneu
 static const u8 sDebugText_Sound_SE[] =     _("Effects");
 static const u8 sDebugText_Sound_SE_ID[] =  _("Sound Id: {STR_VAR_3}\n{STR_VAR_1}    \n{STR_VAR_2}");
@@ -609,6 +619,7 @@ static const struct ListMenuItem sDebugMenu_Items_Utilities[] =
     [DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY]            = {sDebugText_Util_ClearParty,           DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY},
     [DEBUG_UTIL_MENU_ITEM_GIVE_STATUS_AILMENT]    = {sDebugText_Util_GiveStatusAilment,    DEBUG_UTIL_MENU_ITEM_GIVE_STATUS_AILMENT},
     [DEBUG_UTIL_MENU_ITEM_TEST_RAYQUAZA_CUTSCENE] = {sDebugText_Util_TestRayquazaCutscene, DEBUG_UTIL_MENU_ITEM_TEST_RAYQUAZA_CUTSCENE},
+    [DEBUG_UTIL_MENU_ITEM_CHANGE_WEATHER]         = {sDebugText_Util_ChangeWeather,        DEBUG_UTIL_MENU_ITEM_CHANGE_WEATHER},
 };
 static const struct ListMenuItem sDebugMenu_Items_Flags[] =
 {
@@ -639,19 +650,19 @@ static const struct ListMenuItem sDebugMenu_Items_Vars[] =
 static const struct ListMenuItem sDebugMenu_Items_Give[] =
 {
     [DEBUG_GIVE_MENU_GIVE_ITEM]              = {sDebugText_Give_GiveItem,            DEBUG_GIVE_MENU_GIVE_ITEM},
-    [DEBUG_GIVE_MENU_GIVE_ALL_TMS]           = {sDebugText_Give_AllTMs,              DEBUG_GIVE_MENU_GIVE_ALL_TMS},
     [DEBUG_GIVE_MENU_GIVE_EGG]               = {sDebugText_Give_Egg,                 DEBUG_GIVE_MENU_GIVE_EGG},
     [DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE]    = {sDebugText_Give_GivePokemonSimple,   DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE},
     [DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX]   = {sDebugText_Give_GivePokemonComplex,  DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX},
     [DEBUG_GIVE_MENU_GIVE_MAX_MONEY]         = {sDebugText_Give_MaxMoney,            DEBUG_GIVE_MENU_GIVE_MAX_MONEY},
     [DEBUG_GIVE_MENU_GIVE_MAX_COINS]         = {sDebugText_Give_MaxCoins,            DEBUG_GIVE_MENU_GIVE_MAX_COINS},
+    [DEBUG_GIVE_MENU_GIVE_MAX_BATTLE_POINTS] = {sDebugText_Give_MaxBattlePoints,     DEBUG_GIVE_MENU_GIVE_MAX_BATTLE_POINTS},
     [DEBUG_GIVE_MENU_FILL_PC_BOXES]          = {sDebugText_Give_FillPCBoxes,         DEBUG_GIVE_MENU_FILL_PC_BOXES},
     [DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE]   = {sDebugText_Give_FillPCItemStorage,   DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE},
     [DEBUG_GIVE_MENU_FILL_ITEMS_POCKET]      = {sDebugText_Give_FillItemsPocket,     DEBUG_GIVE_MENU_FILL_ITEMS_POCKET},
     [DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET] = {sDebugText_Give_FillPokeBallsPocket, DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET},
+    [DEBUG_GIVE_MENU_FILL_TM_HM_POCKET]      = {sDebugText_Give_FillTMHMPocket,      DEBUG_GIVE_MENU_FILL_TM_HM_POCKET},
     [DEBUG_GIVE_MENU_FILL_BERRIES_POCKET]    = {sDebugText_Give_FillBerriesPocket,   DEBUG_GIVE_MENU_FILL_BERRIES_POCKET},
     [DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET]  = {sDebugText_Give_FillKeyItemsPocket,  DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET},
-    [DEBUG_GIVE_MENU_GIVE_DEBUG_PACK]        = {sDebugText_Give_GiveDebugPack,       DEBUG_GIVE_MENU_GIVE_DEBUG_PACK},
 };
 static const struct ListMenuItem sDebugMenu_Items_Sound[] =
 {
@@ -741,6 +752,7 @@ static void (*const sDebugMenu_Actions_Utilities[])(u8) =
     [DEBUG_UTIL_MENU_ITEM_CLEAR_PARTY]            = DebugAction_Util_ClearParty,
     [DEBUG_UTIL_MENU_ITEM_GIVE_STATUS_AILMENT]    = DebugAction_Util_GiveStatusAilment,
     [DEBUG_UTIL_MENU_ITEM_TEST_RAYQUAZA_CUTSCENE] = DebugAction_Util_TestRayquazaCutscene,
+    [DEBUG_UTIL_MENU_ITEM_CHANGE_WEATHER]         = DebugAction_Util_ChangeWeather,
 };
 static void (*const sDebugMenu_Actions_Flags[])(u8) =
 {
@@ -771,19 +783,19 @@ static void (*const sDebugMenu_Actions_Vars[])(u8) =
 static void (*const sDebugMenu_Actions_Give[])(u8) =
 {
     [DEBUG_GIVE_MENU_GIVE_ITEM]              = DebugAction_Give_Item,
-    [DEBUG_GIVE_MENU_GIVE_ALL_TMS]           = DebugAction_Give_AllTMs,
     [DEBUG_GIVE_MENU_GIVE_EGG]               = DebugAction_Give_Egg,
     [DEBUG_GIVE_MENU_GIVE_POKEMON_SIMPLE]    = DebugAction_Give_PokemonSimple,
     [DEBUG_GIVE_MENU_GIVE_POKEMON_COMPLEX]   = DebugAction_Give_PokemonComplex,
     [DEBUG_GIVE_MENU_GIVE_MAX_MONEY]         = DebugAction_Give_MaxMoney,
     [DEBUG_GIVE_MENU_GIVE_MAX_COINS]         = DebugAction_Give_MaxCoins,
+    [DEBUG_GIVE_MENU_GIVE_MAX_BATTLE_POINTS] = DebugAction_Give_MaxBattlePoints,
     [DEBUG_GIVE_MENU_FILL_PC_BOXES]          = DebugAction_Give_FillPCBoxes,
     [DEBUG_GIVE_MENU_FILL_PC_ITEM_STORAGE]   = DebugAction_Give_FillPCItemStorage,
     [DEBUG_GIVE_MENU_FILL_ITEMS_POCKET]      = DebugAction_Give_FillItemsPocket,
     [DEBUG_GIVE_MENU_FILL_POKE_BALLS_POCKET] = DebugAction_Give_FillPokeBallsPocket,
+    [DEBUG_GIVE_MENU_FILL_TM_HM_POCKET]      = DebugAction_Give_FillTMHMPocket,
     [DEBUG_GIVE_MENU_FILL_BERRIES_POCKET]    = DebugAction_Give_FillBerriesPocket,
     [DEBUG_GIVE_MENU_FILL_KEY_ITEMS_POCKET]  = DebugAction_Give_FillKeyItemsPocket,
-    [DEBUG_GIVE_MENU_GIVE_DEBUG_PACK]        = DebugAction_Give_DebugPack,
 };
 static void (*const sDebugMenu_Actions_Sound[])(u8) =
 {
@@ -850,10 +862,20 @@ static const struct WindowTemplate sDebugMenuWindowTemplate =
 static const struct WindowTemplate sDebugNumberDisplayWindowTemplate =
 {
     .bg = 0,
-    .tilemapLeft = DEBUG_MAIN_MENU_WIDTH - 1,
+    .tilemapLeft = 9,
     .tilemapTop = 1,
     .width = DEBUG_NUMBER_DISPLAY_WIDTH,
     .height = 2 * DEBUG_NUMBER_DISPLAY_HEIGHT,
+    .paletteNum = 15,
+    .baseBlock = 1,
+};
+static const struct WindowTemplate sDebugNumberDisplayMediumWindowTemplate =
+{
+    .bg = 0,
+    .tilemapLeft = 30 - DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH - 1,
+    .tilemapTop = 1,
+    .width = DEBUG_NUMBER_DISPLAY_MEDIUM_WIDTH,
+    .height = 2 * DEBUG_NUMBER_DISPLAY_MEDIUM_HEIGHT,
     .paletteNum = 15,
     .baseBlock = 1,
 };
@@ -978,13 +1000,19 @@ static void Debug_ShowMenu(void (*HandleInput)(u8), struct ListMenuTemplate LMte
 static void Debug_DestroyMenu(u8 taskId)
 {
     DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
+    RemoveWindow(gTasks[taskId].data[1]);
+    DestroyTask(taskId);
+}
+static void Debug_DestroyMenu_Full(u8 taskId)
+{
+    DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
     ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
     RemoveWindow(gTasks[taskId].data[1]);
     DestroyTask(taskId);
 }
 static void DebugAction_Cancel(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_DestroyExtraWindow(u8 taskId)
@@ -1014,7 +1042,7 @@ static void DebugTask_HandleMenuInput_Main(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         ScriptContext_Enable();
     }
 }
@@ -1144,11 +1172,11 @@ static void DebugAction_Util_HealParty(u8 taskId)
     PlaySE(SE_USE_ITEM);
     HealPlayerParty();
     ScriptContext_Enable();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 }
 static void DebugAction_Util_Fly(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_OpenFlyMap);
 }
 
@@ -1160,7 +1188,7 @@ static void DebugAction_Util_Warp_PresetWarp(u8 taskId)
     u8 inputTaskId;
 
     // erase existing window
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 
     // create window
     HideMapNamePopUpWindow();
@@ -1209,7 +1237,7 @@ static void DebugTask_HandleMenuInput_PresetWarp(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
@@ -1299,7 +1327,7 @@ static void DebugAction_Util_Warp_SelectMapGroup(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
@@ -1357,7 +1385,7 @@ static void DebugAction_Util_Warp_SelectMap(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
@@ -1397,7 +1425,7 @@ static void DebugAction_Util_Warp_SelectWarp(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
     }
 }
@@ -1418,19 +1446,19 @@ static void DebugAction_Util_CheckSaveSpace(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar5, maxSb2Size, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar6, maxPkmnStorageSize, STR_CONV_MODE_LEFT_ALIGN, 6);
     ConvertIntToDecimalStringN(gStringVar7, currBoxPkmnSize, STR_CONV_MODE_LEFT_ALIGN, 6);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_CheckSavefileSize);
 }
 static void DebugAction_Util_CheckWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(PlayersHouse_2F_EventScript_CheckWallClock);
 }
 static void DebugAction_Util_SetWallClock(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(PlayersHouse_2F_EventScript_SetWallClock);
 }
@@ -1451,12 +1479,12 @@ static void DebugAction_Util_CheckWeekDay(u8 taskId)
     ConvertIntToDecimalStringN(gStringVar3, month, STR_CONV_MODE_LEADING_ZEROS, 2);
     ConvertIntToDecimalStringN(gStringVar4, year, STR_CONV_MODE_LEFT_ALIGN, 4);
     ShowFieldMessage(TEXT_STRING("Today is {STR_VAR_1} {STR_VAR_2}/{STR_VAR_3}/{STR_VAR_4}."));
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 }
 static void DebugAction_Util_WatchCredits(u8 taskId)
 {
     struct Task* task = &gTasks[taskId];
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetMainCallback2(CB2_StartCreditsSequence);
 }
 static void DebugAction_Util_Trainer_Name(u8 taskId)
@@ -1474,7 +1502,7 @@ static void DebugAction_Util_Trainer_Gender(u8 taskId)
         gSaveBlock2Ptr->playerGender = 1;
     else
         gSaveBlock2Ptr->playerGender = 0;
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum, 255, gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y);
     DoWarp();
 }
@@ -1482,30 +1510,30 @@ static void DebugAction_Util_Trainer_Id(u8 taskId)
 {
     u32 trainerId = ((Random() << 16) | Random());
     SetTrainerId(trainerId, gSaveBlock2Ptr->playerTrainerId);
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Util_CheckStats(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(Script_PokemonDataInfoBox);
 }
 static void DebugAction_Util_ForceEggHatch(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_ForceEggHatch);
 }
 static void DebugAction_Util_OpenPC(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(EventScript_PC);
 }
 static void DebugAction_Util_DoWonderTrade(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_DoWonderTrade);
 }
@@ -1534,13 +1562,13 @@ static void DebugTask_ChangeCostume_End(u8 taskId)
     if (!gPaletteFade.active)
     {
         FadeInFromBlack();
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         ScriptContext_Enable();
     }
 }
 static void DebugAction_Util_CatchChainStatus(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_CatchingStreak);
 }
@@ -1548,7 +1576,7 @@ static void DebugAction_Util_CreateDaycareEgg(u8 taskId)
 {
     if (CountPokemonInDaycare(&gSaveBlock1Ptr->daycare) == DAYCARE_TWO_MONS)
         TriggerPendingDaycareEgg();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Util_ClearBag(u8 taskId)
@@ -1558,30 +1586,30 @@ static void DebugAction_Util_ClearBag(u8 taskId)
     ClearBag();
     for (i = 0; i < BAG_TMHM_COUNT; ++i)
         gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] = 0;
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Util_DeletePokemon(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_DeleteMon);
 }
 static void DebugAction_Util_ClearParty(u8 taskId)
 {
     ZeroPlayerPartyMons();
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Util_GiveStatusAilment(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     LockPlayerFieldControls();
     ScriptContext_SetupScript(DebugScript_GiveStatusAilment);
 }
 static void DebugAction_Util_TestRayquazaCutscene(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_GROUDON);
     FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE);
     VarSet(VAR_SOOTOPOLIS_CITY_STATE, 5);
@@ -1589,6 +1617,109 @@ static void DebugAction_Util_TestRayquazaCutscene(u8 taskId)
     VarSet(VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1);
     SetWarpDestinationToMapWarp(MAP_GROUP(SOOTOPOLIS_CITY), MAP_NUM(SOOTOPOLIS_CITY), 0);
     DoWarp();
+}
+static const u8 sWeatherNames[22][24] = {
+    [WEATHER_NONE]               = _("NONE"),
+    [WEATHER_SUNNY_CLOUDS]       = _("SUNNY CLOUDS"),
+    [WEATHER_SUNNY]              = _("SUNNY"),
+    [WEATHER_RAIN]               = _("RAIN"),
+    [WEATHER_SNOW]               = _("SNOW"),
+    [WEATHER_RAIN_THUNDERSTORM]  = _("RAIN THUNDERSTORM"),
+    [WEATHER_FOG_HORIZONTAL]     = _("FOG HORIZONTAL"),
+    [WEATHER_VOLCANIC_ASH]       = _("VOLCANIC ASH"),
+    [WEATHER_SANDSTORM]          = _("SANDSTORM"),
+    [WEATHER_FOG_DIAGONAL]       = _("FOG DIAGONAL"),
+    [WEATHER_UNDERWATER]         = _("UNDERWATER"),
+    [WEATHER_SHADE]              = _("SHADE"),
+    [WEATHER_DROUGHT]            = _("DROUGHT"),
+    [WEATHER_DOWNPOUR]           = _("DOWNPOUR"),
+    [WEATHER_UNDERWATER_BUBBLES] = _("UNDERWATER BUBBLES"),
+    [WEATHER_ABNORMAL]           = _("ABNORMAL(NOT WORKING)"),
+    [WEATHER_ROUTE119_CYCLE]     = _("ROUTE119 CYCLE"),
+    [WEATHER_ROUTE123_CYCLE]     = _("ROUTE123 CYCLE"),
+};
+static const u8 sText_WeatherNotDefined[] = _("NOT DEFINED!!!");
+static void DebugAction_Util_ChangeWeather(u8 taskId)
+{
+    u8 windowId;
+
+    ClearStdWindowAndFrame(gTasks[taskId].data[1], TRUE);
+    RemoveWindow(gTasks[taskId].data[1]);
+
+    HideMapNamePopUpWindow();
+    LoadMessageBoxAndBorderGfx();
+    windowId = AddWindow(&sDebugNumberDisplayMediumWindowTemplate);
+    DrawStdWindowFrame(windowId, FALSE);
+
+    CopyWindowToVram(windowId, 3);
+
+    //Display initial ID
+    StringCopy(gStringVar2, gText_DigitIndicator[0]);
+    ConvertIntToDecimalStringN(gStringVar3, 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+    StringCopyPadded(gStringVar1, sWeatherNames[0], CHAR_SPACE, 30);
+    StringExpandPlaceholders(gStringVar4, sDebugText_Util_Weather_ID);
+    AddTextPrinterParameterized(windowId, 1, gStringVar4, 1, 1, 0, NULL);
+
+    gTasks[taskId].func = DebugAction_Util_Weather_SelectId;
+    gTasks[taskId].data[2] = windowId;
+    gTasks[taskId].data[3] = 0;            //Current ID
+    gTasks[taskId].data[4] = 0;            //Digit Selected
+}
+static void DebugAction_Util_Weather_SelectId(u8 taskId)
+{
+    if (gMain.newKeys & DPAD_ANY)
+    {
+        PlaySE(SE_SELECT);
+
+        if (gMain.newKeys & DPAD_UP)
+        {
+            gTasks[taskId].data[3] += sPowersOfTen[gTasks[taskId].data[4]];
+            if (gTasks[taskId].data[3] > WEATHER_ROUTE123_CYCLE)
+                gTasks[taskId].data[3] = WEATHER_ROUTE123_CYCLE;
+        }
+        if (gMain.newKeys & DPAD_DOWN)
+        {
+            gTasks[taskId].data[3] -= sPowersOfTen[gTasks[taskId].data[4]];
+            if (gTasks[taskId].data[3] < WEATHER_NONE)
+                gTasks[taskId].data[3] = WEATHER_NONE;
+        }
+        if (gMain.newKeys & DPAD_LEFT)
+        {
+            if (gTasks[taskId].data[4] > 0)
+                gTasks[taskId].data[4] -= 1;
+        }
+        if (gMain.newKeys & DPAD_RIGHT)
+        {
+            if (gTasks[taskId].data[4] < 2)
+                gTasks[taskId].data[4] += 1;
+        }
+
+        StringCopy(gStringVar2, gText_DigitIndicator[gTasks[taskId].data[4]]);
+        ConvertIntToDecimalStringN(gStringVar3, gTasks[taskId].data[3], STR_CONV_MODE_LEADING_ZEROS, 2);
+
+        if (gTasks[taskId].data[3] <= 15 || gTasks[taskId].data[3] >= 20)
+            StringCopyPadded(gStringVar1, sWeatherNames[gTasks[taskId].data[3]], CHAR_SPACE, 30);
+        else
+            StringCopyPadded(gStringVar1, sText_WeatherNotDefined, CHAR_SPACE, 30); 
+
+        StringExpandPlaceholders(gStringVar4, sDebugText_Util_Weather_ID);
+        AddTextPrinterParameterized(gTasks[taskId].data[2], 1, gStringVar4, 1, 1, 0, NULL);
+    }
+
+    if (gMain.newKeys & A_BUTTON)
+    {
+        if (gTasks[taskId].data[3] <= 14 || gTasks[taskId].data[3] >= 20)
+        {
+            gTasks[taskId].data[5] = gTasks[taskId].data[3];
+            SetWeather(gTasks[taskId].data[5]);
+        }
+    }
+    else if (gMain.newKeys & B_BUTTON)
+    {
+        PlaySE(SE_SELECT);
+        Debug_DestroyMenu_Full(taskId);
+        Debug_ShowMenu(DebugTask_HandleMenuInput_Utilities, sDebugMenu_ListTemplate_Utilities);
+    }
 }
 
 // *******************************
@@ -1631,7 +1762,7 @@ static void DebugAction_Flags_FlagsSelect(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Flags, sDebugMenu_ListTemplate_Flags);
         return;
     }
@@ -1694,7 +1825,7 @@ static void DebugAction_Flags_Badges(u8 taskId)
     u8 inputTaskId;
 
     // erase existing window
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
 
     // create window
     HideMapNamePopUpWindow();
@@ -1741,7 +1872,7 @@ static void DebugTask_HandleMenuInput_Badges(u8 taskId)
     }
     else if (gMain.newKeys & B_BUTTON)
     {
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Flags, sDebugMenu_ListTemplate_Flags);
     }
 }
@@ -1754,7 +1885,7 @@ static void DebugAction_Flags_SetPokedexFlags(u8 taskId)
         GetSetPokedexFlag(i + 1, FLAG_SET_CAUGHT);
         GetSetPokedexFlag(i + 1, FLAG_SET_SEEN);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     ScriptContext_Enable();
 }
 static void DebugAction_Flags_DexOnOff(u8 taskId)
@@ -2092,7 +2223,7 @@ static void DebugAction_Vars_Select(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Vars, sDebugMenu_ListTemplate_Vars);
         return;
     }
@@ -2141,7 +2272,7 @@ static void DebugAction_Vars_SetValue(u8 taskId)
     else if (gMain.newKeys & B_BUTTON)
     {
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Vars, sDebugMenu_ListTemplate_Vars);
         return;
     }
@@ -2265,7 +2396,7 @@ static void DebugAction_Give_Item_SelectId(u8 taskId)
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
 
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -2324,21 +2455,9 @@ static void DebugAction_Give_Item_SelectQuantity(u8 taskId)
         DestroySprite(&gSprites[gTasks[taskId].data[6]]);       //Destroy item icon
 
         PlaySE(SE_SELECT);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
-}
-
-//TMs
-static void DebugAction_Give_AllTMs(u8 taskId)
-{
-    u16 i;
-    PlayFanfare(MUS_OBTAIN_TMHM);
-    for (i = ITEM_TM01; i <= ITEM_HM08; i++)
-        if (!CheckBagHasItem(i, 1))
-            AddBagItem(i, 1);
-    Debug_DestroyMenu(taskId);
-    ScriptContext_Enable();
 }
 
 //Pokemon
@@ -2475,7 +2594,7 @@ static void DebugAction_Give_Egg_SelectId(u8 taskId)
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -2639,7 +2758,7 @@ static void DebugAction_Give_Pokemon_SelectId(u8 taskId)
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -2711,7 +2830,7 @@ static void DebugAction_Give_Pokemon_SelectLevel(u8 taskId)
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
         FreeMonIconPalettes();
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[6]]); //Destroy pokemon sprite
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -2764,7 +2883,7 @@ static void DebugAction_Give_Pokemon_SelectShiny(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -2816,7 +2935,7 @@ static void DebugAction_Give_Pokemon_SelectNature(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -2875,7 +2994,7 @@ static void DebugAction_Give_Pokemon_SelectAbility(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -3015,7 +3134,7 @@ static void DebugAction_Give_Pokemon_SelectIVs(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -3136,7 +3255,7 @@ static void DebugAction_Give_Pokemon_Move(u8 taskId)
     {
         PlaySE(SE_SELECT);
         Free(sDebugMonData); //Frees EWRAM of MonData Struct
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
     }
 }
@@ -3277,15 +3396,22 @@ static void DebugAction_Give_Pokemon_ComplexCreateMon(u8 taskId) //https://githu
 
 static void DebugAction_Give_MaxMoney(u8 taskId)
 {
-    AddMoney(&gSaveBlock1Ptr->money, 999999);
+    AddMoney(&gSaveBlock1Ptr->money, MAX_MONEY);
     PlaySE(SE_SHOP);
 }
 
 static void DebugAction_Give_MaxCoins(u8 taskId)
 {
-    SetCoins(9999);
+    SetCoins(MAX_COINS);
     PlaySE(SE_SHOP);
 }
+
+static void DebugAction_Give_MaxBattlePoints(u8 taskId)
+{
+    gSaveBlock2Ptr->frontier.battlePoints = MAX_BATTLE_FRONTIER_POINTS;
+    PlaySE(SE_SHOP);
+}
+
 static void DebugAction_Give_FillPCBoxes(u8 taskId)
 {
     int boxId, boxPosition;
@@ -3303,7 +3429,7 @@ static void DebugAction_Give_FillPCBoxes(u8 taskId)
                 gPokemonStoragePtr->boxes[boxId][boxPosition] = boxMon;
         }
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
@@ -3316,7 +3442,7 @@ static void DebugAction_Give_FillPCItemStorage(u8 taskId)
         if (!CheckPCHasItem(itemId, MAX_PC_ITEM_CAPACITY))
             AddPCItem(itemId, MAX_PC_ITEM_CAPACITY);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
@@ -3329,7 +3455,7 @@ static void DebugAction_Give_FillItemsPocket(u8 taskId)
         if (ItemId_GetPocket(itemId) == POCKET_ITEMS && CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
@@ -3342,7 +3468,20 @@ static void DebugAction_Give_FillPokeBallsPocket(u8 taskId)
         if (CheckBagHasSpace(itemId, MAX_BAG_ITEM_CAPACITY))
             AddBagItem(itemId, MAX_BAG_ITEM_CAPACITY);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
+    Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
+}
+
+static void DebugAction_Give_FillTMHMPocket(u8 taskId)
+{
+    u16 itemId;
+
+    for (itemId = ITEM_TM01; itemId <= ITEM_HM08; itemId++)
+    {
+        if (CheckBagHasSpace(itemId, 1) && ItemIdToBattleMoveId(itemId) != MOVE_NONE)
+            AddBagItem(itemId, 1);
+    }
+    Debug_DestroyMenu_Full(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
@@ -3355,7 +3494,7 @@ static void DebugAction_Give_FillBerriesPocket(u8 taskId)
         if (CheckBagHasSpace(itemId, MAX_BERRY_CAPACITY))
             AddBagItem(itemId, MAX_BERRY_CAPACITY);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
 }
 
@@ -3368,15 +3507,8 @@ static void DebugAction_Give_FillKeyItemsPocket(u8 taskId)
         if (ItemId_GetPocket(itemId) == POCKET_KEY_ITEMS && CheckBagHasSpace(itemId, 1))
             AddBagItem(itemId, 1);
     }
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     Debug_ShowMenu(DebugTask_HandleMenuInput_Give, sDebugMenu_ListTemplate_Give);
-}
-
-static void DebugAction_Give_DebugPack(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    LockPlayerFieldControls();
-    ScriptContext_SetupScript(DebugScript_DebugPack);
 }
 
 // *******************************
@@ -3455,7 +3587,7 @@ static void DebugAction_Sound_SE_SelectId(u8 taskId)
     {
         PlaySE(SE_SELECT);
         m4aSongNumStop(gTasks[taskId].data[5]);
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
     }
 }
@@ -3533,7 +3665,7 @@ static void DebugAction_Sound_MUS_SelectId(u8 taskId)
     {
         PlaySE(SE_SELECT);
         // m4aSongNumStop(gTasks[taskId].data[5]);   //Uncomment if music should stop after leaving menu
-        Debug_DestroyMenu(taskId);
+        Debug_DestroyMenu_Full(taskId);
         Debug_ShowMenu(DebugTask_HandleMenuInput_Sound, sDebugMenu_ListTemplate_Sound);
     }
 }
@@ -4466,175 +4598,175 @@ SOUND_LIST_SE
 
 static void DebugAction_PresetWarp_LittlerootTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(LITTLEROOT_TOWN), MAP_NUM(LITTLEROOT_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_OldaleTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PetalburgCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(PETALBURG_CITY), MAP_NUM(PETALBURG_CITY), 3);
     DoWarp();
 }
 static void DebugAction_PresetWarp_RustboroCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(RUSTBORO_CITY), MAP_NUM(RUSTBORO_CITY), 3);
     DoWarp();
 }
 static void DebugAction_PresetWarp_DewfordTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(DEWFORD_TOWN), MAP_NUM(DEWFORD_TOWN), 1);
     DoWarp();
 }
 static void DebugAction_PresetWarp_SlateportCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(SLATEPORT_CITY), MAP_NUM(SLATEPORT_CITY), 0);
     DoWarp();
 }
 static void DebugAction_PresetWarp_MauvilleCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(MAUVILLE_CITY), MAP_NUM(MAUVILLE_CITY), 1);
     DoWarp();
 }
 static void DebugAction_PresetWarp_VerdanturfTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(VERDANTURF_TOWN), MAP_NUM(VERDANTURF_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_FallarborTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(FALLARBOR_TOWN), MAP_NUM(FALLARBOR_TOWN), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_LavaridgeTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(LAVARIDGE_TOWN), MAP_NUM(LAVARIDGE_TOWN), 3);
     DoWarp();
 }
 static void DebugAction_PresetWarp_FortreeCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(FORTREE_CITY), MAP_NUM(FORTREE_CITY), 0);
     DoWarp();
 }
 static void DebugAction_PresetWarp_LilycoveCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(LILYCOVE_CITY), MAP_NUM(LILYCOVE_CITY), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_MossdeepCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(MOSSDEEP_CITY), MAP_NUM(MOSSDEEP_CITY), 2);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PacifidlogTown(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(PACIFIDLOG_TOWN), MAP_NUM(PACIFIDLOG_TOWN), 0);
     DoWarp();
 }
 static void DebugAction_PresetWarp_SootopolisCity(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(SOOTOPOLIS_CITY), MAP_NUM(SOOTOPOLIS_CITY), 0);
     DoWarp();
 }
 static void DebugAction_PresetWarp_EverGrandeCityOuter(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), 1);
     DoWarp();
 }
 static void DebugAction_PresetWarp_EverGrandeCityInner(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestinationToMapWarp(MAP_GROUP(EVER_GRANDE_CITY), MAP_NUM(EVER_GRANDE_CITY), 0);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PkmnLeagueSidney(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_SIDNEYS_ROOM), MAP_NUM(EVER_GRANDE_CITY_SIDNEYS_ROOM), 255, 6, 7);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PkmnLeaguePhoebe(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_PHOEBES_ROOM), MAP_NUM(EVER_GRANDE_CITY_PHOEBES_ROOM), 255, 6, 7);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PkmnLeagueGlacia(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_GLACIAS_ROOM), MAP_NUM(EVER_GRANDE_CITY_GLACIAS_ROOM), 255, 6, 7);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PkmnLeagueDrake(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_DRAKES_ROOM), MAP_NUM(EVER_GRANDE_CITY_DRAKES_ROOM), 255, 6, 7);
     DoWarp();
 }
 static void DebugAction_PresetWarp_PkmnLeagueChampion(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(EVER_GRANDE_CITY_HALL4), MAP_NUM(EVER_GRANDE_CITY_HALL4), 255, 5, 4);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattleFactory(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_WEST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST), 255, 11, 39);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattleArena(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 39, 30);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattleDome(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_WEST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST), 255, 19, 18);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattlePike(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_WEST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_WEST), 255, 42, 30);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattlePalace(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 45, 57);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattlePyramid(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 58, 15);
     DoWarp();
 }
 static void DebugAction_PresetWarp_BattleTower(u8 taskId)
 {
-    Debug_DestroyMenu(taskId);
+    Debug_DestroyMenu_Full(taskId);
     SetWarpDestination(MAP_GROUP(BATTLE_FRONTIER_OUTSIDE_EAST), MAP_NUM(BATTLE_FRONTIER_OUTSIDE_EAST), 255, 16, 15);
     DoWarp();
 }
