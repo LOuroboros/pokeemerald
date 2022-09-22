@@ -316,7 +316,7 @@ static void HandleInputChooseAction(void)
             if (gBattleResources->bufferA[gActiveBattler][1] == B_ACTION_USE_ITEM)
             {
                 // Add item to bag if it is a ball
-                if (itemId <= LAST_BALL)
+                if (ItemId_GetPocket(itemId) == POCKET_POKE_BALLS)
                     AddBagItem(itemId, 1);
                 else
                     return;

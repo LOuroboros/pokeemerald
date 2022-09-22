@@ -32,11 +32,38 @@
 #define ITEM_BEAST_BALL 26
 #define ITEM_CHERISH_BALL 27
 
-// Note: If moving ball IDs around, updating FIRST_BALL/LAST_BALL is not sufficient
-//       Several places expect the ball IDs to be first and contiguous (e.g. MON_DATA_POKEBALL)
-//       If adding new balls, it's easiest to insert them after the last ball and increment the below IDs (and removing ITEM_034 for example)
-#define FIRST_BALL ITEM_POKE_BALL
-#define LAST_BALL  ITEM_CHERISH_BALL
+// The following list contains the ID of each Poké Ball set in their .secondaryId field.
+// This is done so new Poké Balls can be added anywhere in this item list, where as
+// otherwise, they would need to be placed in between the Cherish Ball and the Potion.
+#define BALL_POKE 1
+#define BALL_GREAT 2
+#define BALL_ULTRA 3
+#define BALL_MASTER 4
+#define BALL_PREMIER 5
+#define BALL_HEAL 6
+#define BALL_NET 7
+#define BALL_NEST 8
+#define BALL_DIVE 9
+#define BALL_DUSK 10
+#define BALL_TIMER 11
+#define BALL_QUICK 12
+#define BALL_REPEAT 13
+#define BALL_LUXURY 14
+#define BALL_LEVEL 15
+#define BALL_LURE 16
+#define BALL_MOON 17
+#define BALL_FRIEND 18
+#define BALL_LOVE 19
+#define BALL_FAST 20
+#define BALL_HEAVY 21
+#define BALL_DREAM 22
+#define BALL_SAFARI 23
+#define BALL_SPORT 24
+#define BALL_PARK 25
+#define BALL_BEAST 26
+#define BALL_CHERISH 27
+
+#define POKEBALL_COUNT 28
 
 // Medicine
 #define ITEM_POTION 28

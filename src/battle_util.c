@@ -530,7 +530,7 @@ void HandleAction_UseItem(void)
 
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
 
-    if (gLastUsedItem <= LAST_BALL) // is ball
+    if (ItemId_GetPocket(gLastUsedItem) == POCKET_POKE_BALLS) // is ball
     {
         gBattlescriptCurrInstr = BattleScript_BallThrow;
     }

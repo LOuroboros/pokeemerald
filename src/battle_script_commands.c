@@ -13771,6 +13771,7 @@ static void Cmd_handleballthrow(void)
 {
     u8 ballMultiplier = 10;
     s8 ballAddition = 0;
+    u8 ballId = ItemIdToBallId(gLastUsedItem);
 
     if (gBattleControllerExecFlags)
         return;
@@ -13991,8 +13992,8 @@ static void Cmd_handleballthrow(void)
         if (gBattleMons[gBattlerTarget].status1 & (STATUS1_POISON | STATUS1_BURN | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON))
             odds = (odds * 15) / 10;
 
-        if (gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL] < 255)
-            gBattleResults.catchAttempts[gLastUsedItem - FIRST_BALL]++;
+        if (gBattleResults.catchAttempts[ballId] < 255 && ballId != BALL_MASTER)
+            gBattleResults.catchAttempts[ballId]++;
 
         if (odds > 254) // mon caught
         {
