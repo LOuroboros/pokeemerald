@@ -983,8 +983,11 @@ void GetOnOffBike(u8 transitionFlags)
     else
     {
         SetPlayerAvatarTransitionFlags(transitionFlags);
-        Overworld_SetSavedMusic(MUS_CYCLING);
-        Overworld_ChangeMusicTo(MUS_CYCLING);
+        if (gSaveBlock2Ptr->optionsSpecialMusic == OPTIONS_SPECIAL_MUSIC_ON)
+        {
+            Overworld_SetSavedMusic(MUS_CYCLING);
+            Overworld_ChangeMusicTo(MUS_CYCLING);
+        }
     }
 }
 

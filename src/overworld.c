@@ -174,6 +174,7 @@ static void TransitionMapMusic(void);
 static u8 GetAdjustedInitialTransitionFlags(struct InitialPlayerAvatarState *, u16, u8);
 static u8 GetAdjustedInitialDirection(struct InitialPlayerAvatarState *, u8, u16, u8);
 static u16 GetCenterScreenMetatileBehavior(void);
+static u16 GetOriginalMapMusic(void);
 
 static void *sUnusedOverworldCallback;
 static u8 sPlayerLinkStates[MAX_LINK_PLAYERS];
@@ -1163,7 +1164,9 @@ void Overworld_PlaySpecialMapMusic(void)
 
     if (music != MUS_ABNORMAL_WEATHER && music != MUS_NONE)
     {
-        if (gSaveBlock1Ptr->savedMusic)
+        if (gSaveBlock2Ptr->optionsSpecialMusic == OPTIONS_SPECIAL_MUSIC_OFF)
+            music = GetOriginalMapMusic();
+        else if (gSaveBlock1Ptr->savedMusic)
             music = gSaveBlock1Ptr->savedMusic;
         else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
             music = MUS_UNDERWATER;
@@ -1189,7 +1192,7 @@ static void TransitionMapMusic(void)
 {
     u16 newMusic = GetWarpDestinationMusic();
     u16 currentMusic = GetCurrentMapMusic();
-    if (newMusic != MUS_ABNORMAL_WEATHER && newMusic != MUS_NONE)
+    if (newMusic != MUS_ABNORMAL_WEATHER && newMusic != MUS_NONE && gSaveBlock2Ptr->optionsSpecialMusic == OPTIONS_SPECIAL_MUSIC_ON)
     {
         if (currentMusic == MUS_UNDERWATER || currentMusic == MUS_SURF)
             return;
@@ -1234,14 +1237,15 @@ void TryFadeOutOldMapMusic(void)
     u16 warpMusic = GetWarpDestinationMusic();
     if (warpMusic != GetCurrentMapMusic())
     {
-        if (currentMusic == MUS_SURF
-            && VarGet(VAR_SKY_PILLAR_STATE) == 2
-            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
-            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
-            && sWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
-            && sWarpDestination.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
-            && sWarpDestination.x == 29
-            && sWarpDestination.y == 53)
+        if ((currentMusic == MUS_SURF
+         && VarGet(VAR_SKY_PILLAR_STATE) == 2
+         && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
+         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
+         && sWarpDestination.mapGroup == MAP_GROUP(SOOTOPOLIS_CITY)
+         && sWarpDestination.mapNum == MAP_NUM(SOOTOPOLIS_CITY)
+         && sWarpDestination.x == 29
+         && sWarpDestination.y == 53)
+         || gSaveBlock2Ptr->optionsSpecialMusic == OPTIONS_SPECIAL_MUSIC_OFF)
             return;
         FadeOutMapMusic(GetMapMusicFadeoutSpeed());
     }
@@ -3229,5 +3233,51 @@ static void SpriteCB_LinkPlayer(struct Sprite *sprite)
     {
         sprite->invisible = ((sprite->data[7] & 4) >> 2);
         sprite->data[7]++;
+    }
+}
+
+static u16 GetOriginalMapMusic(void)
+{
+    switch (gMapHeader.regionMapSectionId)
+    {
+    case MAPSEC_UNDERWATER_124:
+    case MAPSEC_UNDERWATER_125:
+    case MAPSEC_UNDERWATER_126:
+    case MAPSEC_UNDERWATER_127:
+    case MAPSEC_UNDERWATER_128:
+        return MUS_ROUTE120;
+    case MAPSEC_UNDERWATER_SOOTOPOLIS:
+        return MUS_SOOTOPOLIS;
+    case MAPSEC_UNDERWATER_SEAFLOOR_CAVERN:
+        return MUS_MT_CHIMNEY;
+    case MAPSEC_UNDERWATER_SEALED_CHAMBER:
+        return MUS_SEALED_CHAMBER;
+    case MAPSEC_UNDERWATER_MARINE_CAVE:
+        return MUS_PETALBURG_WOODS;
+    case MAPSEC_UNDERWATER_105:
+        return MUS_ROUTE104;
+    case MAPSEC_UNDERWATER_129:
+        return MUS_ROUTE119;
+    default:
+        return GetCurrLocationDefaultMusic();
+    }
+}
+
+u16 GetSpecialMapMusic(void)
+{
+    if (!gDisableSpecialMusic)
+    {
+        if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
+            return MUS_CYCLING;
+        else if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_SURFING))
+            return MUS_SURF;
+        else if (GetCurrentMapType() == MAP_TYPE_UNDERWATER)
+            return MUS_UNDERWATER;
+        else
+            return GetCurrLocationDefaultMusic();
+    }
+    else
+    {
+        return GetCurrLocationDefaultMusic();
     }
 }

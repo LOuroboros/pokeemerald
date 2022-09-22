@@ -97,7 +97,8 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
     gSaveBlock2Ptr->optionsBattleType = OPTIONS_BATTLE_TYPE_HIDE;
-    gSaveBlock2Ptr->optionsQuickLoadOff = TRUE;
+    gSaveBlock2Ptr->optionsQuickLoad = OPTIONS_QUICK_LOAD_OFF;
+    gSaveBlock2Ptr->optionsSpecialMusic = OPTIONS_SPECIAL_MUSIC_OFF;
 }
 
 static void ClearPokedexFlags(void)

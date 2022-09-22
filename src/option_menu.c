@@ -17,6 +17,7 @@
 #include "constants/rgb.h"
 #include "malloc.h"
 #include "sound.h"
+#include "overworld.h"
 
 // Menu items
 enum
@@ -29,6 +30,7 @@ enum
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
     MENUITEM_QUICKLOAD,
+    MENUITEM_SPECIALMUSIC,
     MENUITEM_CANCEL,
     MENUITEM_COUNT,
 };
@@ -63,6 +65,7 @@ static void DrawChoices_Sound(int selection, int y);
 static void DrawChoices_ButtonMode(int selection, int y);
 static void DrawChoices_FrameType(int selection, int y);
 static void DrawChoices_QuickLoad(int selection, int y);
+static void DrawChoices_SpecialMusic(int selection, int y);
 static void DrawChoices_Options_Four(const u8 *const *const strings, int selection, int y);
 static int ProcessInput_Sound(int selection);
 static int ProcessInput_FrameType(int selection);
@@ -87,6 +90,7 @@ struct
     [MENUITEM_BUTTONMODE]    = {DrawChoices_ButtonMode,    ProcessInput_ThreeOptions},
     [MENUITEM_FRAMETYPE]     = {DrawChoices_FrameType,     ProcessInput_FrameType},
     [MENUITEM_QUICKLOAD]     = {DrawChoices_QuickLoad,     ProcessInput_TwoOptions},
+    [MENUITEM_SPECIALMUSIC]  = {DrawChoices_SpecialMusic,  ProcessInput_TwoOptions},
     [MENUITEM_CANCEL]        = {NULL,                      NULL},
 };
 
@@ -107,6 +111,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_BUTTONMODE]    = gText_ButtonMode,
     [MENUITEM_FRAMETYPE]     = gText_Frame,
     [MENUITEM_QUICKLOAD]     = gText_QuickLoad,
+    [MENUITEM_SPECIALMUSIC]  = gText_SpecialMusic,
     [MENUITEM_CANCEL]        = gText_OptionMenuCancel,
 };
 
@@ -259,7 +264,8 @@ void CB2_InitOptionMenu(void)
         sOptions->sel[MENUITEM_SOUND]         = gSaveBlock2Ptr->optionsSound;
         sOptions->sel[MENUITEM_BUTTONMODE]    = gSaveBlock2Ptr->optionsButtonMode;
         sOptions->sel[MENUITEM_FRAMETYPE]     = gSaveBlock2Ptr->optionsWindowFrameType;
-        sOptions->sel[MENUITEM_QUICKLOAD]     = gSaveBlock2Ptr->optionsQuickLoadOff;
+        sOptions->sel[MENUITEM_QUICKLOAD]     = gSaveBlock2Ptr->optionsQuickLoad;
+        sOptions->sel[MENUITEM_SPECIALMUSIC]  = gSaveBlock2Ptr->optionsSpecialMusic;
 
         AddScrollIndicatorArrowPairParameterized(SCROLL_ARROW_UP,
                                                  240 / 2,
@@ -430,7 +436,8 @@ static void Task_OptionMenuSave(u8 taskId)
     gSaveBlock2Ptr->optionsSound           = sOptions->sel[MENUITEM_SOUND];
     gSaveBlock2Ptr->optionsButtonMode      = sOptions->sel[MENUITEM_BUTTONMODE];
     gSaveBlock2Ptr->optionsWindowFrameType = sOptions->sel[MENUITEM_FRAMETYPE];
-    gSaveBlock2Ptr->optionsQuickLoadOff    = sOptions->sel[MENUITEM_QUICKLOAD];
+    gSaveBlock2Ptr->optionsQuickLoad       = sOptions->sel[MENUITEM_QUICKLOAD];
+    gSaveBlock2Ptr->optionsSpecialMusic    = sOptions->sel[MENUITEM_SPECIALMUSIC];
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gTasks[taskId].func = Task_OptionMenuFadeOut;
@@ -484,7 +491,15 @@ static int XOptions_ProcessInput(int x, int selection)
 static int ProcessInput_TwoOptions(int selection)
 {
     if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+    {
         selection ^= 1;
+        if (sOptions->menuCursor == MENUITEM_SPECIALMUSIC)
+        {
+            gDisableSpecialMusic = (selection == 0) ? FALSE : TRUE;
+            if (GetCurrentMapMusic() != GetSpecialMapMusic())
+                PlayNewMapMusic(GetSpecialMapMusic());
+        }
+    }
 
     return selection;
 }
@@ -696,6 +711,16 @@ static void DrawChoices_FrameType(int selection, int y)
 }
 
 static void DrawChoices_QuickLoad(int selection, int y)
+{
+    u8 styles[2] = {0};
+
+    styles[selection] = 1;
+
+    DrawOptionMenuChoice(gText_OptionMenuOn, 104, y, styles[0]);
+    DrawOptionMenuChoice(gText_OptionMenuOff, GetStringRightAlignXOffset(FONT_NORMAL, gText_OptionMenuOff, 198), y, styles[1]);
+}
+
+static void DrawChoices_SpecialMusic(int selection, int y)
 {
     u8 styles[2] = {0};
 

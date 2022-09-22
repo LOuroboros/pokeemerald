@@ -4,6 +4,7 @@
 #include "constants/sound.h"
 
 extern bool8 gDisableMusic;
+extern bool8 gDisableSpecialMusic;
 
 void InitMapMusic(void);
 void MapMusicMain(void);

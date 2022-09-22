@@ -757,7 +757,7 @@ static void Task_TitleScreenPhase3(u8 taskId)
         if (IsCryFinished())
         {
             FadeOutBGM(4);
-            if (!gSaveBlock2Ptr->optionsQuickLoadOff)
+            if (gSaveBlock2Ptr->optionsQuickLoad == OPTIONS_QUICK_LOAD_ON)
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
             else
                 BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_WHITEALPHA);
@@ -798,7 +798,7 @@ static void CB2_GoToMainMenu(void)
 {
     if (!UpdatePaletteFade())
     {
-        if (!gSaveBlock2Ptr->optionsQuickLoadOff)
+        if (gSaveBlock2Ptr->optionsQuickLoad == OPTIONS_QUICK_LOAD_ON)
         {
             gMain.state = 0;
             SetMainCallback2(CB2_ContinueSavedGame);

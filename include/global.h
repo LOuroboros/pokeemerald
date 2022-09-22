@@ -432,29 +432,30 @@ struct SaveBlock2
     /*0x10*/ u8 playTimeMinutes;
     /*0x11*/ u8 playTimeSeconds;
     /*0x12*/ u8 playTimeVBlanks;
-    /*0x13*/ u8 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
-    /*0x14*/ u16 optionsTextSpeed:4; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
+    /*0x13*/ u16 optionsButtonMode;  // OPTIONS_BUTTON_MODE_[NORMAL/LR/L_EQUALS_A]
+             u16 optionsTextSpeed:4; // OPTIONS_TEXT_SPEED_[SLOW/MID/FAST/INSTANT]
              u16 optionsWindowFrameType:5; // Specifies one of the 20 decorative borders for text boxes
              u16 optionsSound:2; // OPTIONS_SOUND_[MONO/STEREO/OFF]
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
              u16 optionsBattleType:1; // OPTIONS_BATTLE_TYPE_EFFECTIVENESS_[HIDE/SHOW]
-             u16 optionsQuickLoadOff:1; // OPTIONS_QUICK_LOAD[ON/OFF]
-    /*0x18*/ struct Pokedex pokedex;
-    /*0x98*/ struct Time localTimeOffset;
-    /*0xA0*/ struct Time lastBerryTreeUpdate;
-    /*0xB0*/ struct PlayersApprentice playerApprentice;
-    /*0xDC*/ struct Apprentice apprentices[APPRENTICE_COUNT];
-    /*0x1EC*/ struct BerryCrush berryCrush;
-    /*0x624*/ u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
-    /*0x64C*/ struct BattleFrontier frontier;
-              bool8 autoRun;
-              u8 playerCostume;
-              u8 rivalName[PLAYER_NAME_LENGTH + 1];
-              u8 savedDay;
-              u8 savedMonth;
-              u16 savedYear;
+             u16 optionsQuickLoad:1; // OPTIONS_QUICK_LOAD[ON/OFF]
+             u16 optionsSpecialMusic:1; // OPTIONS_SPECIAL_MUSIC[ON/OFF]
+             struct Pokedex pokedex;
+             struct Time localTimeOffset;
+             struct Time lastBerryTreeUpdate;
+             struct PlayersApprentice playerApprentice;
+             struct Apprentice apprentices[APPRENTICE_COUNT];
+             struct BerryCrush berryCrush;
+             u16 contestLinkResults[CONTEST_CATEGORIES_COUNT][CONTESTANT_COUNT];
+             struct BattleFrontier frontier;
+             bool8 autoRun;
+             u8 playerCostume;
+             u8 rivalName[PLAYER_NAME_LENGTH + 1];
+             u8 savedDay;
+             u8 savedMonth;
+             u16 savedYear;
 }; // sizeof=0x???/0xFF4
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

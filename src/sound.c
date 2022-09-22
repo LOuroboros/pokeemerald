@@ -25,6 +25,7 @@ static u8 sMapMusicFadeInSpeed;
 static u16 sFanfareCounter;
 
 bool8 gDisableMusic;
+bool8 gDisableSpecialMusic;
 
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
@@ -110,7 +111,8 @@ static const struct Fanfare sFanfares[] = {
 
 void InitMapMusic(void)
 {
-    gDisableMusic = (gSaveBlock2Ptr->optionsSound == 2);
+    gDisableMusic = (gSaveBlock2Ptr->optionsSound == OPTIONS_SOUND_OFF);
+    gDisableSpecialMusic = (gSaveBlock2Ptr->optionsSpecialMusic == OPTIONS_SPECIAL_MUSIC_OFF);
     ResetMapMusic();
 }
 

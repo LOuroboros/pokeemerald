@@ -3151,6 +3151,7 @@ extern const u8 gText_BattleType[];
 extern const u8 gText_OptionMenuHide[];
 extern const u8 gText_OptionMenuShow[];
 extern const u8 gText_QuickLoad[];
+extern const u8 gText_SpecialMusic[];
 
 // Relearning moves from the party screen
 extern const u8 gText_Moves_Menu[];
