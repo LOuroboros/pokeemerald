@@ -137,6 +137,38 @@ const struct CompressedSpritePalette gBallSpritePalettes[POKEBALL_COUNT] =
     [BALL_NEW]     = {gBallPal_New,     GFX_TAG_NEW_BALL},
 };
 
+static const bool8 sBallSpriteLacks1Frame[POKEBALL_COUNT] =
+{
+    [BALL_POKE]    = TRUE,
+    [BALL_GREAT]   = TRUE,
+    [BALL_ULTRA]   = TRUE,
+    [BALL_MASTER]  = TRUE,
+    [BALL_PREMIER] = FALSE,
+    [BALL_HEAL]    = FALSE,
+    [BALL_NET]     = TRUE,
+    [BALL_NEST]    = TRUE,
+    [BALL_DIVE]    = FALSE,
+    [BALL_DUSK]    = FALSE,
+    [BALL_TIMER]   = FALSE,
+    [BALL_QUICK]   = FALSE,
+    [BALL_REPEAT]  = TRUE,
+    [BALL_LUXURY]  = FALSE,
+    [BALL_LEVEL]   = FALSE,
+    [BALL_LURE]    = FALSE,
+    [BALL_MOON]    = FALSE,
+    [BALL_FRIEND]  = FALSE,
+    [BALL_LOVE]    = FALSE,
+    [BALL_FAST]    = FALSE,
+    [BALL_HEAVY]   = FALSE,
+    [BALL_DREAM]   = FALSE,
+    [BALL_SAFARI]  = TRUE,
+    [BALL_SPORT]   = FALSE,
+    [BALL_PARK]    = FALSE,
+    [BALL_BEAST]   = FALSE,
+    [BALL_CHERISH] = FALSE,
+    [BALL_NEW]     = TRUE,
+};
+
 static const struct OamData sBallOamData =
 {
     .y = 0,
@@ -1518,16 +1550,10 @@ void LoadBallGfx(u8 ballId)
         LoadCompressedSpriteSheetUsingHeap(&gBallSpriteSheets[ballId]);
         LoadCompressedSpritePaletteUsingHeap(&gBallSpritePalettes[ballId]);
     }
-
-    switch (ballId)
+    if (sBallSpriteLacks1Frame[ballId])
     {
-    case BALL_POKE ... BALL_MASTER:
-    case BALL_NET ... BALL_NEST:
-    case BALL_REPEAT:
-    case BALL_SAFARI:
         var = GetSpriteTileStartByTag(gBallSpriteSheets[ballId].tag);
         LZDecompressVram(gOpenPokeballGfx, (void *)(OBJ_VRAM0 + 0x100 + var * 32));
-        break;
     }
 }
 
