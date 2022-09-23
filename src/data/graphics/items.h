@@ -1930,3 +1930,6 @@ const u32 gItemIcon_Gem[] = INCBIN_U32("graphics/items/icons/gem.4bpp.lz");
 const u32 gItemIconPalette_Ruby[] = INCBIN_U32("graphics/items/icon_palettes/ruby.gbapal.lz");
 
 const u32 gItemIconPalette_Sapphire[] = INCBIN_U32("graphics/items/icon_palettes/sapphire.gbapal.lz");
+
+const u32 gItemIcon_NewBall[] = INCBIN_U32("graphics/items/icons/new_ball.4bpp.lz");
+const u32 gItemIconPalette_NewBall[] = INCBIN_U32("graphics/items/icon_palettes/new_ball.gbapal.lz");

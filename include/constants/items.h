@@ -62,8 +62,9 @@
 #define BALL_PARK 25
 #define BALL_BEAST 26
 #define BALL_CHERISH 27
+#define BALL_NEW 28
 
-#define POKEBALL_COUNT 28
+#define POKEBALL_COUNT 29
 
 // Medicine
 #define ITEM_POTION 28
@@ -955,7 +956,9 @@
 #define ITEM_RUBY 756
 #define ITEM_SAPPHIRE 757
 
-#define ITEMS_COUNT 758
+#define ITEM_NEW_BALL 758
+
+#define ITEMS_COUNT 759
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // Range of berries given out by various NPCS

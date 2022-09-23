@@ -13974,6 +13974,10 @@ static void Cmd_handleballthrow(void)
             case ITEM_BEAST_BALL:
                 ballMultiplier = 1;
                 break;
+            case ITEM_NEW_BALL: // Very (not) needed original effect.
+                if (!GetSetPokedexFlag(SpeciesToNationalPokedexNum(gBattleMons[gBattlerTarget].species), FLAG_GET_CAUGHT))
+                    ballMultiplier = 50;
+                break;
             }
         }
 

@@ -109,8 +109,8 @@ struct PokemonSubstruct0
     /*0x04*/ u32 experience;
     /*0x08*/ u8 ppBonuses;
     /*0x09*/ u8 friendship;
-    /*0x0A*/ u16 pokeball:5; //31 balls
-             u16 filler:11;
+    /*0x0A*/ u16 pokeball:6; //63 balls
+             u16 filler:10;
 }; /* size = 12 */
 
 struct PokemonSubstruct1

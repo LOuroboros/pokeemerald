@@ -391,6 +391,20 @@ const struct Item gItems[] =
         .secondaryId = BALL_CHERISH,
     },
 
+    [ITEM_NEW_BALL] =
+    {
+        .name = _("New Ball"),
+        .itemId = ITEM_NEW_BALL,
+        .price = 200,
+        .description = sNewBallDesc,
+        .pocket = POCKET_POKE_BALLS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .battleUsage = ITEM_B_USE_OTHER,
+        .battleUseFunc = ItemUseInBattle_PokeBall,
+        .secondaryId = BALL_NEW,
+    },
+
 // Medicine
 
     [ITEM_POTION] =
