@@ -3788,6 +3788,7 @@ void BattleTurnPassed(void)
     gBattleScripting.moveendState = 0;
     gBattleMoveDamage = 0;
     gMoveResultFlags = 0;
+    gBattleStruct->combinedMoveId = 0;
 
     for (i = 0; i < 5; i++)
         gBattleCommunication[i] = 0;

@@ -59,6 +59,7 @@ functions instead of at the top of the file with the other declarations.
 static bool32 TryRemoveScreens(u8 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
 static u8 GetFlingPowerFromItemId(u16 itemId);
+static void TryToSetUpCombinedMove(void);
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
 extern const u8 *const gBattlescriptsForRunningByItem[];
@@ -295,6 +296,23 @@ void HandleAction_UseMove(void)
     else
     {
         gCurrentMove = gChosenMove = gBattleMons[gBattlerAttacker].moves[gCurrMovePos];
+    }
+
+    // Try to set up a combined move.
+    TryToSetUpCombinedMove();
+    if (gBattleStruct->combinedMoveId)
+    {
+        if (gBattlerAttacker == gBattleStruct->firstCombinedMoveBattlerId)
+        {
+            gCurrentActionFuncId = B_ACTION_FINISHED;
+            return;
+        }
+        else if (gBattlerAttacker == gBattleStruct->secondCombinedMoveBattlerId)
+        {
+            gCurrentMove = gBattleStruct->combinedMoveId;
+            PrepareStringBattle(gBattleStruct->combinedMoveStringId, gBattlerAttacker);
+            gBattleCommunication[MSG_DISPLAY] = TRUE;
+        }
     }
 
     // check z move used
@@ -10396,4 +10414,40 @@ bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move)
       && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
         return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
     return TRUE;
+}
+
+static void TryToSetUpCombinedMove(void)
+{
+    int i, j;
+    struct CombinedMove {
+        u16 move1;
+        u16 move2;
+        u16 newMove;
+        u16 stringId;
+    };
+    static const struct CombinedMove sCombinedMoves[] = {
+        {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE, STRINGID_WINDBECAMEHEATWAVE},
+    };
+
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+    {
+        for (i = 0; i < NELEMS(sCombinedMoves); i++)
+        {
+            if (gCurrentMove != sCombinedMoves[i].newMove)
+            {
+                for (j = 0; j < MAX_BATTLERS_COUNT; j++)
+                {
+                    if (gAbsentBattlerFlags & gBitTable[j])
+                        continue;
+                    if (gChosenMoveByBattler[j] == sCombinedMoves[i].move1 && gChosenMoveByBattler[BATTLE_PARTNER(j)] == sCombinedMoves[i].move2)
+                    {
+                        gBattleStruct->firstCombinedMoveBattlerId = j;
+                        gBattleStruct->secondCombinedMoveBattlerId = BATTLE_PARTNER(j);
+                        gBattleStruct->combinedMoveId = sCombinedMoves[i].newMove;
+                        gBattleStruct->combinedMoveStringId = sCombinedMoves[i].stringId;
+                    }
+                }
+            }
+        }
+    }
 }

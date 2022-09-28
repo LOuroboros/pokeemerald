@@ -80,21 +80,6 @@ EWRAM_DATA static u8 sTriedEvolving = 0;
 
 #include "data/battle_moves.h"
 
-// Used in an unreferenced function in RS.
-// Unreferenced here and in FRLG.
-struct CombinedMove
-{
-    u16 move1;
-    u16 move2;
-    u16 newMove;
-};
-
-static const struct CombinedMove sCombinedMoves[2] =
-{
-    {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE},
-    {0xFFFF, 0xFFFF, 0xFFFF}
-};
-
 // NOTE: The order of the elements in the 3 arrays below is irrelevant.
 // To reorder the pokedex, see the values in include/constants/pokedex.h.
 
