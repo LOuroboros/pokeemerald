@@ -647,6 +647,9 @@ struct BattleStruct
     u8 attackerBeforeBounce:2;
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
+    u8 firstCombinedMoveBattlerId;
+    u8 secondCombinedMoveBattlerId;
+    u16 combinedMoveId;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)

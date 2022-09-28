@@ -361,7 +361,7 @@ static const u8 sText_HailContinues[] = _("Hail continues to fall.");
 static const u8 sText_HailStopped[] = _("The hail stopped.");
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
 static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
-static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
+static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!{PAUSE 64}");
 static const u8 sText_StatChangesGone[] = _("All stat changes were\neliminated!");
 static const u8 sText_CoinsScattered[] = _("Coins scattered everywhere!");
 static const u8 sText_TooWeakForSubstitute[] = _("It was too weak to make\na SUBSTITUTE!");
@@ -1381,6 +1381,11 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
     [STRINGID_CANTESCAPEBECAUSEOFCURRENTMOVE - BATTLESTRINGS_TABLE_START] = sText_CantEscapeBecauseOfCurrentMove,
     [STRINGID_PKMNTOOKTARGETHIGH - BATTLESTRINGS_TABLE_START] = sText_PkmnTookTargetHigh,
     [STRINGID_TARGETTOOHEAVY - BATTLESTRINGS_TABLE_START] = sText_TargetTooHeavy,
+};
+
+const u16 gCombinedMoveStringIds[] =
+{
+    [B_MSG_COMBINED_MOVE_HEAT_WAVE] = STRINGID_WINDBECAMEHEATWAVE,
 };
 
 const u16 gZEffectStringIds[] =

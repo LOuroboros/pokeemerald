@@ -910,4 +910,7 @@
 #define B_MSG_Z_STAT_UP       5
 #define B_MSG_Z_HP_TRAP       6
 
+// gCombinedMoveStringIds
+#define B_MSG_COMBINED_MOVE_HEAT_WAVE 0
+
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H
