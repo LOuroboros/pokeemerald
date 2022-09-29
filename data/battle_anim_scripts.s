@@ -805,6 +805,10 @@ gBattleAnims_Moves::
 	.4byte Move_SANDSEAR_STORM
 	.4byte Move_LUNAR_BLESSING
 	.4byte Move_TAKE_HEART
+@@@@ COMBINED MOVES
+	.4byte Move_COMBINED_WATER_PLEDGE
+	.4byte Move_COMBINED_FIRE_PLEDGE
+	.4byte Move_COMBINED_GRASS_PLEDGE
 @@@@ Z MOVES
 	.4byte Move_BREAKNECK_BLITZ
 	.4byte Move_ALL_OUT_PUMMELING
@@ -896,6 +900,9 @@ gBattleAnims_General::
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
 	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
 	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_Rainbow                  @ B_ANIM_RAINBOW
+	.4byte General_SeaOfFire                @ B_ANIM_SEA_OF_FIRE
+	.4byte General_Swamp                    @ B_ANIM_SWAMP
 
 	.align 2
 gBattleAnims_Special::
@@ -14342,6 +14349,15 @@ Move_LUNAR_BLESSING::
 Move_TAKE_HEART::
 	end @to do
 
+Move_COMBINED_WATER_PLEDGE::
+	goto Move_WATER_PLEDGE
+
+Move_COMBINED_FIRE_PLEDGE::
+	goto Move_FIRE_PLEDGE
+
+Move_COMBINED_GRASS_PLEDGE::
+	goto Move_GRASS_PLEDGE
+
 @@@@@@@@@@@@@@@@@@@@@@@ GEN 1-3 @@@@@@@@@@@@@@@@@@@@@@@
 Move_NONE:
 Move_MIRROR_MOVE:
@@ -24910,6 +24926,30 @@ General_AffectionHangedOn_3Hearts:
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
 	waitforvisualfinish
 	end
+
+General_Rainbow:: @ To do
+	goto Move_SUNNY_DAY
+
+General_SeaOfFire::
+	loadspritegfx ANIM_TAG_SMALL_EMBER
+	playsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_TARGET
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 64, 24, 20, ANIM_TARGET, 1
+	delay 4
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 64, 24, 20, ANIM_TARGET, 1
+	delay 4
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 64, 24, 20, ANIM_TARGET, 1
+	delay 4
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 64, 24, 20, ANIM_TARGET, 1
+	delay 4
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 64, 24, 20, ANIM_TARGET, 1
+	delay 4
+	createsprite gEmberFlareSpriteTemplate, ANIM_TARGET, 2, -24, 24, 64, 24, 20, ANIM_TARGET, 1
+	delay 4
+	waitforvisualfinish
+	end
+
+General_Swamp:: @ To do
+	goto Move_SUNNY_DAY
 
 SnatchMoveTrySwapFromSubstitute:
 	createvisualtask AnimTask_IsAttackerBehindSubstitute, 2

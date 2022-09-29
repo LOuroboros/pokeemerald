@@ -14146,4 +14146,54 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .split = SPLIT_PHYSICAL,
         .zMoveEffect = 0
     },
+
+    // Combined Moves
+    [MOVE_COMBINED_WATER_PLEDGE] =
+    {
+        .power = 150,
+        .effect = EFFECT_COMBINED_PLEDGE,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .argument = TYPE_WATER,
+        .zMovePower = 200,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+    [MOVE_COMBINED_FIRE_PLEDGE] =
+    {
+        .power = 150,
+        .effect = EFFECT_COMBINED_PLEDGE,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .argument = TYPE_FIRE,
+        .zMovePower = 200,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
+    [MOVE_COMBINED_GRASS_PLEDGE] =
+    {
+        .power = 150,
+        .effect = EFFECT_COMBINED_PLEDGE,
+        .type = TYPE_GRASS,
+        .accuracy = 100,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+        .split = SPLIT_SPECIAL,
+        .argument = TYPE_GRASS,
+        .zMovePower = 200,
+        .zMoveEffect = Z_EFFECT_NONE,
+    },
 };

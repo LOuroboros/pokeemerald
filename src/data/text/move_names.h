@@ -781,6 +781,9 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_SANDSEAR_STORM] = _("Sandsear Storm"),
     [MOVE_LUNAR_BLESSING] = _("Lunar Blessing"),
     [MOVE_TAKE_HEART] = _("Take Heart"),
+    [MOVE_COMBINED_WATER_PLEDGE] = _("Water Pledge"),
+    [MOVE_COMBINED_FIRE_PLEDGE] = _("Fire Pledge"),
+    [MOVE_COMBINED_GRASS_PLEDGE] = _("Grass Pledge"),
 };
 #else
 // 12 letters
@@ -1565,6 +1568,9 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] =
     [MOVE_SANDSEAR_STORM] = _("SndsearStorm"),
     [MOVE_LUNAR_BLESSING] = _("LunarBlessng"),
     [MOVE_TAKE_HEART] = _("Take Heart"),
+    [MOVE_COMBINED_WATER_PLEDGE] = _("Water Pledge"),
+    [MOVE_COMBINED_FIRE_PLEDGE] = _("Fire Pledge"),
+    [MOVE_COMBINED_GRASS_PLEDGE] = _("Grass Pledge"),
 };
 #endif
 

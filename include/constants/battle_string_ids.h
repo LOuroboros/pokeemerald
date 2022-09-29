@@ -630,8 +630,17 @@
 #define STRINGID_ATTACKERHEALEDITSBURN                628
 #define STRINGID_ATTACKERMELTEDTHEICE                 629
 #define STRINGID_TARGETTOUGHEDITOUT                   630
+#define STRINGID_THETWOMOVESBECOMEONE                 631
+#define STRINGID_ARAINBOWAPPEAREDONSIDE               632
+#define STRINGID_THERAINBOWDISAPPEARED                633
+#define STRINGID_WAITINGFORPARTNERSMOVE               634
+#define STRINGID_SEAOFFIREENVELOPEDSIDE               635
+#define STRINGID_HURTBYTHESEAOFFIRE                   636
+#define STRINGID_THESEAOFFIREDISAPPEARED              637
+#define STRINGID_SWAMPENVELOPEDSIDE                   638
+#define STRINGID_THESWAMPDISAPPEARED                  639
 
-#define BATTLESTRINGS_COUNT                           631
+#define BATTLESTRINGS_COUNT                           640
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
@@ -909,8 +918,5 @@
 #define B_MSG_Z_RECOVER_HP    4
 #define B_MSG_Z_STAT_UP       5
 #define B_MSG_Z_HP_TRAP       6
-
-// gCombinedMoveStringIds
-#define B_MSG_COMBINED_MOVE_HEAT_WAVE 0
 
 #endif // GUARD_CONSTANTS_BATTLE_STRING_IDS_H

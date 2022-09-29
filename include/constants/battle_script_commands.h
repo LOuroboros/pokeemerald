@@ -245,6 +245,8 @@
 #define VARIOUS_TRY_SYMBIOSIS                       154
 #define VARIOUS_CAN_TELEPORT                        155
 #define VARIOUS_GET_BATTLER_SIDE                    156
+#define VARIOUS_JUMP_IF_ARGUMENT_IS_TYPE            157
+#define VARIOUS_SET_PLEDGE_STATUS                   158
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

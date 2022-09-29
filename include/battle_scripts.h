@@ -429,6 +429,12 @@ extern const u8 BattleScript_DefDownSpeedUp[];
 extern const u8 BattleScript_AffectionBasedStatusHeal[];
 extern const u8 BattleScript_AffectionBasedEndurance[];
 extern const u8 BattleScript_SymbiosisActivates[];
+extern const u8 BattleScript_RainbowContinues[];
+extern const u8 BattleScript_TheRainbowDisappeared[];
+extern const u8 BattleScript_HurtByTheSeaOfFire[];
+extern const u8 BattleScript_TheSeaOfFireDisappeared[];
+extern const u8 BattleScript_SwampContinues[];
+extern const u8 BattleScript_TheSwampDisappeared[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

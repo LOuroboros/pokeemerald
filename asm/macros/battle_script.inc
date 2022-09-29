@@ -1988,6 +1988,17 @@
 	various \battler, VARIOUS_GET_BATTLER_SIDE
 	.endm
 
+	.macro jumpifargumentistype type:req ptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_ARGUMENT_IS_TYPE
+	.byte \type
+	.4byte \ptr
+	.endm
+
+	.macro setpledgestatus battler:req sidestatus:req
+	various \battler VARIOUS_SET_PLEDGE_STATUS
+	.4byte \sidestatus
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7

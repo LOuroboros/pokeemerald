@@ -210,10 +210,10 @@
 // Per-side statuses that affect an entire party
 #define SIDE_STATUS_REFLECT                 (1 << 0)
 #define SIDE_STATUS_LIGHTSCREEN             (1 << 1)
-#define SIDE_STATUS_STICKY_WEB              (1 << 2)
+#define SIDE_STATUS_STICKY_WEB              (1 << 2 | 1 << 3)
 #define SIDE_STATUS_SPIKES                  (1 << 4)
 #define SIDE_STATUS_SAFEGUARD               (1 << 5)
-#define SIDE_STATUS_FUTUREATTACK            (1 << 6)
+#define SIDE_STATUS_FUTUREATTACK            (1 << 6 | 1 << 7)
 #define SIDE_STATUS_MIST                    (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED          (1 << 9)
 #define SIDE_STATUS_TAILWIND                (1 << 10)
@@ -228,9 +228,13 @@
 #define SIDE_STATUS_WIDE_GUARD              (1 << 19)
 #define SIDE_STATUS_CRAFTY_SHIELD           (1 << 20)
 #define SIDE_STATUS_MAT_BLOCK               (1 << 21)
+#define SIDE_STATUS_RAINBOW                 (1 << 22)
+#define SIDE_STATUS_SEA_OF_FIRE             (1 << 23)
+#define SIDE_STATUS_SWAMP                   (1 << 24)
 
 #define SIDE_STATUS_HAZARDS_ANY    (SIDE_STATUS_SPIKES | SIDE_STATUS_STICKY_WEB | SIDE_STATUS_TOXIC_SPIKES | SIDE_STATUS_STEALTH_ROCK)
 #define SIDE_STATUS_SCREEN_ANY     (SIDE_STATUS_REFLECT | SIDE_STATUS_LIGHTSCREEN | SIDE_STATUS_AURORA_VEIL)
+#define SIDE_STATUS_PLEDGE_ANY     (SIDE_STATUS_RAINBOW | SIDE_STATUS_SEA_OF_FIRE | SIDE_STATUS_SWAMP)
 
 // Field affecting statuses.
 #define STATUS_FIELD_MAGIC_ROOM                     (1 << 0)

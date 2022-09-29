@@ -283,6 +283,19 @@ static const s32 sExperienceScalingFactors[] =
     159767,
 };
 
+static const u16 sMovesUnaffectedByRainbow[] =
+{
+    [MOVE_SECRET_POWER] = TRUE,
+};
+
+static const u16 sMovesUnaffectedByGems[] =
+{
+    [MOVE_STRUGGLE] = TRUE,
+    [MOVE_WATER_PLEDGE] = TRUE,
+    [MOVE_FIRE_PLEDGE] = TRUE,
+    [MOVE_GRASS_PLEDGE] = TRUE,
+};
+
 static const u16 sTrappingMoves[NUM_TRAPPING_MOVES] =
 {
     MOVE_BIND, MOVE_WRAP, MOVE_FIRE_SPIN, MOVE_CLAMP, MOVE_WHIRLPOOL, MOVE_SAND_TOMB, MOVE_MAGMA_STORM, MOVE_INFESTATION, MOVE_SNAP_TRAP,
@@ -2099,7 +2112,8 @@ END:
     }
     if (gSpecialStatuses[gBattlerAttacker].gemBoost
         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-        && gBattleMons[gBattlerAttacker].item)
+        && gBattleMons[gBattlerAttacker].item
+        && !sMovesUnaffectedByGems[gCurrentMove])
     {
         BattleScriptPushCursor();
         gBattlescriptCurrInstr = BattleScript_GemActivates;
@@ -3625,12 +3639,12 @@ void SetMoveEffect(bool32 primary, u32 certain)
 
 static void Cmd_seteffectwithchance(void)
 {
-    u32 percentChance;
+    u32 percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
 
     if (GetBattlerAbility(gBattlerAttacker) == ABILITY_SERENE_GRACE)
         percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
-    else
-        percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance;
+    if (gSideStatuses[GetBattlerSide(gBattlerAttacker)] & SIDE_STATUS_RAINBOW && !sMovesUnaffectedByRainbow[gCurrentMove])
+        percentChance = gBattleMoves[gCurrentMove].secondaryEffectChance * 2;
 
     if (gBattleScripting.moveEffect & MOVE_EFFECT_CERTAIN
         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT))
@@ -9898,6 +9912,33 @@ static void Cmd_various(void)
         else
             gBattleCommunication[0] = B_SIDE_OPPONENT;
         break;
+    case VARIOUS_JUMP_IF_ARGUMENT_IS_TYPE:
+        if (gBattleMoves[gCurrentMove].argument == gBattlescriptCurrInstr[3])
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 4);
+        else
+            gBattlescriptCurrInstr += 8;
+        return;
+    case VARIOUS_SET_PLEDGE_STATUS:
+    {
+        u8 side = GET_BATTLER_SIDE(gActiveBattler);
+        u32 sideStatus = T1_READ_32(gBattlescriptCurrInstr + 3);
+        if (!(gSideStatuses[side] & sideStatus))
+            gSideStatuses[side] |= sideStatus;
+        switch (sideStatus)
+        {
+        case SIDE_STATUS_RAINBOW:
+            gSideTimers[side].rainbowTimer = 4;
+            break;
+        case SIDE_STATUS_SEA_OF_FIRE:
+            gSideTimers[side].seaOfFireTimer = 4;
+            break;
+        case SIDE_STATUS_SWAMP:
+            gSideTimers[side].swampTimer = 4;
+            break;
+        }
+        gBattlescriptCurrInstr += 4;
+        break;
+    }
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;

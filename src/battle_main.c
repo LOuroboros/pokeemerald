@@ -3788,6 +3788,7 @@ void BattleTurnPassed(void)
     gBattleScripting.moveendState = 0;
     gBattleMoveDamage = 0;
     gMoveResultFlags = 0;
+    gBattleStruct->combinedMoveId = 0;
 
     for (i = 0; i < 5; i++)
         gBattleCommunication[i] = 0;
@@ -4501,6 +4502,10 @@ u32 GetBattlerTotalSpeedStat(u8 battlerId)
     #else
         speed /= 4;
     #endif
+
+    // swamp drop
+    if (gSideStatuses[GET_BATTLER_SIDE(battlerId)] & SIDE_STATUS_SWAMP)
+        speed /= 4;
 
     return speed;
 }

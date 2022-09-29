@@ -415,6 +415,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSteelBeam               @ EFFECT_STEEL_BEAM
 	.4byte BattleScript_EffectExtremeEvoboost         @ EFFECT_EXTREME_EVOBOOST
 	.4byte BattleScript_EffectTerrainHit              @ EFFECT_DAMAGE_SET_TERRAIN
+	.4byte BattleScript_EffectCombinedPledge          @ EFFECT_COMBINED_PLEDGE
 
 BattleScript_AffectionBasedEndurance::
 	playanimation BS_TARGET, B_ANIM_AFFECTION_HANGED_ON
@@ -3000,6 +3001,29 @@ BattleScript_HitFromAtkAnimation::
 BattleScript_MoveEnd::
 	moveendall
 	end
+
+BattleScript_EffectHit_Ret:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	critcalc
+	damagecalc
+	adjustdamage
+	attackanimation
+	waitanimation
+	effectivenesssound
+	hitanimation BS_TARGET
+	waitstate
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET
+	critmessage
+	waitmessage B_WAIT_TIME_LONG
+	resultmessage
+	waitmessage B_WAIT_TIME_LONG
+	seteffectwithchance
+	tryfaintmon BS_TARGET
+	return
 
 BattleScript_EffectNaturalGift:
 	attackcanceler
@@ -9735,6 +9759,69 @@ BattleScript_EffectTerrainHit:
 BattleScript_TryFaint:
 	tryfaintmon BS_TARGET
 	goto BattleScript_MoveEnd
+
+BattleScript_EffectCombinedPledge:
+	jumpifargumentistype TYPE_WATER, BattleScript_EffectCombinedPledge_Water
+	jumpifargumentistype TYPE_FIRE, BattleScript_EffectCombinedPledge_Fire
+	jumpifargumentistype TYPE_GRASS, BattleScript_EffectCombinedPledge_Grass
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectCombinedPledge_Water:
+	call BattleScript_EffectHit_Ret
+	setpledgestatus BS_ATTACKER, SIDE_STATUS_RAINBOW
+	printstring STRINGID_ARAINBOWAPPEAREDONSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_ATTACKER, B_ANIM_RAINBOW
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_RainbowContinues::
+	playanimation BS_ATTACKER, B_ANIM_RAINBOW
+	waitanimation
+	end2
+
+BattleScript_TheRainbowDisappeared::
+	printstring STRINGID_THERAINBOWDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectCombinedPledge_Fire:
+	call BattleScript_EffectHit_Ret
+	setpledgestatus BS_TARGET, SIDE_STATUS_SEA_OF_FIRE
+	printstring STRINGID_SEAOFFIREENVELOPEDSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_SEA_OF_FIRE
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_HurtByTheSeaOfFire::
+	printstring STRINGID_HURTBYTHESEAOFFIRE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoTurnDmg
+
+BattleScript_TheSeaOfFireDisappeared::
+	printstring STRINGID_THESEAOFFIREDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
+
+BattleScript_EffectCombinedPledge_Grass:
+	call BattleScript_EffectHit_Ret
+	setpledgestatus BS_TARGET, SIDE_STATUS_SWAMP
+	printstring STRINGID_SWAMPENVELOPEDSIDE
+	waitmessage B_WAIT_TIME_LONG
+	playanimation BS_TARGET, B_ANIM_SWAMP
+	waitanimation
+	goto BattleScript_MoveEnd
+
+BattleScript_SwampContinues::
+	playanimation BS_ATTACKER, B_ANIM_SWAMP
+	waitanimation
+	end2
+
+BattleScript_TheSwampDisappeared::
+	printstring STRINGID_THESWAMPDISAPPEARED
+	waitmessage B_WAIT_TIME_LONG
+	end2
 
 BattleScript_Pickpocket::
 	call BattleScript_AbilityPopUp

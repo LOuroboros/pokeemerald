@@ -233,6 +233,9 @@ void LaunchBattleAnimation(const u8 *const animsTable[], u16 tableId, bool8 isMo
         case B_ANIM_WISH_HEAL:
         case B_ANIM_MEGA_EVOLUTION:
         case B_ANIM_GULP_MISSILE:
+        case B_ANIM_RAINBOW:
+        case B_ANIM_SEA_OF_FIRE:
+        case B_ANIM_SWAMP:
             hideHpBoxes = TRUE;
             break;
         default:

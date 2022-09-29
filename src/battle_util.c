@@ -299,19 +299,20 @@ void HandleAction_UseMove(void)
     }
 
     // Try to set up a combined move.
-    // Sets up firstCombinedMoveBattlerId, secondCombinedMoveBattlerId and combinedMoveId which are used below.
     TryToSetUpCombinedMove();
-    if (gBattlerAttacker == gBattleStruct->firstCombinedMoveBattlerId)
+    if (gBattleStruct->combinedMoveId)
     {
-        gBattleStruct->firstCombinedMoveBattlerId = 0xFF;
-        gCurrentActionFuncId = B_ACTION_FINISHED;
-        return;
-    }
-    else if (gBattlerAttacker == gBattleStruct->secondCombinedMoveBattlerId)
-    {
-        gCurrentMove = gBattleStruct->combinedMoveId;
-        PrepareStringBattle(*gCombinedMoveStringIds, gBattlerAttacker);
-        gBattleCommunication[MSG_DISPLAY] = TRUE;
+        if (gBattlerAttacker == gBattleStruct->firstCombinedMoveBattlerId)
+        {
+            gCurrentActionFuncId = B_ACTION_FINISHED;
+            return;
+        }
+        else if (gBattlerAttacker == gBattleStruct->secondCombinedMoveBattlerId)
+        {
+            gCurrentMove = gBattleStruct->combinedMoveId;
+            PrepareStringBattle(gBattleStruct->combinedMoveStringId, gBattlerAttacker);
+            gBattleCommunication[MSG_DISPLAY] = TRUE;
+        }
     }
 
     // check z move used
@@ -2172,6 +2173,9 @@ enum
     ENDTURN_RETALIATE,
     ENDTURN_WEATHER_FORM,
     ENDTURN_STATUS_HEAL,
+    ENDTURN_RAINBOW,
+    ENDTURN_SEA_OF_FIRE_DAMAGE,
+    ENDTURN_SWAMP,
     ENDTURN_FIELD_COUNT,
 };
 
@@ -2639,6 +2643,83 @@ u8 DoFieldEndTurnEffects(void)
             }
             gBattleStruct->turnCountersTracker++;
             break;
+        case ENDTURN_RAINBOW:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+                if (gSideStatuses[side] & SIDE_STATUS_RAINBOW)
+                {
+                    gActiveBattler = gBattlerAttacker = gSideTimers[side].rainbowBattlerId;
+                    if (--gSideTimers[side].rainbowTimer == 0)
+                    {
+                        gSideStatuses[side] &= ~SIDE_STATUS_RAINBOW;
+                        BattleScriptExecute(BattleScript_TheRainbowDisappeared);
+                    }
+                    else
+                    {
+                        BattleScriptExecute(BattleScript_RainbowContinues);
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            gBattleStruct->turnSideTracker = 0;
+            break;
+        case ENDTURN_SEA_OF_FIRE_DAMAGE:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+                if (gSideStatuses[side] & SIDE_STATUS_SEA_OF_FIRE)
+                {
+                    for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+                    {
+                        if (GetBattlerSide(gActiveBattler) != side)
+                            continue;
+                        if (IsBattlerAlive(gActiveBattler) && !IS_BATTLER_OF_TYPE(gActiveBattler, TYPE_FIRE))
+                        {
+                            gBattlerAttacker = gActiveBattler;
+                            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                            BtlController_EmitStatusAnimation(BUFFER_A, FALSE, STATUS1_BURN);
+                            MarkBattlerForControllerExec(gActiveBattler);
+                            BattleScriptExecute(BattleScript_HurtByTheSeaOfFire);
+                            break;
+                        }
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            gBattleStruct->turnSideTracker = 0;
+            break;
+        case ENDTURN_SWAMP:
+            while (gBattleStruct->turnSideTracker < 2)
+            {
+                side = gBattleStruct->turnSideTracker;
+                if (gSideStatuses[side] & SIDE_STATUS_SWAMP)
+                {
+                    for (gActiveBattler = 0; gActiveBattler < gBattlersCount; gActiveBattler++)
+                    {
+                        if (GetBattlerSide(gActiveBattler) != side)
+                            continue;
+                        gBattlerAttacker = gActiveBattler;
+                        if (--gSideTimers[side].swampTimer == 0)
+                        {
+                            gSideStatuses[side] &= ~SIDE_STATUS_SWAMP;
+                            BattleScriptExecute(BattleScript_TheSwampDisappeared);
+                            break;
+                        }
+                        else
+                        {
+                            BattleScriptExecute(BattleScript_SwampContinues);
+                            break;
+                        }
+                    }
+                }
+                gBattleStruct->turnSideTracker++;
+            }
+            gBattleStruct->turnCountersTracker++;
+            gBattleStruct->turnSideTracker = 0;
+            break;
         case ENDTURN_FIELD_COUNT:
             effect++;
             break;
@@ -2684,6 +2765,7 @@ enum
     ENDTURN_THROAT_CHOP,
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
+    ENDTURN_SEA_OF_FIRE,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -2709,7 +2791,7 @@ if (ability == ABILITY_MAGIC_GUARD) \
 
 u8 DoBattlerEndTurnEffects(void)
 {
-    u32 ability, i, effect = 0;
+    u32 ability, i, effect = 0, side;
 
     gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_SKIP_DMG_TRACK);
     while (gBattleStruct->turnEffectsBattlerId < gBattlersCount && gBattleStruct->turnEffectsTracker <= ENDTURN_BATTLER_COUNT)
@@ -2722,6 +2804,7 @@ u8 DoBattlerEndTurnEffects(void)
         }
 
         ability = GetBattlerAbility(gActiveBattler);
+        side = GetBattlerSide(gActiveBattler);
         switch (gBattleStruct->turnEffectsTracker)
         {
         case ENDTURN_INGRAIN:  // ingrain
@@ -3224,6 +3307,18 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_PLASMA_FISTS:
             for (i = 0; i < gBattlersCount; i++)
                 gStatuses4[i] &= ~STATUS4_PLASMA_FISTS;
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SEA_OF_FIRE:
+            if (gSideStatuses[side] & SIDE_STATUS_SEA_OF_FIRE)
+            {
+                if (gSideTimers[side].seaOfFireTimer && --gSideTimers[side].seaOfFireTimer == 0)
+                {
+                    gSideStatuses[side] &= ~SIDE_STATUS_SEA_OF_FIRE;
+                    BattleScriptExecute(BattleScript_TheSeaOfFireDisappeared);
+                    effect++;
+                }
+            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done
@@ -10422,10 +10517,16 @@ static void TryToSetUpCombinedMove(void)
         u16 move1;
         u16 move2;
         u16 newMove;
-        u16 battleMsgId;
+        u16 stringId;
     };
     static const struct CombinedMove sCombinedMoves[] = {
-        {MOVE_EMBER, MOVE_GUST, MOVE_HEAT_WAVE, B_MSG_COMBINED_MOVE_HEAT_WAVE},
+        {MOVE_EMBER,        MOVE_GUST,         MOVE_HEAT_WAVE,             STRINGID_WINDBECAMEHEATWAVE  },
+        {MOVE_FIRE_PLEDGE,  MOVE_WATER_PLEDGE, MOVE_COMBINED_WATER_PLEDGE, STRINGID_THETWOMOVESBECOMEONE},
+        {MOVE_FIRE_PLEDGE,  MOVE_GRASS_PLEDGE, MOVE_COMBINED_FIRE_PLEDGE,  STRINGID_THETWOMOVESBECOMEONE},
+        {MOVE_WATER_PLEDGE, MOVE_FIRE_PLEDGE,  MOVE_COMBINED_WATER_PLEDGE, STRINGID_THETWOMOVESBECOMEONE},
+        {MOVE_WATER_PLEDGE, MOVE_GRASS_PLEDGE, MOVE_COMBINED_GRASS_PLEDGE, STRINGID_THETWOMOVESBECOMEONE},
+        {MOVE_GRASS_PLEDGE, MOVE_FIRE_PLEDGE,  MOVE_COMBINED_FIRE_PLEDGE,  STRINGID_THETWOMOVESBECOMEONE},
+        {MOVE_GRASS_PLEDGE, MOVE_WATER_PLEDGE, MOVE_COMBINED_GRASS_PLEDGE, STRINGID_THETWOMOVESBECOMEONE},
     };
 
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
@@ -10443,7 +10544,7 @@ static void TryToSetUpCombinedMove(void)
                         gBattleStruct->firstCombinedMoveBattlerId = j;
                         gBattleStruct->secondCombinedMoveBattlerId = BATTLE_PARTNER(j);
                         gBattleStruct->combinedMoveId = sCombinedMoves[i].newMove;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = sCombinedMoves[i].battleMsgId;
+                        gBattleStruct->combinedMoveStringId = sCombinedMoves[i].stringId;
                     }
                 }
             }

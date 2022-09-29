@@ -213,6 +213,11 @@ struct SideTimer
     u8 followmeTarget:3;
     u8 followmePowder:1; // Rage powder, does not affect grass type pokemon.
     u8 retaliateTimer;
+    u8 rainbowTimer;
+    u8 rainbowBattlerId;
+    u8 seaOfFireTimer;
+    u8 swampTimer;
+    u8 swampBattlerId;
 };
 
 struct FieldTimer
@@ -650,6 +655,7 @@ struct BattleStruct
     u8 firstCombinedMoveBattlerId;
     u8 secondCombinedMoveBattlerId;
     u16 combinedMoveId;
+    u16 combinedMoveStringId;
 };
 
 #define F_DYNAMIC_TYPE_1 (1 << 6)
