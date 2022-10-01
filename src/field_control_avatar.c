@@ -115,7 +115,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             if (newKeys & R_BUTTON)
                 input->pressedRButton = TRUE;
         #ifdef DEBUG_MENU_ENABLED
-            if (heldKeys & R_BUTTON && newKeys & SELECT_BUTTON)
+            if (heldKeys & R_BUTTON && newKeys & START_BUTTON)
                 input->pressedDebugCombo = TRUE;
         #endif
         }
