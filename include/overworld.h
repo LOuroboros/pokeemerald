@@ -69,6 +69,7 @@ void LoadSaveblockObjEventScripts(void);
 void SetObjEventTemplateCoords(u8 localId, s16 x, s16 y);
 void SetObjEventTemplateMovementType(u8 localId, u8 movementType);
 void InitMapView(void);
+void RemoveTintFromObjectEvents(void);
 const struct MapLayout *GetMapLayout(void);
 void ApplyCurrentWarp(void);
 struct MapHeader const *const Overworld_GetMapHeaderByGroupAndId(u16 mapGroup, u16 mapNum);

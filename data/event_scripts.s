@@ -1013,6 +1013,7 @@ Script_SetSepiaTint::
 
 Script_RemoveTint::
 	setptr GLOBAL_FIELD_TINT_NONE, gGlobalFieldTintMode
+	callnative RemoveTintFromObjectEvents
 	callnative InitMapView
 	return
 

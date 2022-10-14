@@ -866,8 +866,6 @@ static void ApplyGlobalTintToPaletteEntries(u16 offset, u16 size)
     switch (gGlobalFieldTintMode)
     {
         case GLOBAL_FIELD_TINT_NONE:
-            FreeAndReserveObjectSpritePalettes();
-            InitObjectEventPalettes(1);
             return;
         case GLOBAL_FIELD_TINT_GRAYSCALE:
             TintPalette_GrayScale(gPlttBufferUnfaded + offset, size);
