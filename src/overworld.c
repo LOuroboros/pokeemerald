@@ -539,8 +539,8 @@ void InitMapView(void)
 
 void RemoveTintFromObjectEvents(void)
 {
-	if(gGlobalFieldTintMode == GLOBAL_FIELD_TINT_NONE)
-		RemoveTintFromObjectEventPalettes();
+    if (gGlobalFieldTintMode == GLOBAL_FIELD_TINT_NONE)
+        RemoveTintFromObjectEventPalettes();
 }
 
 const struct MapLayout *GetMapLayout(void)
