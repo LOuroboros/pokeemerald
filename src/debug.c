@@ -54,7 +54,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/coins.h"
 
-#ifdef DEBUG_MENU_ENABLED
+#if DEBUG_SYSTEM_ENABLE == TRUE
 
 // *******************************
 // Enums
@@ -1614,7 +1614,7 @@ static void DebugAction_Util_TestRayquazaCutscene(u8 taskId)
     FlagClear(FLAG_HIDE_SOOTOPOLIS_CITY_KYOGRE);
     VarSet(VAR_SOOTOPOLIS_CITY_STATE, 5);
     VarSet(VAR_SKY_PILLAR_STATE, 1);
-    VarSet(VAR_SKY_PILLAR_RAQUAZA_CRY_DONE, 1);
+    VarSet(VAR_SKY_PILLAR_RAYQUAZA_CRY_DONE, 1);
     SetWarpDestinationToMapWarp(MAP_GROUP(SOOTOPOLIS_CITY), MAP_NUM(SOOTOPOLIS_CITY), 0);
     DoWarp();
 }
@@ -4891,4 +4891,5 @@ static void DebugAction_Badges_Eighth(u8 taskId)
         PlaySE(MUS_LEVEL_UP);
     }
 }
-#endif
+
+#endif //DEBUG_SYSTEM_ENABLE == TRUE

@@ -647,7 +647,7 @@ static void MainCB2(void)
 static void Task_TitleScreenPhase1(u8 taskId)
 {
     // Skip to next phase when A, B, Start, or Select is pressed
-    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
+    if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].data[1] != 0)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;
@@ -694,7 +694,7 @@ static void Task_TitleScreenPhase2(u8 taskId)
     u32 yPos;
 
     // Skip to next phase when A, B, Start, or Select is pressed
-    if ((gMain.newKeys & A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
+    if (JOY_NEW(A_B_START_SELECT) || gTasks[taskId].tSkipToNext)
     {
         gTasks[taskId].tSkipToNext = TRUE;
         gTasks[taskId].tCounter = 0;

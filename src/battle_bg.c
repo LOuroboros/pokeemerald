@@ -603,7 +603,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x013c,
     },
-    [ARENA_WIN_JUDGEMENT_TITLE] = {
+    [ARENA_WIN_JUDGMENT_TITLE] = {
         .bg = 0,
         .tilemapLeft = 8,
         .tilemapTop = 11,
@@ -612,7 +612,7 @@ static const struct WindowTemplate sBattleArenaWindowTemplates[] =
         .paletteNum = 5,
         .baseBlock = 0x0148,
     },
-    [ARENA_WIN_JUDGEMENT_TEXT] = {
+    [ARENA_WIN_JUDGMENT_TEXT] = {
         .bg = 0,
         .tilemapLeft = 2,
         .tilemapTop = 15,
@@ -907,11 +907,11 @@ void LoadBattleTextboxAndBackground(void)
     CopyBgTilemapBufferToVram(0);
     LoadCompressedPalette(gBattleTextboxPalette, 0, 0x40);
     LoadBattleMenuWindowGfx();
-    #if B_TERRAIN_BG_CHANGE == TRUE
-        DrawTerrainTypeBattleBackground();
-    #else
-        DrawMainBattleBackground();
-    #endif
+#if B_TERRAIN_BG_CHANGE == TRUE
+    DrawTerrainTypeBattleBackground();
+#else
+    DrawMainBattleBackground();
+#endif
 }
 
 static void DrawLinkBattleParticipantPokeballs(u8 taskId, u8 multiplayerId, u8 bgId, u8 destX, u8 destY)

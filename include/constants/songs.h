@@ -269,8 +269,8 @@
 #define SE_RG_HELP_ERROR                  259 // SE_RG_HELP_NG
 #define SE_RG_DEOXYS_MOVE                 260 // SE_RG_DEOMOV
 #define SE_RG_POKE_JUMP_SUCCESS           261 // SE_RG_EXCELLENT
-#define SE_RG_POKE_JUMP_FAILURE           262 // SE_RG_NAWAMISS
-// Emerald SFX
+#define SE_RG_POKE_JUMP_FAILURE           262 // SE_RG_NAWAMISS 
+// Emerald SFX 
 #define SE_POKENAV_CALL                   263 // SE_TOREEYE
 #define SE_POKENAV_HANG_UP                264 // SE_TOREOFF
 #define SE_ARENA_TIMEUP1                  265 // SE_HANTEI1
@@ -334,8 +334,8 @@
 #define END_SE                            PH_NURSE_SOLO
 
 #define START_MUS                         (END_SE + 1)
-// Ruby & Sapphire Music
-#define RS_MUSIC_START                    SONGS_START
+// Ruby & Sapphire Music 
+#define RS_MUSIC_START                    START_MUS
 
 #define MUS_LITTLEROOT_TEST               322 // MUS_TETSUJI
 #define MUS_GSC_ROUTE38                   323 // MUS_FIELD13
@@ -457,7 +457,7 @@
 
 #define RS_MUSIC_END                      MUS_VS_AQUA_MAGMA_LEADER
 
-// FireRed & LeafGreen Music
+// FireRed & LeafGreen Music 
 #define RG_MUSIC_START                    (RS_MUSIC_END + 1)
 
 #define MUS_RG_FOLLOW_ME                  439 // MUS_RG_ANNAI

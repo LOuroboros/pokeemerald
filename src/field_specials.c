@@ -972,24 +972,32 @@ void FieldShowRegionMap(void)
     SetMainCallback2(CB2_FieldShowRegionMap);
 }
 
+static bool8 IsPlayerInFrontOfPC(void)
+{
+    u16 x, y;
+    u16 tileInFront;
+
+    GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
+    tileInFront = MapGridGetMetatileIdAt(x, y);
+
+    return (tileInFront == METATILE_BrendansMaysHouse_BrendanPC_On
+         || tileInFront == METATILE_BrendansMaysHouse_BrendanPC_Off
+         || tileInFront == METATILE_BrendansMaysHouse_MayPC_On
+         || tileInFront == METATILE_BrendansMaysHouse_MayPC_Off
+         || tileInFront == METATILE_Building_PC_On
+         || tileInFront == METATILE_Building_PC_Off);
+}
+
 void DoPCTurnOnEffect(void)
 {
-    extern struct MapPosition gPlayerFacingPosition;
-    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-
-    if (MapGridGetMetatileIdAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) == METATILE_BrendansMaysHouse_BrendanPC_Off
-     || MapGridGetMetatileIdAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) == METATILE_BrendansMaysHouse_MayPC_Off
-     || MapGridGetMetatileIdAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) == METATILE_Building_PC_Off)
+    if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE && IsPlayerInFrontOfPC() == TRUE)
     {
-        if (FuncIsActiveTask(Task_PCTurnOnEffect) != TRUE)
-        {
-            u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
-            gTasks[taskId].data[0] = 0;
-            gTasks[taskId].data[1] = taskId;
-            gTasks[taskId].data[2] = 0;
-            gTasks[taskId].data[3] = 0;
-            gTasks[taskId].data[4] = 0;
-        }
+        u8 taskId = CreateTask(Task_PCTurnOnEffect, 8);
+        gTasks[taskId].data[0] = 0;
+        gTasks[taskId].data[1] = taskId;
+        gTasks[taskId].data[2] = 0;
+        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].data[4] = 0;
     }
 }
 
@@ -1069,38 +1077,31 @@ static void PCTurnOffEffect(void)
     u16 tileId = 0;
     u8 playerDirection = GetPlayerFacingDirection();
 
-    extern struct MapPosition gPlayerFacingPosition;
-    GetXYCoordsOneStepInFrontOfPlayer(&gPlayerFacingPosition.x, &gPlayerFacingPosition.y);
-
-    if (MapGridGetMetatileIdAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) == METATILE_BrendansMaysHouse_BrendanPC_On
-     || MapGridGetMetatileIdAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) == METATILE_BrendansMaysHouse_MayPC_On
-     || MapGridGetMetatileIdAt(gPlayerFacingPosition.x, gPlayerFacingPosition.y) == METATILE_Building_PC_On)
+    if (IsPlayerInFrontOfPC() == FALSE)
+        return;
+    switch (playerDirection)
     {
-        switch (playerDirection)
-        {
-            case DIR_NORTH:
-                dx = 0;
-                dy = -1;
-                break;
-            case DIR_WEST:
-                dx = -1;
-                dy = -1;
-                break;
-            case DIR_EAST:
-                dx = 1;
-                dy = -1;
-                break;
-        }
-
-        if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
-            tileId = METATILE_Building_PC_Off;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
-        else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
-            tileId = METATILE_BrendansMaysHouse_MayPC_Off;
-        MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + 7, gSaveBlock1Ptr->pos.y + dy + 7, tileId | MAPGRID_COLLISION_MASK);
-        DrawWholeMapView();
+    case DIR_NORTH:
+        dx = 0;
+        dy = -1;
+        break;
+    case DIR_WEST:
+        dx = -1;
+        dy = -1;
+        break;
+    case DIR_EAST:
+        dx = 1;
+        dy = -1;
+        break;
     }
+    if (gSpecialVar_0x8004 == PC_LOCATION_OTHER)
+        tileId = METATILE_Building_PC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_BRENDANS_HOUSE)
+        tileId = METATILE_BrendansMaysHouse_BrendanPC_Off;
+    else if (gSpecialVar_0x8004 == PC_LOCATION_MAYS_HOUSE)
+        tileId = METATILE_BrendansMaysHouse_MayPC_Off;
+    MapGridSetMetatileIdAt(gSaveBlock1Ptr->pos.x + dx + MAP_OFFSET, gSaveBlock1Ptr->pos.y + dy + MAP_OFFSET, tileId | MAPGRID_COLLISION_MASK);
+    DrawWholeMapView();
 }
 
 void DoLotteryCornerComputerEffect(void)
@@ -2942,7 +2943,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
             AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor1Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            if (sFrontierExchangeCorner_Decor1[selection] == 0xFFFF)
+            if (sFrontierExchangeCorner_Decor1[selection] == ITEM_LIST_END)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor1[selection]);
             }
@@ -2955,7 +2956,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(u16 menu, u16 selection)
             break;
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
             AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_Decor2Descriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            if (sFrontierExchangeCorner_Decor2[selection] == 0xFFFF)
+            if (sFrontierExchangeCorner_Decor2[selection] == ITEM_LIST_END)
             {
                 ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Decor2[selection]);
             }

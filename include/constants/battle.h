@@ -31,8 +31,8 @@
 #define B_POSITION_OPPONENT_RIGHT     3
 
 // These macros can be used with either battler ID or positions to get the partner or the opposite mon
-#define BATTLE_OPPOSITE(id) ((id) ^ 1)
-#define BATTLE_PARTNER(id) ((id) ^ 2)
+#define BATTLE_OPPOSITE(id) ((id) ^ BIT_SIDE)
+#define BATTLE_PARTNER(id) ((id) ^ BIT_FLANK)
 
 #define B_SIDE_PLAYER     0
 #define B_SIDE_OPPONENT   1
@@ -402,10 +402,10 @@
 
 #define BATTLE_TERRAIN_COUNT            22
 
-#define B_WAIT_TIME_LONG     64
-#define B_WAIT_TIME_MED      48
-#define B_WAIT_TIME_SHORT    32
-#define B_WAIT_TIME_SHORTEST 16
+#define B_WAIT_TIME_LONG        (B_WAIT_TIME_MULTIPLIER * 4)
+#define B_WAIT_TIME_MED         (B_WAIT_TIME_MULTIPLIER * 3)
+#define B_WAIT_TIME_SHORT       (B_WAIT_TIME_MULTIPLIER * 2)
+#define B_WAIT_TIME_SHORTEST    (B_WAIT_TIME_MULTIPLIER)
 
 #define CHERRIM_OVERCAST  0
 #define CHERRIM_SUNSHINE  1
@@ -461,8 +461,8 @@
 #define ARENA_WIN_MIND             18
 #define ARENA_WIN_SKILL            19
 #define ARENA_WIN_BODY             20
-#define ARENA_WIN_JUDGEMENT_TITLE  21
-#define ARENA_WIN_JUDGEMENT_TEXT   22
+#define ARENA_WIN_JUDGMENT_TITLE   21
+#define ARENA_WIN_JUDGMENT_TEXT    22
 
 // Flag for BattlePutTextOnWindow. Never set
 #define B_WIN_COPYTOVRAM (1 << 7)

@@ -112,8 +112,8 @@ static bool32 ValidateWonderCard(const struct WonderCard *card)
         return FALSE;
     if (card->type >= CARD_TYPE_COUNT)
         return FALSE;
-    if (!(card->sendType == SEND_TYPE_DISALLOWED 
-       || card->sendType == SEND_TYPE_ALLOWED 
+    if (!(card->sendType == SEND_TYPE_DISALLOWED
+       || card->sendType == SEND_TYPE_ALLOWED
        || card->sendType == SEND_TYPE_ALLOWED_ALWAYS))
         return FALSE;
     if (card->bgType >= NUM_WONDER_BGS)
@@ -291,7 +291,7 @@ u32 MysteryGift_CompareCardFlags(const u16 *flagId, const struct MysteryGiftLink
 u32 MysteryGift_CheckStamps(const u16 *stamp, const struct MysteryGiftLinkGameData *data, const void *unused)
 {
     int stampsMissing = data->maxStamps - GetNumStampsInMetadata(&data->cardMetadata, data->maxStamps);
-    
+
     // Has full stamp card?
     if (stampsMissing == 0)
         return 1;

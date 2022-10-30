@@ -27,9 +27,9 @@ struct LoadedSaveData
 };
 
 // EWRAM DATA
-EWRAM_DATA struct SaveBlock2DMA gSaveblock2 = {0};
-EWRAM_DATA struct SaveBlock1DMA gSaveblock1 = {0};
-EWRAM_DATA struct PokemonStorageDMA gPokemonStorage = {0};
+EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
+EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
+EWRAM_DATA struct PokemonStorageASLR gPokemonStorage = {0};
 
 EWRAM_DATA struct LoadedSaveData gLoadedSaveData = {0};
 
@@ -55,12 +55,12 @@ void CheckForFlashMemory(void)
 
 void ClearSav2(void)
 {
-    CpuFill16(0, &gSaveblock2, sizeof(struct SaveBlock2DMA));
+    CpuFill16(0, &gSaveblock2, sizeof(struct SaveBlock2ASLR));
 }
 
 void ClearSav1(void)
 {
-    CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1DMA));
+    CpuFill16(0, &gSaveblock1, sizeof(struct SaveBlock1ASLR));
 }
 
 // Offset is the sum of the trainer id bytes

@@ -26,7 +26,7 @@ u32 CountNumberUniqueFossils(void)
     u32 count = 0;
 
     for (i = 0; i < BAG_ITEMS_COUNT; i++)
-        count += CheckBagHasItem(ItemId_GetId(sFossils[i]), 1);
+        count += CheckBagHasItem(sFossils[i], 1);
 
     return count;
 }

@@ -3,6 +3,7 @@
 #include "bike.h"
 #include "coord_event_weather.h"
 #include "daycare.h"
+#include "debug.h"
 #include "faraway_island.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -89,7 +90,6 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->pressedRButton = FALSE;
     input->dpadDirection = 0;
     input->pressedLButton = FALSE;
-    input->pressedDebugCombo = FALSE;
 }
 
 void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
@@ -114,10 +114,6 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                 input->pressedLButton = TRUE;
             if (newKeys & R_BUTTON)
                 input->pressedRButton = TRUE;
-        #ifdef DEBUG_MENU_ENABLED
-            if (heldKeys & R_BUTTON && newKeys & START_BUTTON)
-                input->pressedDebugCombo = TRUE;
-        #endif
         }
 
         if (heldKeys & (DPAD_UP | DPAD_DOWN | DPAD_LEFT | DPAD_RIGHT))
@@ -135,8 +131,22 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
             input->checkStandardWildEncounter = TRUE;
     }
 
-    SetDirectionFromHeldKeys(heldKeys);
-    input->dpadDirection = sCurrentDirection;
+    if (heldKeys & DPAD_UP)
+        input->dpadDirection = DIR_NORTH;
+    else if (heldKeys & DPAD_DOWN)
+        input->dpadDirection = DIR_SOUTH;
+    else if (heldKeys & DPAD_LEFT)
+        input->dpadDirection = DIR_WEST;
+    else if (heldKeys & DPAD_RIGHT)
+        input->dpadDirection = DIR_EAST;
+
+#if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == FALSE
+    if ((heldKeys & DEBUG_SYSTEM_HELD_KEYS) && input->DEBUG_SYSTEM_TRIGGER_EVENT)
+    {
+        input->pressedDebugButtons = TRUE;
+        input->DEBUG_SYSTEM_TRIGGER_EVENT = FALSE;
+    }
+#endif
 }
 
 int ProcessPlayerFieldInput(struct FieldInput *input)
@@ -157,15 +167,6 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
-
-#ifdef DEBUG_MENU_ENABLED
-    if (input->pressedDebugCombo)
-    {
-        PlaySE(SE_WIN_OPEN);
-        Debug_ShowMainMenu();
-        return TRUE;
-    }
-#endif
 
     if (input->pressedBButton && TrySetupDiveEmergeScript() == TRUE)
         return TRUE;
@@ -231,6 +232,16 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
 
     if (input->pressedRButton && TryStartDexnavSearch())
         return TRUE;
+
+#if DEBUG_SYSTEM_ENABLE == TRUE && DEBUG_SYSTEM_IN_MENU == FALSE
+    if (input->pressedDebugButtons)
+    {
+        PlaySE(SE_WIN_OPEN);
+        FreezeObjectEvents();
+        Debug_ShowMainMenu();
+        return TRUE;
+    }
+#endif
 
     return FALSE;
 }
@@ -714,7 +725,7 @@ void RestartWildEncounterImmunitySteps(void)
 
 static bool8 CheckStandardWildEncounter(u16 metatileBehavior)
 {
-    if (FlagGet(FLAG_DISABLE_WILD_ENCOUNTERS))
+    if (FlagGet(OW_FLAG_NO_ENCOUNTER))
         return FALSE;
 
     if (sWildEncounterImmunitySteps < 4)
