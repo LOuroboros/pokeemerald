@@ -206,7 +206,7 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
 
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
 
-const struct SpritePalette gTrainerFrontPicPaletteTable[] =
+const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
 {
     TRAINER_PAL(HIKER, gTrainerPalette_Hiker),
     TRAINER_PAL(AQUA_GRUNT_M, gTrainerPalette_AquaGruntM),
@@ -308,7 +308,7 @@ const struct SpritePalette gTrainerFrontPicPaletteTable[] =
     TRAINER_PAL(WALLY_3, gTrainerPalette_Wally3),
 };
 
-const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT] = 
+const u8 gCostumeFrontPics[COSTUME_COUNT][GENDER_COUNT] =
 {
     [DEFAULT_COSTUME]    = {TRAINER_PIC_BRENDAN, TRAINER_PIC_MAY},
     [LEGACY_COSTUME]     = {TRAINER_PIC_RS_BRENDAN, TRAINER_PIC_RS_MAY},

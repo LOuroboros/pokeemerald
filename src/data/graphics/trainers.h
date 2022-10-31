@@ -205,6 +205,9 @@ const u32 gTrainerPalette_Twins[] = INCBIN_U32("graphics/trainers/front_pics/twi
 const u32 gTrainerFrontPic_Sailor[] = INCBIN_U32("graphics/trainers/front_pics/sailor.4bpp.lz");
 const u32 gTrainerPalette_Sailor[] = INCBIN_U32("graphics/trainers/front_pics/sailor.gbapal.lz");
 
+const u32 gTrainerFrontPic_MagmaAdminM[] = INCBIN_U32("graphics/trainers/front_pics/magma_admin_m.4bpp.lz");
+const u32 gTrainerPalette_MagmaAdminM[] = INCBIN_U32("graphics/trainers/front_pics/magma_admin_m.gbapal.lz");
+
 const u32 gTrainerFrontPic_Wally[] = INCBIN_U32("graphics/trainers/front_pics/wally.4bpp.lz");
 const u32 gTrainerPalette_Wally[] = INCBIN_U32("graphics/trainers/palettes/wally.gbapal.lz");
 
@@ -291,14 +294,11 @@ const u32 gTrainerBackPicPalette_Leaf[] = INCBIN_U32("graphics/trainers/back_pic
 const u32 gTrainerFrontPic_AdventuresBrendan[] = INCBIN_U32("graphics/trainers/front_pics/adventures_brendan.4bpp.lz");
 const u32 gTrainerPalette_AdventuresBrendan[] = INCBIN_U32("graphics/trainers/front_pics/adventures_brendan.gbapal.lz");
 
-const u32 gTrainerFrontPic_AdventuresMay[] = INCBIN_U32("graphics/trainers/front_pics/adventures_brendan.4bpp.lz");
+const u32 gTrainerFrontPic_AdventuresMay[] = INCBIN_U32("graphics/trainers/front_pics/adventures_may.4bpp.lz");
 const u32 gTrainerPalette_AdventuresMay[] = INCBIN_U32("graphics/trainers/front_pics/adventures_may.gbapal.lz");
 
 const u8 gTrainerBackPic_AdventuresBrendan[] = INCBIN_U8("graphics/trainers/back_pics/adventures_brendan.4bpp");
 const u8 gTrainerBackPic_AdventuresMay[] = INCBIN_U8("graphics/trainers/back_pics/adventures_may.4bpp");
-
-const u32 gTrainerFrontPic_MagmaAdminM[] = INCBIN_U32("graphics/trainers/front_pics/magma_admin_m.4bpp.lz");
-const u32 gTrainerPalette_MagmaAdminM[] = INCBIN_U32("graphics/trainers/front_pics/magma_admin_m.gbapal.lz");
 
 const u32 gTrainerFrontPic_MagmaAdminF[] = INCBIN_U32("graphics/trainers/front_pics/magma_admin_f.4bpp.lz");
 const u32 gTrainerPalette_MagmaAdminF[] = INCBIN_U32("graphics/trainers/front_pics/magma_admin_f.gbapal.lz");

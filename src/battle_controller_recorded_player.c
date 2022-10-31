@@ -1238,7 +1238,7 @@ static void RecordedPlayerHandleDrawTrainerPic(void)
     }
     else
     {
-        LoadPalette(gTrainerBackPicPaletteTable[trainerPicId].data, 0x100 + gActiveBattler * 16, 32);
+        DecompressTrainerBackPic(trainerPicId, gActiveBattler);
         SetMultiuseSpriteTemplateToTrainerBack(trainerPicId, GetBattlerPosition(gActiveBattler));
         gBattlerSpriteIds[gActiveBattler] = CreateSprite(&gMultiuseSpriteTemplate, xPos, yPos, GetBattlerSpriteSubpriority(gActiveBattler));
 
@@ -1670,7 +1670,7 @@ static void RecordedPlayerHandleIntroTrainerBallThrow(void)
     else
         trainerPicId = gSaveBlock2Ptr->playerGender;
 
-    LoadPalette(gTrainerBackPicPaletteTable[trainerPicId].data, 0x100 + paletteNum * 16, 32);
+    DecompressTrainerBackPic(trainerPicId, gActiveBattler);
 
     gSprites[gBattlerSpriteIds[gActiveBattler]].oam.paletteNum = paletteNum;
 
