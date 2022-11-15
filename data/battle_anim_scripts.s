@@ -5475,6 +5475,9 @@ Move_QUICK_GUARD:
 	end
 
 Move_ALLY_SWITCH:
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
+	createvisualtask AnimTask_SwapPartnerMonSpriteToFromSubstitute, 2, TRUE
+	waitforvisualfinish
 	end
 
 Move_SCALD:

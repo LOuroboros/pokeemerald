@@ -1317,6 +1317,7 @@ BattleScript_EffectAllySwitch:
 	attackstring
 	ppreduce
 	jumpifnoally BS_ATTACKER, BattleScript_ButItFailed
+	swapbattlerallyslots BS_ATTACKER
 	attackanimation
 	waitanimation
 	printstring STRINGID_ALLYSWITCHPOSITION

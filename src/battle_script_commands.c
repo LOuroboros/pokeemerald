@@ -10267,6 +10267,19 @@ static void Cmd_various(void)
                 gBattlescriptCurrInstr += 7;
         }
         return;
+    case VARIOUS_SWAP_BATTLER_ALLY_SLOTS:
+        {
+            u8 side = GetBattlerSide(gActiveBattler);
+            struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
+            u8 oldSlot = gBattlerPartyIndexes[gActiveBattler];
+            u8 newSlot = gBattlerPartyIndexes[BATTLE_PARTNER(gActiveBattler)];
+            SwitchPartyMonSlots(newSlot, oldSlot);
+            SwapPartyPokemon(&party[newSlot], &party[oldSlot]);
+            // Testing stuff involving the health boxes
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[gActiveBattler], &party[oldSlot], HEALTHBOX_ALL);
+            UpdateHealthboxAttribute(gHealthboxSpriteIds[BATTLE_PARTNER(gActiveBattler)], &party[newSlot], HEALTHBOX_ALL);
+        }
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;

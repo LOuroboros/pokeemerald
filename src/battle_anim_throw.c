@@ -2812,3 +2812,60 @@ static void CB_CriticalCaptureThrownBallMovement(struct Sprite *sprite)
     }
 }
 
+void AnimTask_SwapPartnerMonSpriteToFromSubstitute(u8 taskId)
+{
+    u8 spriteId;
+    u32 x;
+    u32 done = FALSE;
+
+    spriteId = gBattlerSpriteIds[BATTLE_PARTNER(gBattleAnimAttacker)];
+    switch (gTasks[taskId].data[10])
+    {
+    case 0:
+        gTasks[taskId].data[11] = gBattleAnimArgs[0];
+        gTasks[taskId].data[0] += 0x500;
+        if (GetBattlerSide(BATTLE_PARTNER(gBattleAnimAttacker)) != B_SIDE_PLAYER)
+            gSprites[spriteId].x2 += gTasks[taskId].data[0] >> 8;
+        else
+            gSprites[spriteId].x2 -= gTasks[taskId].data[0] >> 8;
+
+        gTasks[taskId].data[0] &= 0xFF;
+        x = gSprites[spriteId].x + gSprites[spriteId].x2 + 32;
+        if (x > 304)
+            gTasks[taskId].data[10]++;
+        break;
+    case 1:
+        LoadBattleMonGfxAndAnimate(BATTLE_PARTNER(gBattleAnimAttacker), gTasks[taskId].data[11], spriteId);
+        gTasks[taskId].data[10]++;
+        break;
+    case 2:
+        gTasks[taskId].data[0] += 0x500;
+        if (GetBattlerSide(BATTLE_PARTNER(gBattleAnimAttacker)) != B_SIDE_PLAYER)
+            gSprites[spriteId].x2 -= gTasks[taskId].data[0] >> 8;
+        else
+            gSprites[spriteId].x2 += gTasks[taskId].data[0] >> 8;
+
+        gTasks[taskId].data[0] &= 0xFF;
+        if (GetBattlerSide(BATTLE_PARTNER(gBattleAnimAttacker)) != B_SIDE_PLAYER)
+        {
+            if (gSprites[spriteId].x2 <= 0)
+            {
+                gSprites[spriteId].x2 = 0;
+                done = TRUE;
+            }
+        }
+        else
+        {
+            if (gSprites[spriteId].x2 >= 0)
+            {
+                gSprites[spriteId].x2 = 0;
+                done = TRUE;
+            }
+        }
+
+        if (done)
+            DestroyAnimVisualTask(taskId);
+
+        break;
+    }
+}

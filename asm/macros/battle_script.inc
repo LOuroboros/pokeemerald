@@ -2049,6 +2049,10 @@
 	.4byte \ptr
 	.endm
 
+	.macro swapbattlerallyslots battler:req
+	various \battler, VARIOUS_SWAP_BATTLER_ALLY_SLOTS
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
