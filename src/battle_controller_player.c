@@ -639,7 +639,14 @@ static void HandleInputChooseMove(void)
         }
         else // double battle
         {
-            if (!(moveTarget & (MOVE_TARGET_RANDOM | MOVE_TARGET_BOTH | MOVE_TARGET_DEPENDS | MOVE_TARGET_FOES_AND_ALLY | MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_USER | MOVE_TARGET_ALLY)))
+            if (!(moveTarget & (MOVE_TARGET_RANDOM
+                              | MOVE_TARGET_BOTH
+                              | MOVE_TARGET_DEPENDS
+                              | MOVE_TARGET_FOES_AND_ALLY
+                              | MOVE_TARGET_OPPONENTS_FIELD
+                              | MOVE_TARGET_USER
+                              | MOVE_TARGET_ALLY
+                              | MOVE_TARGET_USER_AND_ALLY)))
                 canSelectTarget = 1; // either selected or user
             if (moveTarget == (MOVE_TARGET_USER | MOVE_TARGET_ALLY) && IsBattlerAlive(BATTLE_PARTNER(gActiveBattler)))
                 canSelectTarget = 1;
@@ -664,7 +671,7 @@ static void HandleInputChooseMove(void)
 
                 canSelectTarget = 3;
             }
-            else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH | MOVE_TARGET_FOES_AND_ALLY))
+            else if (moveTarget & (MOVE_TARGET_OPPONENTS_FIELD | MOVE_TARGET_BOTH))
             {
                 TryShowAsTarget(gMultiUsePlayerCursor);
                 TryShowAsTarget(BATTLE_PARTNER(gMultiUsePlayerCursor));

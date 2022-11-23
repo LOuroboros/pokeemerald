@@ -293,6 +293,7 @@ static u8 GetBattlePalaceMoveGroup(u8 battlerId, u16 move)
     case MOVE_TARGET_OPPONENTS_FIELD:
         return PALACE_MOVE_GROUP_SUPPORT;
     case MOVE_TARGET_USER:
+    case MOVE_TARGET_USER_AND_ALLY:
         return PALACE_MOVE_GROUP_DEFENSE;
     default:
         return PALACE_MOVE_GROUP_ATTACK;

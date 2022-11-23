@@ -7827,6 +7827,11 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
         else
             targetBattler = gBattlerAttacker;
         break;
+    case MOVE_TARGET_USER_AND_ALLY:
+        targetBattler = GetBattlerAtPosition(GET_BATTLER_SIDE(gBattlerAttacker));
+        if (!IsBattlerAlive(targetBattler))
+            targetBattler ^= BIT_FLANK;
+        break;
     }
 
     *(gBattleStruct->moveTarget + gBattlerAttacker) = targetBattler;
@@ -8197,6 +8202,9 @@ u32 GetMoveTargetCount(u16 move, u8 battlerAtk, u8 battlerDef)
         return IsBattlerAlive(battlerDef);
     case MOVE_TARGET_USER:
         return IsBattlerAlive(battlerAtk);
+    case MOVE_TARGET_USER_AND_ALLY:
+        return IsBattlerAlive(battlerAtk)
+             + IsBattlerAlive(BATTLE_PARTNER(battlerAtk));
     default:
         return 0;
     }

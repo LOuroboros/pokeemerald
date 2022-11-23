@@ -5392,6 +5392,7 @@ static void SetMoveTargetPosition(u16 move)
     {
     case MOVE_TARGET_USER_OR_SELECTED:
     case MOVE_TARGET_USER:
+    case MOVE_TARGET_USER_AND_ALLY:
         gBattlerTarget = B_POSITION_PLAYER_RIGHT;
         break;
     case MOVE_TARGET_SELECTED:

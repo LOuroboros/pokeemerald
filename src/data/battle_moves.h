@@ -6055,8 +6055,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
     {
         #if B_UPDATED_MOVE_DATA >= GEN_8
             .flags = FLAG_SNATCH_AFFECTED | FLAG_SOUND,
+            .target = MOVE_TARGET_USER_AND_ALLY,
         #else
             .flags = FLAG_SNATCH_AFFECTED,
+            .target = MOVE_TARGET_USER,
         #endif
         .effect = EFFECT_ATTACK_UP,
         .power = 0,
@@ -6064,7 +6066,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
         .accuracy = 0,
         .pp = 40,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_USER,
         .priority = 0,
         .split = SPLIT_STATUS,
         .zMovePower = 0,

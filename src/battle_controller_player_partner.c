@@ -1528,6 +1528,12 @@ static void PlayerPartnerHandleChooseMove(void)
         if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
             gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
+    if (gBattleMoves[moveInfo->moves[chosenMoveId]].target & MOVE_TARGET_USER_AND_ALLY)
+    {
+        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        if (gAbsentBattlerFlags & gBitTable[gBattlerTarget])
+            gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+    }
 
     if (ShouldUseZMove(gActiveBattler, gBattlerTarget, moveInfo->moves[chosenMoveId]))
         QueueZMove(gActiveBattler, moveInfo->moves[chosenMoveId]);
