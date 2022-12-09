@@ -1257,6 +1257,7 @@ SECTIONS {
         sound/songs/gbs/gsc/gbs_lakeofrage.o(.rodata);
         sound/songs/gbs/gsc/gbs_azaleatown.o(.rodata);
         sound/songs/gbs/gsc/gbs_violetcity.o(.rodata);
+        sound/songs/gbs/rse/gbs_route101.o(.rodata);
     } =0
 
     lib_rodata :

@@ -633,4 +633,5 @@ gGBSSongTable::
 	song_gbs MUS_RG_SEVII_ROUTE,		gbs_lakeofrage,			0, 0
 	song_gbs MUS_RG_SEVII_45,			gbs_azaleatown,			0, 0
 	song_gbs MUS_RG_SEVII_67,			gbs_violetcity,			0, 0
+	song_gbs MUS_ROUTE101,  			gbs_route101,       	0, 0
 	.4byte 0xFFFFFFFF
