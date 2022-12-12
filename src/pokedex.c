@@ -300,6 +300,8 @@ static void EraseSelectorArrow(u32);
 static void PrintSelectorArrow(u32);
 static void PrintSearchParameterTitle(u32, const u8 *);
 static void ClearSearchParameterBoxText(void);
+static u8 TryToCreateSpeciesFormIndicator(s16, s16);
+static void SpriteCB_SpeciesFormsIndicator(struct Sprite *sprite);
 
 // const rom data
 #include "data/pokemon/pokedex_orders.h"
@@ -767,6 +769,17 @@ static const struct SpriteTemplate sDexListStartMenuCursorSpriteTemplate =
     .callback = SpriteCB_DexListStartMenuCursor,
 };
 
+static const struct SpriteTemplate sFormsIndicatorTextSpriteTemplate =
+{
+    .tileTag = TAG_DEX_INTERFACE,
+    .paletteTag = TAG_DEX_INTERFACE,
+    .oam = &sOamData_SeenOwnText,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCB_SpeciesFormsIndicator,
+};
+
 static const struct CompressedSpriteSheet sInterfaceSpriteSheet[] =
 {
     {gPokedexInterface_Gfx, 0x2000, TAG_DEX_INTERFACE},
@@ -776,6 +789,18 @@ static const struct CompressedSpriteSheet sInterfaceSpriteSheet[] =
 static const struct SpritePalette sInterfaceSpritePalette[] =
 {
     {gPokedexBgHoenn_Pal, TAG_DEX_INTERFACE},
+    {0}
+};
+
+static const struct CompressedSpriteSheet sFormsIndicatorSpriteSheet[] =
+{
+    {gPokedexInterface_FormsIndicatorGfx, 0x2000, TAG_DEX_INTERFACE},
+    {0}
+};
+
+static const struct SpritePalette sFormsIndicatorSpritePalette[] =
+{
+    {gPokedexInterface_FormsIndicatorPal, TAG_DEX_INTERFACE},
     {0}
 };
 
@@ -2452,6 +2477,18 @@ static u8 CreateMonName(u16 num, u8 left, u8 top)
     return StringLength(str);
 }
 
+static u8 TryToCreateSpeciesFormIndicator(s16 x, s16 y)
+{
+    u16 species = NationalPokedexNumToSpecies(sPokedexView->selectedPokemon);
+
+    if (gFormSpeciesIdTables[species] != NULL)
+    {
+        CreateSprite(&sFormsIndicatorTextSpriteTemplate, x, y, 1);
+        LoadCompressedSpriteSheet(sFormsIndicatorSpriteSheet);
+        LoadSpritePalettes(sFormsIndicatorSpritePalette);
+    }
+}
+
 static void ClearMonListEntry(u8 x, u8 y, u16 unused)
 {
     FillWindowPixelRect(0, PIXEL_FILL(0), x * 8, y * 8, 0x60, 16);
@@ -2645,6 +2682,7 @@ static u16 TryDoPokedexScroll(u16 selectedMon, u16 ignored)
     sPokedexView->scrollDirection = scrollDir;
     sPokedexView->pokeBallRotationStep = scrollMonIncrement / 2;
     UpdateDexListScroll(sPokedexView->scrollDirection, sPokedexView->scrollMonIncrement, sPokedexView->maxScrollTimer);
+    TryToCreateSpeciesFormIndicator(50, 25);
     if (sPokedexView->scrollSpeed < 12)
         sPokedexView->scrollSpeed++;
     return selectedMon;
@@ -2999,6 +3037,14 @@ static void SpriteCB_EndMoveMonForInfoScreen(struct Sprite *sprite)
 static void SpriteCB_SeenOwnInfo(struct Sprite *sprite)
 {
     if (sPokedexView->currentPage != PAGE_MAIN)
+        DestroySprite(sprite);
+}
+
+static void SpriteCB_SpeciesFormsIndicator(struct Sprite *sprite)
+{
+    u16 species = NationalPokedexNumToSpecies(sPokedexView->selectedPokemon);
+
+    if (gFormSpeciesIdTables[species] == NULL || !sPokedexView->pokedexList[species].seen)
         DestroySprite(sprite);
 }
 
