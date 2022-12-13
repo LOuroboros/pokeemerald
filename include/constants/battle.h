@@ -299,6 +299,7 @@
 #define ENUM_WEATHER_STRONG_WINDS         7
 
 // Move Effects
+#define MOVE_EFFECT_NONE                0x0
 #define MOVE_EFFECT_SLEEP               0x1
 #define MOVE_EFFECT_POISON              0x2
 #define MOVE_EFFECT_BURN                0x3
@@ -371,8 +372,9 @@
 #define MOVE_EFFECT_RELIC_SONG          0x45
 #define MOVE_EFFECT_TRAP_BOTH           0x46
 #define MOVE_EFFECT_DOUBLE_SHOCK        0x47
+#define MOVE_EFFECT_DIRE_CLAW           0x48
 
-#define NUM_MOVE_EFFECTS                0x48
+#define NUM_MOVE_EFFECTS                0x49
 
 #define MOVE_EFFECT_AFFECTS_USER        0x4000
 #define MOVE_EFFECT_CERTAIN             0x8000
