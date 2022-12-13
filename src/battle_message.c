@@ -760,9 +760,13 @@ static const u8 sText_AttackerHealedItsBurn[] = _("{B_ATK_NAME_WITH_PREFIX} heal
 static const u8 sText_AttackerMeltedTheIce[] = _("{B_ATK_NAME_WITH_PREFIX} melted the ice with\nits fiery determination!");
 static const u8 sText_TargetToughedItOut[] = _("{B_DEF_NAME_WITH_PREFIX} toughed it out\nto show you its best side!");
 static const u8 sText_AttackerLostElectricType[] = _("{B_ATK_NAME_WITH_PREFIX} used up all\nof its electricity!");
+static const u8 sText_AttackerSetAShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set\na shell trap!");
+static const u8 sText_AttackerShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell trap\ndidn't work!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_ATTACKERSHELLTRAPDIDNTWORK - BATTLESTRINGS_TABLE_START] = sText_AttackerShellTrapDidntWork,
+    [STRINGID_ATTACKERSETASHELLTRAP - BATTLESTRINGS_TABLE_START] = sText_AttackerSetAShellTrap,
     [STRINGID_TARGETTOUGHEDITOUT - BATTLESTRINGS_TABLE_START] = sText_TargetToughedItOut,
     [STRINGID_ATTACKERMELTEDTHEICE - BATTLESTRINGS_TABLE_START] = sText_AttackerMeltedTheIce,
     [STRINGID_ATTACKERHEALEDITSBURN - BATTLESTRINGS_TABLE_START] = sText_AttackerHealedItsBurn,
