@@ -421,6 +421,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDireClaw                @ EFFECT_DIRE_CLAW
 	.4byte BattleScript_EffectStoneAxe                @ EFFECT_STONE_AXE
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
+	.4byte BattleScript_EffectTripleArrows            @ EFFECT_TRIPLE_ARROWS
+
+BattleScript_EffectTripleArrows::
+	setmoveeffect MOVE_EFFECT_TRIPLE_ARROWS
+	goto BattleScript_EffectHit
 
 BattleScript_EffectStoneAxe::
 	call BattleScript_EffectHit_Ret
@@ -1341,7 +1346,19 @@ BattleScript_DoubleShockRemoveType::
 	printstring STRINGID_ATTACKERLOSTELECTRICTYPE
 	waitmessage B_WAIT_TIME_LONG
 	return
-	
+
+BattleScript_DefDown::
+@	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_DEF, STAT_CHANGE_CANT_PREVENT | STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_DEF, 1, TRUE
+	statbuffchange MOVE_EFFECT_CERTAIN, BattleScript_DefDown_Ret
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_DefDown_Ret
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_DefDown_Ret:
+	return
+
 BattleScript_EffectPurify:
 	attackcanceler
 	attackstring

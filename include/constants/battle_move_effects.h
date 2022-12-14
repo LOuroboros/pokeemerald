@@ -402,7 +402,8 @@
 #define EFFECT_DIRE_CLAW                    396
 #define EFFECT_STONE_AXE                    397
 #define EFFECT_BARB_BARRAGE                 398
+#define EFFECT_TRIPLE_ARROWS                399
 
-#define NUM_BATTLE_MOVE_EFFECTS             399
+#define NUM_BATTLE_MOVE_EFFECTS             400
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
