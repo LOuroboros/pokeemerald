@@ -422,6 +422,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectStoneAxe                @ EFFECT_STONE_AXE
 	.4byte BattleScript_EffectBarbBarrage             @ EFFECT_BARB_BARRAGE
 	.4byte BattleScript_EffectTripleArrows            @ EFFECT_TRIPLE_ARROWS
+	.4byte BattleScript_EffectInfernalParade          @ EFFECT_INFERNAL_PARADE
+
+BattleScript_EffectInfernalParade::
+	setmoveeffect MOVE_EFFECT_BURN
+	goto BattleScript_EffectHit
 
 BattleScript_EffectTripleArrows::
 	setmoveeffect MOVE_EFFECT_TRIPLE_ARROWS
