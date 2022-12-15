@@ -407,7 +407,8 @@
 #define EFFECT_TAKE_HEART                   401
 #define EFFECT_AXE_KICK                     402
 #define EFFECT_LAST_RESPECTS                403
+#define EFFECT_SPICY_EXTRACT                404
 
-#define NUM_BATTLE_MOVE_EFFECTS             404
+#define NUM_BATTLE_MOVE_EFFECTS             405
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

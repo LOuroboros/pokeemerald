@@ -13827,7 +13827,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SPICY_EXTRACT] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPICY_EXTRACT
+        .effect = EFFECT_SPICY_EXTRACT,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,

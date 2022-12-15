@@ -426,6 +426,33 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectTakeHeart               @ EFFECT_TAKE_HEART
 	.4byte BattleScript_EffectAxeKick                 @ EFFECT_AXE_KICK
 	.4byte BattleScript_EffectHit                     @ EFFECT_LAST_RESPECTS
+	.4byte BattleScript_EffectSpicyExtract            @ EFFECT_SPICY_EXTRACT
+
+BattleScript_EffectSpicyExtract:
+@	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_ATK, MAX_STAT_STAGE, BattleScript_ButItFailed
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_DEF, MIN_STAT_STAGE, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+BattleScript_SpicyExtractBoost:
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_SpicyExtractReduction
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_SpicyExtractReduction:
+	setstatchanger STAT_DEF, 2, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR | STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_MoveEnd
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectAxeKick::
 	attackcanceler
