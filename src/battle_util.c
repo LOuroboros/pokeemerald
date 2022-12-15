@@ -3890,14 +3890,9 @@ u8 AtkCanceller_UnableToUseMove(void)
             #if B_BEAT_UP >= GEN_5
             else if (gBattleMoves[gCurrentMove].effect == EFFECT_BEAT_UP)
             {
-                struct Pokemon* party;
+                struct Pokemon* party = GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER ? gPlayerParty : gEnemyParty;
                 int i;
 
-                if (GetBattlerSide(gBattlerAttacker) == B_SIDE_PLAYER)
-                    party = gPlayerParty;
-                else
-                    party = gEnemyParty;
-                
                 for (i = 0; i < PARTY_SIZE; i++)
                 {
                     if (GetMonData(&party[i], MON_DATA_HP)
@@ -3911,6 +3906,11 @@ u8 AtkCanceller_UnableToUseMove(void)
                 PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 1, 0)
             }
             #endif
+            else if (gBattleMoves[gCurrentMove].effect == EFFECT_POPULATION_BOMB)
+            {
+                gMultiHitCounter = 10;
+                PREPARE_BYTE_NUMBER_BUFFER(gBattleScripting.multihitString, 2, 0)
+            }
             gBattleStruct->atkCancellerTracker++;
             break;
         case CANCELLER_END:

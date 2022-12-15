@@ -428,6 +428,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_LAST_RESPECTS
 	.4byte BattleScript_EffectSpicyExtract            @ EFFECT_SPICY_EXTRACT
 	.4byte BattleScript_EffectSpinOut                 @ EFFECT_SPIN_OUT
+	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
 
 BattleScript_EffectSpinOut:
 	setmoveeffect MOVE_EFFECT_SPD_MINUS_2 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN

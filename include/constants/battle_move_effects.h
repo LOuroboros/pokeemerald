@@ -409,7 +409,8 @@
 #define EFFECT_LAST_RESPECTS                403
 #define EFFECT_SPICY_EXTRACT                404
 #define EFFECT_SPIN_OUT                     405
+#define EFFECT_POPULATION_BOMB              406
 
-#define NUM_BATTLE_MOVE_EFFECTS             406
+#define NUM_BATTLE_MOVE_EFFECTS             407
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

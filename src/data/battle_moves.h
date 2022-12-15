@@ -13860,7 +13860,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_POPULATION_BOMB] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_MULTI_HIT maybe?
+        .effect = EFFECT_POPULATION_BOMB,
         .power = 20,
         .type = TYPE_NORMAL,
         .accuracy = 90,
