@@ -410,7 +410,8 @@
 #define EFFECT_SPICY_EXTRACT                404
 #define EFFECT_SPIN_OUT                     405
 #define EFFECT_POPULATION_BOMB              406
+#define EFFECT_GLAIVE_RUSH                  407
 
-#define NUM_BATTLE_MOVE_EFFECTS             407
+#define NUM_BATTLE_MOVE_EFFECTS             408
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

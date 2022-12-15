@@ -10119,6 +10119,9 @@ static void Cmd_various(void)
             return;
         }
         break;
+    case VARIOUS_SET_GLAIVE_RUSH:
+        gDisableStructs[gActiveBattler].glaiveRushTimer = 2;
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;

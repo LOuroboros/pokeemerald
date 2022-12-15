@@ -8541,6 +8541,10 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         break;
     }
 
+    // various effects
+    if (gDisableStructs[battlerDef].glaiveRushTimer == 1)
+        basePower *= 2;
+
     if (basePower == 0)
         basePower = 1;
     return basePower;
@@ -8846,7 +8850,7 @@ static u32 CalcMoveBasePowerAfterModifiers(u16 move, u8 battlerAtk, u8 battlerDe
     #define TERRAIN_TYPE_BOOST UQ_4_12(1.5)
 #endif
 
-    // various effecs
+    // various effects
     if (gProtectStructs[battlerAtk].helpingHand)
         MulModifier(&modifier, UQ_4_12(1.5));
     if (gStatuses3[battlerAtk] & STATUS3_CHARGED_UP && moveType == TYPE_ELECTRIC)

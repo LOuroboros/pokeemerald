@@ -2000,6 +2000,10 @@
 	.4byte \ptr
 	.endm
 
+	.macro setglaiverush battler:req
+	various \battler, VARIOUS_SET_GLAIVE_RUSH
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
