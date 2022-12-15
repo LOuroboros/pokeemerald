@@ -427,6 +427,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectAxeKick                 @ EFFECT_AXE_KICK
 	.4byte BattleScript_EffectHit                     @ EFFECT_LAST_RESPECTS
 	.4byte BattleScript_EffectSpicyExtract            @ EFFECT_SPICY_EXTRACT
+	.4byte BattleScript_EffectSpinOut                 @ EFFECT_SPIN_OUT
+
+BattleScript_EffectSpinOut:
+	setmoveeffect MOVE_EFFECT_SPD_MINUS_2 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	goto BattleScript_EffectHit
 
 BattleScript_EffectSpicyExtract:
 @	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.

@@ -13844,7 +13844,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SPIN_OUT] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPIN_OUT
+        .effect = EFFECT_SPIN_OUT,
         .power = 100,
         .type = TYPE_STEEL,
         .accuracy = 100,
