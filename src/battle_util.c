@@ -8523,6 +8523,13 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
         if (gBattleMons[battlerDef].status1 & STATUS1_ANY)
             basePower *= 2;
         break;
+    case EFFECT_LAST_RESPECTS:
+        {
+            u8 side = GetBattlerSide(battlerAtk);
+            u8 faintCounter = (side == B_SIDE_PLAYER) ? gBattleResults.playerFaintCounter : gBattleResults.opponentFaintCounter;
+            basePower += (faintCounter * 50);
+        }
+        break;
     }
 
     // Move-specific base power changes
