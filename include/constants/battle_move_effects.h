@@ -405,7 +405,8 @@
 #define EFFECT_TRIPLE_ARROWS                399
 #define EFFECT_INFERNAL_PARADE              400
 #define EFFECT_TAKE_HEART                   401
+#define EFFECT_AXE_KICK                     402
 
-#define NUM_BATTLE_MOVE_EFFECTS             402
+#define NUM_BATTLE_MOVE_EFFECTS             403
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
