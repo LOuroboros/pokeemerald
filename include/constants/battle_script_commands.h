@@ -247,6 +247,7 @@
 #define VARIOUS_GET_BATTLER_SIDE                    156
 #define VARIOUS_CHECK_PARENTAL_BOND_COUNTER         157
 #define VARIOUS_SET_GLAIVE_RUSH                     158
+#define VARIOUS_APPLY_SALT_CURE                     159
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

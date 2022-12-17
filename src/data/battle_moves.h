@@ -13927,7 +13927,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_SALT_CURE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SALT_CURE
+        .effect = EFFECT_SALT_CURE,
         .power = 40,
         .type = TYPE_ROCK,
         .accuracy = 100,

@@ -435,6 +435,7 @@ extern const u8 BattleScript_TargetAbilityStatRaiseRet[];
 extern const u8 BattleScript_DoubleShockRemoveType[];
 extern const u8 BattleScript_ShellTrapSetUp[];
 extern const u8 BattleScript_DefDown[];
+extern const u8 BattleScript_SaltCureExtraDamage[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

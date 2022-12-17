@@ -2004,6 +2004,10 @@
 	various \battler, VARIOUS_SET_GLAIVE_RUSH
 	.endm
 
+	.macro applysaltcure battler:req
+	various \battler, VARIOUS_APPLY_SALT_CURE
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER, \stat | \stages << 3 | \down << 7
@@ -2160,4 +2164,10 @@
 	@ Used by effects that may proc Symbiosis but do not call removeitem.
 	.macro trysymbiosis
 	various BS_ATTACKER, VARIOUS_TRY_SYMBIOSIS
+	.endm
+
+	@ Will jump to script pointer if the specified battler has or has not fainted.
+	.macro jumpiffainted battler:req, value:req, ptr:req
+	getbattlerfainted \battler
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
 	.endm

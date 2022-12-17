@@ -430,6 +430,24 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSpinOut                 @ EFFECT_SPIN_OUT
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
 	.4byte BattleScript_EffectGlaiveRush              @ EFFECT_GLAIVE_RUSH
+	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
+
+BattleScript_EffectSaltCure:
+	call BattleScript_EffectHit_Ret
+	jumpiffainted BS_TARGET, TRUE, BattleScript_EffectSaltCure_End
+	applysaltcure BS_TARGET
+	printstring STRINGID_TARGETISBEINGSALTCURED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectSaltCure_End:
+	goto BattleScript_MoveEnd
+
+BattleScript_SaltCureExtraDamage::
+	playanimation BS_TARGET, B_ANIM_SALT_CURE_DAMAGE, NULL
+	waitanimation
+	call BattleScript_HurtTarget_NoString
+	printstring STRINGID_TARGETISHURTBYSALTCURE
+	waitmessage B_WAIT_TIME_LONG
+	end2
 
 BattleScript_EffectGlaiveRush::
 	setglaiverush BS_ATTACKER
@@ -6702,8 +6720,7 @@ BattleScript_PursuitDmgOnSwitchOut::
 	waitmessage B_WAIT_TIME_LONG
 	tryfaintmon BS_TARGET
 	moveendfromto MOVEEND_ABILITIES, MOVEEND_CHOICE_MOVE
-	getbattlerfainted BS_TARGET
-	jumpifbyte CMP_EQUAL, gBattleCommunication, FALSE, BattleScript_PursuitDmgOnSwitchOutRet
+	jumpiffainted BS_TARGET, FALSE, BattleScript_PursuitDmgOnSwitchOutRet
 	setbyte sGIVEEXP_STATE, 0
 	getexp BS_TARGET
 BattleScript_PursuitDmgOnSwitchOutRet:
@@ -7221,8 +7238,7 @@ BattleScript_GulpMissileGorging::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
-	getbattlerfainted BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
+	jumpiffainted BS_ATTACKER, TRUE, BattleScript_GulpMissileNoSecondEffectGorging
 BattleScript_GulpMissileNoDmgGorging:
 	handleformchange BS_TARGET, 0
 	playanimation BS_TARGET, B_ANIM_FORM_CHANGE
@@ -7250,8 +7266,7 @@ BattleScript_GulpMissileGulping::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
-	getbattlerfainted BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
+	jumpiffainted BS_ATTACKER, TRUE, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_CLEAR_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_FULL_METAL_BODY, BattleScript_GulpMissileNoSecondEffectGulping
 	jumpifability BS_ATTACKER, ABILITY_WHITE_SMOKE, BattleScript_GulpMissileNoSecondEffectGulping
@@ -7831,8 +7846,7 @@ BattleScript_CottonDownActivates::
 	savetarget
 	setbyte gBattlerTarget, 0
 BattleScript_CottonDownLoop:
-	getbattlerfainted BS_TARGET
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_CottonDownLoopIncrement
+	jumpiffainted BS_TARGET, TRUE, BattleScript_CottonDownLoopIncrement
 	setstatchanger STAT_SPEED, 1, TRUE
 	jumpifbyteequal gBattlerTarget, gEffectBattler, BattleScript_CottonDownLoopIncrement
 	statbuffchange STAT_CHANGE_NOT_PROTECT_AFFECTED, BattleScript_CottonDownTargetSpeedCantGoLower

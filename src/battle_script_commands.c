@@ -10122,6 +10122,9 @@ static void Cmd_various(void)
     case VARIOUS_SET_GLAIVE_RUSH:
         gDisableStructs[gActiveBattler].glaiveRushTimer = 2;
         break;
+    case VARIOUS_APPLY_SALT_CURE:
+        gStatuses4[gActiveBattler] |= STATUS4_SALT_CURE;
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;

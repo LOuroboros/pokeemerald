@@ -2685,6 +2685,7 @@ enum
     ENDTURN_THROAT_CHOP,
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
+    ENDTURN_SALT_CURE,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3225,6 +3226,22 @@ u8 DoBattlerEndTurnEffects(void)
         case ENDTURN_PLASMA_FISTS:
             for (i = 0; i < gBattlersCount; i++)
                 gStatuses4[i] &= ~STATUS4_PLASMA_FISTS;
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_SALT_CURE:
+            if (gStatuses4[gActiveBattler] & STATUS4_SALT_CURE && gBattleMons[gActiveBattler].hp != 0)
+            {
+                gBattlerTarget = gActiveBattler;
+                if (IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_STEEL) || IS_BATTLER_OF_TYPE(gBattlerTarget, TYPE_WATER))
+                    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 4;
+                else
+                    gBattleMoveDamage = gBattleMons[gBattlerTarget].maxHP / 8;
+                if (gBattleMoveDamage == 0)
+                    gBattleMoveDamage = 1;
+                PREPARE_MOVE_BUFFER(gBattleTextBuff1, MOVE_SALT_CURE);
+                BattleScriptExecute(BattleScript_SaltCureExtraDamage);
+                effect++;
+            }
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done
