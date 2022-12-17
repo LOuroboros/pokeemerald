@@ -431,6 +431,14 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_POPULATION_BOMB
 	.4byte BattleScript_EffectGlaiveRush              @ EFFECT_GLAIVE_RUSH
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
+	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
+
+BattleScript_EffectMortalSpin:
+	setmoveeffect MOVE_EFFECT_POISON
+	call BattleScript_EffectHit_Ret
+	moveendall
+	rapidspinfree
+	end
 
 BattleScript_EffectSaltCure:
 	call BattleScript_EffectHit_Ret
