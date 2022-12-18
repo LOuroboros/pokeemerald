@@ -14091,12 +14091,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_MAKE_IT_RAIN] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_MAKE_IT_RAIN
+        .effect = EFFECT_MAKE_IT_RAIN,
         .power = 120,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .pp = 5,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,

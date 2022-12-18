@@ -434,6 +434,14 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
 	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
 	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
+	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
+
+BattleScript_EffectMakeItRain:
+	setmoveeffect MOVE_EFFECT_PAYDAY
+	call BattleScript_EffectHit_Ret
+	setmoveeffect MOVE_EFFECT_SP_ATK_MINUS_1 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
+	seteffectprimary
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectFilletAway:
 @	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.

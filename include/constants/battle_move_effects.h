@@ -415,7 +415,8 @@
 #define EFFECT_MORTAL_SPIN                  409
 #define EFFECT_DOODLE                       410
 #define EFFECT_FILLET_AWAY                  411
+#define EFFECT_MAKE_IT_RAIN                 412
 
-#define NUM_BATTLE_MOVE_EFFECTS             412
+#define NUM_BATTLE_MOVE_EFFECTS             413
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H
