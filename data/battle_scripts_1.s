@@ -433,6 +433,47 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
 	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
 	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
+	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
+
+BattleScript_EffectFilletAway:
+@	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpiflessthanhalfhp BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+BattleScript_EffectFilletAway_BoostAtk:
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, MAX_STAT_STAGE, BattleScript_EffectFilletAway_BoostSpeed
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectFilletAway_BoostSpeed
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectFilletAway_BoostSpeed:
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_EffectFilletAway_BoostSpAtk
+	setstatchanger STAT_SPEED, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectFilletAway_BoostSpAtk
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectFilletAway_BoostSpAtk:
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPATK, MAX_STAT_STAGE, BattleScript_ButItFailed
+	setstatchanger STAT_SPATK, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectFilletAway_End
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectFilletAway_End:
+	dmg_1_2_attackerhp
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	waitstate
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectDoodle::
 	attackcanceler
@@ -6414,7 +6455,7 @@ BattleScript_HandleFaintedMon::
 	jumpifbyte CMP_NOT_EQUAL, gBattleOutcome, 0, BattleScript_FaintedMonEnd
 	jumpifbattletype BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE, BattleScript_FaintedMonTryChoose
 	jumpifword CMP_NO_COMMON_BITS, gHitMarker, HITMARKER_PLAYER_FAINTED, BattleScript_FaintedMonTryChoose
-@ Yes/No for sending out a new Pok√©mon if one is defeated in a wild battle
+@ Yes/No for sending out a new Pok®¶mon if one is defeated in a wild battle
 	printstring STRINGID_USENEXTPKMN
 	setbyte gBattleCommunication, 0
 	yesnobox
@@ -6434,7 +6475,7 @@ BattleScript_FaintedMonTryChoose:
 	jumpifbyte CMP_EQUAL, sBATTLE_STYLE, OPTIONS_BATTLE_STYLE_SET, BattleScript_FaintedMonSendOutNew
 	jumpifcantswitch BS_PLAYER1, BattleScript_FaintedMonSendOutNew
 	setbyte sILLUSION_NICK_HACK, 1
-@ Yes/No for sending out a new Pok√©mon when the opponent is switching
+@ Yes/No for sending out a new Pok®¶mon when the opponent is switching
 	printstring STRINGID_ENEMYABOUTTOSWITCHPKMN
 	setbyte gBattleCommunication, 0
 	yesnobox
@@ -6444,7 +6485,7 @@ BattleScript_FaintedMonTryChoose:
 	openpartyscreen BS_ATTACKER | PARTY_SCREEN_OPTIONAL, BattleScript_FaintedMonSendOutNew
 	switchhandleorder BS_ATTACKER, 2
 	jumpifbyte CMP_EQUAL, gBattleCommunication, PARTY_SIZE, BattleScript_FaintedMonSendOutNew
-@ Switch Pok√©mon before opponent
+@ Switch Pok®¶mon before opponent
 	atknameinbuff1
 	resetswitchinabilitybits BS_ATTACKER
 	hpthresholds2 BS_ATTACKER

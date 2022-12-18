@@ -10125,6 +10125,12 @@ static void Cmd_various(void)
     case VARIOUS_APPLY_SALT_CURE:
         gStatuses4[gActiveBattler] |= STATUS4_SALT_CURE;
         break;
+    case VARIOUS_JUMP_IF_LESS_THAN_HALF_HP:
+        if (gBattleMons[gActiveBattler].hp < (gBattleMons[gActiveBattler].maxHP / 2))
+            gBattlescriptCurrInstr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+        else
+            gBattlescriptCurrInstr += 7;
+        return;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;
