@@ -14125,7 +14125,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_COLLISION_COURSE] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_COLLISION_COURSE
+        .effect = EFFECT_COLLISION_COURSE,
         .power = 100,
         .type = TYPE_FIGHTING,
         .accuracy = 100,
@@ -14142,7 +14142,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_ELECTRO_DRIFT] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_COLLISION_COURSE
+        .effect = EFFECT_COLLISION_COURSE,
         .power = 100,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,

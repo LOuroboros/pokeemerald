@@ -8547,6 +8547,12 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
             basePower += (faintCounter * 50);
         }
         break;
+    case EFFECT_COLLISION_COURSE:
+        if (GetTypeModifier(gBattleMoves[gCurrentMove].type, gBattleMons[battlerDef].type1) >= UQ_4_12(2.0)
+         || GetTypeModifier(gBattleMoves[gCurrentMove].type, gBattleMons[battlerDef].type2) >= UQ_4_12(2.0)
+         || GetTypeModifier(gBattleMoves[gCurrentMove].type, gBattleMons[battlerDef].type3) >= UQ_4_12(2.0))
+            MulModifier(&basePower, UQ_4_12(1.33));
+        break;
     }
 
     // Move-specific base power changes

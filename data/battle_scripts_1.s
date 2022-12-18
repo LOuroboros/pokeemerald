@@ -435,6 +435,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
 	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
+	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
 
 BattleScript_EffectMakeItRain:
 	setmoveeffect MOVE_EFFECT_PAYDAY
