@@ -413,7 +413,8 @@
 #define EFFECT_GLAIVE_RUSH                  407
 #define EFFECT_SALT_CURE                    408
 #define EFFECT_MORTAL_SPIN                  409
+#define EFFECT_DOODLE                       410
 
-#define NUM_BATTLE_MOVE_EFFECTS             410
+#define NUM_BATTLE_MOVE_EFFECTS             411
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

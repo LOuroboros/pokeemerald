@@ -432,6 +432,42 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectGlaiveRush              @ EFFECT_GLAIVE_RUSH
 	.4byte BattleScript_EffectSaltCure                @ EFFECT_SALT_CURE
 	.4byte BattleScript_EffectMortalSpin              @ EFFECT_MORTAL_SPIN
+	.4byte BattleScript_EffectDoodle                  @ EFFECT_DOODLE
+
+BattleScript_EffectDoodle::
+	attackcanceler
+	attackstring
+	ppreduce
+	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
+	attackanimation
+	waitanimation
+	call BattleScript_EffectDoodle_Loop
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectDoodle_Loop:
+	setbyte gBattlerAttacker, 0
+	copybyte sBATTLER, gBattlerAttacker
+BattleScript_EffectDoodle_LoopStart:
+	jumpifbattlerside BS_ATTACKER, B_SIDE_OPPONENT, BattleScript_EffectDoodle_LoopIncrement
+	trycopyability BattleScript_ButItFailed
+.if B_ABILITY_POP_UP == TRUE
+	setbyte sFIXED_ABILITY_POPUP, TRUE
+	showabilitypopup BS_ATTACKER
+	pause 60
+	sethword sABILITY_OVERWRITE, 0
+	updateabilitypopup BS_ATTACKER
+	pause 20
+	destroyabilitypopup
+	pause 40
+.endif
+	printstring STRINGID_PKMNCOPIEDFOE
+	waitmessage B_WAIT_TIME_LONG
+	switchinabilities BS_ATTACKER
+BattleScript_EffectDoodle_LoopIncrement:
+	addbyte gBattlerAttacker, 1
+	jumpifbytenotequal gBattlerAttacker, gBattlersCount, BattleScript_EffectDoodle_LoopStart
+BattleScript_EffectDoodle_LoopRet:
+	return
 
 BattleScript_EffectMortalSpin:
 	setmoveeffect MOVE_EFFECT_POISON
@@ -5382,8 +5418,7 @@ BattleScript_EffectTeleportTryToRunAway:
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectTeleportNew:
-	getbattlerside BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, B_SIDE_OPPONENT, BattleScript_EffectTeleportTryToRunAway
+	jumpifbattlerside BS_ATTACKER, B_SIDE_OPPONENT, BattleScript_EffectTeleportTryToRunAway
 	attackanimation
 	waitanimation
 	openpartyscreen BS_ATTACKER, BattleScript_EffectTeleportNewEnd
@@ -5879,6 +5914,7 @@ BattleScript_EffectRolePlay::
 	destroyabilitypopup
 	pause 40
 .endif
+	copybyte sBATTLER, gBattlerAttacker
 	printstring STRINGID_PKMNCOPIEDFOE
 	waitmessage B_WAIT_TIME_LONG
 	switchinabilities BS_ATTACKER

@@ -2171,3 +2171,9 @@
 	getbattlerfainted \battler
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
 	.endm
+
+	@ Will jump to script pointer if the specified battler belongs to the specified side.
+	.macro jumpifbattlerside battler:req, side:req, ptr:req
+	getbattlerside \battler
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \side, \ptr
+	.endm

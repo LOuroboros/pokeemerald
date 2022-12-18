@@ -10550,6 +10550,8 @@ bool32 CanTargetBattler(u8 battlerAtk, u8 battlerDef, u16 move)
       && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef)
       && gStatuses3[battlerAtk] & STATUS3_HEAL_BLOCK)
         return FALSE;   // Pokémon affected by Heal Block cannot target allies with Pollen Puff
+    if (gBattleMoves[move].target == MOVE_TARGET_SELECTED_FOE && GetBattlerSide(battlerAtk) == GetBattlerSide(battlerDef))
+        return FALSE;   // Moves with a .target value of MOVE_TARGET_SELECTED_FOE can't target allies.
     return TRUE;
 }
 
