@@ -14193,7 +14193,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_TIDY_UP] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_TIDY_UP
+        .effect = EFFECT_TIDY_UP,
         .power = 0,
         .type = TYPE_NORMAL,
         .accuracy = 0,

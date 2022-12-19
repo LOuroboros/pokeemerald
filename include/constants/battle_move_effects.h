@@ -418,7 +418,8 @@
 #define EFFECT_MAKE_IT_RAIN                 412
 #define EFFECT_COLLISION_COURSE             413
 #define EFFECT_SHED_TAIL                    414
+#define EFFECT_TIDY_UP                      415
 
-#define NUM_BATTLE_MOVE_EFFECTS             415
+#define NUM_BATTLE_MOVE_EFFECTS             416
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

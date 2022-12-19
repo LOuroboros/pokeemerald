@@ -437,6 +437,35 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
 	.4byte BattleScript_EffectShedTail                @ EFFECT_SHED_TAIL
+	.4byte BattleScript_EffectTidyUp                  @ EFFECT_TIDY_UP
+
+BattleScript_EffectTidyUp:
+@	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	attackanimation
+	waitanimation
+BattleScript_EffectTidyUp_BoostAtk:
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_ATK, MAX_STAT_STAGE, BattleScript_EffectTidyUp_BoostSpeed
+	setstatchanger STAT_ATK, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectTidyUp_BoostSpeed
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectTidyUp_BoostSpeed:
+	jumpifstat BS_ATTACKER, CMP_EQUAL, STAT_SPEED, MAX_STAT_STAGE, BattleScript_EffectTidyUp_Cont
+	setstatchanger STAT_SPEED, 2, FALSE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectTidyUp_Cont
+	setgraphicalstatchangevalues
+	playanimation BS_TARGET, B_ANIM_STATS_CHANGE, sB_ANIM_ARG1
+	printfromtable gStatUpStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectTidyUp_Cont:
+	rapidspinfree
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectShedTail:
 	attackcanceler
