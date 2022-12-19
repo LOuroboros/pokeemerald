@@ -8553,6 +8553,15 @@ static u16 CalcMoveBasePower(u16 move, u8 battlerAtk, u8 battlerDef)
          || GetTypeModifier(gBattleMoves[gCurrentMove].type, gBattleMons[battlerDef].type3) >= UQ_4_12(2.0))
             MulModifier(&basePower, UQ_4_12(1.33));
         break;
+    case EFFECT_RAGE_FIST:
+        {
+            u8 side = GetBattlerSide(battlerAtk);
+            if (gTakenHits[side][gBattlerPartyIndexes[battlerAtk]])
+                basePower += (gTakenHits[side][gBattlerPartyIndexes[battlerAtk]] * 50);
+            if (basePower > 350)
+                basePower = 350;
+        }
+        break;
     }
 
     // Move-specific base power changes

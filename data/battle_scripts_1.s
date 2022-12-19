@@ -438,6 +438,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
 	.4byte BattleScript_EffectShedTail                @ EFFECT_SHED_TAIL
 	.4byte BattleScript_EffectTidyUp                  @ EFFECT_TIDY_UP
+	.4byte BattleScript_EffectHit                     @ EFFECT_RAGE_FIST
 
 BattleScript_EffectTidyUp:
 @	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.

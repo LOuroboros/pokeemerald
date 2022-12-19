@@ -419,7 +419,8 @@
 #define EFFECT_COLLISION_COURSE             413
 #define EFFECT_SHED_TAIL                    414
 #define EFFECT_TIDY_UP                      415
+#define EFFECT_RAGE_FIST                    416
 
-#define NUM_BATTLE_MOVE_EFFECTS             416
+#define NUM_BATTLE_MOVE_EFFECTS             417
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

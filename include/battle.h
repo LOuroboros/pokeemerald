@@ -973,5 +973,6 @@ extern bool8 gHasFetchedBall;
 extern u8 gLastUsedBall;
 extern u16 gLastThrownBall;
 extern u8 gPartyCriticalHits[PARTY_SIZE];
+extern u8 gTakenHits[NUM_BATTLE_SIDES][PARTY_SIZE]; // Keeps track of the amount of times each battler in every party was hit. Used by Rage Fist.
 
 #endif // GUARD_BATTLE_H

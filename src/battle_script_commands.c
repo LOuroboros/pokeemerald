@@ -6036,6 +6036,13 @@ static void Cmd_moveend(void)
             gBattleStruct->zmove.effect = EFFECT_HIT;
             gBattleScripting.moveendState++;
             break;
+        case MOVEEND_TAKEN_HITS: // Primarily added for Rage Fist's base power boost.
+            if (TARGET_TURN_DAMAGED)
+                gTakenHits[GetBattlerSide(gBattlerTarget)][gBattlerPartyIndexes[gBattlerTarget]]++;
+            if (gProtectStructs[gBattlerAttacker].confusionSelfDmg)
+                gTakenHits[GetBattlerSide(gBattlerAttacker)][gBattlerPartyIndexes[gBattlerAttacker]]++;
+            gBattleScripting.moveendState++;
+            break;
         case MOVEEND_COUNT:
             break;
         }

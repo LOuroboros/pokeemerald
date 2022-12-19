@@ -240,6 +240,7 @@ EWRAM_DATA u8 gLastUsedBall = 0;
 EWRAM_DATA u16 gLastThrownBall = 0;
 EWRAM_DATA u8 gPartyCriticalHits[PARTY_SIZE] = {0};
 EWRAM_DATA static u8 sTriedEvolving = 0;
+EWRAM_DATA u8 gTakenHits[NUM_BATTLE_SIDES][PARTY_SIZE] = {0};
 
 void (*gPreBattleCallback1)(void);
 void (*gBattleMainFunc)(void);
