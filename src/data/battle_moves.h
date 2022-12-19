@@ -14371,7 +14371,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT_Z] =
 
     [MOVE_GIGATON_HAMMER] =
     {
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_GIGATON_HAMMER
+        .effect = EFFECT_GIGATON_HAMMER,
         .power = 160,
         .type = TYPE_STEEL,
         .accuracy = 100,

@@ -1890,6 +1890,22 @@ u8 TrySetCantSelectMoveBattleScript(void)
         }
     }
 
+    if (gBattleMoves[move].effect == EFFECT_GIGATON_HAMMER && gStatuses4[gActiveBattler] & STATUS4_GIGATON_HAMMER)
+    {
+        gCurrentMove = move;
+        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gCurrentMove);
+        if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+        {
+            gPalaceSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedCurrentMoveInPalace;
+            gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
+        }
+        else
+        {
+            gSelectionBattleScripts[gActiveBattler] = BattleScript_SelectingNotAllowedCurrentMove;
+            limitations++;
+        }
+    }
+
     gPotentialItemEffectBattler = gActiveBattler;
     if (HOLD_EFFECT_CHOICE(holdEffect) && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
     {
@@ -2025,6 +2041,9 @@ u8 CheckMoveLimitations(u8 battlerId, u8 unusableMoves, u16 check)
             unusableMoves |= gBitTable[i];
         // Gorilla Tactics
         else if (check & MOVE_LIMITATION_CHOICE_ITEM && GetBattlerAbility(battlerId) == ABILITY_GORILLA_TACTICS && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != gBattleMons[battlerId].moves[i])
+            unusableMoves |= gBitTable[i];
+        // Gigaton Hammer
+        else if (check & MOVE_LIMITATION_GIGATON_HAMMER && gBattleMoves[gBattleMons[battlerId].moves[i]].effect == EFFECT_GIGATON_HAMMER && gStatuses4[battlerId] & STATUS4_GIGATON_HAMMER)
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
@@ -2686,6 +2705,7 @@ enum
     ENDTURN_SLOW_START,
     ENDTURN_PLASMA_FISTS,
     ENDTURN_SALT_CURE,
+    ENDTURN_GIGATON_HAMMER,
     ENDTURN_BATTLER_COUNT
 };
 
@@ -3242,6 +3262,12 @@ u8 DoBattlerEndTurnEffects(void)
                 BattleScriptExecute(BattleScript_SaltCureExtraDamage);
                 effect++;
             }
+            gBattleStruct->turnEffectsTracker++;
+            break;
+        case ENDTURN_GIGATON_HAMMER:
+            if (gStatuses4[gActiveBattler] & STATUS4_GIGATON_HAMMER
+             && gDisableStructs[gActiveBattler].gigatonHammerTimer && --gDisableStructs[gActiveBattler].gigatonHammerTimer == 0)
+                gStatuses4[gActiveBattler] &= ~STATUS4_GIGATON_HAMMER;
             gBattleStruct->turnEffectsTracker++;
             break;
         case ENDTURN_BATTLER_COUNT:  // done

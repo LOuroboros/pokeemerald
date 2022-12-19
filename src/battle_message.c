@@ -764,9 +764,11 @@ static const u8 sText_AttackerSetAShellTrap[] = _("{B_ATK_NAME_WITH_PREFIX} set\
 static const u8 sText_AttackerShellTrapDidntWork[] = _("{B_ATK_NAME_WITH_PREFIX}'s shell trap\ndidn't work!");
 static const u8 sText_TargetIsBeingSaltCured[] = _("{B_DEF_NAME_WITH_PREFIX} is being salt cured!");
 static const u8 sText_TargetIsHurtBySaltCure[] = _("{B_DEF_NAME_WITH_PREFIX} is hurt by {B_BUFF1}!");
+static const u8 sText_CurrentMoveCantSelect[] = _("{B_BUFF1} cannot be used!\p");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_CURRENTMOVECANTSELECT - BATTLESTRINGS_TABLE_START] = sText_CurrentMoveCantSelect,
     [STRINGID_TARGETISHURTBYSALTCURE - BATTLESTRINGS_TABLE_START] = sText_TargetIsHurtBySaltCure,
     [STRINGID_TARGETISBEINGSALTCURED - BATTLESTRINGS_TABLE_START] = sText_TargetIsBeingSaltCured,
     [STRINGID_ATTACKERSHELLTRAPDIDNTWORK - BATTLESTRINGS_TABLE_START] = sText_AttackerShellTrapDidntWork,

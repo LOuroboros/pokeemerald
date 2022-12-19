@@ -249,6 +249,7 @@
 #define VARIOUS_SET_GLAIVE_RUSH                     158
 #define VARIOUS_APPLY_SALT_CURE                     159
 #define VARIOUS_JUMP_IF_LESS_THAN_HALF_HP           160
+#define VARIOUS_SET_GIGATON_HAMMER                  161
 
 // Cmd_manipulatedamage
 #define DMG_CHANGE_SIGN            0

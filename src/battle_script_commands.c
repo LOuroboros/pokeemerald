@@ -10139,6 +10139,10 @@ static void Cmd_various(void)
         else
             gBattlescriptCurrInstr += 7;
         return;
+    case VARIOUS_SET_GIGATON_HAMMER:
+        gStatuses4[gActiveBattler] |= STATUS4_GIGATON_HAMMER;
+        gDisableStructs[gActiveBattler].gigatonHammerTimer = 2;
+        break;
     } // End of switch (gBattlescriptCurrInstr[2])
 
     gBattlescriptCurrInstr += 3;

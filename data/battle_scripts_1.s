@@ -439,6 +439,11 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectShedTail                @ EFFECT_SHED_TAIL
 	.4byte BattleScript_EffectTidyUp                  @ EFFECT_TIDY_UP
 	.4byte BattleScript_EffectHit                     @ EFFECT_RAGE_FIST
+	.4byte BattleScript_EffectGigatonHammer           @ EFFECT_GIGATON_HAMMER
+
+BattleScript_EffectGigatonHammer:
+	setgigatonhammer BS_ATTACKER
+	goto BattleScript_EffectHit
 
 BattleScript_EffectTidyUp:
 @	TO DO: Use modifybattlerstatstage here once PR #2470 is merged.
@@ -7697,6 +7702,14 @@ BattleScript_MoveUsedHealBlockPrevents::
 
 BattleScript_SelectingNotAllowedMoveHealBlockInPalace::
 	printstring STRINGID_HEALBLOCKPREVENTSUSAGE
+	goto BattleScript_SelectingUnusableMoveInPalace
+
+BattleScript_SelectingNotAllowedCurrentMove::
+	printselectionstring STRINGID_CURRENTMOVECANTSELECT
+	endselectionscript
+
+BattleScript_SelectingNotAllowedCurrentMoveInPalace::
+	printstring STRINGID_CURRENTMOVECANTSELECT
 	goto BattleScript_SelectingUnusableMoveInPalace
 
 BattleScript_WishComesTrue::

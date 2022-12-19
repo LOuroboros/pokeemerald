@@ -105,6 +105,7 @@ struct DisableStruct
     u8 tarShot:1;
     u8 octolock:1;
     u8 glaiveRushTimer:2;
+    u8 gigatonHammerTimer:2;
 };
 
 struct ProtectStruct
