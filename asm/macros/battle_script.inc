@@ -1986,8 +1986,8 @@
 	various BS_ATTACKER, VARIOUS_SWAP_SIDE_STATUSES
 	.endm
 
-	.macro canteleport battler:req
-	various \battler, VARIOUS_CAN_TELEPORT
+	.macro canswitchout battler:req
+	various \battler, VARIOUS_CAN_SWITCH_OUT
 	.endm
 
 	.macro getbattlerside battler:req
@@ -2181,4 +2181,10 @@
 	.macro jumpifbattlerside battler:req, side:req, ptr:req
 	getbattlerside \battler
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \side, \ptr
+	.endm
+
+	@ Will jump to a script pointer depending on whether the specified battler has 1 or more allies alive.
+	.macro jumpifcanswitch battler:req, value:req, ptr:req
+	canswitchout \battler
+	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
 	.endm

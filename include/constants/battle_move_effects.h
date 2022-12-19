@@ -417,7 +417,8 @@
 #define EFFECT_FILLET_AWAY                  411
 #define EFFECT_MAKE_IT_RAIN                 412
 #define EFFECT_COLLISION_COURSE             413
+#define EFFECT_SHED_TAIL                    414
 
-#define NUM_BATTLE_MOVE_EFFECTS             414
+#define NUM_BATTLE_MOVE_EFFECTS             415
 
 #endif  // GUARD_CONSTANTS_BATTLE_MOVE_EFFECTS_H

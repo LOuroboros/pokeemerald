@@ -436,6 +436,59 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectFilletAway              @ EFFECT_FILLET_AWAY
 	.4byte BattleScript_EffectMakeItRain              @ EFFECT_MAKE_IT_RAIN
 	.4byte BattleScript_EffectHit                     @ EFFECT_COLLISION_COURSE
+	.4byte BattleScript_EffectShedTail                @ EFFECT_SHED_TAIL
+
+BattleScript_EffectShedTail:
+	attackcanceler
+	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_ATTACKER, STATUS2_SUBSTITUTE, BattleScript_AlreadyHasSubstitute
+	jumpifcanswitch BS_ATTACKER, FALSE, BattleScript_ButItFailed
+	jumpiflessthanhalfhp BS_ATTACKER, BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+@ Shed Tail consumes half of the user's HP.
+	dmg_1_2_attackerhp
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	waitstate
+@ If the user is holding a berry such as a Sitrus Berry, they should eat it.
+	jumpifnotberry BS_ATTACKER, BattleScript_EffectShedTail_Continue
+	setbyte sBERRY_OVERRIDE, 1
+	orword gHitMarker, HITMARKER_NO_ANIMATIONS
+	consumeberry BS_ATTACKER, TRUE
+	bicword gHitMarker, HITMARKER_NO_ANIMATIONS
+	setbyte sBERRY_OVERRIDE, 0
+	removeitem BS_ATTACKER
+@ Let the user switch out
+BattleScript_EffectShedTail_Continue:
+	openpartyscreen BS_ATTACKER, BattleScript_EffectShedTail_End
+	switchoutabilities BS_ATTACKER
+	waitstate
+	switchhandleorder BS_ATTACKER, 2
+	returntoball BS_ATTACKER
+	getswitchedmondata BS_ATTACKER
+	switchindataupdate BS_ATTACKER
+	hpthresholds BS_ATTACKER
+	trytoclearprimalweather
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
+	printstring STRINGID_SWITCHINMON
+	switchinanim BS_ATTACKER, TRUE
+	waitstate
+	switchineffects BS_ATTACKER
+@ Set up a Substitute
+	setsubstitute
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SUBSTITUTE_FAILED, BattleScript_EffectShedTail_End
+	pause B_WAIT_TIME_SHORT
+	playmoveanimation BS_ATTACKER, MOVE_SUBSTITUTE
+	waitanimation
+	pause B_WAIT_TIME_SHORT
+	printfromtable gSubstituteUsedStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_EffectShedTail_End:
+	goto BattleScript_MoveEnd
 
 BattleScript_EffectMakeItRain:
 	setmoveeffect MOVE_EFFECT_PAYDAY
@@ -5450,8 +5503,7 @@ BattleScript_EffectTeleport:
 	attackstring
 	ppreduce
 .if B_TELEPORT_BEHAVIOR >= GEN_7
-	canteleport BS_ATTACKER
-	jumpifbyte CMP_EQUAL, gBattleCommunication, TRUE, BattleScript_EffectTeleportNew
+	jumpifcanswitch BS_ATTACKER, TRUE, BattleScript_EffectTeleportNew
 	goto BattleScript_ButItFailed
 .else
 	jumpifbattletype BATTLE_TYPE_TRAINER, BattleScript_ButItFailed

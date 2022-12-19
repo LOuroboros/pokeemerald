@@ -4913,7 +4913,8 @@ static void Cmd_playanimation(void)
      || animId == B_ANIM_ILLUSION_OFF
      || animId == B_ANIM_FORM_CHANGE
      || animId == B_ANIM_SUBSTITUTE_FADE
-     || animId == B_ANIM_PRIMAL_REVERSION)
+     || animId == B_ANIM_PRIMAL_REVERSION
+     || animId == B_ANIM_HELD_ITEM_EFFECT)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, animId, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -8240,7 +8241,7 @@ static bool32 CourtChangeSwapSideStatuses(void)
     SWAP(sideTimerPlayer->stickyWebBattlerSide, sideTimerOpp->stickyWebBattlerSide, temp);
 }
 
-static bool32 CanTeleport(u8 battlerId)
+static bool32 CanSwitchOut(u8 battlerId)
 {
     u8 side = GetBattlerSide(battlerId);
     struct Pokemon *party = (side == B_SIDE_PLAYER) ? gPlayerParty : gEnemyParty;
@@ -10098,8 +10099,8 @@ static void Cmd_various(void)
             return;
         }
         break;
-    case VARIOUS_CAN_TELEPORT:
-        gBattleCommunication[0] = CanTeleport(gActiveBattler);
+    case VARIOUS_CAN_SWITCH_OUT:
+        gBattleCommunication[0] = CanSwitchOut(gActiveBattler);
         break;
     case VARIOUS_GET_BATTLER_SIDE:
         if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
