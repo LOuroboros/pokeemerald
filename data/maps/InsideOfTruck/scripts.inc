@@ -48,7 +48,50 @@ InsideOfTruck_EventScript_SetIntroFlagsFemale::
 	end
 
 InsideOfTruck_EventScript_MovingBox::
-	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
+	lock
+// 1st item
+	random ITEMS_COUNT
+	copyvar VAR_TEMP_1, VAR_RESULT
+	bufferitemname STR_VAR_1, VAR_TEMP_1
+// 2nd item
+	random ITEMS_COUNT
+	copyvar VAR_TEMP_2, VAR_RESULT
+	bufferitemname STR_VAR_2, VAR_TEMP_2
+// 3rd item
+	random ITEMS_COUNT
+	copyvar VAR_TEMP_3, VAR_RESULT
+	bufferitemname STR_VAR_3, VAR_TEMP_3
+// Let's roll
+	loaddynamic 0, InsideOfTruck_EventScript_MovingBox_Text_StrVar1
+	loaddynamic 1, InsideOfTruck_EventScript_MovingBox_Text_StrVar2
+	loaddynamic 2, InsideOfTruck_EventScript_MovingBox_Text_StrVar3
+	multichoice 20, 6, 3, TRUE
+	switch VAR_RESULT
+	case 0, InsideOfTruck_EventScript_MovingBox_1stItem
+	case 1, InsideOfTruck_EventScript_MovingBox_2ndItem
+	case 2, InsideOfTruck_EventScript_MovingBox_3rdItem
+	end
+
+InsideOfTruck_EventScript_MovingBox_Text_StrVar1:
+	.string "{STR_VAR_1}$"
+InsideOfTruck_EventScript_MovingBox_Text_StrVar2:
+	.string "{STR_VAR_2}$"
+InsideOfTruck_EventScript_MovingBox_Text_StrVar3:
+	.string "{STR_VAR_3}$"
+
+InsideOfTruck_EventScript_MovingBox_1stItem:
+	giveitem VAR_TEMP_1, 5
+	release
+	end
+
+InsideOfTruck_EventScript_MovingBox_2ndItem:
+	giveitem VAR_TEMP_2, 5
+	release
+	end
+
+InsideOfTruck_EventScript_MovingBox_3rdItem:
+	giveitem VAR_TEMP_3, 5
+	release
 	end
 
 InsideOfTruck_Text_BoxPrintedWithMonLogo:

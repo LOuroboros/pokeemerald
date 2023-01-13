@@ -923,8 +923,8 @@
 	.byte \ignoreBPress
 	.endm
 
-	@ Nopped in Emerald.
-	.macro drawbox
+	@ Loads strings of text dynamically to be displayed through multichoice.
+	.macro loaddynamic idx:req, ptr:req
 	.byte 0x72
 	.endm
 

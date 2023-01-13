@@ -49,6 +49,7 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "dynamic_placeholder_text_util.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
@@ -1387,14 +1388,12 @@ bool8 ScrCmd_multichoicedefault(struct ScriptContext *ctx)
     }
 }
 
-bool8 ScrCmd_drawbox(struct ScriptContext *ctx)
+bool8 ScrCmd_loaddynamic(struct ScriptContext *ctx)
 {
-    /*u8 left = ScriptReadByte(ctx);
-    u8 top = ScriptReadByte(ctx);
-    u8 right = ScriptReadByte(ctx);
-    u8 bottom = ScriptReadByte(ctx);
-
-    MenuDrawTextWindow(left, top, right, bottom);*/
+    u8 id = ScriptReadByte(ctx);
+    u8 *ptr = (u8 *)ScriptReadWord(ctx);
+    
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(id, ptr);
     return FALSE;
 }
 
