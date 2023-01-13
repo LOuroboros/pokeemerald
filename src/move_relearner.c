@@ -460,8 +460,8 @@ static void CB2_MoveRelearnerMain(void)
 
 static void FormatAndPrintText(const u8 *src)
 {
-    StringExpandPlaceholders(gStringVar4, src);
-    MoveRelearnerPrintText(gStringVar4);
+    StringExpandPlaceholders(gStringBuffer, src);
+    MoveRelearnerPrintText(gStringBuffer);
 }
 
 // See the state machine doc at the top of the file.
@@ -764,9 +764,9 @@ static void HideHeartSpritesAndShowTeachMoveText(bool8 onlyHideSprites)
 
     if (!onlyHideSprites)
     {
-        StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+        StringExpandPlaceholders(gStringBuffer, gText_TeachWhichMoveToPkmn);
         FillWindowPixelBuffer(3, 0x11);
-        AddTextPrinterParameterized(3, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(3, FONT_NORMAL, gStringBuffer, 0, 1, 0, NULL);
     }
 }
 
@@ -805,16 +805,16 @@ static void HandleInput(bool8 showContest)
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
         sMoveRelearnerStruct->state = MENU_STATE_PRINT_GIVE_UP_PROMPT;
-        StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerGiveUp);
-        MoveRelearnerPrintText(gStringVar4);
+        StringExpandPlaceholders(gStringBuffer, gText_MoveRelearnerGiveUp);
+        MoveRelearnerPrintText(gStringBuffer);
         break;
     default:
         PlaySE(SE_SELECT);
         RemoveScrollArrows();
         sMoveRelearnerStruct->state = MENU_STATE_PRINT_TEACH_MOVE_PROMPT;
         StringCopy(gStringVar2, gMoveNames[itemId]);
-        StringExpandPlaceholders(gStringVar4, gText_MoveRelearnerTeachMoveConfirm);
-        MoveRelearnerPrintText(gStringVar4);
+        StringExpandPlaceholders(gStringBuffer, gText_MoveRelearnerTeachMoveConfirm);
+        MoveRelearnerPrintText(gStringBuffer);
         break;
     }
 }
@@ -834,9 +834,9 @@ static void ShowTeachMoveText(bool8 shouldDoNothingInstead)
 {
     if (shouldDoNothingInstead == FALSE)
     {
-        StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+        StringExpandPlaceholders(gStringBuffer, gText_TeachWhichMoveToPkmn);
         FillWindowPixelBuffer(3, 0x11);
-        AddTextPrinterParameterized(3, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+        AddTextPrinterParameterized(3, FONT_NORMAL, gStringBuffer, 0, 1, 0, NULL);
     }
 }
 

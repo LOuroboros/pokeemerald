@@ -1482,7 +1482,7 @@
 	.4byte \text
 	.endm
 
-	@ Expands the given text at the pointer (- the relative address set by setvaddress) into gStringVar4
+	@ Expands the given text at the pointer (- the relative address set by setvaddress) into gStringBuffer
 	.macro vbuffermessage text:req
 	.byte 0xbe
 	.4byte \text

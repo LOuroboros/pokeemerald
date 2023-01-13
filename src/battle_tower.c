@@ -1917,18 +1917,18 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
 void FrontierSpeechToString(const u16 *words)
 {
-    ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);
-    if (GetStringWidth(FONT_NORMAL, gStringVar4, -1) > 204u)
+    ConvertEasyChatWordsToString(gStringBuffer, words, 3, 2);
+    if (GetStringWidth(FONT_NORMAL, gStringBuffer, -1) > 204u)
     {
         s32 i = 0;
 
-        ConvertEasyChatWordsToString(gStringVar4, words, 2, 3);
-        while (gStringVar4[i++] != CHAR_NEWLINE)
+        ConvertEasyChatWordsToString(gStringBuffer, words, 2, 3);
+        while (gStringBuffer[i++] != CHAR_NEWLINE)
             ;
-        while (gStringVar4[i] != CHAR_NEWLINE)
+        while (gStringBuffer[i] != CHAR_NEWLINE)
             i++;
 
-        gStringVar4[i] = CHAR_PROMPT_SCROLL;
+        gStringBuffer[i] = CHAR_PROMPT_SCROLL;
     }
 }
 
@@ -2935,7 +2935,7 @@ void CopyEReaderTrainerGreeting(void)
 static void CopyEReaderTrainerFarewellMessage(void)
 {
     if (gBattleOutcome == B_OUTCOME_DREW)
-        gStringVar4[0] = EOS;
+        gStringBuffer[0] = EOS;
     else if (gBattleOutcome == B_OUTCOME_WON)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.farewellPlayerWon);
     else

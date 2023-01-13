@@ -297,17 +297,17 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
         StringCopy(gStringVar2, gContestPaintingWinner->trainerName);
         ConvertInternationalContestantName(gStringVar2);
         StringCopy(gStringVar3, gContestPaintingWinner->monName);
-        StringExpandPlaceholders(gStringVar4, gContestHallPaintingCaption);
+        StringExpandPlaceholders(gStringBuffer, gContestHallPaintingCaption);
     }
     else
     {
         // Museum caption
         StringCopy(gStringVar1, gContestPaintingWinner->monName);
-        StringExpandPlaceholders(gStringVar4, sMuseumCaptions[category]);
+        StringExpandPlaceholders(gStringBuffer, sMuseumCaptions[category]);
     }
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringVar4, 208);
-    AddTextPrinterParameterized(sWindowId, FONT_NORMAL, gStringVar4, x, 1, 0, 0);
+    x = GetStringCenterAlignXOffset(FONT_NORMAL, gStringBuffer, 208);
+    AddTextPrinterParameterized(sWindowId, FONT_NORMAL, gStringBuffer, x, 1, 0, 0);
     CopyBgTilemapBufferToVram(1);
 }
 

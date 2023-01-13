@@ -660,8 +660,8 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_INTRO_MSG:
         if (!gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
-            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
+            StringExpandPlaceholders(gStringBuffer, gText_PkmnIsEvolving);
+            BattlePutTextOnWindow(gStringBuffer, B_WIN_MSG);
             gTasks[taskId].tState++;
         }
         break;
@@ -757,8 +757,8 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
-            StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
-            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
+            StringExpandPlaceholders(gStringBuffer, gText_CongratsPkmnEvolved);
+            BattlePutTextOnWindow(gStringBuffer, B_WIN_MSG);
             PlayBGM(MUS_EVOLVED);
             gTasks[taskId].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (void *)(&gTasks[taskId].tPostEvoSpecies));
@@ -840,11 +840,11 @@ static void Task_EvolutionScene(u8 taskId)
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteId))
         {
             if (gTasks[taskId].tEvoWasStopped) // FRLG auto cancellation
-                StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
+                StringExpandPlaceholders(gStringBuffer, gText_EllipsisQuestionMark);
             else
-                StringExpandPlaceholders(gStringVar4, gText_PkmnStoppedEvolving);
+                StringExpandPlaceholders(gStringBuffer, gText_PkmnStoppedEvolving);
 
-            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
+            BattlePutTextOnWindow(gStringBuffer, B_WIN_MSG);
             gTasks[taskId].tEvoWasStopped = TRUE;
             gTasks[taskId].tState = EVOSTATE_TRY_LEARN_MOVE;
         }
@@ -1086,8 +1086,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
     switch (gTasks[taskId].tState)
     {
     case T_EVOSTATE_INTRO_MSG:
-        StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
-        DrawTextOnTradeWindow(0, gStringVar4, 1);
+        StringExpandPlaceholders(gStringBuffer, gText_PkmnIsEvolving);
+        DrawTextOnTradeWindow(0, gStringBuffer, 1);
         gTasks[taskId].tState++;
         break;
     case T_EVOSTATE_INTRO_CRY:
@@ -1177,8 +1177,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
-            StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
-            DrawTextOnTradeWindow(0, gStringVar4, 1);
+            StringExpandPlaceholders(gStringBuffer, gText_CongratsPkmnEvolved);
+            DrawTextOnTradeWindow(0, gStringBuffer, 1);
             PlayFanfare(MUS_EVOLVED);
             gTasks[taskId].tState++;
             SetMonData(mon, MON_DATA_SPECIES, (&gTasks[taskId].tPostEvoSpecies));
@@ -1245,8 +1245,8 @@ static void Task_TradeEvolutionScene(u8 taskId)
     case T_EVOSTATE_CANCEL_MSG:
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteId))
         {
-            StringExpandPlaceholders(gStringVar4, gText_EllipsisQuestionMark);
-            DrawTextOnTradeWindow(0, gStringVar4, 1);
+            StringExpandPlaceholders(gStringBuffer, gText_EllipsisQuestionMark);
+            DrawTextOnTradeWindow(0, gStringBuffer, 1);
             gTasks[taskId].tEvoWasStopped = TRUE;
             gTasks[taskId].tState = T_EVOSTATE_TRY_LEARN_MOVE;
         }

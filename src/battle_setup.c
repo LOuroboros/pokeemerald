@@ -1522,14 +1522,14 @@ const u8 *GetTrainerALoseText(void)
     else
         string = sTrainerADefeatSpeech;
 
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(string));
-    return gStringVar4;
+    StringExpandPlaceholders(gStringBuffer, ReturnEmptyStringIfNull(string));
+    return gStringBuffer;
 }
 
 const u8 *GetTrainerBLoseText(void)
 {
-    StringExpandPlaceholders(gStringVar4, ReturnEmptyStringIfNull(sTrainerBDefeatSpeech));
-    return gStringVar4;
+    StringExpandPlaceholders(gStringBuffer, ReturnEmptyStringIfNull(sTrainerBDefeatSpeech));
+    return gStringBuffer;
 }
 
 const u8 *GetTrainerWonSpeech(void)
