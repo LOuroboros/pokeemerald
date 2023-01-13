@@ -926,6 +926,8 @@
 	@ Loads strings of text dynamically to be displayed through multichoice.
 	.macro loaddynamic idx:req, ptr:req
 	.byte 0x72
+	.byte \idx
+	.4byte \ptr
 	.endm
 
 	@ Nopped in Emerald, but still consumes parameters.
