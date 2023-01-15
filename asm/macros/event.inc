@@ -1971,3 +1971,9 @@
 	setvar VAR_0x8006, \item
 	special CreateEventLegalEnemyMon
 	.endm
+
+	@ Checks if the Player is currently in the Battle Pyramid.
+	.macro goto_if_in_battle_pyramid dest:req
+	specialvar VAR_RESULT, InBattlePyramid
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm

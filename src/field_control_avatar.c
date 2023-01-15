@@ -182,7 +182,8 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (input->pressedStartButton)
     {
         PlaySE(SE_WIN_OPEN);
-        ShowStartMenu();
+        LockPlayerFieldControls();
+        ScriptContext_SetupScript(EventScript_StartMenu);
         return TRUE;
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
