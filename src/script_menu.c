@@ -52,7 +52,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId);
 static void Task_HandleMultichoiceInput(u8 taskId);
 static void Task_HandleYesNoInput(u8 taskId);
 static void Task_HandleMultichoiceGridInput(u8 taskId);
-static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 height, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u32 callbackSet);
+static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 height, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u8 choicesSpacing, u32 callbackSet);
 static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos);
 static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId);
 static void DrawLinkServicesMultichoiceMenu(u8 multichoiceId);
@@ -101,7 +101,7 @@ static const struct ListMenuTemplate sScriptableListMenuTemplate =
     .fontId = FONT_NORMAL,
 };
 
-bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 height, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u8 maxBeforeScroll, u32 initialRow, u32 callbackSet)
+bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 height, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u8 maxBeforeScroll, u32 initialRow, u8 choicesSpacing, u32 callbackSet)
 {
     if (FuncIsActiveTask(Task_HandleMultichoiceInput) == TRUE)
     {
@@ -111,7 +111,7 @@ bool8 ScriptMenu_MultichoiceDynamic(u8 left, u8 top, u8 height, u8 argc, struct 
     else
     {
         gSpecialVar_Result = 0xFF;
-        DrawMultichoiceMenuDynamic(left, top, height, argc, items, ignoreBPress, initialRow, maxBeforeScroll, callbackSet);
+        DrawMultichoiceMenuDynamic(left, top, height, argc, items, ignoreBPress, initialRow, maxBeforeScroll, choicesSpacing, callbackSet);
         return TRUE;
     }
 }
@@ -353,7 +353,7 @@ static void MultichoiceDynamic_MoveCursor(s32 itemIndex, bool8 onInit, struct Li
     }
 }
 
-static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 height, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u32 callbackSet)
+static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 height, u8 argc, struct ListMenuItem *items, bool8 ignoreBPress, u32 initialRow, u8 maxBeforeScroll, u8 choicesSpacing, u32 callbackSet)
 {
     u32 i;
     u8 windowId;
@@ -392,6 +392,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 height, u8 argc, stru
     gMultiuseListMenuTemplate.totalItems = argc;
     gMultiuseListMenuTemplate.maxShowed = maxBeforeScroll;
     gMultiuseListMenuTemplate.moveCursorFunc = MultichoiceDynamic_MoveCursor;
+    gMultiuseListMenuTemplate.itemVerticalPadding = choicesSpacing;
 
     taskId = CreateTask(Task_HandleScrollingMultichoiceInput, 80);
     gTasks[taskId].data[0] = ListMenuInit(&gMultiuseListMenuTemplate, 0, 0);

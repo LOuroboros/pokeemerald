@@ -1729,7 +1729,7 @@
 	.2byte \quantity
 	.endm
 
-	.macro _dynmultichoice left:req, top:req, height:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req argv:vararg
+	.macro _dynmultichoice left:req, top:req, height:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, choicesSpacing:req, callbacks:req argv:vararg
 	.byte 0xe3
 	.byte \left
 	.byte \top
@@ -1738,6 +1738,7 @@
 	.byte \maxBeforeScroll
 	.byte \shouldSort
 	.2byte \initialSelected
+	.byte \choicesSpacing
 	.byte \callbacks
 	.byte (.Ldynmultichoice_\@_2 - .Ldynmultichoice_\@_1) / 4
 .Ldynmultichoice_\@_1:
@@ -1749,8 +1750,8 @@
 	@ Lists of options are provided in argv.
 	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
 	@ If height is set to 0xFF, the size of a dynamic multichoice window on the screen will vary depending on the amount of options in argv.
-	.macro dynmultichoice left:req, top:req, height:req, ignoreBPress:req, maxBeforeScroll:req, initialSelected:req, callbacks:req argv:vararg
-	_dynmultichoice \left, \top, \height, \ignoreBPress, \maxBeforeScroll, FALSE, \initialSelected, \callbacks, \argv
+	.macro dynmultichoice left:req, top:req, height:req, ignoreBPress:req, maxBeforeScroll:req, initialSelected:req, choicesSpacing:req, callbacks:req argv:vararg
+	_dynmultichoice \left, \top, \height, \ignoreBPress, \maxBeforeScroll, FALSE, \initialSelected, \callbacks, \choicesSpacing, \argv
 	.endm
 
 	.macro dynmultipush name:req, id:req
@@ -1759,8 +1760,8 @@
 	.2byte \id
 	.endm
 
-	.macro dynmultistack left:req, top:req, height:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, callbacks:req
-	_dynmultichoice \left, \top, \height, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \callbacks, NULL
+	.macro dynmultistack left:req, top:req, height:req, ignoreBPress:req, maxBeforeScroll:req, shouldSort:req, initialSelected:req, choicesSpacing:req, callbacks:req
+	_dynmultichoice \left, \top, \height, \ignoreBPress, \maxBeforeScroll, \shouldSort, \initialSelected, \choicesSpacing, \callbacks, NULL
 	.endm
 
 

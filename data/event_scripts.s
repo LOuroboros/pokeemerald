@@ -1014,7 +1014,7 @@ EventScript_StartMenu::
 	dynmultipush StartMenu_Text_Option, 6
 	dynmultipush StartMenu_Text_Exit, 7
 	special PlayRainStoppingSoundEffect
-	dynmultistack 22, 0, 18, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
+	dynmultistack 22, 0, 18, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, 2, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
 	switch VAR_RESULT
 	case 0, EventScript_StartMenu_PokedexAccess
 	case 1, EventScript_StartMenu_PokemonAccess
@@ -1112,7 +1112,7 @@ EventScript_StartMenu_BuildSafariZoneMenu:
 	dynmultipush StartMenu_Text_Exit, 6
 	special PlayRainStoppingSoundEffect
 	special ShowSafariBallsWindow
-	dynmultistack 22, 0, 18, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
+	dynmultistack 22, 0, 16, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, 2, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
 	switch VAR_RESULT
 	case 0, EventScript_StartMenu_RetireSafariAccess
 	case 1, EventScript_StartMenu_PokedexAccess
@@ -1154,7 +1154,7 @@ EventScript_StartMenu_BuildBattlePyramidMenu:
 	dynmultipush StartMenu_Text_Exit, 6
 	special PlayRainStoppingSoundEffect
 	special ShowPyramidFloorWindow
-	dynmultistack 22, 0, 18, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
+	dynmultistack 22, 0, 16, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, 2, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
 	switch VAR_RESULT
 	case 0, EventScript_StartMenu_PokemonAccess
 	case 1, EventScript_StartMenu_BagAccess
