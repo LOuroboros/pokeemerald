@@ -494,12 +494,24 @@ static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, 
 static void Task_HandleScrollingMultichoiceInput(u8 taskId)
 {
     bool32 done = FALSE;
+    struct ListMenu *list = (void *) gTasks[gTasks[taskId].data[0]].data;
+    s32 positionBeforeScroll = list->selectedRow + list->scrollOffset;
     s32 input = ListMenu_ProcessInput(gTasks[taskId].data[0]);
     
     switch (input)
     {
     case LIST_HEADER:
     case LIST_NOTHING_CHOSEN:
+        if (JOY_REPEAT(DPAD_DOWN))
+        {
+            if (positionBeforeScroll == list->template.totalItems - 1)
+                ListMenuChangeSelection(list, TRUE, list->template.totalItems - 1, FALSE);
+        }
+        else if (JOY_REPEAT(DPAD_UP))
+        {
+            if (positionBeforeScroll == 0)
+                ListMenuChangeSelection(list, TRUE, list->template.totalItems - 1, TRUE);
+        }
         break;
     case LIST_CANCEL:
         if (gTasks[taskId].data[1])
