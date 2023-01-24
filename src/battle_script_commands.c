@@ -4874,7 +4874,8 @@ static void Cmd_playanimation(void)
      || animId == B_ANIM_ILLUSION_OFF
      || animId == B_ANIM_FORM_CHANGE
      || animId == B_ANIM_SUBSTITUTE_FADE
-     || animId == B_ANIM_PRIMAL_REVERSION)
+     || animId == B_ANIM_PRIMAL_REVERSION
+     || animId == B_ANIM_SWAP_ATTACKER_WITH_ALLY)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, animId, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);
@@ -4922,7 +4923,8 @@ static void Cmd_playanimation_var(void)
      || *animationIdPtr == B_ANIM_ILLUSION_OFF
      || *animationIdPtr == B_ANIM_FORM_CHANGE
      || *animationIdPtr == B_ANIM_SUBSTITUTE_FADE
-     || *animationIdPtr == B_ANIM_PRIMAL_REVERSION)
+     || *animationIdPtr == B_ANIM_PRIMAL_REVERSION
+     || *animationIdPtr == B_ANIM_SWAP_ATTACKER_WITH_ALLY)
     {
         BtlController_EmitBattleAnimation(BUFFER_A, *animationIdPtr, *argumentPtr);
         MarkBattlerForControllerExec(gActiveBattler);

@@ -945,6 +945,7 @@ gBattleAnims_General::
 	.4byte General_ShellTrapSetUp           @ B_ANIM_SHELL_TRAP_SETUP
 	.4byte General_ZMoveActivate            @ B_ANIM_ZMOVE_ACTIVATE
 	.4byte General_AffectionHangedOn        @ B_ANIM_AFFECTION_HANGED_ON
+	.4byte General_SwapAttackerWithAlly     @ B_ANIM_SWAP_ATTACKER_WITH_ALLY
 
 	.align 2
 gBattleAnims_Special::
@@ -5474,10 +5475,7 @@ Move_QUICK_GUARD:
 	clearmonbg ANIM_ATTACKER
 	end
 
-Move_ALLY_SWITCH:
-	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
-	createvisualtask AnimTask_SwapPartnerMonSpriteToFromSubstitute, 2, TRUE
-	waitforvisualfinish
+Move_ALLY_SWITCH: @ Unused, handled by B_ANIM_SWAP_ATTACKER_WITH_ALLY.
 	end
 
 Move_SCALD:
@@ -25024,6 +25022,12 @@ General_AffectionHangedOn_3Hearts:
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 160, -32
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, -256, -40
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_ATTACKER, 3, 128, -16
+	waitforvisualfinish
+	end
+
+General_SwapAttackerWithAlly:
+	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, TRUE
+	createvisualtask AnimTask_SwapPartnerMonSpriteToFromSubstitute, 2, TRUE
 	waitforvisualfinish
 	end
 
