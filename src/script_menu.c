@@ -503,6 +503,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
     {
     case LIST_HEADER:
     case LIST_NOTHING_CHOSEN:
+        gKeyRepeatStartDelay = 1;
         if (JOY_REPEAT(DPAD_DOWN))
         {
             if (positionBeforeScroll == list->template.totalItems - 1)
@@ -552,6 +553,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
         DestroyListMenuTask(gTasks[taskId].data[0], NULL, NULL);
         ClearStdWindowAndFrame(gTasks[taskId].data[2], TRUE);
         RemoveWindow(gTasks[taskId].data[2]);
+        gKeyRepeatStartDelay = 40; // Restores the variable to its default value, based on InitKeys()
         ScriptContext_Enable();
         DestroyTask(taskId);
     }
