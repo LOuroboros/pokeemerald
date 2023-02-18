@@ -5091,12 +5091,15 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u16 ability, u8 special, u16 move
                 }
                 break;
             case ABILITY_CUD_CHEW:
-                if (ItemId_GetPocket(GetUsedHeldItem(battler)) == POCKET_BERRIES && gDisableStructs[gActiveBattler].cudChew == TRUE)
                 {
-                    gLastUsedItem = gBattleStruct->usedHeldItems[battler][GetBattlerSide(battler)];
-                    gBattleStruct->usedHeldItems[battler][GetBattlerSide(battler)] = ITEM_NONE;
-                    BattleScriptPushCursorAndCallback(BattleScript_CudChewActivates);
-                    effect++;
+                    u16 usedHeldItem = GetUsedHeldItem(battler);
+                    if (ItemId_GetPocket(usedHeldItem) == POCKET_BERRIES && gDisableStructs[gActiveBattler].cudChew == TRUE)
+                    {
+                        gLastUsedItem = usedHeldItem;
+                        usedHeldItem = ITEM_NONE;
+                        BattleScriptPushCursorAndCallback(BattleScript_CudChewActivates);
+                        effect++;
+                    }
                 }
                 break;
             }
