@@ -21,6 +21,7 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 ### High Priority
 #### That means things that I should do as fast as possible.
 
+* Look into `src/fonts.c` and adjust the width of the shiny star glyph to solve the problem with long species names/nicknames.
 * Finish the dusk time palettes for the Day/Night system and merge it.
   * But before that I should try to merge Merrrp's branch which also includes a dynamic overworld palette system, overworld shadows and following Pokémon.
 * Complete the features and credits list.
@@ -42,7 +43,7 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 * Tweak the metatile behavior of all the chair tiles, not just the ones in the Player's rooms, so the Player can't walk through the back of the chairs anymore.
 * Let the Player get the Red and Blue Orbs by taking Groudon and Kyogre to Mt. Pyre's Summit or something.
 * Put the Arceus Plates in Hoenn, their locations based on ORAS.
-* Put the Mega Stones in Hoenn, their locations also based on ORAS.
+* Put the Mega Stones in Hoenn, [their locations also based on ORAS'](https://www.youtube.com/watch?v=XqG6w_EYYJg&t=143s).
   * The Kingdratite would be located in Route 103 *(North)* or in the empty spot accessible with Dive at Route 124, below an item ball with a Blue Shard.
   * The Flygonite will be located in the desert at Route 110.
   * The Butterfrite will be located in the back of the Pretty Petal Flower Shop.
@@ -194,6 +195,11 @@ I wrote this... I don't know, sometime ago, but I never thought about storing it
 * Buff the encounters at Sky Pillar after the conflict in Sootopolis is solved.
 * When a Gym Leader rematch is ready to happen, make said gym's trainers battle the Player again.
 * Make the Cave of Origin available in the postgame. It'll be the place to rematch Wallace after the league.
+* Alternatively to the Artisan's Cave plan and in relation to Jirachi, I could add an item called "Wish Tag" that would start an event if used in front of the white rock at Mossdeep City, maybe.
+* Make the rival give you an egg of their starter after the 6th rival battle.
+  * Maybe I could make it so Wally received the last starter in-universe, and after beating him he would give you an egg of that one.
+* Draw a text box in battles, similar to the one that is displayed during level ups, to show the EV a Pokémon got in a battle, and a toggle for it in the Options menu.
+* Replace Shelly's overworld sprites with [the ones made by Swizzler121](https://www.spriters-resource.com/custom_edited/pokemoncustoms/sheet/8151/).
 
 ## Misc. Notes
 
