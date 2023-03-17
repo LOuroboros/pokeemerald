@@ -10866,6 +10866,8 @@ bool32 IsBattlerWeatherAffected(u8 battlerId, u32 weatherFlags)
 {
     if (gBattleWeather & weatherFlags && WEATHER_HAS_EFFECT)
     {
+        if (gBattleMoves[gCurrentMove].effect == EFFECT_HYDRO_STEAM)
+            return TRUE;
         // given weather is active -> check if its sun, rain against utility umbrella ( since only 1 weather can be active at once)
         if (gBattleWeather & (B_WEATHER_SUN | B_WEATHER_RAIN) && GetBattlerHoldEffect(battlerId, TRUE) == HOLD_EFFECT_UTILITY_UMBRELLA)
             return FALSE; // utility umbrella blocks sun, rain effects
