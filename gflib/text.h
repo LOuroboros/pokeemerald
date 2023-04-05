@@ -9,6 +9,9 @@
 // loaded at once but not copied to vram yet.
 #define TEXT_SKIP_DRAW 0xFF
 
+#define TEXT_STRING(arg)   \
+(const u8[]) _(arg)        \
+
 enum {
     FONT_SMALL,
     FONT_NORMAL,
