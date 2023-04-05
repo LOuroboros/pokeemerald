@@ -1,3 +1,17 @@
+# About this branch
+
+I made a custom starter selection because I was bored and I haven't done anything with the decomps in a while.
+
+I replaced the Frame option with a selector that lets you pick which generation of Pokémon species you want for your starter.
+
+I used SBird's dynamic multichoice system because the idea was to offer the choice with a good ol' multichoice, but vanilla's system sucks ass.
+
+https://user-images.githubusercontent.com/4485172/230074624-1f9cf2e1-70d8-4ee5-9f64-19a02550e5fb.mp4
+
+I don't expect anyone to use this, and I'm sure not gonna do it myself.
+
+I was just bored, there's nothing else to this.
+
 # Pokémon Emerald
 
 This is a decompilation of Pokémon Emerald.
