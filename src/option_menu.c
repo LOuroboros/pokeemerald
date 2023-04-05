@@ -15,6 +15,9 @@
 #include "window.h"
 #include "gba/m4a_internal.h"
 #include "constants/rgb.h"
+#include "event_data.h"
+#include "sound.h"
+#include "constants/songs.h"
 
 #define tMenuSelection data[0]
 #define tTextSpeed data[1]
@@ -195,12 +198,12 @@ void CB2_InitOptionMenu(void)
         gMain.state++;
         break;
     case 3:
-        LoadBgTiles(1, GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->tiles, 0x120, 0x1A2);
+        LoadBgTiles(1, GetWindowFrameTilesPal(0)->tiles, 0x120, 0x1A2);
         gMain.state++;
         break;
     case 4:
         LoadPalette(sOptionMenuBg_Pal, BG_PLTT_ID(0), sizeof(sOptionMenuBg_Pal));
-        LoadPalette(GetWindowFrameTilesPal(gSaveBlock2Ptr->optionsWindowFrameType)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
+        LoadPalette(GetWindowFrameTilesPal(0)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
         gMain.state++;
         break;
     case 5:
@@ -233,7 +236,10 @@ void CB2_InitOptionMenu(void)
         gTasks[taskId].tBattleStyle = gSaveBlock2Ptr->optionsBattleStyle;
         gTasks[taskId].tSound = gSaveBlock2Ptr->optionsSound;
         gTasks[taskId].tButtonMode = gSaveBlock2Ptr->optionsButtonMode;
-        gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
+        if (!FlagGet(FLAG_UNUSED_0x020))
+            gTasks[taskId].tWindowFrameType = gSaveBlock2Ptr->optionsWindowFrameType;
+        else
+            gTasks[taskId].tWindowFrameType = 1;
 
         TextSpeed_DrawChoices(gTasks[taskId].tTextSpeed);
         BattleScene_DrawChoices(gTasks[taskId].tBattleSceneOff);
@@ -379,7 +385,7 @@ static void HighlightOptionMenuItem(u8 index)
 
 static void DrawOptionMenuChoice(const u8 *text, u8 x, u8 y, u8 style)
 {
-    u8 dst[16];
+    u8 dst[18];
     u16 i;
 
     for (i = 0; *text != EOS && i < ARRAY_COUNT(dst) - 1; i++)
@@ -513,60 +519,67 @@ static void Sound_DrawChoices(u8 selection)
 
 static u8 FrameType_ProcessInput(u8 selection)
 {
-    if (JOY_NEW(DPAD_RIGHT))
+    if (!FlagGet(FLAG_UNUSED_0x020))
     {
-        if (selection < WINDOW_FRAMES_COUNT - 1)
-            selection++;
-        else
-            selection = 0;
+        if (JOY_NEW(DPAD_RIGHT))
+        {
+            if (selection <= 1)
+                selection++;
+            else
+                selection = 0;
 
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
-        sArrowPressed = TRUE;
+            sArrowPressed = TRUE;
+        }
+        if (JOY_NEW(DPAD_LEFT))
+        {
+            if (selection != 0)
+                selection--;
+            else
+                selection = 2;
+
+            sArrowPressed = TRUE;
+        }
+        VarSet(VAR_CUSTOM_STARTER, selection);
     }
-    if (JOY_NEW(DPAD_LEFT))
+    else
     {
-        if (selection != 0)
-            selection--;
-        else
-            selection = WINDOW_FRAMES_COUNT - 1;
-
-        LoadBgTiles(1, GetWindowFrameTilesPal(selection)->tiles, 0x120, 0x1A2);
-        LoadPalette(GetWindowFrameTilesPal(selection)->pal, BG_PLTT_ID(7), PLTT_SIZE_4BPP);
-        sArrowPressed = TRUE;
+        selection = 1;
+        if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+            PlaySE(SE_FAILURE);
     }
     return selection;
 }
 
 static void FrameType_DrawChoices(u8 selection)
 {
-    u8 text[16];
-    u8 n = selection + 1;
-    u16 i;
+    u8 styles[3];
+    s32 widthSlow, widthMid, widthFast, xMid;
 
-    for (i = 0; gText_FrameTypeNumber[i] != EOS && i <= 5; i++)
-        text[i] = gText_FrameTypeNumber[i];
+    styles[0] = 0;
+    styles[1] = 0;
+    styles[2] = 0;
+    styles[selection] = 1;
 
-    // Convert a number to decimal string
-    if (n / 10 != 0)
+    if (!FlagGet(FLAG_UNUSED_0x020))
     {
-        text[i] = n / 10 + CHAR_0;
-        i++;
-        text[i] = n % 10 + CHAR_0;
-        i++;
+        DrawOptionMenuChoice(TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}KANTO"), 104, YPOS_FRAMETYPE, styles[0]);
+
+        widthSlow = GetStringWidth(FONT_NORMAL, TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}KANTO"), 0);
+        widthMid = GetStringWidth(FONT_NORMAL, TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}JOHTO"), 0);
+        widthFast = GetStringWidth(FONT_NORMAL, TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}HOENN"), 0);
+
+        widthMid -= 94;
+        xMid = (widthSlow - widthMid - widthFast) / 2 + 104;
+        DrawOptionMenuChoice(TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}JOHTO"), xMid, YPOS_FRAMETYPE, styles[1]);
+
+        DrawOptionMenuChoice(TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}HOENN"), GetStringRightAlignXOffset(FONT_NORMAL, TEXT_STRING("{COLOR GREEN}{SHADOW LIGHT_GREEN}HOENN"), 198), YPOS_FRAMETYPE, styles[2]);
     }
     else
     {
-        text[i] = n % 10 + CHAR_0;
-        i++;
-        text[i] = CHAR_SPACER;
-        i++;
+        widthMid = GetStringWidth(FONT_NORMAL, TEXT_STRING("{COLOR RED}{SHADOW LIGHT_GRAY}UNAVAILABLE"), 0);
+        xMid = (widthMid / 2) + 86;
+        DrawOptionMenuChoice(TEXT_STRING("{COLOR RED}{SHADOW LIGHT_GRAY}UNAVAILABLE"), xMid, YPOS_FRAMETYPE, styles[1]);
     }
-
-    text[i] = EOS;
-
-    DrawOptionMenuChoice(gText_FrameType, 104, YPOS_FRAMETYPE, 0);
-    DrawOptionMenuChoice(text, 128, YPOS_FRAMETYPE, 1);
 }
 
 static u8 ButtonMode_ProcessInput(u8 selection)
