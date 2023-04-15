@@ -1,3 +1,15 @@
+# About this branch
+
+This is a mirror of [Samu/Xhyzi's Day, Night and Seasons System](https://github.com/Xhyzi/pokeemerald/tree/day-and-night) made in case he ever decides to delete the branch.
+
+It's an implementation directly based off Prime-dialga's DNS tool for binary hacking that implements this system in ROMs of Pokémon FireRed.
+
+I'm storing it here for archiving purposes.
+
+The implementation is not hardware efficient in the slightest and its author doesn't intend to update it anymore either.
+
+However, it is easy to merge and gets the job done for newbies, so I think it's work preserving.
+
 # Pokémon Emerald
 
 [![Build Status][travis-badge]][travis]
