@@ -1,6 +1,12 @@
 #ifndef GUARD_BATTLE_UTIL_H
 #define GUARD_BATTLE_UTIL_H
 
+// defines for the sTypeEffectiveness multipliers
+#define TYPE_MUL_NORMAL             0
+#define TYPE_MUL_NO_EFFECT          1
+#define TYPE_MUL_NOT_EFFECTIVE      2
+#define TYPE_MUL_SUPER_EFFECTIVE    3
+
 #define MOVE_LIMITATION_ZEROMOVE                (1 << 0)
 #define MOVE_LIMITATION_PP                      (1 << 1)
 #define MOVE_LIMITATION_DISABLED                (1 << 2)

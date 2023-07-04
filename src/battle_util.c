@@ -62,7 +62,6 @@ static bool32 IsUnnerveAbilityOnOpposingSide(u8 battlerId);
 static u8 GetFlingPowerFromItemId(u16 itemId);
 static void SetRandomMultiHitCounter();
 static u32 GetBattlerItemHoldEffectParam(u8 battlerId, u16 item);
-static u16 GetInverseTypeMultiplier(u16 multiplier);
 static u16 GetSupremeOverlordModifier(u8 battlerId);
 static bool8 CanBeInfinitelyConfused(u8 battlerId);
 
@@ -1122,41 +1121,196 @@ static const u16 sPercentToModifier[] =
     UQ_4_12(1.00), // 100
 };
 
-#define X UQ_4_12
-
+// Every matchup not specified defaults to TYPE_MUL_NORMAL, in other words, neutral or x1 damage.
+// For more information, see the "GetTypeModifier" function.
 static const u16 sTypeEffectivenessTable[NUMBER_OF_MON_TYPES][NUMBER_OF_MON_TYPES] =
 {
-//   normal  fight   flying  poison  ground  rock    bug     ghost   steel   mystery fire    water   grass  electric psychic ice     dragon  dark    fairy
-    {X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(0.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0)}, // normal
-    {X(2.0), X(1.0), X(0.5), X(0.5), X(1.0), X(2.0), X(0.5), X(0.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(2.0), X(1.0), X(2.0), X(0.5)}, // fight
-    {X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(0.5), X(2.0), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(2.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0)}, // flying
-    {X(1.0), X(1.0), X(1.0), X(0.5), X(0.5), X(0.5), X(1.0), X(0.5), X(0.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0)}, // poison
-    {X(1.0), X(1.0), X(0.0), X(2.0), X(1.0), X(2.0), X(0.5), X(1.0), X(2.0), X(1.0), X(2.0), X(1.0), X(0.5), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0)}, // ground
-    {X(1.0), X(0.5), X(2.0), X(1.0), X(0.5), X(1.0), X(2.0), X(1.0), X(0.5), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0)}, // rock
-    {X(1.0), X(0.5), X(0.5), X(0.5), X(1.0), X(1.0), X(1.0), X(0.5), X(0.5), X(1.0), X(0.5), X(1.0), X(2.0), X(1.0), X(2.0), X(1.0), X(1.0), X(2.0), X(0.5)}, // bug
+    [TYPE_NORMAL] =
+    {
+        [TYPE_ROCK]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GHOST]    = TYPE_MUL_NO_EFFECT,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_FIGHTING] = 
+    {
+        [TYPE_NORMAL]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FLYING]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_POISON]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ROCK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_BUG]      = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GHOST]    = TYPE_MUL_NO_EFFECT,
+        [TYPE_STEEL]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_PSYCHIC]  = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ICE]      = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_DARK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FAIRY]    = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_FLYING] = 
+    {
+        [TYPE_FIGHTING] = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ROCK]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_BUG]      = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ELECTRIC] = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_POISON] = 
+    {
+        [TYPE_POISON]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GROUND]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ROCK]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GHOST]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NO_EFFECT,
+        [TYPE_GRASS]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FAIRY]    = TYPE_MUL_SUPER_EFFECTIVE,
+    },
+    [TYPE_GROUND] = 
+    {
+        [TYPE_FLYING]   = TYPE_MUL_NO_EFFECT,
+        [TYPE_POISON]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ROCK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_BUG]      = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ELECTRIC] = TYPE_MUL_SUPER_EFFECTIVE,
+    },
+    [TYPE_ROCK] = 
+    {
+        [TYPE_FIGHTING] = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FLYING]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_GROUND]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_BUG]      = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ICE]      = TYPE_MUL_SUPER_EFFECTIVE,
+    },
+    [TYPE_BUG] = 
+    {
+        [TYPE_FIGHTING] = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FLYING]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_POISON]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GHOST]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_PSYCHIC]  = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_DARK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FAIRY]    = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_GHOST] = 
+    {
+        [TYPE_NORMAL]   = TYPE_MUL_NO_EFFECT,
+        [TYPE_GHOST]    = TYPE_MUL_SUPER_EFFECTIVE,
     #if B_STEEL_RESISTANCES >= GEN_6
-    {X(0.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(0.5), X(1.0)}, // ghost
     #else
-    {X(0.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(0.5), X(1.0)}, // ghost
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
     #endif
-    {X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(0.5), X(1.0), X(0.5), X(0.5), X(1.0), X(0.5), X(1.0), X(2.0), X(1.0), X(1.0), X(2.0)}, // steel
-    {X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0)}, // mystery
-    {X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(2.0), X(1.0), X(2.0), X(1.0), X(0.5), X(0.5), X(2.0), X(1.0), X(1.0), X(2.0), X(0.5), X(1.0), X(1.0)}, // fire
-    {X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(0.5), X(0.5), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0)}, // water
-    {X(1.0), X(1.0), X(0.5), X(0.5), X(2.0), X(2.0), X(0.5), X(1.0), X(0.5), X(1.0), X(0.5), X(2.0), X(0.5), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0)}, // grass
-    {X(1.0), X(1.0), X(2.0), X(1.0), X(0.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(0.5), X(0.5), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0)}, // electric
-    {X(1.0), X(2.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0), X(0.0), X(1.0)}, // psychic
-    {X(1.0), X(1.0), X(2.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(0.5), X(0.5), X(2.0), X(1.0), X(1.0), X(0.5), X(2.0), X(1.0), X(1.0)}, // ice
-    {X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(0.0)}, // dragon
+        [TYPE_PSYCHIC]  = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_DARK]     = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_STEEL] = 
+    {
+        [TYPE_ROCK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_WATER]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ELECTRIC] = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ICE]      = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FAIRY]    = TYPE_MUL_SUPER_EFFECTIVE,
+    },
+    [TYPE_MYSTERY] = 
+    {
+        // The Mystery Type is neutral against all types.
+    },
+    [TYPE_FIRE] = 
+    {
+        [TYPE_ROCK]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_BUG]      = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_WATER]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ICE]      = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_WATER] = 
+    {
+        [TYPE_GROUND]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ROCK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_WATER]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_GRASS] = 
+    {
+        [TYPE_FLYING]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_POISON]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GROUND]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ROCK]     = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_BUG]      = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_WATER]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_ELECTRIC] = 
+    {
+        [TYPE_FLYING]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_GROUND]   = TYPE_MUL_NO_EFFECT,
+        [TYPE_WATER]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_ELECTRIC] = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_PSYCHIC] = 
+    {
+        [TYPE_FIGHTING] = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_POISON]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_PSYCHIC]  = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DARK]     = TYPE_MUL_NO_EFFECT,
+    },
+    [TYPE_ICE] = 
+    {
+        [TYPE_FLYING]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_GROUND]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_WATER]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GRASS]    = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_ICE]      = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_SUPER_EFFECTIVE,
+    },
+    [TYPE_DRAGON] = 
+    {
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_FAIRY]    = TYPE_MUL_NO_EFFECT,
+    },
+    [TYPE_DARK] = 
+    {
+        [TYPE_FIGHTING] = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_GHOST]    = TYPE_MUL_SUPER_EFFECTIVE,
     #if B_STEEL_RESISTANCES >= GEN_6
-    {X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(0.5), X(0.5)}, // dark
-    #else
-    {X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(1.0), X(1.0), X(0.5), X(0.5)}, // dark
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
     #endif
-    {X(1.0), X(2.0), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(0.5), X(1.0), X(0.5), X(1.0), X(1.0), X(1.0), X(1.0), X(1.0), X(2.0), X(2.0), X(1.0)}, // fairy
+        [TYPE_PSYCHIC]  = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_DARK]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FAIRY]    = TYPE_MUL_NOT_EFFECTIVE,
+    },
+    [TYPE_FAIRY] = 
+    {
+        [TYPE_FIGHTING] = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_POISON]   = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_STEEL]    = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_FIRE]     = TYPE_MUL_NOT_EFFECTIVE,
+        [TYPE_DRAGON]   = TYPE_MUL_SUPER_EFFECTIVE,
+        [TYPE_DARK]     = TYPE_MUL_SUPER_EFFECTIVE,
+    },
 };
-
-#undef X
 
 // code
 u8 GetBattlerForBattleScript(u8 caseId)
@@ -9842,28 +9996,37 @@ u16 CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilit
     return modifier;
 }
 
-static u16 GetInverseTypeMultiplier(u16 multiplier)
-{
-    switch (multiplier)
-    {
-    case UQ_4_12(0.0):
-    case UQ_4_12(0.5):
-        return UQ_4_12(2.0);
-    case UQ_4_12(2.0):
-        return UQ_4_12(0.5);
-    case UQ_4_12(1.0):
-    default:
-        return UQ_4_12(1.0);
-    }
-}
-
 u16 GetTypeModifier(u8 atkType, u8 defType)
 {
 #if B_FLAG_INVERSE_BATTLE != 0
     if (FlagGet(B_FLAG_INVERSE_BATTLE))
-        return GetInverseTypeMultiplier(sTypeEffectivenessTable[atkType][defType]);
+    {
+        switch (sTypeEffectivenessTable[atkType][defType])
+        {
+        case TYPE_MUL_NO_EFFECT:
+        case TYPE_MUL_NOT_EFFECTIVE:
+            return UQ_4_12(2.0);
+        case TYPE_MUL_SUPER_EFFECTIVE:
+            return UQ_4_12(0.5);
+        case TYPE_MUL_NORMAL:
+        default:
+            return UQ_4_12(1.0);
+        }
+    }
 #endif
-    return sTypeEffectivenessTable[atkType][defType];
+
+    switch (sTypeEffectivenessTable[atkType][defType])
+    {
+    case TYPE_MUL_NO_EFFECT:
+        return UQ_4_12(0.0);
+    case TYPE_MUL_NOT_EFFECTIVE:
+        return UQ_4_12(0.5);
+    case TYPE_MUL_SUPER_EFFECTIVE:
+        return UQ_4_12(2.0);
+    case TYPE_MUL_NORMAL:
+    default:
+        return UQ_4_12(1.0);
+    }
 }
 
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp)
