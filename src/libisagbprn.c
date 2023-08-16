@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include "gba/gba.h"
 #include "config.h"
+#include "malloc.h"
+#include "mini_printf.h"
+#include "printf.h"
 
 #define AGB_PRINT_FLUSH_ADDR 0x9FE209D
-#define AGB_PRINT_STRUCT_ADDR 0x9FE20F8
+#define AGB_PRINT_STRUCT_ADDR (char*) 0x9FE20F8
 #define AGB_PRINT_PROTECT_ADDR 0x9FE2FFE
 #define WSCNT_DATA (WAITCNT_PHI_OUT_16MHZ | WAITCNT_WS0_S_2 | WAITCNT_WS0_N_4)
 
