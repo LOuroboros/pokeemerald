@@ -73,12 +73,10 @@ void DeserializeTmHmItemSlots(void)
 
     for (i = 0; i < BAG_TMHM_COUNT; ++i)
     {
+        u8 bit = i % 8;
+
         gTmHmItemSlots[i].itemId = 0;
         SetBagItemQuantity(&(gTmHmItemSlots[i].quantity), 0);
-    }
-    for (i = 0; i < TMHM_COUNT; ++i)
-    {
-        u8 bit = i % 8;
         if (gSaveBlock1Ptr->bagPocket_TMHMOwnedFlags[i / 8] & (1<<bit))
             AddBagItem(i + ITEM_TM01, 1);
     }
@@ -293,14 +291,14 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
         switch(pocket)
         {
-            case BERRIES_POCKET:
-                slotCapacity = MAX_BERRY_CAPACITY;
+        case BERRIES_POCKET:
+            slotCapacity = MAX_BERRY_CAPACITY;
             break;
-            case TMHM_POCKET:
-                slotCapacity = 1;
+        case TMHM_POCKET:
+            slotCapacity = 1;
             break;
-            default:
-                slotCapacity = MAX_BAG_ITEM_CAPACITY;
+        default:
+            slotCapacity = MAX_BAG_ITEM_CAPACITY;
             break;
         }
 

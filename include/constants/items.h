@@ -440,8 +440,6 @@
 #define ITEM_HM07_WATERFALL ITEM_HM07
 #define ITEM_HM08_DIVE ITEM_HM08
 
-#define TMHM_COUNT 58
-
 // Unknown
 #define ITEM_15B 347
 #define ITEM_15C 348
