@@ -1048,7 +1048,10 @@ bool8 ScrCmd_waitmovementat(struct ScriptContext *ctx)
 bool8 ScrCmd_removeobject(struct ScriptContext *ctx)
 {
     u16 localId = VarGet(ScriptReadHalfword(ctx));
+    bool8 clearVisibilityFlag = ScriptReadByte(ctx);
 
+    if (clearVisibilityFlag && localId != OBJECT_EVENTS_COUNT)
+        FlagSet(GetObjectEventFlagIdByObjectEventId(localId));
     RemoveObjectEventByLocalIdAndMap(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
     return FALSE;
 }
@@ -1058,7 +1061,10 @@ bool8 ScrCmd_removeobjectat(struct ScriptContext *ctx)
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
+    bool8 clearVisibilityFlag = ScriptReadByte(ctx);
 
+    if (clearVisibilityFlag && objectId != OBJECT_EVENTS_COUNT)
+        FlagSet(GetObjectEventFlagIdByObjectEventId(objectId));
     RemoveObjectEventByLocalIdAndMap(objectId, mapNum, mapGroup);
     return FALSE;
 }
@@ -1066,8 +1072,18 @@ bool8 ScrCmd_removeobjectat(struct ScriptContext *ctx)
 bool8 ScrCmd_addobject(struct ScriptContext *ctx)
 {
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
+    bool8 clearVisibilityFlag = ScriptReadByte(ctx);
 
-    TrySpawnObjectEvent(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    if (clearVisibilityFlag)
+    {
+        u16 objectEventId = TrySpawnObjectEvent(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        if (objectEventId != OBJECT_EVENTS_COUNT)
+            FlagClear(GetObjectEventFlagIdByObjectEventId(objectEventId));
+    }
+    else
+    {
+        TrySpawnObjectEvent(objectId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    }
     return FALSE;
 }
 
@@ -1076,8 +1092,18 @@ bool8 ScrCmd_addobjectat(struct ScriptContext *ctx)
     u16 objectId = VarGet(ScriptReadHalfword(ctx));
     u8 mapGroup = ScriptReadByte(ctx);
     u8 mapNum = ScriptReadByte(ctx);
+    bool8 clearVisibilityFlag = ScriptReadByte(ctx);
 
-    TrySpawnObjectEvent(objectId, mapNum, mapGroup);
+    if (clearVisibilityFlag)
+    {
+        u16 objectEventId = TrySpawnObjectEvent(objectId, mapNum, mapGroup);;
+        if (objectEventId != OBJECT_EVENTS_COUNT)
+            FlagClear(GetObjectEventFlagIdByObjectEventId(objectEventId));
+    }
+    else
+    {
+        TrySpawnObjectEvent(objectId, mapNum, mapGroup);
+    }
     return FALSE;
 }
 

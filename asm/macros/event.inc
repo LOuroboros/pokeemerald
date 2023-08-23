@@ -621,27 +621,31 @@
 	@ Attempts to despawn the specified (localId) object on the specified map.
 	@ It also sets the object's visibility flag if it has one.
 	@ If no map is specified, then the current map is used.
-	.macro removeobject localId:req, map
+	.macro removeobject localId:req, map, clearVisibilityFlag=TRUE
 		.ifb \map
 			.byte 0x53
 			.2byte \localId
+			.byte \clearVisibilityFlag
 		.else
 			.byte 0x54
 			.2byte \localId
 			map \map
+			.byte \clearVisibilityFlag
 		.endif
 	.endm
 
 	@ Attempts to spawn the specified (localId) object the specified map.
 	@ Note that unlike removeobject this does not modify the object's flag.
 	@ If no map is specified, then the current map is used.
-	.macro addobject localId:req, map
+	.macro addobject localId:req, map, clearVisibilityFlag=FALSE
 		.ifb \map
 			.byte 0x55
 			.2byte \localId
+			.byte \clearVisibilityFlag
 		.else
 			.byte 0x56
 			.2byte \localId
+			.byte \clearVisibilityFlag
 			map \map
 		.endif
 	.endm
