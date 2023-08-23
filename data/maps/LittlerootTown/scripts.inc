@@ -1,4 +1,5 @@
 .set LOCALID_TWIN, 1
+.set LOCALID_FAT_MAN, 2
 .set LOCALID_MOM, 4
 .set LOCALID_RIVAL, 7
 .set LOCALID_BIRCH, 8
@@ -247,8 +248,24 @@ LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale::
 	end
 
 LittlerootTown_EventScript_FatMan::
-	msgbox LittlerootTown_Text_CanUsePCToStoreItems, MSGBOX_NPC
+	removeobject LOCALID_FAT_MAN, TRUE
+	call_if_set FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN, LittlerootTown_EventScript_FatMan_Set
+	call_if_unset FLAG_HIDE_LITTLEROOT_TOWN_FAT_MAN, LittlerootTown_EventScript_FatMan_Unset
+	release
 	end
+
+LittlerootTown_EventScript_FatMan_Set:
+	msgbox LittlerootTown_Text_CanUsePCToStoreItems1, MSGBOX_NPC
+	return
+
+LittlerootTown_EventScript_FatMan_Unset:
+	msgbox LittlerootTown_Text_CanUsePCToStoreItems2, MSGBOX_NPC
+	return
+
+LittlerootTown_Text_CanUsePCToStoreItems1:
+	.string "The Fat Man's flag is set.$"
+LittlerootTown_Text_CanUsePCToStoreItems2:
+	.string "The Fat Man's flag is not set.$"
 
 LittlerootTown_EventScript_Boy::
 	msgbox LittlerootTown_Text_BirchSpendsDaysInLab, MSGBOX_NPC
@@ -956,11 +973,6 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "…But please be careful.\n"
 	.string "If anything happens, you can come home.\p"
 	.string "Go on, go get them, honey!$"
-
-LittlerootTown_Text_CanUsePCToStoreItems:
-	.string "If you use a PC, you can store items\n"
-	.string "and POKéMON.\p"
-	.string "The power of science is staggering!$"
 
 LittlerootTown_Text_BirchSpendsDaysInLab:
 	.string "PROF. BIRCH spends days in his LAB\n"
