@@ -950,7 +950,7 @@ struct SaveBlock1
     /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
     /*0x690*/ u8 bagPocket_TMHMOwnedFlags[NUM_TMHM_BYTES]; // Number of TMs & HMs that can be owned by the player, determined
                                                            // by the BAG_TMHM_COUNT constant at "include/constants/global.h".
-              u8 bagPocket_TMHMPadding[248]; // Do not alter the save layout.
+              u8 bagPocket_TMHMPadding[256 - NUM_TMHM_BYTES]; // Do not alter the save layout.
     /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
