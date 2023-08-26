@@ -31,6 +31,7 @@ struct BagPocket
 
 extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
+extern struct ItemSlot gTmHmItemSlots[BAG_TMHM_COUNT];
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void ApplyNewEncryptionKeyToBagItems_(u32 newKey);
@@ -75,5 +76,6 @@ u8 ItemId_GetSecondaryId(u16 itemId);
 u8 ItemId_GetFlingPower(u16 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
+void DeserializeTmHmItemSlots(void);
 
 #endif // GUARD_ITEM_H
