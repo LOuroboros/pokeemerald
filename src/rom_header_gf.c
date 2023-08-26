@@ -82,7 +82,7 @@ struct GFRomHeader
     u8 bagCountItems;
     u8 bagCountKeyItems;
     u8 bagCountPokeballs;
-    u8 bagCountTMHMs;
+    u16 bagCountTMHMs;
     u8 bagCountBerries;
     u8 pcItemsCount;
     u32 pcItemsOffset;
