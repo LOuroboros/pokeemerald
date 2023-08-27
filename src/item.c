@@ -91,7 +91,7 @@ void SetBagItemsPointers(void)
     gBagPockets[BALLS_POCKET].capacity = BAG_POKEBALLS_COUNT;
 
     gBagPockets[TMHM_POCKET].itemSlots = &gTmHmItemSlots[0];
-    gBagPockets[TMHM_POCKET].capacity = BAG_TMHM_COUNT;
+    gBagPockets[TMHM_POCKET].capacity = 1;
 
     gBagPockets[BERRIES_POCKET].itemSlots = gSaveBlock1Ptr->bagPocket_Berries;
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
@@ -137,7 +137,7 @@ void GetBerryCountString(u8 *dst, const u8 *berryName, u32 quantity)
 
 bool8 IsBagPocketNonEmpty(u8 pocket)
 {
-    u16 i;
+    u8 i;
 
     for (i = 0; i < gBagPockets[pocket - 1].capacity; i++)
     {
@@ -149,7 +149,7 @@ bool8 IsBagPocketNonEmpty(u8 pocket)
 
 bool8 CheckBagHasItem(u16 itemId, u16 count)
 {
-    u16 i;
+    u8 i;
     u8 pocket;
 
     if (ItemId_GetPocket(itemId) == 0)
@@ -194,7 +194,7 @@ bool8 HasAtLeastOneBerry(void)
 
 bool8 CheckBagHasSpace(u16 itemId, u16 count)
 {
-    u16 i;
+    u8 i;
     u8 pocket;
     u16 slotCapacity;
     u16 ownedCount;
@@ -264,7 +264,7 @@ static void SetTmHmOwned(u16 itemId)
 
 bool8 AddBagItem(u16 itemId, u16 count)
 {
-    u16 i;
+    u8 i;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE)
         return FALSE;
@@ -381,7 +381,7 @@ bool8 AddBagItem(u16 itemId, u16 count)
 
 bool8 RemoveBagItem(u16 itemId, u16 count)
 {
-    u16 i;
+    u8 i;
     u16 totalQuantity = 0;
 
     if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
