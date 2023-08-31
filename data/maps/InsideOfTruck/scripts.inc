@@ -48,6 +48,7 @@ InsideOfTruck_EventScript_SetIntroFlagsFemale::
 	end
 
 InsideOfTruck_EventScript_MovingBox::
+	speakername InsideOfTruck_Text_Kamisama
 	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_DEFAULT
 	dynmultichoice 3, 4, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, InsideOfTruck_Text_Opcion1, InsideOfTruck_Text_Opcion2, InsideOfTruck_Text_Opcion3, InsideOfTruck_Text_Opcion4
 	switch VAR_RESULT
@@ -59,25 +60,31 @@ InsideOfTruck_EventScript_MovingBox::
 	end
 
 InsideOfTruck_EventScript_MovingBox_Opcion1:
+	speakername InsideOfTruck_Text_Kamisama
 	msgbox InsideOfTruck_Text_Opcion1Aftermath, MSGBOX_DEFAULT
 	release
 	end
 
 InsideOfTruck_EventScript_MovingBox_Opcion2:
+	speakername InsideOfTruck_Text_Kamisama
 	msgbox InsideOfTruck_Text_Opcion2Aftermath, MSGBOX_DEFAULT
 	release
 	end
 
 InsideOfTruck_EventScript_MovingBox_Opcion3:
+	speakername InsideOfTruck_Text_Kamisama
 	msgbox InsideOfTruck_Text_Opcion3Aftermath, MSGBOX_DEFAULT
 	release
 	end
 
 InsideOfTruck_EventScript_MovingBox_Opcion4:
+	speakername InsideOfTruck_Text_Kamisama
 	msgbox InsideOfTruck_Text_Opcion4Aftermath, MSGBOX_DEFAULT
 	release
 	end
 
+InsideOfTruck_Text_Kamisama:
+	.string "Kami-sama$"
 InsideOfTruck_Text_BoxPrintedWithMonLogo:
 	.string "¡Que se abra el multichoice...!$"
 InsideOfTruck_Text_Opcion1:
