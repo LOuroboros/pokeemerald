@@ -71,6 +71,7 @@ void SetWaldaWallpaperColors(u16 color1, u16 color2);
 u8 *GetWaldaPhrasePtr(void);
 void SetWaldaPhrase(const u8 *src);
 bool32 IsWaldaPhraseEmpty(void);
+void Cb2_ReturnToPSS(void);
 
 void EnterPokeStorage(u8 boxOption);
 
