@@ -48,11 +48,51 @@ InsideOfTruck_EventScript_SetIntroFlagsFemale::
 	end
 
 InsideOfTruck_EventScript_MovingBox::
-	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_SIGN
+	msgbox InsideOfTruck_Text_BoxPrintedWithMonLogo, MSGBOX_DEFAULT
+	dynmultichoice 3, 4, TRUE, 6, 0, DYN_MULTICHOICE_CB_NONE, InsideOfTruck_Text_Opcion1, InsideOfTruck_Text_Opcion2, InsideOfTruck_Text_Opcion3, InsideOfTruck_Text_Opcion4
+	switch VAR_RESULT
+	case 0, InsideOfTruck_EventScript_MovingBox_Opcion1
+	case 1, InsideOfTruck_EventScript_MovingBox_Opcion2
+	case 2, InsideOfTruck_EventScript_MovingBox_Opcion3
+	case 3, InsideOfTruck_EventScript_MovingBox_Opcion4
+	release
+	end
+
+InsideOfTruck_EventScript_MovingBox_Opcion1:
+	msgbox InsideOfTruck_Text_Opcion1Aftermath, MSGBOX_DEFAULT
+	release
+	end
+
+InsideOfTruck_EventScript_MovingBox_Opcion2:
+	msgbox InsideOfTruck_Text_Opcion2Aftermath, MSGBOX_DEFAULT
+	release
+	end
+
+InsideOfTruck_EventScript_MovingBox_Opcion3:
+	msgbox InsideOfTruck_Text_Opcion3Aftermath, MSGBOX_DEFAULT
+	release
+	end
+
+InsideOfTruck_EventScript_MovingBox_Opcion4:
+	msgbox InsideOfTruck_Text_Opcion4Aftermath, MSGBOX_DEFAULT
+	release
 	end
 
 InsideOfTruck_Text_BoxPrintedWithMonLogo:
-	.string "The box is printed with a POKéMON logo.\p"
-	.string "It's a POKéMON brand moving and\n"
-	.string "delivery service.$"
-
+	.string "¡Que se abra el multichoice...!$"
+InsideOfTruck_Text_Opcion1:
+	.string "Opción 1$"
+InsideOfTruck_Text_Opcion2:
+	.string "Opción 2$"
+InsideOfTruck_Text_Opcion3:
+	.string "Opción 3$"
+InsideOfTruck_Text_Opcion4:
+	.string "Opción 4$"
+InsideOfTruck_Text_Opcion1Aftermath:
+	.string "Esta es el resultado de\nla opción 1.$"
+InsideOfTruck_Text_Opcion2Aftermath:
+	.string "Esta es el resultado de\nla opción 2.$"
+InsideOfTruck_Text_Opcion3Aftermath:
+	.string "Esta es el resultado de\nla opción 3.$"
+InsideOfTruck_Text_Opcion4Aftermath:
+	.string "Esta es el resultado de\nla opción 4.$"
