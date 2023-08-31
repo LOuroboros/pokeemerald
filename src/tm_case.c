@@ -78,7 +78,7 @@ static void CreateTMCaseListMenuBuffers(void);
 static void InitTMCaseListMenuItems(void);
 static void GetTMNumberAndMoveString(u8 * dest, u16 itemId);
 static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *list);
-static void TMCase_ItemPrintFunc(u8 windowId, s32 itemId, u8 y);
+static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y);
 static void TMCase_MoveCursor_UpdatePrintedDescription(s32 itemIndex);
 static void PrintListMenuCursorAt_WithColorIdx(u8 a0, u8 a1);
 static void CreateTMCaseScrollIndicatorArrowPair_Main(void);
@@ -187,7 +187,7 @@ static const u8 sTMCaseTextColors[][3] = {
     {0, 2, 3},
     {0, 3, 6},
     {0, 14, 10},
-    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GREY, TEXT_COLOR_LIGHT_GREY},
+    {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY},
 };
 
 static const struct WindowTemplate sWindowTemplates[] = {
@@ -303,11 +303,11 @@ static void CB2_SetUpTMCaseUI_Blocking(void)
 {
     while (1)
     {
-        if (MenuHelpers_CallLinkSomething() == TRUE)
+        if (MenuHelpers_ShouldWaitForLinkRecv() == TRUE)
             break;
         if (DoSetUpTMCaseUI() == TRUE)
             break;
-        if (MenuHelpers_LinkSomething() == TRUE)
+        if (MenuHelpers_IsLinkActive() == TRUE)
             break;
     }
 }
@@ -557,7 +557,7 @@ static void TMCase_MoveCursorFunc(s32 itemIndex, bool8 onInit, struct ListMenu *
     TMCase_MoveCursor_UpdatePrintedTMInfo(itemId);
 }
 
-static void TMCase_ItemPrintFunc(u8 windowId, s32 itemId, u8 y)
+static void TMCase_ItemPrintFunc(u8 windowId, u32 itemId, u8 y)
 {
     if (itemId != -2)
     {
@@ -731,7 +731,7 @@ static void Task_TMCaseMain(u8 taskId)
 
     if (!gPaletteFade.active)
     {
-        if (MenuHelpers_CallLinkSomething() != TRUE)
+        if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
         {
             input = ListMenu_ProcessInput(data[0]);
             ListMenuGetScrollAndRow(data[0], &sTMCaseStaticResources.scrollOffset, &sTMCaseStaticResources.selectedRow);
@@ -779,7 +779,7 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
 {
     u8 * strbuf;
     // contex menu
-    if (!MenuHelpers_LinkSomething() && InUnionRoom() != TRUE) // menu code
+    if (!MenuHelpers_IsLinkActive() && InUnionRoom() != TRUE) // menu code
     {
         AddTMContextMenu(&sTMCaseDynamicResources->contextMenuWindowId, 1);
         sTMCaseDynamicResources->menuActionIndices = sMenuActionIndices_Field;
@@ -792,9 +792,9 @@ static void Task_SelectTMAction_FromFieldBag(u8 taskId)
         sTMCaseDynamicResources->numMenuActions = NELEMS(sMenuActionIndices_UnionRoom);
     }
     // context menu text
-    AddItemMenuActionTextPrinters(sTMCaseDynamicResources->contextMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 0, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, sMenuActions_UseGiveExit, sTMCaseDynamicResources->menuActionIndices);
+    PrintMenuActionTexts(sTMCaseDynamicResources->contextMenuWindowId, 2, GetMenuCursorDimensionByFont(2, 0), 2, 0, GetFontAttribute(2, 1) + 2, sTMCaseDynamicResources->numMenuActions, sMenuActions_UseGiveExit, sTMCaseDynamicResources->menuActionIndices);
     // context menu cursor
-    InitMenuInUpperLeftCornerPlaySoundWhenAPressed(sTMCaseDynamicResources->contextMenuWindowId, sTMCaseDynamicResources->numMenuActions, 0);
+    InitMenuInUpperLeftCornerNormal(sTMCaseDynamicResources->contextMenuWindowId, sTMCaseDynamicResources->numMenuActions, 0);
     
     //"Move xyz is selected" text and window (no shoing the right palette)
     TMCase_SetWindowBorder3(2); // context window border style
@@ -820,7 +820,7 @@ static void Task_TMContextMenu_HandleInput(u8 taskId)
 {
     s8 input;
 
-    if (MenuHelpers_CallLinkSomething() != TRUE)
+    if (MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         input = Menu_ProcessInputNoWrap();
         switch (input)
@@ -966,7 +966,7 @@ static void Task_SelectTMAction_Type3(u8 taskId)
 
     if (!ItemId_GetImportance(BagGetItemIdByPocketPosition(POCKET_TM_HM, data[1])))
     {
-        sTMCaseDynamicResources->savedCallback = Cb2_ReturnToPSS;
+        sTMCaseDynamicResources->savedCallback = CB2_ReturnToPokeStorage;
         Task_BeginFadeOutFromTMCase(taskId);
     }
     else
@@ -1332,7 +1332,7 @@ static void UpdateTMSpritePosition(struct Sprite * sprite, u8 var)
     {
         x = 0x1B;
         y = 0x36;
-        sprite->pos2.y = 0x14;
+        sprite->y2 = 0x14;
     }
     else
     {
@@ -1343,8 +1343,8 @@ static void UpdateTMSpritePosition(struct Sprite * sprite, u8 var)
         x = 0x29 - (((0xE00 * var) / 58) >> 8);
         y = 0x2E + (((0x800 * var) / 58) >> 8);
     }
-    sprite->pos1.x = x;
-    sprite->pos1.y = y;
+    sprite->x = x;
+    sprite->y = y;
 }
 
 static void InitSelectedTMSpriteData(u8 spriteId, u16 itemId)
@@ -1359,7 +1359,7 @@ static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite)
     switch (sprite->data[1])
     {
     case 0:
-        if (sprite->pos2.y >= 20)
+        if (sprite->y2 >= 20)
         {
             if (sprite->data[0] != ITEM_NONE)
             {
@@ -1374,14 +1374,14 @@ static void SpriteCB_MoveTMSpriteInCase(struct Sprite * sprite)
         }
         else
         {
-            sprite->pos2.y += 10;
+            sprite->y2 += 10;
         }
         break;
     case 1:
-        if (sprite->pos2.y <= 0)
+        if (sprite->y2 <= 0)
             sprite->callback = SpriteCallbackDummy;
         else
-            sprite->pos2.y -= 10;
+            sprite->y2 -= 10;
     }
 }
 

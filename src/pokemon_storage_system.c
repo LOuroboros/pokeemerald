@@ -2025,7 +2025,7 @@ void EnterPokeStorage(u8 boxOption)
     }
 }
 
-void Cb2_ReturnToPSS(void)
+void CB2_ReturnToPokeStorage(void)
 {
     ResetTasks();
     sStorage = Alloc(sizeof(*sStorage));
