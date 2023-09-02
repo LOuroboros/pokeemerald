@@ -74,7 +74,7 @@ struct BagMenu
     const u8* contextMenuItemsPtr;
     u8 contextMenuItemsBuffer[4];
     u8 contextMenuNumItems;
-    u8 numItemStacks[POCKETS_COUNT];
+    u16 numItemStacks[POCKETS_COUNT];
     u8 numShownItems[POCKETS_COUNT];
     s16 graphicsLoadState;
     u8 unused2[14];
