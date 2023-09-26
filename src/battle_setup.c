@@ -809,21 +809,7 @@ static u16 GetSumOfPlayerPartyLevel(u8 numMons)
 
 static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
 {
-    u8 i;
-    u8 sum;
-    u32 count = numMons;
-    const struct TrainerMon *party;
-
-    if (gTrainers[opponentId].partySize < count)
-        count = gTrainers[opponentId].partySize;
-
-    sum = 0;
-
-    party = gTrainers[opponentId].party;
-    for (i = 0; i < count; i++)
-        sum += party[i].lvl;
-
-    return sum;
+    return 100;
 }
 
 u8 GetWildBattleTransition(void)

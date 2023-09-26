@@ -3047,7 +3047,7 @@ static void FillPartnerParty(u16 trainerId)
         for (i = 0; i < 3; i++)
             ZeroMonData(&gPlayerParty[i + 3]);
 
-        for (i = 0; i < 3 && i < gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].partySize; i++)
+        for (i = 0; i < 3 && i < 5; i++)
         {
             const struct TrainerMon *partyData = gTrainers[trainerId - TRAINER_CUSTOM_PARTNER].party;
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
