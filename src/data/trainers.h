@@ -3826,6 +3826,8 @@ const struct Trainer gTrainers[] = {
         .doubleBattle = FALSE,
         .aiFlags = AI_FLAG_CHECK_BAD_MOVE,
         .party = TRAINER_PARTY(sParty_Calvin1),
+        .partyNormal = TRAINER_PARTY(sParty_Calvin1_Normal),
+        .partyHard = TRAINER_PARTY(sParty_Calvin1_Hard),
     },
 
     [TRAINER_BILLY] =

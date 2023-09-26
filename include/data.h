@@ -58,6 +58,8 @@ struct Trainer
 {
     /*0x00*/ u32 aiFlags;
     /*0x04*/ const struct TrainerMon *party;
+    /*0x??*/ const struct TrainerMon *partyNormal;
+    /*0x??*/ const struct TrainerMon *partyHard;
     /*0x08*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x10*/ u8 trainerClass;
     /*0x11*/ u8 encounterMusic_gender; // last bit is gender

@@ -120,7 +120,7 @@ static void SpriteCB_UnusedBattleInit(struct Sprite *sprite);
 static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
 static void TrySpecialEvolution(void);
 static u32 Crc32B (const u8 *data, u32 size);
-static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i);
+static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i, u8 difficultyLevel);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -1886,10 +1886,33 @@ static u32 Crc32B (const u8 *data, u32 size)
    return ~crc;
 }
 
-static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i)
+static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i, u8 difficultyLevel)
 {
-    const u8 *buffer = (const u8 *) &trainer->party[i];
-    u32 n = sizeof(*trainer->party);
+    const u8 *buffer;
+    u32 n;
+
+    switch (difficultyLevel)
+    {
+    case DIFFICULTY_LEVEL_EASY:
+        buffer = (const u8 *) &trainer->party[i];
+        n = sizeof(*trainer->party);
+        break;
+    case DIFFICULTY_LEVEL_NORMAL:
+        if (trainer->partyNormal != 0)
+        {
+            buffer = (const u8 *) &trainer->partyNormal[i];
+            n = sizeof(*trainer->partyNormal);
+        }
+        break;
+    case DIFFICULTY_LEVEL_HARD:
+        if (trainer->partyHard != 0)
+        {
+            buffer = (const u8 *) &trainer->partyHard[i];
+            n = sizeof(*trainer->partyHard);
+        }
+        break;
+    }
+
     return Crc32B(buffer, n);
 }
 
@@ -1966,10 +1989,26 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
         for (i = 0; i < monsCount; i++)
         {
             s32 ball = -1;
-            u32 personalityHash = GeneratePartyHash(trainer, i);
-            const struct TrainerMon *partyData = trainer->party;
+            u8 difficultyLevel = VarGet(VAR_DIFFICULTY_LEVEL);
+            u32 personalityHash = GeneratePartyHash(trainer, i, difficultyLevel);
+            const struct TrainerMon *partyData;
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
+
+            switch (difficultyLevel)
+            {
+            case DIFFICULTY_LEVEL_EASY:
+                partyData = trainer->party;
+                break;
+            case DIFFICULTY_LEVEL_NORMAL:
+                if (trainer->partyNormal != 0)
+                    partyData = trainer->partyNormal;
+                break;
+            case DIFFICULTY_LEVEL_HARD:
+                if (trainer->partyHard != 0)
+                    partyData = trainer->partyHard;
+                break;
+            }
 
             if (trainer->doubleBattle == TRUE)
                 personalityValue = 0x80;
