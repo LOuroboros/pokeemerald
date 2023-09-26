@@ -1893,10 +1893,6 @@ static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i, u8 difficulty
 
     switch (difficultyLevel)
     {
-    case DIFFICULTY_LEVEL_EASY:
-        buffer = (const u8 *) &trainer->party[i];
-        n = sizeof(*trainer->party);
-        break;
     case DIFFICULTY_LEVEL_NORMAL:
         if (trainer->partyNormal != 0)
         {
@@ -1910,6 +1906,11 @@ static u32 GeneratePartyHash(const struct Trainer *trainer, u32 i, u8 difficulty
             buffer = (const u8 *) &trainer->partyHard[i];
             n = sizeof(*trainer->partyHard);
         }
+        break;
+    case DIFFICULTY_LEVEL_EASY:
+    default:
+        buffer = (const u8 *) &trainer->party[i];
+        n = sizeof(*trainer->party);
         break;
     }
 
@@ -1991,24 +1992,9 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             s32 ball = -1;
             u8 difficultyLevel = VarGet(VAR_DIFFICULTY_LEVEL);
             u32 personalityHash = GeneratePartyHash(trainer, i, difficultyLevel);
-            const struct TrainerMon *partyData;
+            const struct TrainerMon *partyData = GetTrainerNPCDifficultyBasedPartyData(trainer);
             u32 otIdType = OT_ID_RANDOM_NO_SHINY;
             u32 fixedOtId = 0;
-
-            switch (difficultyLevel)
-            {
-            case DIFFICULTY_LEVEL_EASY:
-                partyData = trainer->party;
-                break;
-            case DIFFICULTY_LEVEL_NORMAL:
-                if (trainer->partyNormal != 0)
-                    partyData = trainer->partyNormal;
-                break;
-            case DIFFICULTY_LEVEL_HARD:
-                if (trainer->partyHard != 0)
-                    partyData = trainer->partyHard;
-                break;
-            }
 
             if (trainer->doubleBattle == TRUE)
                 personalityValue = 0x80;
@@ -5786,4 +5772,40 @@ bool32 IsWildMonSmart(void)
 #else
     return FALSE;
 #endif
+}
+
+const struct TrainerMonPartyData *GetTrainerNPCDifficultyBasedPartyData(u16 trainerId)
+{
+    const struct Trainer *trainer = &gTrainers[trainerId];
+
+    switch (VarGet(VAR_DIFFICULTY_LEVEL))
+    {
+    case DIFFICULTY_LEVEL_NORMAL:
+        if (trainer->partyNormal.partyData)
+            return &trainer->partyNormal;
+    case DIFFICULTY_LEVEL_HARD:
+        if (trainer->partyHard.partyData)
+            return &trainer->partyHard;
+    case DIFFICULTY_LEVEL_EASY:
+    default:
+        return &trainer->party;
+    }
+}
+
+const struct TrainerMonPartyData GetTrainerNPCDifficultyBasedPartySize(u16 trainerId)
+{
+    const struct Trainer *trainer = &gTrainers[trainerId];
+
+    switch (VarGet(VAR_DIFFICULTY_LEVEL))
+    {
+    case DIFFICULTY_LEVEL_NORMAL:
+        if (trainer->partyNormal.partyData)
+            return trainer->partyNormal.partySize;
+    case DIFFICULTY_LEVEL_HARD:
+        if (trainer->partyHard.partyData)
+            return trainer->partyHard.partySize
+    case DIFFICULTY_LEVEL_EASY:
+    default:
+        return trainer->party.partySize;
+    }
 }
