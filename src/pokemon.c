@@ -2296,11 +2296,11 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     value = FALSE;
     SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_HP, &value);
-    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_ATTACK, &value);
-    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_DEFENSE, &value);
+    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_ATK, &value);
+    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_DEF, &value);
     SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_SPEED, &value);
-    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_SP_ATTACK, &value);
-    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_SP_DEFENSE, &value);
+    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_SPATK, &value);
+    SetBoxMonData(boxMon, MON_DATA_HYPER_TRAINED_SPDEF, &value);
 }
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
