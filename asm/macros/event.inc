@@ -1980,3 +1980,9 @@
 	specialvar VAR_RESULT, InBattlePyramid
 	goto_if_eq VAR_RESULT, TRUE, \dest
 	.endm
+
+	@ Checks if the Player is currently in the Battle Pike.
+	.macro goto_if_in_battle_pike dest:req
+	specialvar VAR_RESULT, InBattlePike
+	goto_if_eq VAR_RESULT, TRUE, \dest
+	.endm

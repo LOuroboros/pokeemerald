@@ -548,4 +548,5 @@ gSpecials::
 	def_special ShowPyramidFloorWindow
 	def_special RemoveExtraStartMenuWindows
 	def_special Script_StartMenu_OpenRetireSafari
+	def_special InBattlePike
 @ Start menu functions end above:

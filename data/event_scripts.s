@@ -1005,6 +1005,7 @@ Common_EventScript_LegendaryFlewAway::
 EventScript_StartMenu::
 	goto_if_set FLAG_SYS_SAFARI_MODE, EventScript_StartMenu_BuildSafariZoneMenu
 	goto_if_in_battle_pyramid EventScript_StartMenu_BuildBattlePyramidMenu
+	goto_if_in_battle_pike EventScript_StartMenu_BuildBattlePikeMenu
 	call_if_set FLAG_SYS_POKEDEX_GET, EventScript_StartMenu_TogglePokedex
 	call_if_set FLAG_SYS_POKEMON_GET, EventScript_StartMenu_TogglePokemon
 	call_if_set FLAG_SYS_BAG, EventScript_StartMenu_ToggleBag
@@ -1172,6 +1173,7 @@ EventScript_StartMenu_TogglePokemonInBattlePyramid:
 EventScript_StartMenu_ToggleBagInBattlePyramid:
 	dynmultipush StartMenu_Text_Bag, 1
 	return
+EventScript_StartMenu_ToggleTrainerCardInBattlePike:
 EventScript_StartMenu_ToggleTrainerCardInBattlePyramid:
 	dynmultipush StartMenu_Text_TrainerCard, 2
 	return
@@ -1199,6 +1201,23 @@ EventScript_StartMenu_RebuildBattlePyramidMenu:
 
 StartMenu_Text_Rest:
     .string "Rest$"
+
+EventScript_StartMenu_BuildBattlePikeMenu:
+	call_if_set FLAG_SYS_POKEDEX_GET, EventScript_StartMenu_TogglePokedex
+	call_if_set FLAG_SYS_POKEMON_GET, EventScript_StartMenu_TogglePokemon
+	call_if_set FLAG_SYS_TRAINER_CARD, EventScript_StartMenu_ToggleTrainerCardInBattlePike
+	dynmultipush StartMenu_Text_Option, 3
+	dynmultipush StartMenu_Text_Exit, 4
+	special PlayRainStoppingSoundEffect
+	dynmultistack 22, 0, 16, TRUE, 8, FALSE, VAR_START_MENU_CURSOR_POS, 2, DYN_MULTICHOICE_CB_UPDATE_START_MENU_CURSOR_POS
+	switch VAR_RESULT
+	case 0, EventScript_StartMenu_PokedexAccess
+	case 1, EventScript_StartMenu_PokemonAccess
+	case 2, EventScript_StartMenu_TrainerCardAccess
+	case 3, EventScript_StartMenu_OptionAccess
+	case 4, EventScript_StartMenu_ExitAccess
+	case MULTI_B_PRESSED, EventScript_StartMenu_ExitAccess
+	end
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
