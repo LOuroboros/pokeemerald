@@ -503,7 +503,7 @@ static void Task_HandleScrollingMultichoiceInput(u8 taskId)
     {
     case LIST_HEADER:
     case LIST_NOTHING_CHOSEN:
-        gKeyRepeatStartDelay = 1;
+        gKeyRepeatStartDelay = 30;
         if (JOY_REPEAT(DPAD_DOWN))
         {
             if (positionBeforeScroll == list->template.totalItems - 1)
