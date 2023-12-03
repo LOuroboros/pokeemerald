@@ -4273,11 +4273,6 @@ void Script_StartMenu_OpenRetireSafari(void)
     SafariZoneRetirePrompt();
 }
 
-void Script_StartMenu_OpenRetireBattlePyramid(void)
-{
-    // TODO: Remake this in a saner manner, probably within a script, idk.
-}
-
 void ShowSafariBallsWindow(void)
 {
     sSafariBallsWindowId = AddWindow(&sSafariBallsWindowTemplate);

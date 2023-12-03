@@ -1148,8 +1148,8 @@ EventScript_StartMenu_BuildBattlePyramidMenu:
 	call_if_set FLAG_SYS_POKEMON_GET, EventScript_StartMenu_TogglePokemonInBattlePyramid
 	call_if_set FLAG_SYS_BAG, EventScript_StartMenu_ToggleBagInBattlePyramid
 	call_if_set FLAG_SYS_TRAINER_CARD, EventScript_StartMenu_ToggleTrainerCardInBattlePyramid
-	dynmultipush StartMenu_Text_Retire, 3
-	dynmultipush StartMenu_Text_Rest, 4
+	dynmultipush StartMenu_Text_Rest, 3
+	dynmultipush StartMenu_Text_Retire, 4
 	dynmultipush StartMenu_Text_Option, 5
 	dynmultipush StartMenu_Text_Exit, 6
 	special PlayRainStoppingSoundEffect
@@ -1159,8 +1159,8 @@ EventScript_StartMenu_BuildBattlePyramidMenu:
 	case 0, EventScript_StartMenu_PokemonAccess
 	case 1, EventScript_StartMenu_BagAccess
 	case 2, EventScript_StartMenu_TrainerCardAccess
-	case 3, EventScript_StartMenu_RetireBattlePyramidAccess
-	case 4, EventScript_StartMenu_SaveAccess
+	case 3, EventScript_StartMenu_Rest
+	case 4, EventScript_StartMenu_RetireBattlePyramidAccess
 	case 5, EventScript_StartMenu_OptionAccess
 	case 6, EventScript_StartMenu_ExitAccess
 	case MULTI_B_PRESSED, EventScript_StartMenu_ExitAccess
@@ -1176,8 +1176,25 @@ EventScript_StartMenu_ToggleTrainerCardInBattlePyramid:
 	dynmultipush StartMenu_Text_TrainerCard, 2
 	return
 
+EventScript_StartMenu_Rest:
+	special RemoveExtraStartMenuWindows
+	call Common_EventScript_SaveGame
+	goto_if_eq VAR_RESULT, NO, EventScript_StartMenu_BuildBattlePyramidMenu
+	callnative DoSoftReset
+	releaseall
+	end
+
 EventScript_StartMenu_RetireBattlePyramidAccess:
-	special Script_StartMenu_OpenRetireBattlePyramid
+	msgbox gText_BattlePyramidConfirmRetire, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, EventScript_StartMenu_RebuildBattlePyramidMenu
+	closemessage
+	special RemoveExtraStartMenuWindows
+	goto BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	end
+
+EventScript_StartMenu_RebuildBattlePyramidMenu:
+	closemessage
+	goto EventScript_StartMenu_BuildBattlePyramidMenu
 	end
 
 StartMenu_Text_Rest:
