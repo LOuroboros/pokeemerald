@@ -73,6 +73,7 @@
 #include "option_menu.h"
 #include "safari_zone.h"
 #include "battle_pyramid.h"
+#include "battle_pyramid_bag.h"
 
 EWRAM_DATA bool8 gBikeCyclingChallenge = FALSE;
 EWRAM_DATA u8 gBikeCollisions = 0;
@@ -4240,7 +4241,10 @@ void Script_StartMenu_OpenPokemonMenu(void)
 void Script_StartMenu_OpenBagMenu(void)
 {
     CleanupOverworldWindowsAndTilemaps();
-    SetMainCallback2(CB2_BagMenuFromStartMenu); // Display bag menu
+    if (InBattlePyramid())
+        SetMainCallback2(CB2_PyramidBagMenuFromStartMenu);
+    else
+        SetMainCallback2(CB2_BagMenuFromStartMenu); // Display bag menu
 }
 
 void Script_StartMenu_OpenPokenavMenu(void)
