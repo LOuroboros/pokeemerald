@@ -181,9 +181,14 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         return TRUE;
     if (input->pressedStartButton)
     {
+    #ifdef FLAG_SYS_DEXNAV_GET // Fixes an issue with the start menu when the DexNav is used.
+        u8 taskId = FindTaskIdByFunc(Task_DexNavSearch);
+        if (taskId != TASK_NONE)
+            EndDexNavSearchSetupScript(EventScript_StartMenu, taskId);
+        else
+    #endif
+            ScriptContext_SetupScript(EventScript_StartMenu);
         PlaySE(SE_WIN_OPEN);
-        LockPlayerFieldControls();
-        ScriptContext_SetupScript(EventScript_StartMenu);
         return TRUE;
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
