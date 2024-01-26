@@ -4387,12 +4387,12 @@ bool8 GetCaughtMon(void)
     return GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_GET_CAUGHT);
 }
 
-bool8 SetSeenMon(void)
+void SetSeenMon(void)
 {
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_SET_SEEN);
 }
 
-bool8 SetCaughtMon(void)
+void SetCaughtMon(void)
 {
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_SET_SEEN);
     GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_SET_CAUGHT);
