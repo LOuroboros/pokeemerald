@@ -2732,8 +2732,14 @@ static u8 DisplaySelectionWindow(u8 windowType)
 
     for (i = 0; i < sPartyMenuInternal->numActions; i++)
     {
+        const u8 *text;
         u8 fontColorsId = (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES) ? 4 : 3;
-        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, sCursorOptions[sPartyMenuInternal->actions[i]].text);
+        if (sPartyMenuInternal->actions[i] >= MENU_FIELD_MOVES)
+            text = gMovesInfo[sFieldMoves[sPartyMenuInternal->actions[i] - MENU_FIELD_MOVES]].name;
+        else
+            text = sCursorOptions[sPartyMenuInternal->actions[i]].text;
+
+        AddTextPrinterParameterized4(sPartyMenuInternal->windowId[0], FONT_NORMAL, cursorDimension, (i * 16) + 1, letterSpacing, 0, sFontColorTable[fontColorsId], 0, text);
     }
 
     InitMenuInUpperLeftCorner(sPartyMenuInternal->windowId[0], sPartyMenuInternal->numActions, 0, TRUE);
@@ -2939,11 +2945,17 @@ static void Task_HandleSelectionMenuInput(u8 taskId)
         case MENU_B_PRESSED:
             PlaySE(SE_SELECT);
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
-            sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
+            if (sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1] >= MENU_FIELD_MOVES)
+                CursorCb_FieldMove(taskId);
+            else
+                sCursorOptions[sPartyMenuInternal->actions[sPartyMenuInternal->numActions - 1]].func(taskId);
             break;
         default:
             PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[2]);
-            sCursorOptions[sPartyMenuInternal->actions[input]].func(taskId);
+            if (sPartyMenuInternal->actions[input] >= MENU_FIELD_MOVES)
+                CursorCb_FieldMove(taskId);
+            else
+                sCursorOptions[sPartyMenuInternal->actions[input]].func(taskId);
             break;
         }
     }

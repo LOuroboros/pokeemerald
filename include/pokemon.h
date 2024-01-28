@@ -446,10 +446,7 @@ struct SpeciesInfo /*0x8C*/
 
 struct MoveInfo
 {
-    union {
-        u8 moveName[MOVE_NAME_LENGTH + 1];
-        const u8 *longMoveName;
-    } name;
+    const u8 *name;
     const u8 *description;
     u16 effect;
     u8 power;

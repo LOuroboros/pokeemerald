@@ -690,7 +690,7 @@ struct
 {
     const u8 *text;
     TaskFunc func;
-} static const sCursorOptions[] =
+} static const sCursorOptions[MENU_FIELD_MOVES] =
 {
     [MENU_SUMMARY] = {gText_Summary5, CursorCb_Summary},
     [MENU_SWITCH] = {gText_Switch2, CursorCb_Switch},
@@ -719,20 +719,6 @@ struct
     [MENU_CATALOG_MOWER] = {gText_LawnMower, CursorCb_CatalogMower},
     [MENU_CHANGE_FORM] = {gText_ChangeForm, CursorCb_ChangeForm},
     [MENU_CHANGE_ABILITY] = {gText_ChangeAbility, CursorCb_ChangeAbility},
-    [MENU_FIELD_MOVES + FIELD_MOVE_CUT] = {gMovesInfo[MOVE_CUT].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_FLASH] = {gMovesInfo[MOVE_FLASH].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_ROCK_SMASH] = {gMovesInfo[MOVE_ROCK_SMASH].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_STRENGTH] = {gMovesInfo[MOVE_STRENGTH].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SURF] = {gMovesInfo[MOVE_SURF].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_FLY] = {gMovesInfo[MOVE_FLY].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_DIVE] = {gMovesInfo[MOVE_DIVE].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_WATERFALL] = {gMovesInfo[MOVE_WATERFALL].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_TELEPORT] = {gMovesInfo[MOVE_TELEPORT].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_DIG] = {gMovesInfo[MOVE_DIG].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SECRET_POWER] = {gMovesInfo[MOVE_SECRET_POWER].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_MILK_DRINK] = {gMovesInfo[MOVE_MILK_DRINK].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gMovesInfo[MOVE_SOFT_BOILED].name.moveName, CursorCb_FieldMove},
-    [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMovesInfo[MOVE_SWEET_SCENT].name.moveName, CursorCb_FieldMove},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
