@@ -1,3 +1,15 @@
+# About this branch
+
+This is a recreation of the game's start menu using [SBird](https://github.com/SBird1337)'s dynamic multichoice system.
+
+The primary goal was to get a start menu that is easy to update and that has scrolling capabilities.
+
+Known Issues:
+
+- [ ] There's a flickering issue with the start menu when you close the bag.
+
+ - In SBird's words, this is caused by the call to `LoadMessageBoxAndBorderGfx` inside `DrawMultichoiceMenuDynamic` due to how it updates the PLTT backbuffer.
+
 # Pokémon Emerald
 
 This is a decompilation of Pokémon Emerald.
