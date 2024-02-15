@@ -5519,6 +5519,7 @@ BattleScript_FaintTarget::
 	tryactivategrimneigh BS_ATTACKER    @ and as one shadow rider
 	tryactivatebattlebond BS_ATTACKER
 	trytrainerslidefirstdownmsg BS_TARGET
+	call BattleScript_HandleBattleEvo
 	return
 
 BattleScript_GiveExp::
@@ -9970,3 +9971,13 @@ BattleScript_EffectSnow::
 	call BattleScript_CheckPrimalWeather
 	setsnow
 	goto BattleScript_MoveWeatherChange
+
+BattleScript_HandleBattleEvo::
+	handlebattleevo BS_ATTACKER, BattleScript_HandleBattleEvo_Ret
+	pause 5
+	playanimation BS_ATTACKER, B_ANIM_FORM_CHANGE
+	waitanimation
+	printstring STRINGID_ATTACKERHASEVOLVED
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_HandleBattleEvo_Ret:
+	return

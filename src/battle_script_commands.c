@@ -16671,3 +16671,31 @@ void BS_TryUpdateRecoilTracker(void)
     TryUpdateEvolutionTracker(EVO_LEVEL_RECOIL_DAMAGE_FEMALE, gBattleMoveDamage);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+void BS_HandleBattleEvo(void)
+{
+    NATIVE_ARGS(u8 battler, const u8 *jumpInstr);
+    u8 battler = GetBattlerForBattleScript(cmd->battler);
+    struct Pokemon *party = GetBattlerParty(battler);
+    struct Pokemon *mon = &party[gBattlerPartyIndexes[battler]];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u16 evoSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE, NULL);
+
+    if (gLeveledUpInBattle & gBitTable[battler]
+     && evoSpecies != SPECIES_NONE
+     && GetBattlerSide(battler) == B_SIDE_PLAYER)
+    {
+        StringCopy(gBattleTextBuff1, GetSpeciesName(species));
+        StringCopy(gBattleTextBuff2, GetSpeciesName(evoSpecies));
+        SetMonData(mon, MON_DATA_SPECIES, &evoSpecies);
+        gBattleMons[battler].species = evoSpecies;
+        RecalcBattlerStats(battler, mon);
+        EvolutionRenameMon(mon, species, evoSpecies);
+        UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    }
+}
