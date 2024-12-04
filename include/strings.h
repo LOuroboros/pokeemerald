@@ -2711,4 +2711,7 @@ extern const u8 gText_PlayerScurriedBackHome[];
 extern const u8 gText_Relearn[]; // move relearner from summary screen
 extern const u8 gText_Rename[]; // change nickname from summary screen
 
+// Move reminder in party menu
+extern const u8 gText_Moves_Menu[];
+
 #endif // GUARD_STRINGS_H

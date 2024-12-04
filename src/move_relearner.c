@@ -706,7 +706,15 @@ static void DoMoveRelearnerMain(void)
             }
             else
             {
-                SetMainCallback2(CB2_ReturnToField);
+                if (FlagGet(FLAG_PARTY_MOVES))
+                {
+                    CB2_ReturnToPartyMenuFromSummaryScreen();
+                    FlagClear(FLAG_PARTY_MOVES);
+                }
+                else
+                {
+                    SetMainCallback2(CB2_ReturnToField);
+                }
             }
 
             FreeMoveRelearnerResources();
