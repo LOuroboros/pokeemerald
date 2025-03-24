@@ -4,6 +4,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "event_data.h"
+#include "mugshot.h"
 #include "constants/mugshots.h"
 
 #define MUGSHOT_PALETTE_NUM 13
@@ -16,10 +17,6 @@ struct Mugshot{
     const u32* image;
     const u16* palette;
 };
-
-void DrawMugshot(void); //VAR_0x8000 = mugshot id
-void DrawMugshotAtPos(void); //VAR_0x8000 = mugshot id, VAR_0x8001 = x, VAR_0x8002 = y
-void ClearMugshot(void);
 
 static const u32 sMugshotImg_BrendanEm[] = INCBIN_U32("graphics/mugshots/brendan_em.4bpp.lz");
 static const u16 sMugshotPal_BrendanEm[] = INCBIN_U16("graphics/mugshots/brendan_em.gbapal");
@@ -69,4 +66,9 @@ void DrawMugshot(void){
 
 void DrawMugshotAtPos(void){
     DrawMugshotCore(sMugshots + VarGet(VAR_0x8000), VarGet(VAR_0x8001), VarGet(VAR_0x8002));
+}
+
+bool32 IsMugshotDrawn(void)
+{
+    return (sMugshotWindow != 0);
 }

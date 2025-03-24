@@ -34,6 +34,8 @@
 #include "constants/map_types.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
+#include "mugshot.h"
+#include "constants/mugshots.h"
 
 static EWRAM_DATA u8 sWildEncounterImmunitySteps = 0;
 static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
@@ -187,6 +189,25 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     }
     if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
         return TRUE;
+
+    if (JOY_NEW(R_BUTTON))
+    {
+        if (IsMugshotDrawn())
+        {
+            PlaySE(SE_BOO);
+            ClearMugshot();
+            ScriptContext_Enable();
+            return TRUE;
+        }
+        else
+        {
+            PlaySE(SE_PIN);
+            VarSet(VAR_0x8005, MUGSHOT_BRENDAN_EM);
+            DrawMugshot();
+            ScriptContext_Enable();
+            return TRUE;
+        }
+    }
 
     return FALSE;
 }
