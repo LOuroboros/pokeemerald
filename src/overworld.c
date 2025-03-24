@@ -66,6 +66,8 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "mugshot.h"
+#include "constants/mugshots.h"
 
 struct CableClubPlayer
 {
@@ -822,6 +824,20 @@ void LoadMapFromCameraTransition(u8 mapGroup, u8 mapNum)
     if (gMapHeader.regionMapSectionId != MAPSEC_BATTLE_FRONTIER
      || gMapHeader.regionMapSectionId != sLastMapSectionId)
         ShowMapNamePopup();
+
+    if (IsMugshotDrawn())
+    {
+        PlaySE(SE_BOO);
+        ClearMugshot();
+        ScriptContext_Enable();
+    }
+    else
+    {
+        PlaySE(SE_PIN);
+        VarSet(VAR_0x8005, MUGSHOT_BRENDAN_EM);
+        DrawMugshot();
+        ScriptContext_Enable();
+    }
 }
 
 static void LoadMapFromWarp(bool32 a1)
